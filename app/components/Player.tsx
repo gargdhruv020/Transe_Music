@@ -210,7 +210,7 @@ export default function Player() {
   const [duration, setDuration] = useState(0);
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
-  const [queueMode, setQueueMode] = useState<"all" | "16d">("all");
+  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global">("all");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
@@ -326,7 +326,7 @@ export default function Player() {
   useEffect(() => {
     if (!currentVideoId || isPlaying === false) return;
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -525,7 +525,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -548,7 +548,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -575,7 +575,7 @@ export default function Player() {
     }
   }, [duration]);
 
-  const handleTrackSelect = useCallback((index: number, mode: "all" | "16d") => {
+  const handleTrackSelect = useCallback((index: number, mode: "all" | "16d" | "global") => {
     setCurrentIndex(index);
     setQueueMode(mode);
     setIsPlaying(true);

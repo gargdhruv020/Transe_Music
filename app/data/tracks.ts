@@ -6,6 +6,7 @@ export interface Track {
   youtubeId?: string;
   startSeconds?: number;
   isSpatial?: boolean;
+  isGlobal?: boolean;
 }
 
 const list1 = [
@@ -335,7 +336,7 @@ const list4 = [
   { title: "52 Bars (16D Beat Switch Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true },
   { title: "Players (16D Heavy Drop Edit)", artist: "Badshah & Karan Aujla", film: "Single", isSpatial: true },
   { title: "White Brown Black (16D Bass Blast Drop)", artist: "Karan Aujla & Avvy Sra", film: "Single", isSpatial: true },
-  { title: "Tauba Tanuba (16D Trap Beat Drop)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true },
+  { title: "Tauba Tauba (16D Trap Beat Drop)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true },
   { title: "On Top (16D Aggressive Brass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
   { title: "Don't Look (16D Trap Drop)", artist: "Karan Aujla & Jay Trak", film: "Single", isSpatial: true },
   { title: "Jhanjar (16D Heavy Sub-Bass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
@@ -390,12 +391,117 @@ const list4 = [
   { title: "Jhoome Jo Pathaan (16D Hard Drop Remix)", artist: "Arijit Singh", film: "Pathaan", isSpatial: true },
   { title: "Illegal Weapon 2.0 (16D EDM Bass Drop)", artist: "Jasmine Sandlas", film: "Street Dancer 3D", isSpatial: true },
   { title: "Kar Gayi Chull (16D Bounce Trap Drop)", artist: "Badshah", film: "Kapoor & Sons", isSpatial: true },
-  { title: "Aankh Marey (16D Hard Bass Drop)", artist: "Neha Kakkar", film: "Simmba", isSpatial: true }
+  { title: "Aankh Marey (16D Hard Bass Drop)", artist: "Neha Kakkar", film: "Simmba", isSpatial: true },
+  { title: "Six (16D Audio)", artist: "Guru Randhawa, Kiran Bajwa, Gurjit Gill", film: "Single", isSpatial: true },
+  { title: "Tauba Tauba (16D Trap Remix)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true }
 ];
 
 // Combine all four lists and remove exact duplicates dynamically
-const merged = [...list1, ...list2, ...list3, ...list4];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean }>();
+const listGlobal = [
+  { title: "Sandstorm", artist: "Darude", film: "Global Anthems", youtubeId: "UdWRghH6EzY", isGlobal: true },
+  { title: "Better Off Alone", artist: "Alice Deejay", film: "Global Anthems", youtubeId: "Ck0LO6b6OQc", isGlobal: true },
+  { title: "Adagio for Strings", artist: "Tiësto", film: "Global Anthems", youtubeId: "EiS9isTa82Y", isGlobal: true },
+  { title: "Children", artist: "Robert Miles", film: "Global Anthems", youtubeId: "CC5ca6Hsb2Q", isGlobal: true },
+  { title: "Insomnia", artist: "Faithless", film: "Global Anthems", youtubeId: "f2sv98d0gS4", isGlobal: true },
+  { title: "9 PM (Till I Come)", artist: "ATB", film: "Global Anthems", youtubeId: "QFGMQZyvnmY", isGlobal: true },
+  { title: "In and Out of Love", artist: "Armin van Buuren ft. Sharon den Adel", film: "Global Anthems", youtubeId: "krHqVGz_o18", isGlobal: true },
+  { title: "Sun & Moon", artist: "Above & Beyond ft. Richard Bedford", film: "Global Anthems", youtubeId: "ll5ykbAumD4", isGlobal: true },
+  { title: "Silence (Tiësto's In Search of Sunrise Remix)", artist: "Delerium ft. Sarah McLachlan", film: "Global Anthems", youtubeId: "ugsQypXvJQw", isGlobal: true },
+  { title: "Concrete Angel", artist: "Gareth Emery ft. Christina Novelli", film: "Global Anthems", youtubeId: "f3GRM0Yz7wM", isGlobal: true },
+  { title: "Miracle", artist: "Calvin Harris & Ellie Goulding", film: "Global Anthems", youtubeId: "961v0E3b01g", isGlobal: true },
+  { title: "For an Angel (PvD E-Werk Club Mix)", artist: "Paul van Dyk", film: "Global Anthems", youtubeId: "evPhEkujDxw", isGlobal: true },
+  { title: "Ecstasy", artist: "ATB", film: "Global Anthems", youtubeId: "LI_3Jsyuma4", isGlobal: true },
+  { title: "As The Rush Comes (Gabriel & Dresden Sweeping Strings Mix)", artist: "Motorcycle", film: "Global Anthems", youtubeId: "TwNV5ytRh5I", isGlobal: true },
+  { title: "Café Del Mar (Three 'N One Remix)", artist: "Energy 52", film: "Global Anthems", youtubeId: "yyvp_nCM15Q", isGlobal: true },
+  { title: "Castles in the Sky", artist: "Ian Van Dahl ft. Marsha", film: "Global Anthems", youtubeId: "npYyiwpPR2I", isGlobal: true },
+  { title: "This Is What It Feels Like", artist: "Armin van Buuren ft. Trevor Guthrie", film: "Global Anthems", youtubeId: "HukyFUAVuGo", isGlobal: true },
+  { title: "Saltwater", artist: "Chicane ft. Moya Brennan", film: "Global Anthems", youtubeId: "UZmg8NnVe74", isGlobal: true },
+  { title: "Waiting", artist: "Dash Berlin ft. Emma Hewitt", film: "Global Anthems", youtubeId: "pH_H1cfttVw", isGlobal: true },
+  { title: "Exploration of Space", artist: "Cosmic Gate", film: "Global Anthems", isGlobal: true },
+  { title: "Satellite", artist: "OceanLab (Above & Beyond)", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Shivers", artist: "Armin van Buuren ft. Susana", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Traffic", artist: "Tiësto", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Southern Sun (Tiësto Remix)", artist: "Paul Oakenfold", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Carte Blanche", artist: "Veracocha", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Out of the Blue", artist: "System F (Ferry Corsten)", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Airwave", artist: "Rank 1", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Take Me Away (Into the Night)", artist: "4 Strings", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Toca Me / Toca's Miracle", artist: "Fragma", film: "Vocal & Melodic", isGlobal: true },
+  { title: "On A Good Day", artist: "Above & Beyond pres. OceanLab", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Till the Sky Falls Down", artist: "Dash Berlin", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Flaming June", artist: "BT", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Nothing But You", artist: "Paul van Dyk ft. Hemstock & Jennings", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Silence", artist: "Tiësto", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Universal Nation", artist: "Push", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Gouryella", artist: "Gouryella (Ferry Corsten & Tiësto)", film: "Vocal & Melodic", isGlobal: true },
+  { title: "1998 (Paul van Dyk Remix)", artist: "Binary Finary", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Big Sky (Agnelli & Nelson Remix)", artist: "John O'Callaghan ft. Audrey Gallagher", film: "Vocal & Melodic", isGlobal: true },
+  { title: "We Control The Sunlight", artist: "Aly & Fila ft. Jwaydan", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Man On The Run", artist: "Dash Berlin with Cerf, Mitiska & Jaren", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Xpander", artist: "Sasha", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Offshore", artist: "Chicane", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Communication", artist: "Armin van Buuren", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Greece 2000", artist: "Three Drives on a Vinyl", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Tuvan", artist: "Gaia", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Be Your Sound", artist: "Cosmic Gate ft. Emma Hewitt", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Good For Me", artist: "Above & Beyond ft. Zoë Johnston", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Lethal Industry", artist: "Tiësto", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "The Age of Love (Jam & Spoon Remix)", artist: "Age of Love", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "The New World", artist: "Markus Schulz", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Helsinki Scorchin'", artist: "Super8 & Tab", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Burned With Desire (Rising Star Vocal Mix)", artist: "Armin van Buuren ft. Justine Suissa", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Seven Cities (Solarstone Atlantis Mix)", artist: "Solarstone", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "RAMsterdam (Jorn van Deynhoven Remix)", artist: "RAM", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Beautiful", artist: "Ferry Corsten", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Alone Tonight", artist: "Above & Beyond", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Are You Fine?", artist: "Kyau & Albert", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Out of the Sky", artist: "Lange ft. Sarah Howells", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Faces", artist: "Andy Moor & Ashley Wallbridge ft. Meighan Nealon", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Strange World (2000 Remake)", artist: "Push", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Great Spirit", artist: "Vini Vici & Armin van Buuren ft. Hilight Tribe", film: "Modern & Festival", isGlobal: true },
+  { title: "Free Tibet (Vini Vici Remix)", artist: "Vini Vici", film: "Modern & Festival", isGlobal: true },
+  { title: "Deep Jungle Walk", artist: "Astrix", film: "Modern & Festival", isGlobal: true },
+  { title: "Anahera", artist: "Ferry Corsten pres. Gouryella", film: "Modern & Festival", isGlobal: true },
+  { title: "United", artist: "Armin van Buuren vs. Vini Vici", film: "Modern & Festival", isGlobal: true },
+  { title: "U (Bryan Kearney Remix)", artist: "Gareth Emery ft. Bo Bruce", film: "Modern & Festival", isGlobal: true },
+  { title: "Thing Called Love", artist: "Above & Beyond ft. Richard Bedford", film: "Modern & Festival", isGlobal: true },
+  { title: "Dark Warrior", artist: "Andrew Rayel", film: "Modern & Festival", isGlobal: true },
+  { title: "Chakra", artist: "W&W & Vini Vici", film: "Modern & Festival", isGlobal: true },
+  { title: "Through Your Eyes", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true },
+  { title: "43", artist: "ilan Bluestone", film: "Modern & Festival", isGlobal: true },
+  { title: "Waiting for the Night", artist: "Armin van Buuren ft. Fiora", film: "Modern & Festival", isGlobal: true },
+  { title: "Pikachu", artist: "Key4050 (John O'Callaghan & Bryan Kearney)", film: "Modern & Festival", isGlobal: true },
+  { title: "Visions", artist: "MaRLo", film: "Modern & Festival", isGlobal: true },
+  { title: "Lost Language", artist: "Aly & Fila", film: "Modern & Festival", isGlobal: true },
+  { title: "Sirens of the Sea (Above & Beyond Club Mix)", artist: "OceanLab", film: "Modern & Festival", isGlobal: true },
+  { title: "Opus", artist: "Eric Prydz", film: "Modern & Festival", isGlobal: true },
+  { title: "L.E.D. There Be Light", artist: "Rank 1", film: "Modern & Festival", isGlobal: true },
+  { title: "Sun In Your Eyes", artist: "Above & Beyond", film: "Modern & Festival", isGlobal: true },
+  { title: "Keep Your Dreams Alive", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true },
+  { title: "Komodo (Save a Soul)", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Bellissima", artist: "DJ Quicksilver", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Ayla (Veracocha / Taucher Remix)", artist: "Ayla", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Heaven Scent", artist: "Bedrock", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Mysterious Times ft. Tina Cousins", artist: "Sash!", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Protect Your Mind (Braveheart)", artist: "DJ Sakin & Friends", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Lizard", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Madagascar (Ferry Corsten Remix)", artist: "Art of Trance", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Love Shines Through", artist: "Chakra", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "The Theme", artist: "Jurgen Vries", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Beachball", artist: "Nalin & Kane", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Beautiful", artist: "Matt Darey ft. Marcella Woods", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "What Ya Got 4 Me", artist: "Signum", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Fire Wire", artist: "Cosmic Gate", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Blue Fear", artist: "Armin van Buuren", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "The Spell (Solarstone Pure Mix)", artist: "Solarstone & Clare Stagg", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Anthem", artist: "Filo & Peri ft. Eric Lumiere", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Elektra", artist: "Super8 & Tab", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Happiness Happening", artist: "Lost Witness", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Stella", artist: "Jam & Spoon", film: "Heritage & Club Classics", isGlobal: true },
+];
+
+const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal];
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
@@ -413,7 +519,8 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   film: track.film,
   youtubeId: track.youtubeId,
   startSeconds: track.startSeconds,
-  isSpatial: true,
+  isSpatial: track.isSpatial ?? (track.isGlobal ? false : true),
+  isGlobal: track.isGlobal ?? false,
 }));
 
 // Fisher-Yates Shuffle function to randomize track order dynamically on load and assign clean sequential IDs (1 to length)
