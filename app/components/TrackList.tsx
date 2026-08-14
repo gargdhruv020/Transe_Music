@@ -66,8 +66,8 @@ const TrackRow = memo(function TrackRow({
       }`}
     >
       {/* Track number or equalizer */}
-      <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0">
-        {isActive ? <Equalizer /> : track.id}
+      <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0 flex items-center justify-center">
+        {isActive ? <Equalizer /> : null}
       </span>
 
       {/* Info */}
