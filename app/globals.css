@@ -394,3 +394,12 @@ nextjs-portal, #__next-prerender-indicator {
   display: none !important;
 }
 
+/* Hide scrollbars for horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
