@@ -1,0 +1,270 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { tracks, type Track } from "@/app/data/tracks";
+
+/* ── Close Icon ───────────────────────────────────── */
+function CloseIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+/* ── Equalizer Animation (playing indicator) ──────── */
+function Equalizer() {
+  return (
+    <div className="flex items-end gap-[2px] h-3.5">
+      {[0, 0.2, 0.4].map((delay, i) => (
+        <div
+          key={i}
+          className="w-[3px] rounded-full bg-[var(--color-accent)]"
+          style={{
+            animation: `eq-bar 0.8s ease-in-out ${delay}s infinite alternate`,
+            height: "40%",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function TrackList({
+  currentIndex,
+  isPlaying,
+  onTogglePlay,
+  onSelect,
+  onClose,
+}: {
+  currentIndex: number;
+  isPlaying: boolean;
+  onTogglePlay: () => void;
+  onSelect: (index: number, mode: "all" | "16d") => void;
+  onClose: () => void;
+}) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<"all" | "16d">("all");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  // Close on escape key
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  // Close on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (overlayRef.current && e.target === overlayRef.current) {
+        onClose();
+      }
+    }
+    window.addEventListener("mousedown", handleClick);
+    return () => window.removeEventListener("mousedown", handleClick);
+  }, [onClose]);
+
+  // Filter tracks by selected tab AND search query
+  const filteredTracks = tracks.filter((t) => {
+    if (activeTab === "16d" && !t.isSpatial) return false;
+    return (
+      searchQuery === "" ||
+      t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.film.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
+  const handleHeaderPlayClick = () => {
+    // If the currently playing track is in the active tab list, toggle play/pause
+    const isCurrentTrackInTab = filteredTracks.some((t) => {
+      const globalIndex = tracks.findIndex((gt) => gt.id === t.id);
+      return globalIndex === currentIndex;
+    });
+
+    if (isCurrentTrackInTab) {
+      onTogglePlay();
+    } else {
+      // Start playing the first track of this tab and set the queue mode
+      if (filteredTracks.length > 0) {
+        const firstTrack = filteredTracks[0];
+        const firstGlobalIndex = tracks.findIndex((gt) => gt.id === firstTrack.id);
+        onSelect(firstGlobalIndex, activeTab);
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm animate-[fade-in_0.2s_ease-out]"
+    >
+      <div className="glass w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-5 pb-3">
+          <div className="flex items-center gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-white">Playlist</h2>
+              <p className="text-xs text-white/40 mt-0.5">
+                {activeTab === "16d" ? filteredTracks.length : tracks.length} tracks
+              </p>
+            </div>
+            <button
+              onClick={handleHeaderPlayClick}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black hover:bg-white/90 active:scale-95 transition-all shadow-[0_0_10px_rgba(255,255,255,0.4)]"
+              aria-label={isPlaying ? "Pause music" : "Play music"}
+            >
+              {isPlaying ? (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                </svg>
+              ) : (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="ml-[1px]">
+                  <path d="M8 5.14v14l11-7-11-7z" />
+                </svg>
+              )}
+            </button>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close playlist"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex px-5 pb-4 gap-2">
+          <button
+            onClick={() => setActiveTab("all")}
+            className={`flex-1 py-2 text-xs font-semibold rounded-xl border transition-all duration-200 ${
+              activeTab === "all"
+                ? "bg-white/10 border-white/20 text-white shadow-md"
+                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+            }`}
+          >
+            All Tracks ({tracks.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("16d")}
+            className={`flex-1 py-2 text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+              activeTab === "16d"
+                ? "bg-[oklch(0.68_0.16_250)]/20 border-[oklch(0.68_0.16_250)]/40 text-white shadow-md shadow-[oklch(0.68_0.16_250)]/10"
+                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.68_0.16_250)] animate-pulse" />
+            16D Audio ({tracks.filter(t => t.isSpatial).length})
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="px-5 pb-5">
+          <div className="relative">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search tracks, artists, films..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-xl bg-white/5 border border-white/10 py-2.5 pl-9 pr-4 text-[13px] text-white placeholder:text-white/30 outline-none focus:border-white/20 focus:bg-white/[0.07] transition-colors"
+            />
+          </div>
+        </div>
+
+        {/* Track Rows */}
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-auto custom-scrollbar px-2 pb-5"
+        >
+          {filteredTracks.map((t) => {
+            // Find global index in the tracks array to pass back
+            const globalIndex = tracks.findIndex((gt) => gt.id === t.id);
+            const isActive = globalIndex === currentIndex;
+            return (
+              <button
+                key={t.id}
+                onClick={() => onSelect(globalIndex, activeTab)}
+                className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all ${
+                  isActive ? "active" : ""
+                }`}
+              >
+                {/* Track number or equalizer */}
+                <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0">
+                  {isActive ? <Equalizer /> : t.id}
+                </span>
+
+                {/* Info */}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <p
+                      className={`truncate text-[13px] font-medium ${
+                        isActive ? "text-[var(--color-accent)]" : "text-white/90"
+                      }`}
+                    >
+                      {t.title}
+                    </p>
+                    {t.isSpatial && (
+                      <span className="flex-shrink-0 text-[8px] tracking-wider font-extrabold px-1.5 py-0.5 rounded-md bg-[oklch(0.68_0.16_250)] text-white shadow-[0_0_8px_rgba(0,240,255,0.6)] animate-pulse">
+                        16D
+                      </span>
+                    )}
+                  </div>
+                  <p className="truncate text-[11px] text-white/40">
+                    {t.artist} · {t.film}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+
+          {filteredTracks.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-12 text-white/30">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="mb-3"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <p className="text-sm">No tracks found</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
