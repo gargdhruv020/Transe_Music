@@ -51,6 +51,11 @@ export default function Home() {
         <CaptionRotator />
         <Player />
       </div>
+
+      {/* Watermark — bottom right */}
+      <div className="fixed bottom-3 right-5 z-30 select-none pointer-events-none text-white/45 text-[11px] font-medium tracking-wide">
+        By: Dhruv Garg
+      </div>
     </main>
   );
 }
