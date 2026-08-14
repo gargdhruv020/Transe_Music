@@ -192,9 +192,6 @@ export default function TrackList({
           <div className="flex items-center gap-3">
             <div>
               <h2 className="text-lg font-semibold text-white">Playlist</h2>
-              <p className="text-xs text-white/40 mt-0.5">
-                {filteredTracks.length} tracks
-              </p>
             </div>
             <button
               onClick={handleHeaderPlayClick}
@@ -231,7 +228,7 @@ export default function TrackList({
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
             }`}
           >
-            All ({tracks.length})
+            All
           </button>
           <button
             onClick={() => setActiveTab("16d")}
@@ -242,7 +239,7 @@ export default function TrackList({
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.68_0.16_250)] animate-pulse" />
-            16D ({spatialCount})
+            16D
           </button>
           <button
             onClick={() => setActiveTab("global")}
@@ -253,7 +250,7 @@ export default function TrackList({
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.20_190)] animate-pulse" />
-            Global ({globalCount})
+            Global
           </button>
           <button
             onClick={() => setActiveTab("goa")}
@@ -264,7 +261,7 @@ export default function TrackList({
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.16_45)] animate-pulse" />
-            Goa ({goaCount})
+            Goa
           </button>
           <button
             onClick={() => setActiveTab("remix")}
@@ -275,7 +272,7 @@ export default function TrackList({
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.70_0.22_340)] animate-pulse" />
-            Remix ({remixCount})
+            Remix
           </button>
         </div>
 
