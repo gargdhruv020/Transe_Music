@@ -9,6 +9,7 @@ export interface Track {
   isGlobal?: boolean;
   isGoa?: boolean;
   isRemix?: boolean;
+  isKTrance?: boolean;
 }
 
 const list1 = [
@@ -808,8 +809,46 @@ const listRemix = [
   { title: "BamBholle (Psycore / Hard Bass Edit)", artist: "Viruss", film: "Sufi Techno & Bootlegs", isRemix: true },
 ];
 
-const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean }>();
+
+
+const listKTrance = [
+  { title: "Uff Teri Adaa x I Adore You | SORVV Afrohouse Flip", artist: "Hugel | Shankar Mahadevan | 2025 (SORVV)", film: "K//TRANCE", isKTrance: true },
+  { title: "Sahiba X Titanium (SORVV Afro Edit)", artist: "Jasleen Royal | Sia | BollyTech (SORVV)", film: "K//TRANCE", isKTrance: true },
+  { title: "Arjan Vailley X Jatt Don't Care X Alameyo X Anchor Point", artist: "Krautek & Ryan Nogar Mashup (Krautek)", film: "K//TRANCE", isKTrance: true },
+  { title: "Alameyo X Jee Karda X Jatt Don't Care (Aarmash Edit)", artist: "AARMASH", film: "K//TRANCE", isKTrance: true },
+  { title: "Papi (Bhabi)", artist: "Eden Shalev", film: "K//TRANCE", isKTrance: true },
+  { title: "Papi x Aria x Tujhe Bhula Diya // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
+  { title: "Tenu Leke x Say What | Dj Ganesh | Afro Bollywood", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true },
+  { title: "CHAR BAJ GAYE X ALAMEYO (MASHUP)", artist: "D-Rain", film: "K//TRANCE", isKTrance: true },
+  { title: "Adore You x Tujhe Bhula Diya (Afro Bollywood Mashup)", artist: "Vishal Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true },
+  { title: "FE!N x Paisa Hai Toh (DJ Suketu Mashup)", artist: "DJ Suketu", film: "K//TRANCE", isKTrance: true },
+  { title: "Move With Woh Lamhe | Dj Ganesh | Afro House", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true },
+  { title: "Big Dawgs x Karan Aujla (Trapperx Mashup)", artist: "Hanumankind | Karan Aujla | Trapperx (Trapperx)", film: "K//TRANCE", isKTrance: true },
+  { title: "Vem Dançar Kuduro", artist: "Lucenzo", film: "K//TRANCE", isKTrance: true },
+  { title: "Jimmy Jimmy Jimmy Aaja (BollyTech Mix)", artist: "Deepanshu Ruhela, Priyank, Parvati Khan & I", film: "K//TRANCE", isKTrance: true },
+  { title: "CHAR BAJ GAYE (BOLLYTECH EDIT)", artist: "Dj Dextron", film: "K//TRANCE", isKTrance: true },
+  { title: "Big Dawgs X Winning Speech", artist: "IAMPRANN", film: "K//TRANCE", isKTrance: true },
+  { title: "Jawani Jan-E-Man House Trap", artist: "DJ Percy & Asha Bhosle", film: "K//TRANCE", isKTrance: true },
+  { title: "Ek Pal Ka Jeena Tech Remix | Kaho Naa Pyaar Hai", artist: "Hrithik Roshan | Lucky Ali | KTONIKK (KTONIKK)", film: "K//TRANCE", isKTrance: true },
+  { title: "Desi Girl x Akon Sexy Bitch", artist: "David Guetta | Vishal & Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true },
+  { title: "Naadan Parindey (Rumble) // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
+  { title: "RANGILO MARO DHOLNA - ROHAN MUKATI EDIT", artist: "Rohan Mukati", film: "K//TRANCE", isKTrance: true },
+  { title: "Tune O Rangeele (Brazilian Funk Mix)", artist: "Knockwell & Lata Mangeshkar", film: "K//TRANCE", isKTrance: true },
+  { title: "Aaj Sajeya x Kudmayi (Mashup)", artist: "Knockwell, Goldie Sohel & Pritam", film: "K//TRANCE", isKTrance: true },
+  { title: "Papi X Move It X Aahun Aahun (Private Edit)", artist: "DJ Missy K", film: "K//TRANCE", isKTrance: true },
+  { title: "MAMTA'S INTERLUDE - Trance Remix", artist: "Gauntlet. & NARCO", film: "K//TRANCE", isKTrance: true },
+  { title: "Joota Japani", artist: "KR$NA and Mukesh", film: "K//TRANCE", isKTrance: true },
+  { title: "Rasputin", artist: "Majestic & Boney M.", film: "K//TRANCE", isKTrance: true },
+  { title: "Mockingbird", artist: "Tiësto, Dimitri Vegas & Like Mike & Gabry Ponte", film: "K//TRANCE", isKTrance: true },
+  { title: "Woops (Dimitri Vegas & Junkie Kid Remix)", artist: "Bountyhunter, Dimitri Vegas & Junkie Kid", film: "K//TRANCE", isKTrance: true },
+  { title: "Aria (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES & AEXTRAX", film: "K//TRANCE", isKTrance: true },
+  { title: "Dernière Danse (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES, Zantryc and AEXTRAX", film: "K//TRANCE", isKTrance: true },
+  { title: "São Paulo", artist: "The Weeknd & Anitta", film: "K//TRANCE", isKTrance: true },
+  { title: "Ankhe Khuli x Fire Fire // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
+];
+
+const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance];
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
@@ -822,6 +861,7 @@ for (const t of merged) {
     if (item.isGlobal) existing.isGlobal = true;
     if (item.isGoa) existing.isGoa = true;
     if (item.isRemix) existing.isRemix = true;
+    if (item.isKTrance) existing.isKTrance = true;
     if (item.youtubeId && !existing.youtubeId) existing.youtubeId = item.youtubeId;
   }
 }
@@ -835,10 +875,11 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   film: track.film,
   youtubeId: track.youtubeId,
   startSeconds: track.startSeconds,
-  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa || track.isRemix) ? false : true),
+  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa || track.isRemix || track.isKTrance) ? false : true),
   isGlobal: track.isGlobal ?? false,
   isGoa: track.isGoa ?? false,
   isRemix: track.isRemix ?? false,
+  isKTrance: track.isKTrance ?? false,
 }));
 
 // Fisher-Yates Shuffle function to randomize track order dynamically on load and assign clean sequential IDs (1 to length)

@@ -55,8 +55,8 @@ const TrackRow = memo(function TrackRow({
   track: Track;
   globalIndex: number;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix";
-  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
+  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
 }) {
   return (
     <button
@@ -104,11 +104,11 @@ export default function TrackList({
   currentIndex: number;
   isPlaying: boolean;
   onTogglePlay: () => void;
-  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix") => void;
+  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
   onClose: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa" | "remix">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -149,6 +149,7 @@ export default function TrackList({
       if (activeTab === "global" && !t.isGlobal) return false;
       if (activeTab === "goa" && !t.isGoa) return false;
       if (activeTab === "remix" && !t.isRemix) return false;
+      if (activeTab === "ktrance" && !t.isKTrance) return false;
       return (
         q === "" ||
         t.title.toLowerCase().includes(q) ||
@@ -163,6 +164,7 @@ export default function TrackList({
   const globalCount = useMemo(() => tracks.filter(t => t.isGlobal).length, []);
   const goaCount = useMemo(() => tracks.filter(t => t.isGoa).length, []);
   const remixCount = useMemo(() => tracks.filter(t => t.isRemix).length, []);
+  const ktranceCount = useMemo(() => tracks.filter(t => t.isKTrance).length, []);
 
   const handleHeaderPlayClick = () => {
     const isCurrentTrackInTab = filteredTracks.some((t) => {
@@ -219,10 +221,10 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
-        <div className="flex px-4 pb-4 gap-1 sm:gap-1.5 justify-between">
+        <div className="flex px-4 pb-4 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none">
           <button
             onClick={() => setActiveTab("all")}
-            className={`flex-1 py-1.5 text-[9px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 ${
               activeTab === "all"
                 ? "bg-white/10 border-white/20 text-white shadow-md"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
@@ -232,7 +234,7 @@ export default function TrackList({
           </button>
           <button
             onClick={() => setActiveTab("16d")}
-            className={`flex-1 py-1.5 text-[9px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
               activeTab === "16d"
                 ? "bg-[oklch(0.68_0.16_250)]/20 border-[oklch(0.68_0.16_250)]/40 text-white shadow-md shadow-[oklch(0.68_0.16_250)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
@@ -243,7 +245,7 @@ export default function TrackList({
           </button>
           <button
             onClick={() => setActiveTab("global")}
-            className={`flex-1 py-1.5 text-[9px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
               activeTab === "global"
                 ? "bg-[oklch(0.72_0.20_190)]/20 border-[oklch(0.72_0.20_190)]/40 text-white shadow-md shadow-[oklch(0.72_0.20_190)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
@@ -254,7 +256,7 @@ export default function TrackList({
           </button>
           <button
             onClick={() => setActiveTab("goa")}
-            className={`flex-1 py-1.5 text-[9px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
               activeTab === "goa"
                 ? "bg-[oklch(0.72_0.16_45)]/20 border-[oklch(0.72_0.16_45)]/40 text-white shadow-md shadow-[oklch(0.72_0.16_45)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
@@ -265,7 +267,7 @@ export default function TrackList({
           </button>
           <button
             onClick={() => setActiveTab("remix")}
-            className={`flex-1 py-1.5 text-[9px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
               activeTab === "remix"
                 ? "bg-[oklch(0.70_0.22_340)]/20 border-[oklch(0.70_0.22_340)]/40 text-white shadow-md shadow-[oklch(0.70_0.22_340)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
@@ -273,6 +275,17 @@ export default function TrackList({
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.70_0.22_340)] animate-pulse" />
             Remix
+          </button>
+          <button
+            onClick={() => setActiveTab("ktrance")}
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+              activeTab === "ktrance"
+                ? "bg-[oklch(0.60_0.25_285)]/20 border-[oklch(0.60_0.25_285)]/40 text-white shadow-md shadow-[oklch(0.60_0.25_285)]/10"
+                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.60_0.25_285)] animate-pulse" />
+            K//TRANCE
           </button>
         </div>
 
