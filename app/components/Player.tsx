@@ -108,13 +108,9 @@ function TransportBtn({
 }) {
   return (
     <button
-      onPointerUp={(e) => {
+      onClick={(e) => {
         e.stopPropagation();
-        e.preventDefault();
         onAction();
-      }}
-      onTouchEnd={(e) => {
-        e.stopPropagation();
       }}
       aria-label={ariaLabel}
       className={`${size} flex items-center justify-center rounded-full text-white/80 transition-colors duration-200 hover:bg-white/10 hover:text-white active:opacity-80 select-none`}
@@ -741,7 +737,7 @@ export default function Player() {
           <PrevIcon />
         </TransportBtn>
         <button
-          onPointerUp={(e) => { e.stopPropagation(); togglePlay(); }}
+          onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
           className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 flex-shrink-0 select-none"
           style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
@@ -816,7 +812,7 @@ export default function Player() {
           <PrevIcon />
         </TransportBtn>
         <button
-          onPointerUp={(e) => { e.stopPropagation(); togglePlay(); }}
+          onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 select-none"
           style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
