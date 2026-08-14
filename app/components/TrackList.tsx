@@ -307,7 +307,7 @@ export default function TrackList({
         </div>
 
         {/* Search */}
-        <div className="px-5 pb-5">
+        <div className="px-5 pt-2 pb-5">
           <div className="relative">
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
