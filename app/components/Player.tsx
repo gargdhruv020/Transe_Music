@@ -94,6 +94,24 @@ function ListIcon() {
   );
 }
 
+function HeadphoneIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+    </svg>
+  );
+}
+
 /* ── Transport Button ───────────────────────────── */
 function TransportBtn({
   onAction,
@@ -215,6 +233,8 @@ export default function Player() {
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
   const [showVolumeIndicator, setShowVolumeIndicator] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
+  const [guideTab, setGuideTab] = useState<"ios" | "android">("ios");
   const volumeTimeoutRef = useRef<any>(null);
   
   const handleNextRef = useRef<any>(null);
@@ -789,6 +809,13 @@ export default function Player() {
       {/* Transport & Utility Controls */}
       <div className="flex items-center gap-1.5 flex-shrink-0">
         <TransportBtn
+          onAction={() => setShowGuide(true)}
+          ariaLabel="Background play guide"
+          size="w-8 h-8"
+        >
+          <HeadphoneIcon />
+        </TransportBtn>
+        <TransportBtn
           onAction={() => setShuffle(!shuffle)}
           ariaLabel="Shuffle"
           size="w-8 h-8"
@@ -820,9 +847,18 @@ export default function Player() {
     </div>
   );
 
-  /* ── MOBILE LAYOUT ──────────────────────────────── */
   const MobilePlayer = (
-    <div className="sm:hidden glass rounded-3xl p-5 w-full max-w-sm animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)]">
+    <div className="sm:hidden glass rounded-3xl p-5 w-full max-w-sm animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)] relative">
+      {/* Help icon at top-right of mobile card */}
+      <button
+        onClick={() => setShowGuide(true)}
+        className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/50 hover:bg-white/10 hover:text-white transition-colors cursor-pointer select-none active:scale-95"
+        style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+        aria-label="Background play guide"
+      >
+        <HeadphoneIcon />
+      </button>
+
       {/* Top: Vinyl */}
       <div className="flex flex-col items-center gap-4">
         <div className="relative">
@@ -911,6 +947,126 @@ export default function Player() {
           onSelect={handleTrackSelect}
           onClose={() => setShowList(false)}
         />
+      )}
+
+      {/* Background Play Guide Modal */}
+      {showGuide && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 animate-[fade-in_0.2s_ease-out] p-4">
+          <div className="glass w-full max-w-sm rounded-3xl flex flex-col overflow-hidden border border-white/10 shadow-2xl p-6 relative animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)]">
+            <button
+              onClick={() => setShowGuide(false)}
+              className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            <div className="flex flex-col items-center text-center mt-2">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4 animate-bounce">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                </svg>
+              </div>
+              <h3 className="text-sm font-bold text-white">Background Play Guide</h3>
+              <p className="text-[11px] text-white/50 mt-1.5 max-w-[260px] leading-relaxed">
+                Mobile browsers pause YouTube videos when minimized. To play in the background, you must request the Desktop Site.
+              </p>
+
+              {/* OS Toggle */}
+              <div className="flex bg-white/5 p-1 rounded-xl border border-white/5 w-full mt-5">
+                <button
+                  onClick={() => setGuideTab("ios")}
+                  className={`flex-1 py-1.5 text-[11px] font-semibold rounded-lg transition-all ${
+                    guideTab === "ios"
+                      ? "bg-blue-600 text-white shadow-md shadow-blue-600/10"
+                      : "text-white/50 hover:text-white/80"
+                  }`}
+                >
+                  iOS Safari
+                </button>
+                <button
+                  onClick={() => setGuideTab("android")}
+                  className={`flex-1 py-1.5 text-[11px] font-semibold rounded-lg transition-all ${
+                    guideTab === "android"
+                      ? "bg-blue-600 text-white shadow-md shadow-blue-600/10"
+                      : "text-white/50 hover:text-white/80"
+                  }`}
+                >
+                  Android Chrome
+                </button>
+              </div>
+
+              {/* Steps */}
+              <div className="w-full text-left mt-5 space-y-4">
+                {guideTab === "ios" ? (
+                  <>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        1
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Tap the <span className="font-semibold text-white">"aA"</span> icon on the left side of your Safari address bar.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        2
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Select <span className="font-semibold text-white">"Request Desktop Website"</span> from the menu.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        3
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Play a track, minimize Safari, and tap **Play** in your iOS Control Center / Lock Screen to keep listening!
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        1
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Tap the <span className="font-semibold text-white">three dots (⋮)</span> in the top-right corner of Chrome.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        2
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Check the <span className="font-semibold text-white">"Desktop site"</span> option.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        3
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed">
+                        Play any track, minimize Chrome, and tap **Play** in your notification shade!
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <button
+                onClick={() => setShowGuide(false)}
+                className="w-full mt-6 py-2.5 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white rounded-xl text-xs font-semibold shadow-lg shadow-blue-600/20 transition-all cursor-pointer"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
