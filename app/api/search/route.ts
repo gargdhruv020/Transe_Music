@@ -6,21 +6,28 @@ import path from "path";
 const cacheDir = path.join(process.cwd(), "app", "data");
 const cacheFile = path.join(cacheDir, "youtube_cache.json");
 
-// Load the cache file safely from disk
+// In-memory cache singleton — loaded once, persists across requests
+let memoryCache: Record<string, string> | null = null;
+
+// Load the cache file safely from disk (or return in-memory copy)
 function readCache(): Record<string, string> {
+  if (memoryCache) return memoryCache;
   try {
     if (fs.existsSync(cacheFile)) {
       const data = fs.readFileSync(cacheFile, "utf8");
-      return JSON.parse(data);
+      memoryCache = JSON.parse(data);
+      return memoryCache!;
     }
   } catch (e) {
     console.error("Cache read error:", e);
   }
-  return {};
+  memoryCache = {};
+  return memoryCache;
 }
 
-// Write the cache file safely back to disk
+// Write the cache file safely back to disk and update memory
 function writeCache(cache: Record<string, string>) {
+  memoryCache = cache;
   try {
     if (!fs.existsSync(cacheDir)) {
       fs.mkdirSync(cacheDir, { recursive: true });

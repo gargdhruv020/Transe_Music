@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo, memo } from "react";
 import { tracks, type Track } from "@/app/data/tracks";
 
 /* ── Close Icon ───────────────────────────────────── */
@@ -40,6 +40,60 @@ function Equalizer() {
   );
 }
 
+/* ── Pre-compute a lookup map: track.id → global index (O(1) instead of O(n)) ── */
+const globalIndexMap = new Map<number, number>();
+tracks.forEach((t, i) => globalIndexMap.set(t.id, i));
+
+/* ── Memoized Track Row ─────────────────────────────── */
+const TrackRow = memo(function TrackRow({
+  track,
+  globalIndex,
+  isActive,
+  activeTab,
+  onSelect,
+}: {
+  track: Track;
+  globalIndex: number;
+  isActive: boolean;
+  activeTab: "all" | "16d";
+  onSelect: (index: number, mode: "all" | "16d") => void;
+}) {
+  return (
+    <button
+      onClick={() => onSelect(globalIndex, activeTab)}
+      className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${
+        isActive ? "active" : ""
+      }`}
+    >
+      {/* Track number or equalizer */}
+      <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0">
+        {isActive ? <Equalizer /> : track.id}
+      </span>
+
+      {/* Info */}
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <p
+            className={`truncate text-[13px] font-medium ${
+              isActive ? "text-[var(--color-accent)]" : "text-white/90"
+            }`}
+          >
+            {track.title}
+          </p>
+          {track.isSpatial && (
+            <span className="flex-shrink-0 text-[8px] tracking-wider font-extrabold px-1.5 py-0.5 rounded-md bg-[oklch(0.68_0.16_250)] text-white">
+              16D
+            </span>
+          )}
+        </div>
+        <p className="truncate text-[11px] text-white/40">
+          {track.artist} · {track.film}
+        </p>
+      </div>
+    </button>
+  );
+});
+
 export default function TrackList({
   currentIndex,
   isPlaying,
@@ -57,6 +111,15 @@ export default function TrackList({
   const [activeTab, setActiveTab] = useState<"all" | "16d">("all");
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll while the playlist modal is open
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
 
   // Close on escape key
   useEffect(() => {
@@ -78,31 +141,34 @@ export default function TrackList({
     return () => window.removeEventListener("mousedown", handleClick);
   }, [onClose]);
 
-  // Filter tracks by selected tab AND search query
-  const filteredTracks = tracks.filter((t) => {
-    if (activeTab === "16d" && !t.isSpatial) return false;
-    return (
-      searchQuery === "" ||
-      t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.film.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
+  // Memoize filtered tracks to avoid re-filtering on every render
+  const filteredTracks = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return tracks.filter((t) => {
+      if (activeTab === "16d" && !t.isSpatial) return false;
+      return (
+        q === "" ||
+        t.title.toLowerCase().includes(q) ||
+        t.artist.toLowerCase().includes(q) ||
+        t.film.toLowerCase().includes(q)
+      );
+    });
+  }, [searchQuery, activeTab]);
+
+  // Memoize spatial count
+  const spatialCount = useMemo(() => tracks.filter(t => t.isSpatial).length, []);
 
   const handleHeaderPlayClick = () => {
-    // If the currently playing track is in the active tab list, toggle play/pause
     const isCurrentTrackInTab = filteredTracks.some((t) => {
-      const globalIndex = tracks.findIndex((gt) => gt.id === t.id);
-      return globalIndex === currentIndex;
+      return (globalIndexMap.get(t.id) ?? -1) === currentIndex;
     });
 
     if (isCurrentTrackInTab) {
       onTogglePlay();
     } else {
-      // Start playing the first track of this tab and set the queue mode
       if (filteredTracks.length > 0) {
         const firstTrack = filteredTracks[0];
-        const firstGlobalIndex = tracks.findIndex((gt) => gt.id === firstTrack.id);
+        const firstGlobalIndex = globalIndexMap.get(firstTrack.id) ?? 0;
         onSelect(firstGlobalIndex, activeTab);
       }
     }
@@ -111,7 +177,8 @@ export default function TrackList({
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm animate-[fade-in_0.2s_ease-out]"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 animate-[fade-in_0.2s_ease-out]"
+      style={{ overscrollBehavior: "contain" }}
     >
       <div className="glass w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
         {/* Header */}
@@ -169,7 +236,7 @@ export default function TrackList({
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.68_0.16_250)] animate-pulse" />
-            16D Audio ({tracks.filter(t => t.isSpatial).length})
+            16D Audio ({spatialCount})
           </button>
         </div>
 
@@ -203,46 +270,19 @@ export default function TrackList({
         {/* Track Rows */}
         <div
           ref={scrollRef}
-          className="flex-1 overflow-y-auto custom-scrollbar px-2 pb-5"
+          className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-2 pb-5"
         >
           {filteredTracks.map((t) => {
-            // Find global index in the tracks array to pass back
-            const globalIndex = tracks.findIndex((gt) => gt.id === t.id);
-            const isActive = globalIndex === currentIndex;
+            const globalIndex = globalIndexMap.get(t.id) ?? 0;
             return (
-              <button
+              <TrackRow
                 key={t.id}
-                onClick={() => onSelect(globalIndex, activeTab)}
-                className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all ${
-                  isActive ? "active" : ""
-                }`}
-              >
-                {/* Track number or equalizer */}
-                <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0">
-                  {isActive ? <Equalizer /> : t.id}
-                </span>
-
-                {/* Info */}
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <p
-                      className={`truncate text-[13px] font-medium ${
-                        isActive ? "text-[var(--color-accent)]" : "text-white/90"
-                      }`}
-                    >
-                      {t.title}
-                    </p>
-                    {t.isSpatial && (
-                      <span className="flex-shrink-0 text-[8px] tracking-wider font-extrabold px-1.5 py-0.5 rounded-md bg-[oklch(0.68_0.16_250)] text-white shadow-[0_0_8px_rgba(0,240,255,0.6)] animate-pulse">
-                        16D
-                      </span>
-                    )}
-                  </div>
-                  <p className="truncate text-[11px] text-white/40">
-                    {t.artist} · {t.film}
-                  </p>
-                </div>
-              </button>
+                track={t}
+                globalIndex={globalIndex}
+                isActive={globalIndex === currentIndex}
+                activeTab={activeTab}
+                onSelect={onSelect}
+              />
             );
           })}
 

@@ -6,8 +6,8 @@ echo ===================================================
 echo   Starting Trance Music Nostalgia Radio Server...
 echo ===================================================
 
-echo Opening http://localhost:3005 in your browser...
-start http://localhost:3005
+echo Opening http://localhost:8000 in your browser...
+start http://localhost:8000
 
 :: If node_modules does not exist, run npm install
 if not exist "node_modules\" (

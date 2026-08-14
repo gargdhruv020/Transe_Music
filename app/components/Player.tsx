@@ -94,6 +94,37 @@ function ListIcon() {
   );
 }
 
+/* ── Transport Button ───────────────────────────── */
+function TransportBtn({
+  onAction,
+  children,
+  ariaLabel,
+  size = "w-9 h-9",
+}: {
+  onAction: () => void;
+  children: React.ReactNode;
+  ariaLabel: string;
+  size?: string;
+}) {
+  return (
+    <button
+      onPointerUp={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        onAction();
+      }}
+      onTouchEnd={(e) => {
+        e.stopPropagation();
+      }}
+      aria-label={ariaLabel}
+      className={`${size} flex items-center justify-center rounded-full text-white/80 transition-colors duration-200 hover:bg-white/10 hover:text-white active:opacity-80 select-none`}
+      style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+    >
+      {children}
+    </button>
+  );
+}
+
 /* ── Vinyl Component ──────────────────────────────── */
 function Vinyl({
   track,
@@ -223,20 +254,16 @@ export default function Player() {
     };
   }, []);
 
-  // 2. Resolve YouTube Video ID for the current track dynamically (with local memory caching)
+  // 2. Search YouTube when currentIndex changes
   useEffect(() => {
-    // Reset video ID and progress immediately when track changes to give instant feedback
-    setCurrentVideoId(null);
-    setCurrentTime(0);
-    setDuration(0);
+    const track = tracks[currentIndex];
+    if (!track) return;
 
-    // Stop current playing video immediately for instant audio cut feedback
-    if (ytPlayerRef.current && typeof ytPlayerRef.current.stopVideo === "function") {
+    // Instantly pause old playback to prevent audio mismatch while resolving the new song
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
       try {
-        ytPlayerRef.current.stopVideo();
-      } catch (e) {
-        // ignore
-      }
+        ytPlayerRef.current.pauseVideo();
+      } catch (_) {}
     }
 
     if (searchAbortControllerRef.current) {
@@ -271,10 +298,18 @@ export default function Player() {
         if (data.videoId && !controller.signal.aborted) {
           resolvedCacheRef.current[cacheKey] = data.videoId;
           setCurrentVideoId(data.videoId);
+        } else if (!controller.signal.aborted) {
+          console.warn("Search resolved to no videoId, skipping to next track.");
+          if (handleNextRef.current) {
+            handleNextRef.current();
+          }
         }
       } catch (e: any) {
         if (e.name !== "AbortError") {
-          console.error("Search API resolution error:", e);
+          console.error("Search API resolution error, skipping to next track:", e);
+          if (handleNextRef.current) {
+            handleNextRef.current();
+          }
         }
       }
     }
@@ -390,6 +425,14 @@ export default function Player() {
             if (isPlaying) {
               ytPlayerRef.current.playVideo();
             }
+          },
+          onError: (event: any) => {
+            console.error("YouTube Player error:", event.data);
+            setTimeout(() => {
+              if (handleNextRef.current) {
+                handleNextRef.current();
+              }
+            }, 100);
           },
         },
       });
@@ -656,26 +699,7 @@ export default function Player() {
     };
   }, [volume]);
 
-  /* ── Transport Button ───────────────────────────── */
-  const TransportBtn = ({
-    onClick,
-    children,
-    ariaLabel,
-    size = "w-9 h-9",
-  }: {
-    onClick: () => void;
-    children: React.ReactNode;
-    ariaLabel: string;
-    size?: string;
-  }) => (
-    <button
-      onClick={onClick}
-      aria-label={ariaLabel}
-      className={`${size} flex items-center justify-center rounded-full text-white/80 transition-colors duration-200 hover:bg-white/10 hover:text-white active:opacity-80`}
-    >
-      {children}
-    </button>
-  );
+  /* TransportBtn is now defined outside the component to prevent remounting */
 
   /* ── DESKTOP LAYOUT ─────────────────────────────── */
   const DesktopPlayer = (
@@ -707,27 +731,28 @@ export default function Player() {
       {/* Transport & Utility Controls */}
       <div className="flex items-center gap-1.5 flex-shrink-0">
         <TransportBtn
-          onClick={() => setShuffle(!shuffle)}
+          onAction={() => setShuffle(!shuffle)}
           ariaLabel="Shuffle"
           size="w-8 h-8"
         >
           <ShuffleIcon active={shuffle} />
         </TransportBtn>
-        <TransportBtn onClick={handlePrev} ariaLabel="Previous track">
+        <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
           <PrevIcon />
         </TransportBtn>
         <button
-          onClick={togglePlay}
+          onPointerUp={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 flex-shrink-0"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 flex-shrink-0 select-none"
+          style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <TransportBtn onClick={handleNext} ariaLabel="Next track">
+        <TransportBtn onAction={handleNext} ariaLabel="Next track">
           <NextIcon />
         </TransportBtn>
         <TransportBtn
-          onClick={() => setShowList(!showList)}
+          onAction={() => setShowList(!showList)}
           ariaLabel="Track list"
           size="w-8 h-8"
         >
@@ -781,27 +806,28 @@ export default function Player() {
       {/* Transport */}
       <div className="mt-3 flex items-center justify-center gap-4">
         <TransportBtn
-          onClick={() => setShuffle(!shuffle)}
+          onAction={() => setShuffle(!shuffle)}
           ariaLabel="Shuffle"
           size="w-8 h-8"
         >
           <ShuffleIcon active={shuffle} />
         </TransportBtn>
-        <TransportBtn onClick={handlePrev} ariaLabel="Previous track">
+        <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
           <PrevIcon />
         </TransportBtn>
         <button
-          onClick={togglePlay}
+          onPointerUp={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 select-none"
+          style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <TransportBtn onClick={handleNext} ariaLabel="Next track">
+        <TransportBtn onAction={handleNext} ariaLabel="Next track">
           <NextIcon />
         </TransportBtn>
         <TransportBtn
-          onClick={() => setShowList(!showList)}
+          onAction={() => setShowList(!showList)}
           ariaLabel="Track list"
           size="w-8 h-8"
         >
