@@ -238,10 +238,10 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
-        <div className="flex px-4 pb-4 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none">
+        <div className="flex items-center px-4 pb-4 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none">
           <button
             onClick={() => setActiveTab("all")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 ${
+            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center ${
               activeTab === "all"
                 ? "bg-white/10 border-white/20 text-white shadow-md"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
