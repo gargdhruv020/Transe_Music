@@ -238,76 +238,76 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
-        <div className="relative z-10 flex items-center h-12 px-4 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none">
+        <div className="flex px-5 pb-4 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center">
           <button
             onClick={() => setActiveTab("all")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 ${
               activeTab === "all"
                 ? "bg-white/10 border-white/20 text-white shadow-md"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
             All
           </button>
           <button
             onClick={() => setActiveTab("16d")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "16d"
-                ? "bg-[oklch(0.68_0.16_250)]/20 border-[oklch(0.68_0.16_250)]/40 text-white shadow-md shadow-[oklch(0.68_0.16_250)]/10"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                ? "bg-[oklch(0.68_0.16_250)]/15 border-[oklch(0.68_0.16_250)]/30 text-white shadow-md"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.68_0.16_250)] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] flex-shrink-0" />
             16D
           </button>
           <button
             onClick={() => setActiveTab("global")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "global"
-                ? "bg-[oklch(0.72_0.20_190)]/20 border-[oklch(0.72_0.20_190)]/40 text-white shadow-md shadow-[oklch(0.72_0.20_190)]/10"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                ? "bg-[oklch(0.72_0.20_190)]/15 border-[oklch(0.72_0.20_190)]/30 text-white shadow-md"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.20_190)] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8] flex-shrink-0" />
             Global
           </button>
           <button
             onClick={() => setActiveTab("goa")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "goa"
-                ? "bg-[oklch(0.72_0.16_45)]/20 border-[oklch(0.72_0.16_45)]/40 text-white shadow-md shadow-[oklch(0.72_0.16_45)]/10"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                ? "bg-[oklch(0.72_0.16_45)]/15 border-[oklch(0.72_0.16_45)]/30 text-white shadow-md"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.16_45)] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e76f51] flex-shrink-0" />
             Goa
           </button>
           <button
             onClick={() => setActiveTab("remix")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "remix"
-                ? "bg-[oklch(0.70_0.22_340)]/20 border-[oklch(0.70_0.22_340)]/40 text-white shadow-md shadow-[oklch(0.70_0.22_340)]/10"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                ? "bg-[oklch(0.70_0.22_340)]/15 border-[oklch(0.70_0.22_340)]/30 text-white shadow-md"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.70_0.22_340)] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] flex-shrink-0" />
             Remix
           </button>
           <button
             onClick={() => setActiveTab("ktrance")}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1 ${
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "ktrance"
-                ? "bg-[oklch(0.60_0.25_285)]/20 border-[oklch(0.60_0.25_285)]/40 text-white shadow-md shadow-[oklch(0.60_0.25_285)]/10"
-                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+                ? "bg-[oklch(0.60_0.25_285)]/15 border-[oklch(0.60_0.25_285)]/30 text-white shadow-md"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.60_0.25_285)] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8338ec] flex-shrink-0" />
             K//TRANCE
           </button>
         </div>
 
         {/* Search */}
-        <div className="px-5 pt-2 pb-5">
+        <div className="px-5 pb-5">
           <div className="relative">
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
