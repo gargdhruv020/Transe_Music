@@ -225,6 +225,11 @@ export default function Player() {
   const ytPlayerRef = useRef<any>(null);
   const searchAbortControllerRef = useRef<AbortController | null>(null);
   const resolvedCacheRef = useRef<Record<string, string>>({});
+  const isPlayingRef = useRef(isPlaying);
+
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
 
   const track = tracks[currentIndex] || { id: 0, title: "No Track Loaded", artist: "Add songs to start", film: "" };
   const progress = duration > 0 ? currentTime / duration : 0;
@@ -406,9 +411,20 @@ export default function Player() {
         },
         events: {
           onStateChange: (event: any) => {
-            // YT.PlayerState.PLAYING = 1, ENDED = 0
+            // YT.PlayerState.PLAYING = 1, ENDED = 0, PAUSED = 2
             if (event.data === 1) {
               setIsPlaying(true);
+            } else if (event.data === 2) {
+              // If background suspension forced a pause but we want it to be playing, auto-resume
+              if (isPlayingRef.current) {
+                setTimeout(() => {
+                  try {
+                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                      ytPlayerRef.current.playVideo();
+                    }
+                  } catch (_) {}
+                }, 1000);
+              }
             } else if (event.data === 0) {
               setTimeout(() => {
                 if (handleNextRef.current) {
@@ -443,6 +459,7 @@ export default function Player() {
       } catch (e) {
         console.error("Cue/load video failed:", e);
       }
+    }
   }, [currentVideoId, isYTApiReady]);
 
   // 4b. Auto-resume when page becomes visible or focused again (recovers from mobile browser suspension)
@@ -648,9 +665,19 @@ export default function Player() {
     try {
       navigator.mediaSession.setActionHandler("play", () => {
         if (setIsPlayingRef.current) setIsPlayingRef.current(true);
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+          try {
+            ytPlayerRef.current.playVideo();
+          } catch (_) {}
+        }
       });
       navigator.mediaSession.setActionHandler("pause", () => {
         if (setIsPlayingRef.current) setIsPlayingRef.current(false);
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+          try {
+            ytPlayerRef.current.pauseVideo();
+          } catch (_) {}
+        }
       });
       navigator.mediaSession.setActionHandler("nexttrack", () => {
         if (handleNextRef.current) handleNextRef.current();
