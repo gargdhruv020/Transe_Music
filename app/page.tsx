@@ -53,7 +53,11 @@ export default function Home() {
       </div>
 
       {/* Watermark — bottom right */}
-      <div className="fixed bottom-3 right-5 z-30 select-none pointer-events-none text-white/45 text-[11px] font-medium tracking-wide">
+      <div className="fixed bottom-3 right-5 z-30 select-none pointer-events-none text-white/45 text-[11px] font-medium tracking-wide flex items-center gap-1.5">
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[oklch(0.68_0.16_250)] opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[oklch(0.68_0.16_250)]"></span>
+        </span>
         By: Dhruv Garg
       </div>
     </main>
