@@ -61,6 +61,7 @@ const TrackRow = memo(function TrackRow({
   return (
     <button
       onClick={() => onSelect(globalIndex, activeTab)}
+      data-active={isActive ? "true" : "false"}
       className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${
         isActive ? "active" : ""
       }`}
@@ -97,18 +98,20 @@ const TrackRow = memo(function TrackRow({
 export default function TrackList({
   currentIndex,
   isPlaying,
+  initialTab = "all",
   onTogglePlay,
   onSelect,
   onClose,
 }: {
   currentIndex: number;
   isPlaying: boolean;
+  initialTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
   onTogglePlay: () => void;
   onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
   onClose: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">(initialTab);
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -140,6 +143,20 @@ export default function TrackList({
     window.addEventListener("mousedown", handleClick);
     return () => window.removeEventListener("mousedown", handleClick);
   }, [onClose]);
+
+  // Scroll active track into view on mount or tab change
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    
+    // Use requestAnimationFrame to ensure the DOM is painted first
+    requestAnimationFrame(() => {
+      const activeElement = container.querySelector('[data-active="true"]');
+      if (activeElement) {
+        activeElement.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+    });
+  }, [activeTab]);
 
   // Memoize filtered tracks to avoid re-filtering on every render
   const filteredTracks = useMemo(() => {

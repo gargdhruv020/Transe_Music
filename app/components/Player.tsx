@@ -246,10 +246,49 @@ export default function Player() {
   const searchAbortControllerRef = useRef<AbortController | null>(null);
   const resolvedCacheRef = useRef<Record<string, string>>({});
   const isPlayingRef = useRef(isPlaying);
+  const initialSeekTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+
+  // Load saved player state on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const savedIndex = localStorage.getItem("transe_music_index");
+      const savedMode = localStorage.getItem("transe_music_mode");
+      const savedTime = localStorage.getItem("transe_music_time");
+
+      if (savedIndex !== null) {
+        const idx = parseInt(savedIndex, 10);
+        if (idx >= 0 && idx < tracks.length) {
+          setCurrentIndex(idx);
+        }
+      }
+      if (savedMode !== null) {
+        setQueueMode(savedMode as any);
+      }
+      if (savedTime !== null) {
+        const time = parseFloat(savedTime);
+        if (!isNaN(time) && time > 0) {
+          initialSeekTimeRef.current = time;
+          setCurrentTime(time);
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load saved state:", e);
+    }
+  }, []);
+
+  // Save current index and queue mode when they change
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      localStorage.setItem("transe_music_index", currentIndex.toString());
+      localStorage.setItem("transe_music_mode", queueMode);
+    } catch (e) {}
+  }, [currentIndex, queueMode]);
 
   const track = tracks[currentIndex] || { id: 0, title: "No Track Loaded", artist: "Add songs to start", film: "" };
   const progress = duration > 0 ? currentTime / duration : 0;
@@ -410,7 +449,11 @@ export default function Player() {
   useEffect(() => {
     if (!isYTApiReady || !currentVideoId) return;
 
-    const startPos = (track as any).startSeconds || 0;
+    let startPos = (track as any).startSeconds || 0;
+    if (initialSeekTimeRef.current !== null) {
+      startPos = Math.floor(initialSeekTimeRef.current);
+      initialSeekTimeRef.current = null; // Clear so subsequent plays start from 0
+    }
 
     if (!ytPlayerRef.current) {
       // Create new player instance
@@ -529,8 +572,10 @@ export default function Player() {
           typeof ytPlayerRef.current.getCurrentTime === "function" &&
           typeof ytPlayerRef.current.getDuration === "function"
         ) {
-          setCurrentTime(ytPlayerRef.current.getCurrentTime() || 0);
+          const time = ytPlayerRef.current.getCurrentTime() || 0;
+          setCurrentTime(time);
           setDuration(ytPlayerRef.current.getDuration() || 0);
+          localStorage.setItem("transe_music_time", time.toString());
         }
       } catch (e) {
         // Suppress errors during player reload
@@ -592,6 +637,7 @@ export default function Player() {
       const newTime = value * duration;
       ytPlayerRef.current.seekTo(newTime, true);
       setCurrentTime(newTime);
+      localStorage.setItem("transe_music_time", newTime.toString());
     }
   }, [duration]);
 
@@ -611,6 +657,10 @@ export default function Player() {
             ytPlayerRef.current.playVideo();
           } else {
             ytPlayerRef.current.pauseVideo();
+            if (typeof ytPlayerRef.current.getCurrentTime === "function") {
+              const time = ytPlayerRef.current.getCurrentTime() || 0;
+              localStorage.setItem("transe_music_time", time.toString());
+            }
           }
         } catch (e) {
           console.error("Direct toggle failed:", e);
@@ -943,6 +993,7 @@ export default function Player() {
         <TrackList
           currentIndex={currentIndex}
           isPlaying={isPlaying}
+          initialTab={queueMode}
           onTogglePlay={togglePlay}
           onSelect={handleTrackSelect}
           onClose={() => setShowList(false)}
