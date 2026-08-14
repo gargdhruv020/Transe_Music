@@ -443,8 +443,43 @@ export default function Player() {
       } catch (e) {
         console.error("Cue/load video failed:", e);
       }
-    }
   }, [currentVideoId, isYTApiReady]);
+
+  // 4b. Auto-resume when page becomes visible or focused again (recovers from mobile browser suspension)
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") return;
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && isPlaying && ytPlayerRef.current) {
+        try {
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
+        } catch (e) {
+          console.warn("Auto-resume visibility failed:", e);
+        }
+      }
+    };
+
+    const handleFocus = () => {
+      if (isPlaying && ytPlayerRef.current) {
+        try {
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
+        } catch (e) {
+          console.warn("Auto-resume focus failed:", e);
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [isPlaying]);
 
   // 5. Track playing time/duration updates
   useEffect(() => {
