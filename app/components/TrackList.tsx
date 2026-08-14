@@ -55,8 +55,8 @@ const TrackRow = memo(function TrackRow({
   track: Track;
   globalIndex: number;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global";
-  onSelect: (index: number, mode: "all" | "16d" | "global") => void;
+  activeTab: "all" | "16d" | "global" | "goa";
+  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa") => void;
 }) {
   return (
     <button
@@ -104,11 +104,11 @@ export default function TrackList({
   currentIndex: number;
   isPlaying: boolean;
   onTogglePlay: () => void;
-  onSelect: (index: number, mode: "all" | "16d" | "global") => void;
+  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa") => void;
   onClose: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa">("all");
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -147,6 +147,7 @@ export default function TrackList({
     return tracks.filter((t) => {
       if (activeTab === "16d" && !t.isSpatial) return false;
       if (activeTab === "global" && !t.isGlobal) return false;
+      if (activeTab === "goa" && !t.isGoa) return false;
       return (
         q === "" ||
         t.title.toLowerCase().includes(q) ||
@@ -159,6 +160,7 @@ export default function TrackList({
   // Memoize counts
   const spatialCount = useMemo(() => tracks.filter(t => t.isSpatial).length, []);
   const globalCount = useMemo(() => tracks.filter(t => t.isGlobal).length, []);
+  const goaCount = useMemo(() => tracks.filter(t => t.isGoa).length, []);
 
   const handleHeaderPlayClick = () => {
     const isCurrentTrackInTab = filteredTracks.some((t) => {
@@ -221,35 +223,46 @@ export default function TrackList({
         <div className="flex px-5 pb-4 gap-1.5 sm:gap-2">
           <button
             onClick={() => setActiveTab("all")}
-            className={`flex-1 py-2 text-[10.5px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 ${
+            className={`flex-1 py-2 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 ${
               activeTab === "all"
                 ? "bg-white/10 border-white/20 text-white shadow-md"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
             }`}
           >
-            All Tracks ({tracks.length})
+            All ({tracks.length})
           </button>
           <button
             onClick={() => setActiveTab("16d")}
-            className={`flex-1 py-2 text-[10.5px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-2 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "16d"
                 ? "bg-[oklch(0.68_0.16_250)]/20 border-[oklch(0.68_0.16_250)]/40 text-white shadow-md shadow-[oklch(0.68_0.16_250)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.68_0.16_250)] animate-pulse" />
-            16D Audio ({spatialCount})
+            16D ({spatialCount})
           </button>
           <button
             onClick={() => setActiveTab("global")}
-            className={`flex-1 py-2 text-[10.5px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-2 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "global"
                 ? "bg-[oklch(0.72_0.20_190)]/20 border-[oklch(0.72_0.20_190)]/40 text-white shadow-md shadow-[oklch(0.72_0.20_190)]/10"
                 : "bg-transparent border-transparent text-white/50 hover:text-white/80"
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.20_190)] animate-pulse" />
-            Global Transe ({globalCount})
+            Global ({globalCount})
+          </button>
+          <button
+            onClick={() => setActiveTab("goa")}
+            className={`flex-1 py-2 text-[10px] sm:text-xs font-semibold rounded-xl border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+              activeTab === "goa"
+                ? "bg-[oklch(0.72_0.16_45)]/20 border-[oklch(0.72_0.16_45)]/40 text-white shadow-md shadow-[oklch(0.72_0.16_45)]/10"
+                : "bg-transparent border-transparent text-white/50 hover:text-white/80"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.16_45)] animate-pulse" />
+            Goa ({goaCount})
           </button>
         </div>
 

@@ -7,6 +7,7 @@ export interface Track {
   startSeconds?: number;
   isSpatial?: boolean;
   isGlobal?: boolean;
+  isGoa?: boolean;
 }
 
 const list1 = [
@@ -500,13 +501,123 @@ const listGlobal = [
   { title: "Stella", artist: "Jam & Spoon", film: "Heritage & Club Classics", isGlobal: true },
 ];
 
-const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean }>();
+const listGoa = [
+  { title: "Mahadeva", artist: "Astral Projection", film: "Iconic Anthems", youtubeId: "Ix0lduF1Co4", isGoa: true },
+  { title: "Free Tibet (Vini Vici Remix)", artist: "Hilight Tribe", film: "Iconic Anthems", youtubeId: "0lBjcaMokvo", isGoa: true },
+  { title: "Deep Jungle Walk", artist: "Astrix", film: "Iconic Anthems", youtubeId: "lIuEuJvKos4", isGoa: true },
+  { title: "Shiva’s India (Outsiders Remix)", artist: "1200 Micrograms", film: "Iconic Anthems", youtubeId: "qJtWEhl5smA", isGoa: true },
+  { title: "Great Spirit", artist: "Armin van Buuren vs. Vini Vici ft. Hilight Tribe", film: "Iconic Anthems", youtubeId: "yo4pmauhugo", isGoa: true },
+  { title: "L.S.D.", artist: "Hallucinogen", film: "Iconic Anthems", youtubeId: "iIsVzSMRw8E", isGoa: true },
+  { title: "Mahishasura Mardini (Droplex & Psy Edit)", artist: "Shanti People", film: "Iconic Anthems", isGoa: true },
+  { title: "Becoming Insane", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true },
+  { title: "Kabalah", artist: "Astral Projection", film: "Iconic Anthems", isGoa: true },
+  { title: "Teleport", artist: "Man With No Name", film: "Iconic Anthems", isGoa: true },
+  { title: "Chakra", artist: "Vini Vici & W&W", film: "Iconic Anthems", isGoa: true },
+  { title: "Pranava", artist: "Astrix & Ace Ventura", film: "Iconic Anthems", isGoa: true },
+  { title: "Universe Inside Me", artist: "Liquid Soul & Vini Vici", film: "Iconic Anthems", isGoa: true },
+  { title: "Pistolero", artist: "Juno Reactor", film: "Iconic Anthems", isGoa: true },
+  { title: "Parvati Valley", artist: "Blastoyz", film: "Iconic Anthems", isGoa: true },
+  { title: "The Prayer", artist: "Electric Universe", film: "Iconic Anthems", isGoa: true },
+  { title: "Tandava", artist: "Shanti People", film: "Iconic Anthems", isGoa: true },
+  { title: "Smashing the Opponent", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true },
+  { title: "People Can Fly", artist: "Astral Projection", film: "Iconic Anthems", isGoa: true },
+  { title: "Neurochemistry", artist: "Ace Ventura & Liquid Soul", film: "Iconic Anthems", isGoa: true },
+  { title: "Wire-Tap", artist: "GMS & Vini Vici", film: "Iconic Anthems", isGoa: true },
+  { title: "Ayahuasca", artist: "1200 Micrograms", film: "Iconic Anthems", isGoa: true },
+  { title: "Sahara", artist: "Astrix", film: "Iconic Anthems", isGoa: true },
+  { title: "Heavyweight", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true },
+  { title: "Bungee Jump", artist: "Captain Hook & Astrix", film: "Iconic Anthems", isGoa: true },
+  { title: "Floor-Essence", artist: "Man With No Name", film: "Golden Era & Acid", isGoa: true },
+  { title: "Let’s Turn On", artist: "Doof", film: "Golden Era & Acid", isGoa: true },
+  { title: "Geomantik", artist: "Prana", film: "Golden Era & Acid", isGoa: true },
+  { title: "Liquid Sun", artist: "Astral Projection", film: "Golden Era & Acid", isGoa: true },
+  { title: "Der Damm", artist: "Hallucinogen", film: "Golden Era & Acid", isGoa: true },
+  { title: "Canopy", artist: "Total Eclipse", film: "Golden Era & Acid", isGoa: true },
+  { title: "Alcyone", artist: "Pleiadians", film: "Golden Era & Acid", isGoa: true },
+  { title: "Sugar Rush", artist: "Man With No Name", film: "Golden Era & Acid", isGoa: true },
+  { title: "High Energy Protons", artist: "Juno Reactor", film: "Golden Era & Acid", isGoa: true },
+  { title: "Searching For UFOs", artist: "Astral Projection", film: "Golden Era & Acid", isGoa: true },
+  { title: "Cor", artist: "Green Nuns of the Revolution", film: "Golden Era & Acid", isGoa: true },
+  { title: "Dansul Ielelor", artist: "E-Mantra", film: "Golden Era & Acid", isGoa: true },
+  { title: "A Bit of Goa", artist: "Koxbox", film: "Golden Era & Acid", isGoa: true },
+  { title: "Cannabanoid", artist: "Cosmosis", film: "Golden Era & Acid", isGoa: true },
+  { title: "X-File", artist: "Chakra & Edi Mis", film: "Golden Era & Acid", isGoa: true },
+  { title: "Deep Space 5D", artist: "Dimension 5", film: "Golden Era & Acid", isGoa: true },
+  { title: "Trash Shiva", artist: "Transwave", film: "Golden Era & Acid", isGoa: true },
+  { title: "Epilogue", artist: "Asia 2001", film: "Golden Era & Acid", isGoa: true },
+  { title: "Magnetic Activity", artist: "MFG (Message From God)", film: "Golden Era & Acid", isGoa: true },
+  { title: "Trip Tonite", artist: "Etnica", film: "Golden Era & Acid", isGoa: true },
+  { title: "Camel", artist: "Indoor", film: "Golden Era & Acid", isGoa: true },
+  { title: "Kreak", artist: "Space Cat", film: "Golden Era & Acid", isGoa: true },
+  { title: "Bust a Move", artist: "Infected Mushroom", film: "Golden Era & Acid", isGoa: true },
+  { title: "Divine Moments of Truth (D.M.T.)", artist: "Shpongle", film: "Golden Era & Acid", isGoa: true },
+  { title: "Forest of the Saints (Live Ritual Edit)", artist: "Goa Gil", film: "Golden Era & Acid", isGoa: true },
+  { title: "Shankara", artist: "Shanti People", film: "Vedic & Tribal", isGoa: true },
+  { title: "Karma", artist: "Vini Vici & Reality Test ft. Shanti People", film: "Vedic & Tribal", isGoa: true },
+  { title: "Kabalah", artist: "Blastoyz & Reality Test", film: "Vedic & Tribal", isGoa: true },
+  { title: "Sem Chão", artist: "Mandragora", film: "Vedic & Tribal", isGoa: true },
+  { title: "1000 Sterne", artist: "Neelix", film: "Vedic & Tribal", isGoa: true },
+  { title: "Artcore", artist: "Astrix", film: "Vedic & Tribal", isGoa: true },
+  { title: "Wake and Bake", artist: "Avalon & Laughing Buddha", film: "Vedic & Tribal", isGoa: true },
+  { title: "Shankara", artist: "Hilight Tribe", film: "Vedic & Tribal", isGoa: true },
+  { title: "Key to the Universe", artist: "Sesto Sento", film: "Vedic & Tribal", isGoa: true },
+  { title: "Stomping Ground", artist: "Ace Ventura", film: "Vedic & Tribal", isGoa: true },
+  { title: "Adhana", artist: "Vini Vici & Astrix", film: "Vedic & Tribal", isGoa: true },
+  { title: "Cherokee", artist: "Neelix", film: "Vedic & Tribal", isGoa: true },
+  { title: "Hit and Run", artist: "Skazi", film: "Vedic & Tribal", isGoa: true },
+  { title: "Mama India", artist: "Technical Hitch", film: "Vedic & Tribal", isGoa: true },
+  { title: "A Journey in Trance", artist: "Talamasca", film: "Vedic & Tribal", isGoa: true },
+  { title: "Life Frequency", artist: "Liquid Soul & Outsiders", film: "Vedic & Tribal", isGoa: true },
+  { title: "Awake", artist: "Astrix & Tristan", film: "Vedic & Tribal", isGoa: true },
+  { title: "Rumble on the Jungle", artist: "Tristan & Avalon", film: "Vedic & Tribal", isGoa: true },
+  { title: "Step Aside", artist: "Blastoyz", film: "Vedic & Tribal", isGoa: true },
+  { title: "Spitfire", artist: "Infected Mushroom", film: "Vedic & Tribal", isGoa: true },
+  { title: "The Tree", artist: "Vini Vici & WHITENO1SE", film: "Vedic & Tribal", isGoa: true },
+  { title: "God Is God", artist: "Juno Reactor", film: "Vedic & Tribal", isGoa: true },
+  { title: "Raya", artist: "Outsiders & Volcano", film: "Vedic & Tribal", isGoa: true },
+  { title: "The Alien Jams", artist: "Ajja & Cosmosis", film: "Vedic & Tribal", isGoa: true },
+  { title: "Prime Time", artist: "Ace Ventura & Symbolic", film: "Vedic & Tribal", isGoa: true },
+  { title: "We Are Intelligent", artist: "Laughing Buddha", film: "Twilight Underground", isGoa: true },
+  { title: "Deep Mind", artist: "Tristan", film: "Twilight Underground", isGoa: true },
+  { title: "Tumbleweed", artist: "Dickster & Burn in Noise", film: "Twilight Underground", isGoa: true },
+  { title: "Duck Fuzz", artist: "Fungus Funk", film: "Twilight Underground", isGoa: true },
+  { title: "The Mushroom Network", artist: "Earthling & Virtual Light", film: "Twilight Underground", isGoa: true },
+  { title: "Navigate", artist: "Filteria", film: "Twilight Underground", isGoa: true },
+  { title: "Cyclone in Your Heart", artist: "Crossing Mind", film: "Twilight Underground", isGoa: true },
+  { title: "Just Another Jam", artist: "Sonic Species", film: "Twilight Underground", isGoa: true },
+  { title: "Source of Light", artist: "Braincell", film: "Twilight Underground", isGoa: true },
+  { title: "Vuuv Festival Anthem", artist: "Burn in Noise", film: "Twilight Underground", isGoa: true },
+  { title: "Orange Sunshine", artist: "Hypnocoustics", film: "Twilight Underground", isGoa: true },
+  { title: "Origin", artist: "Captain Hook", film: "Twilight Underground", isGoa: true },
+  { title: "Cyber Space", artist: "Symbolic & Waio", film: "Twilight Underground", isGoa: true },
+  { title: "Floating Waves", artist: "Protonica", film: "Twilight Underground", isGoa: true },
+  { title: "Dragonfly", artist: "Zen Mechanics & Egorythmia", film: "Twilight Underground", isGoa: true },
+  { title: "The Seed", artist: "Ritmo & Sphera", film: "Twilight Underground", isGoa: true },
+  { title: "Salvia Divinorum", artist: "E-Clip", film: "Twilight Underground", isGoa: true },
+  { title: "Flying Objects", artist: "Faders", film: "Twilight Underground", isGoa: true },
+  { title: "Mantra", artist: "Electric Universe", film: "Twilight Underground", isGoa: true },
+  { title: "Million Little Pieces", artist: "Freedom Fighters & Ryanosaurus", film: "Twilight Underground", isGoa: true },
+  { title: "Whispering Gallery", artist: "Arjuna", film: "Twilight Underground", isGoa: true },
+  { title: "Rings of Fairy", artist: "Atriohm", film: "Twilight Underground", isGoa: true },
+  { title: "Acid Country", artist: "Dust", film: "Twilight Underground", isGoa: true },
+  { title: "Ritual of the Elements", artist: "Parasense", film: "Twilight Underground", isGoa: true },
+  { title: "Spirit of the Forest", artist: "Kindzadza", film: "Twilight Underground", isGoa: true },
+];
+
+const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa];
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
+  const item = t as any;
   if (!uniqueMap.has(key)) {
-    uniqueMap.set(key, t);
+    uniqueMap.set(key, { ...t });
+  } else {
+    const existing = uniqueMap.get(key)!;
+    if (item.isSpatial) existing.isSpatial = true;
+    if (item.isGlobal) existing.isGlobal = true;
+    if (item.isGoa) existing.isGoa = true;
+    if (item.youtubeId && !existing.youtubeId) existing.youtubeId = item.youtubeId;
   }
 }
 
@@ -519,8 +630,9 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   film: track.film,
   youtubeId: track.youtubeId,
   startSeconds: track.startSeconds,
-  isSpatial: track.isSpatial ?? (track.isGlobal ? false : true),
+  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa) ? false : true),
   isGlobal: track.isGlobal ?? false,
+  isGoa: track.isGoa ?? false,
 }));
 
 // Fisher-Yates Shuffle function to randomize track order dynamically on load and assign clean sequential IDs (1 to length)
