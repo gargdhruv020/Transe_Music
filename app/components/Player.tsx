@@ -155,33 +155,15 @@ function Vinyl({
         {/* Subtle physical grooves overlay */}
         <div className="vinyl-grooves absolute inset-0 rounded-full opacity-35" />
 
-        {/* Center Label Area / Album Art */}
+        {/* Center Label Area */}
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden border border-black/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),_0_2px_4px_rgba(0,0,0,0.5)] flex items-center justify-center bg-[#151515]"
-          style={{ width: labelSize, height: labelSize }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden border border-black/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),_0_2px_4px_rgba(0,0,0,0.5)]"
+          style={{
+            width: labelSize,
+            height: labelSize,
+            background: `radial-gradient(circle, rgba(255,255,255,0.1) 0%, ${accentColor} 85%, rgba(0,0,0,0.35) 100%)`,
+          }}
         >
-          {track.youtubeId ? (
-            <img
-              src={`https://img.youtube.com/vi/${track.youtubeId}/mqdefault.jpg`}
-              alt={track.title}
-              className="w-full h-full object-cover rounded-full select-none pointer-events-none"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = "none";
-              }}
-            />
-          ) : (
-            <div
-              className="w-full h-full rounded-full flex flex-col items-center justify-center p-1"
-              style={{
-                background: `radial-gradient(circle, rgba(0,0,0,0.2) 0%, ${accentColor} 80%, ${accentColor} 100%)`,
-              }}
-            >
-              <span className="text-[5px] text-white/30 font-bold truncate max-w-full leading-none">
-                TRANSE
-              </span>
-            </div>
-          )}
-
           {/* Sub hub ring */}
           <div className="absolute inset-0 rounded-full border border-white/5 pointer-events-none" />
         </div>
