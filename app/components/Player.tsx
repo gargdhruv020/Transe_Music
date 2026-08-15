@@ -495,6 +495,22 @@ export default function Player() {
                 }, 1000);
               }
             } else if (event.data === 0) {
+              // Guard: Only skip to the next track if the video has actually reached its end
+              try {
+                if (
+                  ytPlayerRef.current &&
+                  typeof ytPlayerRef.current.getCurrentTime === "function" &&
+                  typeof ytPlayerRef.current.getDuration === "function"
+                ) {
+                  const currTime = ytPlayerRef.current.getCurrentTime() || 0;
+                  const dur = ytPlayerRef.current.getDuration() || 0;
+                  if (dur > 0 && currTime < dur - 1.5) {
+                    console.log("[YT Player] Ignored premature ENDED event. Time:", currTime, "Duration:", dur);
+                    return;
+                  }
+                }
+              } catch (_) {}
+
               setTimeout(() => {
                 if (handleNextRef.current) {
                   handleNextRef.current();
