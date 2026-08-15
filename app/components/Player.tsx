@@ -132,35 +132,66 @@ function Vinyl({
   size: number;
 }) {
   const accentColor = getCategoryColor(track.id % 10);
+  const labelSize = Math.round(size * 0.38); // Hub is 38% of vinyl size
 
   return (
     <div
-      className="relative flex-shrink-0 rounded-full"
+      className="relative flex-shrink-0 select-none shadow-[0_8px_24px_rgba(0,0,0,0.5)] rounded-full overflow-hidden"
       style={{ width: size, height: size }}
     >
-      {/* Vinyl disc */}
+      {/* Vinyl body containing black grooves and conic shining reflections */}
       <div
-        className="vinyl-grooves absolute inset-0 rounded-full"
+        className="absolute inset-0 rounded-full"
         style={{
           background: `
-            radial-gradient(circle at 50% 50%, 
-              ${accentColor} 0%, 
-              rgba(30,10,40,0.9) 25%, 
-              rgba(20,5,30,0.95) 35%, 
-              ${accentColor}33 45%, 
-              rgba(15,5,25,0.9) 55%, 
-              rgba(10,2,20,0.95) 70%, 
-              rgba(5,1,15,0.9) 100%)
+            radial-gradient(circle, transparent 38%, rgba(0,0,0,0.4) 38%, rgba(0,0,0,0.85) 42%, rgba(0,0,0,0.95) 100%),
+            repeating-radial-gradient(circle, #222 0px, #111 2px, #222 4px),
+            conic-gradient(from 0deg, #121212 0%, #2a2a2a 15%, #121212 30%, #121212 50%, #2a2a2a 65%, #121212 80%, #121212 100%)
           `,
           animation: "vinyl-spin 8s linear infinite",
           animationPlayState: isPlaying ? "running" : "paused",
         }}
-      />
-      {/* Spindle hole */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/70 ring-2 ring-white/40"
-        style={{ width: 12, height: 12 }}
-      />
+      >
+        {/* Subtle physical grooves overlay */}
+        <div className="vinyl-grooves absolute inset-0 rounded-full opacity-35" />
+
+        {/* Center Label Area / Album Art */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden border border-black/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),_0_2px_4px_rgba(0,0,0,0.5)] flex items-center justify-center bg-[#151515]"
+          style={{ width: labelSize, height: labelSize }}
+        >
+          {track.youtubeId ? (
+            <img
+              src={`https://img.youtube.com/vi/${track.youtubeId}/mqdefault.jpg`}
+              alt={track.title}
+              className="w-full h-full object-cover rounded-full select-none pointer-events-none"
+              onError={(e) => {
+                (e.target as HTMLElement).style.display = "none";
+              }}
+            />
+          ) : (
+            <div
+              className="w-full h-full rounded-full flex flex-col items-center justify-center p-1"
+              style={{
+                background: `radial-gradient(circle, rgba(0,0,0,0.2) 0%, ${accentColor} 80%, ${accentColor} 100%)`,
+              }}
+            >
+              <span className="text-[5px] text-white/30 font-bold truncate max-w-full leading-none">
+                TRANSE
+              </span>
+            </div>
+          )}
+
+          {/* Sub hub ring */}
+          <div className="absolute inset-0 rounded-full border border-white/5 pointer-events-none" />
+        </div>
+
+        {/* Spindle hole in center */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black border border-white/20 shadow-[inset_0_1px_3px_rgba(0,0,0,1)] pointer-events-none z-10"
+          style={{ width: Math.max(6, Math.round(size * 0.08)), height: Math.max(6, Math.round(size * 0.08)) }}
+        />
+      </div>
     </div>
   );
 }
