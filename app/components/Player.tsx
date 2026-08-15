@@ -676,10 +676,11 @@ export default function Player() {
       }
 
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: activeTrack.title || "Placeholder Title",
-        artist: activeTrack.artist || "Placeholder Artist",
-        album: activeTrack.film || "Placeholder Album",
+        title: activeTrack.title || "Unknown Title",
+        artist: activeTrack.artist || "Unknown Artist",
+        album: activeTrack.film || "Trance Sangeet",
         artwork: [
+          { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
           { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
           { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
         ],
@@ -690,6 +691,9 @@ export default function Player() {
         setIsPlaying(true);
         if (silentAudioRef.current) {
           silentAudioRef.current.play().catch(() => {});
+        }
+        if (audioRef.current) {
+          audioRef.current.play().catch(() => {});
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
           try {
@@ -702,6 +706,9 @@ export default function Player() {
         setIsPlaying(false);
         if (silentAudioRef.current) {
           silentAudioRef.current.pause();
+        }
+        if (audioRef.current) {
+          audioRef.current.pause();
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
           try {
@@ -719,9 +726,12 @@ export default function Player() {
       });
 
       navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (details.seekTime !== undefined && ytPlayerRef.current && durationRef.current > 0) {
+        if (details.seekTime !== undefined && durationRef.current > 0) {
           const seekTime = details.seekTime;
-          if (typeof ytPlayerRef.current.seekTo === "function") {
+          if (audioRef.current) {
+            audioRef.current.currentTime = seekTime;
+          }
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.seekTo === "function") {
             try {
               ytPlayerRef.current.seekTo(seekTime, true);
               setCurrentTime(seekTime);
@@ -734,6 +744,11 @@ export default function Player() {
       console.error("Media Session initialization failed:", e);
     }
   }, [track]);
+
+  // Synchronize Media Session metadata and actions on track changes
+  useEffect(() => {
+    initMediaSession(track);
+  }, [track, initMediaSession]);
 
   const playTrack = useCallback((selectedTrack: Track) => {
     if (!selectedTrack || !audioRef.current) return;
