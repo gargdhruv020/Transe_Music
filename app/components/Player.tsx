@@ -362,17 +362,13 @@ export default function Player() {
           resolvedCacheRef.current[cacheKey] = data.videoId;
           setCurrentVideoId(data.videoId);
         } else if (!controller.signal.aborted) {
-          console.warn("Search resolved to no videoId, skipping to next track.");
-          if (handleNextRef.current) {
-            handleNextRef.current();
-          }
+          console.error(`Could not resolve videoId for: ${track.title}`);
+          setIsPlaying(false);
         }
       } catch (e: any) {
         if (e.name !== "AbortError") {
-          console.error("Search API resolution error, skipping to next track:", e);
-          if (handleNextRef.current) {
-            handleNextRef.current();
-          }
+          console.error(`Search API resolution error for: ${track.title}`, e);
+          setIsPlaying(false);
         }
       }
     }
