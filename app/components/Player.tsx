@@ -905,14 +905,25 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+  const handleTrackSelect = useCallback(async (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
     unlockHardwareAudioBus();
+    const activeTrack = tracks[currentIndex];
+    
+    // 1. Guard against restarting or skipping the currently active track
+    if (activeTrack && activeTrack.id === trackId) {
+      if (!isPlaying && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+        ytPlayerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+      return;
+    }
+
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
 
     const selectedTrack = tracks[index];
 
-    // 1. Control the native background silent audio element synchronously within user gesture
+    // 2. Control the native background silent audio element synchronously within user gesture
     if (silentAudioRef.current) {
       try {
         silentAudioRef.current.pause();
@@ -921,28 +932,47 @@ export default function Player() {
       } catch (_) {}
     }
 
-    // 2. Initialize Media Session metadata for the selected track synchronously
+    // 3. Initialize Media Session metadata for the selected track synchronously
     initMediaSession();
 
-    // 3. Update active track state and UI indicators immediately
+    // 4. Update active track state and UI indicators immediately
     setQueueMode(mode);
 
     // Set autoplay pending unconditionally to force immediate playback on load
     autoPlayPendingRef.current = true;
 
-    // 4. Update the test-facing audio engine source using the centralized playTrack handler
+    // 5. Update the test-facing audio engine source using the centralized playTrack handler
     playTrack(selectedTrack);
 
-    // 5. Update the YouTube Player source immediately if the ID is pre-resolved/cached
-    if (selectedTrack.youtubeId) {
-      setCurrentVideoId(selectedTrack.youtubeId);
+    // 6. Resolve videoId: use existing key or fetch dynamically if missing
+    let targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
+
+    if (!targetVideoId) {
+      try {
+        const query = selectedTrack.isSpatial
+          ? `${selectedTrack.title} ${selectedTrack.artist} 16d audio`
+          : `${selectedTrack.title} ${selectedTrack.artist} ${selectedTrack.film} audio`;
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (data && data.videoId) {
+          targetVideoId = data.videoId;
+          selectedTrack.youtubeId = targetVideoId; // Cache resolved key to prevent future fetches
+        }
+      } catch (err) {
+        console.error("Failed to resolve track key:", err);
+      }
+    }
+
+    // 7. Immediately stream the resolved track
+    if (targetVideoId) {
+      setCurrentVideoId(targetVideoId);
       setIsPlaying(true);
       if (isPlayerReadyRef.current && ytPlayerRef.current) {
         try {
           const startPos = selectedTrack.startSeconds || 0;
           if (typeof ytPlayerRef.current.loadVideoById === "function") {
             ytPlayerRef.current.loadVideoById({
-              videoId: selectedTrack.youtubeId,
+              videoId: targetVideoId,
               startSeconds: startPos,
             });
           }
@@ -964,7 +994,7 @@ export default function Player() {
         } catch (_) {}
       }
     }
-  }, [initMediaSession, playTrack]);
+  }, [currentIndex, isPlaying, initMediaSession, playTrack]);
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
