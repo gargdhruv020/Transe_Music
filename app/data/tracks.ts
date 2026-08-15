@@ -882,11 +882,21 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isKTrance: track.isKTrance ?? false,
 }));
 
-// Fisher-Yates Shuffle function to randomize track order dynamically on load and assign clean sequential IDs (1 to length)
+// Stable deterministic pseudo-random number generator to prevent chunk-evaluation mismatches and hydration errors
+function seedableRandom(seed: number) {
+  let s = seed;
+  return function() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+// Fisher-Yates Shuffle function to randomize track order deterministically on load and assign clean sequential IDs (1 to length)
 function shuffleAndReindex(array: Track[]): Track[] {
   const arr = [...array];
+  const rand = seedableRandom(42); // Stable seed
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rand() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr.map((track, index) => ({
@@ -895,7 +905,7 @@ function shuffleAndReindex(array: Track[]): Track[] {
   }));
 }
 
-// Export the dynamically shuffled and sequential re-indexed tracks
+// Export the deterministically shuffled and sequential re-indexed tracks
 export const tracks: Track[] = shuffleAndReindex(rawTracks);
 
 export function getRandomDuration(): number {
