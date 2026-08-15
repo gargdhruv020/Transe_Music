@@ -710,7 +710,10 @@ export default function Player() {
     }
   }, [track]);
 
-  const handleTrackSelect = useCallback((index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+    const index = tracks.findIndex(t => t.id === trackId);
+    if (index === -1) return;
+
     const selectedTrack = tracks[index];
 
     // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
@@ -724,7 +727,6 @@ export default function Player() {
     setCurrentIndex(index);
     setQueueMode(mode);
     setIsPlaying(true);
-    setShowList(false);
   }, [initMediaSession]);
 
   const togglePlay = useCallback(() => {

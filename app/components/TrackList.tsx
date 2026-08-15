@@ -40,27 +40,25 @@ function Equalizer() {
   );
 }
 
-/* ── Pre-compute a lookup map: track.id → global index (O(1) instead of O(n)) ── */
-const globalIndexMap = new Map<number, number>();
-tracks.forEach((t, i) => globalIndexMap.set(t.id, i));
-
 /* ── Memoized Track Row ─────────────────────────────── */
 const TrackRow = memo(function TrackRow({
   track,
-  globalIndex,
   isActive,
   activeTab,
   onSelect,
 }: {
   track: Track;
-  globalIndex: number;
   isActive: boolean;
   activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
-  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
 }) {
   return (
     <button
-      onClick={() => onSelect(globalIndex, activeTab)}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onSelect(track.id, activeTab);
+      }}
       data-active={isActive ? "true" : "false"}
       className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${
         isActive ? "active" : ""
@@ -107,7 +105,7 @@ export default function TrackList({
   isPlaying: boolean;
   initialTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
   onTogglePlay: () => void;
-  onSelect: (index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
   onClose: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -183,18 +181,17 @@ export default function TrackList({
   const remixCount = useMemo(() => tracks.filter(t => t.isRemix).length, []);
   const ktranceCount = useMemo(() => tracks.filter(t => t.isKTrance).length, []);
 
-  const handleHeaderPlayClick = () => {
-    const isCurrentTrackInTab = filteredTracks.some((t) => {
-      return (globalIndexMap.get(t.id) ?? -1) === currentIndex;
-    });
+  const handleHeaderPlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const activeTrack = tracks[currentIndex];
+    const isCurrentTrackInTab = activeTrack && filteredTracks.some((t) => t.id === activeTrack.id);
 
     if (isCurrentTrackInTab) {
       onTogglePlay();
     } else {
       if (filteredTracks.length > 0) {
-        const firstTrack = filteredTracks[0];
-        const firstGlobalIndex = globalIndexMap.get(firstTrack.id) ?? 0;
-        onSelect(firstGlobalIndex, activeTab);
+        onSelect(filteredTracks[0].id, activeTab);
       }
     }
   };
@@ -339,13 +336,13 @@ export default function TrackList({
           className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-2 pb-5"
         >
           {filteredTracks.map((t) => {
-            const globalIndex = globalIndexMap.get(t.id) ?? 0;
+            const activeTrack = tracks[currentIndex];
+            const isActive = activeTrack ? t.id === activeTrack.id : false;
             return (
               <TrackRow
                 key={t.id}
                 track={t}
-                globalIndex={globalIndex}
-                isActive={globalIndex === currentIndex}
+                isActive={isActive}
                 activeTab={activeTab}
                 onSelect={onSelect}
               />
