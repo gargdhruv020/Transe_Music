@@ -244,6 +244,7 @@ export default function Player() {
   const initialSeekTimeRef = useRef<number | null>(null);
   const durationRef = useRef(duration);
   const autoPlayPendingRef = useRef(false);
+  const mediaStateRef = useRef<any>(null);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -665,28 +666,22 @@ export default function Player() {
     }
   }, [duration]);
 
-  const initMediaSession = useCallback((overrideTrack?: Track) => {
+  const initMediaSession = useCallback(() => {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
 
-    const activeTrack = overrideTrack || track;
     try {
       // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
       if (silentAudioRef.current) {
         silentAudioRef.current.play().catch(() => {});
       }
+    } catch (_) {}
+  }, []);
 
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: activeTrack.title || "Unknown Title",
-        artist: activeTrack.artist || "Unknown Artist",
-        album: activeTrack.film || "Trance Sangeet",
-        artwork: [
-          { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
-          { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
-          { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
-        ],
-      });
+  // Register Media Session API Action Handlers once on mount
+  useEffect(() => {
+    if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
 
-      // Hook up native system-level action handlers ('play', 'pause', and 'seekto') using 'navigator.mediaSession.setActionHandler()'
+    try {
       navigator.mediaSession.setActionHandler("play", () => {
         setIsPlaying(true);
         if (silentAudioRef.current) {
@@ -718,15 +713,19 @@ export default function Player() {
       });
 
       navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (handleNextRef.current) handleNextRef.current();
+        if (mediaStateRef.current && typeof mediaStateRef.current.handleNext === "function") {
+          mediaStateRef.current.handleNext();
+        }
       });
 
       navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (handlePrevRef.current) handlePrevRef.current();
+        if (mediaStateRef.current && typeof mediaStateRef.current.handlePrev === "function") {
+          mediaStateRef.current.handlePrev();
+        }
       });
 
       navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (details.seekTime !== undefined && durationRef.current > 0) {
+        if (details.seekTime !== undefined && mediaStateRef.current && mediaStateRef.current.duration > 0) {
           const seekTime = details.seekTime;
           if (audioRef.current) {
             audioRef.current.currentTime = seekTime;
@@ -741,14 +740,53 @@ export default function Player() {
         }
       });
     } catch (e) {
-      console.error("Media Session initialization failed:", e);
+      console.error("Failed to register Media Session handlers:", e);
+    }
+  }, []);
+
+  // Synchronize Media Session metadata on track changes
+  useEffect(() => {
+    if (typeof window === "undefined" || !("mediaSession" in navigator) || !track) return;
+
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track.title || "Unknown Title",
+        artist: track.artist || "Unknown Artist",
+        album: track.film || "Trance Sangeet",
+        artwork: [
+          { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
+          { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
+          { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
+        ],
+      });
+    } catch (e) {
+      console.error("Failed to update Media Session metadata:", e);
     }
   }, [track]);
 
-  // Synchronize Media Session metadata and actions on track changes
+  // Update Media Session playback state
   useEffect(() => {
-    initMediaSession(track);
-  }, [track, initMediaSession]);
+    if (typeof window !== "undefined" && "mediaSession" in navigator) {
+      try {
+        navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+      } catch (_) {}
+    }
+  }, [isPlaying]);
+
+  // Update Media Session position state
+  useEffect(() => {
+    if (typeof window !== "undefined" && "mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+      try {
+        if (duration > 0) {
+          navigator.mediaSession.setPositionState({
+            duration: duration,
+            playbackRate: 1,
+            position: Math.min(currentTime, duration),
+          });
+        }
+      } catch (_) {}
+    }
+  }, [currentTime, duration]);
 
   const playTrack = useCallback((selectedTrack: Track) => {
     if (!selectedTrack || !audioRef.current) return;
@@ -833,7 +871,7 @@ export default function Player() {
     }
 
     // 2. Initialize Media Session metadata for the selected track synchronously
-    initMediaSession(selectedTrack);
+    initMediaSession();
 
     // 3. Update active track state and UI indicators immediately
     setQueueMode(mode);
@@ -961,6 +999,19 @@ export default function Player() {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
   }, [isPlaying]);
+
+  // Update mutable references to latest player states & functions
+  useEffect(() => {
+    mediaStateRef.current = {
+      track,
+      isPlaying,
+      currentTime,
+      duration,
+      handleNext,
+      handlePrev,
+      togglePlay,
+    };
+  }, [track, isPlaying, currentTime, duration, handleNext, handlePrev, togglePlay]);
 
   // 7. Bluetooth/Hardware Keyboard Volume +/- Events Interception
   useEffect(() => {
