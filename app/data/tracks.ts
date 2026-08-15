@@ -10,6 +10,7 @@ export interface Track {
   isGoa?: boolean;
   isRemix?: boolean;
   isKTrance?: boolean;
+  audioUrl?: string;
 }
 
 const list1 = [
@@ -880,6 +881,7 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isGoa: track.isGoa ?? false,
   isRemix: track.isRemix ?? false,
   isKTrance: track.isKTrance ?? false,
+  audioUrl: (track as any).audioUrl,
 }));
 
 // Stable deterministic pseudo-random number generator to prevent chunk-evaluation mismatches and hydration errors

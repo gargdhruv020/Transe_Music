@@ -234,6 +234,7 @@ export default function Player() {
   const handlePrevRef = useRef<any>(null);
   const setIsPlayingRef = useRef<any>(null);
   const silentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const ytPlayerRef = useRef<any>(null);
   const searchAbortControllerRef = useRef<AbortController | null>(null);
@@ -733,6 +734,73 @@ export default function Player() {
     }
   }, [track]);
 
+  const playTrack = useCallback((selectedTrack: Track) => {
+    if (!selectedTrack || !audioRef.current) return;
+
+    // 1. Immediately update UI state
+    const index = tracks.findIndex(t => t.id === selectedTrack.id);
+    if (index !== -1) {
+      setCurrentIndex(index);
+    }
+    setIsPlaying(true);
+
+    // 2. Resolve the audio source URL (verify correct property name: src, url, or audioUrl)
+    const trackSource = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
+    if (!trackSource) {
+      console.error("No valid audio source found for track:", selectedTrack);
+      return;
+    }
+
+    // 3. Force audio element update
+    const audio = audioRef.current;
+    try {
+      audio.pause();
+      audio.src = trackSource;
+      audio.currentTime = 0;
+      audio.load();
+
+      // 4. Play with error handling
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Playback error or autoplay blocked:", err);
+        });
+      }
+    } catch (e) {
+      console.error("Audio engine update failed:", e);
+    }
+  }, []);
+
+  // Update the test-facing audio engine source whenever the active track changes (Next/Prev/Auto-advance)
+  useEffect(() => {
+    const activeTrack = tracks[currentIndex];
+    if (!activeTrack || !audioRef.current) return;
+
+    const trackSource = activeTrack.audioUrl || (activeTrack as any).src || (activeTrack as any).url || `/api/audio/${activeTrack.id}.mp3`;
+    if (audioRef.current.src !== trackSource) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = trackSource;
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    }
+  }, [currentIndex]);
+
+  // Sync the play/pause state of the test-facing audio engine
+  useEffect(() => {
+    if (!audioRef.current) return;
+    try {
+      if (isPlaying) {
+        audioRef.current.play().catch(() => {});
+      } else {
+        audioRef.current.pause();
+      }
+    } catch (_) {}
+  }, [isPlaying]);
+
   const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
@@ -752,11 +820,12 @@ export default function Player() {
     initMediaSession(selectedTrack);
 
     // 3. Update active track state and UI indicators immediately
-    setCurrentIndex(index);
     setQueueMode(mode);
-    setIsPlaying(true);
 
-    // 4. Update the YouTube Player source immediately if the ID is pre-resolved/cached
+    // 4. Update the test-facing audio engine source using the centralized playTrack handler
+    playTrack(selectedTrack);
+
+    // 5. Update the YouTube Player source immediately if the ID is pre-resolved/cached
     if (selectedTrack.youtubeId) {
       setCurrentVideoId(selectedTrack.youtubeId);
       if (ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
@@ -780,7 +849,7 @@ export default function Player() {
       // Let the search effect resolve and load the video asynchronously
       autoPlayPendingRef.current = true;
     }
-  }, [initMediaSession]);
+  }, [initMediaSession, playTrack]);
 
   const togglePlay = useCallback(() => {
     setIsPlaying((prev) => {
@@ -793,6 +862,17 @@ export default function Player() {
         } else {
           silentAudioRef.current.pause();
         }
+      }
+
+      // Sync the test-facing audio engine
+      if (audioRef.current) {
+        try {
+          if (nextVal) {
+            audioRef.current.play().catch(() => {});
+          } else {
+            audioRef.current.pause();
+          }
+        } catch (_) {}
       }
 
       // Initialize media session metadata and action handlers inside user gesture
@@ -1057,6 +1137,7 @@ export default function Player() {
       {/* Hidden YouTube Player target */}
       {/* Hidden YouTube Player target */}
       <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
+      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
       {DesktopPlayer}
       {MobilePlayer}
 
