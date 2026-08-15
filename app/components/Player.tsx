@@ -4,6 +4,31 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { tracks, type Track } from "@/app/data/tracks";
 import TrackList from "./TrackList";
 
+/* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
+let globalAudioCtx: any = null;
+export const unlockHardwareAudioBus = () => {
+  if (typeof window === "undefined") return;
+  if (!globalAudioCtx) {
+    const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
+    if (AudioCtx) {
+      try {
+        globalAudioCtx = new AudioCtx();
+        const oscillator = globalAudioCtx.createOscillator();
+        const gain = globalAudioCtx.createGain();
+        gain.gain.value = 0.001;
+        oscillator.connect(gain);
+        gain.connect(globalAudioCtx.destination);
+        oscillator.start();
+      } catch (err) {
+        console.warn("Failed to initialize Hardware Audio Bus:", err);
+      }
+    }
+  }
+  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+    globalAudioCtx.resume().catch(() => {});
+  }
+};
+
 /* ── Helpers ──────────────────────────────────────── */
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
@@ -468,7 +493,7 @@ export default function Player() {
         width: "1",
         videoId: currentVideoId,
         playerVars: {
-          autoplay: shouldPlay ? 1 : 0,
+          autoplay: 1,
           controls: 0,
           disablekb: 1,
           fs: 0,
@@ -478,6 +503,7 @@ export default function Player() {
           iv_load_policy: 3,
           start: startPos,
           playsinline: 1,
+          origin: typeof window !== "undefined" ? window.location.origin : "",
         },
         events: {
           onStateChange: (event: any) => {
@@ -512,11 +538,10 @@ export default function Player() {
                 }
               } catch (_) {}
 
-              setTimeout(() => {
-                if (handleNextRef.current) {
-                  handleNextRef.current();
-                }
-              }, 100);
+              // Direct next track trigger
+              if (handleNextRef.current) {
+                handleNextRef.current();
+              }
             }
           },
           onReady: (event: any) => {
@@ -543,6 +568,17 @@ export default function Player() {
       // Load new video ID into existing player
       try {
         if (isPlayerReadyRef.current && ytPlayerRef.current) {
+          // Guard: prevent redundant load/cue if the player is already playing/buffering this video
+          if (typeof ytPlayerRef.current.getVideoData === "function") {
+            const videoData = ytPlayerRef.current.getVideoData();
+            if (videoData && videoData.video_id === currentVideoId) {
+              if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
+                ytPlayerRef.current.playVideo();
+              }
+              return;
+            }
+          }
+
           if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
             ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
           } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
@@ -870,6 +906,7 @@ export default function Player() {
   }, [isPlaying]);
 
   const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+    unlockHardwareAudioBus();
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
 
@@ -890,6 +927,9 @@ export default function Player() {
     // 3. Update active track state and UI indicators immediately
     setQueueMode(mode);
 
+    // Set autoplay pending unconditionally to force immediate playback on load
+    autoPlayPendingRef.current = true;
+
     // 4. Update the test-facing audio engine source using the centralized playTrack handler
     playTrack(selectedTrack);
 
@@ -900,6 +940,7 @@ export default function Player() {
         try {
           const startPos = selectedTrack.startSeconds || 0;
           ytPlayerRef.current.loadVideoById(selectedTrack.youtubeId, startPos);
+          setIsPlaying(true);
         } catch (e) {
           console.error("Direct loadVideoById failed:", e);
         }
@@ -914,12 +955,11 @@ export default function Player() {
           ytPlayerRef.current.pauseVideo();
         } catch (_) {}
       }
-      // Let the search effect resolve and load the video asynchronously
-      autoPlayPendingRef.current = true;
     }
   }, [initMediaSession, playTrack]);
 
   const togglePlay = useCallback(() => {
+    unlockHardwareAudioBus();
     setIsPlaying((prev) => {
       const nextVal = !prev;
 
@@ -1225,7 +1265,11 @@ export default function Player() {
     <>
       {/* Hidden YouTube Player target */}
       {/* Hidden YouTube Player target */}
-      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
+      <div 
+        id="yt-player" 
+        className="yt-background-audio-bypass"
+        {...{ allow: "autoplay; encrypted-media; picture-in-picture" } as any}
+      />
       <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
       {DesktopPlayer}
       {MobilePlayer}

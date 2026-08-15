@@ -402,3 +402,15 @@ nextjs-portal, #__next-prerender-indicator {
   -ms-overflow-style: none !important;  /* IE and Edge */
   scrollbar-width: none !important;  /* Firefox */
 }
+
+/* Chrome Background Playback Bypass */
+.yt-background-audio-bypass {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 4px !important;
+  height: 4px !important;
+  opacity: 0.01 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+}
