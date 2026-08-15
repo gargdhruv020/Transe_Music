@@ -224,6 +224,7 @@ export default function Player() {
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
   const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
+  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
@@ -918,6 +919,13 @@ export default function Player() {
     setIsPlayingRef.current = setIsPlaying;
   }, [handleNext, handlePrev]);
 
+  // Synchronize playlistTab with queueMode when opening the playlist modal
+  useEffect(() => {
+    if (showList) {
+      setPlaylistTab(queueMode);
+    }
+  }, [showList, queueMode]);
+
   // Keep silent audio in sync with playback state to claim media focus
   useEffect(() => {
     if (!silentAudioRef.current) return;
@@ -1146,10 +1154,11 @@ export default function Player() {
         <TrackList
           currentIndex={currentIndex}
           isPlaying={isPlaying}
-          initialTab="all"
+          activeTab={playlistTab}
           onTogglePlay={togglePlay}
           onSelect={handleTrackSelect}
           onClose={() => setShowList(false)}
+          onTabChange={setPlaylistTab}
         />
       )}
     </>

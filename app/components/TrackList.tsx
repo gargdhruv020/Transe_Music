@@ -99,20 +99,21 @@ const TrackRow = memo(function TrackRow({
 export default function TrackList({
   currentIndex,
   isPlaying,
-  initialTab = "all",
+  activeTab = "all",
   onTogglePlay,
   onSelect,
   onClose,
+  onTabChange,
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  initialTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
   onTogglePlay: () => void;
   onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
   onClose: () => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">(initialTab);
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -240,7 +241,7 @@ export default function TrackList({
         {/* Tabs */}
         <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
           <button
-            onClick={() => setActiveTab("all")}
+            onClick={() => onTabChange?.("all")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 ${
               activeTab === "all"
                 ? "bg-white/10 border-white/20 text-white shadow-md"
@@ -250,7 +251,7 @@ export default function TrackList({
             All
           </button>
           <button
-            onClick={() => setActiveTab("16d")}
+            onClick={() => onTabChange?.("16d")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "16d"
                 ? "bg-[oklch(0.68_0.16_250)]/15 border-[oklch(0.68_0.16_250)]/30 text-white shadow-md"
@@ -261,7 +262,7 @@ export default function TrackList({
             16D
           </button>
           <button
-            onClick={() => setActiveTab("global")}
+            onClick={() => onTabChange?.("global")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "global"
                 ? "bg-[oklch(0.72_0.20_190)]/15 border-[oklch(0.72_0.20_190)]/30 text-white shadow-md"
@@ -272,7 +273,7 @@ export default function TrackList({
             Global
           </button>
           <button
-            onClick={() => setActiveTab("goa")}
+            onClick={() => onTabChange?.("goa")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "goa"
                 ? "bg-[oklch(0.72_0.16_45)]/15 border-[oklch(0.72_0.16_45)]/30 text-white shadow-md"
@@ -283,7 +284,7 @@ export default function TrackList({
             Goa
           </button>
           <button
-            onClick={() => setActiveTab("remix")}
+            onClick={() => onTabChange?.("remix")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "remix"
                 ? "bg-[oklch(0.70_0.22_340)]/15 border-[oklch(0.70_0.22_340)]/30 text-white shadow-md"
@@ -294,7 +295,7 @@ export default function TrackList({
             Remix
           </button>
           <button
-            onClick={() => setActiveTab("ktrance")}
+            onClick={() => onTabChange?.("ktrance")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
               activeTab === "ktrance"
                 ? "bg-[oklch(0.60_0.25_285)]/15 border-[oklch(0.60_0.25_285)]/30 text-white shadow-md"
