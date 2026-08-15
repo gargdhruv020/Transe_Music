@@ -207,7 +207,7 @@ export default function TrackList({
     >
       <div className="glass w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-3">
+        <div className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div>
               <h2 className="text-lg font-semibold text-white">Playlist</h2>
@@ -238,7 +238,7 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
-        <div className="flex px-5 pb-4 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center">
+        <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
           <button
             onClick={() => setActiveTab("all")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 ${
@@ -307,7 +307,7 @@ export default function TrackList({
         </div>
 
         {/* Search */}
-        <div className="px-5 pb-5">
+        <div className="px-5 pt-1 pb-4 flex-shrink-0">
           <div className="relative">
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
