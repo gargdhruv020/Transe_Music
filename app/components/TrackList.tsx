@@ -54,6 +54,7 @@ const TrackRow = memo(function TrackRow({
 }) {
   return (
     <button
+      type="button"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -62,7 +63,7 @@ const TrackRow = memo(function TrackRow({
         onSelect(track.id, activeTab);
       }}
       data-active={isActive ? "true" : "false"}
-      className={`track-row w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${
+      className={`track-row playlist-track-item w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left relative cursor-pointer select-none pointer-events-auto ${
         isActive ? "active" : ""
       }`}
     >
@@ -204,7 +205,7 @@ export default function TrackList({
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 animate-[fade-in_0.2s_ease-out]"
       style={{ overscrollBehavior: "contain" }}
     >
-      <div className="glass w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+      <div className="glass playlist-modal-content w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col relative animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
           <div className="flex items-center gap-3">
@@ -335,7 +336,7 @@ export default function TrackList({
         {/* Track Rows */}
         <div
           ref={scrollRef}
-          className="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-2 pb-5"
+          className="playlist-track-list flex-1 min-h-0 flex flex-col overflow-y-auto relative z-10 custom-scrollbar px-2 pb-5"
         >
           {filteredTracks.map((t) => {
             const activeTrack = tracks[currentIndex];
