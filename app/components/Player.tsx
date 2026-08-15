@@ -245,6 +245,7 @@ export default function Player() {
   const durationRef = useRef(duration);
   const autoPlayPendingRef = useRef(false);
   const mediaStateRef = useRef<any>(null);
+  const isPlayerReadyRef = useRef<boolean>(false);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -464,6 +465,7 @@ export default function Player() {
     }
 
     if (!ytPlayerRef.current) {
+      isPlayerReadyRef.current = false;
       // Create new player instance
       ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
         height: "1",
@@ -521,9 +523,14 @@ export default function Player() {
               }, 100);
             }
           },
-          onReady: () => {
+          onReady: (event: any) => {
+            isPlayerReadyRef.current = true;
             if (shouldPlay) {
-              ytPlayerRef.current.playVideo();
+              try {
+                if (typeof event.target.playVideo === "function") {
+                  event.target.playVideo();
+                }
+              } catch (_) {}
             }
           },
           onError: (event: any) => {
@@ -539,10 +546,19 @@ export default function Player() {
     } else {
       // Load new video ID into existing player
       try {
-        if (shouldPlay) {
-          ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
+        if (isPlayerReadyRef.current && ytPlayerRef.current) {
+          if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
+            ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
+          } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
+            ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
+            if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
+              ytPlayerRef.current.playVideo();
+            }
+          } else {
+            console.warn("YouTube player instance lacks cue/load methods. Queuing video ID:", currentVideoId);
+          }
         } else {
-          ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
+          console.warn("YouTube player instance not ready yet. Queuing video ID:", currentVideoId);
         }
       } catch (e) {
         console.error("Cue/load video failed:", e);
@@ -790,40 +806,40 @@ export default function Player() {
     }
   }, [currentTime, duration]);
 
-  const playTrack = useCallback((selectedTrack: Track) => {
-    if (!selectedTrack || !audioRef.current) return;
+  const playTrack = useCallback(async (selectedTrack: Track) => {
+    if (!selectedTrack) return;
 
-    // 1. Immediately update UI state
+    // 1. Update State
     const index = tracks.findIndex(t => t.id === selectedTrack.id);
     if (index !== -1) {
       setCurrentIndex(index);
     }
     setIsPlaying(true);
 
-    // 2. Resolve the audio source URL (verify correct property name: src, url, or audioUrl)
-    const trackSource = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
-    if (!trackSource) {
-      console.error("No valid audio source found for track:", selectedTrack);
+    // 2. Validate Source URL
+    const audioSrc = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
+    if (!audioSrc) {
+      console.error("No valid audio source URL found for track:", selectedTrack);
       return;
     }
 
-    // 3. Force audio element update
     const audio = audioRef.current;
-    try {
-      audio.pause();
-      audio.src = trackSource;
-      audio.currentTime = 0;
-      audio.load();
+    if (!audio) return;
 
-      // 4. Play with error handling
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Playback error or autoplay blocked:", err);
-        });
-      }
-    } catch (e) {
-      console.error("Audio engine update failed:", e);
+    try {
+      // 3. Reset and assign
+      audio.pause();
+      audio.src = audioSrc;
+      audio.currentTime = 0;
+      audio.muted = false; // Ensure not muted
+      audio.volume = 1.0;
+
+      // 4. Force load and play
+      audio.load();
+      await audio.play();
+    } catch (err) {
+      console.error("Audio playback error:", err);
+      setIsPlaying(false);
     }
   }, []);
 
@@ -884,7 +900,7 @@ export default function Player() {
     // 5. Update the YouTube Player source immediately if the ID is pre-resolved/cached
     if (selectedTrack.youtubeId) {
       setCurrentVideoId(selectedTrack.youtubeId);
-      if (ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           const startPos = selectedTrack.startSeconds || 0;
           ytPlayerRef.current.loadVideoById(selectedTrack.youtubeId, startPos);

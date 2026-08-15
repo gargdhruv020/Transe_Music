@@ -100,7 +100,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ videoId });
     }
 
-    return NextResponse.json({ error: "No video found" }, { status: 404 });
+    return NextResponse.json({ error: "No video found", videoId: null }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
