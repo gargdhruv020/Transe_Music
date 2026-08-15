@@ -227,10 +227,15 @@ export default function Player() {
   const resolvedCacheRef = useRef<Record<string, string>>({});
   const isPlayingRef = useRef(isPlaying);
   const initialSeekTimeRef = useRef<number | null>(null);
+  const durationRef = useRef(duration);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+
+  useEffect(() => {
+    durationRef.current = duration;
+  }, [duration]);
 
   // Load saved player state on mount
   useEffect(() => {
@@ -451,6 +456,7 @@ export default function Player() {
           showinfo: 0,
           iv_load_policy: 3,
           start: startPos,
+          playsinline: 1,
         },
         events: {
           onStateChange: (event: any) => {
@@ -621,16 +627,109 @@ export default function Player() {
     }
   }, [duration]);
 
+  const initMediaSession = useCallback((overrideTrack?: Track) => {
+    if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
+
+    const activeTrack = overrideTrack || track;
+    try {
+      // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
+      if (silentAudioRef.current) {
+        silentAudioRef.current.play().catch(() => {});
+      }
+
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: activeTrack.title || "Placeholder Title",
+        artist: activeTrack.artist || "Placeholder Artist",
+        album: activeTrack.film || "Placeholder Album",
+        artwork: [
+          { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
+          { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
+        ],
+      });
+
+      // Hook up native system-level action handlers ('play', 'pause', and 'seekto') using 'navigator.mediaSession.setActionHandler()'
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsPlaying(true);
+        if (silentAudioRef.current) {
+          silentAudioRef.current.play().catch(() => {});
+        }
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+          try {
+            ytPlayerRef.current.playVideo();
+          } catch (_) {}
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsPlaying(false);
+        if (silentAudioRef.current) {
+          silentAudioRef.current.pause();
+        }
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+          try {
+            ytPlayerRef.current.pauseVideo();
+          } catch (_) {}
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        if (handleNextRef.current) handleNextRef.current();
+      });
+
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        if (handlePrevRef.current) handlePrevRef.current();
+      });
+
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        if (details.seekTime !== undefined && ytPlayerRef.current && durationRef.current > 0) {
+          const seekTime = details.seekTime;
+          if (typeof ytPlayerRef.current.seekTo === "function") {
+            try {
+              ytPlayerRef.current.seekTo(seekTime, true);
+              setCurrentTime(seekTime);
+              localStorage.setItem("transe_music_time", seekTime.toString());
+            } catch (_) {}
+          }
+        }
+      });
+    } catch (e) {
+      console.error("Media Session initialization failed:", e);
+    }
+  }, [track]);
+
   const handleTrackSelect = useCallback((index: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+    const selectedTrack = tracks[index];
+
+    // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
+    if (silentAudioRef.current) {
+      silentAudioRef.current.play().catch(() => {});
+    }
+
+    // Synchronously initialize/update Media Session metadata/handlers within the user gesture!
+    initMediaSession(selectedTrack);
+
     setCurrentIndex(index);
     setQueueMode(mode);
     setIsPlaying(true);
     setShowList(false);
-  }, []);
+  }, [initMediaSession]);
 
   const togglePlay = useCallback(() => {
     setIsPlaying((prev) => {
       const nextVal = !prev;
+
+      // Synchronous HTML5 audio control for WebKit/iOS unlocking
+      if (silentAudioRef.current) {
+        if (nextVal) {
+          silentAudioRef.current.play().catch(() => {});
+        } else {
+          silentAudioRef.current.pause();
+        }
+      }
+
+      // Initialize media session metadata and action handlers inside user gesture
+      initMediaSession();
+
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           if (nextVal) {
@@ -648,7 +747,7 @@ export default function Player() {
       }
       return nextVal;
     });
-  }, []);
+  }, [initMediaSession]);
 
   // 6. Silent audio element setup to activate browser Media Session on parent page
   useEffect(() => {
@@ -675,81 +774,22 @@ export default function Player() {
   useEffect(() => {
     if (!silentAudioRef.current) return;
     if (isPlaying) {
-      silentAudioRef.current.play().catch(() => {
-        // Safe to ignore: browser user gesture limitations are bypassed when triggered via track select UI click
-      });
+      silentAudioRef.current.play().catch(() => {});
     } else {
       silentAudioRef.current.pause();
     }
   }, [isPlaying]);
 
-  // Update Media Session Metadata when track changes
+  // Auto-update Media Session when track changes (e.g. automatic transitions)
   useEffect(() => {
-    if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
-
-    try {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: track.title,
-        artist: track.artist,
-        album: track.film || "Trance Music",
-        artwork: [
-          { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
-          { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
-        ],
-      });
-    } catch (e) {
-      console.error("MediaSession metadata update failed:", e);
-    }
-  }, [track]);
+    initMediaSession();
+  }, [track, initMediaSession]);
 
   // Sync media session playback state
   useEffect(() => {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
   }, [isPlaying]);
-
-  // Register Media Session action handlers once on mount (referencing mutable refs to prevent stale closures)
-  useEffect(() => {
-    if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
-
-    try {
-      navigator.mediaSession.setActionHandler("play", () => {
-        if (setIsPlayingRef.current) setIsPlayingRef.current(true);
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-          try {
-            ytPlayerRef.current.playVideo();
-          } catch (_) {}
-        }
-      });
-      navigator.mediaSession.setActionHandler("pause", () => {
-        if (setIsPlayingRef.current) setIsPlayingRef.current(false);
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-          try {
-            ytPlayerRef.current.pauseVideo();
-          } catch (_) {}
-        }
-      });
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (handleNextRef.current) handleNextRef.current();
-      });
-      navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (handlePrevRef.current) handlePrevRef.current();
-      });
-    } catch (e) {
-      console.error("MediaSession action handler registration failed:", e);
-    }
-
-    return () => {
-      try {
-        navigator.mediaSession.setActionHandler("play", null);
-        navigator.mediaSession.setActionHandler("pause", null);
-        navigator.mediaSession.setActionHandler("nexttrack", null);
-        navigator.mediaSession.setActionHandler("previoustrack", null);
-      } catch (e) {
-        // ignore
-      }
-    };
-  }, []);
 
   // 7. Bluetooth/Hardware Keyboard Volume +/- Events Interception
   useEffect(() => {
@@ -947,7 +987,8 @@ export default function Player() {
   return (
     <>
       {/* Hidden YouTube Player target */}
-      <div id="yt-player" className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
+      {/* Hidden YouTube Player target */}
+      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
       {DesktopPlayer}
       {MobilePlayer}
 
