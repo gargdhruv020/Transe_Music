@@ -241,6 +241,7 @@ export default function Player() {
   const isPlayingRef = useRef(isPlaying);
   const initialSeekTimeRef = useRef<number | null>(null);
   const durationRef = useRef(duration);
+  const autoPlayPendingRef = useRef(false);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -453,6 +454,12 @@ export default function Player() {
       initialSeekTimeRef.current = null; // Clear so subsequent plays start from 0
     }
 
+    const shouldPlay = isPlaying || autoPlayPendingRef.current;
+    if (autoPlayPendingRef.current) {
+      autoPlayPendingRef.current = false;
+      setIsPlaying(true);
+    }
+
     if (!ytPlayerRef.current) {
       // Create new player instance
       ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
@@ -460,7 +467,7 @@ export default function Player() {
         width: "1",
         videoId: currentVideoId,
         playerVars: {
-          autoplay: isPlaying ? 1 : 0,
+          autoplay: shouldPlay ? 1 : 0,
           controls: 0,
           disablekb: 1,
           fs: 0,
@@ -496,7 +503,7 @@ export default function Player() {
             }
           },
           onReady: () => {
-            if (isPlaying) {
+            if (shouldPlay) {
               ytPlayerRef.current.playVideo();
             }
           },
@@ -513,7 +520,7 @@ export default function Player() {
     } else {
       // Load new video ID into existing player
       try {
-        if (isPlaying) {
+        if (shouldPlay) {
           ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
         } else {
           ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
@@ -716,17 +723,36 @@ export default function Player() {
 
     const selectedTrack = tracks[index];
 
-    // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
-    if (silentAudioRef.current) {
-      silentAudioRef.current.play().catch(() => {});
+    // 1. Decouple selection: pause old playback immediately to prevent playing preloaded track
+    setIsPlaying(false);
+    setCurrentVideoId(null);
+    setCurrentTime(0);
+    setDuration(0);
+
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+      try {
+        ytPlayerRef.current.pauseVideo();
+      } catch (_) {}
     }
 
-    // Synchronously initialize/update Media Session metadata/handlers within the user gesture!
-    initMediaSession(selectedTrack);
+    // 2. Direct source assignment / reload of silent audio to claim background focus immediately
+    if (silentAudioRef.current) {
+      try {
+        silentAudioRef.current.pause();
+        silentAudioRef.current.load();
+        silentAudioRef.current.play().catch(() => {});
+      } catch (_) {}
+    }
 
+    // 3. Update active track state and UI indicators immediately
     setCurrentIndex(index);
     setQueueMode(mode);
-    setIsPlaying(true);
+
+    // 4. Update Media Session metadata/handlers within the user gesture context
+    initMediaSession(selectedTrack);
+
+    // 5. Signal that we want to auto-play once the new video id resolves
+    autoPlayPendingRef.current = true;
   }, [initMediaSession]);
 
   const togglePlay = useCallback(() => {
