@@ -29,6 +29,8 @@ export const unlockHardwareAudioBus = () => {
   }
 };
 
+const AUDIO_STREAM_ANCHOR = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+
 /* ── Helpers ──────────────────────────────────────── */
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
@@ -260,6 +262,15 @@ export default function Player() {
   const handlePrevRef = useRef<any>(null);
   const setIsPlayingRef = useRef<any>(null);
   const silentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const backgroundAudioRef = silentAudioRef;
+
+  const claimMobileAudioFocus = async () => {
+    if (backgroundAudioRef.current) {
+      try {
+        await backgroundAudioRef.current.play();
+      } catch (_) {}
+    }
+  };
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const ytPlayerRef = useRef<any>(null);
@@ -907,6 +918,7 @@ export default function Player() {
 
   const handleTrackSelect = useCallback(async (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
     unlockHardwareAudioBus();
+    claimMobileAudioFocus();
     const activeTrack = tracks[currentIndex];
     
     // 1. Guard against restarting or skipping the currently active track
@@ -998,6 +1010,7 @@ export default function Player() {
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
+    claimMobileAudioFocus();
     setIsPlaying((prev) => {
       const nextVal = !prev;
 
