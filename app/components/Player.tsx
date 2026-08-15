@@ -1010,7 +1010,7 @@ export default function Player() {
         <TrackList
           currentIndex={currentIndex}
           isPlaying={isPlaying}
-          initialTab={queueMode}
+          initialTab="all"
           onTogglePlay={togglePlay}
           onSelect={handleTrackSelect}
           onClose={() => setShowList(false)}
