@@ -798,50 +798,21 @@ export default function Player() {
     }
     setIsPlaying(true);
 
-    // 2. Resolve the audio source URL (verify correct property name: src, url, or audioUrl)
-    const trackSource = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
-    if (!trackSource) {
-      console.error("No valid audio source found for track:", selectedTrack);
-      return;
-    }
-
-    // 3. Force audio element update
+    // 2. Play the hidden audio element (unblocks background execution and media session)
     const audio = audioRef.current;
     try {
-      audio.pause();
-      audio.src = trackSource;
-      audio.currentTime = 0;
-      audio.load();
-
-      // 4. Play with error handling
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Playback error or autoplay blocked:", err);
-        });
+      if (audio.paused) {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn("Playback error or autoplay blocked:", err);
+          });
+        }
       }
     } catch (e) {
       console.error("Audio engine update failed:", e);
     }
   }, []);
-
-  // Update the test-facing audio engine source whenever the active track changes (Next/Prev/Auto-advance)
-  useEffect(() => {
-    const activeTrack = tracks[currentIndex];
-    if (!activeTrack || !audioRef.current) return;
-
-    const trackSource = activeTrack.audioUrl || (activeTrack as any).src || (activeTrack as any).url || `/api/audio/${activeTrack.id}.mp3`;
-    if (audioRef.current.src !== trackSource) {
-      try {
-        audioRef.current.pause();
-        audioRef.current.src = trackSource;
-        audioRef.current.load();
-        if (isPlaying) {
-          audioRef.current.play().catch(() => {});
-        }
-      } catch (_) {}
-    }
-  }, [currentIndex]);
 
   // Sync the play/pause state of the test-facing audio engine
   useEffect(() => {
@@ -1209,9 +1180,8 @@ export default function Player() {
   return (
     <>
       {/* Hidden YouTube Player target */}
-      {/* Hidden YouTube Player target */}
-      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
-      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
+      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="fixed -z-50 pointer-events-none w-[200px] h-[200px] left-0 top-0 opacity-[0.001]" />
+      <audio ref={audioRef} id="main-audio-engine" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" style={{ display: 'none' }} preload="auto" loop />
       {DesktopPlayer}
       {MobilePlayer}
 
