@@ -936,11 +936,19 @@ export default function Player() {
     // 5. Update the YouTube Player source immediately if the ID is pre-resolved/cached
     if (selectedTrack.youtubeId) {
       setCurrentVideoId(selectedTrack.youtubeId);
-      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+      setIsPlaying(true);
+      if (isPlayerReadyRef.current && ytPlayerRef.current) {
         try {
           const startPos = selectedTrack.startSeconds || 0;
-          ytPlayerRef.current.loadVideoById(selectedTrack.youtubeId, startPos);
-          setIsPlaying(true);
+          if (typeof ytPlayerRef.current.loadVideoById === "function") {
+            ytPlayerRef.current.loadVideoById({
+              videoId: selectedTrack.youtubeId,
+              startSeconds: startPos,
+            });
+          }
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } catch (e) {
           console.error("Direct loadVideoById failed:", e);
         }
