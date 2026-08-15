@@ -318,8 +318,8 @@ export default function Player() {
     const track = tracks[currentIndex];
     if (!track) return;
 
-    // Instantly pause old playback to prevent audio mismatch while resolving the new song
-    if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+    // Instantly pause old playback ONLY if we need to resolve the new video ID asynchronously
+    if (!track.youtubeId && ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
       try {
         ytPlayerRef.current.pauseVideo();
       } catch (_) {}
@@ -723,19 +723,7 @@ export default function Player() {
 
     const selectedTrack = tracks[index];
 
-    // 1. Decouple selection: pause old playback immediately to prevent playing preloaded track
-    setIsPlaying(false);
-    setCurrentVideoId(null);
-    setCurrentTime(0);
-    setDuration(0);
-
-    if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-      try {
-        ytPlayerRef.current.pauseVideo();
-      } catch (_) {}
-    }
-
-    // 2. Direct source assignment / reload of silent audio to claim background focus immediately
+    // 1. Control the native background silent audio element synchronously within user gesture
     if (silentAudioRef.current) {
       try {
         silentAudioRef.current.pause();
@@ -744,15 +732,38 @@ export default function Player() {
       } catch (_) {}
     }
 
+    // 2. Initialize Media Session metadata for the selected track synchronously
+    initMediaSession(selectedTrack);
+
     // 3. Update active track state and UI indicators immediately
     setCurrentIndex(index);
     setQueueMode(mode);
+    setIsPlaying(true);
 
-    // 4. Update Media Session metadata/handlers within the user gesture context
-    initMediaSession(selectedTrack);
-
-    // 5. Signal that we want to auto-play once the new video id resolves
-    autoPlayPendingRef.current = true;
+    // 4. Update the YouTube Player source immediately if the ID is pre-resolved/cached
+    if (selectedTrack.youtubeId) {
+      setCurrentVideoId(selectedTrack.youtubeId);
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+        try {
+          const startPos = selectedTrack.startSeconds || 0;
+          ytPlayerRef.current.loadVideoById(selectedTrack.youtubeId, startPos);
+        } catch (e) {
+          console.error("Direct loadVideoById failed:", e);
+        }
+      }
+    } else {
+      // If not resolved, clear current video ID and progress metrics to prevent playing the old track
+      setCurrentVideoId(null);
+      setCurrentTime(0);
+      setDuration(0);
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+        try {
+          ytPlayerRef.current.pauseVideo();
+        } catch (_) {}
+      }
+      // Let the search effect resolve and load the video asynchronously
+      autoPlayPendingRef.current = true;
+    }
   }, [initMediaSession]);
 
   const togglePlay = useCallback(() => {
