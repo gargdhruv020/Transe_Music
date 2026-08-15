@@ -245,7 +245,6 @@ export default function Player() {
   const durationRef = useRef(duration);
   const autoPlayPendingRef = useRef(false);
   const mediaStateRef = useRef<any>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -555,27 +554,11 @@ export default function Player() {
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
-    const resumeAllAudio = async () => {
-      // Resume AudioContext if Chrome suspended it in the background
-      if (audioContextRef.current && audioContextRef.current.state === "suspended") {
-        try {
-          await audioContextRef.current.resume();
-        } catch (err) {
-          console.warn("Error resuming AudioContext:", err);
-        }
-      }
-
+    const resumeAllAudio = () => {
       // Resume silent audio to maintain media session focus
       if (isPlayingRef.current && silentAudioRef.current) {
         try {
           silentAudioRef.current.play().catch(() => {});
-        } catch (_) {}
-      }
-
-      // Resume HTML5 audio engine
-      if (isPlayingRef.current && audioRef.current) {
-        try {
-          audioRef.current.play().catch(() => {});
         } catch (_) {}
       }
 
@@ -591,10 +574,10 @@ export default function Player() {
       }
     };
 
-    // Resume on BOTH visible and hidden transitions — Chrome may suspend
-    // the AudioContext the moment the tab goes hidden, so we fight back immediately
     const handleVisibilityChange = () => {
-      resumeAllAudio();
+      if (document.visibilityState === "visible") {
+        resumeAllAudio();
+      }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -977,49 +960,10 @@ export default function Player() {
     audio.loop = true;
     silentAudioRef.current = audio;
 
-    // Create AudioContext and route silent audio through it to prevent Chrome from
-    // suspending audio output when the tab is minimized or backgrounded
-    let keepaliveInterval: ReturnType<typeof setInterval> | null = null;
-    try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      if (AudioCtx) {
-        const ctx = new AudioCtx();
-        const source = ctx.createMediaElementSource(audio);
-        source.connect(ctx.destination);
-        audioContextRef.current = ctx;
-
-        // Immediately resume if Chrome auto-suspends the context
-        ctx.addEventListener("statechange", () => {
-          if (ctx.state === "suspended" && isPlayingRef.current) {
-            ctx.resume().catch(() => {});
-          }
-        });
-
-        // Background keepalive: periodically poke the AudioContext to resist
-        // Chrome's background tab throttling from suspending it
-        keepaliveInterval = setInterval(() => {
-          if (ctx.state === "suspended" && isPlayingRef.current) {
-            ctx.resume().catch(() => {});
-          }
-        }, 1000);
-      }
-    } catch (e) {
-      console.warn("AudioContext creation failed:", e);
-    }
-
     return () => {
-      if (keepaliveInterval) {
-        clearInterval(keepaliveInterval);
-      }
       if (silentAudioRef.current) {
         silentAudioRef.current.pause();
         silentAudioRef.current = null;
-      }
-      if (audioContextRef.current) {
-        try {
-          audioContextRef.current.close();
-        } catch (_) {}
-        audioContextRef.current = null;
       }
     };
   }, []);
