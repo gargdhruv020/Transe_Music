@@ -57,6 +57,8 @@ const TrackRow = memo(function TrackRow({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
+        console.log("Clicked Track Title:", track.title, "ID:", track.id);
+        console.log("Clicked Event Target:", e.target, "CurrentTarget:", e.currentTarget);
         onSelect(track.id, activeTab);
       }}
       data-active={isActive ? "true" : "false"}
