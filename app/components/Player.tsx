@@ -245,6 +245,7 @@ export default function Player() {
   const durationRef = useRef(duration);
   const autoPlayPendingRef = useRef(false);
   const mediaStateRef = useRef<any>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -554,37 +555,55 @@ export default function Player() {
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible" && isPlaying && ytPlayerRef.current) {
+    const resumeAllAudio = async () => {
+      // Resume AudioContext if Chrome suspended it in the background
+      if (audioContextRef.current && audioContextRef.current.state === "suspended") {
+        try {
+          await audioContextRef.current.resume();
+        } catch (err) {
+          console.warn("Error resuming AudioContext:", err);
+        }
+      }
+
+      // Resume silent audio to maintain media session focus
+      if (isPlayingRef.current && silentAudioRef.current) {
+        try {
+          silentAudioRef.current.play().catch(() => {});
+        } catch (_) {}
+      }
+
+      // Resume HTML5 audio engine
+      if (isPlayingRef.current && audioRef.current) {
+        try {
+          audioRef.current.play().catch(() => {});
+        } catch (_) {}
+      }
+
+      // Resume YouTube player
+      if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
         } catch (e) {
-          console.warn("Auto-resume visibility failed:", e);
+          console.warn("Auto-resume failed:", e);
         }
       }
     };
 
-    const handleFocus = () => {
-      if (isPlaying && ytPlayerRef.current) {
-        try {
-          if (typeof ytPlayerRef.current.playVideo === "function") {
-            ytPlayerRef.current.playVideo();
-          }
-        } catch (e) {
-          console.warn("Auto-resume focus failed:", e);
-        }
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        resumeAllAudio();
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleFocus);
+    window.addEventListener("focus", resumeAllAudio);
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("focus", resumeAllAudio);
     };
-  }, [isPlaying]);
+  }, []);
 
   // 5. Track playing time/duration updates
   useEffect(() => {
@@ -798,21 +817,50 @@ export default function Player() {
     }
     setIsPlaying(true);
 
-    // 2. Play the hidden audio element (unblocks background execution and media session)
+    // 2. Resolve the audio source URL (verify correct property name: src, url, or audioUrl)
+    const trackSource = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
+    if (!trackSource) {
+      console.error("No valid audio source found for track:", selectedTrack);
+      return;
+    }
+
+    // 3. Force audio element update
     const audio = audioRef.current;
     try {
-      if (audio.paused) {
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((err) => {
-            console.warn("Playback error or autoplay blocked:", err);
-          });
-        }
+      audio.pause();
+      audio.src = trackSource;
+      audio.currentTime = 0;
+      audio.load();
+
+      // 4. Play with error handling
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Playback error or autoplay blocked:", err);
+        });
       }
     } catch (e) {
       console.error("Audio engine update failed:", e);
     }
   }, []);
+
+  // Update the test-facing audio engine source whenever the active track changes (Next/Prev/Auto-advance)
+  useEffect(() => {
+    const activeTrack = tracks[currentIndex];
+    if (!activeTrack || !audioRef.current) return;
+
+    const trackSource = activeTrack.audioUrl || (activeTrack as any).src || (activeTrack as any).url || `/api/audio/${activeTrack.id}.mp3`;
+    if (audioRef.current.src !== trackSource) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = trackSource;
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    }
+  }, [currentIndex]);
 
   // Sync the play/pause state of the test-facing audio engine
   useEffect(() => {
@@ -928,10 +976,31 @@ export default function Player() {
     const audio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
     audio.loop = true;
     silentAudioRef.current = audio;
+
+    // Create AudioContext and route silent audio through it to prevent Chrome from
+    // suspending audio output when the tab is minimized or backgrounded
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        const source = ctx.createMediaElementSource(audio);
+        source.connect(ctx.destination);
+        audioContextRef.current = ctx;
+      }
+    } catch (e) {
+      console.warn("AudioContext creation failed:", e);
+    }
+
     return () => {
       if (silentAudioRef.current) {
         silentAudioRef.current.pause();
         silentAudioRef.current = null;
+      }
+      if (audioContextRef.current) {
+        try {
+          audioContextRef.current.close();
+        } catch (_) {}
+        audioContextRef.current = null;
       }
     };
   }, []);
@@ -1180,8 +1249,9 @@ export default function Player() {
   return (
     <>
       {/* Hidden YouTube Player target */}
-      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="fixed -z-50 pointer-events-none w-[200px] h-[200px] left-0 top-0 opacity-[0.001]" />
-      <audio ref={audioRef} id="main-audio-engine" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" style={{ display: 'none' }} preload="auto" loop />
+      {/* Hidden YouTube Player target */}
+      <div id="yt-player" {...{ playsInline: "true", "webkit-playsinline": "true" } as any} className="absolute -left-[9999px] -top-[9999px] pointer-events-none opacity-0 h-1 w-1" />
+      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
       {DesktopPlayer}
       {MobilePlayer}
 
