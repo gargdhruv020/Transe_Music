@@ -26,28 +26,61 @@
 
 /* ── Keyframes ────────────────────────────────────── */
 @keyframes vinyl-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.4; transform: scale(0.85); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 8px var(--color-accent-glow), 0 0 24px var(--color-accent-glow); }
-  50%      { box-shadow: 0 0 16px var(--color-accent-glow), 0 0 40px var(--color-accent-glow); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px var(--color-accent-glow), 0 0 24px var(--color-accent-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 16px var(--color-accent-glow), 0 0 40px var(--color-accent-glow);
+  }
 }
 
 /* ── Base Reset ───────────────────────────────────── */
@@ -101,13 +134,11 @@ body {
 
 /* Dynamic Laser Color Overlay */
 .hero-laser-overlay {
-  background: linear-gradient(
-    45deg,
-    #ff007f,
-    #9d4edd,
-    #00f0ff,
-    #ff007f
-  );
+  background: linear-gradient(45deg,
+      #ff007f,
+      #9d4edd,
+      #00f0ff,
+      #ff007f);
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
   animation-play-state: paused;
@@ -119,9 +150,12 @@ body {
 }
 
 @keyframes bg-strobe {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: brightness(0.35) saturate(0.8) contrast(1.1);
   }
+
   50% {
     filter: brightness(0.68) saturate(1.15) contrast(0.98);
   }
@@ -171,11 +205,9 @@ body {
 /* ── Glass Surface ────────────────────────────────── */
 .glass {
   border: 1px solid var(--color-glass-border);
-  background: linear-gradient(
-    to bottom,
-    var(--color-glass-from),
-    var(--color-glass-to)
-  );
+  background: linear-gradient(to bottom,
+      var(--color-glass-from),
+      var(--color-glass-to));
   backdrop-filter: blur(64px) saturate(1.7);
   -webkit-backdrop-filter: blur(64px) saturate(1.7);
   box-shadow:
@@ -251,13 +283,11 @@ input[type="range"].seek-bar {
 }
 
 input[type="range"].seek-bar::-webkit-slider-runnable-track {
-  background: linear-gradient(
-    to right,
-    var(--color-accent) 0%,
-    var(--color-accent) var(--fill),
-    rgba(255 255 255 / 0.15) var(--fill),
-    rgba(255 255 255 / 0.15) 100%
-  );
+  background: linear-gradient(to right,
+      var(--color-accent) 0%,
+      var(--color-accent) var(--fill),
+      rgba(255 255 255 / 0.15) var(--fill),
+      rgba(255 255 255 / 0.15) 100%);
 }
 
 input[type="range"].seek-bar::-moz-range-progress {
@@ -268,13 +298,11 @@ input[type="range"].seek-bar::-moz-range-progress {
 
 /* ── Vinyl Grooves ────────────────────────────────── */
 .vinyl-grooves {
-  background: repeating-radial-gradient(
-    circle,
-    transparent 0px,
-    transparent 2px,
-    rgba(0 0 0 / 0.15) 2.5px,
-    transparent 3px
-  );
+  background: repeating-radial-gradient(circle,
+      transparent 0px,
+      transparent 2px,
+      rgba(0 0 0 / 0.15) 2.5px,
+      transparent 3px);
 }
 
 /* ── Scrollbar Styling ────────────────────────────── */
@@ -333,14 +361,20 @@ input[type="range"].seek-bar::-moz-range-progress {
 }
 
 /* Prevent pointer event flickering on button icons */
-button svg, .track-row svg {
+button svg,
+.track-row svg {
   pointer-events: none;
 }
 
 /* Equalizer keyframes */
 @keyframes eq-bar {
-  0%   { height: 20%; }
-  100% { height: 100%; }
+  0% {
+    height: 20%;
+  }
+
+  100% {
+    height: 100%;
+  }
 }
 
 /* ── Utility ──────────────────────────────────────── */
@@ -354,7 +388,7 @@ button svg, .track-row svg {
   letter-spacing: -0.02em;
   color: #ffffff;
   /* Crisp dark background shadow + neon glowing aura */
-  text-shadow: 
+  text-shadow:
     0 3px 10px rgba(0, 0, 0, 0.95),
     0 0 15px rgba(255, 0, 127, 0.85),
     0 0 35px rgba(0, 240, 255, 0.6);
@@ -367,7 +401,7 @@ button svg, .track-row svg {
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #ffffff;
-  text-shadow: 
+  text-shadow:
     0 2px 6px rgba(0, 0, 0, 0.95),
     0 0 10px rgba(255, 0, 127, 0.8),
     0 0 25px rgba(0, 240, 255, 0.5);
@@ -375,22 +409,32 @@ button svg, .track-row svg {
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes club-glow {
   0% {
     filter: drop-shadow(0 0 10px rgba(255, 0, 127, 0.85)) drop-shadow(0 0 25px rgba(157, 78, 221, 0.5));
   }
+
   100% {
     filter: drop-shadow(0 0 24px rgba(255, 0, 127, 1)) drop-shadow(0 0 50px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 80px rgba(0, 240, 255, 0.4));
   }
 }
 
 /* Hide Next.js Development Issue/Error Overlay Toasts */
-nextjs-portal, #__next-prerender-indicator {
+nextjs-portal,
+#__next-prerender-indicator {
   display: none !important;
 }
 
@@ -398,9 +442,12 @@ nextjs-portal, #__next-prerender-indicator {
 .scrollbar-hide::-webkit-scrollbar {
   display: none !important;
 }
+
 .scrollbar-hide {
-  -ms-overflow-style: none !important;  /* IE and Edge */
-  scrollbar-width: none !important;  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
 }
 
 /* Chrome Background Playback Bypass */
@@ -415,4 +462,14 @@ nextjs-portal, #__next-prerender-indicator {
   z-index: -9999 !important;
 }
 
-.yt-background-audio-bypass { position: fixed !important; bottom: 0 !important; right: 0 !important; width: 4px !important; height: 4px !important; opacity: 0.01 !important; pointer-events: none !important; z-index: -9999 !important; overflow: hidden !important; }
+.yt-background-audio-bypass {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 4px !important;
+  height: 4px !important;
+  opacity: 0.01 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+  overflow: hidden !important;
+}
