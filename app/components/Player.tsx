@@ -75,7 +75,7 @@ export default function Player() {
     setIsPlaying(true);
     syncMediaSessionState(track, true);
 
-    const targetVideoId = track.videoId || track.youtubeId;
+    const targetVideoId = track.youtubeId || (track as any).videoId;
 
     if (targetVideoId && playerRef.current && isPlayerReadyRef.current) {
       playerRef.current.unMute?.();
@@ -124,7 +124,7 @@ export default function Player() {
         new (window as any).YT.Player('youtube-player', {
           height: '4',
           width: '4',
-          videoId: currentTrack?.videoId || currentTrack?.youtubeId || '',
+          videoId: currentTrack?.youtubeId || '',
           playerVars: {
             autoplay: 1,
             controls: 0,
