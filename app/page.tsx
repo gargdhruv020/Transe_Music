@@ -1,16 +1,23 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
+import dynamicImport from "next/dynamic";
 import Clock from "@/app/components/Clock";
-import Player from "@/app/components/Player";
 import CaptionRotator from "@/app/components/CaptionRotator";
+
+// Isolate browser-dependent components
+const Player = dynamicImport(() => import("@/app/components/Player"), { ssr: false });
+const BackgroundVideo = dynamicImport(() => import("@/app/components/BackgroundVideo"), { ssr: false });
 
 export default function Home() {
   return (
     <main className="relative flex min-h-dvh flex-1 flex-col items-center justify-between overflow-hidden">
-      {/* ── 1. Fixed Background ─────────────────────── */}
-      <div className="hero-bg" />
+      {/* ── 1. Dynamic Background ─────────────── */}
+      <BackgroundVideo />
+
       {/* Gradient overlay */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-b from-black/65 via-black/20 to-black/95" />
+      <div className="fixed inset-0 -z-20 bg-gradient-to-b from-black/65 via-black/20 to-black/95 pointer-events-none" />
 
       {/* Dynamic Laser Color Overlay */}
       <div className="fixed inset-0 -z-20 hero-laser-overlay mix-blend-color opacity-[0.22] pointer-events-none" />
@@ -20,16 +27,13 @@ export default function Home() {
 
       {/* ── 3. Fixed Top Row ────────────────────────── */}
       <header className="safe-all fixed top-0 left-0 right-0 z-30 flex items-start justify-between">
-        {/* Clock — top left */}
         <div className="safe-left safe-top">
           <Clock />
         </div>
-
-        {/* Empty space for right-side balance */}
         <div className="safe-right safe-top w-12" />
       </header>
 
-      {/* ── Spacer (pushes player to bottom) ─────── */}
+      {/* Spacer */}
       <div className="flex-1" />
 
       {/* ── Centered branding ───────────────────────── */}
@@ -39,7 +43,7 @@ export default function Home() {
         </h1>
       </div>
 
-      {/* ── Spacer ──────────────────────────────────── */}
+      {/* Spacer */}
       <div className="flex-1" />
 
       {/* ── 4. Player (bottom-anchored) ─────────────── */}
@@ -48,7 +52,7 @@ export default function Home() {
         <Player />
       </div>
 
-      {/* Watermark — bottom right */}
+      {/* Watermark */}
       <div
         className="fixed bottom-3 right-5 z-30 select-none pointer-events-auto text-white/45 text-[11px] font-medium tracking-wide flex items-center gap-1.5"
       >

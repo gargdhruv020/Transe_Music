@@ -1,15 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  staticPageGenerationTimeout: 180,
   experimental: {
-    webpackBuildWorker: true,
+    // Prevents Next.js from spawning memory-capped child workers during page data collection
+    workerThreads: false,
     cpus: 1,
   },
   webpack: (config) => {
-    config.optimization.splitChunks = {
-      chunks: 'all',
-      maxInitialRequests: 25,
-      minSize: 20000,
+    config.optimization = {
+      ...config.optimization,
+      minimize: false, // Prevents aggressive minifier heap spikes during build
     };
     return config;
   },
