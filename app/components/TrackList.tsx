@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo, memo } from "react";
 import { tracks, type Track } from "@/app/data/tracks";
 
+/* ── Close Icon ───────────────────────────────────── */
 function CloseIcon() {
   return (
     <svg
@@ -21,6 +22,7 @@ function CloseIcon() {
   );
 }
 
+/* ── Equalizer Animation (playing indicator) ──────── */
 function Equalizer() {
   return (
     <div className="flex items-end gap-[2px] h-3.5">
@@ -38,6 +40,7 @@ function Equalizer() {
   );
 }
 
+/* ── Memoized Track Row ─────────────────────────────── */
 const TrackRow = memo(function TrackRow({
   track,
   isActive,
@@ -55,6 +58,8 @@ const TrackRow = memo(function TrackRow({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
+        console.log("Clicked Track Title:", track.title, "ID:", track.id);
+        console.log("Clicked Event Target:", e.target, "CurrentTarget:", e.currentTarget);
         onSelect(track.id, activeTab);
       }}
       data-active={isActive ? "true" : "false"}
@@ -62,10 +67,12 @@ const TrackRow = memo(function TrackRow({
         isActive ? "active" : ""
       }`}
     >
+      {/* Track number or equalizer */}
       <span className="w-6 text-center text-[11px] tabular-nums text-white/30 flex-shrink-0 flex items-center justify-center">
         {isActive ? <Equalizer /> : null}
       </span>
 
+      {/* Info */}
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5 min-w-0">
           <p
@@ -110,6 +117,7 @@ export default function TrackList({
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  // Lock body scroll while the playlist modal is open
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -118,6 +126,7 @@ export default function TrackList({
     };
   }, []);
 
+  // Close on escape key
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
@@ -126,6 +135,7 @@ export default function TrackList({
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
+  // Close on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (overlayRef.current && e.target === overlayRef.current) {
@@ -136,9 +146,12 @@ export default function TrackList({
     return () => window.removeEventListener("mousedown", handleClick);
   }, [onClose]);
 
+  // Scroll active track into view on mount or tab change
   useEffect(() => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
+    
+    // Use requestAnimationFrame to ensure the DOM is painted first
     requestAnimationFrame(() => {
       const activeElement = container.querySelector('[data-active="true"]');
       if (activeElement) {
@@ -147,6 +160,7 @@ export default function TrackList({
     });
   }, [activeTab]);
 
+  // Memoize filtered tracks to avoid re-filtering on every render
   const filteredTracks = useMemo(() => {
     const q = searchQuery.toLowerCase();
     return tracks.filter((t) => {
@@ -163,6 +177,13 @@ export default function TrackList({
       );
     });
   }, [searchQuery, activeTab]);
+
+  // Memoize counts
+  const spatialCount = useMemo(() => tracks.filter(t => t.isSpatial).length, []);
+  const globalCount = useMemo(() => tracks.filter(t => t.isGlobal).length, []);
+  const goaCount = useMemo(() => tracks.filter(t => t.isGoa).length, []);
+  const remixCount = useMemo(() => tracks.filter(t => t.isRemix).length, []);
+  const ktranceCount = useMemo(() => tracks.filter(t => t.isKTrance).length, []);
 
   const handleHeaderPlayClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -186,6 +207,7 @@ export default function TrackList({
       style={{ overscrollBehavior: "contain" }}
     >
       <div className="glass playlist-modal-content w-full max-w-lg max-h-[80dvh] sm:max-h-[70dvh] rounded-t-3xl sm:rounded-3xl flex flex-col relative animate-[slide-up_0.3s_cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+        {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div>
@@ -216,6 +238,7 @@ export default function TrackList({
           </button>
         </div>
 
+        {/* Tabs */}
         <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
           <button
             onClick={() => onTabChange?.("all")}
@@ -284,6 +307,7 @@ export default function TrackList({
           </button>
         </div>
 
+        {/* Search */}
         <div className="px-5 pt-1 pb-4 flex-shrink-0">
           <div className="relative">
             <svg
@@ -310,6 +334,7 @@ export default function TrackList({
           </div>
         </div>
 
+        {/* Track Rows */}
         <div
           ref={scrollRef}
           className="playlist-track-list flex-1 min-h-0 flex flex-col overflow-y-auto relative z-10 custom-scrollbar px-2 pb-5"
