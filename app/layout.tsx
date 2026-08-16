@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 // @ts-expect-error - Next.js provides CSS side-effect typing during build, but TypeScript doesn't recognize it in the IDE.
-import "C:\Users\NEW BAG COLLECTION\OneDrive\Desktop\Assets\Live_Projects\Transe_Music\app\globals.css";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Trance Music — Bollywood Nostalgia Radio",
