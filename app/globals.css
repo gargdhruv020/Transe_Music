@@ -450,27 +450,17 @@ nextjs-portal,
   /* Firefox */
 }
 
-/* Chrome Background Playback Bypass */
-.yt-background-audio-bypass {
+/* Chrome/Mobile Background Playback — iframe must remain in the render tree */
+.yt-background-audio-bypass,
+.yt-background-audio-bypass iframe {
   position: fixed !important;
   bottom: 0 !important;
   right: 0 !important;
-  width: 4px !important;
-  height: 4px !important;
+  width: 1px !important;
+  height: 1px !important;
   opacity: 0.01 !important;
   pointer-events: none !important;
-  z-index: -9999 !important;
-}
-
-.yt-background-audio-bypass {
-  position: fixed !important;
-  bottom: 0 !important;
-  right: 0 !important;
-  width: 4px !important;
-  height: 4px !important;
-  opacity: 0.01 !important;
-  pointer-events: none !important;
-  z-index: -9999 !important;
+  z-index: 1 !important;
   overflow: hidden !important;
 }
 /* =========================================================

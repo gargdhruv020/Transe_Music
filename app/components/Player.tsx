@@ -521,7 +521,10 @@ export default function Player() {
           onStateChange: (event: any) => {
             // YT.PlayerState.PLAYING = 1, ENDED = 0, PAUSED = 2
             if (event.data === 1) {
-              setIsPlaying(true);
+              // Only set if React state is currently false to prevent ping-pong
+              if (!isPlayingRef.current) {
+                setIsPlaying(true);
+              }
             } else if (event.data === 2) {
               // If background suspension forced a pause but we want it to be playing, auto-resume
               if (isPlayingRef.current) {
@@ -993,12 +996,23 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback(async (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
+    // 0. Unlock hardware audio bus (for iOS/WebKit) — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
+
+    // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
+    if (silentAudioRef.current) {
+      try {
+        silentAudioRef.current.pause();
+        silentAudioRef.current.load();
+        silentAudioRef.current.play().catch(() => {});
+      } catch (_) {}
+    }
     claimMobileAudioFocus();
+    initMediaSession();
+
+    // 2. Guard: if clicking same track that's already loaded
     const activeTrack = tracks[currentIndex];
-    
-    // 1. Guard against restarting or skipping the currently active track
     if (activeTrack && activeTrack.id === trackId) {
       if (!isPlaying && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         ytPlayerRef.current.playVideo();
@@ -1007,83 +1021,38 @@ export default function Player() {
       return;
     }
 
+    // 3. Find the selected track
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
-
     const selectedTrack = tracks[index];
 
-    // 2. Control the native background silent audio element synchronously within user gesture
-    if (silentAudioRef.current) {
-      try {
-        silentAudioRef.current.pause();
-        silentAudioRef.current.load();
-        silentAudioRef.current.play().catch(() => {});
-      } catch (_) {}
-    }
-
-    // 3. Initialize Media Session metadata for the selected track synchronously
-    initMediaSession();
-
-    // 4. Update active track state and UI indicators immediately
+    // 4. Update state SYNCHRONOUSLY (no await before playVideo)
     setQueueMode(mode);
+    setCurrentTime(0);
+    setDuration(0);
+    setCurrentIndex(index);
+    setIsPlaying(true);
 
-    // Set autoplay pending unconditionally to force immediate playback on load
-    autoPlayPendingRef.current = true;
+    // 5. Try to get videoId synchronously (from pre-baked data)
+    const targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
 
-    // 5. Update the test-facing audio engine source using the centralized playTrack handler
-    playTrack(selectedTrack);
-
-    // 6. Resolve videoId: use existing key or fetch dynamically if missing
-    let targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
-
-    if (!targetVideoId) {
-      try {
-        const query = selectedTrack.isSpatial
-          ? `${selectedTrack.title} ${selectedTrack.artist} 16d audio`
-          : `${selectedTrack.title} ${selectedTrack.artist} ${selectedTrack.film} audio`;
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-        const data = await res.json();
-        if (data && data.videoId) {
-          targetVideoId = data.videoId;
-          selectedTrack.youtubeId = targetVideoId; // Cache resolved key to prevent future fetches
-        }
-      } catch (err) {
-        console.error("Failed to resolve track key:", err);
-      }
-    }
-
-    // 7. Immediately stream the resolved track
     if (targetVideoId) {
+      // We have the ID — load and play SYNCHRONOUSLY within user gesture
       setCurrentVideoId(targetVideoId);
-      setIsPlaying(true);
-      if (isPlayerReadyRef.current && ytPlayerRef.current) {
+      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
-          const startPos = selectedTrack.startSeconds || 0;
-          if (typeof ytPlayerRef.current.loadVideoById === "function") {
-            ytPlayerRef.current.loadVideoById({
-              videoId: targetVideoId,
-              startSeconds: startPos,
-            });
-          }
-          if (typeof ytPlayerRef.current.playVideo === "function") {
-            ytPlayerRef.current.playVideo();
-          }
+          ytPlayerRef.current.loadVideoById(targetVideoId, selectedTrack.startSeconds || 0);
         } catch (e) {
           console.error("Direct loadVideoById failed:", e);
         }
       }
     } else {
-      // If not resolved, clear current video ID and progress metrics to prevent playing the old track
-      setCurrentVideoId(null);
-      setCurrentTime(0);
-      setDuration(0);
-      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-        try {
-          ytPlayerRef.current.pauseVideo();
-        } catch (_) {}
-      }
+      // No pre-baked ID — the useEffect[currentIndex] will search and resolve asynchronously.
+      // Mark autoplay pending so the useEffect[currentVideoId] will autoplay when it resolves.
+      autoPlayPendingRef.current = true;
+      // The video will start playing once the search API resolves in useEffect[currentIndex]
     }
-  }, [currentIndex, isPlaying, initMediaSession, playTrack]);
+  }, [currentIndex, isPlaying, initMediaSession]);
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
