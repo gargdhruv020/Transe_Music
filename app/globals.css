@@ -458,9 +458,9 @@ nextjs-portal,
   right: 0 !important;
   width: 250px !important;
   height: 250px !important;
-  opacity: 1 !important;
+  opacity: 0.1 !important;
   pointer-events: none !important;
-  z-index: -1 !important;
+  z-index: 9999 !important;
   overflow: hidden !important;
 }
 /* =========================================================

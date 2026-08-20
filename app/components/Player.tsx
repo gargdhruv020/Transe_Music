@@ -5,29 +5,20 @@ import { tracks, type Track } from "@/app/data/tracks";
 import TrackList from "./TrackList";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
-let globalAudioCtx: any = null;
-export const unlockHardwareAudioBus = () => {
-  if (typeof window === "undefined") return;
-  if (!globalAudioCtx) {
-    const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
-    if (AudioCtx) {
-      try {
-        globalAudioCtx = new AudioCtx();
-        const oscillator = globalAudioCtx.createOscillator();
-        const gain = globalAudioCtx.createGain();
-        gain.gain.value = 0.001;
-        oscillator.connect(gain);
-        gain.connect(globalAudioCtx.destination);
-        oscillator.start();
-      } catch (err) {
-        console.warn("Failed to initialize Hardware Audio Bus:", err);
-      }
+
+// Background keepalive worker
+const workerScript = `
+  let interval;
+  self.onmessage = function(e) {
+    if (e.data === 'start') {
+      interval = setInterval(() => self.postMessage('tick'), 1000);
+    } else if (e.data === 'stop') {
+      clearInterval(interval);
     }
-  }
-  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-    globalAudioCtx.resume().catch(() => {});
-  }
-};
+  };
+`;
+let globalAudioCtx: any = null;
+export const unlockHardwareAudioBus = () => {};
 
 const AUDIO_STREAM_ANCHOR = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
 
@@ -281,6 +272,45 @@ export default function Player() {
   const durationRef = useRef(duration);
   const autoPlayPendingRef = useRef(false);
   const mediaStateRef = useRef<any>(null);
+
+  const workerRef = useRef<Worker | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const blob = new Blob([workerScript], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    workerRef.current = new Worker(url);
+    
+    workerRef.current.onmessage = () => {
+      if (isPlayingRef.current && ytPlayerRef.current) {
+        try {
+          const state = ytPlayerRef.current.getPlayerState();
+          // If we are supposed to be playing but YouTube paused it (e.g. background restriction)
+          if (state === 2 || state === -1) {
+             ytPlayerRef.current.playVideo();
+          }
+        } catch (e) {}
+      }
+    };
+
+    return () => {
+      if (workerRef.current) {
+        workerRef.current.terminate();
+      }
+      URL.revokeObjectURL(url);
+    };
+  }, []);
+
+  // Start/stop worker based on playing state
+  useEffect(() => {
+    if (workerRef.current) {
+      if (isPlaying) {
+        workerRef.current.postMessage('start');
+      } else {
+        workerRef.current.postMessage('stop');
+      }
+    }
+  }, [isPlaying]);
   const isPlayerReadyRef = useRef<boolean>(false);
 
   // Eagerly initialize the YT player on first user gesture so it's ready
@@ -328,9 +358,8 @@ export default function Player() {
               tryResume(1500);
               tryResume(3000);
               try {
-                if (audioRef.current) audioRef.current.play().catch(() => {});
-                if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-                  globalAudioCtx.resume().catch(() => {});
+                if (audioRef.current) /* removed audioRef play */
+                );
                 }
               } catch (_) {}
             }
@@ -626,10 +655,9 @@ export default function Player() {
 
     const resumeAllAudio = () => {
       if (isPlayingRef.current && audioRef.current) {
-        try { audioRef.current.play().catch(() => {}); } catch (_) {}
+        try { /* removed audioRef play */ } catch (_) {}
       }
-      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-        globalAudioCtx.resume().catch(() => {});
+      );
       }
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
@@ -649,10 +677,9 @@ export default function Player() {
         // Going to background — re-assert audio focus to prevent browser killing it
         if (isPlayingRef.current) {
           if (audioRef.current) {
-            try { audioRef.current.play().catch(() => {}); } catch (_) {}
+            try { /* removed audioRef play */ } catch (_) {}
           }
-          if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-            globalAudioCtx.resume().catch(() => {});
+          );
           }
           // Schedule resume attempts for when browser tries to pause YT
           [200, 800, 2000, 4000, 8000].forEach(delay => {
@@ -661,7 +688,7 @@ export default function Player() {
                 try { ytPlayerRef.current.playVideo(); } catch (_) {}
               }
               if (isPlayingRef.current && audioRef.current) {
-                try { audioRef.current.play().catch(() => {}); } catch (_) {}
+                try { /* removed audioRef play */ } catch (_) {}
               }
             }, delay);
           });
@@ -673,10 +700,9 @@ export default function Player() {
     const keepaliveInterval = setInterval(() => {
       if (!isPlayingRef.current) return;
       if (audioRef.current) {
-        try { audioRef.current.play().catch(() => {}); } catch (_) {}
+        try { /* removed audioRef play */ } catch (_) {}
       }
-      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-        globalAudioCtx.resume().catch(() => {});
+      );
       }
       if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
         try {
@@ -816,7 +842,7 @@ export default function Player() {
     try {
       // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
       if (audioRef.current) {
-        audioRef.current.play().catch(() => {});
+        /* removed audioRef play */
       }
     } catch (_) {}
   }, []);
@@ -829,10 +855,10 @@ export default function Player() {
       navigator.mediaSession.setActionHandler("play", () => {
         setIsPlaying(true);
         if (audioRef.current) {
-          audioRef.current.play().catch(() => {});
+          /* removed audioRef play */
         }
         if (audioRef.current) {
-          audioRef.current.play().catch(() => {});
+          /* removed audioRef play */
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
           try {
@@ -844,10 +870,10 @@ export default function Player() {
       navigator.mediaSession.setActionHandler("pause", () => {
         setIsPlaying(false);
         if (audioRef.current) {
-          audioRef.current.pause();
+          /* removed audioRef pause */
         }
         if (audioRef.current) {
-          audioRef.current.pause();
+          /* removed audioRef pause */
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
           try {
@@ -932,33 +958,16 @@ export default function Player() {
     }
   }, [currentTime, duration]);
 
-  // Update the native audio engine to play the silent keepalive stream
-  // This is required to keep Mobile Chrome from suspending the page in the background
-  useEffect(() => {
-    if (!audioRef.current) return;
-    
-    // We use a silent base64 WAV file. As long as this native element is playing,
-    // Chrome will not suspend the Web Audio API or the YouTube iframe.
-    if (!audioRef.current.src || !audioRef.current.src.includes('data:audio/wav')) {
-      try {
-        audioRef.current.pause();
-        audioRef.current.src = AUDIO_STREAM_ANCHOR;
-        audioRef.current.loop = true;
-        audioRef.current.load();
-      } catch (e) {
-        console.error("Failed to set silent audio src:", e);
-      }
-    }
-  }, []);
+
 
   // Sync the play/pause state of the test-facing audio engine
   useEffect(() => {
     if (!audioRef.current) return;
     try {
       if (isPlaying) {
-        audioRef.current.play().catch(() => {});
+        /* removed audioRef play */
       } else {
-        audioRef.current.pause();
+        /* removed audioRef pause */
       }
     } catch (_) {}
   }, [isPlaying]);
@@ -971,9 +980,9 @@ export default function Player() {
     // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
     if (audioRef.current) {
       try {
-        audioRef.current.pause();
-        audioRef.current.load();
-        audioRef.current.play().catch(() => {});
+        /* removed audioRef pause */
+        /* removed audioRef load */
+        /* removed audioRef play */
       } catch (_) {}
     }
     claimMobileAudioFocus();
@@ -1032,9 +1041,9 @@ export default function Player() {
       // Synchronous HTML5 audio control for WebKit/iOS unlocking
       if (audioRef.current) {
         if (nextVal) {
-          audioRef.current.play().catch(() => {});
+          /* removed audioRef play */
         } else {
-          audioRef.current.pause();
+          /* removed audioRef pause */
         }
       }
 
@@ -1042,9 +1051,9 @@ export default function Player() {
       if (audioRef.current) {
         try {
           if (nextVal) {
-            audioRef.current.play().catch(() => {});
+            /* removed audioRef play */
           } else {
-            audioRef.current.pause();
+            /* removed audioRef pause */
           }
         } catch (_) {}
       }
@@ -1091,9 +1100,9 @@ export default function Player() {
   useEffect(() => {
     if (!audioRef.current) return;
     if (isPlaying) {
-      audioRef.current.play().catch(() => {});
+      /* removed audioRef play */
     } else {
-      audioRef.current.pause();
+      /* removed audioRef pause */
     }
   }, [isPlaying]);
 
