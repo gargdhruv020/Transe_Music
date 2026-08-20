@@ -284,6 +284,92 @@ export default function Player() {
   const mediaStateRef = useRef<any>(null);
   const isPlayerReadyRef = useRef<boolean>(false);
 
+  // Eagerly initialize the YT player on first user gesture so it's ready
+  // when loadVideoById is called. On mobile, creating the player lazily
+  // means onReady fires outside the user gesture → playVideo blocked.
+  const ensurePlayerReady = useCallback(() => {
+    if (ytPlayerRef.current || !isYTApiReady) return;
+    if (typeof window === "undefined" || !(window as any).YT || !(window as any).YT.Player) return;
+
+    isPlayerReadyRef.current = false;
+    ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
+      height: "1",
+      width: "1",
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: 1,
+        rel: 0,
+        showinfo: 0,
+        iv_load_policy: 3,
+        playsinline: 1,
+        origin: typeof window !== "undefined" ? window.location.origin : "",
+      },
+      events: {
+        onStateChange: (event: any) => {
+          if (event.data === 1) {
+            if (!isPlayingRef.current) {
+              setIsPlaying(true);
+            }
+          } else if (event.data === 2) {
+            if (isPlayingRef.current) {
+              const tryResume = (delay: number) => {
+                setTimeout(() => {
+                  try {
+                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                      ytPlayerRef.current.playVideo();
+                    }
+                  } catch (_) {}
+                }, delay);
+              };
+              tryResume(100);
+              tryResume(500);
+              tryResume(1500);
+              tryResume(3000);
+              try {
+                if (silentAudioRef.current) silentAudioRef.current.play().catch(() => {});
+                if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+                  globalAudioCtx.resume().catch(() => {});
+                }
+              } catch (_) {}
+            }
+          } else if (event.data === 0) {
+            try {
+              if (
+                ytPlayerRef.current &&
+                typeof ytPlayerRef.current.getCurrentTime === "function" &&
+                typeof ytPlayerRef.current.getDuration === "function"
+              ) {
+                const currTime = ytPlayerRef.current.getCurrentTime() || 0;
+                const dur = ytPlayerRef.current.getDuration() || 0;
+                if (dur > 0 && currTime < dur - 1.5) {
+                  return;
+                }
+              }
+            } catch (_) {}
+            if (handleNextRef.current) {
+              handleNextRef.current();
+            }
+          }
+        },
+        onReady: () => {
+          isPlayerReadyRef.current = true;
+        },
+        onError: (event: any) => {
+          console.error("YouTube Player error:", event.data);
+          setTimeout(() => {
+            if (handleNextRef.current) {
+              handleNextRef.current();
+            }
+          }, 100);
+        },
+      },
+    });
+  }, [isYTApiReady]);
+
+
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
@@ -481,6 +567,15 @@ export default function Player() {
     }
   }, [isPlaying]);
 
+
+  // Eagerly create the YT player once the API is ready
+  // (handles case where API loads after user's first tap)
+  useEffect(() => {
+    if (isYTApiReady && !ytPlayerRef.current) {
+      ensurePlayerReady();
+    }
+  }, [isYTApiReady, ensurePlayerReady]);
+
   // 4. Load video when ID resolves
   useEffect(() => {
     if (!isYTApiReady || !currentVideoId) return;
@@ -488,7 +583,7 @@ export default function Player() {
     let startPos = (track as any).startSeconds || 0;
     if (initialSeekTimeRef.current !== null) {
       startPos = Math.floor(initialSeekTimeRef.current);
-      initialSeekTimeRef.current = null; // Clear so subsequent plays start from 0
+      initialSeekTimeRef.current = null;
     }
 
     const shouldPlay = isPlaying || autoPlayPendingRef.current;
@@ -497,124 +592,33 @@ export default function Player() {
       setIsPlaying(true);
     }
 
+    // Ensure player is created (should already be from user gesture)
     if (!ytPlayerRef.current) {
-      isPlayerReadyRef.current = false;
-      // Create new player instance
-      ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
-        height: "1",
-        width: "1",
-        videoId: currentVideoId,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          iv_load_policy: 3,
-          start: startPos,
-          playsinline: 1,
-          origin: typeof window !== "undefined" ? window.location.origin : "",
-        },
-        events: {
-          onStateChange: (event: any) => {
-            // YT.PlayerState.PLAYING = 1, ENDED = 0, PAUSED = 2
-            if (event.data === 1) {
-              // Only set if React state is currently false to prevent ping-pong
-              if (!isPlayingRef.current) {
-                setIsPlaying(true);
-              }
-            } else if (event.data === 2) {
-              // If background suspension forced a pause but we want it to be playing, auto-resume
-              if (isPlayingRef.current) {
-                // Aggressive multi-attempt resume for mobile background playback
-                const tryResume = (delay: number) => {
-                  setTimeout(() => {
-                    try {
-                      if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-                        ytPlayerRef.current.playVideo();
-                      }
-                    } catch (_) {}
-                  }, delay);
-                };
-                tryResume(100);
-                tryResume(500);
-                tryResume(1500);
-                tryResume(3000);
-                // Re-poke silent audio & AudioContext to keep media session alive
-                try {
-                  if (silentAudioRef.current) silentAudioRef.current.play().catch(() => {});
-                  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-                    globalAudioCtx.resume().catch(() => {});
-                  }
-                } catch (_) {}
-              }
-            } else if (event.data === 0) {
-              // Guard: Only skip to the next track if the video has actually reached its end
-              try {
-                if (
-                  ytPlayerRef.current &&
-                  typeof ytPlayerRef.current.getCurrentTime === "function" &&
-                  typeof ytPlayerRef.current.getDuration === "function"
-                ) {
-                  const currTime = ytPlayerRef.current.getCurrentTime() || 0;
-                  const dur = ytPlayerRef.current.getDuration() || 0;
-                  if (dur > 0 && currTime < dur - 1.5) {
-                    console.log("[YT Player] Ignored premature ENDED event. Time:", currTime, "Duration:", dur);
-                    return;
-                  }
-                }
-              } catch (_) {}
+      ensurePlayerReady();
+    }
 
-              // Direct next track trigger
-              if (handleNextRef.current) {
-                handleNextRef.current();
-              }
-            }
-          },
-          onReady: (event: any) => {
-            isPlayerReadyRef.current = true;
-            if (shouldPlay) {
-              try {
-                if (typeof event.target.playVideo === "function") {
-                  event.target.playVideo();
-                }
-              } catch (_) {}
-            }
-          },
-          onError: (event: any) => {
-            console.error("YouTube Player error:", event.data);
-            setTimeout(() => {
-              if (handleNextRef.current) {
-                handleNextRef.current();
-              }
-            }, 100);
-          },
-        },
-      });
-    } else {
-      // Load new video ID into existing player
+    // Wait for player to be ready, then load the video
+    const tryLoad = () => {
+      if (!ytPlayerRef.current || !isPlayerReadyRef.current) {
+        // Player not ready yet — retry in 200ms
+        setTimeout(tryLoad, 200);
+        return;
+      }
       try {
-        if (isPlayerReadyRef.current && ytPlayerRef.current) {
-          if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
-            ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
-          } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
-            ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
-            if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
-              ytPlayerRef.current.playVideo();
-            }
-          } else {
-            console.warn("YouTube player instance lacks cue/load methods. Queuing video ID:", currentVideoId);
+        if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
+          ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
+        } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
+          ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
+          if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
           }
-        } else {
-          console.warn("YouTube player instance not ready yet. Queuing video ID:", currentVideoId);
         }
       } catch (e) {
         console.error("Cue/load video failed:", e);
       }
-    }
-  }, [currentVideoId, isYTApiReady]);
+    };
+    tryLoad();
+  }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
 
   // 4b. Background playback lifecycle manager
   // Handles visibility changes, focus events, and periodic keepalive
@@ -997,8 +1001,9 @@ export default function Player() {
   }, [isPlaying]);
 
   const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
-    // 0. Unlock hardware audio bus (for iOS/WebKit) — MUST be synchronous in user gesture
+    // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
+    ensurePlayerReady();
 
     // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
     if (silentAudioRef.current) {
@@ -1052,10 +1057,11 @@ export default function Player() {
       autoPlayPendingRef.current = true;
       // The video will start playing once the search API resolves in useEffect[currentIndex]
     }
-  }, [currentIndex, isPlaying, initMediaSession]);
+  }, [currentIndex, isPlaying, initMediaSession, ensurePlayerReady]);
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
+    ensurePlayerReady();
     claimMobileAudioFocus();
     setIsPlaying((prev) => {
       const nextVal = !prev;
@@ -1100,7 +1106,7 @@ export default function Player() {
       }
       return nextVal;
     });
-  }, [initMediaSession]);
+  }, [initMediaSession, ensurePlayerReady]);
 
   // 6. Silent audio element setup to activate browser Media Session on parent page
   useEffect(() => {
