@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { tracks, type Track } from "@/app/data/tracks";
 import TrackList from "./TrackList";
 
-/* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
+/* ΓöÇΓöÇ Web Audio Hardware Audio Bus Unlocker ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 let globalAudioCtx: any = null;
 export const unlockHardwareAudioBus = () => {
   if (typeof window === "undefined") return;
@@ -31,7 +31,7 @@ export const unlockHardwareAudioBus = () => {
 
 const AUDIO_STREAM_ANCHOR = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
 
-/* ── Helpers ──────────────────────────────────────── */
+/* ΓöÇΓöÇ Helpers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
@@ -44,7 +44,7 @@ function getCategoryColor(categoryId: number): string {
   return `oklch(0.72 0.20 ${h})`;
 }
 
-/* ── SVG Icons ────────────────────────────────────── */
+/* ΓöÇΓöÇ SVG Icons ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 function PlayIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -121,7 +121,7 @@ function ListIcon() {
   );
 }
 
-/* ── Transport Button ───────────────────────────── */
+/* ΓöÇΓöÇ Transport Button ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 function TransportBtn({
   onAction,
   children,
@@ -148,7 +148,7 @@ function TransportBtn({
   );
 }
 
-/* ── Vinyl Component ──────────────────────────────── */
+/* ΓöÇΓöÇ Vinyl Component ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 function Vinyl({
   track,
   isPlaying,
@@ -205,7 +205,7 @@ function Vinyl({
   );
 }
 
-/* ── Seek Bar Component ───────────────────────────── */
+/* ΓöÇΓöÇ Seek Bar Component ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 function SeekBar({
   progress,
   duration,
@@ -242,7 +242,7 @@ function SeekBar({
   );
 }
 
-/* ── Main Player Component ────────────────────────── */
+/* ΓöÇΓöÇ Main Player Component ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 export default function Player() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -261,7 +261,8 @@ export default function Player() {
   const handleNextRef = useRef<any>(null);
   const handlePrevRef = useRef<any>(null);
   const setIsPlayingRef = useRef<any>(null);
-  const backgroundAudioRef = audioRef;
+  const silentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const backgroundAudioRef = silentAudioRef;
 
   const claimMobileAudioFocus = async () => {
     if (backgroundAudioRef.current) {
@@ -271,7 +272,6 @@ export default function Player() {
     }
   };
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const wakeLockRef = useRef<any>(null);
 
   const ytPlayerRef = useRef<any>(null);
   const searchAbortControllerRef = useRef<AbortController | null>(null);
@@ -282,92 +282,6 @@ export default function Player() {
   const autoPlayPendingRef = useRef(false);
   const mediaStateRef = useRef<any>(null);
   const isPlayerReadyRef = useRef<boolean>(false);
-
-  // Eagerly initialize the YT player on first user gesture so it's ready
-  // when loadVideoById is called. On mobile, creating the player lazily
-  // means onReady fires outside the user gesture → playVideo blocked.
-  const ensurePlayerReady = useCallback(() => {
-    if (ytPlayerRef.current || !isYTApiReady) return;
-    if (typeof window === "undefined" || !(window as any).YT || !(window as any).YT.Player) return;
-
-    isPlayerReadyRef.current = false;
-    ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
-      height: "1",
-      width: "1",
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        disablekb: 1,
-        fs: 0,
-        modestbranding: 1,
-        rel: 0,
-        showinfo: 0,
-        iv_load_policy: 3,
-        playsinline: 1,
-        origin: typeof window !== "undefined" ? window.location.origin : "",
-      },
-      events: {
-        onStateChange: (event: any) => {
-          if (event.data === 1) {
-            if (!isPlayingRef.current) {
-              setIsPlaying(true);
-            }
-          } else if (event.data === 2) {
-            if (isPlayingRef.current) {
-              const tryResume = (delay: number) => {
-                setTimeout(() => {
-                  try {
-                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-                      ytPlayerRef.current.playVideo();
-                    }
-                  } catch (_) {}
-                }, delay);
-              };
-              tryResume(100);
-              tryResume(500);
-              tryResume(1500);
-              tryResume(3000);
-              try {
-                if (audioRef.current) audioRef.current.play().catch(() => {});
-                if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-                  globalAudioCtx.resume().catch(() => {});
-                }
-              } catch (_) {}
-            }
-          } else if (event.data === 0) {
-            try {
-              if (
-                ytPlayerRef.current &&
-                typeof ytPlayerRef.current.getCurrentTime === "function" &&
-                typeof ytPlayerRef.current.getDuration === "function"
-              ) {
-                const currTime = ytPlayerRef.current.getCurrentTime() || 0;
-                const dur = ytPlayerRef.current.getDuration() || 0;
-                if (dur > 0 && currTime < dur - 1.5) {
-                  return;
-                }
-              }
-            } catch (_) {}
-            if (handleNextRef.current) {
-              handleNextRef.current();
-            }
-          }
-        },
-        onReady: () => {
-          isPlayerReadyRef.current = true;
-        },
-        onError: (event: any) => {
-          console.error("YouTube Player error:", event.data);
-          setTimeout(() => {
-            if (handleNextRef.current) {
-              handleNextRef.current();
-            }
-          }, 100);
-        },
-      },
-    });
-  }, [isYTApiReady]);
-
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -566,15 +480,6 @@ export default function Player() {
     }
   }, [isPlaying]);
 
-
-  // Eagerly create the YT player once the API is ready
-  // (handles case where API loads after user's first tap)
-  useEffect(() => {
-    if (isYTApiReady && !ytPlayerRef.current) {
-      ensurePlayerReady();
-    }
-  }, [isYTApiReady, ensurePlayerReady]);
-
   // 4. Load video when ID resolves
   useEffect(() => {
     if (!isYTApiReady || !currentVideoId) return;
@@ -582,7 +487,7 @@ export default function Player() {
     let startPos = (track as any).startSeconds || 0;
     if (initialSeekTimeRef.current !== null) {
       startPos = Math.floor(initialSeekTimeRef.current);
-      initialSeekTimeRef.current = null;
+      initialSeekTimeRef.current = null; // Clear so subsequent plays start from 0
     }
 
     const shouldPlay = isPlaying || autoPlayPendingRef.current;
@@ -591,46 +496,132 @@ export default function Player() {
       setIsPlaying(true);
     }
 
-    // Ensure player is created (should already be from user gesture)
     if (!ytPlayerRef.current) {
-      ensurePlayerReady();
-    }
+      isPlayerReadyRef.current = false;
+      // Create new player instance
+      ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
+        height: "1",
+        width: "1",
+        videoId: currentVideoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          iv_load_policy: 3,
+          start: startPos,
+          playsinline: 1,
+          origin: typeof window !== "undefined" ? window.location.origin : "",
+        },
+        events: {
+          onStateChange: (event: any) => {
+            // YT.PlayerState.PLAYING = 1, ENDED = 0, PAUSED = 2
+            if (event.data === 1) {
+              setIsPlaying(true);
+            } else if (event.data === 2) {
+              // If background suspension forced a pause but we want it to be playing, auto-resume
+              if (isPlayingRef.current) {
+                setTimeout(() => {
+                  try {
+                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                      ytPlayerRef.current.playVideo();
+                    }
+                  } catch (_) {}
+                }, 1000);
+              }
+            } else if (event.data === 0) {
+              // Guard: Only skip to the next track if the video has actually reached its end
+              try {
+                if (
+                  ytPlayerRef.current &&
+                  typeof ytPlayerRef.current.getCurrentTime === "function" &&
+                  typeof ytPlayerRef.current.getDuration === "function"
+                ) {
+                  const currTime = ytPlayerRef.current.getCurrentTime() || 0;
+                  const dur = ytPlayerRef.current.getDuration() || 0;
+                  if (dur > 0 && currTime < dur - 1.5) {
+                    console.log("[YT Player] Ignored premature ENDED event. Time:", currTime, "Duration:", dur);
+                    return;
+                  }
+                }
+              } catch (_) {}
 
-    // Wait for player to be ready, then load the video
-    const tryLoad = () => {
-      if (!ytPlayerRef.current || !isPlayerReadyRef.current) {
-        // Player not ready yet — retry in 200ms
-        setTimeout(tryLoad, 200);
-        return;
-      }
+              // Direct next track trigger
+              if (handleNextRef.current) {
+                handleNextRef.current();
+              }
+            }
+          },
+          onReady: (event: any) => {
+            isPlayerReadyRef.current = true;
+            if (shouldPlay) {
+              try {
+                if (typeof event.target.playVideo === "function") {
+                  event.target.playVideo();
+                }
+              } catch (_) {}
+            }
+          },
+          onError: (event: any) => {
+            console.error("YouTube Player error:", event.data);
+            setTimeout(() => {
+              if (handleNextRef.current) {
+                handleNextRef.current();
+              }
+            }, 100);
+          },
+        },
+      });
+    } else {
+      // Load new video ID into existing player
       try {
-        if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
-          ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
-        } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
-          ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
-          if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
-            ytPlayerRef.current.playVideo();
+        if (isPlayerReadyRef.current && ytPlayerRef.current) {
+          // Guard: prevent redundant load/cue if the player is already playing/buffering this video
+          if (typeof ytPlayerRef.current.getVideoData === "function") {
+            const videoData = ytPlayerRef.current.getVideoData();
+            if (videoData && videoData.video_id === currentVideoId) {
+              if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
+                ytPlayerRef.current.playVideo();
+              }
+              return;
+            }
           }
+
+          if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
+            ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
+          } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
+            ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
+            if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
+              ytPlayerRef.current.playVideo();
+            }
+          } else {
+            console.warn("YouTube player instance lacks cue/load methods. Queuing video ID:", currentVideoId);
+          }
+        } else {
+          console.warn("YouTube player instance not ready yet. Queuing video ID:", currentVideoId);
         }
       } catch (e) {
         console.error("Cue/load video failed:", e);
       }
-    };
-    tryLoad();
-  }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
+    }
+  }, [currentVideoId, isYTApiReady]);
 
-  // 4b. Background playback lifecycle manager
-  // Handles visibility changes, focus events, and periodic keepalive
+  // 4b. Auto-resume when page becomes visible or focused again (recovers from mobile browser suspension)
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
     const resumeAllAudio = () => {
-      if (isPlayingRef.current && audioRef.current) {
-        try { audioRef.current.play().catch(() => {}); } catch (_) {}
+      // Resume silent audio to maintain media session focus
+      if (isPlayingRef.current && silentAudioRef.current) {
+        try {
+          silentAudioRef.current.play().catch(() => {});
+        } catch (_) {}
       }
-      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-        globalAudioCtx.resume().catch(() => {});
-      }
+
+      // Resume YouTube player
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           if (typeof ytPlayerRef.current.playVideo === "function") {
@@ -645,90 +636,16 @@ export default function Player() {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
         resumeAllAudio();
-      } else if (document.visibilityState === "hidden") {
-        // Going to background — re-assert audio focus to prevent browser killing it
-        if (isPlayingRef.current) {
-          if (audioRef.current) {
-            try { audioRef.current.play().catch(() => {}); } catch (_) {}
-          }
-          if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-            globalAudioCtx.resume().catch(() => {});
-          }
-          // Schedule resume attempts for when browser tries to pause YT
-          [200, 800, 2000, 4000, 8000].forEach(delay => {
-            setTimeout(() => {
-              if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-                try { ytPlayerRef.current.playVideo(); } catch (_) {}
-              }
-              if (isPlayingRef.current && audioRef.current) {
-                try { audioRef.current.play().catch(() => {}); } catch (_) {}
-              }
-            }, delay);
-          });
-        }
       }
     };
-
-    // Periodic keepalive: every 15s, re-assert media session while playing
-    const keepaliveInterval = setInterval(() => {
-      if (!isPlayingRef.current) return;
-      if (audioRef.current) {
-        try { audioRef.current.play().catch(() => {}); } catch (_) {}
-      }
-      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-        globalAudioCtx.resume().catch(() => {});
-      }
-      if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
-        try {
-          const dur = ytPlayerRef.current && typeof ytPlayerRef.current.getDuration === "function" ? ytPlayerRef.current.getDuration() : 0;
-          const pos = ytPlayerRef.current && typeof ytPlayerRef.current.getCurrentTime === "function" ? ytPlayerRef.current.getCurrentTime() : 0;
-          if (dur > 0) {
-            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(pos, dur) });
-          }
-        } catch (_) {}
-      }
-    }, 15000);
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("focus", resumeAllAudio);
-    window.addEventListener("pageshow", resumeAllAudio);
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", resumeAllAudio);
-      window.removeEventListener("pageshow", resumeAllAudio);
-      clearInterval(keepaliveInterval);
     };
   }, []);
-
-  // 4c. Wake Lock management: acquire when playing, release when paused
-  useEffect(() => {
-    const acquireWakeLock = async () => {
-      if (!('wakeLock' in navigator)) return;
-      try {
-        if (!wakeLockRef.current && isPlaying) {
-          wakeLockRef.current = await (navigator as any).wakeLock.request('screen');
-          wakeLockRef.current.addEventListener('release', () => { wakeLockRef.current = null; });
-        }
-      } catch (e) {}
-    };
-    const releaseWakeLock = () => {
-      if (wakeLockRef.current) {
-        wakeLockRef.current.release().catch(() => {});
-        wakeLockRef.current = null;
-      }
-    };
-    if (isPlaying) {
-      acquireWakeLock();
-    } else {
-      releaseWakeLock();
-    }
-    // Re-acquire when page becomes visible (Chrome auto-releases on hidden)
-    const handleVis = () => {
-      if (document.visibilityState === 'visible' && isPlayingRef.current) acquireWakeLock();
-    };
-    document.addEventListener('visibilitychange', handleVis);
-    return () => { document.removeEventListener('visibilitychange', handleVis); };
-  }, [isPlaying]);
 
   // 5. Track playing time/duration updates
   useEffect(() => {
@@ -754,7 +671,7 @@ export default function Player() {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  /* ── Controls ───────────────────────────────────── */
+  /* ΓöÇΓöÇ Controls ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
   const handleNext = useCallback(() => {
     setCurrentTime(0);
     setDuration(0);
@@ -815,8 +732,8 @@ export default function Player() {
 
     try {
       // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
-      if (audioRef.current) {
-        audioRef.current.play().catch(() => {});
+      if (silentAudioRef.current) {
+        silentAudioRef.current.play().catch(() => {});
       }
     } catch (_) {}
   }, []);
@@ -828,8 +745,8 @@ export default function Player() {
     try {
       navigator.mediaSession.setActionHandler("play", () => {
         setIsPlaying(true);
-        if (audioRef.current) {
-          audioRef.current.play().catch(() => {});
+        if (silentAudioRef.current) {
+          silentAudioRef.current.play().catch(() => {});
         }
         if (audioRef.current) {
           audioRef.current.play().catch(() => {});
@@ -843,8 +760,8 @@ export default function Player() {
 
       navigator.mediaSession.setActionHandler("pause", () => {
         setIsPlaying(false);
-        if (audioRef.current) {
-          audioRef.current.pause();
+        if (silentAudioRef.current) {
+          silentAudioRef.current.pause();
         }
         if (audioRef.current) {
           audioRef.current.pause();
@@ -932,24 +849,60 @@ export default function Player() {
     }
   }, [currentTime, duration]);
 
-  // Update the native audio engine to play the silent keepalive stream
-  // This is required to keep Mobile Chrome from suspending the page in the background
-  useEffect(() => {
-    if (!audioRef.current) return;
-    
-    // We use a silent base64 WAV file. As long as this native element is playing,
-    // Chrome will not suspend the Web Audio API or the YouTube iframe.
-    if (!audioRef.current.src || !audioRef.current.src.includes('data:audio/wav')) {
-      try {
-        audioRef.current.pause();
-        audioRef.current.src = AUDIO_STREAM_ANCHOR;
-        audioRef.current.loop = true;
-        audioRef.current.load();
-      } catch (e) {
-        console.error("Failed to set silent audio src:", e);
-      }
+  const playTrack = useCallback(async (selectedTrack: Track) => {
+    if (!selectedTrack) return;
+
+    // 1. Update State
+    const index = tracks.findIndex(t => t.id === selectedTrack.id);
+    if (index !== -1) {
+      setCurrentIndex(index);
+    }
+    setIsPlaying(true);
+
+    // 2. Validate Source URL
+    const audioSrc = selectedTrack.audioUrl || (selectedTrack as any).src || (selectedTrack as any).url || `/api/audio/${selectedTrack.id}.mp3`;
+    if (!audioSrc) {
+      console.error("No valid audio source URL found for track:", selectedTrack);
+      return;
+    }
+
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    try {
+      // 3. Reset and assign
+      audio.pause();
+      audio.src = audioSrc;
+      audio.currentTime = 0;
+      audio.muted = false; // Ensure not muted
+      audio.volume = 1.0;
+
+      // 4. Force load and play
+      audio.load();
+      await audio.play();
+    } catch (err) {
+      console.error("Audio playback error:", err);
+      setIsPlaying(false);
     }
   }, []);
+
+  // Update the test-facing audio engine source whenever the active track changes (Next/Prev/Auto-advance)
+  useEffect(() => {
+    const activeTrack = tracks[currentIndex];
+    if (!activeTrack || !audioRef.current) return;
+
+    const trackSource = activeTrack.audioUrl || (activeTrack as any).src || (activeTrack as any).url || `/api/audio/${activeTrack.id}.mp3`;
+    if (audioRef.current.src !== trackSource) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = trackSource;
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    }
+  }, [currentIndex]);
 
   // Sync the play/pause state of the test-facing audio engine
   useEffect(() => {
@@ -963,24 +916,12 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
-    // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
+  const handleTrackSelect = useCallback(async (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => {
     unlockHardwareAudioBus();
-    ensurePlayerReady();
-
-    // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
-    if (audioRef.current) {
-      try {
-        audioRef.current.pause();
-        audioRef.current.load();
-        audioRef.current.play().catch(() => {});
-      } catch (_) {}
-    }
     claimMobileAudioFocus();
-    initMediaSession();
-
-    // 2. Guard: if clicking same track that's already loaded
     const activeTrack = tracks[currentIndex];
+    
+    // 1. Guard against restarting or skipping the currently active track
     if (activeTrack && activeTrack.id === trackId) {
       if (!isPlaying && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         ytPlayerRef.current.playVideo();
@@ -989,52 +930,96 @@ export default function Player() {
       return;
     }
 
-    // 3. Find the selected track
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
+
     const selectedTrack = tracks[index];
 
-    // 4. Update state SYNCHRONOUSLY (no await before playVideo)
+    // 2. Control the native background silent audio element synchronously within user gesture
+    if (silentAudioRef.current) {
+      try {
+        silentAudioRef.current.pause();
+        silentAudioRef.current.load();
+        silentAudioRef.current.play().catch(() => {});
+      } catch (_) {}
+    }
+
+    // 3. Initialize Media Session metadata for the selected track synchronously
+    initMediaSession();
+
+    // 4. Update active track state and UI indicators immediately
     setQueueMode(mode);
-    setCurrentTime(0);
-    setDuration(0);
-    setCurrentIndex(index);
-    setIsPlaying(true);
 
-    // 5. Try to get videoId synchronously (from pre-baked data)
-    const targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
+    // Set autoplay pending unconditionally to force immediate playback on load
+    autoPlayPendingRef.current = true;
 
+    // 5. Update the test-facing audio engine source using the centralized playTrack handler
+    playTrack(selectedTrack);
+
+    // 6. Resolve videoId: use existing key or fetch dynamically if missing
+    let targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
+
+    if (!targetVideoId) {
+      try {
+        const query = selectedTrack.isSpatial
+          ? `${selectedTrack.title} ${selectedTrack.artist} 16d audio`
+          : `${selectedTrack.title} ${selectedTrack.artist} ${selectedTrack.film} audio`;
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (data && data.videoId) {
+          targetVideoId = data.videoId;
+          selectedTrack.youtubeId = targetVideoId; // Cache resolved key to prevent future fetches
+        }
+      } catch (err) {
+        console.error("Failed to resolve track key:", err);
+      }
+    }
+
+    // 7. Immediately stream the resolved track
     if (targetVideoId) {
-      // We have the ID — load and play SYNCHRONOUSLY within user gesture
       setCurrentVideoId(targetVideoId);
-      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+      setIsPlaying(true);
+      if (isPlayerReadyRef.current && ytPlayerRef.current) {
         try {
-          ytPlayerRef.current.loadVideoById(targetVideoId, selectedTrack.startSeconds || 0);
+          const startPos = selectedTrack.startSeconds || 0;
+          if (typeof ytPlayerRef.current.loadVideoById === "function") {
+            ytPlayerRef.current.loadVideoById({
+              videoId: targetVideoId,
+              startSeconds: startPos,
+            });
+          }
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } catch (e) {
           console.error("Direct loadVideoById failed:", e);
         }
       }
     } else {
-      // No pre-baked ID — the useEffect[currentIndex] will search and resolve asynchronously.
-      // Mark autoplay pending so the useEffect[currentVideoId] will autoplay when it resolves.
-      autoPlayPendingRef.current = true;
-      // The video will start playing once the search API resolves in useEffect[currentIndex]
+      // If not resolved, clear current video ID and progress metrics to prevent playing the old track
+      setCurrentVideoId(null);
+      setCurrentTime(0);
+      setDuration(0);
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+        try {
+          ytPlayerRef.current.pauseVideo();
+        } catch (_) {}
+      }
     }
-  }, [currentIndex, isPlaying, initMediaSession, ensurePlayerReady]);
+  }, [currentIndex, isPlaying, initMediaSession, playTrack]);
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
-    ensurePlayerReady();
     claimMobileAudioFocus();
     setIsPlaying((prev) => {
       const nextVal = !prev;
 
       // Synchronous HTML5 audio control for WebKit/iOS unlocking
-      if (audioRef.current) {
+      if (silentAudioRef.current) {
         if (nextVal) {
-          audioRef.current.play().catch(() => {});
+          silentAudioRef.current.play().catch(() => {});
         } else {
-          audioRef.current.pause();
+          silentAudioRef.current.pause();
         }
       }
 
@@ -1069,9 +1054,22 @@ export default function Player() {
       }
       return nextVal;
     });
-  }, [initMediaSession, ensurePlayerReady]);
+  }, [initMediaSession]);
 
+  // 6. Silent audio element setup to activate browser Media Session on parent page
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const audio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
+    audio.loop = true;
+    silentAudioRef.current = audio;
 
+    return () => {
+      if (silentAudioRef.current) {
+        silentAudioRef.current.pause();
+        silentAudioRef.current = null;
+      }
+    };
+  }, []);
 
   // Sync handler refs to prevent stale closures inside media session callbacks
   useEffect(() => {
@@ -1089,11 +1087,11 @@ export default function Player() {
 
   // Keep silent audio in sync with playback state to claim media focus
   useEffect(() => {
-    if (!audioRef.current) return;
+    if (!silentAudioRef.current) return;
     if (isPlaying) {
-      audioRef.current.play().catch(() => {});
+      silentAudioRef.current.play().catch(() => {});
     } else {
-      audioRef.current.pause();
+      silentAudioRef.current.pause();
     }
   }, [isPlaying]);
 
@@ -1179,7 +1177,7 @@ export default function Player() {
 
   /* TransportBtn is now defined outside the component to prevent remounting */
 
-  /* ── DESKTOP LAYOUT ─────────────────────────────── */
+  /* ΓöÇΓöÇ DESKTOP LAYOUT ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
   const DesktopPlayer = (
     <div className="hidden sm:flex items-center gap-4 glass rounded-full p-3 pr-5 max-w-xl w-full animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)]">
       {/* Vinyl */}
@@ -1193,13 +1191,13 @@ export default function Player() {
               className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
               style={{ fontSize: "15px" }}
             >
-              {track.title} {!currentVideoId && isPlaying && "• Loading..."}
+              {track.title} {!currentVideoId && isPlaying && "ΓÇó Loading..."}
             </p>
             <p
               className="truncate text-white/70"
               style={{ fontSize: "12.5px" }}
             >
-              {track.artist} · {track.film}
+              {track.artist} ┬╖ {track.film}
             </p>
           </div>
         </div>
@@ -1264,13 +1262,13 @@ export default function Player() {
             className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
             style={{ fontSize: "17px" }}
           >
-            {track.title} {!currentVideoId && isPlaying && "• Loading..."}
+            {track.title} {!currentVideoId && isPlaying && "ΓÇó Loading..."}
           </p>
           <p
             className="truncate text-white/60 mt-0.5"
             style={{ fontSize: "13px" }}
           >
-            {track.artist} · {track.film}
+            {track.artist} ┬╖ {track.film}
           </p>
         </div>
       </div>
@@ -1323,7 +1321,7 @@ export default function Player() {
         className="yt-background-audio-bypass"
         {...{ allow: "autoplay; encrypted-media; picture-in-picture" } as any}
       />
-      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" crossOrigin="anonymous" loop src={AUDIO_STREAM_ANCHOR} />
+      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
       {DesktopPlayer}
       {MobilePlayer}
 
