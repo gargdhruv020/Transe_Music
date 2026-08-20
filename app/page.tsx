@@ -1,6 +1,7 @@
 "use client";
 
 import Clock from "@/app/components/Clock";
+import ListenerCount from "@/app/components/ListenerCount";
 import Player from "@/app/components/Player";
 import CaptionRotator from "@/app/components/CaptionRotator";
 
@@ -23,6 +24,11 @@ export default function Home() {
         {/* Clock — top left */}
         <div className="safe-left safe-top">
           <Clock />
+        </div>
+
+        {/* Listener count — top centre */}
+        <div className="safe-top">
+          <ListenerCount />
         </div>
 
         {/* Empty space for right-side balance */}
