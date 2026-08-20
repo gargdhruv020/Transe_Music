@@ -456,11 +456,11 @@ nextjs-portal,
   position: fixed !important;
   bottom: 0 !important;
   right: 0 !important;
-  width: 250px !important;
-  height: 250px !important;
-  opacity: 0.1 !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0.01 !important;
   pointer-events: none !important;
-  z-index: 9999 !important;
+  z-index: -9999 !important;
   overflow: hidden !important;
 }
 /* =========================================================
