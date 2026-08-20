@@ -272,6 +272,7 @@ export default function Player() {
     }
   };
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const wakeLockRef = useRef<any>(null);
 
   const ytPlayerRef = useRef<any>(null);
   const searchAbortControllerRef = useRef<AbortController | null>(null);
@@ -524,13 +525,27 @@ export default function Player() {
             } else if (event.data === 2) {
               // If background suspension forced a pause but we want it to be playing, auto-resume
               if (isPlayingRef.current) {
-                setTimeout(() => {
-                  try {
-                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-                      ytPlayerRef.current.playVideo();
-                    }
-                  } catch (_) {}
-                }, 1000);
+                // Aggressive multi-attempt resume for mobile background playback
+                const tryResume = (delay: number) => {
+                  setTimeout(() => {
+                    try {
+                      if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                        ytPlayerRef.current.playVideo();
+                      }
+                    } catch (_) {}
+                  }, delay);
+                };
+                tryResume(100);
+                tryResume(500);
+                tryResume(1500);
+                tryResume(3000);
+                // Re-poke silent audio & AudioContext to keep media session alive
+                try {
+                  if (silentAudioRef.current) silentAudioRef.current.play().catch(() => {});
+                  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+                    globalAudioCtx.resume().catch(() => {});
+                  }
+                } catch (_) {}
               }
             } else if (event.data === 0) {
               // Guard: Only skip to the next track if the video has actually reached its end
@@ -579,17 +594,6 @@ export default function Player() {
       // Load new video ID into existing player
       try {
         if (isPlayerReadyRef.current && ytPlayerRef.current) {
-          // Guard: prevent redundant load/cue if the player is already playing/buffering this video
-          if (typeof ytPlayerRef.current.getVideoData === "function") {
-            const videoData = ytPlayerRef.current.getVideoData();
-            if (videoData && videoData.video_id === currentVideoId) {
-              if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
-                ytPlayerRef.current.playVideo();
-              }
-              return;
-            }
-          }
-
           if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
             ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
           } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
@@ -609,19 +613,18 @@ export default function Player() {
     }
   }, [currentVideoId, isYTApiReady]);
 
-  // 4b. Auto-resume when page becomes visible or focused again (recovers from mobile browser suspension)
+  // 4b. Background playback lifecycle manager
+  // Handles visibility changes, focus events, and periodic keepalive
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
     const resumeAllAudio = () => {
-      // Resume silent audio to maintain media session focus
       if (isPlayingRef.current && silentAudioRef.current) {
-        try {
-          silentAudioRef.current.play().catch(() => {});
-        } catch (_) {}
+        try { silentAudioRef.current.play().catch(() => {}); } catch (_) {}
       }
-
-      // Resume YouTube player
+      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+        globalAudioCtx.resume().catch(() => {});
+      }
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           if (typeof ytPlayerRef.current.playVideo === "function") {
@@ -636,16 +639,90 @@ export default function Player() {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
         resumeAllAudio();
+      } else if (document.visibilityState === "hidden") {
+        // Going to background — re-assert audio focus to prevent browser killing it
+        if (isPlayingRef.current) {
+          if (silentAudioRef.current) {
+            try { silentAudioRef.current.play().catch(() => {}); } catch (_) {}
+          }
+          if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+            globalAudioCtx.resume().catch(() => {});
+          }
+          // Schedule resume attempts for when browser tries to pause YT
+          [200, 800, 2000, 4000, 8000].forEach(delay => {
+            setTimeout(() => {
+              if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                try { ytPlayerRef.current.playVideo(); } catch (_) {}
+              }
+              if (isPlayingRef.current && silentAudioRef.current) {
+                try { silentAudioRef.current.play().catch(() => {}); } catch (_) {}
+              }
+            }, delay);
+          });
+        }
       }
     };
 
+    // Periodic keepalive: every 15s, re-assert media session while playing
+    const keepaliveInterval = setInterval(() => {
+      if (!isPlayingRef.current) return;
+      if (silentAudioRef.current) {
+        try { silentAudioRef.current.play().catch(() => {}); } catch (_) {}
+      }
+      if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+        globalAudioCtx.resume().catch(() => {});
+      }
+      if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+        try {
+          const dur = ytPlayerRef.current && typeof ytPlayerRef.current.getDuration === "function" ? ytPlayerRef.current.getDuration() : 0;
+          const pos = ytPlayerRef.current && typeof ytPlayerRef.current.getCurrentTime === "function" ? ytPlayerRef.current.getCurrentTime() : 0;
+          if (dur > 0) {
+            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(pos, dur) });
+          }
+        } catch (_) {}
+      }
+    }, 15000);
+
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("focus", resumeAllAudio);
+    window.addEventListener("pageshow", resumeAllAudio);
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", resumeAllAudio);
+      window.removeEventListener("pageshow", resumeAllAudio);
+      clearInterval(keepaliveInterval);
     };
   }, []);
+
+  // 4c. Wake Lock management: acquire when playing, release when paused
+  useEffect(() => {
+    const acquireWakeLock = async () => {
+      if (!('wakeLock' in navigator)) return;
+      try {
+        if (!wakeLockRef.current && isPlaying) {
+          wakeLockRef.current = await (navigator as any).wakeLock.request('screen');
+          wakeLockRef.current.addEventListener('release', () => { wakeLockRef.current = null; });
+        }
+      } catch (e) {}
+    };
+    const releaseWakeLock = () => {
+      if (wakeLockRef.current) {
+        wakeLockRef.current.release().catch(() => {});
+        wakeLockRef.current = null;
+      }
+    };
+    if (isPlaying) {
+      acquireWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+    // Re-acquire when page becomes visible (Chrome auto-releases on hidden)
+    const handleVis = () => {
+      if (document.visibilityState === 'visible' && isPlayingRef.current) acquireWakeLock();
+    };
+    document.addEventListener('visibilitychange', handleVis);
+    return () => { document.removeEventListener('visibilitychange', handleVis); };
+  }, [isPlaying]);
 
   // 5. Track playing time/duration updates
   useEffect(() => {
@@ -1321,7 +1398,7 @@ export default function Player() {
         className="yt-background-audio-bypass"
         {...{ allow: "autoplay; encrypted-media; picture-in-picture" } as any}
       />
-      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" />
+      <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" crossOrigin="anonymous" />
       {DesktopPlayer}
       {MobilePlayer}
 
