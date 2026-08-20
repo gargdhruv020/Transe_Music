@@ -11,12 +11,14 @@ const workerScript = `
   let interval;
   self.onmessage = function(e) {
     if (e.data === 'start') {
+      if (interval) clearInterval(interval);
       interval = setInterval(() => self.postMessage('tick'), 1000);
     } else if (e.data === 'stop') {
       clearInterval(interval);
     }
   };
 `;
+
 let globalAudioCtx: any = null;
 export const unlockHardwareAudioBus = () => {};
 
@@ -252,12 +254,12 @@ export default function Player() {
   const handleNextRef = useRef<any>(null);
   const handlePrevRef = useRef<any>(null);
   const setIsPlayingRef = useRef<any>(null);
-  const backgroundAudioRef = audioRef;
+  
 
   const claimMobileAudioFocus = async () => {
-    if (backgroundAudioRef.current) {
+    if (audioRef.current) {
       try {
-        await backgroundAudioRef.current.play();
+        await audioRef.current.play();
       } catch (_) {}
     }
   };
@@ -311,6 +313,7 @@ export default function Player() {
       }
     }
   }, [isPlaying]);
+
   const isPlayerReadyRef = useRef<boolean>(false);
 
   // Eagerly initialize the YT player on first user gesture so it's ready
@@ -358,9 +361,8 @@ export default function Player() {
               tryResume(1500);
               tryResume(3000);
               try {
-                if (audioRef.current) /* removed audioRef play */
-                );
-                }
+                
+                
               } catch (_) {}
             }
           } else if (event.data === 0) {
@@ -655,10 +657,9 @@ export default function Player() {
 
     const resumeAllAudio = () => {
       if (isPlayingRef.current && audioRef.current) {
-        try { /* removed audioRef play */ } catch (_) {}
+        
       }
-      );
-      }
+      
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           if (typeof ytPlayerRef.current.playVideo === "function") {
@@ -677,10 +678,9 @@ export default function Player() {
         // Going to background — re-assert audio focus to prevent browser killing it
         if (isPlayingRef.current) {
           if (audioRef.current) {
-            try { /* removed audioRef play */ } catch (_) {}
+            
           }
-          );
-          }
+          
           // Schedule resume attempts for when browser tries to pause YT
           [200, 800, 2000, 4000, 8000].forEach(delay => {
             setTimeout(() => {
@@ -688,7 +688,7 @@ export default function Player() {
                 try { ytPlayerRef.current.playVideo(); } catch (_) {}
               }
               if (isPlayingRef.current && audioRef.current) {
-                try { /* removed audioRef play */ } catch (_) {}
+                
               }
             }, delay);
           });
@@ -700,10 +700,9 @@ export default function Player() {
     const keepaliveInterval = setInterval(() => {
       if (!isPlayingRef.current) return;
       if (audioRef.current) {
-        try { /* removed audioRef play */ } catch (_) {}
+        
       }
-      );
-      }
+      
       if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
         try {
           const dur = ytPlayerRef.current && typeof ytPlayerRef.current.getDuration === "function" ? ytPlayerRef.current.getDuration() : 0;
@@ -842,7 +841,7 @@ export default function Player() {
     try {
       // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
       if (audioRef.current) {
-        /* removed audioRef play */
+        audioRef.current.play().catch(() => {});
       }
     } catch (_) {}
   }, []);
@@ -855,10 +854,10 @@ export default function Player() {
       navigator.mediaSession.setActionHandler("play", () => {
         setIsPlaying(true);
         if (audioRef.current) {
-          /* removed audioRef play */
+          audioRef.current.play().catch(() => {});
         }
         if (audioRef.current) {
-          /* removed audioRef play */
+          audioRef.current.play().catch(() => {});
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
           try {
@@ -870,10 +869,10 @@ export default function Player() {
       navigator.mediaSession.setActionHandler("pause", () => {
         setIsPlaying(false);
         if (audioRef.current) {
-          /* removed audioRef pause */
+          audioRef.current.pause();
         }
         if (audioRef.current) {
-          /* removed audioRef pause */
+          audioRef.current.pause();
         }
         if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
           try {
@@ -965,9 +964,9 @@ export default function Player() {
     if (!audioRef.current) return;
     try {
       if (isPlaying) {
-        /* removed audioRef play */
+        audioRef.current.play().catch(() => {});
       } else {
-        /* removed audioRef pause */
+        audioRef.current.pause();
       }
     } catch (_) {}
   }, [isPlaying]);
@@ -978,13 +977,7 @@ export default function Player() {
     ensurePlayerReady();
 
     // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
-    if (audioRef.current) {
-      try {
-        /* removed audioRef pause */
-        /* removed audioRef load */
-        /* removed audioRef play */
-      } catch (_) {}
-    }
+    
     claimMobileAudioFocus();
     initMediaSession();
 
@@ -1038,25 +1031,9 @@ export default function Player() {
     setIsPlaying((prev) => {
       const nextVal = !prev;
 
-      // Synchronous HTML5 audio control for WebKit/iOS unlocking
-      if (audioRef.current) {
-        if (nextVal) {
-          /* removed audioRef play */
-        } else {
-          /* removed audioRef pause */
-        }
-      }
 
-      // Sync the test-facing audio engine
-      if (audioRef.current) {
-        try {
-          if (nextVal) {
-            /* removed audioRef play */
-          } else {
-            /* removed audioRef pause */
-          }
-        } catch (_) {}
-      }
+
+
 
       // Initialize media session metadata and action handlers inside user gesture
       initMediaSession();
@@ -1100,9 +1077,9 @@ export default function Player() {
   useEffect(() => {
     if (!audioRef.current) return;
     if (isPlaying) {
-      /* removed audioRef play */
+      audioRef.current.play().catch(() => {});
     } else {
-      /* removed audioRef pause */
+      audioRef.current.pause();
     }
   }, [isPlaying]);
 
