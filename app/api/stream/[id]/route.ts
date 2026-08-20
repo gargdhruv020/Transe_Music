@@ -4,9 +4,9 @@ import ytdl from '@distube/ytdl-core';
 // This must run in Node.js runtime, not Edge, because ytdl-core uses Node built-ins
 export const runtime = 'nodejs';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const videoId = await params.id;
+    const { id: videoId } = await params;
     if (!videoId) return NextResponse.json({ error: "No ID provided" }, { status: 400 });
 
     const info = await ytdl.getInfo(videoId);
