@@ -25,6 +25,12 @@ export const unlockHardwareAudioBus = () => {};
 const AUDIO_STREAM_ANCHOR = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
 
 /* ── Helpers ──────────────────────────────────────── */
+
+function isIOS() {
+  if (typeof window === "undefined") return false;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
+
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
@@ -840,10 +846,27 @@ export default function Player() {
 
     try {
       // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
-      if (audioRef.current) {
+      if (audioRef.current && isIOS()) {
         audioRef.current.play().catch(() => {});
       }
     } catch (_) {}
+  }, []);
+
+
+  // iOS Background Keepalive for MediaSession controls
+  useEffect(() => {
+    if (!audioRef.current || !isIOS()) return;
+    
+    if (!audioRef.current.src || !audioRef.current.src.includes('data:audio/wav')) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = AUDIO_STREAM_ANCHOR;
+        audioRef.current.loop = true;
+        audioRef.current.load();
+      } catch (e) {
+        console.error("Failed to set silent audio src:", e);
+      }
+    }
   }, []);
 
   // Register Media Session API Action Handlers once on mount
