@@ -916,7 +916,13 @@ export default function Player() {
       // AGGRESSIVELY RE-REGISTER HANDLERS!
       // YouTube iframe API automatically registers its own MediaSession handlers every time a video loads, overwriting ours.
       // This breaks Bluetooth controls. We must steal them back.
+      //
+      // CRITICAL: We MUST update isPlayingRef.current SYNCHRONOUSLY here, BEFORE calling
+      // pauseVideo/playVideo. Otherwise the onStateChange auto-resume logic and the
+      // Web Worker keepalive will see isPlayingRef.current === true when YouTube fires
+      // its paused state change, and immediately call playVideo() again, undoing the pause.
       navigator.mediaSession.setActionHandler("play", () => {
+        isPlayingRef.current = true; // sync ref FIRST
         setIsPlaying(true);
         if (audioRef.current) audioRef.current.play().catch(() => {});
         if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
@@ -925,7 +931,9 @@ export default function Player() {
       });
 
       navigator.mediaSession.setActionHandler("pause", () => {
+        isPlayingRef.current = false; // sync ref FIRST — prevents onStateChange from resuming
         setIsPlaying(false);
+        if (workerRef.current) workerRef.current.postMessage('stop'); // kill worker keepalive immediately
         if (audioRef.current) audioRef.current.pause();
         if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
           try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
@@ -1105,10 +1113,7 @@ export default function Player() {
     claimMobileAudioFocus();
     setIsPlaying((prev) => {
       const nextVal = !prev;
-
-
-
-
+      isPlayingRef.current = nextVal; // sync ref FIRST — prevents onStateChange/worker from fighting
 
       // Initialize media session metadata and action handlers inside user gesture
       initMediaSession();
@@ -1116,8 +1121,10 @@ export default function Player() {
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           if (nextVal) {
+            if (workerRef.current) workerRef.current.postMessage('start');
             ytPlayerRef.current.playVideo();
           } else {
+            if (workerRef.current) workerRef.current.postMessage('stop'); // kill worker immediately
             ytPlayerRef.current.pauseVideo();
             if (typeof ytPlayerRef.current.getCurrentTime === "function") {
               const time = ytPlayerRef.current.getCurrentTime() || 0;
