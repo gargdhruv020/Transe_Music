@@ -52,8 +52,20 @@ const TrackRow = memo(function TrackRow({
   activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix";
   onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
 }) {
+  const rowRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    // Only scroll if this is the active track
+    if (isActive && rowRef.current) {
+      setTimeout(() => {
+        rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  }, [isActive]);
+
   return (
     <button
+      ref={rowRef}
       type="button"
       onClick={(e) => {
         e.preventDefault();
