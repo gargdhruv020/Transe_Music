@@ -104,6 +104,7 @@ export default function TrackList({
   onSelect,
   onClose,
   onTabChange,
+  isRemixOnly = false,
 }: {
   currentIndex: number;
   isPlaying: boolean;
@@ -112,6 +113,7 @@ export default function TrackList({
   onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
   onClose: () => void;
   onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -164,11 +166,15 @@ export default function TrackList({
   const filteredTracks = useMemo(() => {
     const q = searchQuery.toLowerCase();
     return tracks.filter((t) => {
-      if (activeTab === "16d" && !t.isSpatial) return false;
-      if (activeTab === "global" && !t.isGlobal) return false;
-      if (activeTab === "goa" && !t.isGoa) return false;
-      if (activeTab === "remix" && !t.isRemix) return false;
-      if (activeTab === "ktrance" && !t.isKTrance) return false;
+      if (isRemixOnly) {
+        if (!t.isRemix) return false;
+      } else {
+        if (activeTab === "16d" && !t.isSpatial) return false;
+        if (activeTab === "global" && !t.isGlobal) return false;
+        if (activeTab === "goa" && !t.isGoa) return false;
+        if (activeTab === "remix" && !t.isRemix) return false;
+        if (activeTab === "ktrance" && !t.isKTrance) return false;
+      }
       return (
         q === "" ||
         t.title.toLowerCase().includes(q) ||
@@ -176,7 +182,7 @@ export default function TrackList({
         t.film.toLowerCase().includes(q)
       );
     });
-  }, [searchQuery, activeTab]);
+  }, [searchQuery, activeTab, isRemixOnly]);
 
   // Memoize counts
   const spatialCount = useMemo(() => tracks.filter(t => t.isSpatial).length, []);
@@ -211,7 +217,7 @@ export default function TrackList({
         <div className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-white">Playlist</h2>
+              <h2 className="text-lg font-semibold text-white">{isRemixOnly ? "Remix List" : "Playlist"}</h2>
             </div>
             <button
               onClick={handleHeaderPlayClick}
@@ -239,6 +245,7 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
+        {!isRemixOnly && (
         <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
           <button
             onClick={() => onTabChange?.("all")}
@@ -283,17 +290,7 @@ export default function TrackList({
             <span className="w-1.5 h-1.5 rounded-full bg-[#e76f51] flex-shrink-0" />
             Goa
           </button>
-          <button
-            onClick={() => onTabChange?.("remix")}
-            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
-              activeTab === "remix"
-                ? "bg-[oklch(0.70_0.22_340)]/15 border-[oklch(0.70_0.22_340)]/30 text-white shadow-md"
-                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
-            }`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] flex-shrink-0" />
-            Remix
-          </button>
+
           <button
             onClick={() => onTabChange?.("ktrance")}
             className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
@@ -307,6 +304,7 @@ export default function TrackList({
           </button>
         </div>
 
+        )}
         {/* Search */}
         <div className="px-5 pt-1 pb-4 flex-shrink-0">
           <div className="relative">

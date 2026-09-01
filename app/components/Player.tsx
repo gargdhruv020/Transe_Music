@@ -98,6 +98,17 @@ function ShuffleIcon({ active }: { active: boolean }) {
   );
 }
 
+
+function MicIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+    </svg>
+  );
+}
+
 function ListIcon() {
   return (
     <svg
@@ -249,6 +260,7 @@ export default function Player() {
   const [duration, setDuration] = useState(0);
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
+  const [showRemixList, setShowRemixList] = useState(false);
   const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
   const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance">("all");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
@@ -1245,6 +1257,13 @@ export default function Player() {
         >
           <ListIcon />
         </TransportBtn>
+        <TransportBtn
+          onAction={() => setShowRemixList(!showRemixList)}
+          ariaLabel="Remix list"
+          size="w-8 h-8"
+        >
+          <MicIcon />
+        </TransportBtn>
       </div>
     </div>
   );
@@ -1319,6 +1338,13 @@ export default function Player() {
         >
           <ListIcon />
         </TransportBtn>
+        <TransportBtn
+          onAction={() => setShowRemixList(!showRemixList)}
+          ariaLabel="Remix list"
+          size="w-8 h-8"
+        >
+          <MicIcon />
+        </TransportBtn>
       </div>
     </div>
   );
@@ -1346,6 +1372,17 @@ export default function Player() {
           onSelect={handleTrackSelect}
           onClose={() => setShowList(false)}
           onTabChange={setPlaylistTab}
+        />
+      )}
+      {showRemixList && (
+        <TrackList
+          currentIndex={currentIndex}
+          isPlaying={isPlaying}
+          activeTab="remix"
+          isRemixOnly={true}
+          onTogglePlay={togglePlay}
+          onSelect={handleTrackSelect}
+          onClose={() => setShowRemixList(false)}
         />
       )}
     </>
