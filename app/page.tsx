@@ -39,10 +39,12 @@ export default function Home() {
       <div className="flex-1" />
 
       {/* ── Centered VORTEXIA branding ───────────── */}
-      <div className="flex flex-col items-center justify-center gap-3 mb-auto mt-[10vh] sm:mt-[12vh] animate-[fade-in_1.5s_ease-out] select-none pointer-events-none z-0 mix-blend-screen w-full">
-        <h1 className="vortexia-title text-[15vw] sm:text-[160px] leading-none text-center transform scale-y-110 ml-[0.3em]">
-          VORTEXIA
-        </h1>
+      <div className="flex flex-col items-center justify-center gap-3 mb-auto mt-[12vh] sm:mt-[15vh] animate-[fade-in_1.5s_ease-out] select-none pointer-events-none z-0 mix-blend-screen w-full px-4">
+        <img 
+          src="/vortexia_logo.png" 
+          alt="VORTEXIA" 
+          className="w-full max-w-[1000px] h-auto object-contain drop-shadow-[0_0_15px_rgba(200,0,255,0.6)] mix-blend-screen"
+        />
       </div>
 
       {/* ── Spacer ──────────────────────────────────── */}
