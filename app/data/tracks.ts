@@ -2595,6 +2595,706 @@ const listIndoHouse = [
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
+  },
+  {
+    "title": "Aankh Marey",
+    "artist": "Melodic Techno Edit (126 BPM)",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Aao Milo Chalo",
+    "artist": "Deep Indo-House Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ab Toh Forever",
+    "artist": "BollyTech Peak-Time Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ae Dil Hai Mushkil",
+    "artist": "Progressive Melodic House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Afreen Afreen",
+    "artist": "Tech House Extended Drop Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ahista Ahista",
+    "artist": "Indo Minimal Techno Version",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Amplifier (Imran Khan)",
+    "artist": "Driving Tech House Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ankhon Mein Teri",
+    "artist": "Sunset Melodic House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Apna Bana Le",
+    "artist": "Peak-Time BollyTech Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Arijit Singh Medley",
+    "artist": "Continuous BollyTech Transition Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Aye Udi Udi",
+    "artist": "Percussive Latin-Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Badtameez Dil",
+    "artist": "128 BPM Tech House Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Bakhuda Tumhi Ho",
+    "artist": "Melodic Techno Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Banjaara (Ek Villain)",
+    "artist": "Dark Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Batshit x Desi Beats",
+    "artist": "High-Energy Tech Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Besharam Rang",
+    "artist": "Deep Groove Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Bhare Naina",
+    "artist": "Heavy Baseline BollyTech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Brown Munde",
+    "artist": "Tech House Festival Drop Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chaar Botal Vodka",
+    "artist": "Tech House Club Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chaiyya Chaiyya",
+    "artist": "126 BPM Indo-House Peak-Time Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chaleya",
+    "artist": "Melodic Tech House Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chammak Challo",
+    "artist": "Afro-Tech & BollyTech Hybrid Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chand Sifarish",
+    "artist": "Progressive Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Char Baj Gaye (Party Abhi Baaki Hai)",
+    "artist": "Peak-Time Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chitta Ve",
+    "artist": "Industrial Melodic Techno Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Crazy Kiya Re",
+    "artist": "Driving Tech House Club Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Danza Kuduro x Bolly Beats",
+    "artist": "Tech House Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Deewana Dil",
+    "artist": "Classic Bollywood Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dekha Ek Khwaab",
+    "artist": "Ambient Melodic House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Desi Boyz (Make Some Noise)",
+    "artist": "128 BPM BollyTech Remix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dhoom Machale",
+    "artist": "High-Octane Tech House Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dil Chahta Hai",
+    "artist": "Summer Indo-House Groove",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dil Dhadakne Do",
+    "artist": "Vocal Tech House Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dil Sambhal Ja Zara",
+    "artist": "Melodic Techno Club Version",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Disco Deewane",
+    "artist": "Peak-Time Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Dus Bahane 2.0",
+    "artist": "Bass-Heavy Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ek Do Teen",
+    "artist": "Tribal-Infused BollyTech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Gallan Goodiyaan",
+    "artist": "High-BPM Wedding BollyTech Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Gandi Baat",
+    "artist": "Groovy Minimal Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Genda Phool",
+    "artist": "Folk-Tech House Extended Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ghungroo Toot Gaye",
+    "artist": "Melodic Indo-House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Gulaabo",
+    "artist": "Funky Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Halka Halka Suroor",
+    "artist": "Progressive BollyTech Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Hookah Bar",
+    "artist": "128 BPM Festival Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Hua Hain Aaj Pehli Baar",
+    "artist": "Melodic Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Humnava Mere",
+    "artist": "Deep Melodic Techno Version",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "I Hate Luv Storys (Title Track)",
+    "artist": "Upbeat BollyTech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ik Junoon (Paint It Red)",
+    "artist": "Sunset Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Illegal Weapon 2.0",
+    "artist": "Heavy BollyTech Drop Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ishq Shava",
+    "artist": "Percussive Afro-Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ishq Wala Love",
+    "artist": "Deep Melodic House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Jai Jai Shivshankar",
+    "artist": "Festival Peak-Time Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Jee Karda (Badlapur)",
+    "artist": "Aggressive BollyTech Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Jhoome Jo Pathaan",
+    "artist": "Big Room Tech House Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Kabira (Encore)",
+    "artist": "Melodic Techno Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Kar Gayi Chull",
+    "artist": "126 BPM BollyTech Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Khadke Glassy",
+    "artist": "Punjabi-Tech House Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Khaike Paan Banaraswala",
+    "artist": "Funky Indo-House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Khairiyat",
+    "artist": "Melodic House Extended Vocal Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Khuda Jaane",
+    "artist": "Progressive House & Melodic Techno Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Kudi Nu Nachne De",
+    "artist": "Uplifting BollyTech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Kurti Mal Mal Di",
+    "artist": "Punjabi Tech House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Kya Hua Tera Wada",
+    "artist": "Retro Melodic Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Lagdi Lahore Di",
+    "artist": "Afro-Infused BollyTech Remix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "London Thumakda",
+    "artist": "High-Energy Wedding Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Locha-E-Ulfat",
+    "artist": "Groovy Indo-House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Love Mera Hit Hit",
+    "artist": "128 BPM Tech House Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Lungi Dance",
+    "artist": "Big Room BollyTech Festival Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Malhari",
+    "artist": "Heavy Peak-Time BollyTech Tribal Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Matargashti",
+    "artist": "Funky Minimal Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Mitwa (KANK)",
+    "artist": "Progressive Melodic House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Nadiyon Paar (Let The Music Play)",
+    "artist": "Deep Tech House Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Naacho Naacho (RRR)",
+    "artist": "Fast-Paced BollyTech Tribal Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Nashe Si Chadh Gayi",
+    "artist": "French-Touch Indo-House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "O Saki Saki (New Version)",
+    "artist": "Peak-Time BollyTech Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Pani Da Rang",
+    "artist": "Ambient Deep Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Party All Night",
+    "artist": "128 BPM Tech House Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Pee Loon",
+    "artist": "Deep Melodic House Vocal Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Pretty Hot Tempting (P.H.A.T)",
+    "artist": "Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Raataan Lambiyan",
+    "artist": "Sunset Melodic Techno Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Radha Kaise Na Jale",
+    "artist": "Classical-Infused Indo-House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Rock Tha Party (Bombay Rockers)",
+    "artist": "Driving Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Sauda Khara Khara",
+    "artist": "Bhangra-Tech House Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Senorita (ZNMD)",
+    "artist": "Flamenco Indo-Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Shanivaar Raati",
+    "artist": "Peak-Time BollyTech Club Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Show Me The Thumka",
+    "artist": "Upbeat BollyTech House Version",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Subah Hone Na De",
+    "artist": "126 BPM Tech House Mainstage Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Suraj Hua Maddham",
+    "artist": "Melodic Techno Sunset Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Sweety Tera Drama",
+    "artist": "Desi Tech House Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Tamanche Pe Disco",
+    "artist": "Bass-Heavy BollyTech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Tarasti Hain Nigahein",
+    "artist": "Melodic Techno Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "The Humma Song",
+    "artist": "Deep Tech House Groove Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Tujh Mein Rab Dikhta Hai",
+    "artist": "Progressive Indo-House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Tune Maari Entriyaan",
+    "artist": "Big Room Tech House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Udi Teri Aankhon Se",
+    "artist": "Melodic Afro-Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Vele (SOTY)",
+    "artist": "128 BPM BollyTech Club Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Woh Din",
+    "artist": "Chill Indo-House Vocal Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Ya Baba (Arabic-Bolly)",
+    "artist": "Dark Tech House Club Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Zingaat",
+    "artist": "Tribal Tech House Peak-Time Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Zinda Banda",
+    "artist": "Heavy Bassline BollyTech Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
   }
 ];
 const listAfro = [
