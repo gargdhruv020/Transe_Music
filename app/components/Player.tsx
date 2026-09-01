@@ -656,6 +656,9 @@ export default function Player() {
       try {
         if (shouldPlay && typeof ytPlayerRef.current.loadVideoById === "function") {
           ytPlayerRef.current.loadVideoById(currentVideoId, startPos);
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } else if (typeof ytPlayerRef.current.cueVideoById === "function") {
           ytPlayerRef.current.cueVideoById(currentVideoId, startPos);
           if (shouldPlay && typeof ytPlayerRef.current.playVideo === "function") {
@@ -821,12 +824,25 @@ export default function Player() {
     setCurrentIndex(nextGlobalIndex);
     setIsPlaying(true);
     
-    // Synchronously ensure playback is active to satisfy iOS user gesture requirements
-    // This allows the async fetch to later change the video via loadVideoById without getting blocked.
-    if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-      try {
-        ytPlayerRef.current.playVideo();
-      } catch (_) {}
+    // Attempt to load video SYNCHRONOUSLY if the ID is pre-baked or cached (solves iOS background lock)
+    const cacheKey = `${nextTrack.title.toLowerCase()} - ${nextTrack.artist.toLowerCase()}`;
+    const targetVideoId = nextTrack.youtubeId || (nextTrack as any).videoId || resolvedCacheRef.current[cacheKey];
+    
+    if (targetVideoId) {
+      setCurrentVideoId(targetVideoId);
+      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+        try {
+          ytPlayerRef.current.loadVideoById(targetVideoId, (nextTrack as any).startSeconds || 0);
+        } catch (_) {}
+      }
+    } else {
+      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
+      // This allows the async fetch to later change the video via loadVideoById without getting blocked.
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+        try {
+          ytPlayerRef.current.playVideo();
+        } catch (_) {}
+      }
     }
   }, [currentIndex, queueMode, shuffle, track]);
 
@@ -852,11 +868,24 @@ export default function Player() {
     setCurrentIndex(prevGlobalIndex);
     setIsPlaying(true);
     
-    // Synchronously ensure playback is active to satisfy iOS user gesture requirements
-    if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-      try {
-        ytPlayerRef.current.playVideo();
-      } catch (_) {}
+    // Attempt to load video SYNCHRONOUSLY if the ID is pre-baked or cached (solves iOS background lock)
+    const cacheKey = `${prevTrack.title.toLowerCase()} - ${prevTrack.artist.toLowerCase()}`;
+    const targetVideoId = prevTrack.youtubeId || (prevTrack as any).videoId || resolvedCacheRef.current[cacheKey];
+    
+    if (targetVideoId) {
+      setCurrentVideoId(targetVideoId);
+      if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
+        try {
+          ytPlayerRef.current.loadVideoById(targetVideoId, (prevTrack as any).startSeconds || 0);
+        } catch (_) {}
+      }
+    } else {
+      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+        try {
+          ytPlayerRef.current.playVideo();
+        } catch (_) {}
+      }
     }
   }, [currentIndex, queueMode, shuffle, track]);
 
