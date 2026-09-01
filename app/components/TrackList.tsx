@@ -318,6 +318,17 @@ export default function TrackList({
               <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8] flex-shrink-0" />
               E & A Afro
             </button>
+            <button
+              onClick={() => onTabChange?.("x")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "x"
+                  ? "bg-[#6d28d9]/15 border-[#6d28d9]/30 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8b5cf6] flex-shrink-0" />
+              X
+            </button>
           </div>
         ) : (
         <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
