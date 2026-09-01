@@ -527,13 +527,13 @@ export default function Player() {
           resolvedCacheRef.current[cacheKey] = data.videoId;
           setCurrentVideoId(data.videoId);
         } else if (!controller.signal.aborted) {
-          console.error(`Could not resolve videoId for: ${track.title}`);
-          setIsPlaying(false);
+          console.error(`Could not resolve videoId for: ${track.title}. Auto-skipping...`);
+          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1000);
         }
       } catch (e: any) {
         if (e.name !== "AbortError") {
           console.error(`Search API resolution error for: ${track.title}`, e);
-          setIsPlaying(false);
+          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1000);
         }
       }
     }
