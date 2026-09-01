@@ -111,9 +111,10 @@ body {
   inset: 0;
   z-index: -20;
   background-image: url("/bg_vortexia.jpg");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #000;
 
   /* Strobe effect config */
   animation: bg-strobe 1.8s ease-in-out infinite;
