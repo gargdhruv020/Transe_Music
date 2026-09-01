@@ -38,7 +38,12 @@ export default function Home() {
       {/* ── Spacer (pushes player to bottom) ─────── */}
       <div className="flex-1" />
 
-
+      {/* ── Centered VORTEXIA branding ───────────── */}
+      <div className="flex flex-col items-center justify-center gap-3 mb-auto mt-[10vh] sm:mt-[12vh] animate-[fade-in_1.5s_ease-out] select-none pointer-events-none z-0 mix-blend-screen w-full">
+        <h1 className="vortexia-title text-[15vw] sm:text-[160px] leading-none text-center transform scale-y-110 ml-[0.3em]">
+          VORTEXIA
+        </h1>
+      </div>
 
       {/* ── Spacer ──────────────────────────────────── */}
       <div className="flex-1" />
