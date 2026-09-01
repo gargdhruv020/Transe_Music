@@ -910,8 +910,15 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
+    "title": "Aadat Se Majboor",
+    "artist": "DJ Sujooy & DJ Brij",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
     "title": "Aadat Se Majboor x Edge of Desire",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -919,6 +926,13 @@ const listIndoHouse = [
   {
     "title": "Aahista Aahista",
     "artist": "(Zroxx Edit)",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Aaj Ki Raat",
+    "artist": "(D-Rain & Hrutik Mashup)",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -988,7 +1002,7 @@ const listIndoHouse = [
   },
   {
     "title": "Aankho Se Tune x Run The World",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1043,6 +1057,13 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
+    "title": "AFTERAll",
+    "artist": "Choli x lag Bari",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
     "title": "Afsana Banake",
     "artist": "DJ Aftab & DJ Ad",
     "film": "Remix",
@@ -1079,7 +1100,7 @@ const listIndoHouse = [
   },
   {
     "title": "Agar Tum Saath Ho x Chasing Highs Midnight",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1149,7 +1170,7 @@ const listIndoHouse = [
   },
   {
     "title": "Bachna Ae Haseeno",
-    "artist": "Mashup",
+    "artist": "DJ Sam",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1170,7 +1191,7 @@ const listIndoHouse = [
   },
   {
     "title": "Badshah o Badshah",
-    "artist": "Mashup",
+    "artist": "Mashup – DJ Sam",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1226,14 +1247,14 @@ const listIndoHouse = [
   },
   {
     "title": "Bewafa",
-    "artist": "Mashup",
+    "artist": "Mashup – DJ Sam Bolly Banger",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
   },
   {
     "title": "Bewafa x Taka Taka",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1241,13 +1262,6 @@ const listIndoHouse = [
   {
     "title": "Bhaag DK Bose x Saxobeat",
     "artist": "(Saif Side)",
-    "film": "Remix",
-    "isRemix": true,
-    "isIndoHouse": true
-  },
-  {
-    "title": "Biba",
-    "artist": "Enzed Edit",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1262,6 +1276,13 @@ const listIndoHouse = [
   {
     "title": "Bhool Bhulaiya x Jungle (Edit)",
     "artist": "Samz",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Biba",
+    "artist": "Enzed Edit",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1351,15 +1372,15 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
-    "title": "Dard-E-Disco",
-    "artist": "DJ Sujoy & DJ Brij",
+    "title": "Dard E Disco",
+    "artist": "Avattar (Indo Tech Project)",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
   },
   {
-    "title": "Dard E Disco",
-    "artist": "Avattar (Indo Tech Project)",
+    "title": "Dard-E-Disco",
+    "artist": "DJ Sujooy & DJ Brij",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1519,13 +1540,6 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
-    "title": "Dope Shop x Work",
-    "artist": "Darksidez Music",
-    "film": "Remix",
-    "isRemix": true,
-    "isIndoHouse": true
-  },
-  {
     "title": "Dum Dum Ranbir Singh",
     "artist": "DJ Saurabh (Edit)",
     "film": "Remix",
@@ -1541,7 +1555,7 @@ const listIndoHouse = [
   },
   {
     "title": "Dum Maaro Dum",
-    "artist": "Mashup",
+    "artist": "Mashup – DJ Sam",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1589,7 +1603,7 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
-    "title": "Gehra Hua x Magic Dragon",
+    "title": "Gehra Hua x Magic Drgon",
     "artist": "(Sykar & Teja)",
     "film": "Remix",
     "isRemix": true,
@@ -1632,7 +1646,7 @@ const listIndoHouse = [
   },
   {
     "title": "High Heels",
-    "artist": "Mashup",
+    "artist": "Mashup – DJ Sam Banger",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1694,8 +1708,15 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
+    "title": "Jaan Se Guzarte Hain",
+    "artist": "DJ Lalit & DJ Pearl",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
     "title": "Jaan Se Guzarte Hain EDIT (128 BPM / 130 BPM)",
-    "artist": "DJ Lalit, DJ Pearl & DJ Skelltron",
+    "artist": "DJ Skelltron",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1772,7 +1793,7 @@ const listIndoHouse = [
   },
   {
     "title": "Jumma Chumma Tech Mix",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -1884,7 +1905,7 @@ const listIndoHouse = [
   },
   {
     "title": "Kya Mujhe Pyaar Hai x Edge of Desire Tech Edit / BollyTech Mix",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -2059,7 +2080,7 @@ const listIndoHouse = [
   },
   {
     "title": "Money Follows x Paisa x Millionaire",
-    "artist": "IndoHouse",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -2109,6 +2130,13 @@ const listIndoHouse = [
   {
     "title": "O Meri Jaane Jaan",
     "artist": "(Vicky Dance Remix)",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "O O Jane Jana x Bam Bam",
+    "artist": "DJ Sharad",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -2170,6 +2198,13 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
+    "title": "Piya Ghar Aaya Nusrat Fateh Ali",
+    "artist": "(Asad S Remix)",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
     "title": "Pyaar Dilon Ka Mela Hai EDIT",
     "artist": "(130 BPM)",
     "film": "Remix",
@@ -2191,8 +2226,15 @@ const listIndoHouse = [
     "isIndoHouse": true
   },
   {
+    "title": "Ramba Ho",
+    "artist": "Rowan Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
     "title": "Ramba Ho x Gizula",
-    "artist": "(Sykar & Teja) / Rowan Mashup",
+    "artist": "(Sykar & Teja)",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
@@ -2473,6 +2515,13 @@ const listIndoHouse = [
   {
     "title": "Wannabe x Bheege Hont Tere (V",
     "artist": "Niks Flip)",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Where's The Party Tonight",
+    "artist": "(DJ Naairo Mashup)",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
