@@ -2600,7 +2600,7 @@ const listIndoHouse = [
 const listAfro = [
   {
     "title": "Aadat AP Dhillon Afro x DJ Ashu",
-    "artist": "Afro",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
@@ -2635,7 +2635,7 @@ const listAfro = [
   },
   {
     "title": "Alharan Kuarian Diljit Dosanjh x Jamaican",
-    "artist": "Afro",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
@@ -2712,7 +2712,7 @@ const listAfro = [
   },
   {
     "title": "Dhoor Afrodesia",
-    "artist": "Afro",
+    "artist": "Unknown",
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
@@ -2740,7 +2740,7 @@ const listAfro = [
   },
   {
     "title": "Gangsta",
-    "artist": "Karan Aujla",
+    "artist": "Karan Aujla – VDJ Shaan",
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
@@ -2916,6 +2916,13 @@ const listAfro = [
   {
     "title": "Mafia x Get Down",
     "artist": "(Hyperjaxx Mashup)",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true
+  },
+  {
+    "title": "Masakali x Yuma",
+    "artist": "Antriksh",
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
