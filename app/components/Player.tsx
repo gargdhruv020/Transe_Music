@@ -820,6 +820,14 @@ export default function Player() {
     const nextGlobalIndex = tracks.findIndex(t => t.id === nextTrack.id);
     setCurrentIndex(nextGlobalIndex);
     setIsPlaying(true);
+    
+    // Synchronously ensure playback is active to satisfy iOS user gesture requirements
+    // This allows the async fetch to later change the video via loadVideoById without getting blocked.
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+      try {
+        ytPlayerRef.current.playVideo();
+      } catch (_) {}
+    }
   }, [currentIndex, queueMode, shuffle, track]);
 
   const handlePrev = useCallback(() => {
@@ -843,6 +851,13 @@ export default function Player() {
     const prevGlobalIndex = tracks.findIndex(t => t.id === prevTrack.id);
     setCurrentIndex(prevGlobalIndex);
     setIsPlaying(true);
+    
+    // Synchronously ensure playback is active to satisfy iOS user gesture requirements
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+      try {
+        ytPlayerRef.current.playVideo();
+      } catch (_) {}
+    }
   }, [currentIndex, queueMode, shuffle, track]);
 
   const handleSeek = useCallback((value: number) => {
@@ -1056,6 +1071,12 @@ export default function Player() {
       // No pre-baked ID — the useEffect[currentIndex] will search and resolve asynchronously.
       // Mark autoplay pending so the useEffect[currentVideoId] will autoplay when it resolves.
       autoPlayPendingRef.current = true;
+      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+        try {
+          ytPlayerRef.current.playVideo();
+        } catch (_) {}
+      }
       // The video will start playing once the search API resolves in useEffect[currentIndex]
     }
   }, [currentIndex, isPlaying, initMediaSession, ensurePlayerReady]);
