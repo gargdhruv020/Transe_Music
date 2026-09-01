@@ -263,6 +263,7 @@ export default function Player() {
   const [showRemixList, setShowRemixList] = useState(false);
   const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("all");
   const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("all");
+  const [remixTab, setRemixTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("remix");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
@@ -555,7 +556,7 @@ export default function Player() {
   useEffect(() => {
     if (!currentVideoId || isPlaying === false) return;
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -802,7 +803,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -825,7 +826,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -1378,11 +1379,12 @@ export default function Player() {
         <TrackList
           currentIndex={currentIndex}
           isPlaying={isPlaying}
-          activeTab="remix"
+          activeTab={remixTab}
           isRemixOnly={true}
           onTogglePlay={togglePlay}
           onSelect={handleTrackSelect}
           onClose={() => setShowRemixList(false)}
+          onTabChange={setRemixTab}
         />
       )}
     </>
