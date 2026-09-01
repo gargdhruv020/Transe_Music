@@ -13,6 +13,7 @@ export interface Track {
   isIndoHouse?: boolean;
   isSufi?: boolean;
   isAfro?: boolean;
+  isEAndAAfro?: boolean;
   audioUrl?: string;
 }
 
