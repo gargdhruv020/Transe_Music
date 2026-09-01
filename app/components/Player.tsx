@@ -261,9 +261,9 @@ export default function Player() {
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showRemixList, setShowRemixList] = useState(false);
-  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("all");
-  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("all");
-  const [remixTab, setRemixTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro">("remix");
+  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix">("all");
+  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix">("all");
+  const [remixTab, setRemixTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix">("all-remix");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
@@ -556,7 +556,7 @@ export default function Player() {
   useEffect(() => {
     if (!currentVideoId || isPlaying === false) return;
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -803,7 +803,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -834,7 +834,7 @@ export default function Player() {
     setCurrentTime(0);
     setDuration(0);
     
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "remix" ? tracks.filter(t => t.isRemix) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : tracks;
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -1022,7 +1022,7 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro") => {
+  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => {
     // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
     ensurePlayerReady();

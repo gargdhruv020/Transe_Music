@@ -49,8 +49,8 @@ const TrackRow = memo(function TrackRow({
 }: {
   track: Track;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro";
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix";
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
 }) {
   return (
     <button
@@ -108,11 +108,11 @@ export default function TrackList({
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix";
   onTogglePlay: () => void;
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
   onClose: () => void;
-  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro") => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
   isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -168,6 +168,7 @@ export default function TrackList({
     return tracks.filter((t) => {
       if (isRemixOnly) {
         if (!t.isRemix) return false;
+        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro)) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
         if (activeTab === "sufi" && !(t as any).isSufi) return false;
         if (activeTab === "afro" && !(t as any).isAfro) return false;
@@ -252,14 +253,25 @@ export default function TrackList({
         {isRemixOnly ? (
           <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
             <button
-              onClick={() => onTabChange?.("remix")}
+              onClick={() => onTabChange?.("all-remix")}
               className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 ${
-                activeTab === "remix"
+                activeTab === "all-remix"
                   ? "bg-white/10 border-white/20 text-white shadow-md"
                   : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
               }`}
             >
-              All Remixes
+              All
+            </button>
+            <button
+              onClick={() => onTabChange?.("remix")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "remix"
+                  ? "bg-[oklch(0.65_0.20_300)]/15 border-[oklch(0.65_0.20_300)]/30 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] flex-shrink-0" />
+              Remix
             </button>
             <button
               onClick={() => onTabChange?.("indo-house")}
