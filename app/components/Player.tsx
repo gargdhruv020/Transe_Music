@@ -266,6 +266,7 @@ export default function Player() {
   const [remixTab, setRemixTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix">("all-remix");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const [volume, setVolumeState] = useState(100);
   const [showVolumeIndicator, setShowVolumeIndicator] = useState(false);
   const volumeTimeoutRef = useRef<any>(null);
