@@ -382,6 +382,8 @@ button svg,
   font-variant-numeric: tabular-nums;
 }
 
+
+
 .club-title {
   font-family: 'Poppins', 'Outfit', var(--font-sans);
   font-weight: 800;
@@ -984,47 +986,36 @@ nextjs-portal,
   }
 }
 
+
+
+@media (max-width: 640px) {
+  
+}
+
+
+
 .vortexia-title {
   font-family: 'Poppins', 'Outfit', var(--font-sans);
-  font-weight: 300;
-  letter-spacing: 0.3em;
+  font-weight: 900;
+  letter-spacing: 0.15em;
   color: transparent;
-  -webkit-text-stroke: 2px #fff;
+  -webkit-text-stroke: 4px rgba(255, 255, 255, 1);
   text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.5),
-    0 0 20px rgba(200, 0, 255, 0.9),
-    0 0 40px rgba(200, 0, 255, 0.9),
-    0 0 80px rgba(200, 0, 255, 0.7);
+    0 0 10px rgba(255, 0, 255, 1),
+    0 0 20px rgba(255, 0, 255, 0.9),
+    0 0 40px rgba(213, 47, 255, 0.8),
+    0 0 80px rgba(213, 47, 255, 0.8);
   text-transform: uppercase;
+  padding: 10px 0;
+  line-height: 1.1;
 }
 
 @media (max-width: 640px) {
   .vortexia-title {
-    -webkit-text-stroke: 1px #fff;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
     text-shadow:
-      0 0 5px rgba(255, 255, 255, 0.4),
-      0 0 15px rgba(200, 0, 255, 0.9),
-      0 0 25px rgba(200, 0, 255, 0.9);
+      0 0 8px rgba(255, 0, 255, 1),
+      0 0 15px rgba(213, 47, 255, 0.8),
+      0 0 30px rgba(213, 47, 255, 0.8);
   }
-}
-/* -- Vortexia Title -------------------------------- */
-.vortexia-title {
-  font-family: 'Outfit', 'Inter', sans-serif;
-  color: transparent;
-  background: 
-    radial-gradient(circle, rgba(213, 47, 255, 0.4) 1px, transparent 1px),
-    linear-gradient(#1a001a, #1a001a);
-  background-size: 4px 4px, 100% 100%;
-  -webkit-text-stroke: 2px #d52fff;
-  text-shadow: 
-    0 0 5px #d52fff,
-    0 0 15px #d52fff,
-    0 0 30px rgba(213, 47, 255, 0.6),
-    0 0 50px rgba(213, 47, 255, 0.4);
-  
-  
-  -webkit-background-clip: text;
-  position: relative;
-  z-index: 10;
-  margin-left: 0.15em; /* Optical centering for tracking */
 }

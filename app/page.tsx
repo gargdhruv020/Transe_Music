@@ -40,8 +40,8 @@ export default function Home() {
 
       {/* ── Centered branding ───────────────────────── */}
       <div className="flex flex-col items-center gap-3 mb-auto mt-[4vh] sm:mt-[6vh] animate-[fade-in_1s_ease-out] select-none pointer-events-none z-0">
-        <h1 className="vortexia-title text-6xl sm:text-8xl md:text-9xl font-black text-center tracking-[0.15em] sm:tracking-[0.2em] uppercase">
-          Vortexia
+        <h1 className="vortexia-title text-6xl sm:text-9xl text-center">
+          VORTEXIA
         </h1>
       </div>
 
