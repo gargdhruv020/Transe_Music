@@ -3688,7 +3688,14 @@ const listEAAfro = [
 ];
 const listSufi = [
   {
-    "title": "Bol Kaffara Kya Hoga (Extended Versions 1 & 2)",
+    "title": "Bol Kaffara Kya Hoga (Extended Version 1)",
+    "artist": "DJ Abhii",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true
+  },
+  {
+    "title": "Bol Kaffara Kya Hoga (Extended Version 2)",
     "artist": "DJ Abhii",
     "film": "Remix",
     "isRemix": true,
@@ -3702,8 +3709,15 @@ const listSufi = [
     "isSufi": true
   },
   {
-    "title": "Jaan Se Guzarte Hai (Extended Versions 1 & 2 / Afro House)",
-    "artist": "DJ Abhii & DJ Tejas",
+    "title": "Jaan Se Guzarte Hai (Extended Version 1)",
+    "artist": "DJ Abhii",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true
+  },
+  {
+    "title": "Jaan Se Guzarte Hai (Extended Version 2)",
+    "artist": "DJ Abhii",
     "film": "Remix",
     "isRemix": true,
     "isSufi": true
@@ -3745,7 +3759,7 @@ const listSufi = [
   },
   {
     "title": "Yeh Tune Kya Kiya (Extended Version)",
-    "artist": "DJ Abhii / EDIT (128 BPM)",
+    "artist": "DJ Abhii",
     "film": "Remix",
     "isRemix": true,
     "isSufi": true
@@ -3989,13 +4003,6 @@ const listSufi = [
     "isSufi": true
   },
   {
-    "title": "Bulleya",
-    "artist": "(Ae Dil Hai Mushkil) (Extended BollyTech Festival Edit)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
     "title": "Kiven Mukhre Ton Nazran Hatawan",
     "artist": "(Extended Afro House Version)",
     "film": "Remix",
@@ -4012,55 +4019,6 @@ const listSufi = [
   {
     "title": "Mera Piya Ghar Aaya (Extended High",
     "artist": "BPM Tech Mix)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Sajdaa",
-    "artist": "(My Name Is Khan) (Extended Deep House Flip)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Tum Tak",
-    "artist": "(Raanjhanaa) (Extended Melodic Afro Flip)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Tum Jo Aaye",
-    "artist": "(Once Upon A Time In Mumbaai) (Extended Tech House Mix)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Kehna Galat Galat",
-    "artist": "(Extended BollyTech Club Edit)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Maan Ki Lagan",
-    "artist": "(Paap) (Extended Deep Afro Mix)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Yeh Tune Kya Kiya",
-    "artist": "(OUATIMD) (Extended Melodic Techno Edit)",
-    "film": "Remix",
-    "isRemix": true,
-    "isSufi": true
-  },
-  {
-    "title": "Bol Kaffara Kya Hoga",
-    "artist": "(Extended Festival House Edit)",
     "film": "Remix",
     "isRemix": true,
     "isSufi": true
