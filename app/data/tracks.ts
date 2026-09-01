@@ -10,6 +10,7 @@ export interface Track {
   isGoa?: boolean;
   isRemix?: boolean;
   isKTrance?: boolean;
+  isIndoHouse?: boolean;
   audioUrl?: string;
 }
 

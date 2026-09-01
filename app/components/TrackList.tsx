@@ -49,8 +49,8 @@ const TrackRow = memo(function TrackRow({
 }: {
   track: Track;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house";
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
 }) {
   return (
     <button
@@ -108,11 +108,11 @@ export default function TrackList({
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house";
   onTogglePlay: () => void;
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
   onClose: () => void;
-  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance") => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
   isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -168,6 +168,7 @@ export default function TrackList({
     return tracks.filter((t) => {
       if (isRemixOnly) {
         if (!t.isRemix) return false;
+        if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
       } else {
         if (activeTab === "16d" && !t.isSpatial) return false;
         if (activeTab === "global" && !t.isGlobal) return false;
@@ -245,7 +246,31 @@ export default function TrackList({
         </div>
 
         {/* Tabs */}
-        {!isRemixOnly && (
+        {isRemixOnly ? (
+          <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
+            <button
+              onClick={() => onTabChange?.("remix")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 ${
+                activeTab === "remix"
+                  ? "bg-white/10 border-white/20 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              All Remixes
+            </button>
+            <button
+              onClick={() => onTabChange?.("indo-house")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "indo-house"
+                  ? "bg-[oklch(0.70_0.22_340)]/15 border-[oklch(0.70_0.22_340)]/30 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] flex-shrink-0" />
+              Indo-House
+            </button>
+          </div>
+        ) : (
         <div className="flex px-5 pt-1 pb-3 gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide max-w-full snap-x snap-mandatory select-none items-center flex-shrink-0">
           <button
             onClick={() => onTabChange?.("all")}
