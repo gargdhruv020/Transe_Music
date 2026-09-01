@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { tracks, type Track } from "@/app/data/tracks";
+import youtubeCache from "@/app/data/youtube_cache.json";
 import TrackList from "./TrackList";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
@@ -288,7 +289,31 @@ export default function Player() {
 
   const ytPlayerRef = useRef<any>(null);
   const searchAbortControllerRef = useRef<AbortController | null>(null);
-  const resolvedCacheRef = useRef<Record<string, string>>({});
+  const resolvedCacheRef = useRef<Record<string, string>>(youtubeCache as Record<string, string>);
+
+  const getTrackYoutubeId = useCallback((t: Track | null | undefined): string | null => {
+    if (!t) return null;
+    if (t.youtubeId) return t.youtubeId;
+    if ((t as any).videoId) return (t as any).videoId;
+
+    const cache = resolvedCacheRef.current || youtubeCache;
+    const title = t.title.toLowerCase().trim();
+    const artist = t.artist.toLowerCase().trim();
+    const film = (t.film || "").toLowerCase().trim();
+
+    const keyDash = `${title} - ${artist}`;
+    const keySpace = `${title} ${artist}`;
+    const keyQuery = `${title} ${artist} ${film} audio`.trim().replace(/\s+/g, ' ');
+
+    return (
+      cache[keyDash] ||
+      cache[keySpace] ||
+      cache[title] ||
+      cache[keyQuery] ||
+      null
+    );
+  }, []);
+
   const isPlayingRef = useRef(isPlaying);
   const initialSeekTimeRef = useRef<number | null>(null);
   const durationRef = useRef(duration);
@@ -1072,7 +1097,7 @@ export default function Player() {
     setIsPlaying(true);
 
     // 5. Try to get videoId synchronously (from pre-baked data)
-    const targetVideoId = selectedTrack.youtubeId || (selectedTrack as any).videoId;
+    const targetVideoId = getTrackYoutubeId(selectedTrack);
 
     if (targetVideoId) {
       // We have the ID — load and play SYNCHRONOUSLY within user gesture
