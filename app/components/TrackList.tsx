@@ -148,19 +148,22 @@ export default function TrackList({
     return () => window.removeEventListener("mousedown", handleClick);
   }, [onClose]);
 
-  // Scroll active track into view on mount or tab change
+  // Scroll active track into view on mount, tab change, or track change
   useEffect(() => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
     
-    // Use requestAnimationFrame to ensure the DOM is painted first
-    requestAnimationFrame(() => {
-      const activeElement = container.querySelector('[data-active="true"]');
-      if (activeElement) {
-        activeElement.scrollIntoView({ block: "center", behavior: "smooth" });
-      }
-    });
-  }, [activeTab]);
+    // Use a small delay + rAF to ensure the DOM is painted and list is rendered
+    const timer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        const activeElement = container.querySelector('[data-active="true"]');
+        if (activeElement) {
+          activeElement.scrollIntoView({ block: "center", behavior: "smooth" });
+        }
+      });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [activeTab, currentIndex]);
 
   // Memoize filtered tracks to avoid re-filtering on every render
   const filteredTracks = useMemo(() => {
