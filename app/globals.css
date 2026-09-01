@@ -1007,3 +1007,24 @@ nextjs-portal,
       0 0 25px rgba(200, 0, 255, 0.9);
   }
 }
+/* -- Vortexia Title -------------------------------- */
+.vortexia-title {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  color: transparent;
+  background: 
+    radial-gradient(circle, rgba(213, 47, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(#1a001a, #1a001a);
+  background-size: 4px 4px, 100% 100%;
+  -webkit-text-stroke: 2px #d52fff;
+  text-shadow: 
+    0 0 5px #d52fff,
+    0 0 15px #d52fff,
+    0 0 30px rgba(213, 47, 255, 0.6),
+    0 0 50px rgba(213, 47, 255, 0.4);
+  
+  
+  -webkit-background-clip: text;
+  position: relative;
+  z-index: 10;
+  margin-left: 0.15em; /* Optical centering for tracking */
+}

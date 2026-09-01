@@ -3,7 +3,6 @@
 import Clock from "@/app/components/Clock";
 import ListenerCount from "@/app/components/ListenerCount";
 import Player from "@/app/components/Player";
-import VortexiaHeader from "@/app/components/VortexiaHeader";
 import CaptionRotator from "@/app/components/CaptionRotator";
 
 export default function Home() {
@@ -36,8 +35,17 @@ export default function Home() {
         <div className="safe-right safe-top w-12" />
       </header>
 
+      {/* ── Spacer (pushes player to bottom) ─────── */}
+      <div className="flex-1" />
+
       {/* ── Centered branding ───────────────────────── */}
-      <VortexiaHeader />
+      <div className="flex flex-col items-center gap-3 mb-auto mt-[4vh] sm:mt-[6vh] animate-[fade-in_1s_ease-out] select-none pointer-events-none z-0">
+        <h1 className="vortexia-title text-6xl sm:text-8xl md:text-9xl font-black text-center tracking-[0.15em] sm:tracking-[0.2em] uppercase">
+          Vortexia
+        </h1>
+      </div>
+
+      {/* ── Spacer ──────────────────────────────────── */}
       <div className="flex-1" />
 
       {/* ── 4. Player (bottom-anchored) ─────────────── */}
