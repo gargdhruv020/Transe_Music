@@ -4083,6 +4083,10 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isGoa: track.isGoa ?? false,
   isRemix: track.isRemix ?? false,
   isKTrance: track.isKTrance ?? false,
+  isIndoHouse: track.isIndoHouse ?? false,
+  isSufi: track.isSufi ?? false,
+  isAfro: track.isAfro ?? false,
+  isEAndAAfro: track.isEAndAAfro ?? false,
   audioUrl: (track as any).audioUrl,
 }));
 
