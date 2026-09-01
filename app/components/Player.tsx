@@ -912,6 +912,51 @@ export default function Player() {
       if (audioRef.current && isIOS()) {
         audioRef.current.play().catch(() => {});
       }
+      
+      // AGGRESSIVELY RE-REGISTER HANDLERS!
+      // YouTube iframe API automatically registers its own MediaSession handlers every time a video loads, overwriting ours.
+      // This breaks Bluetooth controls. We must steal them back.
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsPlaying(true);
+        if (audioRef.current) audioRef.current.play().catch(() => {});
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+          try { ytPlayerRef.current.playVideo(); } catch (_) {}
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsPlaying(false);
+        if (audioRef.current) audioRef.current.pause();
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+          try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        if (mediaStateRef.current && typeof mediaStateRef.current.handleNext === "function") {
+          mediaStateRef.current.handleNext();
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        if (mediaStateRef.current && typeof mediaStateRef.current.handlePrev === "function") {
+          mediaStateRef.current.handlePrev();
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        if (details.seekTime !== undefined && mediaStateRef.current && mediaStateRef.current.duration > 0) {
+          const seekTime = details.seekTime;
+          if (audioRef.current) audioRef.current.currentTime = seekTime;
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.seekTo === "function") {
+            try {
+              ytPlayerRef.current.seekTo(seekTime, true);
+              setCurrentTime(seekTime);
+              localStorage.setItem("transe_music_time", seekTime.toString());
+            } catch (_) {}
+          }
+        }
+      });
     } catch (_) {}
   }, []);
 
@@ -932,72 +977,7 @@ export default function Player() {
     }
   }, []);
 
-  // Register Media Session API Action Handlers once on mount
-  useEffect(() => {
-    if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
-
-    try {
-      navigator.mediaSession.setActionHandler("play", () => {
-        setIsPlaying(true);
-        if (audioRef.current) {
-          audioRef.current.play().catch(() => {});
-        }
-        if (audioRef.current) {
-          audioRef.current.play().catch(() => {});
-        }
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-          try {
-            ytPlayerRef.current.playVideo();
-          } catch (_) {}
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("pause", () => {
-        setIsPlaying(false);
-        if (audioRef.current) {
-          audioRef.current.pause();
-        }
-        if (audioRef.current) {
-          audioRef.current.pause();
-        }
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-          try {
-            ytPlayerRef.current.pauseVideo();
-          } catch (_) {}
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (mediaStateRef.current && typeof mediaStateRef.current.handleNext === "function") {
-          mediaStateRef.current.handleNext();
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (mediaStateRef.current && typeof mediaStateRef.current.handlePrev === "function") {
-          mediaStateRef.current.handlePrev();
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (details.seekTime !== undefined && mediaStateRef.current && mediaStateRef.current.duration > 0) {
-          const seekTime = details.seekTime;
-          if (audioRef.current) {
-            audioRef.current.currentTime = seekTime;
-          }
-          if (ytPlayerRef.current && typeof ytPlayerRef.current.seekTo === "function") {
-            try {
-              ytPlayerRef.current.seekTo(seekTime, true);
-              setCurrentTime(seekTime);
-              localStorage.setItem("transe_music_time", seekTime.toString());
-            } catch (_) {}
-          }
-        }
-      });
-    } catch (e) {
-      console.error("Failed to register Media Session handlers:", e);
-    }
-  }, []);
+  
 
   // Synchronize Media Session metadata on track changes
   useEffect(() => {
