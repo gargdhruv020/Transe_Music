@@ -6428,7 +6428,620 @@ const listSufi = [
   }
 ];
 
-const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : [])];
+
+const listX = [
+  {
+    "title": "Baap Se x Ferrari (James Hype Tech Rework)",
+    "artist": "Seedhe Maut x KR$NA",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Asthagfirullah x Snake (Bass House Edit)",
+    "artist": "DIVINE x MC Stan",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Open Letter x Satisfaction (Benny Benassi Tech Flip)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Trap Praa x Laserbeam (Ray Volpe Festival Drop)",
+    "artist": "Raftaar x Prabh Deep",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Giraftaar x Losing It (FISHER Tech House Mix)",
+    "artist": "Emiway Bantai x DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Luka Chippi x Drugs From Amsterdam (Mau P Minimal Tech)",
+    "artist": "Seedhe Maut x Calm",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Forever x Do It To It (ACRAZE Tech Edit)",
+    "artist": "KR$NA x Brodha V",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Tadipaar x Turn Off The Lights (Fred Again.. Edit)",
+    "artist": "MC Stan x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Wish You Were Here x Heads Will Roll (A-Trak Mix)",
+    "artist": "Seedhe Maut x Encore ABJ",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Gumaan x Piece Of Your Heart (Meduza Deep Tech)",
+    "artist": "Talha Anjum x Talhah Yunus",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "100 Million x Move Your Body (Öwnboss Bass House)",
+    "artist": "DIVINE x Karan Aujla",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Damn x Gasolina (Daddy Yankee Latin Tech House)",
+    "artist": "KR$NA x Raftaar",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Maya x Sweet Dreams (Eurythmics Dark Techno)",
+    "artist": "Prabh Deep x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Kavi x Danza Kuduro (Don Omar Afro-Tech Edit)",
+    "artist": "Seedhe Maut x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Khatam Hue Waande x Tremor (DVLM Festival Edit)",
+    "artist": "Emiway Bantai x MC Stan",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Tu Aake Dekhle x Baianá (Bakermat Afro House Flip)",
+    "artist": "King x Zaeden",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Monster x Spaceman (Hardwell Peak-Time Tech)",
+    "artist": "Bella x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Zaruri Nahi x Destination Calabria (Alex Gaudino Flip)",
+    "artist": "KR$NA x Karma",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Mirchi x Kernkraft 400 (Zombie Nation Big-Room Edit)",
+    "artist": "DIVINE x Phenom",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Touch Base x Mammoth (DVLM Club Banger)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Ball x One Kiss (Calvin Harris & Dua Lipa Edit)",
+    "artist": "Seedhe Maut x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Drama x Animals (Martin Garrix Big-Room Flip)",
+    "artist": "Raftaar x Badshah",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Basti Ka Hasti x Titanium (David Guetta Electro Edit)",
+    "artist": "MC Stan x DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Touch Base (Drill) x Work It (Fisher Tech Mix) 25. Prabh Deep x Calm – Amar x Low Frequency (Denney Deep Tech Flip) 26. Seedhe Maut x Fotty Seven – Haath Baandh x Deep Down (Alok Melodic House) 27. Emiway Bantai x Celina Sharma – Machayenge x Lean On (Major Lazer Tech Flip) 28. Talha Anjum x Savage – Karachi Mera x Sunset Lover (Petit Biscuit Chill House) 29. DIVINE x Nas – NY Se Mumbai x Turn Down For What (DJ Snake Trap Edit) 30. Raftaar x KR$NA – Saath Ya Khilaaf x Age Of Love (Melodic Techno Flip)",
+    "artist": "KR$NA x Talha Anjum",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Baat Bangayi x Better Off Alone (Alice Deejay Tech)",
+    "artist": "Seedhe Maut x Ahmer",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Ek Din Pyaar x Deep Fear (Sidekick Tech House Mix)",
+    "artist": "MC Stan x King",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Khoya Sab x Stay (The Kid LAROI Deep House Edit)",
+    "artist": "Bella x Gravity",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Farak Nahi Padta x The Rockafeller Skank (Fatboy Slim)",
+    "artist": "KR$NA x Subspace",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Mirchi Remix x Mi Gente (J Balvin Tribal House Mix)",
+    "artist": "DIVINE x Stylo G",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Agency x Habits (Stay High) (Tove Lo Deep House)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Scalp Dem x Silicon Luv (Indo-Tech Peak Edit)",
+    "artist": "Seedhe Maut x Foreign Beggars",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Saza-E-Maut x Bangarang (Skrillex Tech Flip)",
+    "artist": "Raftaar x Deep Kalsi",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "New Bombay x Drop It Like It's Hot (House Mix)",
+    "artist": "Emiway Bantai x Snoop Dogg",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Chitta x Sun & Moon (Above & Beyond Progressive)",
+    "artist": "Prabh Deep x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Kahan Par Hai x Clarity (Zedd Melodic House Flip)",
+    "artist": "MC Stan x Raftaar",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Hola Amigo x Pepas (Farruko Latin Tech Edit)",
+    "artist": "KR$NA x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Wish x Wake Me Up (Avicii Sunset Tech)",
+    "artist": "Talha Anjum x Hasan Raheem",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Gandhi Money x Bounce Generation (TJR Big-Room)",
+    "artist": "DIVINE x Shah Rule",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Class-Sikh Maut x Show Me Love (Robin S House Edit)",
+    "artist": "Seedhe Maut x Tienas",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Chehre x Let Me Love You (DJ Snake Vocal Mix)",
+    "artist": "Bella x MC Square",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Maaye Ni x Reload (Sebastian Ingrosso Progressive)",
+    "artist": "Raftaar x Salim-Sulaiman",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Grind x Thrift Shop (Macklemore Groovy House)",
+    "artist": "Emiway Bantai x Macklemore",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Haath Varthi x Opus (Eric Prydz Melodic Techno Edit)",
+    "artist": "MC Stan x KSHMR",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Villena x Take Over Control (Afrojack Tech Edit)",
+    "artist": "KR$NA x Phenom",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "King x How Deep Is Your Love (Calvin Harris Mix)",
+    "artist": "Prabh Deep x DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Afsanay x Love Nwantiti (Afro-Tech Edit)",
+    "artist": "Talha Anjum x Talhah Yunus",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Do Guna x Luv Deluxe (Minimal Tech Rework)",
+    "artist": "Seedhe Maut x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Chal Bombay x Cold Water (Major Lazer Club Mix)",
+    "artist": "DIVINE x Jonita Gandhi",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Aage Chal x Danza Kuduro (Don Omar Latin Tech)",
+    "artist": "Raftaar x Deep Kalsi",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Amin x In Da Club (50 Cent House Edit)",
+    "artist": "MC Stan x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Prarthana x Pump It (Black Eyed Peas Tech Flip) 58. Bella x King – Sweet Poison x Turn Up The Speakers (Afrojack & Martin Garrix) 59. Emiway Bantai x Meme Machine – Machayenge 3 x Booyah (Showtek Festival Mix) 60. Talha Anjum x Umair – Secrets x Push The Feeling On (Nightcrawlers House) 61. Seedhe Maut x Rawal – Kyu x Temperature (Sean Paul Afro-Tech Mix) 62. DIVINE x Vince Staples – Punya Paap x Let's Get It Started (Tech House Edit) 63. Prabh Deep x Sez On The Beat – Tabia x Jump & Sweat (Garmiani Tribal Edit) 64. Raftaar x KR$NA – Untitled x Riverside (Sidney Samson Tech Flip)",
+    "artist": "KR$NA x Kidshot",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Regret x Under The Stars (Melodic Techno Mix)",
+    "artist": "MC Stan x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Vyanjan x Silence (Delerium Melodic Edit)",
+    "artist": "KR$NA x Brodha V",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Jawab De x Samba De Janeiro (Bellini Afro-Tech)",
+    "artist": "Talha Anjum x Faris Shafi",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Keh Chuka x Low Frequency (Denney Tech Edit)",
+    "artist": "Seedhe Maut x Calm",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Level Up x Baila Conmigo (Dayvi Latin House Flip)",
+    "artist": "DIVINE x MC Altaf",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Ring Ring x Tsunami (DVBBS & Borgeous Mix)",
+    "artist": "Emiway Bantai x Swaalina",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Antidote x Greyhound (Swedish House Mafia Mix)",
+    "artist": "Bella x Deepak Rathore Project",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Ready For My City x Macarena (Los Del Rio House Flip)",
+    "artist": "Raftaar x Badshah",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Broke Is A Joke x Bonkers (Dizzee Rascal Tech Mix)",
+    "artist": "MC Stan x DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "I Guess x Trumpets (Sak Noel Tech House Mix)",
+    "artist": "KR$NA x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Downers At Dusk x Ocean (Martin Garrix Progressive)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Suno x Intoxicated (Martin Solveig House Edit)",
+    "artist": "Prabh Deep x Calm",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Nawaazishein x World, Hold On (Bob Sinclar Edit)",
+    "artist": "Seedhe Maut x Encore ABJ",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Kohinoor x Bla Bla Bla (Gigi D'Agostino Tech House)",
+    "artist": "DIVINE x Phenom",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Jump Kar x Summer (Calvin Harris House Mix)",
+    "artist": "Emiway Bantai x Young Galib",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Naiyyo x Habibi (Shaggy Afro-Tech)",
+    "artist": "Raftaar x Akasa",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Yede Ki Chaal x SexyBack (Justin Timberlake Flip)",
+    "artist": "MC Stan x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Dekh Kaun Aaya Wapas x Rave Tool (High-Energy Festival Mix)",
+    "artist": "KR$NA x Raga",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Bandish x Rasputin (Majestic Tech House Rework)",
+    "artist": "Talha Anjum x Savage",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "PNP x Heads Will Roll (A-Trak House Edit)",
+    "artist": "Seedhe Maut x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Teesri Manzil x Losing It (FISHER Tech Flip)",
+    "artist": "DIVINE x D'Evil",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Spacecraft x Ferrari (James Hype Tech Rework)",
+    "artist": "Bella x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Sher x Do It To It (ACRAZE Tech Edit)",
+    "artist": "Prabh Deep x Raftaar",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Snake x Drugs From Amsterdam (Mau P Minimal Tech)",
+    "artist": "MC Stan x Karma",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Round One x Turn Off The Lights (Fred Again.. Edit)",
+    "artist": "Emiway Bantai x Loka",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "OG x Gasolina (Daddy Yankee Latin Tech)",
+    "artist": "KR$NA x Seedhe Maut",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Talk To Me x Sweet Dreams (Eurythmics Dark Techno)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Sitara x Danza Kuduro (Don Omar Afro-Tech)",
+    "artist": "DIVINE x Shah Rule",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Pain x Tremor (DVLM Festival Edit)",
+    "artist": "Seedhe Maut x Calm",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Sheikh Chilli x Piece Of Your Heart (Meduza Deep Tech)",
+    "artist": "Raftaar x Prabh Deep",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "I'm Done x Move Your Body (Öwnboss Bass House)",
+    "artist": "MC Stan x King",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Humble Poet x Kernkraft 400 (Zombie Nation Edit)",
+    "artist": "Bella x Talhah Yunus",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Bag x Satisfaction (Benny Benassi Tech House)",
+    "artist": "KR$NA x DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Yaad x Laserbeam (Ray Volpe Festival Drop)",
+    "artist": "Seedhe Maut x Sez On The Beat",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Glass Half Full x Spaceman (Hardwell Tech Rework)",
+    "artist": "Talha Anjum x Umair",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  },
+  {
+    "title": "Chhod Daale x Animals (Martin Garrix Big-Room Flip)",
+    "artist": "Emiway Bantai x MC Stan",
+    "film": "Remix",
+    "isRemix": true,
+    "isX": true
+  }
+];
+
+const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : [])];
 const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean }>();
 
 for (const t of merged) {
