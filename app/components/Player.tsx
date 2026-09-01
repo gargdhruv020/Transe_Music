@@ -494,13 +494,6 @@ export default function Player() {
     const track = tracks[currentIndex];
     if (!track) return;
 
-    // Instantly pause old playback ONLY if we need to resolve the new video ID asynchronously
-    if (!track.youtubeId && ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-      try {
-        ytPlayerRef.current.pauseVideo();
-      } catch (_) {}
-    }
-
     if (searchAbortControllerRef.current) {
       searchAbortControllerRef.current.abort();
     }
