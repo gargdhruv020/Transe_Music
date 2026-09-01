@@ -11,7 +11,7 @@ export default function Home() {
       {/* ── 1. Fixed Background ─────────────────────── */}
       <div className="hero-bg" />
       {/* Gradient overlay */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-b from-black/65 via-black/20 to-black/95" />
+      <div className="fixed inset-0 -z-20 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
 
       {/* Dynamic Laser Color Overlay */}
       <div className="fixed inset-0 -z-20 hero-laser-overlay mix-blend-color opacity-[0.22] pointer-events-none" />
