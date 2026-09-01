@@ -833,6 +833,9 @@ export default function Player() {
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           ytPlayerRef.current.loadVideoById(targetVideoId, (nextTrack as any).startSeconds || 0);
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } catch (_) {}
       }
     } else {
@@ -877,6 +880,9 @@ export default function Player() {
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           ytPlayerRef.current.loadVideoById(targetVideoId, (prevTrack as any).startSeconds || 0);
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } catch (_) {}
       }
     } else {
@@ -1092,6 +1098,9 @@ export default function Player() {
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           ytPlayerRef.current.loadVideoById(targetVideoId, selectedTrack.startSeconds || 0);
+          if (typeof ytPlayerRef.current.playVideo === "function") {
+            ytPlayerRef.current.playVideo();
+          }
         } catch (e) {
           console.error("Direct loadVideoById failed:", e);
         }
