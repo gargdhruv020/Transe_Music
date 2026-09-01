@@ -11,6 +11,7 @@ export interface Track {
   isRemix?: boolean;
   isKTrance?: boolean;
   isIndoHouse?: boolean;
+  isSufi?: boolean;
   audioUrl?: string;
 }
 

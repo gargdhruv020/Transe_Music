@@ -49,8 +49,8 @@ const TrackRow = memo(function TrackRow({
 }: {
   track: Track;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house";
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi";
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi") => void;
 }) {
   return (
     <button
@@ -108,11 +108,11 @@ export default function TrackList({
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi";
   onTogglePlay: () => void;
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi") => void;
   onClose: () => void;
-  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house") => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi") => void;
   isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -169,6 +169,7 @@ export default function TrackList({
       if (isRemixOnly) {
         if (!t.isRemix) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
+        if (activeTab === "sufi" && !(t as any).isSufi) return false;
       } else {
         if (activeTab === "16d" && !t.isSpatial) return false;
         if (activeTab === "global" && !t.isGlobal) return false;
@@ -268,6 +269,17 @@ export default function TrackList({
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] flex-shrink-0" />
               Indo-House
+            </button>
+            <button
+              onClick={() => onTabChange?.("sufi")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "sufi"
+                  ? "bg-[oklch(0.68_0.16_250)]/15 border-[oklch(0.68_0.16_250)]/30 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] flex-shrink-0" />
+              Sufi
             </button>
           </div>
         ) : (
