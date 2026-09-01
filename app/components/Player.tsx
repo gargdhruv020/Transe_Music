@@ -261,8 +261,8 @@ export default function Player() {
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showRemixList, setShowRemixList] = useState(false);
-  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi">("all");
-  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi">("all");
+  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro">("all");
+  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro">("all");
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [volume, setVolumeState] = useState(100);
@@ -1006,7 +1006,7 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi") => {
+  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro") => {
     // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
     ensurePlayerReady();

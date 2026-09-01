@@ -12,6 +12,7 @@ export interface Track {
   isKTrance?: boolean;
   isIndoHouse?: boolean;
   isSufi?: boolean;
+  isAfro?: boolean;
   audioUrl?: string;
 }
 
