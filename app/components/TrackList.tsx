@@ -49,8 +49,8 @@ const TrackRow = memo(function TrackRow({
 }: {
   track: Track;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix";
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix";
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
 }) {
   return (
     <button
@@ -108,11 +108,11 @@ export default function TrackList({
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix";
   onTogglePlay: () => void;
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
   onClose: () => void;
-  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "all-remix") => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
   isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -168,11 +168,12 @@ export default function TrackList({
     return tracks.filter((t) => {
       if (isRemixOnly) {
         if (!t.isRemix) return false;
-        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro)) return false;
+        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro || (t as any).isX)) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
         if (activeTab === "sufi" && !(t as any).isSufi) return false;
         if (activeTab === "afro" && !(t as any).isAfro) return false;
         if (activeTab === "ea-afro" && !(t as any).isEAndAAfro) return false;
+        if (activeTab === "x" && !(t as any).isX) return false;
       } else {
         if (activeTab === "16d" && !t.isSpatial) return false;
         if (activeTab === "global" && !t.isGlobal) return false;

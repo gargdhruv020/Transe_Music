@@ -14,6 +14,7 @@ export interface Track {
   isSufi?: boolean;
   isAfro?: boolean;
   isEAndAAfro?: boolean;
+  isX?: boolean;
   audioUrl?: string;
 }
 
@@ -6428,7 +6429,7 @@ const listSufi = [
 ];
 
 const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : [])];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean }>();
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
@@ -6446,6 +6447,7 @@ for (const t of merged) {
     if (item.isSufi) existing.isSufi = true;
     if (item.isAfro) existing.isAfro = true;
     if (item.isEAndAAfro) existing.isEAndAAfro = true;
+    if (item.isX) existing.isX = true;
     if (item.youtubeId && !existing.youtubeId) existing.youtubeId = item.youtubeId;
   }
 }
@@ -6468,6 +6470,7 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isSufi: track.isSufi ?? false,
   isAfro: track.isAfro ?? false,
   isEAndAAfro: track.isEAndAAfro ?? false,
+  isX: track.isX ?? false,
   audioUrl: (track as any).audioUrl,
 }));
 
