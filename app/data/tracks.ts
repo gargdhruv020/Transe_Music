@@ -614,6 +614,27 @@ const listGoa = [
 
 const listRemix = [
   {
+    "title": "Mera Yaar x Alif Allah",
+    "artist": "Extended Sufi House Mix (DJ Abhii Edit)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ycS5PagXvhQ"
+  },
+  {
+    "title": "Mera Yaar x Losing It",
+    "artist": "Peak-Time Tech House Club Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "u31thuMehjM"
+  },
+  {
+    "title": "Mera Yaar x Drugs From Amsterdam",
+    "artist": "Minimal BollyTech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "lOtl4W_ZCu4"
+  },
+  {
     "title": "Lutt Le Gaya x Voices In My Head x Aria (Edit)",
     "artist": "AFTERLYF / FLIPSYD",
     "film": "Bollytech Flips",
@@ -2521,6 +2542,14 @@ const listKTrance = [
 ];
 
 const listIndoHouse = [
+  {
+    "title": "Mera Yaar (Wo Noor Ka Jharna)",
+    "artist": "Melodic Techno / Deep Indo-House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "zXy_8U-_RNc"
+  },
   {
     "title": "Aa Zara",
     "artist": "Dhyan BollyTech",
@@ -4967,6 +4996,14 @@ const listIndoHouse = [
 ];
 const listAfro = [
   {
+    "title": "Mera Yaar (Sufi Extended Vocal Mix)",
+    "artist": "Organic Afro House Edit (122 BPM)",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "WLkTlxJVQiE"
+  },
+  {
     "title": "Aadat AP Dhillon Afro x DJ Ashu",
     "artist": "Unknown",
     "film": "Remix",
@@ -6055,6 +6092,14 @@ const listEAAfro = [
   }
 ];
 const listSufi = [
+  {
+    "title": "Mera Yaar (Original Sufi Version)",
+    "artist": "Javed Bashir & Shankar-Ehsaan-Loy",
+    "film": "Bhaag Milkha Bhaag",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "ycS5PagXvhQ"
+  },
   {
     "title": "Bol Kaffara Kya Hoga (Extended Version 1)",
     "artist": "DJ Abhii",
