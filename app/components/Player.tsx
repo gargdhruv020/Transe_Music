@@ -1600,175 +1600,201 @@ export default function Player() {
 
   /* ── DESKTOP LAYOUT ─────────────────────────────── */
   const DesktopPlayer = (
-    <div className="hidden sm:flex items-center gap-4 glass rounded-full p-3 pr-5 max-w-xl w-full animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)]">
+    <div className="hidden sm:flex items-center gap-3.5 md:gap-5 glass rounded-full p-2.5 px-6 w-[94vw] max-w-4xl animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)] shadow-[0_16px_48px_rgba(0,0,0,0.65)] border border-white/15">
       {/* Vinyl */}
-      <Vinyl track={track} isPlaying={isPlaying} size={80} />
+      <Vinyl track={track} isPlaying={isPlaying} size={66} />
 
-      {/* Info + Seek */}
-      <div className="flex flex-col flex-1 min-w-0 gap-1">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="min-w-0 flex-1">
-            <p
-              className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
-              style={{ fontSize: "15px" }}
-            >
-              {track.title} {!currentVideoId && isPlaying && "• Loading..."}
-            </p>
-            <p
-              className="truncate text-white/70"
-              style={{ fontSize: "12.5px" }}
-            >
-              {track.artist} · {track.film}
-            </p>
-          </div>
-        </div>
+      {/* Info: Title & Artist (Spacious, dedicated text block with proper truncation) */}
+      <div className="flex flex-col justify-center min-w-[150px] max-w-[220px] flex-shrink-0">
+        <p
+          className={`truncate font-semibold text-white text-[14px] leading-tight ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
+          title={track.title}
+        >
+          {track.title} {!currentVideoId && isPlaying && "• Loading..."}
+        </p>
+        <p
+          className="truncate text-white/60 text-[12px] mt-1"
+          title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
+        >
+          {track.artist} {track.film ? `· ${track.film}` : ""}
+        </p>
+      </div>
+
+      {/* Seek Bar (Flexible middle space — wide progress bar with clear timestamps) */}
+      <div className="flex-1 min-w-[130px] px-2">
         <SeekBar progress={progress} duration={duration} onSeek={handleSeek} />
       </div>
 
-      {/* Transport & Utility Controls */}
-      <div className="flex items-center gap-1.5 flex-shrink-0">
-        <TransportBtn
-          onAction={toggleCrossfade}
-          ariaLabel={crossfadeEnabled ? "Smart Crossfade ON (5s)" : "Smart Crossfade OFF"}
-          size="w-8 h-8"
-        >
-          <CrossfadeIcon active={crossfadeEnabled} />
-        </TransportBtn>
-        <TransportBtn
-          onAction={toggleCrossfade}
-          ariaLabel={crossfadeEnabled ? "Smart Crossfade ON (5s)" : "Smart Crossfade OFF"}
-          size="w-8 h-8"
-        >
-          <CrossfadeIcon active={crossfadeEnabled} />
-        </TransportBtn>
-        <TransportBtn
-          onAction={() => setShuffle(!shuffle)}
-          ariaLabel="Shuffle"
-          size="w-8 h-8"
-        >
-          <ShuffleIcon active={shuffle} />
-        </TransportBtn>
-        <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
+      {/* Transport Controls (Cleanly grouped with subtle dividers) */}
+      <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+        {/* Modes: Crossfade & Shuffle */}
+        <div className="flex items-center gap-1 pr-1.5 border-r border-white/10">
+          <TransportBtn
+            onAction={toggleCrossfade}
+            ariaLabel={crossfadeEnabled ? "Smart Crossfade ON (5s)" : "Smart Crossfade OFF"}
+            size="w-8 h-8"
+          >
+            <CrossfadeIcon active={crossfadeEnabled} />
+          </TransportBtn>
+          <TransportBtn
+            onAction={() => setShuffle(!shuffle)}
+            ariaLabel="Shuffle"
+            size="w-8 h-8"
+          >
+            <ShuffleIcon active={shuffle} />
+          </TransportBtn>
+        </div>
+
+        {/* Playback Controls: Prev, Skip -5s, Play/Pause, Skip +5s, Next */}
+        <TransportBtn onAction={handlePrev} ariaLabel="Previous track" size="w-8 h-8">
           <PrevIcon />
         </TransportBtn>
-        <TransportBtn onAction={seekBackward5} ariaLabel="Skip back 5 seconds" size="w-8 h-8">
+        <TransportBtn onAction={seekBackward5} ariaLabel="Skip back 5 seconds" size="w-7 h-7">
           <SkipBack5Icon />
         </TransportBtn>
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 flex-shrink-0 select-none"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black transition-all duration-200 hover:scale-105 hover:bg-white/95 active:scale-95 flex-shrink-0 select-none shadow-[0_2px_12px_rgba(255,255,255,0.35)]"
           style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <TransportBtn onAction={seekForward5} ariaLabel="Skip forward 5 seconds" size="w-8 h-8">
+        <TransportBtn onAction={seekForward5} ariaLabel="Skip forward 5 seconds" size="w-7 h-7">
           <SkipFwd5Icon />
         </TransportBtn>
-        <TransportBtn onAction={handleNext} ariaLabel="Next track">
+        <TransportBtn onAction={handleNext} ariaLabel="Next track" size="w-8 h-8">
           <NextIcon />
         </TransportBtn>
-        <TransportBtn
-          onAction={() => setShowList(!showList)}
-          ariaLabel="Track list"
-          size="w-8 h-8"
-        >
-          <ListIcon />
-        </TransportBtn>
-        <TransportBtn
-          onAction={() => setShowRemixList(!showRemixList)}
-          ariaLabel="Remix list"
-          size="w-8 h-8"
-        >
-          <MicIcon />
-        </TransportBtn>
+
+        {/* Drawers: Playlist & Remixes */}
+        <div className="flex items-center gap-1 pl-1.5 border-l border-white/10">
+          <TransportBtn
+            onAction={() => setShowList(!showList)}
+            ariaLabel="Track list"
+            size="w-8 h-8"
+          >
+            <ListIcon />
+          </TransportBtn>
+          <TransportBtn
+            onAction={() => setShowRemixList(!showRemixList)}
+            ariaLabel="Remix list"
+            size="w-8 h-8"
+          >
+            <MicIcon />
+          </TransportBtn>
+        </div>
       </div>
     </div>
   );
 
+  /* ── MOBILE LAYOUT ───────────────────────────────── */
   const MobilePlayer = (
-    <div className="sm:hidden glass rounded-3xl p-5 w-full max-w-sm animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)]">
-      {/* Top: Vinyl */}
-      <div className="flex flex-col items-center gap-4">
+    <div className="sm:hidden glass rounded-3xl p-5 w-full max-w-sm animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)] shadow-[0_16px_48px_rgba(0,0,0,0.65)] border border-white/15">
+      {/* Top: Vinyl Artwork */}
+      <div className="flex flex-col items-center gap-3">
         <div className="relative">
-          <Vinyl track={track} isPlaying={isPlaying} size={120} />
+          <Vinyl track={track} isPlaying={isPlaying} size={115} />
           {/* Glow ring */}
           <div
             className="absolute inset-[-4px] rounded-full opacity-40"
             style={{
               background: `conic-gradient(from 0deg, ${getCategoryColor(track.id % 10)}40, transparent 50%, ${getCategoryColor(track.id % 10)}40)`,
-              animation: isPlaying
-                ? "vinyl-spin 4s linear infinite"
-                : "none",
+              animation: isPlaying ? "vinyl-spin 4s linear infinite" : "none",
             }}
           />
         </div>
 
         {/* Title + Artist */}
-        <div className="text-center w-full">
+        <div className="text-center w-full px-2">
           <p
             className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
-            style={{ fontSize: "17px" }}
+            style={{ fontSize: "16px" }}
+            title={track.title}
           >
             {track.title} {!currentVideoId && isPlaying && "• Loading..."}
           </p>
           <p
             className="truncate text-white/60 mt-0.5"
-            style={{ fontSize: "13px" }}
+            style={{ fontSize: "12.5px" }}
+            title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
           >
-            {track.artist} · {track.film}
+            {track.artist} {track.film ? `· ${track.film}` : ""}
           </p>
         </div>
       </div>
 
       {/* Seek Bar */}
-      <div className="mt-4">
+      <div className="mt-3.5">
         <SeekBar progress={progress} duration={duration} onSeek={handleSeek} />
       </div>
 
-      {/* Transport */}
-      <div className="mt-3 flex items-center justify-center gap-2">
+      {/* Primary Transport Row: Shuffle, Prev, Play (Large), Next, Crossfade */}
+      <div className="mt-3.5 flex items-center justify-between px-2">
         <TransportBtn
           onAction={() => setShuffle(!shuffle)}
           ariaLabel="Shuffle"
-          size="w-8 h-8"
+          size="w-9 h-9"
         >
           <ShuffleIcon active={shuffle} />
         </TransportBtn>
-        <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
+        <TransportBtn onAction={handlePrev} ariaLabel="Previous track" size="w-10 h-10">
           <PrevIcon />
-        </TransportBtn>
-        <TransportBtn onAction={seekBackward5} ariaLabel="Skip back 5 seconds" size="w-8 h-8">
-          <SkipBack5Icon />
         </TransportBtn>
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition-colors duration-200 hover:bg-white/90 active:opacity-90 select-none"
-          style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+          className="flex h-13 w-13 items-center justify-center rounded-full bg-white text-black transition-all duration-200 hover:scale-105 active:scale-95 select-none shadow-[0_4px_16px_rgba(255,255,255,0.35)]"
+          style={{ width: "52px", height: "52px", touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <TransportBtn onAction={seekForward5} ariaLabel="Skip forward 5 seconds" size="w-8 h-8">
-          <SkipFwd5Icon />
-        </TransportBtn>
-        <TransportBtn onAction={handleNext} ariaLabel="Next track">
+        <TransportBtn onAction={handleNext} ariaLabel="Next track" size="w-10 h-10">
           <NextIcon />
         </TransportBtn>
         <TransportBtn
-          onAction={() => setShowList(!showList)}
-          ariaLabel="Track list"
-          size="w-8 h-8"
+          onAction={toggleCrossfade}
+          ariaLabel={crossfadeEnabled ? "Smart Crossfade ON (5s)" : "Smart Crossfade OFF"}
+          size="w-9 h-9"
+        >
+          <CrossfadeIcon active={crossfadeEnabled} />
+        </TransportBtn>
+      </div>
+
+      {/* Secondary Quick-Actions Row: Skip -5s, Playlist, Remixes, Skip +5s */}
+      <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-around px-1">
+        <button
+          onClick={(e) => { e.stopPropagation(); seekBackward5(); }}
+          className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 active:opacity-75 text-[11px] text-white/80 transition-colors"
+          aria-label="Skip back 5 seconds"
+        >
+          <SkipBack5Icon />
+          <span>-5s</span>
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); setShowList(!showList); }}
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 active:opacity-75 text-[11.5px] text-white/80 transition-colors"
+          aria-label="Track list"
         >
           <ListIcon />
-        </TransportBtn>
-        <TransportBtn
-          onAction={() => setShowRemixList(!showRemixList)}
-          ariaLabel="Remix list"
-          size="w-8 h-8"
+          <span>Playlist</span>
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); setShowRemixList(!showRemixList); }}
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 active:opacity-75 text-[11.5px] text-white/80 transition-colors"
+          aria-label="Remix list"
         >
           <MicIcon />
-        </TransportBtn>
+          <span>Remixes</span>
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); seekForward5(); }}
+          className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 active:opacity-75 text-[11px] text-white/80 transition-colors"
+          aria-label="Skip forward 5 seconds"
+        >
+          <span>+5s</span>
+          <SkipFwd5Icon />
+        </button>
       </div>
     </div>
   );
