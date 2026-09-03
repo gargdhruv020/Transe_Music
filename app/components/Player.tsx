@@ -132,6 +132,26 @@ function ListIcon() {
   );
 }
 
+function SkipBack5Icon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 19a8 8 0 1 0 0-14" />
+      <polyline points="11 1 7 5 11 9" />
+      <text x="12" y="15.5" fill="currentColor" stroke="none" fontSize="8" fontWeight="bold" textAnchor="middle" fontFamily="system-ui">5</text>
+    </svg>
+  );
+}
+
+function SkipFwd5Icon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 19a8 8 0 1 1 0-14" />
+      <polyline points="13 1 17 5 13 9" />
+      <text x="12" y="15.5" fill="currentColor" stroke="none" fontSize="8" fontWeight="bold" textAnchor="middle" fontFamily="system-ui">5</text>
+    </svg>
+  );
+}
+
 /* ── Transport Button ───────────────────────────── */
 function TransportBtn({
   onAction,
@@ -923,6 +943,49 @@ export default function Player() {
     }
   }, [duration]);
 
+  /* ── 5-Second Skip Controls ───────────────────────── */
+  const seekForward5 = useCallback(() => {
+    if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+    const dur = durationRef.current || duration;
+    if (dur <= 0) return;
+    try {
+      const cur = ytPlayerRef.current.getCurrentTime() || 0;
+      const newTime = Math.min(cur + 5, dur); // Clamp to duration
+      ytPlayerRef.current.seekTo(newTime, true);
+      setCurrentTime(newTime);
+      localStorage.setItem("transe_music_time", newTime.toString());
+      // Immediately sync OS lock-screen scrubber
+      if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+        navigator.mediaSession.setPositionState({
+          duration: dur,
+          playbackRate: 1,
+          position: Math.min(newTime, dur),
+        });
+      }
+    } catch (_) {}
+  }, [duration]);
+
+  const seekBackward5 = useCallback(() => {
+    if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+    const dur = durationRef.current || duration;
+    if (dur <= 0) return;
+    try {
+      const cur = ytPlayerRef.current.getCurrentTime() || 0;
+      const newTime = Math.max(cur - 5, 0); // Clamp to 0
+      ytPlayerRef.current.seekTo(newTime, true);
+      setCurrentTime(newTime);
+      localStorage.setItem("transe_music_time", newTime.toString());
+      // Immediately sync OS lock-screen scrubber
+      if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+        navigator.mediaSession.setPositionState({
+          duration: dur,
+          playbackRate: 1,
+          position: Math.min(newTime, dur),
+        });
+      }
+    } catch (_) {}
+  }, [duration]);
+
   const initMediaSession = useCallback(() => {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
 
@@ -983,6 +1046,40 @@ export default function Player() {
             } catch (_) {}
           }
         }
+      });
+
+      navigator.mediaSession.setActionHandler("seekforward", (details) => {
+        const offset = details.seekOffset || 5;
+        if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+        try {
+          const cur = ytPlayerRef.current.getCurrentTime() || 0;
+          const dur = ytPlayerRef.current.getDuration() || 0;
+          if (dur <= 0) return;
+          const newTime = Math.min(cur + offset, dur);
+          ytPlayerRef.current.seekTo(newTime, true);
+          setCurrentTime(newTime);
+          localStorage.setItem("transe_music_time", newTime.toString());
+          if ("setPositionState" in navigator.mediaSession) {
+            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+          }
+        } catch (_) {}
+      });
+
+      navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+        const offset = details.seekOffset || 5;
+        if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+        try {
+          const cur = ytPlayerRef.current.getCurrentTime() || 0;
+          const dur = ytPlayerRef.current.getDuration() || 0;
+          if (dur <= 0) return;
+          const newTime = Math.max(cur - offset, 0);
+          ytPlayerRef.current.seekTo(newTime, true);
+          setCurrentTime(newTime);
+          localStorage.setItem("transe_music_time", newTime.toString());
+          if ("setPositionState" in navigator.mediaSession) {
+            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+          }
+        } catch (_) {}
       });
     } catch (_) {}
   }, []);
@@ -1305,6 +1402,9 @@ export default function Player() {
         <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
           <PrevIcon />
         </TransportBtn>
+        <TransportBtn onAction={seekBackward5} ariaLabel="Skip back 5 seconds" size="w-8 h-8">
+          <SkipBack5Icon />
+        </TransportBtn>
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
@@ -1313,6 +1413,9 @@ export default function Player() {
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
+        <TransportBtn onAction={seekForward5} ariaLabel="Skip forward 5 seconds" size="w-8 h-8">
+          <SkipFwd5Icon />
+        </TransportBtn>
         <TransportBtn onAction={handleNext} ariaLabel="Next track">
           <NextIcon />
         </TransportBtn>
@@ -1375,7 +1478,7 @@ export default function Player() {
       </div>
 
       {/* Transport */}
-      <div className="mt-3 flex items-center justify-center gap-4">
+      <div className="mt-3 flex items-center justify-center gap-2">
         <TransportBtn
           onAction={() => setShuffle(!shuffle)}
           ariaLabel="Shuffle"
@@ -1386,6 +1489,9 @@ export default function Player() {
         <TransportBtn onAction={handlePrev} ariaLabel="Previous track">
           <PrevIcon />
         </TransportBtn>
+        <TransportBtn onAction={seekBackward5} ariaLabel="Skip back 5 seconds" size="w-8 h-8">
+          <SkipBack5Icon />
+        </TransportBtn>
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={isPlaying ? "Pause" : "Play"}
@@ -1394,6 +1500,9 @@ export default function Player() {
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
+        <TransportBtn onAction={seekForward5} ariaLabel="Skip forward 5 seconds" size="w-8 h-8">
+          <SkipFwd5Icon />
+        </TransportBtn>
         <TransportBtn onAction={handleNext} ariaLabel="Next track">
           <NextIcon />
         </TransportBtn>
