@@ -620,6 +620,7 @@ export default function Player() {
 
   // 2. Search YouTube when currentIndex changes
   useEffect(() => {
+    if (isCrossfadingRef.current) return;
     const track = tracks[currentIndex];
     if (!track) return;
 
@@ -749,6 +750,7 @@ export default function Player() {
 
   // 4. Load video when ID resolves
   useEffect(() => {
+    if (isCrossfadingRef.current) return;
     if (!isYTApiReady || !currentVideoId) return;
 
     let startPos = (track as any).startSeconds || 0;
