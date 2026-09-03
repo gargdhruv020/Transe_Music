@@ -1026,6 +1026,11 @@ export default function Player() {
     crossfadeAnimRef.current = requestAnimationFrame(stepFade);
   }, [queueMode, track, shuffle, getTrackYoutubeId]);
 
+  const startCrossfadeRef = useRef(startCrossfade);
+  useEffect(() => {
+    startCrossfadeRef.current = startCrossfade;
+  }, [startCrossfade]);
+
   useEffect(() => {
     if (!isPlaying) return;
 
@@ -1051,7 +1056,9 @@ export default function Player() {
             dur - time <= 5.2 &&
             dur - time >= 0.5
           ) {
-            startCrossfade();
+            if (startCrossfadeRef.current) {
+              startCrossfadeRef.current();
+            }
           }
         }
       } catch (e) {
@@ -1060,7 +1067,7 @@ export default function Player() {
     }, 500);
 
     return () => clearInterval(interval);
-  }, [isPlaying, startCrossfade]);
+  }, [isPlaying]);
 
   /* ── Controls ───────────────────────────────────── */
   const handleNext = useCallback(() => {
