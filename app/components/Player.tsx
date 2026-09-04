@@ -9,6 +9,7 @@ import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordin
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
 import { SystemInterruptionListener } from "@/app/utils/systemInterruptionListener";
+import { ServiceWorkerBackgroundAnchor } from "@/app/utils/serviceWorkerBackgroundAnchor";
 import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
@@ -783,24 +784,34 @@ export default function Player() {
     tryLoad();
   }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
 
-  // 4a. Anti-Eviction Service Worker registration & instant notification re-hydration
+  // 4a. Service Worker Background Anchor, Anti-Eviction Buffer, & IndexedDB State Persistence
   useEffect(() => {
-    AntiEvictionMediaAnchor.registerServiceWorker();
-
-    const handleWakeup = () => {
-      AntiEvictionMediaAnchor.rehydrateMediaSession(track);
-    };
-
-    document.addEventListener("visibilitychange", handleWakeup);
-    window.addEventListener("pageshow", handleWakeup);
-    window.addEventListener("focus", handleWakeup);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleWakeup);
-      window.removeEventListener("pageshow", handleWakeup);
-      window.removeEventListener("focus", handleWakeup);
-    };
+    ServiceWorkerBackgroundAnchor.registerServiceWorker();
+    const cleanup = ServiceWorkerBackgroundAnchor.installMicrosecondRecoveryListeners(() => ({
+      title: track?.title || "Trance Sangeet",
+      artist: track?.artist || "Vortexia",
+      film: track?.film || "Trance Sangeet",
+    }));
+    return cleanup;
   }, [track]);
+
+  // Continuous State Persisting to IndexedDB & LocalStorage
+  useEffect(() => {
+    if (typeof window === "undefined" || !track) return;
+    ServiceWorkerBackgroundAnchor.persistState({
+      currentTrackIndex: currentIndex,
+      currentTime,
+      duration,
+      playlistQueue: queueMode,
+      shuffle,
+      playbackState: isPlaying ? "playing" : "paused",
+      crossfadeEnabled,
+      title: track.title,
+      artist: track.artist,
+      film: track.film,
+      timestamp: Date.now(),
+    });
+  }, [currentIndex, currentTime, duration, queueMode, shuffle, isPlaying, crossfadeEnabled, track]);
 
   // Attach event-driven oncanplay / onplaying hooks to force mediaSession.playbackState='playing'
   useEffect(() => {
@@ -821,6 +832,8 @@ export default function Player() {
       onPause: () => {
         console.log("Audio focus requested by external app (Instagram/Call) - pausing cleanly to yield sound");
         wasInterruptedBySystemRef.current = true;
+        // Engage silent hardware audio buffer to protect process from Low Memory Killer eviction!
+        ServiceWorkerBackgroundAnchor.startSilentKeepAliveBuffer();
         try {
           if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
             ytPlayerRef.current.pauseVideo();
@@ -836,6 +849,7 @@ export default function Player() {
       },
       onResume: () => {
         console.log("External app finished - auto-resuming playback smoothly");
+        ServiceWorkerBackgroundAnchor.stopSilentKeepAliveBuffer();
         if (wasInterruptedBySystemRef.current && !isUserPausedRef.current) {
           wasInterruptedBySystemRef.current = false;
           try {
@@ -1471,6 +1485,7 @@ export default function Player() {
       if (nextVal) {
         isUserPausedRef.current = false;
         wasInterruptedBySystemRef.current = false;
+        ServiceWorkerBackgroundAnchor.stopSilentKeepAliveBuffer();
         if (systemInterruptionListenerRef.current) {
           systemInterruptionListenerRef.current.notifyUserPlay();
         }
@@ -1480,6 +1495,7 @@ export default function Player() {
       } else {
         isUserPausedRef.current = true;
         wasInterruptedBySystemRef.current = false;
+        ServiceWorkerBackgroundAnchor.startSilentKeepAliveBuffer();
         if (systemInterruptionListenerRef.current) {
           systemInterruptionListenerRef.current.notifyUserPause();
         }
