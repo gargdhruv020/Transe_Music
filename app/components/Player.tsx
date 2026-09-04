@@ -6,6 +6,7 @@ import youtubeCache from "@/app/data/youtube_cache.json";
 import TrackList from "./TrackList";
 import CrossfadeIcon from "./CrossfadeIcon";
 import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordinator";
+import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
 
@@ -974,31 +975,56 @@ export default function Player() {
   /* ── Controls ───────────────────────────────────── */
   const handleNext = useCallback(() => {
     abortCrossfade();
-    setCurrentTime(0);
-    setDuration(0);
-    
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : tracks;
-    if (activeQueue.length === 0) return;
 
-    let queueIndex = activeQueue.findIndex(t => t.id === track.id);
+    // 1. Synchronously lock playback state so mobile OS does NOT kill the notification widget
+    if (typeof window !== "undefined" && "mediaSession" in navigator) {
+      try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+    }
+
+    // 2. Keep hardware audio pipeline hot during buffering transition
+    if (audioRef.current) {
+      try {
+        if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+          audioRef.current.src = SILENT_WAV_BASE64;
+          audioRef.current.loop = true;
+        }
+        if (audioRef.current.paused) {
+          audioRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    }
+
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : tracks;
+    const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
+
+    let queueIndex = safeQueue.findIndex(t => t.id === track.id);
     if (queueIndex === -1) queueIndex = 0;
 
-    let nextQueueIndex;
-    if (shuffle) {
-      nextQueueIndex = Math.floor(Math.random() * activeQueue.length);
-    } else {
-      nextQueueIndex = (queueIndex + 1) % activeQueue.length;
-    }
-    
-    const nextTrack = activeQueue[nextQueueIndex];
+    // Boundary-safe index resolution (handles final song gracefully with loop-around)
+    const { nextIndex, nextTrack } = BulletproofMediaSessionGuardian.getNextTrackSafe(safeQueue, queueIndex, shuffle);
     const nextGlobalIndex = tracks.findIndex(t => t.id === nextTrack.id);
-    setCurrentIndex(nextGlobalIndex);
+    const validGlobalIndex = nextGlobalIndex !== -1 ? nextGlobalIndex : 0;
+
+    setCurrentIndex(validGlobalIndex);
     setIsPlaying(true);
-    
-    // Attempt to load video SYNCHRONOUSLY if the ID is pre-baked or cached (solves iOS background lock)
-    const cacheKey = `${nextTrack.title.toLowerCase()} - ${nextTrack.artist.toLowerCase()}`;
-    const targetVideoId = nextTrack.youtubeId || (nextTrack as any).videoId || resolvedCacheRef.current[cacheKey];
-    
+
+    // Synchronously update lock-screen metadata immediately to the new track so the widget stays locked & updated
+    if (typeof window !== "undefined" && "mediaSession" in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: nextTrack.title || "Unknown Title",
+          artist: nextTrack.artist || "Unknown Artist",
+          album: nextTrack.film || "Trance Sangeet",
+          artwork: [
+            { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
+            { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
+            { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
+          ],
+        });
+      } catch (_) {}
+    }
+
+    const targetVideoId = getTrackYoutubeId(nextTrack);
     if (targetVideoId) {
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
@@ -1010,43 +1036,66 @@ export default function Player() {
         } catch (_) {}
       }
     } else {
-      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
-      // This allows the async fetch to later change the video via loadVideoById without getting blocked.
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           ytPlayerRef.current.playVideo();
         } catch (_) {}
       }
     }
-  }, [currentIndex, queueMode, shuffle, track]);
+  }, [currentIndex, queueMode, shuffle, track, getTrackYoutubeId]);
 
   const handlePrev = useCallback(() => {
     abortCrossfade();
-    setCurrentTime(0);
-    setDuration(0);
-    
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : tracks;
-    if (activeQueue.length === 0) return;
 
-    let queueIndex = activeQueue.findIndex(t => t.id === track.id);
+    // 1. Synchronously lock playback state so mobile OS does NOT kill the notification widget
+    if (typeof window !== "undefined" && "mediaSession" in navigator) {
+      try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+    }
+
+    // 2. Keep hardware audio pipeline hot during buffering transition
+    if (audioRef.current) {
+      try {
+        if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+          audioRef.current.src = SILENT_WAV_BASE64;
+          audioRef.current.loop = true;
+        }
+        if (audioRef.current.paused) {
+          audioRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    }
+
+    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : tracks;
+    const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
+
+    let queueIndex = safeQueue.findIndex(t => t.id === track.id);
     if (queueIndex === -1) queueIndex = 0;
 
-    let prevQueueIndex;
-    if (shuffle) {
-      prevQueueIndex = Math.floor(Math.random() * activeQueue.length);
-    } else {
-      prevQueueIndex = (queueIndex - 1 + activeQueue.length) % activeQueue.length;
-    }
-    
-    const prevTrack = activeQueue[prevQueueIndex];
+    // Boundary-safe reverse index resolution (handles first song gracefully with reverse loop)
+    const { prevIndex, prevTrack } = BulletproofMediaSessionGuardian.getPrevTrackSafe(safeQueue, queueIndex, shuffle);
     const prevGlobalIndex = tracks.findIndex(t => t.id === prevTrack.id);
-    setCurrentIndex(prevGlobalIndex);
+    const validGlobalIndex = prevGlobalIndex !== -1 ? prevGlobalIndex : 0;
+
+    setCurrentIndex(validGlobalIndex);
     setIsPlaying(true);
-    
-    // Attempt to load video SYNCHRONOUSLY if the ID is pre-baked or cached (solves iOS background lock)
-    const cacheKey = `${prevTrack.title.toLowerCase()} - ${prevTrack.artist.toLowerCase()}`;
-    const targetVideoId = prevTrack.youtubeId || (prevTrack as any).videoId || resolvedCacheRef.current[cacheKey];
-    
+
+    // Synchronously update lock-screen metadata immediately to the previous track
+    if (typeof window !== "undefined" && "mediaSession" in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: prevTrack.title || "Unknown Title",
+          artist: prevTrack.artist || "Unknown Artist",
+          album: prevTrack.film || "Trance Sangeet",
+          artwork: [
+            { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
+            { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
+            { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
+          ],
+        });
+      } catch (_) {}
+    }
+
+    const targetVideoId = getTrackYoutubeId(prevTrack);
     if (targetVideoId) {
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
@@ -1058,14 +1107,13 @@ export default function Player() {
         } catch (_) {}
       }
     } else {
-      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           ytPlayerRef.current.playVideo();
         } catch (_) {}
       }
     }
-  }, [currentIndex, queueMode, shuffle, track]);
+  }, [currentIndex, queueMode, shuffle, track, getTrackYoutubeId]);
 
   const handleSeek = useCallback((value: number) => {
     abortCrossfade();
@@ -1126,100 +1174,87 @@ export default function Player() {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
 
     try {
-      // Audio unlocking trick: play the silent/placeholder audio source directly inside the synchronous click event to unlock background media session control before any async network operations occur.
       if (audioRef.current && isIOS()) {
         audioRef.current.play().catch(() => {});
       }
-      
-      // AGGRESSIVELY RE-REGISTER HANDLERS!
-      // YouTube iframe API automatically registers its own MediaSession handlers every time a video loads, overwriting ours.
-      // This breaks Bluetooth controls. We must steal them back.
-      //
-      // CRITICAL: We MUST update isPlayingRef.current SYNCHRONOUSLY here, BEFORE calling
-      // pauseVideo/playVideo. Otherwise the onStateChange auto-resume logic and the
-      // Web Worker keepalive will see isPlayingRef.current === true when YouTube fires
-      // its paused state change, and immediately call playVideo() again, undoing the pause.
-      navigator.mediaSession.setActionHandler("play", () => {
-        isPlayingRef.current = true; // sync ref FIRST
-        setIsPlaying(true);
-        if (audioRef.current) audioRef.current.play().catch(() => {});
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-          try { ytPlayerRef.current.playVideo(); } catch (_) {}
-        }
-      });
 
-      navigator.mediaSession.setActionHandler("pause", () => {
-        isPlayingRef.current = false; // sync ref FIRST — prevents onStateChange from resuming
-        setIsPlaying(false);
-        if (workerRef.current) workerRef.current.postMessage('stop'); // kill worker keepalive immediately
-        if (audioRef.current) audioRef.current.pause();
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-          try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (mediaStateRef.current && typeof mediaStateRef.current.handleNext === "function") {
-          mediaStateRef.current.handleNext();
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (mediaStateRef.current && typeof mediaStateRef.current.handlePrev === "function") {
-          mediaStateRef.current.handlePrev();
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (details.seekTime !== undefined && mediaStateRef.current && mediaStateRef.current.duration > 0) {
-          const seekTime = details.seekTime;
-          if (audioRef.current) audioRef.current.currentTime = seekTime;
-          if (ytPlayerRef.current && typeof ytPlayerRef.current.seekTo === "function") {
-            try {
-              ytPlayerRef.current.seekTo(seekTime, true);
-              setCurrentTime(seekTime);
-              localStorage.setItem("transe_music_time", seekTime.toString());
-            } catch (_) {}
+      // Register bulletproof action handlers with zero-crash try/catch protection
+      // and synchronous lock-screen keepalive guarding
+      BulletproofMediaSessionGuardian.registerHandlers({
+        onPlay: () => {
+          isPlayingRef.current = true;
+          setIsPlaying(true);
+          if (audioRef.current) audioRef.current.play().catch(() => {});
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+            try { ytPlayerRef.current.playVideo(); } catch (_) {}
           }
-        }
-      });
-
-      navigator.mediaSession.setActionHandler("seekforward", (details) => {
-        const offset = details.seekOffset || 5;
-        if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
-        try {
-          const cur = ytPlayerRef.current.getCurrentTime() || 0;
-          const dur = ytPlayerRef.current.getDuration() || 0;
-          if (dur <= 0) return;
-          const newTime = Math.min(cur + offset, dur);
-          ytPlayerRef.current.seekTo(newTime, true);
-          setCurrentTime(newTime);
-          localStorage.setItem("transe_music_time", newTime.toString());
-          if ("setPositionState" in navigator.mediaSession) {
-            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+        },
+        onPause: () => {
+          isPlayingRef.current = false;
+          setIsPlaying(false);
+          if (workerRef.current) workerRef.current.postMessage('stop');
+          if (audioRef.current) audioRef.current.pause();
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+            try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
           }
-        } catch (_) {}
-      });
-
-      navigator.mediaSession.setActionHandler("seekbackward", (details) => {
-        const offset = details.seekOffset || 5;
-        if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
-        try {
-          const cur = ytPlayerRef.current.getCurrentTime() || 0;
-          const dur = ytPlayerRef.current.getDuration() || 0;
-          if (dur <= 0) return;
-          const newTime = Math.max(cur - offset, 0);
-          ytPlayerRef.current.seekTo(newTime, true);
-          setCurrentTime(newTime);
-          localStorage.setItem("transe_music_time", newTime.toString());
-          if ("setPositionState" in navigator.mediaSession) {
-            navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+        },
+        onNext: () => {
+          if (mediaStateRef.current && typeof mediaStateRef.current.handleNext === "function") {
+            mediaStateRef.current.handleNext();
           }
-        } catch (_) {}
+        },
+        onPrev: () => {
+          if (mediaStateRef.current && typeof mediaStateRef.current.handlePrev === "function") {
+            mediaStateRef.current.handlePrev();
+          }
+        },
+        onSeekTo: (seekTime) => {
+          if (mediaStateRef.current && mediaStateRef.current.duration > 0) {
+            if (audioRef.current) audioRef.current.currentTime = seekTime;
+            if (ytPlayerRef.current && typeof ytPlayerRef.current.seekTo === "function") {
+              try {
+                ytPlayerRef.current.seekTo(seekTime, true);
+                setCurrentTime(seekTime);
+                localStorage.setItem("transe_music_time", seekTime.toString());
+              } catch (_) {}
+            }
+          }
+        },
+        onSeekForward: (offset) => {
+          if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+          try {
+            const cur = ytPlayerRef.current.getCurrentTime() || 0;
+            const dur = ytPlayerRef.current.getDuration() || 0;
+            if (dur <= 0) return;
+            const newTime = Math.min(cur + offset, dur);
+            ytPlayerRef.current.seekTo(newTime, true);
+            setCurrentTime(newTime);
+            localStorage.setItem("transe_music_time", newTime.toString());
+            if ("setPositionState" in navigator.mediaSession) {
+              navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+            }
+          } catch (_) {}
+        },
+        onSeekBackward: (offset) => {
+          if (!ytPlayerRef.current || typeof ytPlayerRef.current.seekTo !== "function") return;
+          try {
+            const cur = ytPlayerRef.current.getCurrentTime() || 0;
+            const dur = ytPlayerRef.current.getDuration() || 0;
+            if (dur <= 0) return;
+            const newTime = Math.max(cur - offset, 0);
+            ytPlayerRef.current.seekTo(newTime, true);
+            setCurrentTime(newTime);
+            localStorage.setItem("transe_music_time", newTime.toString());
+            if ("setPositionState" in navigator.mediaSession) {
+              navigator.mediaSession.setPositionState({ duration: dur, playbackRate: 1, position: Math.min(newTime, dur) });
+            }
+          } catch (_) {}
+        },
+        getAudioAnchor: () => audioRef.current,
+        getCurrentDuration: () => durationRef.current || duration,
       });
     } catch (_) {}
-  }, []);
-
+  }, [duration]);
 
   // iOS Background Keepalive for MediaSession controls
   useEffect(() => {
