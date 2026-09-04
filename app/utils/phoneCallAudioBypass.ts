@@ -7,24 +7,24 @@
  * This module bypasses this restriction at the hardware level using:
  *
  * 1. AudioContext State & Time Monitoring:
- *    Continuous high-frequency monitoring of audioContext.currentTime.
- *    Mobile operating systems (Android AudioFlinger / iOS CoreAudio) forcefully freeze
- *    or mutate the Web Audio hardware clock the exact millisecond a call connects.
- *    Triggers an instant audio.pause() when the clock stalls or throws a state change.
+ *    High-frequency monitoring (every 50ms + requestAnimationFrame) of audioContext.currentTime.
+ *    Mobile operating systems (Android AudioFlinger/AudioPolicy & iOS CoreAudio) forcefully
+ *    freeze or mutate the Web Audio hardware clock the exact millisecond a phone call connects.
+ *    Triggers audio.pause() when the clock stalls or throws an interrupted/suspended state change.
  *
  * 2. Page Visibility State Overrides:
- *    Hooks into document.visibilitychange. When an incoming call tray slides down
- *    or the dialer takes over the screen, coordinates an instant pause of the active
- *    HTML5 audio element.
+ *    Hooks into document.addEventListener('visibilitychange'). When an incoming call tray
+ *    slides down or takes over the mobile screen, page visibility instantly transitions to 'hidden'.
+ *    Coordinates this event with hardware clock signals to pause the active audio immediately.
  *
  * 3. Media Session Lock-Screen Synchronization:
- *    Ensures navigator.mediaSession.playbackState is updated to 'paused' (never 'none')
- *    so the lock-screen notification does not clash with device call state.
+ *    Ensures navigator.mediaSession.playbackState is explicitly updated to 'paused' (never 'none')
+ *    so the lock-screen notification does not clash with device telephony state.
  *
  * 4. Post-Call Automatic Resumption:
- *    Monitors audioContext.onstatechange, visibility 'visible', and focus events.
- *    Once the phone call ends and the OS restores the sample rate clock to 'running',
- *    automatically executes a promise-handled .play() sequence to bring the music back.
+ *    Monitors audioContext.onstatechange and page 'visible' focus events. Once the phone call ends
+ *    and the mobile OS restores the sample rate clock to 'running', automatically executes a
+ *    promise-handled .play() sequence to seamlessly bring the music back without manual clicks.
  */
 
 export interface PhoneCallBypassCallbacks {
@@ -35,12 +35,41 @@ export interface PhoneCallBypassCallbacks {
   getYTPlayer: () => any;
 }
 
+let sharedAudioContext: AudioContext | null = null;
+
+/**
+ * Returns or creates the shared AudioContext instance.
+ */
+export function getSharedAudioContext(): AudioContext | null {
+  if (typeof window === "undefined") return null;
+  if (!sharedAudioContext || sharedAudioContext.state === "closed") {
+    const AudioContextClass =
+      window.AudioContext || (window as any).webkitAudioContext;
+    if (AudioContextClass) {
+      sharedAudioContext = new AudioContextClass({ latencyHint: "playback" });
+    }
+  }
+  return sharedAudioContext;
+}
+
+/**
+ * Unlocks the hardware audio bus synchronously inside any user gesture.
+ */
+export function unlockHardwareAudioBus(): AudioContext | null {
+  const ctx = getSharedAudioContext();
+  if (ctx && ctx.state === "suspended") {
+    ctx.resume().catch(() => {});
+  }
+  return ctx;
+}
+
 export class PhoneCallAudioBypass {
   private callbacks: PhoneCallBypassCallbacks;
   private audioContext: AudioContext | null = null;
   private isCallInterrupted = false;
   private wasPlayingBeforeCall = false;
-  private clockMonitorInterval: any = null;
+  private monitorInterval: any = null;
+  private animFrameId: number | null = null;
   private lastAudioTime = 0;
   private lastWallClock = 0;
   private consecutiveStalls = 0;
@@ -48,13 +77,14 @@ export class PhoneCallAudioBypass {
   private silentSource: AudioBufferSourceNode | null = null;
   private silentGain: GainNode | null = null;
   private cleanupFns: Array<() => void> = [];
+  private lastVisibleTime = Date.now();
 
   constructor(callbacks: PhoneCallBypassCallbacks) {
     this.callbacks = callbacks;
   }
 
   /**
-   * Initializes or binds an AudioContext and starts hardware clock monitoring.
+   * Initializes hardware audio context and binds high-frequency telephony detection.
    */
   public attach(existingCtx?: AudioContext | null): void {
     if (typeof window === "undefined" || this.isAttached) return;
@@ -72,23 +102,27 @@ export class PhoneCallAudioBypass {
   }
 
   /**
-   * Ensure an active Web Audio context is anchored to the hardware sound driver.
+   * Connect an active hardware audio node to ensure continuous sample rate clock ticking.
    */
   private initAudioContext(existingCtx?: AudioContext | null): void {
     if (existingCtx && existingCtx.state !== "closed") {
       this.audioContext = existingCtx;
+      sharedAudioContext = existingCtx;
     } else {
-      const AudioContextClass =
-        window.AudioContext || (window as any).webkitAudioContext;
-      if (AudioContextClass) {
-        this.audioContext = new AudioContextClass({ latencyHint: "playback" });
-      }
+      this.audioContext = getSharedAudioContext();
     }
 
     if (!this.audioContext) return;
 
-    // Attach a micro silent loop to keep the audio hardware clock running continuously
+    this.ensureKeepAliveNode();
+  }
+
+  private ensureKeepAliveNode(): void {
+    if (!this.audioContext) return;
+    if (this.silentSource) return;
+
     try {
+      // Create a 1-second silent buffer loop connected to destination at zero gain
       const sampleRate = this.audioContext.sampleRate || 44100;
       const buffer = this.audioContext.createBuffer(1, sampleRate, sampleRate);
       const source = this.audioContext.createBufferSource();
@@ -108,27 +142,39 @@ export class PhoneCallAudioBypass {
   }
 
   /**
-   * 1. High-Frequency AudioContext Clock Monitor:
-   * Detects hardware clock freeze when an incoming/outgoing call monopolizes the audio DAC.
+   * 1. AudioContext State & Time Monitoring:
+   * High-frequency check (every 50ms + requestAnimationFrame) of audioContext.currentTime.
    */
   private startClockMonitoring(): void {
-    if (this.clockMonitorInterval) {
-      clearInterval(this.clockMonitorInterval);
+    if (this.monitorInterval) {
+      clearInterval(this.monitorInterval);
     }
 
     this.lastWallClock = performance.now();
     this.lastAudioTime = this.audioContext ? this.audioContext.currentTime : 0;
     this.consecutiveStalls = 0;
 
-    // Monitor clock every 100ms
-    this.clockMonitorInterval = setInterval(() => {
+    // High-frequency 50ms check
+    this.monitorInterval = setInterval(() => {
       this.checkAudioClock();
-    }, 100);
+    }, 50);
+
+    // requestAnimationFrame loop when tab is active
+    const rafLoop = () => {
+      if (!this.isAttached) return;
+      this.checkAudioClock();
+      this.animFrameId = requestAnimationFrame(rafLoop);
+    };
+    this.animFrameId = requestAnimationFrame(rafLoop);
 
     this.cleanupFns.push(() => {
-      if (this.clockMonitorInterval) {
-        clearInterval(this.clockMonitorInterval);
-        this.clockMonitorInterval = null;
+      if (this.monitorInterval) {
+        clearInterval(this.monitorInterval);
+        this.monitorInterval = null;
+      }
+      if (this.animFrameId) {
+        cancelAnimationFrame(this.animFrameId);
+        this.animFrameId = null;
       }
     });
   }
@@ -141,45 +187,57 @@ export class PhoneCallAudioBypass {
     const currentWallClock = performance.now();
     const wallElapsed = currentWallClock - this.lastWallClock;
 
-    // If audio is supposed to be playing
-    if (isPlaying && !this.isCallInterrupted) {
-      const state = this.audioContext.state;
+    // Only evaluate after a minimum measurement window (at least 60ms)
+    if (wallElapsed < 60) return;
 
-      // Hardware state forced to suspended or interrupted by OS telephony
-      if (state === "interrupted" || (state === "suspended" && wallElapsed > 150)) {
-        console.log("[PhoneCallAudioBypass] Hardware AudioContext state changed to:", state);
+    const state = this.audioContext.state;
+
+    if (isPlaying && !this.isCallInterrupted) {
+      // 1. Check if hardware state was interrupted by phone call
+      if (state === "interrupted") {
+        console.log("[PhoneCallAudioBypass] Hardware state changed to interrupted (Phone Call)");
         this.handleCallInterruptionBegin();
+        this.lastWallClock = currentWallClock;
+        this.lastAudioTime = currentAudioTime;
         return;
       }
 
-      // Check if AudioContext hardware clock has frozen
-      const audioElapsed = currentAudioTime - this.lastAudioTime;
-      if (wallElapsed >= 180) {
-        // If 180ms of real time passed but audio clock advanced less than 10ms
-        if (audioElapsed < 0.01) {
-          this.consecutiveStalls++;
-          // 2 consecutive stalled intervals (~360ms) while actively playing indicates hardware freeze
-          if (this.consecutiveStalls >= 2) {
-            console.log("[PhoneCallAudioBypass] Audio hardware clock frozen by telephony:", {
-              audioElapsed,
-              wallElapsed,
-            });
-            this.handleCallInterruptionBegin();
-          }
-        } else {
-          this.consecutiveStalls = 0;
-        }
-
+      // If AudioContext suspended while music was actively playing
+      if (state === "suspended" && this.wasPlayingBeforeCall) {
+        this.handleCallInterruptionBegin();
         this.lastWallClock = currentWallClock;
         this.lastAudioTime = currentAudioTime;
+        return;
       }
-    } else if (this.isCallInterrupted) {
-      // While call is interrupted, monitor for hardware clock restoration
-      const state = this.audioContext.state;
+
+      // 2. Hardware clock freeze check:
+      // In normal playback, audio clock matches wall clock (e.g. 60ms -> ~0.06s).
+      // During a phone call, Android AudioFlinger / iOS CoreAudio freezes the clock.
       const audioElapsed = currentAudioTime - this.lastAudioTime;
 
-      if (state === "running" && audioElapsed > 0.05) {
-        console.log("[PhoneCallAudioBypass] Hardware clock resumed running after call");
+      if (audioElapsed < 0.005) {
+        // Wall clock moved >= 60ms, but audio hardware clock advanced less than 5ms
+        this.consecutiveStalls++;
+        if (this.consecutiveStalls >= 2) {
+          console.log("[PhoneCallAudioBypass] Audio hardware clock frozen by telephony:", {
+            audioElapsed,
+            wallElapsed,
+            consecutiveStalls: this.consecutiveStalls,
+          });
+          this.handleCallInterruptionBegin();
+        }
+      } else {
+        this.consecutiveStalls = 0;
+      }
+
+      this.lastWallClock = currentWallClock;
+      this.lastAudioTime = currentAudioTime;
+    } else if (this.isCallInterrupted) {
+      // During interruption: monitor for hardware clock restoration and running state
+      const audioElapsed = currentAudioTime - this.lastAudioTime;
+
+      if (state === "running" && audioElapsed > 0.03) {
+        console.log("[PhoneCallAudioBypass] Hardware clock resumed advancing after call");
         this.handleCallInterruptionEnd();
       }
 
@@ -201,14 +259,13 @@ export class PhoneCallAudioBypass {
     const onStateChange = () => {
       try {
         const state = (this.audioContext as any)?.state;
-        if (state === "interrupted" || state === "suspended") {
+        console.log("[PhoneCallAudioBypass] AudioContext statechange ->", state);
+        if (state === "interrupted") {
           if (this.callbacks.isCurrentlyPlaying() && !this.isCallInterrupted) {
-            console.log("[PhoneCallAudioBypass] Statechange -> interrupted/suspended");
             this.handleCallInterruptionBegin();
           }
         } else if (state === "running") {
           if (this.isCallInterrupted && this.wasPlayingBeforeCall) {
-            console.log("[PhoneCallAudioBypass] Statechange -> running");
             this.handleCallInterruptionEnd();
           }
         }
@@ -222,23 +279,29 @@ export class PhoneCallAudioBypass {
   }
 
   /**
-   * 3. Page Visibility & Call Tray Detection Listeners:
-   * When an incoming call tray or heads-up banner drops down, page visibility switches to 'hidden'.
+   * 3. Page Visibility State Overrides:
+   * Hook into native document.addEventListener('visibilitychange').
+   * When an incoming call tray slides down or takes over the mobile screen,
+   * visibility transitions to 'hidden'.
    */
   private setupVisibilityListeners(): void {
     const onVisibilityChange = () => {
       try {
         if (document.visibilityState === "hidden") {
-          // If the audio clock is also stalled or stalled recently, ensure immediate pause
-          if (this.consecutiveStalls > 0 || (this.audioContext && this.audioContext.state !== "running")) {
-            if (this.callbacks.isCurrentlyPlaying() && !this.isCallInterrupted) {
+          // If the page was just visible and is now hidden while audio is playing
+          const isPlaying = this.callbacks.isCurrentlyPlaying();
+          if (isPlaying && !this.isCallInterrupted) {
+            // Check if clock stalled or state is suspended/interrupted
+            const isStalled = this.consecutiveStalls > 0 || (this.audioContext && this.audioContext.state !== "running");
+            if (isStalled) {
+              console.log("[PhoneCallAudioBypass] Visibility hidden with stalled clock -> Phone call banner");
               this.handleCallInterruptionBegin();
             }
           }
         } else if (document.visibilityState === "visible") {
+          this.lastVisibleTime = Date.now();
           // Returning to app after call ended
           if (this.isCallInterrupted && this.wasPlayingBeforeCall) {
-            // Attempt to restore AudioContext and resume
             if (this.audioContext && this.audioContext.state === "suspended") {
               this.audioContext.resume().then(() => {
                 this.handleCallInterruptionEnd();
@@ -256,6 +319,9 @@ export class PhoneCallAudioBypass {
     const onWindowFocus = () => {
       try {
         if (this.isCallInterrupted && this.wasPlayingBeforeCall) {
+          if (this.audioContext && this.audioContext.state === "suspended") {
+            this.audioContext.resume().catch(() => {});
+          }
           this.handleCallInterruptionEnd();
         }
       } catch (_) {}
@@ -305,7 +371,7 @@ export class PhoneCallAudioBypass {
 
   /**
    * Instant Hardware-Triggered Pause:
-   * Monopolizes call audio avoidance by executing instant pause and syncing MediaSession to paused.
+   * Forces instant audio pause and sets navigator.mediaSession.playbackState = 'paused'.
    */
   public handleCallInterruptionBegin(): void {
     if (this.isCallInterrupted) return;
@@ -334,7 +400,7 @@ export class PhoneCallAudioBypass {
 
   /**
    * Post-Call Automatic Resumption:
-   * Smoothly restores audio playback via promise-handled play sequence without manual interaction.
+   * Restores audio playback via promise-handled .play() sequence without requiring manual clicks.
    */
   public handleCallInterruptionEnd(): void {
     if (!this.isCallInterrupted) return;
@@ -368,14 +434,20 @@ export class PhoneCallAudioBypass {
   }
 
   /**
-   * User explicitly pressed play: reset call state
+   * User explicitly pressed play: reset call state and resume AudioContext
    */
   public notifyUserPlay(): void {
     this.isCallInterrupted = false;
     this.wasPlayingBeforeCall = false;
     this.consecutiveStalls = 0;
-    if (this.audioContext && this.audioContext.state === "suspended") {
-      this.audioContext.resume().catch(() => {});
+    this.lastWallClock = performance.now();
+
+    if (this.audioContext) {
+      this.lastAudioTime = this.audioContext.currentTime;
+      if (this.audioContext.state === "suspended") {
+        this.audioContext.resume().catch(() => {});
+      }
+      this.ensureKeepAliveNode();
     }
   }
 
@@ -403,6 +475,15 @@ export class PhoneCallAudioBypass {
       } catch (_) {}
     });
     this.cleanupFns = [];
+
+    if (this.monitorInterval) {
+      clearInterval(this.monitorInterval);
+      this.monitorInterval = null;
+    }
+    if (this.animFrameId) {
+      cancelAnimationFrame(this.animFrameId);
+      this.animFrameId = null;
+    }
 
     if (this.silentSource) {
       try {

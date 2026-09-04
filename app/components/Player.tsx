@@ -9,7 +9,7 @@ import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordin
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
 import { SystemInterruptionListener } from "@/app/utils/systemInterruptionListener";
-import { PhoneCallAudioBypass } from "@/app/utils/phoneCallAudioBypass";
+import { PhoneCallAudioBypass, unlockHardwareAudioBus } from "@/app/utils/phoneCallAudioBypass";
 import { ServiceWorkerBackgroundAnchor } from "@/app/utils/serviceWorkerBackgroundAnchor";
 import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
@@ -29,7 +29,6 @@ const workerScript = `
 `;
 
 let globalAudioCtx: any = null;
-export const unlockHardwareAudioBus = () => {};
 
 const AUDIO_STREAM_ANCHOR = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
 
@@ -877,7 +876,6 @@ export default function Player() {
       onPause: () => {
         console.log("Phone call detected - pausing instantly to silence playback over call");
         wasInterruptedBySystemRef.current = true;
-        ServiceWorkerBackgroundAnchor.startSilentKeepAliveBuffer();
         try {
           if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
             ytPlayerRef.current.pauseVideo();
@@ -1093,6 +1091,10 @@ export default function Player() {
   /* ── Controls ───────────────────────────────────── */
   const handleNext = useCallback(() => {
     abortCrossfade();
+    unlockHardwareAudioBus();
+    if (phoneCallAudioBypassRef.current) {
+      phoneCallAudioBypassRef.current.notifyUserPlay();
+    }
 
     // Force instant background playback synchronization (keeps audio node hot and re-triggers playVideo)
     if (backgroundSyncRef.current) {
@@ -1169,6 +1171,10 @@ export default function Player() {
 
   const handlePrev = useCallback(() => {
     abortCrossfade();
+    unlockHardwareAudioBus();
+    if (phoneCallAudioBypassRef.current) {
+      phoneCallAudioBypassRef.current.notifyUserPlay();
+    }
 
     // Force instant background playback synchronization (keeps audio node hot and re-triggers playVideo)
     if (backgroundSyncRef.current) {
@@ -1465,6 +1471,12 @@ export default function Player() {
     // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
     ensurePlayerReady();
+    if (phoneCallAudioBypassRef.current) {
+      phoneCallAudioBypassRef.current.notifyUserPlay();
+    }
+    if (systemInterruptionListenerRef.current) {
+      systemInterruptionListenerRef.current.notifyUserPlay();
+    }
 
     // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
     
