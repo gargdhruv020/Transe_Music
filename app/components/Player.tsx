@@ -8,6 +8,7 @@ import CrossfadeIcon from "./CrossfadeIcon";
 import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordinator";
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
+import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
 
@@ -782,6 +783,25 @@ export default function Player() {
     tryLoad();
   }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
 
+  // 4a. Anti-Eviction Service Worker registration & instant notification re-hydration
+  useEffect(() => {
+    AntiEvictionMediaAnchor.registerServiceWorker();
+
+    const handleWakeup = () => {
+      AntiEvictionMediaAnchor.rehydrateMediaSession(track);
+    };
+
+    document.addEventListener("visibilitychange", handleWakeup);
+    window.addEventListener("pageshow", handleWakeup);
+    window.addEventListener("focus", handleWakeup);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleWakeup);
+      window.removeEventListener("pageshow", handleWakeup);
+      window.removeEventListener("focus", handleWakeup);
+    };
+  }, [track]);
+
   // Attach event-driven oncanplay / onplaying hooks to force mediaSession.playbackState='playing'
   useEffect(() => {
     if (!audioRef.current || !backgroundSyncRef.current) return;
@@ -806,9 +826,13 @@ export default function Player() {
         if ("mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
         }
+        // Engage silent anti-eviction keepalive loop so iOS Jetsam & Android LMK do not kill the tab!
+        AntiEvictionMediaAnchor.engageAntiEvictionKeepAlive();
       },
       onResumeRequested: () => {
         console.log("Audio focus restored after interruption - resuming playback");
+        // Release secondary anchor as primary track resumes
+        AntiEvictionMediaAnchor.releaseAntiEvictionKeepAlive();
         if (wasInterruptedBySystemRef.current && !isUserPausedRef.current) {
           wasInterruptedBySystemRef.current = false;
           if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
@@ -963,6 +987,19 @@ export default function Player() {
           setCurrentTime(time);
           setDuration(dur);
           localStorage.setItem("transe_music_time", time.toString());
+          AntiEvictionMediaAnchor.persistPlaybackState({
+            currentIndex,
+            currentTime: time,
+            duration: dur,
+            queueMode,
+            shuffle,
+            isPlaying: isPlayingRef.current,
+            crossfadeEnabled: crossfadeEnabledRef.current,
+            title: track.title,
+            artist: track.artist,
+            film: track.film,
+            updatedAt: Date.now(),
+          });
 
           // A. Smart DJ Crossfade Trigger (2.5s before track end)
           if (
@@ -1440,6 +1477,7 @@ export default function Player() {
       if (nextVal) {
         isUserPausedRef.current = false;
         wasInterruptedBySystemRef.current = false;
+        AntiEvictionMediaAnchor.releaseAntiEvictionKeepAlive();
         if (audioFocusCoordinatorRef.current) {
           audioFocusCoordinatorRef.current.notifyUserPlay();
         }
@@ -1455,6 +1493,7 @@ export default function Player() {
         if (typeof window !== "undefined" && "mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
         }
+        AntiEvictionMediaAnchor.engageAntiEvictionKeepAlive();
       }
 
       // Initialize media session metadata and action handlers inside user gesture
