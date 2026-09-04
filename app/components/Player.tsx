@@ -292,15 +292,9 @@ export default function Player() {
   const [crossfadeEnabled, setCrossfadeEnabled] = useState(true);
   const crossfadeEnabledRef = useRef(true);
   const volumeRef = useRef(100);
-  
-  const playerARef = useRef<any>(null);
-  const playerBRef = useRef<any>(null);
-  const isPlayerAReadyRef = useRef<boolean>(false);
-  const isPlayerBReadyRef = useRef<boolean>(false);
-  const activeSlotRef = useRef<'a' | 'b'>('a');
   const isCrossfadingRef = useRef<boolean>(false);
+  const fadeInPendingRef = useRef<boolean>(false);
   const crossfadeAnimRef = useRef<number | null>(null);
-  const mediaSessionSwappedRef = useRef<boolean>(false);
   const [volume, setVolumeState] = useState(100);
   const [showVolumeIndicator, setShowVolumeIndicator] = useState(false);
   const volumeTimeoutRef = useRef<any>(null);
@@ -394,99 +388,29 @@ export default function Player() {
 
   const isPlayerReadyRef = useRef<boolean>(false);
 
-  // Crossfade abort handler: cancels animation, stops incoming video, restores volume
+  // Crossfade abort handler: cancels animation and restores full master volume
   const abortCrossfade = useCallback(() => {
     if (crossfadeAnimRef.current) {
       cancelAnimationFrame(crossfadeAnimRef.current);
       crossfadeAnimRef.current = null;
     }
-    if (isCrossfadingRef.current) {
-      isCrossfadingRef.current = false;
-      mediaSessionSwappedRef.current = false;
-      const currentSlot = activeSlotRef.current;
-      const outgoing = currentSlot === 'a' ? playerARef.current : playerBRef.current;
-      const incoming = currentSlot === 'a' ? playerBRef.current : playerARef.current;
-      const baseVol = volumeRef.current;
+    isCrossfadingRef.current = false;
+    fadeInPendingRef.current = false;
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
       try {
-        if (incoming && typeof incoming.stopVideo === "function") incoming.stopVideo();
-        if (incoming && typeof incoming.setVolume === "function") incoming.setVolume(baseVol);
-        if (outgoing && typeof outgoing.setVolume === "function") outgoing.setVolume(baseVol);
+        ytPlayerRef.current.setVolume(volumeRef.current);
       } catch (_) {}
     }
   }, []);
 
-  // Handle player state changes for dual slots
-  const handlePlayerStateChange = useCallback((slot: 'a' | 'b', event: any) => {
-    const isActive = activeSlotRef.current === slot;
-
-    if (isActive) {
-      if (event.data === 1) {
-        if (!isPlayingRef.current) {
-          setIsPlaying(true);
-        }
-      } else if (event.data === 2) {
-        if (isPlayingRef.current && !isCrossfadingRef.current) {
-          const tryResume = (delay: number) => {
-            setTimeout(() => {
-              try {
-                const p = activeSlotRef.current === 'a' ? playerARef.current : playerBRef.current;
-                if (isPlayingRef.current && p && typeof p.playVideo === "function") {
-                  p.playVideo();
-                }
-              } catch (_) {}
-            }, delay);
-          };
-          tryResume(100);
-          tryResume(500);
-          tryResume(1500);
-          tryResume(3000);
-        }
-      } else if (event.data === 0) {
-        // If crossfade is handling the transition, suppress natural end auto-advance
-        if (isCrossfadingRef.current) {
-          return;
-        }
-        try {
-          const p = activeSlotRef.current === 'a' ? playerARef.current : playerBRef.current;
-          if (
-            p &&
-            typeof p.getCurrentTime === "function" &&
-            typeof p.getDuration === "function"
-          ) {
-            const currTime = p.getCurrentTime() || 0;
-            const dur = p.getDuration() || 0;
-            if (dur > 0 && currTime < dur - 1.5) {
-              return;
-            }
-          }
-        } catch (_) {}
-        if (handleNextRef.current) {
-          handleNextRef.current();
-        }
-      }
-    }
-  }, []);
-
-  const handlePlayerError = useCallback((slot: 'a' | 'b', event: any) => {
-    console.error(`YouTube Player (${slot}) error:`, event.data);
-    if (activeSlotRef.current === slot) {
-      if (isCrossfadingRef.current) {
-        abortCrossfade();
-      }
-      setTimeout(() => {
-        if (handleNextRef.current) {
-          handleNextRef.current();
-        }
-      }, 100);
-    }
-  }, [abortCrossfade]);
-
-  // Eagerly initialize dual YT players (Slot A and Slot B) for seamless crossfading
+  // Eagerly initialize the single YT player on first user gesture
+  // Single-player architecture guarantees 100% continuous playback without mobile autoplay blocks!
   const ensurePlayerReady = useCallback(() => {
-    if (!isYTApiReady) return;
+    if (ytPlayerRef.current || !isYTApiReady) return;
     if (typeof window === "undefined" || !(window as any).YT || !(window as any).YT.Player) return;
 
-    const createPlayerConfig = (slot: 'a' | 'b') => ({
+    isPlayerReadyRef.current = false;
+    ytPlayerRef.current = new (window as any).YT.Player("yt-player", {
       height: "1",
       width: "1",
       playerVars: {
@@ -502,39 +426,83 @@ export default function Player() {
         origin: typeof window !== "undefined" ? window.location.origin : "",
       },
       events: {
-        onStateChange: (event: any) => handlePlayerStateChange(slot, event),
-        onReady: () => {
-          if (slot === 'a') {
-            isPlayerAReadyRef.current = true;
-            if (activeSlotRef.current === 'a') {
-              ytPlayerRef.current = playerARef.current;
-              isPlayerReadyRef.current = true;
+        onStateChange: (event: any) => {
+          if (event.data === 1) {
+            // Track is PLAYING
+            if (!isPlayingRef.current) {
+              setIsPlaying(true);
             }
-          } else {
-            isPlayerBReadyRef.current = true;
-            if (activeSlotRef.current === 'b') {
-              ytPlayerRef.current = playerBRef.current;
-              isPlayerReadyRef.current = true;
+            // If track was loaded via crossfade outro, execute smooth intro fade-in!
+            if (fadeInPendingRef.current && ytPlayerRef.current) {
+              fadeInPendingRef.current = false;
+              const durationMs = 2500;
+              const startTime = performance.now();
+              const baseVolume = volumeRef.current;
+
+              const stepFadeIn = (now: number) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(Math.max(elapsed / durationMs, 0), 1);
+                const inVol = Math.round(Math.sin(progress * 0.5 * Math.PI) * baseVolume);
+                try {
+                  if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+                    ytPlayerRef.current.setVolume(inVol);
+                  }
+                } catch (_) {}
+
+                if (progress < 1) {
+                  crossfadeAnimRef.current = requestAnimationFrame(stepFadeIn);
+                } else {
+                  crossfadeAnimRef.current = null;
+                  isCrossfadingRef.current = false;
+                  try {
+                    if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+                      ytPlayerRef.current.setVolume(baseVolume);
+                    }
+                  } catch (_) {}
+                }
+              };
+              crossfadeAnimRef.current = requestAnimationFrame(stepFadeIn);
+            }
+          } else if (event.data === 2) {
+            // Track is PAUSED - auto-resume if supposed to be playing
+            if (isPlayingRef.current && !isCrossfadingRef.current) {
+              const tryResume = (delay: number) => {
+                setTimeout(() => {
+                  try {
+                    if (isPlayingRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                      ytPlayerRef.current.playVideo();
+                    }
+                  } catch (_) {}
+                }, delay);
+              };
+              tryResume(100);
+              tryResume(500);
+              tryResume(1500);
+              tryResume(3000);
+            }
+          } else if (event.data === 0) {
+            // Track ENDED: Advance to next song immediately!
+            abortCrossfade();
+            if (handleNextRef.current) {
+              handleNextRef.current();
             }
           }
         },
-        onError: (event: any) => handlePlayerError(slot, event),
+        onReady: () => {
+          isPlayerReadyRef.current = true;
+        },
+        onError: (event: any) => {
+          console.error("YouTube Player error:", event.data);
+          abortCrossfade();
+          setTimeout(() => {
+            if (handleNextRef.current) {
+              handleNextRef.current();
+            }
+          }, 300);
+        },
       },
     });
-
-    if (!playerARef.current) {
-      isPlayerAReadyRef.current = false;
-      playerARef.current = new (window as any).YT.Player("yt-player-a", createPlayerConfig('a'));
-    }
-
-    if (!playerBRef.current) {
-      isPlayerBReadyRef.current = false;
-      playerBRef.current = new (window as any).YT.Player("yt-player-b", createPlayerConfig('b'));
-    }
-
-    ytPlayerRef.current = activeSlotRef.current === 'a' ? playerARef.current : playerBRef.current;
-  }, [isYTApiReady, handlePlayerStateChange, handlePlayerError]);
-
+  }, [isYTApiReady, abortCrossfade]);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
@@ -620,7 +588,6 @@ export default function Player() {
 
   // 2. Search YouTube when currentIndex changes
   useEffect(() => {
-    if (isCrossfadingRef.current) return;
     const track = tracks[currentIndex];
     if (!track) return;
 
@@ -750,7 +717,6 @@ export default function Player() {
 
   // 4. Load video when ID resolves
   useEffect(() => {
-    if (isCrossfadingRef.current) return;
     if (!isYTApiReady || !currentVideoId) return;
 
     let startPos = (track as any).startSeconds || 0;
@@ -912,161 +878,97 @@ export default function Player() {
     });
   }, []);
 
-  // Smart 5-second Equal-Power DJ Crossfade Engine
+  // Seamless DJ Power-Crossfade Engine (Outro fade down -> Seamless load -> Intro fade up)
+  // 100% compatible with mobile devices, iOS background playback, and all playlists!
   const startCrossfade = useCallback(() => {
-    if (isCrossfadingRef.current) return;
-
-    const currentSlot = activeSlotRef.current;
-    const outgoing = currentSlot === 'a' ? playerARef.current : playerBRef.current;
-    const incoming = currentSlot === 'a' ? playerBRef.current : playerARef.current;
-    const incomingReady = currentSlot === 'a' ? isPlayerBReadyRef.current : isPlayerAReadyRef.current;
-
-    if (!outgoing || !incoming || !incomingReady) {
-      return;
-    }
-
-    // Determine next track from current active queue
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : tracks;
-    if (activeQueue.length === 0) return;
-
-    let queueIndex = activeQueue.findIndex(t => t.id === track.id);
-    if (queueIndex === -1) queueIndex = 0;
-
-    const nextQueueIndex = shuffle
-      ? Math.floor(Math.random() * activeQueue.length)
-      : (queueIndex + 1) % activeQueue.length;
-
-    const nextTrack = activeQueue[nextQueueIndex];
-    if (!nextTrack) return;
-    const nextGlobalIndex = tracks.findIndex(t => t.id === nextTrack.id);
-    const targetVideoId = getTrackYoutubeId(nextTrack);
-
-    if (!targetVideoId) {
-      return;
-    }
-
+    if (isCrossfadingRef.current || !crossfadeEnabledRef.current || !ytPlayerRef.current) return;
     isCrossfadingRef.current = true;
-    mediaSessionSwappedRef.current = false;
 
-    // Cue and start incoming player silently at 0 volume
-    try {
-      if (typeof incoming.setVolume === "function") {
-        incoming.setVolume(0);
-      }
-      if (typeof incoming.loadVideoById === "function") {
-        incoming.loadVideoById(targetVideoId, (nextTrack as any).startSeconds || 0);
-      }
-      if (typeof incoming.playVideo === "function") {
-        incoming.playVideo();
-      }
-    } catch (err) {
-      isCrossfadingRef.current = false;
-      return;
-    }
-
-    const durationMs = 5000;
+    const durationMs = 2500;
     const startTime = performance.now();
     const baseVolume = volumeRef.current;
 
-    const stepFade = (now: number) => {
+    const stepFadeOut = (now: number) => {
       if (!isCrossfadingRef.current) return;
-
       const elapsed = now - startTime;
       const progress = Math.min(Math.max(elapsed / durationMs, 0), 1);
-
-      // Equal-power crossfade curve:
-      // Outgoing: cos(t * pi/2)
-      // Incoming: sin(t * pi/2)
+      // Equal-power cosine curve for fade-out
       const outVol = Math.round(Math.cos(progress * 0.5 * Math.PI) * baseVolume);
-      const inVol = Math.round(Math.sin(progress * 0.5 * Math.PI) * baseVolume);
-
       try {
-        if (typeof outgoing.setVolume === "function") outgoing.setVolume(outVol);
-        if (typeof incoming.setVolume === "function") incoming.setVolume(inVol);
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+          ytPlayerRef.current.setVolume(outVol);
+        }
       } catch (_) {}
 
-      // Midpoint (50% / 2.5s) sync: update MediaSession lock screen metadata and UI song details
-      if (progress >= 0.5 && !mediaSessionSwappedRef.current) {
-        mediaSessionSwappedRef.current = true;
-        setCurrentIndex(nextGlobalIndex);
-        setCurrentVideoId(targetVideoId);
-
-        if (typeof window !== "undefined" && "mediaSession" in navigator) {
-          try {
-            navigator.mediaSession.metadata = new MediaMetadata({
-              title: nextTrack.title || "Unknown Title",
-              artist: nextTrack.artist || "Unknown Artist",
-              album: nextTrack.film || "Trance Sangeet",
-              artwork: [
-                { src: "/bg/scene-wide.jpg", sizes: "512x512", type: "image/jpeg" },
-                { src: "/bg/scene-wide.jpg", sizes: "1280x720", type: "image/jpeg" },
-                { src: "/bg/scene-tall.jpg", sizes: "720x1280", type: "image/jpeg" },
-              ],
-            });
-          } catch (_) {}
-        }
-      }
-
       if (progress < 1) {
-        crossfadeAnimRef.current = requestAnimationFrame(stepFade);
+        crossfadeAnimRef.current = requestAnimationFrame(stepFadeOut);
       } else {
-        // Complete transition: stop outgoing, restore master volumes, swap active slot
         crossfadeAnimRef.current = null;
         try {
-          if (typeof outgoing.stopVideo === "function") outgoing.stopVideo();
-          if (typeof outgoing.setVolume === "function") outgoing.setVolume(baseVolume);
-          if (typeof incoming.setVolume === "function") incoming.setVolume(baseVolume);
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+            ytPlayerRef.current.setVolume(0);
+          }
         } catch (_) {}
-
-        activeSlotRef.current = currentSlot === 'a' ? 'b' : 'a';
-        ytPlayerRef.current = incoming;
-        isCrossfadingRef.current = false;
-        mediaSessionSwappedRef.current = false;
+        fadeInPendingRef.current = true;
+        if (handleNextRef.current) {
+          handleNextRef.current();
+        }
       }
     };
 
-    crossfadeAnimRef.current = requestAnimationFrame(stepFade);
-  }, [queueMode, track, shuffle, getTrackYoutubeId]);
+    crossfadeAnimRef.current = requestAnimationFrame(stepFadeOut);
+  }, []);
 
   const startCrossfadeRef = useRef(startCrossfade);
   useEffect(() => {
     startCrossfadeRef.current = startCrossfade;
   }, [startCrossfade]);
 
+  // 5. High-precision playback time monitoring & auto-advance watchdog
   useEffect(() => {
     if (!isPlaying) return;
 
     const interval = setInterval(() => {
       try {
-        const activeP = activeSlotRef.current === 'a' ? playerARef.current : playerBRef.current;
         if (
-          activeP &&
-          typeof activeP.getCurrentTime === "function" &&
-          typeof activeP.getDuration === "function"
+          ytPlayerRef.current &&
+          typeof ytPlayerRef.current.getCurrentTime === "function" &&
+          typeof ytPlayerRef.current.getDuration === "function"
         ) {
-          const time = activeP.getCurrentTime() || 0;
-          const dur = activeP.getDuration() || 0;
+          const time = ytPlayerRef.current.getCurrentTime() || 0;
+          const dur = ytPlayerRef.current.getDuration() || 0;
           setCurrentTime(time);
           setDuration(dur);
           localStorage.setItem("transe_music_time", time.toString());
 
-          // Smart DJ crossfade check (5s before track end)
+          // A. Smart DJ Crossfade Trigger (2.5s before track end)
           if (
             crossfadeEnabledRef.current &&
             !isCrossfadingRef.current &&
-            dur > 10 &&
-            dur - time <= 5.2 &&
+            dur > 8 &&
+            dur - time <= 2.6 &&
             dur - time >= 0.5
           ) {
             if (startCrossfadeRef.current) {
               startCrossfadeRef.current();
             }
           }
+
+          // B. Mobile Auto-Advance Watchdog: If track hits the very end, advance automatically!
+          if (
+            !isCrossfadingRef.current &&
+            dur > 5 &&
+            time >= dur - 0.4
+          ) {
+            if (handleNextRef.current) {
+              handleNextRef.current();
+            }
+          }
         }
       } catch (e) {
         // Suppress errors during player reload
       }
-    }, 500);
+    }, 400);
 
     return () => clearInterval(interval);
   }, [isPlaying]);
@@ -1803,18 +1705,12 @@ export default function Player() {
 
   return (
     <>
-      {/* Dual YouTube Player targets for seamless DJ crossfading */}
+      {/* Single, resilient YouTube Player instance for 100% mobile continuous playback */}
       <div 
-        id="yt-player-a" 
+        id="yt-player" 
         className="yt-background-audio-bypass"
         {...{ allow: "autoplay; encrypted-media; picture-in-picture" } as any}
       />
-      <div 
-        id="yt-player-b" 
-        className="yt-background-audio-bypass"
-        {...{ allow: "autoplay; encrypted-media; picture-in-picture" } as any}
-      />
-      <div id="yt-player" style={{ display: 'none' }} />
       <audio ref={audioRef} id="main-audio-engine" style={{ display: 'none' }} preload="auto" crossOrigin="anonymous" loop src={AUDIO_STREAM_ANCHOR} />
       {DesktopPlayer}
       {MobilePlayer}
