@@ -49,8 +49,8 @@ const TrackRow = memo(function TrackRow({
 }: {
   track: Track;
   isActive: boolean;
-  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix";
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
+  activeTab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle";
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle") => void;
 }) {
   const rowRef = useRef<HTMLButtonElement>(null);
 
@@ -104,6 +104,11 @@ const TrackRow = memo(function TrackRow({
           {track.artist} · {track.film}
         </p>
       </div>
+      {track.hustleSeason && (
+        <span className="flex-shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 tracking-wide ml-auto">
+          {track.hustleSeason}
+        </span>
+      )}
     </button>
   );
 });
@@ -120,11 +125,11 @@ export default function TrackList({
 }: {
   currentIndex: number;
   isPlaying: boolean;
-  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix";
+  activeTab?: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle";
   onTogglePlay: () => void;
-  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
+  onSelect: (trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle") => void;
   onClose: () => void;
-  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix") => void;
+  onTabChange?: (tab: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle") => void;
   isRemixOnly?: boolean;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -180,15 +185,16 @@ export default function TrackList({
   // Memoize filtered tracks to avoid re-filtering on every render
   const filteredTracks = useMemo(() => {
     const q = searchQuery.toLowerCase();
-    return tracks.filter((t) => {
+    const result = tracks.filter((t) => {
       if (isRemixOnly) {
         if (!t.isRemix) return false;
-        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro || (t as any).isX)) return false;
+        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro || (t as any).isX || (t as any).isHustle)) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
         if (activeTab === "sufi" && !(t as any).isSufi) return false;
         if (activeTab === "afro" && !(t as any).isAfro) return false;
         if (activeTab === "ea-afro" && !(t as any).isEAndAAfro) return false;
         if (activeTab === "x" && !(t as any).isX) return false;
+        if (activeTab === "hustle" && !(t as any).isHustle) return false;
       } else {
         if (activeTab === "16d" && !t.isSpatial) return false;
         if (activeTab === "global" && !t.isGlobal) return false;
@@ -203,6 +209,10 @@ export default function TrackList({
         t.film.toLowerCase().includes(q)
       );
     });
+    if (activeTab === "hustle") {
+      return [...result].sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0));
+    }
+    return result;
   }, [searchQuery, activeTab, isRemixOnly]);
 
   // Memoize counts
@@ -343,6 +353,17 @@ export default function TrackList({
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#8b5cf6] flex-shrink-0" />
               X
+            </button>
+            <button
+              onClick={() => onTabChange?.("hustle")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "hustle"
+                  ? "bg-amber-500/15 border-amber-500/30 text-white shadow-md"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
+              Hustle
             </button>
           </div>
         ) : (

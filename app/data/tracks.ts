@@ -15,6 +15,9 @@ export interface Track {
   isAfro?: boolean;
   isEAndAAfro?: boolean;
   isX?: boolean;
+  isHustle?: boolean;
+  hustleSeason?: string;
+  hustleNum?: number;
   audioUrl?: string;
 }
 
@@ -7086,8 +7089,2856 @@ const listX = [
   }
 ];
 
-const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : [])];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean }>();
+
+const listHustle = [
+  {
+    "title": "Baaghi",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "QuAPfzCD6Zo",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 1
+  },
+  {
+    "title": "Goku",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "1glWWQP5ENs",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 2
+  },
+  {
+    "title": "Door",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "9fAzyTza7W8",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 3
+  },
+  {
+    "title": "Chal Koi Baat Nahi",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "HDi-5Ox9kgE",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 4
+  },
+  {
+    "title": "Tamasha",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "dR9BS1E_PXw",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 5
+  },
+  {
+    "title": "Psycho",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "pPEY3ztOqLw",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 6
+  },
+  {
+    "title": "Namastey Hindustaan",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "DAxJYxYWrMw",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 7
+  },
+  {
+    "title": "Parchhaiyan",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "-OBBy7sQJd0",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 8
+  },
+  {
+    "title": "Aazadi",
+    "artist": "M-Zee Bella",
+    "film": "MTV Hustle",
+    "youtubeId": "J9mpbVOpkJc",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 9
+  },
+  {
+    "title": "Agneepath",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "tHD5xuuRQsQ",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 10
+  },
+  {
+    "title": "Insaaf Ka Qatil",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "E6s0XVrfpKk",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 11
+  },
+  {
+    "title": "Har Kadam Pe",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "rFa3cr34HAI",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 12
+  },
+  {
+    "title": "Srini Bana EPR",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "9EdD4q4jm8k",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 13
+  },
+  {
+    "title": "Raasta-Man",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "CyBNBQcdFCY",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 14
+  },
+  {
+    "title": "Main Rawa",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "th8WTaH5f64",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 15
+  },
+  {
+    "title": "Rok Nah Ruke Hum",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "mmDi340rFvo",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 16
+  },
+  {
+    "title": "Kalam Kari",
+    "artist": "EPR Iyer",
+    "film": "MTV Hustle",
+    "youtubeId": "Xlc4bfBunh8",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 17
+  },
+  {
+    "title": "Badnaam Raja",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "QgYV6HxkpsM",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 18
+  },
+  {
+    "title": "Aye Jaani",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "FrdLXPdcVpQ",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 19
+  },
+  {
+    "title": "Gold Digger",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "Lrk7UIfjMjU",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 20
+  },
+  {
+    "title": "Memories",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "kulwUCAapjs",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 21
+  },
+  {
+    "title": "Moment Hai",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "XshjDhMhzBo",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 22
+  },
+  {
+    "title": "Usool",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "s3ZbJUMmn9k",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 23
+  },
+  {
+    "title": "She Don't Give A",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "YTSDgHuWVN4",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 24
+  },
+  {
+    "title": "High",
+    "artist": "King",
+    "film": "MTV Hustle",
+    "youtubeId": "s3ZbJUMmn9k",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 25
+  },
+  {
+    "title": "Father",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "v8Pc2XOpTCs",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 26
+  },
+  {
+    "title": "Aaja Mere Nede Nede",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "bFZnULfmP8c",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 27
+  },
+  {
+    "title": "Leja Kahin Door Khuda",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "p9tvdKK8uJs",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 28
+  },
+  {
+    "title": "Rap Ki Bimaari",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "v8Pc2XOpTCs",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 29
+  },
+  {
+    "title": "Main Pagal",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "jrOZ9RU7zXw",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 30
+  },
+  {
+    "title": "Tum Ho Jaali",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "zReBtzODbso",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 31
+  },
+  {
+    "title": "Yeh Dil Chup Chaap",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "R5mYtEHboaA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 32
+  },
+  {
+    "title": "RCR Standard",
+    "artist": "RCR",
+    "film": "MTV Hustle",
+    "youtubeId": "zReBtzODbso",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 33
+  },
+  {
+    "title": "Swan Song",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "o8sdS8sjeMA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 34
+  },
+  {
+    "title": "Laashein",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "AGPCLpPkGIA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 35
+  },
+  {
+    "title": "Maaya",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "bfzBu4Hctt0",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 36
+  },
+  {
+    "title": "Peedha",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "SS_F-b5FDog",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 37
+  },
+  {
+    "title": "Pita",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "ArkuaXAQ_-k",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 38
+  },
+  {
+    "title": "Garda Urega",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "jTAxcOCUCgA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 39
+  },
+  {
+    "title": "Kaarvaan",
+    "artist": "Shloka",
+    "film": "MTV Hustle",
+    "youtubeId": "o8sdS8sjeMA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 40
+  },
+  {
+    "title": "Indian Diversity",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 41
+  },
+  {
+    "title": "Bezubaan",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 42
+  },
+  {
+    "title": "Janani",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 43
+  },
+  {
+    "title": "Khai",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 44
+  },
+  {
+    "title": "Latt",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 45
+  },
+  {
+    "title": "Na Tum Akele",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 46
+  },
+  {
+    "title": "Danav",
+    "artist": "Agsy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 47
+  },
+  {
+    "title": "Haarun Main Kaise",
+    "artist": "Void",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 48
+  },
+  {
+    "title": "Void Kaun Hai",
+    "artist": "Void",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 49
+  },
+  {
+    "title": "Raghav Aur Arpan",
+    "artist": "Void",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 50
+  },
+  {
+    "title": "Solo",
+    "artist": "Void",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 51
+  },
+  {
+    "title": "No Pain",
+    "artist": "Void",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 52
+  },
+  {
+    "title": "No Sleep",
+    "artist": "MC Heam",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 53
+  },
+  {
+    "title": "Pratik",
+    "artist": "MC Heam",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 54
+  },
+  {
+    "title": "Daud Baag",
+    "artist": "MC Heam",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 55
+  },
+  {
+    "title": "Welcome",
+    "artist": "MC Heam",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 56
+  },
+  {
+    "title": "Launda Befikar",
+    "artist": "MC Heam",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 57
+  },
+  {
+    "title": "Body Shaming",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 58
+  },
+  {
+    "title": "Expression",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 59
+  },
+  {
+    "title": "Comeback",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 60
+  },
+  {
+    "title": "Kranti",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 61
+  },
+  {
+    "title": "Khel Abhi Jari Hain",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 62
+  },
+  {
+    "title": "Udaan Le Le",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 63
+  },
+  {
+    "title": "Raeza Ladegi",
+    "artist": "Raeza",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 64
+  },
+  {
+    "title": "Bajao",
+    "artist": "Shetty Saa",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 65
+  },
+  {
+    "title": "Chinese",
+    "artist": "Shetty Saa",
+    "film": "MTV Hustle",
+    "youtubeId": "GYHY1a2wz6Q",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 66
+  },
+  {
+    "title": "Maa",
+    "artist": "Shetty Saa",
+    "film": "MTV Hustle",
+    "youtubeId": "-sUDGEcqNJM",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 67
+  },
+  {
+    "title": "Road Pe",
+    "artist": "Shetty Saa",
+    "film": "MTV Hustle",
+    "youtubeId": "RZDEnyl4HJY",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 68
+  },
+  {
+    "title": "Stage Pe",
+    "artist": "Shetty Saa",
+    "film": "MTV Hustle",
+    "youtubeId": "TeaMjaCKEis",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 69
+  },
+  {
+    "title": "6 Mahine Ruk Jaa",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "zbNfwoEwrOA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 70
+  },
+  {
+    "title": "Aunga Aunga",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "MQfP_rmssB8",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 71
+  },
+  {
+    "title": "Hinda Musalman",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "pSw1kc9kWeM",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 72
+  },
+  {
+    "title": "Middle Class",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "1SFLf3IXZ7I",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 73
+  },
+  {
+    "title": "Don't Drink And Drive",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "H0VUX01HG6w",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 74
+  },
+  {
+    "title": "Fakeman",
+    "artist": "Himan",
+    "film": "MTV Hustle",
+    "youtubeId": "uCrBL-8qgFo",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 75
+  },
+  {
+    "title": "Kya Dikkat Hai",
+    "artist": "Firaag",
+    "film": "MTV Hustle",
+    "youtubeId": "vsFeZGpkIRk",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 76
+  },
+  {
+    "title": "Aag Se Jalte",
+    "artist": "Firaag",
+    "film": "MTV Hustle",
+    "youtubeId": "sf5soB47vUk",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 77
+  },
+  {
+    "title": "Faadunga",
+    "artist": "Firaag",
+    "film": "MTV Hustle",
+    "youtubeId": "nA65wBvSIGI",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 78
+  },
+  {
+    "title": "Haar Gaya Hoon",
+    "artist": "Firaag",
+    "film": "MTV Hustle",
+    "youtubeId": "slCywwRhraM",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 79
+  },
+  {
+    "title": "Kal",
+    "artist": "Zack",
+    "film": "MTV Hustle",
+    "youtubeId": "PJK2drP5KG4",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 80
+  },
+  {
+    "title": "Cancer",
+    "artist": "Zack",
+    "film": "MTV Hustle",
+    "youtubeId": "uvGdMu8Xilg",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 81
+  },
+  {
+    "title": "Mazaak",
+    "artist": "Zack",
+    "film": "MTV Hustle",
+    "youtubeId": "pJtSJpei4YM",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 82
+  },
+  {
+    "title": "Chalta Hai",
+    "artist": "Starnick",
+    "film": "MTV Hustle",
+    "youtubeId": "T4i_2WwZZI8",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 83
+  },
+  {
+    "title": "Sukoon Lotade",
+    "artist": "Starnick",
+    "film": "MTV Hustle",
+    "youtubeId": "zv7d9tuD5VA",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 84
+  },
+  {
+    "title": "Taqdeer",
+    "artist": "Neeru Pal",
+    "film": "MTV Hustle",
+    "youtubeId": "LhtB8URsUxU",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S1",
+    "hustleNum": 85
+  },
+  {
+    "title": "Ram Ram",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "youtubeId": "Tnfs0MZsBBE",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 86
+  },
+  {
+    "title": "Badmosh Chora",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "youtubeId": "kqYYu1cK7nY",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 87
+  },
+  {
+    "title": "Naina Ki Talwar",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 88
+  },
+  {
+    "title": "Aadha Gyaan",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 89
+  },
+  {
+    "title": "Chehre",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 90
+  },
+  {
+    "title": "Bhoj",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 91
+  },
+  {
+    "title": "2 Woofer",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 92
+  },
+  {
+    "title": "4 Din",
+    "artist": "MC Square",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 93
+  },
+  {
+    "title": "Chhore NCR Aale",
+    "artist": "MC Square & Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 94
+  },
+  {
+    "title": "Babam Bam",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 95
+  },
+  {
+    "title": "Bt Ho Gayi",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 96
+  },
+  {
+    "title": "Gang Wale Munde",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 97
+  },
+  {
+    "title": "Jaadugar",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 98
+  },
+  {
+    "title": "Cowboy",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "youtubeId": "4UUC_dBlRuc",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 99
+  },
+  {
+    "title": "Rihaayi",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "youtubeId": "uTgsRbvLhUI",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 100
+  },
+  {
+    "title": "Mileya Ni",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 101
+  },
+  {
+    "title": "Glitch",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 102
+  },
+  {
+    "title": "Perfy",
+    "artist": "Paradox",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 103
+  },
+  {
+    "title": "Main Nahi Toh Kaun",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 104
+  },
+  {
+    "title": "Dummies Guide To Mumbai",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 105
+  },
+  {
+    "title": "Chill Kinda Guy",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 106
+  },
+  {
+    "title": "Ek Tha Kauvva",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 107
+  },
+  {
+    "title": "Chhota Don",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 108
+  },
+  {
+    "title": "Fool Out Of You",
+    "artist": "Srushti Tawade",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 109
+  },
+  {
+    "title": "Dukandaar",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 110
+  },
+  {
+    "title": "Maut Ka Manzar",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 111
+  },
+  {
+    "title": "Toothpick",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 112
+  },
+  {
+    "title": "Jalaluddin",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 113
+  },
+  {
+    "title": "Main Bikhar Chuka Hoon",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 114
+  },
+  {
+    "title": "Pop Smoke",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 115
+  },
+  {
+    "title": "Sim Sim",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 116
+  },
+  {
+    "title": "Represent",
+    "artist": "Gravity",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 117
+  },
+  {
+    "title": "Gadar",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 118
+  },
+  {
+    "title": "Bus Ek Baar",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 119
+  },
+  {
+    "title": "Bhasad",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 120
+  },
+  {
+    "title": "Kaha Hai Tu",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 121
+  },
+  {
+    "title": "Homeopathy",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 122
+  },
+  {
+    "title": "Chashmey",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 123
+  },
+  {
+    "title": "Up Se",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 124
+  },
+  {
+    "title": "Bande",
+    "artist": "Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 125
+  },
+  {
+    "title": "Loriyan",
+    "artist": "Spectra & Panther",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 126
+  },
+  {
+    "title": "Sadko Pe",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 127
+  },
+  {
+    "title": "Ghar Pe Jaa",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 128
+  },
+  {
+    "title": "Heavy Driver",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 129
+  },
+  {
+    "title": "Maut Ka Kuan",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 130
+  },
+  {
+    "title": "Bakasur",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 131
+  },
+  {
+    "title": "Agar Main Hota Bhagwan",
+    "artist": "Nazz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 132
+  },
+  {
+    "title": "Lump Sum",
+    "artist": "Spectra",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 133
+  },
+  {
+    "title": "PTSD",
+    "artist": "Spectra",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 134
+  },
+  {
+    "title": "Watch Out",
+    "artist": "Spectra",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 135
+  },
+  {
+    "title": "Waise Wala Rap",
+    "artist": "Spectra",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 136
+  },
+  {
+    "title": "Fake Gareebi",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 137
+  },
+  {
+    "title": "Sexy Lag Raha Tha",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 138
+  },
+  {
+    "title": "Asli Hero",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 139
+  },
+  {
+    "title": "Kaha Pe Hoon",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 140
+  },
+  {
+    "title": "Prayag Mein",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 141
+  },
+  {
+    "title": "Aadhi Shakti",
+    "artist": "Wicked Sunny",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 142
+  },
+  {
+    "title": "Husnpari",
+    "artist": "UK Rapi Boy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 143
+  },
+  {
+    "title": "Rooh",
+    "artist": "UK Rapi Boy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 144
+  },
+  {
+    "title": "Galti",
+    "artist": "UK Rapi Boy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 145
+  },
+  {
+    "title": "Pahado Ki Aur",
+    "artist": "UK Rapi Boy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 146
+  },
+  {
+    "title": "Bharosa Nahi",
+    "artist": "MC Headshot",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 147
+  },
+  {
+    "title": "Meri Marzi",
+    "artist": "MC Headshot",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 148
+  },
+  {
+    "title": "Ami Tomake",
+    "artist": "MC Headshot",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 149
+  },
+  {
+    "title": "Sho Sha",
+    "artist": "MC Headshot",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 150
+  },
+  {
+    "title": "Mere Papa Mast",
+    "artist": "MC Headshot",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 151
+  },
+  {
+    "title": "Chaplin",
+    "artist": "Supermanikk",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 152
+  },
+  {
+    "title": "Johny Johny Yes Papa",
+    "artist": "Supermanikk",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 153
+  },
+  {
+    "title": "Deathbed",
+    "artist": "Supermanikk",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 154
+  },
+  {
+    "title": "Mirza",
+    "artist": "Supermanikk",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 155
+  },
+  {
+    "title": "Beizzati Kara Di",
+    "artist": "KhullarG",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 156
+  },
+  {
+    "title": "Khush Hoon Main Bohot",
+    "artist": "KhullarG",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 157
+  },
+  {
+    "title": "Upar Neeche",
+    "artist": "KhullarG",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 158
+  },
+  {
+    "title": "Lady Don",
+    "artist": "KhanZaadi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 159
+  },
+  {
+    "title": "Azaadi",
+    "artist": "KhanZaadi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 160
+  },
+  {
+    "title": "Umar Meri 26",
+    "artist": "Shlovij",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 161
+  },
+  {
+    "title": "She Likes My Momo",
+    "artist": "UNB",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 162
+  },
+  {
+    "title": "Naari",
+    "artist": "Rhyme",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 163
+  },
+  {
+    "title": "Zidd Mein Arya",
+    "artist": "QK",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 164
+  },
+  {
+    "title": "Bata De",
+    "artist": "Lxsh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S2",
+    "hustleNum": 165
+  },
+  {
+    "title": "Sharam Nahi",
+    "artist": "Uday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 166
+  },
+  {
+    "title": "I Tried My Best",
+    "artist": "Uday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 167
+  },
+  {
+    "title": "Balancing Sheets",
+    "artist": "Uday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 168
+  },
+  {
+    "title": "Kaun Hai",
+    "artist": "Uday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 169
+  },
+  {
+    "title": "Kalamkaar",
+    "artist": "Uday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 170
+  },
+  {
+    "title": "Best In The Biz",
+    "artist": "Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 171
+  },
+  {
+    "title": "Bhoolo Bhatko",
+    "artist": "Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 172
+  },
+  {
+    "title": "MTV Anthem",
+    "artist": "Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 173
+  },
+  {
+    "title": "Bepanah",
+    "artist": "Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 174
+  },
+  {
+    "title": "Kaam Baari",
+    "artist": "Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 175
+  },
+  {
+    "title": "Ground Shunya",
+    "artist": "Uday & Bassick",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 176
+  },
+  {
+    "title": "Street Celebrity",
+    "artist": "Kayden Sharma",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 177
+  },
+  {
+    "title": "Celebrities",
+    "artist": "Kayden Sharma",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 178
+  },
+  {
+    "title": "Haseena",
+    "artist": "Kayden Sharma",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 179
+  },
+  {
+    "title": "Aamchi Mumbai",
+    "artist": "Kayden Sharma",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 180
+  },
+  {
+    "title": "Kalyan",
+    "artist": "Kayden Sharma",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 181
+  },
+  {
+    "title": "Zanjeer",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 182
+  },
+  {
+    "title": "Sarkar",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 183
+  },
+  {
+    "title": "Ladki Ya Galti",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 184
+  },
+  {
+    "title": "Amravati Potta",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 185
+  },
+  {
+    "title": "Andhere Mein Ujala",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 186
+  },
+  {
+    "title": "Warriors",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 187
+  },
+  {
+    "title": "Full Ijjat",
+    "artist": "100RBH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 188
+  },
+  {
+    "title": "Azadi",
+    "artist": "Shen B",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 189
+  },
+  {
+    "title": "Lockdown",
+    "artist": "Shen B",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 190
+  },
+  {
+    "title": "Mujhe Dekh",
+    "artist": "Shen B",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 191
+  },
+  {
+    "title": "JK02",
+    "artist": "Shen B",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 192
+  },
+  {
+    "title": "Run",
+    "artist": "GAUSH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 193
+  },
+  {
+    "title": "Dumb It Down",
+    "artist": "GAUSH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 194
+  },
+  {
+    "title": "Spit It Back",
+    "artist": "GAUSH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 195
+  },
+  {
+    "title": "Janaaze",
+    "artist": "Shen B & GAUSH",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 196
+  },
+  {
+    "title": "My Dad",
+    "artist": "Poet Shaf",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 197
+  },
+  {
+    "title": "Awaargi",
+    "artist": "Poet Shaf",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 198
+  },
+  {
+    "title": "Kafila",
+    "artist": "Poet Shaf",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 199
+  },
+  {
+    "title": "Waqt Ab Gaya",
+    "artist": "Rap ID",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 200
+  },
+  {
+    "title": "Devi",
+    "artist": "Rap ID",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 201
+  },
+  {
+    "title": "India Wale",
+    "artist": "Rap ID",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 202
+  },
+  {
+    "title": "Scam",
+    "artist": "Rap ID",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 203
+  },
+  {
+    "title": "Tu Te Main",
+    "artist": "Burrah",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 204
+  },
+  {
+    "title": "Main Sochi Jaavan",
+    "artist": "Burrah",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 205
+  },
+  {
+    "title": "Fikar Nahi Hai",
+    "artist": "Burrah",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 206
+  },
+  {
+    "title": "Lo-Kal",
+    "artist": "Vijay Dada",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 207
+  },
+  {
+    "title": "Nahi Mama",
+    "artist": "Vijay Dada",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 208
+  },
+  {
+    "title": "Chai",
+    "artist": "Vijay Dada",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 209
+  },
+  {
+    "title": "Albela Sajan",
+    "artist": "Mrunal Shankar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 210
+  },
+  {
+    "title": "Ameeri",
+    "artist": "Mrunal Shankar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 211
+  },
+  {
+    "title": "Mommy Issues",
+    "artist": "Mrunal Shankar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 212
+  },
+  {
+    "title": "Folk Rapper",
+    "artist": "Bob.B Randhawa",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 213
+  },
+  {
+    "title": "This Is Hip Hop",
+    "artist": "Bob.B Randhawa",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 214
+  },
+  {
+    "title": "Lit Game",
+    "artist": "Prince The Artist Singh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 215
+  },
+  {
+    "title": "Wah Re Wah",
+    "artist": "Prince The Artist Singh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 216
+  },
+  {
+    "title": "Dil De Lootere",
+    "artist": "Prince The Artist Singh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 217
+  },
+  {
+    "title": "Salamat",
+    "artist": "Vish",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 218
+  },
+  {
+    "title": "Blood In",
+    "artist": "Vish",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 219
+  },
+  {
+    "title": "Bhadak",
+    "artist": "Vish",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 220
+  },
+  {
+    "title": "Dream Girl",
+    "artist": "Badal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 221
+  },
+  {
+    "title": "Naar Gajab",
+    "artist": "Jaya Rohilla",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 222
+  },
+  {
+    "title": "Chhatrapati",
+    "artist": "Meetoride",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S3",
+    "hustleNum": 223
+  },
+  {
+    "title": "Bhaag Bhag",
+    "artist": "Lashcurry",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 224
+  },
+  {
+    "title": "Ulte Karam",
+    "artist": "Lashcurry",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 225
+  },
+  {
+    "title": "Delhi 83",
+    "artist": "Lashcurry",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 226
+  },
+  {
+    "title": "Bhanje",
+    "artist": "Lashcurry",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 227
+  },
+  {
+    "title": "Drop",
+    "artist": "Lashcurry",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 228
+  },
+  {
+    "title": "Protocol",
+    "artist": "Naam Sujal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 229
+  },
+  {
+    "title": "PYAAR?",
+    "artist": "Naam Sujal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 230
+  },
+  {
+    "title": "Safar",
+    "artist": "Naam Sujal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 231
+  },
+  {
+    "title": "3AM In Nagpur",
+    "artist": "Naam Sujal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 232
+  },
+  {
+    "title": "Chhote Tera Kya Hoga",
+    "artist": "Naam Sujal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 233
+  },
+  {
+    "title": "Dhingana",
+    "artist": "99side",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 234
+  },
+  {
+    "title": "Chowk Pe",
+    "artist": "99side",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 235
+  },
+  {
+    "title": "Gondhal",
+    "artist": "99side",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 236
+  },
+  {
+    "title": "Bataa De Tu",
+    "artist": "99side",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 237
+  },
+  {
+    "title": "Main Hoon Don (The Hustle Flip)",
+    "artist": "99side",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 238
+  },
+  {
+    "title": "All Night",
+    "artist": "Sense",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 239
+  },
+  {
+    "title": "Dharavi 400017",
+    "artist": "Sense",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 240
+  },
+  {
+    "title": "Taza Khabar",
+    "artist": "Sense",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 241
+  },
+  {
+    "title": "Dana Dana",
+    "artist": "Sense & Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 242
+  },
+  {
+    "title": "Murran",
+    "artist": "Vichaar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 243
+  },
+  {
+    "title": "Vaadi Bounce",
+    "artist": "Vichaar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 244
+  },
+  {
+    "title": "No Pockets",
+    "artist": "Vichaar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 245
+  },
+  {
+    "title": "5 Fingers of Death",
+    "artist": "Vichaar",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 246
+  },
+  {
+    "title": "Khalbatta",
+    "artist": "Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 247
+  },
+  {
+    "title": "Main Kalam Tu Kitab",
+    "artist": "Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 248
+  },
+  {
+    "title": "South Ka Superstar",
+    "artist": "Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 249
+  },
+  {
+    "title": "Naya Music",
+    "artist": "Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 250
+  },
+  {
+    "title": "Ek Pyar Ka Naghma Hai (Hustle Flip)",
+    "artist": "Dharmik",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 251
+  },
+  {
+    "title": "Badmash Munda",
+    "artist": "Ghaint Jxtt",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 252
+  },
+  {
+    "title": "Chaye Hoye Ne",
+    "artist": "Ghaint Jxtt",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 253
+  },
+  {
+    "title": "Gaddi Vich Cash",
+    "artist": "Ghaint Jxtt & Ajitesh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 254
+  },
+  {
+    "title": "Baapu",
+    "artist": "Ajitesh",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 255
+  },
+  {
+    "title": "YES SIR",
+    "artist": "Rajjo",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 256
+  },
+  {
+    "title": "Jaadu",
+    "artist": "Pho",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 257
+  },
+  {
+    "title": "Befikar",
+    "artist": "Pho",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 258
+  },
+  {
+    "title": "Boom Padi Dese",
+    "artist": "Mad Trip",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 259
+  },
+  {
+    "title": "Dhiktana Dhiktana (Hustle Flip)",
+    "artist": "Mad Trip",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 260
+  },
+  {
+    "title": "Let Them Say",
+    "artist": "DOTM",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 261
+  },
+  {
+    "title": "Goli Baari",
+    "artist": "DOTM",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 262
+  },
+  {
+    "title": "GG",
+    "artist": "Little Bhatia",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 263
+  },
+  {
+    "title": "Kohraam",
+    "artist": "Devil The Rhymer",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 264
+  },
+  {
+    "title": "Naach Devil Ke Saath",
+    "artist": "Devil The Rhymer",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 265
+  },
+  {
+    "title": "Suryaputra",
+    "artist": "Volt",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 266
+  },
+  {
+    "title": "Mattha Tek",
+    "artist": "Manisten",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 267
+  },
+  {
+    "title": "Nazar",
+    "artist": "Siyaahi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 268
+  },
+  {
+    "title": "Drop The Beat",
+    "artist": "Season 4 All-Stars",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S4",
+    "hustleNum": 269
+  },
+  {
+    "title": "Hustle 5 Anthem",
+    "artist": "Squad Bosses & Rap Supremo Badshah",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 270
+  },
+  {
+    "title": "Obsession",
+    "artist": "Whysokai",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 271
+  },
+  {
+    "title": "Payback",
+    "artist": "Whysokai",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 272
+  },
+  {
+    "title": "Jhoot",
+    "artist": "Harmeeet",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 273
+  },
+  {
+    "title": "LET GO",
+    "artist": "Harmeeet",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 274
+  },
+  {
+    "title": "Barood",
+    "artist": "OG Tehran",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 275
+  },
+  {
+    "title": "Zaalim",
+    "artist": "OG Tehran",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 276
+  },
+  {
+    "title": "Likhta Hoon",
+    "artist": "Farak",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 277
+  },
+  {
+    "title": "Kora Panna",
+    "artist": "Farak",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 278
+  },
+  {
+    "title": "Lickety Rap",
+    "artist": "Gargi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 279
+  },
+  {
+    "title": "Not All Men",
+    "artist": "Gargi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 280
+  },
+  {
+    "title": "Ek Tha Kalakaar",
+    "artist": "R-mridul",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 281
+  },
+  {
+    "title": "Baukhaal Tight",
+    "artist": "R-mridul",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 282
+  },
+  {
+    "title": "Catchy",
+    "artist": "Anushka Baduwal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 283
+  },
+  {
+    "title": "Kalakaar Banna Hai",
+    "artist": "Anushka Baduwal",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 284
+  },
+  {
+    "title": "Khatarnaak Zamaana",
+    "artist": "Raaj Babu",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 285
+  },
+  {
+    "title": "Roti",
+    "artist": "Raaj Babu",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 286
+  },
+  {
+    "title": "Scene Check",
+    "artist": "TXAMA",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 287
+  },
+  {
+    "title": "Gidhaad",
+    "artist": "Hruday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 288
+  },
+  {
+    "title": "Ulti Ginti",
+    "artist": "Hruday",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 289
+  },
+  {
+    "title": "Push Start Freeverse",
+    "artist": "Dflacko",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 290
+  },
+  {
+    "title": "Kathputli",
+    "artist": "Vasu Kainth",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 291
+  },
+  {
+    "title": "Honey Multigrain Oats",
+    "artist": "Vasu Kainth",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 292
+  },
+  {
+    "title": "Culture",
+    "artist": "Dhadkan",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 293
+  },
+  {
+    "title": "Thar Coast",
+    "artist": "Dhadkan",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 294
+  },
+  {
+    "title": "Puneri Freeverse",
+    "artist": "Siroyi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 295
+  },
+  {
+    "title": "Piya Bairi Lage",
+    "artist": "Siroyi",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 296
+  },
+  {
+    "title": "Ludo",
+    "artist": "XEEMO",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 297
+  },
+  {
+    "title": "Game Baabe",
+    "artist": "Bhaktaaa",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 298
+  },
+  {
+    "title": "Parv Man",
+    "artist": "Parv",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 299
+  },
+  {
+    "title": "Dentist",
+    "artist": "Parv",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 300
+  },
+  {
+    "title": "Doctor-Doctor",
+    "artist": "Ansh4sure",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 301
+  },
+  {
+    "title": "Shehenshah",
+    "artist": "Eddy",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 302
+  },
+  {
+    "title": "Dope Bars",
+    "artist": "Split",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 303
+  },
+  {
+    "title": "Aura",
+    "artist": "Mars King",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 304
+  },
+  {
+    "title": "Charo Kone Chit",
+    "artist": "D.Raashi & Kod.E",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 305
+  },
+  {
+    "title": "Bael Buddhi",
+    "artist": "Khudraaz",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 306
+  },
+  {
+    "title": "Shikari",
+    "artist": "Urban Poet",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 307
+  },
+  {
+    "title": "Daye Baye",
+    "artist": "Deep Harks",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 308
+  },
+  {
+    "title": "Drunk",
+    "artist": "Deep Harks",
+    "film": "MTV Hustle",
+    "isRemix": true,
+    "isHustle": true,
+    "hustleSeason": "S5",
+    "hustleNum": 309
+  }
+];
+const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean; isHustle?: boolean; hustleSeason?: string; hustleNum?: number }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
@@ -7106,6 +9957,9 @@ for (const t of merged) {
     if (item.isAfro) existing.isAfro = true;
     if (item.isEAndAAfro) existing.isEAndAAfro = true;
     if (item.isX) existing.isX = true;
+    if (item.isHustle) existing.isHustle = true;
+    if (item.hustleSeason) existing.hustleSeason = item.hustleSeason;
+    if (item.hustleNum) existing.hustleNum = item.hustleNum;
     if (item.youtubeId && !existing.youtubeId) existing.youtubeId = item.youtubeId;
   }
 }
@@ -7129,6 +9983,9 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isAfro: track.isAfro ?? false,
   isEAndAAfro: track.isEAndAAfro ?? false,
   isX: track.isX ?? false,
+  isHustle: track.isHustle ?? false,
+  hustleSeason: track.hustleSeason,
+  hustleNum: (track as any).hustleNum,
   audioUrl: (track as any).audioUrl,
 }));
 
