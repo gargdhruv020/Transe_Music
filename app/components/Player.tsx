@@ -8,6 +8,7 @@ import CrossfadeIcon from "./CrossfadeIcon";
 import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordinator";
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
+import { ResilientAudioFocusManager } from "@/app/utils/resilientAudioFocusListener";
 import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
@@ -302,6 +303,7 @@ export default function Player() {
   const wasInterruptedBySystemRef = useRef<boolean>(false);
   const isUserPausedRef = useRef<boolean>(false);
   const audioFocusCoordinatorRef = useRef<MobileAudioFocusCoordinator | null>(null);
+  const resilientFocusManagerRef = useRef<ResilientAudioFocusManager | null>(null);
   const backgroundSyncRef = useRef<BackgroundPlaybackSyncEngine | null>(null);
   if (!backgroundSyncRef.current) {
     backgroundSyncRef.current = new BackgroundPlaybackSyncEngine({
@@ -490,14 +492,16 @@ export default function Player() {
 
             if (!isCrossfadingRef.current) {
               // If paused while supposed to be playing and user DID NOT click pause,
-              // it is a system interruption (incoming phone call or external app like Instagram/YouTube)!
+              // delegate to resilient focus manager (ducks, keeps notification anchor, and auto-resumes!)
               if (isPlayingRef.current && !isUserPausedRef.current) {
-                wasInterruptedBySystemRef.current = true;
-                setIsPlaying(false);
-                if (typeof window !== "undefined" && "mediaSession" in navigator) {
-                  try {
-                    navigator.mediaSession.playbackState = "paused";
-                  } catch (_) {}
+                if (resilientFocusManagerRef.current) {
+                  resilientFocusManagerRef.current.handleExternalInterruption("external_app");
+                } else {
+                  wasInterruptedBySystemRef.current = true;
+                  setIsPlaying(false);
+                  if (typeof window !== "undefined" && "mediaSession" in navigator) {
+                    try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
+                  }
                 }
               }
             }
@@ -809,16 +813,32 @@ export default function Player() {
     return cleanup;
   }, []);
 
-  // 4b. Native Audio Focus & System Interruption Coordinator
-  // Coordinates phone calls, FaceTime, Instagram Reels, and YouTube audio sharing
+  // 4b. Resilient Audio Focus & Auto-Resumption Engine
+  // Non-destructive ducking, continuous hardware keep-alive, and instant recovery after Instagram
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
-    const coordinator = new MobileAudioFocusCoordinator({
+    const manager = new ResilientAudioFocusManager({
       isCurrentlyPlaying: () => isPlayingRef.current,
-      onPauseRequested: (reason: "call" | "external_app" | "interruption") => {
-        console.log(`Audio focus interrupted by ${reason} - pausing playback`);
-        wasInterruptedBySystemRef.current = true;
+      getAudioAnchor: () => audioRef.current,
+      onDuck: (duckPercent) => {
+        console.log(`Ducking audio to ${duckPercent}% for external app`);
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+          try {
+            ytPlayerRef.current.setVolume(duckPercent);
+          } catch (_) {}
+        }
+      },
+      onUnduck: () => {
+        console.log("Restoring audio volume to 100%");
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+          try {
+            ytPlayerRef.current.setVolume(volumeRef.current);
+          } catch (_) {}
+        }
+      },
+      onPause: () => {
+        console.log("Pausing playback for call/interruption");
         if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
           try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
         }
@@ -826,42 +846,21 @@ export default function Player() {
         if ("mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
         }
-        // Engage silent anti-eviction keepalive loop so iOS Jetsam & Android LMK do not kill the tab!
-        AntiEvictionMediaAnchor.engageAntiEvictionKeepAlive();
       },
-      onResumeRequested: () => {
-        console.log("Audio focus restored after interruption - resuming playback");
-        // Release secondary anchor as primary track resumes
-        AntiEvictionMediaAnchor.releaseAntiEvictionKeepAlive();
-        if (wasInterruptedBySystemRef.current && !isUserPausedRef.current) {
-          wasInterruptedBySystemRef.current = false;
-          if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-            try { ytPlayerRef.current.playVideo(); } catch (_) {}
-          }
-          setIsPlaying(true);
-          if ("mediaSession" in navigator) {
-            try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
-          }
+      onResume: () => {
+        console.log("Instant auto-resuming playback after external app");
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+          try { ytPlayerRef.current.playVideo(); } catch (_) {}
         }
-      },
-      onDuckRequested: (factor: number) => {
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-          try {
-            ytPlayerRef.current.setVolume(Math.round(volumeRef.current * factor));
-          } catch (_) {}
-        }
-      },
-      onUnduckRequested: () => {
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-          try {
-            ytPlayerRef.current.setVolume(volumeRef.current);
-          } catch (_) {}
+        setIsPlaying(true);
+        if ("mediaSession" in navigator) {
+          try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
         }
       },
     });
 
-    coordinator.attach(null, audioRef.current);
-    audioFocusCoordinatorRef.current = coordinator;
+    manager.attach();
+    resilientFocusManagerRef.current = manager;
 
     // Periodic keepalive: synchronizes MediaSession timeline position
     const keepaliveInterval = setInterval(() => {
@@ -878,8 +877,8 @@ export default function Player() {
     }, 10000);
 
     return () => {
-      coordinator.destroy();
-      audioFocusCoordinatorRef.current = null;
+      manager.destroy();
+      resilientFocusManagerRef.current = null;
       clearInterval(keepaliveInterval);
     };
   }, []);
@@ -1481,6 +1480,9 @@ export default function Player() {
         if (audioFocusCoordinatorRef.current) {
           audioFocusCoordinatorRef.current.notifyUserPlay();
         }
+        if (resilientFocusManagerRef.current) {
+          resilientFocusManagerRef.current.notifyUserPlay();
+        }
         if (typeof window !== "undefined" && "mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
         }
@@ -1489,6 +1491,9 @@ export default function Player() {
         wasInterruptedBySystemRef.current = false;
         if (audioFocusCoordinatorRef.current) {
           audioFocusCoordinatorRef.current.notifyUserPause();
+        }
+        if (resilientFocusManagerRef.current) {
+          resilientFocusManagerRef.current.notifyUserPause();
         }
         if (typeof window !== "undefined" && "mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
