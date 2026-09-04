@@ -7,6 +7,7 @@ import TrackList from "./TrackList";
 import CrossfadeIcon from "./CrossfadeIcon";
 import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordinator";
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
+import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
 
@@ -300,6 +301,13 @@ export default function Player() {
   const wasInterruptedBySystemRef = useRef<boolean>(false);
   const isUserPausedRef = useRef<boolean>(false);
   const audioFocusCoordinatorRef = useRef<MobileAudioFocusCoordinator | null>(null);
+  const backgroundSyncRef = useRef<BackgroundPlaybackSyncEngine | null>(null);
+  if (!backgroundSyncRef.current) {
+    backgroundSyncRef.current = new BackgroundPlaybackSyncEngine({
+      getAudioElement: () => audioRef.current,
+      getYTPlayer: () => ytPlayerRef.current,
+    });
+  }
   const [volume, setVolumeState] = useState(100);
   const [showVolumeIndicator, setShowVolumeIndicator] = useState(false);
   const volumeTimeoutRef = useRef<any>(null);
@@ -470,6 +478,15 @@ export default function Player() {
             }
           } else if (event.data === 2) {
             // Track is PAUSED
+            // If the track is currently transitioning (user just clicked Next/Prev on lock-screen),
+            // this is a transient buffering pause, NOT a user pause or phone call! Force playback to resume immediately!
+            if (backgroundSyncRef.current?.getIsTransitioning()) {
+              if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                try { ytPlayerRef.current.playVideo(); } catch (_) {}
+              }
+              return;
+            }
+
             if (!isCrossfadingRef.current) {
               // If paused while supposed to be playing and user DID NOT click pause,
               // it is a system interruption (incoming phone call or external app like Instagram/YouTube)!
@@ -765,6 +782,13 @@ export default function Player() {
     tryLoad();
   }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
 
+  // Attach event-driven oncanplay / onplaying hooks to force mediaSession.playbackState='playing'
+  useEffect(() => {
+    if (!audioRef.current || !backgroundSyncRef.current) return;
+    const cleanup = backgroundSyncRef.current.attachAudioListeners(audioRef.current);
+    return cleanup;
+  }, []);
+
   // 4b. Native Audio Focus & System Interruption Coordinator
   // Coordinates phone calls, FaceTime, Instagram Reels, and YouTube audio sharing
   useEffect(() => {
@@ -976,6 +1000,11 @@ export default function Player() {
   const handleNext = useCallback(() => {
     abortCrossfade();
 
+    // Force instant background playback synchronization (keeps audio node hot and re-triggers playVideo)
+    if (backgroundSyncRef.current) {
+      backgroundSyncRef.current.forceBackgroundPlayback();
+    }
+
     // 1. Synchronously lock playback state so mobile OS does NOT kill the notification widget
     if (typeof window !== "undefined" && "mediaSession" in navigator) {
       try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
@@ -1046,6 +1075,11 @@ export default function Player() {
 
   const handlePrev = useCallback(() => {
     abortCrossfade();
+
+    // Force instant background playback synchronization (keeps audio node hot and re-triggers playVideo)
+    if (backgroundSyncRef.current) {
+      backgroundSyncRef.current.forceBackgroundPlayback();
+    }
 
     // 1. Synchronously lock playback state so mobile OS does NOT kill the notification widget
     if (typeof window !== "undefined" && "mediaSession" in navigator) {
