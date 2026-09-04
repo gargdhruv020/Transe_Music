@@ -748,10 +748,12 @@ export default function Player() {
       initialSeekTimeRef.current = null;
     }
 
-    const shouldPlay = isPlaying || autoPlayPendingRef.current;
-    if (autoPlayPendingRef.current) {
+    const shouldPlay = isPlaying || autoPlayPendingRef.current || isPlayingRef.current;
+    if (autoPlayPendingRef.current || shouldPlay) {
       autoPlayPendingRef.current = false;
       setIsPlaying(true);
+      isPlayingRef.current = true;
+      isUserPausedRef.current = false;
     }
 
     // Ensure player is created (should already be from user gesture)
@@ -1479,14 +1481,20 @@ export default function Player() {
     }
 
     // 1. Claim mobile audio focus SYNCHRONOUSLY within user gesture
-    
     claimMobileAudioFocus();
     initMediaSession();
+
+    // Immediately mark active playback and transition
+    isUserPausedRef.current = false;
+    wasInterruptedBySystemRef.current = false;
+    isPlayingRef.current = true;
+    autoPlayPendingRef.current = true;
+    backgroundSyncRef.current?.markTransitioning(5000);
 
     // 2. Guard: if clicking same track that's already loaded
     const activeTrack = tracks[currentIndex];
     if (activeTrack && activeTrack.id === trackId) {
-      if (!isPlaying && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         ytPlayerRef.current.playVideo();
         setIsPlaying(true);
       }
