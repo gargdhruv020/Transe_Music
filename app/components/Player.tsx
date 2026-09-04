@@ -742,7 +742,8 @@ export default function Player() {
   useEffect(() => {
     if (!isYTApiReady || !currentVideoId) return;
 
-    let startPos = (track as any).startSeconds || 0;
+    const isHustle = (track as any)?.isHustle || queueMode === "hustle";
+    let startPos = (track as any)?.startSeconds ?? (isHustle ? 5 : 0);
     if (initialSeekTimeRef.current !== null) {
       startPos = Math.floor(initialSeekTimeRef.current);
       initialSeekTimeRef.current = null;
@@ -1058,24 +1059,27 @@ export default function Player() {
             updatedAt: Date.now(),
           });
 
-          // A. Smart DJ Crossfade Trigger (2.5s before track end)
+          const isHustle = (track as any)?.isHustle || queueMode === "hustle";
+          const endCutoff = isHustle ? 5.0 : 0.4;
+
+          // A. Smart DJ Crossfade Trigger
           if (
             crossfadeEnabledRef.current &&
             !isCrossfadingRef.current &&
-            dur > 8 &&
-            dur - time <= 2.6 &&
-            dur - time >= 0.5
+            dur > (isHustle ? 12 : 8) &&
+            dur - time <= (isHustle ? 7.5 : 2.6) &&
+            dur - time >= (isHustle ? 5.0 : 0.5)
           ) {
             if (startCrossfadeRef.current) {
               startCrossfadeRef.current();
             }
           }
 
-          // B. Mobile Auto-Advance Watchdog: If track hits the very end, advance automatically!
+          // B. Mobile Auto-Advance Watchdog: Cut last 5 seconds for Hustle tracks and advance automatically!
           if (
             !isCrossfadingRef.current &&
-            dur > 5 &&
-            time >= dur - 0.4
+            dur > (isHustle ? 10 : 5) &&
+            time >= dur - endCutoff
           ) {
             if (handleNextRef.current) {
               handleNextRef.current();
@@ -1156,7 +1160,9 @@ export default function Player() {
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
-          ytPlayerRef.current.loadVideoById(targetVideoId, (nextTrack as any).startSeconds || 0);
+          const isHustleNext = (nextTrack as any)?.isHustle || queueMode === "hustle";
+            const startPosNext = (nextTrack as any)?.startSeconds ?? (isHustleNext ? 5 : 0);
+            ytPlayerRef.current.loadVideoById(targetVideoId, startPosNext);
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
@@ -1236,7 +1242,9 @@ export default function Player() {
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
-          ytPlayerRef.current.loadVideoById(targetVideoId, (prevTrack as any).startSeconds || 0);
+          const isHustlePrev = (prevTrack as any)?.isHustle || queueMode === "hustle";
+            const startPosPrev = (prevTrack as any)?.startSeconds ?? (isHustlePrev ? 5 : 0);
+            ytPlayerRef.current.loadVideoById(targetVideoId, startPosPrev);
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
@@ -1254,12 +1262,15 @@ export default function Player() {
   const handleSeek = useCallback((value: number) => {
     abortCrossfade();
     if (ytPlayerRef.current && duration > 0 && typeof ytPlayerRef.current.seekTo === "function") {
-      const newTime = value * duration;
+      const isHustle = (track as any)?.isHustle || queueMode === "hustle";
+      const minTime = isHustle ? 5 : 0;
+      const maxTime = isHustle ? Math.max(duration - 5, minTime) : duration;
+      const newTime = Math.min(Math.max(value * duration, minTime), maxTime);
       ytPlayerRef.current.seekTo(newTime, true);
       setCurrentTime(newTime);
       localStorage.setItem("transe_music_time", newTime.toString());
     }
-  }, [duration]);
+  }, [duration, track, queueMode]);
 
   /* ── 5-Second Skip Controls ───────────────────────── */
   const seekForward5 = useCallback(() => {
@@ -1269,7 +1280,9 @@ export default function Player() {
     if (dur <= 0) return;
     try {
       const cur = ytPlayerRef.current.getCurrentTime() || 0;
-      const newTime = Math.min(cur + 5, dur); // Clamp to duration
+      const isHustle = (track as any)?.isHustle || queueMode === "hustle";
+      const maxTime = isHustle ? Math.max(dur - 5, 5) : dur;
+      const newTime = Math.min(cur + 5, maxTime);
       ytPlayerRef.current.seekTo(newTime, true);
       setCurrentTime(newTime);
       localStorage.setItem("transe_music_time", newTime.toString());
@@ -1291,7 +1304,9 @@ export default function Player() {
     if (dur <= 0) return;
     try {
       const cur = ytPlayerRef.current.getCurrentTime() || 0;
-      const newTime = Math.max(cur - 5, 0); // Clamp to 0
+      const isHustle = (track as any)?.isHustle || queueMode === "hustle";
+      const minTime = isHustle ? 5 : 0;
+      const newTime = Math.max(cur - 5, minTime);
       ytPlayerRef.current.seekTo(newTime, true);
       setCurrentTime(newTime);
       localStorage.setItem("transe_music_time", newTime.toString());
@@ -1521,7 +1536,9 @@ export default function Player() {
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
-          ytPlayerRef.current.loadVideoById(targetVideoId, selectedTrack.startSeconds || 0);
+          const isHustleSelected = (selectedTrack as any)?.isHustle || mode === "hustle";
+          const startPosSelected = selectedTrack.startSeconds ?? (isHustleSelected ? 5 : 0);
+          ytPlayerRef.current.loadVideoById(targetVideoId, startPosSelected);
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
