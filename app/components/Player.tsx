@@ -8,7 +8,7 @@ import CrossfadeIcon from "./CrossfadeIcon";
 import { MobileAudioFocusCoordinator } from "@/app/utils/mobileAudioFocusCoordinator";
 import { BulletproofMediaSessionGuardian, SILENT_WAV_BASE64 } from "@/app/utils/bulletproofMediaSession";
 import { BackgroundPlaybackSyncEngine } from "@/app/utils/backgroundPlaybackSync";
-import { ResilientAudioFocusManager } from "@/app/utils/resilientAudioFocusListener";
+import { SystemInterruptionListener } from "@/app/utils/systemInterruptionListener";
 import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
@@ -302,8 +302,7 @@ export default function Player() {
   const crossfadeAnimRef = useRef<number | null>(null);
   const wasInterruptedBySystemRef = useRef<boolean>(false);
   const isUserPausedRef = useRef<boolean>(false);
-  const audioFocusCoordinatorRef = useRef<MobileAudioFocusCoordinator | null>(null);
-  const resilientFocusManagerRef = useRef<ResilientAudioFocusManager | null>(null);
+  const systemInterruptionListenerRef = useRef<SystemInterruptionListener | null>(null);
   const backgroundSyncRef = useRef<BackgroundPlaybackSyncEngine | null>(null);
   if (!backgroundSyncRef.current) {
     backgroundSyncRef.current = new BackgroundPlaybackSyncEngine({
@@ -481,8 +480,7 @@ export default function Player() {
             }
           } else if (event.data === 2) {
             // Track is PAUSED
-            // If the track is currently transitioning (user just clicked Next/Prev on lock-screen),
-            // this is a transient buffering pause, NOT a user pause or phone call! Force playback to resume immediately!
+            // 1. If currently transitioning (lock-screen song skip), keep playing through buffering delay!
             if (backgroundSyncRef.current?.getIsTransitioning()) {
               if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
                 try { ytPlayerRef.current.playVideo(); } catch (_) {}
@@ -490,18 +488,16 @@ export default function Player() {
               return;
             }
 
-            if (!isCrossfadingRef.current) {
-              // If paused while supposed to be playing and user DID NOT click pause,
-              // delegate to resilient focus manager (ducks, keeps notification anchor, and auto-resumes!)
-              if (isPlayingRef.current && !isUserPausedRef.current) {
-                if (resilientFocusManagerRef.current) {
-                  resilientFocusManagerRef.current.handleExternalInterruption("external_app");
-                } else {
-                  wasInterruptedBySystemRef.current = true;
-                  setIsPlaying(false);
-                  if (typeof window !== "undefined" && "mediaSession" in navigator) {
-                    try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
-                  }
+            // 2. If paused while playing and user DID NOT click pause, another app (Instagram/YouTube/Call) requested focus!
+            // Instantly yield focus cleanly so Instagram plays sound with zero interference!
+            if (!isCrossfadingRef.current && isPlayingRef.current && !isUserPausedRef.current) {
+              if (systemInterruptionListenerRef.current) {
+                systemInterruptionListenerRef.current.handleInterruptionBegin("external_app");
+              } else {
+                wasInterruptedBySystemRef.current = true;
+                setIsPlaying(false);
+                if (typeof window !== "undefined" && "mediaSession" in navigator) {
+                  try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
                 }
               }
             }
@@ -813,54 +809,53 @@ export default function Player() {
     return cleanup;
   }, []);
 
-  // 4b. Resilient Audio Focus & Auto-Resumption Engine
-  // Non-destructive ducking, continuous hardware keep-alive, and instant recovery after Instagram
+  // 4b. Industrial-Grade System Interruption & Shared Audio Focus Engine
+  // Deactivates exclusive audio lock, gracefully yields focus to Instagram/Calls, and auto-resumes smoothly!
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return;
 
-    const manager = new ResilientAudioFocusManager({
+    const listener = new SystemInterruptionListener({
       isCurrentlyPlaying: () => isPlayingRef.current,
-      getAudioAnchor: () => audioRef.current,
-      onDuck: (duckPercent) => {
-        console.log(`Ducking audio to ${duckPercent}% for external app`);
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-          try {
-            ytPlayerRef.current.setVolume(duckPercent);
-          } catch (_) {}
-        }
-      },
-      onUnduck: () => {
-        console.log("Restoring audio volume to 100%");
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-          try {
-            ytPlayerRef.current.setVolume(volumeRef.current);
-          } catch (_) {}
-        }
-      },
+      getAudioElement: () => audioRef.current,
+      getYTPlayer: () => ytPlayerRef.current,
       onPause: () => {
-        console.log("Pausing playback for call/interruption");
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-          try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
-        }
+        console.log("Audio focus requested by external app (Instagram/Call) - pausing cleanly to yield sound");
+        wasInterruptedBySystemRef.current = true;
+        try {
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+            ytPlayerRef.current.pauseVideo();
+          }
+          if (audioRef.current && !audioRef.current.paused) {
+            audioRef.current.pause();
+          }
+        } catch (_) {}
         setIsPlaying(false);
         if ("mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
         }
       },
       onResume: () => {
-        console.log("Instant auto-resuming playback after external app");
-        if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-          try { ytPlayerRef.current.playVideo(); } catch (_) {}
-        }
-        setIsPlaying(true);
-        if ("mediaSession" in navigator) {
-          try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+        console.log("External app finished - auto-resuming playback smoothly");
+        if (wasInterruptedBySystemRef.current && !isUserPausedRef.current) {
+          wasInterruptedBySystemRef.current = false;
+          try {
+            if (audioRef.current && audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
+            if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+              ytPlayerRef.current.playVideo();
+            }
+          } catch (_) {}
+          setIsPlaying(true);
+          if ("mediaSession" in navigator) {
+            try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+          }
         }
       },
     });
 
-    manager.attach();
-    resilientFocusManagerRef.current = manager;
+    listener.attach();
+    systemInterruptionListenerRef.current = listener;
 
     // Periodic keepalive: synchronizes MediaSession timeline position
     const keepaliveInterval = setInterval(() => {
@@ -877,8 +872,8 @@ export default function Player() {
     }, 10000);
 
     return () => {
-      manager.destroy();
-      resilientFocusManagerRef.current = null;
+      listener.destroy();
+      systemInterruptionListenerRef.current = null;
       clearInterval(keepaliveInterval);
     };
   }, []);
@@ -1476,12 +1471,8 @@ export default function Player() {
       if (nextVal) {
         isUserPausedRef.current = false;
         wasInterruptedBySystemRef.current = false;
-        AntiEvictionMediaAnchor.releaseAntiEvictionKeepAlive();
-        if (audioFocusCoordinatorRef.current) {
-          audioFocusCoordinatorRef.current.notifyUserPlay();
-        }
-        if (resilientFocusManagerRef.current) {
-          resilientFocusManagerRef.current.notifyUserPlay();
+        if (systemInterruptionListenerRef.current) {
+          systemInterruptionListenerRef.current.notifyUserPlay();
         }
         if (typeof window !== "undefined" && "mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
@@ -1489,16 +1480,12 @@ export default function Player() {
       } else {
         isUserPausedRef.current = true;
         wasInterruptedBySystemRef.current = false;
-        if (audioFocusCoordinatorRef.current) {
-          audioFocusCoordinatorRef.current.notifyUserPause();
-        }
-        if (resilientFocusManagerRef.current) {
-          resilientFocusManagerRef.current.notifyUserPause();
+        if (systemInterruptionListenerRef.current) {
+          systemInterruptionListenerRef.current.notifyUserPause();
         }
         if (typeof window !== "undefined" && "mediaSession" in navigator) {
           try { navigator.mediaSession.playbackState = "paused"; } catch (_) {}
         }
-        AntiEvictionMediaAnchor.engageAntiEvictionKeepAlive();
       }
 
       // Initialize media session metadata and action handlers inside user gesture
