@@ -16,12 +16,14 @@ export const SILENT_AUDIO_WAV =
 export interface SyncEngineOptions {
   getAudioElement: () => HTMLAudioElement | null;
   getYTPlayer: () => any;
+  isCurrentlyPlaying?: () => boolean;
   onStateSynced?: (isPlaying: boolean) => void;
 }
 
 export class BackgroundPlaybackSyncEngine {
   private getAudioElement: () => HTMLAudioElement | null;
   private getYTPlayer: () => any;
+  private isCurrentlyPlaying?: () => boolean;
   private isTransitioning = false;
   private transitionTimer: ReturnType<typeof setTimeout> | null = null;
   private retryTimer: ReturnType<typeof setTimeout> | null = null;
@@ -29,45 +31,31 @@ export class BackgroundPlaybackSyncEngine {
   constructor(options: SyncEngineOptions) {
     this.getAudioElement = options.getAudioElement;
     this.getYTPlayer = options.getYTPlayer;
+    this.isCurrentlyPlaying = options.isCurrentlyPlaying;
   }
 
   /**
    * Binds event-driven listeners to the native HTML <audio> element.
-   * Forces mediaSession.playbackState = 'playing' the moment the OS confirms audio buffer readiness.
+   * Accurately reflects mediaSession.playbackState based on whether playback is active or paused.
    */
   public attachAudioListeners(audio: HTMLAudioElement): () => void {
-    const handleCanPlay = () => {
+    const syncPlaybackState = () => {
       if (typeof window !== "undefined" && "mediaSession" in navigator) {
         try {
-          navigator.mediaSession.playbackState = "playing";
+          const isPlaying = this.isCurrentlyPlaying ? this.isCurrentlyPlaying() : true;
+          navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
         } catch (_) {}
       }
     };
 
-    const handlePlaying = () => {
-      if (typeof window !== "undefined" && "mediaSession" in navigator) {
-        try {
-          navigator.mediaSession.playbackState = "playing";
-        } catch (_) {}
-      }
-    };
-
-    const handleLoadedMetadata = () => {
-      if (typeof window !== "undefined" && "mediaSession" in navigator) {
-        try {
-          navigator.mediaSession.playbackState = "playing";
-        } catch (_) {}
-      }
-    };
-
-    audio.addEventListener("canplay", handleCanPlay);
-    audio.addEventListener("playing", handlePlaying);
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("canplay", syncPlaybackState);
+    audio.addEventListener("playing", syncPlaybackState);
+    audio.addEventListener("loadedmetadata", syncPlaybackState);
 
     return () => {
-      audio.removeEventListener("canplay", handleCanPlay);
-      audio.removeEventListener("playing", handlePlaying);
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("canplay", syncPlaybackState);
+      audio.removeEventListener("playing", syncPlaybackState);
+      audio.removeEventListener("loadedmetadata", syncPlaybackState);
     };
   }
 

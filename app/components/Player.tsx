@@ -15,15 +15,19 @@ import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
 
-// Background keepalive worker
+// Background keepalive worker: maintains continuous timing both while playing (1000ms) and while paused (2000ms)
 const workerScript = `
   let interval;
   self.onmessage = function(e) {
     if (e.data === 'start') {
       if (interval) clearInterval(interval);
       interval = setInterval(() => self.postMessage('tick'), 1000);
+    } else if (e.data === 'pause') {
+      if (interval) clearInterval(interval);
+      interval = setInterval(() => self.postMessage('pause_tick'), 2000);
     } else if (e.data === 'stop') {
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
+      interval = null;
     }
   };
 `;
@@ -310,6 +314,7 @@ export default function Player() {
     backgroundSyncRef.current = new BackgroundPlaybackSyncEngine({
       getAudioElement: () => audioRef.current,
       getYTPlayer: () => ytPlayerRef.current,
+      isCurrentlyPlaying: () => isPlayingRef.current,
     });
   }
   const [volume, setVolumeState] = useState(100);
@@ -372,7 +377,39 @@ export default function Player() {
     const url = URL.createObjectURL(blob);
     workerRef.current = new Worker(url);
     
-    workerRef.current.onmessage = () => {
+    workerRef.current.onmessage = (e: MessageEvent) => {
+      if (e.data === 'pause_tick' || !isPlayingRef.current) {
+        // Continuous hardware anchor while paused: Keep silent audio playing so OS never kills notification
+        if (audioRef.current && !wasInterruptedBySystemRef.current) {
+          try {
+            if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+              audioRef.current.src = AUDIO_STREAM_ANCHOR;
+              audioRef.current.loop = true;
+            }
+            if (audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
+          } catch (_) {}
+        }
+        if (typeof window !== "undefined" && "mediaSession" in navigator) {
+          try {
+            navigator.mediaSession.playbackState = "paused";
+            const dur = durationRef.current || 0;
+            if ("setPositionState" in navigator.mediaSession && dur > 0) {
+              const cur = (ytPlayerRef.current && typeof ytPlayerRef.current.getCurrentTime === "function")
+                ? (ytPlayerRef.current.getCurrentTime() || 0)
+                : 0;
+              navigator.mediaSession.setPositionState({
+                duration: dur,
+                playbackRate: 0,
+                position: Math.min(cur, dur),
+              });
+            }
+          } catch (_) {}
+        }
+        return;
+      }
+
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           const state = ytPlayerRef.current.getPlayerState();
@@ -392,13 +429,13 @@ export default function Player() {
     };
   }, []);
 
-  // Start/stop worker based on playing state
+  // Start playing (1s ticks) or switch to pause keepalive mode (2s heartbeat)
   useEffect(() => {
     if (workerRef.current) {
       if (isPlaying) {
         workerRef.current.postMessage('start');
       } else {
-        workerRef.current.postMessage('stop');
+        workerRef.current.postMessage('pause');
       }
     }
   }, [isPlaying]);
@@ -868,6 +905,16 @@ export default function Player() {
           if ("mediaSession" in navigator) {
             try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
           }
+        } else if (isUserPausedRef.current) {
+          // Keep paused, but re-anchor silent audio so notification is restored!
+          try {
+            if (audioRef.current && audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
+            if ("mediaSession" in navigator) {
+              navigator.mediaSession.playbackState = "paused";
+            }
+          } catch (_) {}
         }
       },
     });
@@ -909,6 +956,16 @@ export default function Player() {
           if ("mediaSession" in navigator) {
             try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
           }
+        } else if (isUserPausedRef.current) {
+          // Keep paused, but re-anchor silent audio so notification is restored!
+          try {
+            if (audioRef.current && audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
+            if ("mediaSession" in navigator) {
+              navigator.mediaSession.playbackState = "paused";
+            }
+          } catch (_) {}
         }
       },
     });
@@ -1333,20 +1390,80 @@ export default function Player() {
       // and synchronous lock-screen keepalive guarding
       BulletproofMediaSessionGuardian.registerHandlers({
         onPlay: () => {
+          unlockHardwareAudioBus();
           isPlayingRef.current = true;
+          isUserPausedRef.current = false;
+          wasInterruptedBySystemRef.current = false;
           setIsPlaying(true);
-          if (audioRef.current) audioRef.current.play().catch(() => {});
+          if (workerRef.current) workerRef.current.postMessage('start');
+          if (audioRef.current) {
+            if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+              audioRef.current.src = AUDIO_STREAM_ANCHOR;
+              audioRef.current.loop = true;
+            }
+            audioRef.current.play().catch(() => {});
+          }
           if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
             try { ytPlayerRef.current.playVideo(); } catch (_) {}
+          }
+          if (systemInterruptionListenerRef.current) {
+            systemInterruptionListenerRef.current.notifyUserPlay();
+          }
+          if (phoneCallAudioBypassRef.current) {
+            phoneCallAudioBypassRef.current.notifyUserPlay();
+          }
+          if (typeof window !== "undefined" && "mediaSession" in navigator) {
+            try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
           }
         },
         onPause: () => {
           isPlayingRef.current = false;
+          isUserPausedRef.current = true;
+          wasInterruptedBySystemRef.current = false;
           setIsPlaying(false);
-          if (workerRef.current) workerRef.current.postMessage('stop');
-          if (audioRef.current) audioRef.current.pause();
+          // Put worker into pause heartbeat mode (keeps tab active in background)
+          if (workerRef.current) workerRef.current.postMessage('pause');
           if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
-            try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
+            try {
+              ytPlayerRef.current.pauseVideo();
+              const time = ytPlayerRef.current.getCurrentTime() || 0;
+              localStorage.setItem("transe_music_time", time.toString());
+            } catch (_) {}
+          }
+          // CRITICAL: Keep silent audio hardware anchor active while paused
+          // Prevents Android Chrome & iOS from killing the lock-screen & car notification widget!
+          if (audioRef.current) {
+            try {
+              if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+                audioRef.current.src = AUDIO_STREAM_ANCHOR;
+                audioRef.current.loop = true;
+              }
+              if (audioRef.current.paused) {
+                audioRef.current.play().catch(() => {});
+              }
+            } catch (_) {}
+          }
+          if (systemInterruptionListenerRef.current) {
+            systemInterruptionListenerRef.current.notifyUserPause();
+          }
+          if (phoneCallAudioBypassRef.current) {
+            phoneCallAudioBypassRef.current.notifyUserPause();
+          }
+          if (typeof window !== "undefined" && "mediaSession" in navigator) {
+            try {
+              navigator.mediaSession.playbackState = "paused";
+              const dur = durationRef.current || duration;
+              if ("setPositionState" in navigator.mediaSession && dur > 0) {
+                const cur = (ytPlayerRef.current && typeof ytPlayerRef.current.getCurrentTime === "function")
+                  ? (ytPlayerRef.current.getCurrentTime() || 0)
+                  : 0;
+                navigator.mediaSession.setPositionState({
+                  duration: dur,
+                  playbackRate: 0,
+                  position: Math.min(cur, dur),
+                });
+              }
+            } catch (_) {}
           }
         },
         onNext: () => {
@@ -1604,12 +1721,38 @@ export default function Player() {
           if (nextVal) {
             if (workerRef.current) workerRef.current.postMessage('start');
             ytPlayerRef.current.playVideo();
+            if (audioRef.current && audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
           } else {
-            if (workerRef.current) workerRef.current.postMessage('stop'); // kill worker immediately
+            // Keep background worker in pause heartbeat mode so tab does not sleep
+            if (workerRef.current) workerRef.current.postMessage('pause');
             ytPlayerRef.current.pauseVideo();
+            // Ensure silent anchor continues looping so notification widget stays anchored
+            if (audioRef.current) {
+              if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+                audioRef.current.src = AUDIO_STREAM_ANCHOR;
+                audioRef.current.loop = true;
+              }
+              if (audioRef.current.paused) {
+                audioRef.current.play().catch(() => {});
+              }
+            }
             if (typeof ytPlayerRef.current.getCurrentTime === "function") {
               const time = ytPlayerRef.current.getCurrentTime() || 0;
               localStorage.setItem("transe_music_time", time.toString());
+              if (typeof window !== "undefined" && "mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+                const dur = durationRef.current || duration;
+                if (dur > 0) {
+                  try {
+                    navigator.mediaSession.setPositionState({
+                      duration: dur,
+                      playbackRate: 0,
+                      position: Math.min(time, dur),
+                    });
+                  } catch (_) {}
+                }
+              }
             }
           }
         } catch (e) {
@@ -1636,15 +1779,41 @@ export default function Player() {
     }
   }, [showList, queueMode]);
 
-  // Keep silent audio in sync with playback state to claim media focus
+  // Continuous hardware audio anchor: Keep silent WAV active even while paused
+  // Crucial: Only pause audioRef during genuine external system interruptions (e.g. phone call / Instagram)
+  // This keeps the OS media notification and lock screen controls pinned until the user manually swipes away the tab!
   useEffect(() => {
     if (!audioRef.current) return;
-    if (isPlaying) {
+    if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
+      audioRef.current.src = AUDIO_STREAM_ANCHOR;
+      audioRef.current.loop = true;
+    }
+    if (!wasInterruptedBySystemRef.current) {
       audioRef.current.play().catch(() => {});
-    } else {
-      audioRef.current.pause();
     }
   }, [isPlaying]);
+
+  // Clean teardown only when user explicitly closes or swipes away the tab from minimized background tabs
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleManualTabClose = () => {
+      if ("mediaSession" in navigator) {
+        try { navigator.mediaSession.playbackState = "none"; } catch (_) {}
+      }
+      if (audioRef.current) {
+        try { audioRef.current.pause(); } catch (_) {}
+      }
+      if (workerRef.current) {
+        try { workerRef.current.terminate(); } catch (_) {}
+      }
+    };
+    window.addEventListener("beforeunload", handleManualTabClose);
+    window.addEventListener("pagehide", handleManualTabClose);
+    return () => {
+      window.removeEventListener("beforeunload", handleManualTabClose);
+      window.removeEventListener("pagehide", handleManualTabClose);
+    };
+  }, []);
 
   // Auto-update Media Session when track changes (e.g. automatic transitions)
   useEffect(() => {
