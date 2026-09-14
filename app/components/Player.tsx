@@ -294,7 +294,7 @@ export default function Player() {
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showRemixList, setShowRemixList] = useState(false);
-  type PlaylistQueueMode = "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle" | "liked";
+  type PlaylistQueueMode = "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle" | "liked" | "club";
   const [queueMode, setQueueMode] = useState<PlaylistQueueMode>("all");
   const [playlistTab, setPlaylistTab] = useState<PlaylistQueueMode>("all");
   const [remixTab, setRemixTab] = useState<PlaylistQueueMode>("all-remix");
@@ -313,11 +313,12 @@ export default function Player() {
       const filtered = tracks.filter(t => likedIds.has(t.id));
       return filtered.length > 0 ? filtered : tracks;
     }
+    if (mode === "club") return tracks.filter(t => (t as any).isClub);
     if (mode === "16d") return tracks.filter(t => t.isSpatial);
     if (mode === "global") return tracks.filter(t => t.isGlobal);
     if (mode === "goa") return tracks.filter(t => t.isGoa);
     if (mode === "all-remix") return tracks.filter(t => t.isRemix);
-    if (mode === "remix") return tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle);
+    if (mode === "remix") return tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle && !(t as any).isClub);
     if (mode === "ktrance") return tracks.filter(t => t.isKTrance);
     if (mode === "indo-house") return tracks.filter(t => (t as any).isIndoHouse);
     if (mode === "sufi") return tracks.filter(t => (t as any).isSufi);

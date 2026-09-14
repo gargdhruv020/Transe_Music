@@ -8365,6 +8365,1305 @@ const listX = [
 ];
 
 
+const listClub = [
+  {
+    title: "Tauba Tauba x Losing It",
+    artist: "Karan Aujla x FISHER",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Aaj Ki Raat x Tremor",
+    artist: "Stree 2 x DVLM & Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Winning Speech x Laserbeam",
+    artist: "Karan Aujla x Ray Volpe",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Malhari x Booyah",
+    artist: "Bajirao Mastani x Showtek",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Apna Bana Le x Laserbeam",
+    artist: "Bhediya x Ray Volpe",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Kesariya x Tremor",
+    artist: "Brahmāstra x Dimitri Vegas & Like Mike",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "T2wdiA-IDH4"
+  },
+  {
+    title: "Tum Hi Ho x Spaceman",
+    artist: "Aashiqui 2 x Hardwell",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "-JxmOPtjlJE"
+  },
+  {
+    title: "Raataan Lambiyan x Mammoth",
+    artist: "Shershaah x DVLM & MOGUAI",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "yldN7geOZfc"
+  },
+  {
+    title: "Kabira x Booyah",
+    artist: "Yeh Jawaani Hai Deewani x Showtek",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "jHNNMj5bNQw"
+  },
+  {
+    title: "Pee Loon x Losing It",
+    artist: "Once Upon A Time In Mumbaai x FISHER",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "dE4hhfuIpw4"
+  },
+  {
+    title: "Tum Se Hi x Satisfaction",
+    artist: "Jab We Met x Benny Benassi",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Cb6wuzOurPc"
+  },
+  {
+    title: "Zaalima x Drugs From Amsterdam",
+    artist: "Raees x Mau P",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "t55amDg4qZM"
+  },
+  {
+    title: "Dil Sambhal Ja Zara x Animals",
+    artist: "Murder 2 x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "5-OqPhet-NU"
+  },
+  {
+    title: "Khuda Jaane x Kernkraft 400",
+    artist: "Bachna Ae Haseeno x Zombie Nation",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "cmMiyZaSELo"
+  },
+  {
+    title: "Subhanallah x Turn Up The Speakers",
+    artist: "YJHD x Afrojack & Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "dzHdo4yxidc"
+  },
+  {
+    title: "Ishq Sufiyana x Tsunami",
+    artist: "The Dirty Picture x DVBBS & Borgeous",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "lC_pM7a9wl0"
+  },
+  {
+    title: "Hasi Ban Gaye x Party Till We Die",
+    artist: "Hamari Adhuri Kahani x MAKJ & Timmy Trumpet",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "IDTS7zoI5pw"
+  },
+  {
+    title: "Soch Na Sake x Rave Tool",
+    artist: "Airlift x Industrial Drop Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "LYheoXR4Yo8"
+  },
+  {
+    title: "Agar Tum Saath Ho x Bonkers",
+    artist: "Tamasha x Dizzee Rascal",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ukmTXXLJ4kM"
+  },
+  {
+    title: "Chaleya x Ferrari",
+    artist: "Jawan x James Hype",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "CgeleP7nWN0"
+  },
+  {
+    title: "Jiyein Kyun x Move Your Body",
+    artist: "Dum Maaro Dum x Öwnboss",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "sJW37INWnYk"
+  },
+  {
+    title: "Mast Magan x Do It To It",
+    artist: "2 States x ACRAZE",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xitd9mEZIHk"
+  },
+  {
+    title: "Sun Saathiya x Bounce Generation",
+    artist: "ABCD 2 x TJR & VINAI",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "UNs50T6EYwE"
+  },
+  {
+    title: "Jeena Jeena x Heads Will Roll",
+    artist: "Badlapur x A-Trak",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zFdi834FiZ4"
+  },
+  {
+    title: "Tere Sang Yaara x Riverside",
+    artist: "Rustom x Sidney Samson",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "dxkPZ_4PlDE"
+  },
+  {
+    title: "Dekha Ek Khwaab x Jump & Sweat",
+    artist: "Silsila x Garmiani",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Nef_1GA-rVU"
+  },
+  {
+    title: "Mitwa x Turn Off The Lights",
+    artist: "KANK x Fred Again..",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Q22MCFC0CP0"
+  },
+  {
+    title: "Heer Raanjhana x Bla Bla Bla",
+    artist: "Bachchhan Paandey x Gigi D'Agostino",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "g6t8g6ka4W0"
+  },
+  {
+    title: "Dil Diyan Gallan x Intoxicated",
+    artist: "Tiger Zinda Hai x Martin Solveig",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "SAcpESN_Fk4"
+  },
+  {
+    title: "Tera Hone Laga Hoon x Low Frequency",
+    artist: "APKGK x Denney",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "H_lYTvMZ3lU"
+  },
+  {
+    title: "Tu Chahiye x Trumpets",
+    artist: "Bajrangi Bhaijaan x Sak Noel",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zuvla6ABKbs"
+  },
+  {
+    title: "Pani Da Rang x Greyhound",
+    artist: "Vicky Donor x Swedish House Mafia",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "EiItLWWxgOI"
+  },
+  {
+    title: "Samjhawan x Gasolina",
+    artist: "HSKD x Daddy Yankee Hard Trap",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "KXs2zgqLpVk"
+  },
+  {
+    title: "Nazar Na Lag Jaaye x Better Off Alone",
+    artist: "Stree x Alice Deejay",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Lgs9QUtWc3M"
+  },
+  {
+    title: "Kaun Tujhe x Lay Low",
+    artist: "M.S. Dhoni x Tiësto",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "fRYtYrzlPpQ"
+  },
+  {
+    title: "Bakhuda Tumhi Ho x Tremor",
+    artist: "Kismat Konnection x DVLM",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ENklhABDmck"
+  },
+  {
+    title: "Hua Hain Aaj Pehli Baar x Laserbeam",
+    artist: "Sanam Re x Ray Volpe",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DGVJtAHzzDQ"
+  },
+  {
+    title: "Tu Jaane Na x Mammoth",
+    artist: "APKGK x DVLM",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "RpKxgkLiRw4"
+  },
+  {
+    title: "Khaab x Spaceman",
+    artist: "Akhil x Hardwell",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "2eliQ_KR8yA"
+  },
+  {
+    title: "Main Rang Sharbaton Ka x Booyah",
+    artist: "PPNH x Showtek",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "RBCk1SyC1PA"
+  },
+  {
+    title: "Sunn Raha Hai Na Tu x Animals",
+    artist: "Aashiqui 2 x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "EwfEbt8IDCc"
+  },
+  {
+    title: "Banjaara x Drugs From Amsterdam",
+    artist: "Ek Villain x Mau P",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "juuIhW8V1Xw"
+  },
+  {
+    title: "Te Amo x Losing It",
+    artist: "Dum Maaro Dum x FISHER",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "3N3n23loy24"
+  },
+  {
+    title: "Hawayein x Satisfaction",
+    artist: "Jab Harry Met Sejal x Benny Benassi",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "cYOB941gyXI"
+  },
+  {
+    title: "Enna Sona x Move Your Body",
+    artist: "OK Jaanu x Öwnboss",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mrdRHsIkK_c"
+  },
+  {
+    title: "Moh Moh Ke Dhaage x Kernkraft 400",
+    artist: "Dum Laga Ke Haisha x Zombie Nation",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "peBsfgbOlYM"
+  },
+  {
+    title: "Ghar More Pardesiya x Turn Up The Speakers",
+    artist: "Kalank x Afrojack",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9lkiKsMZazw"
+  },
+  {
+    title: "Pal Pal Dil Ke Paas x Do It To It",
+    artist: "Blackmail x ACRAZE",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "cvQWzlNIjt8"
+  },
+  {
+    title: "Ishq Wala Love x Tsunami",
+    artist: "SOTY x DVBBS",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "N2cPyl83tkQ"
+  },
+  {
+    title: "Meherbaan x Ferrari",
+    artist: "Bang Bang! x James Hype",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "CgeleP7nWN0"
+  },
+  {
+    title: "Shayad x Rave Tool",
+    artist: "Love Aaj Kal 2 x Peak Tech Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xf_R641_aAc"
+  },
+  {
+    title: "Rasiya x Bonkers",
+    artist: "Brahmāstra x Dizzee Rascal",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Ci40ae8BlcE"
+  },
+  {
+    title: "Kinna Sohna x Heads Will Roll",
+    artist: "Marjaavaan x A-Trak",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8CLJS3DoDhg"
+  },
+  {
+    title: "Woh Din x Bounce Generation",
+    artist: "Chhichhore x TJR",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xC1cj9zhh6k"
+  },
+  {
+    title: "Chaiyya Chaiyya x Kernkraft 400",
+    artist: "A.R. Rahman x Zombie Nation",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "79TEKzCxZM0"
+  },
+  {
+    title: "Apna Bana Le x Miracle",
+    artist: "Bhediya x Calvin Harris & Ellie Goulding",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "961v0E3b01g"
+  },
+  {
+    title: "Kesariya x Don't You Worry Child",
+    artist: "Brahmāstra x Swedish House Mafia",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "hKM5JkIDTeE"
+  },
+  {
+    title: "Raataan Lambiyan x Under The Stars",
+    artist: "Shershaah x Melodic Techno Mix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Kp76nzS7pwA"
+  },
+  {
+    title: "Tum Hi Ho x Reload",
+    artist: "Aashiqui 2 x Sebastian Ingrosso & Tommy Trash",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "RPCGOiDT9BE"
+  },
+  {
+    title: "Kabira x Clarity",
+    artist: "Yeh Jawaani Hai Deewani x Zedd",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "jHNNMj5bNQw"
+  },
+  {
+    title: "Pee Loon x Sunset Lover",
+    artist: "Once Upon A Time In Mumbaai x Petit Biscuit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "D8XFTglfSMg"
+  },
+  {
+    title: "Tum Se Hi x Ocean",
+    artist: "Jab We Met x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mt9xg0mmt28"
+  },
+  {
+    title: "Zaalima x Cold Water",
+    artist: "Raees x Major Lazer & Justin Bieber",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "nBtDsQ4fhXY"
+  },
+  {
+    title: "Dil Sambhal Ja Zara x Piece Of Your Heart",
+    artist: "Murder 2 x Meduza",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "5-OqPhet-NU"
+  },
+  {
+    title: "Khuda Jaane x Without You",
+    artist: "Bachna Ae Haseeno x David Guetta & Usher",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "o3PaG9r-qJU"
+  },
+  {
+    title: "Subhanallah x Titanium",
+    artist: "Yeh Jawaani Hai Deewani x David Guetta & Sia",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "QYO6AlxiRE4"
+  },
+  {
+    title: "Ishq Sufiyana x Sun & Moon",
+    artist: "The Dirty Picture x Above & Beyond",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "5RT6QMKJTjQ"
+  },
+  {
+    title: "Hasi Ban Gaye x Heroes (We Could Be)",
+    artist: "Hamari Adhuri Kahani x Alesso",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "n3zqZICNFSg"
+  },
+  {
+    title: "Soch Na Sake x Stay The Night",
+    artist: "Airlift x Zedd & Hayley Williams",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "i-gyZ35074k"
+  },
+  {
+    title: "Agar Tum Saath Ho x Faded",
+    artist: "Tamasha x Alan Walker",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "2tUr3yzqctI"
+  },
+  {
+    title: "Chaleya x Padam Padam",
+    artist: "Jawan x Kylie Minogue Tech Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "s4yy40jRTu4"
+  },
+  {
+    title: "Jiyein Kyun x Leave The World Behind",
+    artist: "Dum Maaro Dum x Axwell & Ingrosso",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "sJW37INWnYk"
+  },
+  {
+    title: "Mast Magan x In My Mind",
+    artist: "2 States x Dynoro & Gigi D'Agostino",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xitd9mEZIHk"
+  },
+  {
+    title: "Sun Saathiya x This Is What You Came For",
+    artist: "ABCD 2 x Calvin Harris & Rihanna",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kOkQ4T5WO9E"
+  },
+  {
+    title: "Jeena Jeena x Calling (Lose My Mind)",
+    artist: "Badlapur x Sebastian Ingrosso & Alesso",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9G1I16gJBvU"
+  },
+  {
+    title: "Tere Sang Yaara x If I Lose Myself",
+    artist: "Rustom x Alesso vs OneRepublic",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "dLa_ryRjC7M"
+  },
+  {
+    title: "Dekha Ek Khwaab x Stay",
+    artist: "Silsila x The Kid LAROI & Justin Bieber",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Nef_1GA-rVU"
+  },
+  {
+    title: "Mitwa x Opus",
+    artist: "Kabhi Alvida Naa Kehna x Eric Prydz",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "6LtpYX3G0wc"
+  },
+  {
+    title: "Heer Raanjhana x How Deep Is Your Love",
+    artist: "Bachchhan Paandey x Calvin Harris",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "QkPxhZO-0hc"
+  },
+  {
+    title: "Dil Diyan Gallan x I Wanna Know",
+    artist: "Tiger Zinda Hai x Alesso",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "SAcpESN_Fk4"
+  },
+  {
+    title: "Tera Hone Laga Hoon x Wake Me Up",
+    artist: "Ajab Prem Ki Ghazab Kahani x Avicii",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "rTuxUAuJRyY"
+  },
+  {
+    title: "Tu Chahiye x Red Lights",
+    artist: "Bajrangi Bhaijaan x Tiësto",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zuvla6ABKbs"
+  },
+  {
+    title: "Pani Da Rang x Rather Be",
+    artist: "Vicky Donor x Clean Bandit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "EiItLWWxgOI"
+  },
+  {
+    title: "Samjhawan x Middle",
+    artist: "Humpty Sharma Ki Dulhania x DJ Snake",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "KXs2zgqLpVk"
+  },
+  {
+    title: "Nazar Na Lag Jaaye x Silence",
+    artist: "Stree x Marshmello & Khalid",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "-JMtKCqnkm0"
+  },
+  {
+    title: "Kaun Tujhe x Something Just Like This",
+    artist: "M.S. Dhoni x The Chainsmokers & Coldplay",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "FM7MFYoylVs"
+  },
+  {
+    title: "Bakhuda Tumhi Ho x Tremor (Melodic Drop)",
+    artist: "Kismat Konnection x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ENklhABDmck"
+  },
+  {
+    title: "Hua Hain Aaj Pehli Baar x Sweet Dreams",
+    artist: "Sanam Re x Eurythmics Tech Flip",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DGVJtAHzzDQ"
+  },
+  {
+    title: "Tu Jaane Na x Mammoth (Festival Vocal Flip)",
+    artist: "APKGK x DVLM",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "P8PWN1OmZOA"
+  },
+  {
+    title: "Khaab x Beautiful Now",
+    artist: "Akhil x Zedd",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "OAZZKCWGoJE"
+  },
+  {
+    title: "Main Rang Sharbaton Ka x Spectrum",
+    artist: "Phata Poster Nikhla Hero x Zedd",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "RBCk1SyC1PA"
+  },
+  {
+    title: "Sunn Raha Hai Na Tu x Animals (Melodic Drop)",
+    artist: "Aashiqui 2 x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "z3UHfi9vpbc"
+  },
+  {
+    title: "Banjaara x Turn Off The Lights",
+    artist: "Ek Villain x Fred Again..",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Q22MCFC0CP0"
+  },
+  {
+    title: "Te Amo x I Took A Pill In Ibiza",
+    artist: "Dum Maaro Dum x Mike Posner & Seeb",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "foE1mO2yM04"
+  },
+  {
+    title: "Hawayein x Levels",
+    artist: "Jab Harry Met Sejal x Avicii",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "oJZNxU2tj_0"
+  },
+  {
+    title: "Moh Moh Ke Dhaage x Stargazing",
+    artist: "Dum Laga Ke Haisha x Kygo",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "peBsfgbOlYM"
+  },
+  {
+    title: "Ghar More Pardesiya x Baianá",
+    artist: "Kalank x Bakermat Afro-House Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Deb9SA9Sfe4"
+  },
+  {
+    title: "Pal Pal Dil Ke Paas x Do It To It",
+    artist: "Blackmail x ACRAZE Tech Flip",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "NA-q7WCRfDU"
+  },
+  {
+    title: "Ishq Wala Love x The Nights",
+    artist: "Student of the Year x Avicii",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "N2cPyl83tkQ"
+  },
+  {
+    title: "Meherbaan x Ten Feet Tall",
+    artist: "Bang Bang! x Afrojack",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "bltr_Dsk5EY"
+  },
+  {
+    title: "Shayad x High On Life",
+    artist: "Love Aaj Kal 2 x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Lpjcm1F8tY8"
+  },
+  {
+    title: "Rasiya x The Veldt",
+    artist: "Brahmāstra x deadmau5",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xvtNS6hbVy4"
+  },
+  {
+    title: "Kinna Sohna x Losing It",
+    artist: "Marjaavaan x FISHER Tech House Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8CLJS3DoDhg"
+  },
+  {
+    title: "Woh Din x Summer",
+    artist: "Chhichhore x Calvin Harris",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "bbbQaYIlmMU"
+  },
+  {
+    title: "Badtameez Dil x Spaceman",
+    artist: "YJHD x Hardwell",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "II2EO3Nw4m0"
+  },
+  {
+    title: "Dhan Te Nan x Mammoth",
+    artist: "Kaminey x DVLM & MOGUAI",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "AKF2whlGnr4"
+  },
+  {
+    title: "Zingaat x Rave Tool",
+    artist: "Dhadak x High-Energy Festival Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Rd9wF5fAnVw"
+  },
+  {
+    title: "Besharam Rang x Drugs From Amsterdam",
+    artist: "Pathaan x Mau P",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "juuIhW8V1Xw"
+  },
+  {
+    title: "Aankh Marey x Move Your Body",
+    artist: "Simmba x Öwnboss",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "_KhQT-LGb-4"
+  },
+  {
+    title: "Choli Ke Peeche x Satisfaction",
+    artist: "Crew x Benny Benassi",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "co4EBYZZhg4"
+  },
+  {
+    title: "Ghungroo x Ferrari",
+    artist: "War x James Hype",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "XUwCeFgFKQc"
+  },
+  {
+    title: "Dope Shope x Do It To It",
+    artist: "Yo Yo Honey Singh x ACRAZE",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "NrXdauEv9HY"
+  },
+  {
+    title: "Dum Maaro Dum x Turn Off The Lights",
+    artist: "Asha Bhosle x Fred Again..",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kOrRYDJ4AuY"
+  },
+  {
+    title: "Sadda Haq x Heads Will Roll",
+    artist: "Rockstar x A-Trak",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mk2W-Xo_qAQ"
+  },
+  {
+    title: "Bhaag D.K. Bose x Bonkers",
+    artist: "Delhi Belly x Dizzee Rascal",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "IQEDu8SPHao"
+  },
+  {
+    title: "Kala Chashma x Bounce Generation",
+    artist: "Baar Baar Dekho x TJR & VINAI",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "4WRJHbL4dAk"
+  },
+  {
+    title: "52 Bars x Animals",
+    artist: "Karan Aujla x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "4DfVxVeqk2o"
+  },
+  {
+    title: "Softly x Ferrari",
+    artist: "Karan Aujla x James Hype",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "cWMxCE2HTag"
+  },
+  {
+    title: "On Top x Tsunami",
+    artist: "Karan Aujla x DVBBS & Borgeous",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "0EWbonj7f18"
+  },
+  {
+    title: "Admirin' You x Turn Up The Speakers",
+    artist: "Karan Aujla x Afrojack & Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "k85UB5b6pJU"
+  },
+  {
+    title: "White Brown Black x Piece Of Your Heart",
+    artist: "Karan Aujla x Meduza",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BtQp2U6hJII"
+  },
+  {
+    title: "Jee Karda x Animals",
+    artist: "Badlapur x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "IPYTxAHeR_o"
+  },
+  {
+    title: "Abhi Toh Party x Heads Will Roll",
+    artist: "Badshah x A-Trak",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "O3c4dPxN1qM"
+  },
+  {
+    title: "Chammak Challo x Low",
+    artist: "Ra.One x Flo Rida Club Edit",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "LWViwRT2DO4"
+  },
+  {
+    title: "Dus Bahane x Piece Of Your Heart",
+    artist: "Dus x Meduza",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "KWjV25q34Hw"
+  },
+  {
+    title: "Ek Do Teen x Gasolina",
+    artist: "Tezaab x Daddy Yankee",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "CCF1_jI8Prk"
+  },
+  {
+    title: "Gandi Baat x Levels",
+    artist: "R... Rajkumar x Avicii",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "bpOJmRlgg-4"
+  },
+  {
+    title: "Hookah Bar x Party Till We Die",
+    artist: "Khiladi 786 x MAKJ & Timmy Trumpet",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "IDTS7zoI5pw"
+  },
+  {
+    title: "Illegal Weapon x Spaceman",
+    artist: "Street Dancer 3D x Hardwell",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "GOkJguI8kYc"
+  },
+  {
+    title: "Jai Jai Shivshankar x Mammoth",
+    artist: "War x DVLM",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "oGneAab3e88"
+  },
+  {
+    title: "Jhoome Jo Pathaan x Lay Low",
+    artist: "Pathaan x Tiësto",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxWlaYCA8MU"
+  },
+  {
+    title: "Kar Gayi Chull x Better Off Alone",
+    artist: "Kapoor & Sons x Alice Deejay",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "NTHz9ephYTw"
+  },
+  {
+    title: "Khadke Glassy x Bounce Generation",
+    artist: "Jabariya Jodi x TJR",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YcDw4h3SUfI"
+  },
+  {
+    title: "Lahu Munh Lag Gaya x Ferrari",
+    artist: "Ram-Leela x James Hype",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "szVW_w-W8cQ"
+  },
+  {
+    title: "London Thumakda x Danza Kuduro",
+    artist: "Queen x Don Omar",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "WyawIree6iQ"
+  },
+  {
+    title: "Lungi Dance x Turn Up The Speakers",
+    artist: "Chennai Express x Afrojack",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "fbwCgt1hMD4"
+  },
+  {
+    title: "Naacho Naacho x Jump & Sweat",
+    artist: "RRR x Garmiani",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "sAzlWScHTc4"
+  },
+  {
+    title: "O Saki Saki x Do It To It",
+    artist: "Batla House x ACRAZE",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "_uUdJalMaF8"
+  },
+  {
+    title: "Party All Night x Riverside",
+    artist: "Boss x Sidney Samson",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Wd7H311MrWA"
+  },
+  {
+    title: "Sauda Khara Khara x Low Frequency",
+    artist: "Good Newwz x Denney",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "LYEqeUr-158"
+  },
+  {
+    title: "Shanivaar Raati x Tsunami",
+    artist: "Main Tera Hero x DVBBS",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Ee_9J9lGgS0"
+  },
+  {
+    title: "Show Me The Thumka x Drugs From Amsterdam",
+    artist: "TJMM x Mau P",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "juuIhW8V1Xw"
+  },
+  {
+    title: "Subah Hone Na De x Greyhound",
+    artist: "Desi Boyz x Swedish House Mafia",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Y7G-tYRzwYY"
+  },
+  {
+    title: "Tamanche Pe Disco x Bonkers",
+    artist: "Bullett Raja x Dizzee Rascal",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ju12RhZFGRo"
+  },
+  {
+    title: "The Humma Song x Trumpets",
+    artist: "OK Jaanu x Sak Noel",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "1tVL11ULjYY"
+  },
+  {
+    title: "Tune Maari Entriyaan x Intoxicated",
+    artist: "Gunday x Martin Solveig",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "2I3NgxDAiqE"
+  },
+  {
+    title: "Vele x Bla Bla Bla",
+    artist: "Student of the Year x Gigi D'Agostino",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "g6t8g6ka4W0"
+  },
+  {
+    title: "Yaar Naa Miley x Animals",
+    artist: "Kick x Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "bp6oHlllWHA"
+  },
+  {
+    title: "Zinda Banda x Turn Off The Lights",
+    artist: "Jawan x Fred Again..",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "stjZKBhQ3lg"
+  },
+  {
+    title: "Malhari x Laserbeam",
+    artist: "Bajirao Mastani x Ray Volpe",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Tauba Tauba x Losing It",
+    artist: "Bad Newz x FISHER",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "tJQKMpf5ANE"
+  },
+  {
+    title: "Badtameez Dil x Spaceman",
+    artist: "Yeh Jawaani Hai Deewani x Hardwell",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "II2EO3Nw4m0"
+  },
+  {
+    title: "Zingaat x Booyah",
+    artist: "Dhadak x Showtek",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "5mMYlA-2yX4"
+  },
+  {
+    title: "Jee Karda x Rave Tool",
+    artist: "Badlapur x High-Energy Industrial Drop",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "VAJK04HOLd0"
+  },
+  {
+    title: "Chambal Ka Daku x Laserbeam",
+    artist: "Haryanvi Trap x Ray Volpe",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "070t4rVokoA"
+  },
+  {
+    title: "Abhi Toh Party x Heads Will Roll",
+    artist: "Khoobsurat x Yeah Yeah Yeahs",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "rzcCpHLA_8g"
+  },
+  {
+    title: "Chammak Challo x Low",
+    artist: "Ra.One x Flo Rida Club Flip",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ufHLYw9q7vQ"
+  },
+  {
+    title: "Dus Bahane x Piece Of Your Heart",
+    artist: "Dus x Meduza Tech Drop",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "KWjV25q34Hw"
+  },
+  {
+    title: "Ek Do Teen x Gasolina",
+    artist: "Tezaab x Daddy Yankee Hard Trap",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Om9zu4NTtd4"
+  },
+  {
+    title: "Lungi Dance x Turn Up The Speakers",
+    artist: "Chennai Express x Afrojack & Martin Garrix",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "dzHdo4yxidc"
+  },
+  {
+    title: "Bahu Kale Ki x Satisfaction",
+    artist: "Ajay Hooda x Benny Benassi",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Mlj0hdOG4QQ"
+  },
+  {
+    title: "Systum x Do It To It",
+    artist: "Masoom Sharma x ACRAZE",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "CQW4A3cV2Oo"
+  }
+];
+
 const listHustle = [
   {
     "title": "Baaghi",
@@ -11767,8 +13066,8 @@ const listHustle = [
   }
 ];
 
-const merged = [...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean; isHustle?: boolean; hustleSeason?: string; hustleNum?: number }>();
+const merged = [...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
+const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean; isClub?: boolean; isHustle?: boolean; hustleSeason?: string; hustleNum?: number }>();
 
 for (const t of merged) {
   const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
@@ -11787,6 +13086,7 @@ for (const t of merged) {
     if (item.isAfro) existing.isAfro = true;
     if (item.isEAndAAfro) existing.isEAndAAfro = true;
     if (item.isX) existing.isX = true;
+    if (item.isClub) existing.isClub = true;
     if (item.isHustle) existing.isHustle = true;
     if (item.hustleSeason) existing.hustleSeason = item.hustleSeason;
     if (item.hustleNum) existing.hustleNum = item.hustleNum;
@@ -11804,7 +13104,7 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   film: track.film,
   youtubeId: track.youtubeId,
   startSeconds: track.startSeconds,
-  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa || track.isRemix || track.isKTrance) ? false : true),
+  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa || track.isRemix || track.isKTrance || track.isClub) ? false : true),
   isGlobal: track.isGlobal ?? false,
   isGoa: track.isGoa ?? false,
   isRemix: track.isRemix ?? false,
@@ -11814,6 +13114,7 @@ const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
   isAfro: track.isAfro ?? false,
   isEAndAAfro: track.isEAndAAfro ?? false,
   isX: track.isX ?? false,
+  isClub: track.isClub ?? false,
   isHustle: track.isHustle ?? false,
   hustleSeason: track.hustleSeason,
   hustleNum: (track as any).hustleNum,
