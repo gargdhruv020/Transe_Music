@@ -2503,6 +2503,188 @@ const listRemix = [
     "artist": "(Boney M x Majestic Tech House Rework)",
     "film": "Remix",
     "isRemix": true
+  },
+  {
+    "title": "System Pe System x Laserbeam",
+    "artist": "Ray Volpe Heavy Bass Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "6BxGumtWc_c"
+  },
+  {
+    "title": "Kala Daman x Do It To It",
+    "artist": "ACRAZE Tech Drop Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "cBSYJqv0Fjc"
+  },
+  {
+    "title": "Laad Piya Ke x Heads Will Roll",
+    "artist": "A-Trak Club Banger Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "hRxv0EmgEaY"
+  },
+  {
+    "title": "Bhookh (Gulzaar Chhaniwala) x Turn Off The Lights",
+    "artist": "Fred Again.. Bass Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Uw64lL583uU"
+  },
+  {
+    "title": "Diler Harkhiya - Kaleshi Chori x Turn Down For What",
+    "artist": "DJ Snake Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "702uU0t65og"
+  },
+  {
+    "title": "Chunni Me Chunni x Riverside",
+    "artist": "Sidney Samson Bounce Tech Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "V775PPuBc7Y"
+  },
+  {
+    "title": "Thada Bhartar x Booyah",
+    "artist": "Showtek Festival Peak-Time Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "QCyIY10KBnk"
+  },
+  {
+    "title": "Fauji Faujan x Mammoth",
+    "artist": "DVLM Mainstage Big-Room Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "3Qq7kNjg-KY"
+  },
+  {
+    "title": "Kabootar x Low",
+    "artist": "Flo Rida Heavy Bassline Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "LUL_42vsLVE"
+  },
+  {
+    "title": "Gaam Ka Desi x Turn Off The Lights",
+    "artist": "Fred Again.. Style Hard Indo-Bass Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Q22MCFC0CP0"
+  },
+  {
+    "title": "Kala Chashma Drip x Kernkraft 400",
+    "artist": "Zombie Nation Aggressive Big-Room Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ZPonBufRfBg"
+  },
+  {
+    "title": "Moto (Ajay Hooda) x Booyah",
+    "artist": "Showtek Festival Trap Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "a7ANDh9k76o"
+  },
+  {
+    "title": "Choudhar Jaat Ki x Ferrari",
+    "artist": "James Hype Aggressive Tech Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "CgeleP7nWN0"
+  },
+  {
+    "title": "Boli Haryanvi x Bounce Generation",
+    "artist": "TJR Hard Bounce Festival Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "aevDBNHf5zs"
+  },
+  {
+    "title": "Diler Harkesh x Mammoth",
+    "artist": "DVLM Aggressive Mainstage Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "4kT0NXiu4Hk"
+  },
+  {
+    "title": "Bandook Chalegi x Bonkers",
+    "artist": "Dizzee Rascal Heavy Bass Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "P7dKhiJXSKI"
+  },
+  {
+    "title": "Jail Karawegi x Rave Tool",
+    "artist": "High-Energy Industrial Drop Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "F-iiuSk0pgw"
+  },
+  {
+    "title": "Gajban Paani Ne Chali x Pepas",
+    "artist": "Farruko Latin-House Heavy Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "kAhcPRCIFvk"
+  },
+  {
+    "title": "Laung Gawacha x Bangarang",
+    "artist": "Nucleya x Skrillex (Festival Trap Mashup)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "oVkS1Ff4AhY"
+  },
+  {
+    "title": "Tamil Fever x Lean On",
+    "artist": "Nucleya x Major Lazer (Desi Moombahton Flip)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "dVYQOW2CIDw"
+  },
+  {
+    "title": "Aaja x Magenta Riddim",
+    "artist": "Nucleya x DJ Snake (Bass Mashup)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "op4B9sNGi0k"
+  },
+  {
+    "title": "Bass Rani x Kaolo",
+    "artist": "Nucleya x Yellow Claw (Hard Trap Edit)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "SoSMY5CVIXo"
+  },
+  {
+    "title": "Bhayanak Atma x Do It To It",
+    "artist": "Nucleya x ACRAZE (Tech Bass Flip)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "z6H7QX0fQrE"
+  },
+  {
+    "title": "Akkad Bakkad x Satisfaction",
+    "artist": "Nucleya x Benny Benassi (Street Bass Rework)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "Scene Kya Hai x Losing It",
+    "artist": "Nucleya x FISHER (Bass House Mashup)",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "4zYOO4F1ecw"
+  },
+  {
+    "title": "Nonstop Nucleya Megamix / Festival Mashup",
+    "artist": "Nucleya x DJ Mark",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "FqWQT0eExyE"
   }
 ];
 
@@ -4995,6 +5177,420 @@ const listIndoHouse = [
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true
+  },
+  {
+    "title": "Gypsy (Balam Thanedar) x Losing It",
+    "artist": "FISHER Tech House Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "u31thuMehjM"
+  },
+  {
+    "title": "52 Gaj Ka Daman x Satisfaction",
+    "artist": "Benny Benassi Electro-Tech Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "Chatak Matak x Tremor",
+    "artist": "Dimitri Vegas & Like Mike Heavy Drop Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "Bahu Kale Ki x Ferrari",
+    "artist": "James Hype High-Energy Tech Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "CgeleP7nWN0"
+  },
+  {
+    "title": "Dum Maro Dum",
+    "artist": "Nucleya Remix / Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "gVG8dHCd9PI"
+  },
+  {
+    "title": "Disco Dancer",
+    "artist": "Nucleya Bass Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "f0DkVn-joQc"
+  },
+  {
+    "title": "Aao Huzoor Tumko",
+    "artist": "Nucleya Trap Remix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "5QWW2zTvJHo"
+  },
+  {
+    "title": "Raat Baaki Baat Baaki",
+    "artist": "Nucleya Bassline Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "W81HtSrG4LA"
+  },
+  {
+    "title": "Chandan Sa Badan",
+    "artist": "Nucleya Moombahton Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "vKLayRJY_ac"
+  },
+  {
+    "title": "Boom Boom",
+    "artist": "Nucleya Street Bass Remix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "azKJCG9RNd0"
+  },
+  {
+    "title": "Mein Ek Chor",
+    "artist": "Nucleya Glitch-Hop Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "PfJJlQbWtcs"
+  },
+  {
+    "title": "Solid Body x Drugs From Amsterdam",
+    "artist": "Mau P Minimal Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Gulzaar Chhaniwala - Dada x Kernkraft 400",
+    "artist": "Zombie Nation Big-Room Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "rXxXOuZYECA"
+  },
+  {
+    "title": "Goli Chal Javegi x Animals",
+    "artist": "Martin Garrix Peak-Time Festival Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "gCYcHz2k5x0"
+  },
+  {
+    "title": "Badli Badli Laage x Move Your Body",
+    "artist": "Öwnboss Bass House Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "gi0nqupQ94E"
+  },
+  {
+    "title": "Moto x Danza Kuduro",
+    "artist": "High-Tempo Latin Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "nll9oomd_gY"
+  },
+  {
+    "title": "Chambal Ke Daaku x Spaceman",
+    "artist": "Hardwell Festival Drop Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "rJiTPa3G4r8"
+  },
+  {
+    "title": "Aaj Ki Raat (Stree 2) x Losing It",
+    "artist": "FISHER Hard Tech House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "S3MCXK0vflk"
+  },
+  {
+    "title": "Tauba Tauba (Bad Newz) x Ferrari",
+    "artist": "James Hype High-BPM Aggressive Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "LK7-_dgAVQE"
+  },
+  {
+    "title": "Taras (Munjya) x Drugs From Amsterdam",
+    "artist": "Mau P Minimal Hard-Kick Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Arjan Vailly (Animal) x Rave Tool",
+    "artist": "Industrial Dark Techno Peak Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "zqGW6x_5N0k"
+  },
+  {
+    "title": "Sher Khul Gaye (Fighter) x Satisfaction",
+    "artist": "Benny Benassi Electro-Tech Crunch Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "exdsbFvhocI"
+  },
+  {
+    "title": "Choli Ke Peeche (Crew) x Do It To It",
+    "artist": "ACRAZE Hard Bass Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "co4EBYZZhg4"
+  },
+  {
+    "title": "Antidote (Karan Aujla) x Animals",
+    "artist": "Martin Garrix Big-Room Festival Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "lvzAxbs_x4w"
+  },
+  {
+    "title": "Winning Speech (Karan Aujla) x Spaceman",
+    "artist": "Hardwell Peak-Time Heavy Kick Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "zXHgLwShHI8"
+  },
+  {
+    "title": "Tauba Tauba x Losing It",
+    "artist": "Karan Aujla x FISHER Tech-House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Winning Speech x Laserbeam",
+    "artist": "Karan Aujla x Ray Volpe Dubstep Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "EyI2ChkxL0c"
+  },
+  {
+    "title": "Softly x Do It To It",
+    "artist": "Karan Aujla x ACRAZE Tech-House Groove",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "6wwuEXlIniU"
+  },
+  {
+    "title": "52 Bars x Ferrari",
+    "artist": "Karan Aujla x James Hype Club House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "4DfVxVeqk2o"
+  },
+  {
+    "title": "Admirin' You x Move Your Body",
+    "artist": "Karan Aujla x Öwnboss Brazilian Bass Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "k85UB5b6pJU"
+  },
+  {
+    "title": "Antidote x Satisfaction",
+    "artist": "Karan Aujla x Benny Benassi Electro-House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "D3MbiqzktkY"
+  },
+  {
+    "title": "On Top x Tremor",
+    "artist": "Karan Aujla x Martin Garrix & DVLM Festival Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "White Brown Black x Drugs From Amsterdam",
+    "artist": "Karan Aujla & Avvy Sra x Mau P Minimal Tech Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "BtQp2U6hJII"
+  },
+  {
+    "title": "Check Kar (Parmish Verma) x Tsunami",
+    "artist": "DVBBS & Borgeous Hard-Drop Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "0EWbonj7f18"
+  },
+  {
+    "title": "God Damn (Badshah x Karan Aujla) x Mammoth",
+    "artist": "DVLM Heavy Mainstage Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chambal Ka Daku x Laserbeam",
+    "artist": "Ray Volpe Style Trap/Hard-Drop Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "f4lJx5IufPE"
+  },
+  {
+    "title": "Gypsy (Balam Thanedar) x Tremor",
+    "artist": "DVLM Big-Room Festival Banger",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "Bahu Kale Ki x Satisfaction",
+    "artist": "Benny Benassi Electro-Tech Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "2 Numbari x Losing It",
+    "artist": "FISHER Style Tech-Bass Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "o3WdLtpWM_c"
+  },
+  {
+    "title": "Badnam Gabru x Move Your Body",
+    "artist": "Öwnboss Hard Bass House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "d2QaN6jHWFI"
+  },
+  {
+    "title": "Randa Party x Spaceman",
+    "artist": "Hardwell Peak-Time Festival Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "ppy-fgbPn2s"
+  },
+  {
+    "title": "Solid Body x Drugs From Amsterdam",
+    "artist": "Mau P Minimal Aggressive Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Dada Sadhu x Animals",
+    "artist": "Martin Garrix Big-Room Aggressive Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "gCYcHz2k5x0"
+  },
+  {
+    "title": "Systum (Elvish Yadav / Masoom Sharma) x Do It To It",
+    "artist": "Heavy Tech-House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "VGAdlwHcbqs"
+  },
+  {
+    "title": "52 Gaj Ka Daman x Heads Will Roll",
+    "artist": "High-BPM Electro Club Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "NcsFsq7a6vg"
+  },
+  {
+    "title": "Aaj Ki Raat x Tremor",
+    "artist": "Stree 2 x DVLM & Martin Garrix Big-Room Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "U2QkIUhT6Jw"
+  },
+  {
+    "title": "Malhari x Laserbeam",
+    "artist": "Bajirao Mastani x Ray Volpe Dubstep Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true
+  },
+  {
+    "title": "Chaiyya Chaiyya x Kernkraft 400",
+    "artist": "A.R. Rahman x Zombie Nation Peak Rave Synth",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "79TEKzCxZM0"
+  },
+  {
+    "title": "Badtameez Dil x Spaceman",
+    "artist": "Yeh Jawaani Hai Deewani x Hardwell Big-Room Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "WRz22ibD3qI"
+  },
+  {
+    "title": "Dhan Te Nan x Mammoth",
+    "artist": "Kaminey x DVLM & MOGUAI Mainstage Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "AKF2whlGnr4"
+  },
+  {
+    "title": "Zingaat x Booyah",
+    "artist": "Dhadak x Showtek Dutch-House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "bsytWBV3XVo"
+  },
+  {
+    "title": "Jee Karda (Badlapur Vocals) x Turn Off The Lights",
+    "artist": "Fred Again.. Hard Bass Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isIndoHouse": true,
+    "youtubeId": "KAIyRiigews"
   }
 ];
 const listAfro = [
@@ -5572,6 +6168,357 @@ const listAfro = [
     "film": "Remix",
     "isRemix": true,
     "isAfro": true
+  },
+  {
+    "title": "Chhore NCR Aale x Baianá",
+    "artist": "Bakermat Afro-Tech Percussive Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "iaGjz4dtr3o"
+  },
+  {
+    "title": "Lala Lala Lori x Gasolina",
+    "artist": "Daddy Yankee Latin House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "BYRUn1DtccE"
+  },
+  {
+    "title": "Softly x Mwaki",
+    "artist": "Karan Aujla x Zerb Afro-House Rhythm",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "XnDwZTaqHOs"
+  },
+  {
+    "title": "IDK HOW x Turn Off The Lights",
+    "artist": "Karan Aujla x Fred Again.. UK Garage / Bass Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Uw64lL583uU"
+  },
+  {
+    "title": "Jee Ni Lagda x Anchor Point",
+    "artist": "Karan Aujla x Groovedev Organic Tribal House",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "BXNxrT59MzQ"
+  },
+  {
+    "title": "Players x Temperature",
+    "artist": "Badshah & Karan Aujla x Sean Paul Club Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "CeFQO9MQNqs"
+  },
+  {
+    "title": "Chitta Kurta x Heads Will Roll",
+    "artist": "Karan Aujla x A-Trak Electro Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "o9PY6NsB3_E"
+  },
+  {
+    "title": "Jail Karawegi x Tsunami",
+    "artist": "DVBBS & Borgeous Hard-Drop Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "0EWbonj7f18"
+  },
+  {
+    "title": "Haryanvi Mashup (Diler Harkhiya / Renuka Panwar) x Rave Tool",
+    "artist": "Continuous Peak-Drop Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "BDWVdumiNJk"
+  },
+  {
+    "title": "Gulzaar Chhaniwala Medley x Bounce Generation",
+    "artist": "High-BPM Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "z6sDIc1Zqzs"
+  },
+  {
+    "title": "Big Dawgs (Hanumankind) x Laserbeam",
+    "artist": "Ray Volpe Heavy Festival Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true
+  },
+  {
+    "title": "Taambdi Chaamdi x Tremor",
+    "artist": "Dimitri Vegas & Like Mike Aggressive Mainstage Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "Illuminati (Aavesham) x Move Your Body",
+    "artist": "Öwnboss Bass House Heavy Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Hx0koX2kcio"
+  },
+  {
+    "title": "Aayi Nai (Stree 2) x Booyah",
+    "artist": "Showtek Hardstyle / Peak Drop Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "nFgsBxw-zWQ"
+  },
+  {
+    "title": "Dhurandhar x Kernkraft 400",
+    "artist": "Zombie Nation Big-Room Aggressive Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "x2DfXg8aslY"
+  },
+  {
+    "title": "Blockbuster (Faris Shafi) x Turn Down For What",
+    "artist": "DJ Snake 808 Trap Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "-urTPhh7gNk"
+  },
+  {
+    "title": "Let's Nacho x Tamil Fever",
+    "artist": "Nucleya x Benny Dayal x Badshah",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "dVYQOW2CIDw"
+  },
+  {
+    "title": "Laung Gawacha (Nucleya Bass Rani Flip)",
+    "artist": "ft. Avneet Khurmi",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "l12_JIQ2TqA"
+  },
+  {
+    "title": "Aaja (Nucleya Street Bass Mashup)",
+    "artist": "ft. Avneet Khurmi & Guri Gangsta",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "slNebO7Yips"
+  },
+  {
+    "title": "Bhayanak Atma (Nucleya Festival Flip)",
+    "artist": "ft. Gagan Mudgal",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "z6H7QX0fQrE"
+  },
+  {
+    "title": "Scene Kya Hai",
+    "artist": "Nucleya x DIVINE Bass Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "4zYOO4F1ecw"
+  },
+  {
+    "title": "Jind Mahi (Nucleya Bass Edit)",
+    "artist": "ft. Avneet Khurmi",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "EyvA65wimJs"
+  },
+  {
+    "title": "Bakar Bakar",
+    "artist": "Across The Spider-Verse Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "UcgTeZVBNZw"
+  },
+  {
+    "title": "Jadi Buti (Nucleya VIP Remix / Mashup)",
+    "artist": "Major Lazer x Nucleya ft. Rashmeet Kaur",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "4IymJWeIV-k"
+  },
+  {
+    "title": "Mirza x Trap Drop",
+    "artist": "Nucleya ft. Raftaar & Rashmeet Kaur",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "7fM4u782EuY"
+  },
+  {
+    "title": "Chennai Bass (South Indian Folk x Dubstep Mashup)",
+    "artist": "Nucleya ft. Sivamani & Chinna Ponnu",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "vdy4koj9haA"
+  },
+  {
+    "title": "Bangla Bass (Folk-Bass Mashup)",
+    "artist": "Nucleya ft. Mou Sultana & Brooklyn Shanti",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "57_x2GHX7Zw"
+  },
+  {
+    "title": "Mumbai Dance (Street Moombahton Edit)",
+    "artist": "ft. Julius Sylvest & Gagan Mudgal",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "f0DkVn-joQc"
+  },
+  {
+    "title": "Akkad Bakkad (Desi Bass Drop)",
+    "artist": "Nucleya",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "3mVFS8suPb0"
+  },
+  {
+    "title": "Bell Gaadi (Koocha Trap Edit)",
+    "artist": "ft. Chinna Ponnu & Relok",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Q0Bm3lZ5jzs"
+  },
+  {
+    "title": "Thandi Hawa (Nucleya Official Remix / Mashup)",
+    "artist": "Ritviz x Nucleya",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "UNNOR690320"
+  },
+  {
+    "title": "Roz (Baaraat Bass Edit)",
+    "artist": "Ritviz x Nucleya",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "WCauHgLeqZc"
+  },
+  {
+    "title": "Ari Ari (Punjabi Folk-Bass Mashup)",
+    "artist": "Ritviz x Nucleya",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "uk-MjNSgrlY"
+  },
+  {
+    "title": "Tauba Tauba x Losing It",
+    "artist": "Bad Newz x FISHER Tech House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "LK7-_dgAVQE"
+  },
+  {
+    "title": "Dum Maaro Dum x Turn Off The Lights",
+    "artist": "Asha Bhosle x Fred Again.. London Bass Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "c0-hvjV2A5Y"
+  },
+  {
+    "title": "Sadda Haq x Heads Will Roll",
+    "artist": "Rockstar x A-Trak Peak-Time Electro Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "RUIFRhHDLqY"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Bonkers",
+    "artist": "Delhi Belly x Dizzee Rascal Bass Rave Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "IQEDu8SPHao"
+  },
+  {
+    "title": "Kala Chashma x Bounce Generation",
+    "artist": "Baar Baar Dekho x TJR & VINAI Bounce Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "k4yXQkG2s1E"
+  },
+  {
+    "title": "Besharam Rang x Drugs From Amsterdam",
+    "artist": "Pathaan x Mau P Minimal Tech Punch",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Aankh Marey x Move Your Body",
+    "artist": "Simmba x Öwnboss & FAST BOY Brazilian Bass Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "_KhQT-LGb-4"
+  },
+  {
+    "title": "Choli Ke Peeche x Satisfaction",
+    "artist": "Crew x Benny Benassi Electro-Tech Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "Ghungroo x Ferrari",
+    "artist": "War x James Hype Percussive Tech-House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "9uuCfUe7mb0"
+  },
+  {
+    "title": "Dope Shope x Do It To It",
+    "artist": "Yo Yo Honey Singh x ACRAZE Slap / Tech House Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "vuCA_Xn5Kkg"
+  },
+  {
+    "title": "Jaldi Aao (Bella Ciao x Desi Street Bass Mashup)",
+    "artist": "Nucleya (Money Heist India)",
+    "film": "Remix",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "nNDbFYfIU1A"
   }
 ];
 const listEAAfro = [
@@ -6473,6 +7420,334 @@ const listSufi = [
     "film": "Remix",
     "isRemix": true,
     "isSufi": true
+  },
+  {
+    "title": "Tajdar-E-Haram x Bhar Do Jholi",
+    "artist": "Atif Aslam & Sabri Brothers Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "a18py61_F_w"
+  },
+  {
+    "title": "Afreen Afreen x Sanu Ek Pal Chain",
+    "artist": "Acoustic Guitar Sufi Fusion",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "kw4tT7SCmaY"
+  },
+  {
+    "title": "Kun Faya Kun x Arziyan",
+    "artist": "Deep Spiritual Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "uizBajSQurU"
+  },
+  {
+    "title": "Iktara x Kabira",
+    "artist": "Acoustic Indie-Sufi Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "55n0XterUkI"
+  },
+  {
+    "title": "Tu Mane Ya Na Mane x Bulla Ki Jaana",
+    "artist": "Wadali Brothers x Rabbi Shergill Fusion",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "coSX7DqD7MY"
+  },
+  {
+    "title": "O Re Piya x Maula Mere Maula",
+    "artist": "Soulful Rahat Fateh Ali Khan Blend",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "llS3TVkGA04"
+  },
+  {
+    "title": "Nit Khair Manga x Halka Halka Suroor",
+    "artist": "Nusrat Fateh Ali Khan Classic Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "cmG51rEThuM"
+  },
+  {
+    "title": "Chaap Tilak x Dama Dam Mast Qalandar",
+    "artist": "Raw Acoustic Qawwali Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "3Tj3pbUy55s"
+  },
+  {
+    "title": "Kun Faya Kun x Mwaki",
+    "artist": "Zerb Style Afro-House Spiritual Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "y6iMvNkAQt4"
+  },
+  {
+    "title": "Mera Yaar (Wo Noor Ka Jharna) x Alif Allah",
+    "artist": "DJ Abhii Extended Sufi House Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "ycS5PagXvhQ"
+  },
+  {
+    "title": "Tajdar-E-Haram x Miracle",
+    "artist": "Calvin Harris Melodic Techno Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "e9xxt8VPvSA"
+  },
+  {
+    "title": "Afreen Afreen x Move Your Body",
+    "artist": "Öwnboss Style Bass-Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "CASyPdNqc_o"
+  },
+  {
+    "title": "Kinna Sohna Tenu x Drugs From Amsterdam",
+    "artist": "Mau P Minimal Tech Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Rashke Qamar x Losing It",
+    "artist": "FISHER Tech House Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "oUbpmjOgmmU"
+  },
+  {
+    "title": "Bol Kaffara Kya Hoga x Do It To It",
+    "artist": "ACRAZE Tech Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "wBk4o-NrKN0"
+  },
+  {
+    "title": "Yeh Tune Kya Kiya x Turn Off The Lights",
+    "artist": "Fred Again.. Style Deep House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "Q22MCFC0CP0"
+  },
+  {
+    "title": "Chhaap Tilak x Baianá",
+    "artist": "Bakermat Afro-House Spiritual Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "iaGjz4dtr3o"
+  },
+  {
+    "title": "Jaan Se Guzarte Hain x Ferrari",
+    "artist": "James Hype Tech House Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "vj-2HsjJX94"
+  },
+  {
+    "title": "Bulleya x Tremor",
+    "artist": "High-Energy Big-Room Festival Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "09Rr3BIe5s0"
+  },
+  {
+    "title": "Khwaja Mere Khwaja x Age Of Love",
+    "artist": "Peak-Time Melodic Techno Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "4YbAaRFk70o"
+  },
+  {
+    "title": "Nit Khair Manga x Deep Down",
+    "artist": "Alok Melodic House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "RoF8lw6q57U"
+  },
+  {
+    "title": "Sanu Ek Pal Chain x Anchor Point",
+    "artist": "Organic Afro-House Groove",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "_fb72ArcgBk"
+  },
+  {
+    "title": "Ali Maula x Satisfaction",
+    "artist": "Benny Benassi Tech House Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "Afreen Afreen x Sanu Ek Pal Chain (Acoustic)",
+    "artist": "Acoustic Sufi Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "34BTjZd-dYE"
+  },
+  {
+    "title": "Halka Halka Suroor x Nit Khair Manga",
+    "artist": "Classic NFAK Qawwali Blend",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "cmG51rEThuM"
+  },
+  {
+    "title": "Kinna Sohna Tenu x Tere Bin Nahi Lagda",
+    "artist": "Soulful Romantic Sufi Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "55n0XterUkI"
+  },
+  {
+    "title": "Rashke Qamar x Sochta Hoon Ke Woh Kitne Masoom The",
+    "artist": "Qawwali Fusion Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "RaRHiuYXr80"
+  },
+  {
+    "title": "Kali Kali Zulfon Ke x Mast Nazron Se Allah Bachaye",
+    "artist": "Fast-Tempo NFAK Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "o-7b6ctrQX0"
+  },
+  {
+    "title": "Mera Piya Ghar Aaya x Dama Dam Mast Qalandar",
+    "artist": "High-Energy Traditional Sufi Mashup",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "K3FOnamKIm4"
+  },
+  {
+    "title": "Kiven Mukhre Ton Nazran Hatawan x Akhiyan Udeek Diyan",
+    "artist": "Melodic Folk Sufi Blend",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "92fsyPmSmBM"
+  },
+  {
+    "title": "Tumhein Dillagi Bhool Jaani Padegi x Halka Halka Suroor",
+    "artist": "Emotional Sufi Medley",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "MpmUpxuBWOs"
+  },
+  {
+    "title": "Rashke Qamar x Losing It (FISHER)",
+    "artist": "Tech House Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "oUbpmjOgmmU"
+  },
+  {
+    "title": "Kinna Sohna Tenu x Drugs From Amsterdam (Mau P)",
+    "artist": "Minimal Tech Club Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "juuIhW8V1Xw"
+  },
+  {
+    "title": "Nit Khair Manga x Deep Down (Alok)",
+    "artist": "Melodic House Extended Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "cmG51rEThuM"
+  },
+  {
+    "title": "Sanu Ek Pal Chain x Anchor Point (Organic)",
+    "artist": "Organic Afro-House Spiritual Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "m4j3nvuULSM"
+  },
+  {
+    "title": "Halka Halka Suroor x Satisfaction (Benny Benassi)",
+    "artist": "Driving Electro-Tech Bootleg",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "lpV5UZaiq3s"
+  },
+  {
+    "title": "Kali Kali Zulfon Ke x Ferrari (James Hype)",
+    "artist": "High-BPM Peak-Time Tech Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "qA5zMom6WAc"
+  },
+  {
+    "title": "Mera Piya Ghar Aaya x Tremor (DVLM)",
+    "artist": "Big-Room Festival Drop Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "hC2uh53pc20"
+  },
+  {
+    "title": "Mast Nazron Se x Do It To It (ACRAZE)",
+    "artist": "BollyTech Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "6wwuEXlIniU"
+  },
+  {
+    "title": "Tere Bin Nahi Lagda x Baianá (Bakermat)",
+    "artist": "Deep Afro-Tech House Flip",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "H_QO_nmONEU"
+  },
+  {
+    "title": "Kiven Mukhre Ton x Turn Off The Lights (Fred Again..)",
+    "artist": "Melodic Indo-Bass Rework",
+    "film": "Remix",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "s-gVxITC_pI"
   }
 ];
 
