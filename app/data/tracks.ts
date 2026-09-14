@@ -53,7 +53,9 @@ const list1 = [
   { title: "Ranjha", artist: "Organic Deep House Mix", film: "Shershaah", youtubeId: "hPHU3oXzDaw" },
   { title: "Agar Tum Saath Ho", artist: "Atmospheric Deep House Remix", film: "Tamasha", youtubeId: "PYgnCOpmpMU" },
   { title: "Mast Magan", artist: "Melodic Techno Mix", film: "2 States", youtubeId: "ZrhQCtQJ13s" },
-  { title: "Pani Da Rang", artist: "Chill Psytrance / Organic House", film: "Vicky Donor" },
+  { title: "Pani Da Rang", artist: "Chill Psytrance / Organic House", film: "Vicky Donor",
+    youtubeId: "zRzD3-a9_qc"
+  },
   { title: "Galliyan", artist: "Deep House Remix", film: "Ek Villain", youtubeId: "CGDezb6Jgoc" },
   { title: "Subha Hun Ki Sham Se", artist: "Deep House Edit", film: "Retro", youtubeId: "8dfIIse1fmM" },
   { title: "Dil Diyan Gallan", artist: "Deep House / Chillstep Mix", film: "Tiger Zinda Hai", youtubeId: "IdPlBcRZjbI" },
@@ -84,7 +86,9 @@ const list1 = [
   { title: "Nashe Si Chadh Gayi", artist: "Tech House Remix", film: "Befikre", youtubeId: "u4FbmqEW_AU" },
   { title: "Nadiyon Paar", artist: "Slap House / Tech Remix", film: "Roohi", youtubeId: "K5wQDhYiUIs" },
   { title: "O Bedardeya", artist: "Deep Slap House Mix", film: "Tu Jhoothi Main Makkaar", youtubeId: "IBxJUr_zFuI" },
-  { title: "Gimme More x Desi Beat", artist: "Tech House Flip", film: "Bodyguard" },
+  { title: "Gimme More x Desi Beat", artist: "Tech House Flip", film: "Bodyguard",
+    youtubeId: "cARCtDPFt3g"
+  },
   { title: "Daddy Whip", artist: "Desi Bass House Edit", film: "Single", youtubeId: "ZWNCR9cfkPw" },
   { title: "Kahani Suno", artist: "Tech House Remix", film: "Kaifi Khalil", youtubeId: "gaPSrCXRPsw" },
 
@@ -134,13 +138,17 @@ const list1 = [
 ];
 
 const list2 = [
-  { title: "Jimmy Jimmy (Trance)", artist: "Sameer Sen, Abhijit, Paroma, etc.", film: "Disco Dancer Remix" },
+  { title: "Jimmy Jimmy (Trance)", artist: "Sameer Sen, Abhijit, Paroma, etc.", film: "Disco Dancer Remix",
+    youtubeId: "fRSLPx0HSvw"
+  },
   { title: "PYAAR KA PUNCHNAMA - Remix", artist: "Mika Singh, Luv Ranjan, Akasa", film: "Pyaar Ka Punchnama", youtubeId: "zN6YlySa_44" },
   { title: "Timmy Reworks", artist: "Timmy Reworks, Pritam", film: "Pritam Edit", youtubeId: "LemcOS6EGBQ" },
   { title: "Bhool Bhulaiyaa", artist: "Timmy Reworks, Pritam", film: "Bhool Bhulaiyaa", youtubeId: "mll82yN_XZA" },
   { title: "Ek Do Teen - Psy Trance", artist: "Meet Bros, Neha Kakkar, Dhvani Bhanushali", film: "Baaghi 2", youtubeId: "JhaVdknWerA" },
   { title: "Dum Karo Dum (Psytrance)", artist: "Meet Bros, Dev Negi", film: "Dum Maaro Dum", youtubeId: "NDmrjwJXBlU" },
-  { title: "Aao Huzur - Psytrance", artist: "Meet Bros, Neha Kakkar, Monali Thakur", film: "Psy Remix" },
+  { title: "Aao Huzur - Psytrance", artist: "Meet Bros, Neha Kakkar, Monali Thakur", film: "Psy Remix",
+    youtubeId: "DxH123syr4o"
+  },
   { title: "Aap Jaisa Koi (Psytrance)", artist: "Arijit Singh, Yash Narvekar, Dhvani Bhanushali", film: "An Action Hero", youtubeId: "Ovu5FepCzcc" },
   { title: "Ang Laga De - Melodic Techno Remix", artist: "Deepanshu, Melodic", film: "Goliyon Ki Raasleela", youtubeId: "VS2WMYuDk1Y" },
   { title: "Yeh Sham Mastani - Bollywood Trance", artist: "Deepanshu, Timmy Reworks", film: "Retro Remix", youtubeId: "LemcOS6EGBQ" },
@@ -175,12 +183,16 @@ const list2 = [
   { title: "Chot Dil Pe Lagi - Slap Mix", artist: "Kumar Sanu, Alka Yagnik, DJ Rink", film: "Dil Ka Rishta", youtubeId: "zCamH8ur5hw" },
   { title: "Dil To Pagal Hai - Club Mix", artist: "DJ Rink, Uttam Singh", film: "Dil To Pagal Hai", youtubeId: "zIdexaFwsck" },
   { title: "Tum - Slap Flip", artist: "Pritam", film: "Ludo", youtubeId: "iKCGyy04ato" },
-  { title: "Roop Tera Mastana - Slap Mix", artist: "Kishore Kumar, R.D. Burman", film: "Aradhana" },
+  { title: "Roop Tera Mastana - Slap Mix", artist: "Kishore Kumar, R.D. Burman", film: "Aradhana",
+    youtubeId: "dyEdcOhxJNQ"
+  },
   { title: "Sanam Re - Psy Trance Mix", artist: "Mithoon, Arijit Singh", film: "Sanam Re", youtubeId: "yCldJqnoNcw" },
   { title: "Zara Zara - Psytrance Mix", artist: "Bombay Jayashri, Harris Jayaraj", film: "Rehnaa Hai Terre Dil Mein", youtubeId: "buI_0KiInJ8" },
   { title: "Shona Shona - Remix", artist: "Tony Kakkar, Neha Kakkar", film: "Single", youtubeId: "N9lqbhVVTck" },
   { title: "Piya Tu Ab To Aaja (Trance Remix)", artist: "Asha Bhosle, R.D. Burman", film: "Caravan", youtubeId: "hOroPhFi4do" },
-  { title: "Aaj Tera Jawan - Slap House Remix", artist: "DJ Rink, Amit Kumar", film: "Kasme Vaade" },
+  { title: "Aaj Tera Jawan - Slap House Remix", artist: "DJ Rink, Amit Kumar", film: "Kasme Vaade",
+    youtubeId: "NlsVaeP6CEA"
+  },
   { title: "Yeh Jawaani Hai Deewani - Off-The-Wall Edit", artist: "Kishore Kumar, R.D. Burman", film: "Yeh Jawaani Hai Deewani", youtubeId: "jHNNMj5bNQw" },
   { title: "Humma Humma - Tech House Mix", artist: "A.R. Rahman, Badshah", film: "OK Jaanu", youtubeId: "H8HEFjx552I" },
   { title: "Dil Cheez Kya Hai - Deep House Remix", artist: "Asha Bhosle, Khayyam", film: "Umrao Jaan", youtubeId: "eFcs3p1moMA" },
@@ -203,7 +215,9 @@ const list3 = [
   { title: "Silsila Yeh Chahat Ka", artist: "Progressive Psytrance Edit", film: "Devdas", youtubeId: "NQDlHbS5ya8" },
   { title: "Bolo Har Har Har (Shiva)", artist: "High-BPM Psy Edit", film: "Shivaay", youtubeId: "nMjYG4uayM4" },
   { title: "Hai Rama Ye Kya Hua", artist: "Progressive Psy Remix", film: "Rangeela", youtubeId: "byAxJ9N_1dA" },
-  { title: "Tip Tip Barsa Phani", artist: "Dark Psytrance Flip", film: "Mohra" },
+  { title: "Tip Tip Barsa Phani", artist: "Dark Psytrance Flip", film: "Mohra",
+    youtubeId: "yMUA3wqd1qA"
+  },
   { title: "Piya (DJ NYK)", artist: "Ethnic Progressive Psy", film: "DJ NYK", youtubeId: "aiIUwVKd3Yw" },
   { title: "Shiva Tandava Stotram", artist: "Festival Psytrance Remix", film: "Shiva Stotram", youtubeId: "cxzUFGftYeo" },
   { title: "Deva Deva (Brahmastra)", artist: "Progressive Psy Edit", film: "Brahmāstra", youtubeId: "6l8RnAIaVpo" },
@@ -217,7 +231,9 @@ const list3 = [
   { title: "Sun Saathiya", artist: "Progressive Psytrance Edit", film: "ABCD 2", youtubeId: "FrgAmPnMwRA" },
   { title: "Dard-E-Disco", artist: "Dark Psytrance Flip", film: "Om Shanti Om", youtubeId: "Jnymuo4f-1A" },
   { title: "Kamli (Dhoom 3)", artist: "High-Energy Psy Remix", film: "Dhoom 3", youtubeId: "KuT0l96RXBA" },
-  { title: "Jhumka Gira Re", artist: "Retro Psytrance Edit", film: "Classic" },
+  { title: "Jhumka Gira Re", artist: "Retro Psytrance Edit", film: "Classic",
+    youtubeId: "04-qv2QoEJU"
+  },
   { title: "Malhari", artist: "High-BPM Dhol Psytrance Mix", film: "Bajirao Mastani", youtubeId: "CQBPNOX80bI" },
   { title: "Dil To Pagal Hai", artist: "Progressive Psy Edit", film: "Dil To Pagal Hai", youtubeId: "J0ZfvjK__ko" },
   { title: "Saiyaan (Kailash Kher)", artist: "Deep Progressive Psy", film: "Kailash Kher", youtubeId: "TuUVVKVdZm4" },
@@ -232,23 +248,45 @@ const list3 = [
   { title: "Jai Jai Shivshankar", artist: "Festival Psytrance Remix", film: "War", youtubeId: "oGneAab3e88" },
   { title: "Aankh Marey", artist: "Slap-Psytrance Mix", film: "Simmba", youtubeId: "Ay-kHJZzmsw" },
   { title: "Aisa Jadoo Dala Re", artist: "Retro Psytrance Edit", film: "Khakee", youtubeId: "ToL9ecPfP_Y" },
-  { title: "Kukdoo Koo (Barfi!)", artist: "Bounce Psy Remix", film: "Barfi!" },
+  { title: "Kukdoo Koo (Barfi!)", artist: "Bounce Psy Remix", film: "Barfi!",
+    youtubeId: "av5YCk2U5Ac"
+  },
   { title: "Nadiyon Paar", artist: "Dark Progressive Psy Edit", film: "Roohi", youtubeId: "PKno7lqfHsU" },
-  { title: "Chhalia (Kurbaan)", artist: "Psytrance Edit", film: "Kurbaan" },
+  { title: "Chhalia (Kurbaan)", artist: "Psytrance Edit", film: "Kurbaan",
+    youtubeId: "b0PfRRvQPOg"
+  },
   { title: "Duniyaa (Luka Chuppi)", artist: "Melodic Psy Remix", film: "Luka Chuppi", youtubeId: "vzAr40-v3u0" },
   { title: "Mast Kalandar", artist: "Tribal Sufi Psytrance Mix", film: "Heyy Babyy", youtubeId: "AwWwjEHHydQ" },
-  { title: "Pasoori", artist: "Indian/Pakistani Psytrance Bootleg", film: "Coke Studio" },
-  { title: "Param Sundari", artist: "Folk Psytrance Flip", film: "Mimi" },
-  { title: "Pinga (Bajirao Mastani)", artist: "Classical Psytrance Remix", film: "Bajirao Mastani" },
-  { title: "Breathless (Shankar Mahadevan)", artist: "High-BPM Psy Remix", film: "Shankar Mahadevan" },
-  { title: "Jaan Nisaar", artist: "Atmospheric Progressive Psy Edit", film: "Kedarnath" },
+  { title: "Pasoori", artist: "Indian/Pakistani Psytrance Bootleg", film: "Coke Studio",
+    youtubeId: "HzMfmeKITaw"
+  },
+  { title: "Param Sundari", artist: "Folk Psytrance Flip", film: "Mimi",
+    youtubeId: "w4ClQO0FFQg"
+  },
+  { title: "Pinga (Bajirao Mastani)", artist: "Classical Psytrance Remix", film: "Bajirao Mastani",
+    youtubeId: "KMuOUIfFOPw"
+  },
+  { title: "Breathless (Shankar Mahadevan)", artist: "High-BPM Psy Remix", film: "Shankar Mahadevan",
+    youtubeId: "oRnUIwQiP4w"
+  },
+  { title: "Jaan Nisaar", artist: "Atmospheric Progressive Psy Edit", film: "Kedarnath",
+    youtubeId: "RF7srXtwub0"
+  },
   { title: "Challa (Jab Tak Hai Jaan)", artist: "Punjabi Folk Psy Edit", film: "Jab Tak Hai Jaan", youtubeId: "b_soLl__eHI" },
-  { title: "O Saki Saki", artist: "High-Energy Psytrance Edit", film: "Batla House" },
+  { title: "O Saki Saki", artist: "High-Energy Psytrance Edit", film: "Batla House",
+    youtubeId: "IUvPVi-D7ho"
+  },
   { title: "Dil Cheez Tujhe Dedi", artist: "Club Psytrance Remix", film: "Airlift", youtubeId: "XKnGKKbK_mo" },
-  { title: "Tattad Tattad", artist: "Gujarati Folk Psy Edit", film: "Goliyon Ki Raasleela" },
-  { title: "Tum Hi Ho", artist: "Deep Progressive Psytrance Remix", film: "Aashiqui 2" },
+  { title: "Tattad Tattad", artist: "Gujarati Folk Psy Edit", film: "Goliyon Ki Raasleela",
+    youtubeId: "sIooFGRBZJY"
+  },
+  { title: "Tum Hi Ho", artist: "Deep Progressive Psytrance Remix", film: "Aashiqui 2",
+    youtubeId: "WjPueYPwsO8"
+  },
   { title: "Ghar Kab Aayoge (Border)", artist: "Emotional Progressive Psy Edit", film: "Border", youtubeId: "oodOj8jx8ds" },
-  { title: "Main Tera Boyfriend", artist: "Drop-Heavy Psytrance Flip", film: "Raabta" },
+  { title: "Main Tera Boyfriend", artist: "Drop-Heavy Psytrance Flip", film: "Raabta",
+    youtubeId: "7uXu91IB3sA"
+  },
   { title: "Piya Ghar Aaya (Remix) Live", artist: "Nusrat Fateh Ali Khan & Asad", film: "Nusrat Fateh Ali Khan", youtubeId: "g4xVDns_PO4", startSeconds: 50 },
 ];
 
@@ -256,156 +294,398 @@ const list4 = [
   { title: "O Maahi (16D Audio)", artist: "Arijit Singh, Pritam, Shah Rukh Khan", film: "Dunki", youtubeId: "1JaMbp6BK0s", isSpatial: true },
   { title: "Chal Tere Ishq Mein", artist: "Neeti Mohan, Vishal Mishra, Mithoon", film: "Gadar 2", youtubeId: "p_oYiDR6S0E", isSpatial: true },
   { title: "Sahiba x Samjho Na (16D Mashup)", artist: "Aditya Rikhari / Wishes", film: "Mashup", youtubeId: "072mkD_3-dA", isSpatial: true },
-  { title: "Qeher (16D Audio)", artist: "Guru Randhawa", film: "Dhamaal 4", isSpatial: true },
-  { title: "Ban Ja Tu (16D Audio)", artist: "Charan Preet x Badshah ft. Ahsii", film: "Single", isSpatial: true },
-  { title: "7.7 Magnitude (16D Heavy Trap Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true },
+  { title: "Qeher (16D Audio)", artist: "Guru Randhawa", film: "Dhamaal 4", isSpatial: true,
+    youtubeId: "vW8f3DsOUtY"
+  },
+  { title: "Ban Ja Tu (16D Audio)", artist: "Charan Preet x Badshah ft. Ahsii", film: "Single", isSpatial: true,
+    youtubeId: "mCKbvedLakE"
+  },
+  { title: "7.7 Magnitude (16D Heavy Trap Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
+    youtubeId: "Pf311ETArlk"
+  },
   { title: "52 Bars (16D Spatial Trap Edit)", artist: "Karan Aujla", film: "Single", youtubeId: "lU3nWOKRqco", isSpatial: true },
-  { title: "Winning Speech (16D Brass & Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true },
-  { title: "Softly (16D Club Trap Remix)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true },
-  { title: "Low Fade / C Walk (16D Spatial Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true },
-  { title: "Admirin' You (16D Festival Trap Drop)", artist: "Karan Aujla ft. Preston Pablo", film: "Single", isSpatial: true },
-  { title: "Players (16D Audio Bass Boost)", artist: "Karan Aujla & Badshah", film: "Single", isSpatial: true },
-  { title: "Levels (16D Hard Drill Bass Drop)", artist: "Sidhu Moose Wala ft. Sunny Malton", film: "Single", isSpatial: true },
+  { title: "Winning Speech (16D Brass & Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true,
+    youtubeId: "vsWxs1tuwDk"
+  },
+  { title: "Softly (16D Club Trap Remix)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
+    youtubeId: "cWMxCE2HTag"
+  },
+  { title: "Low Fade / C Walk (16D Spatial Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true,
+    youtubeId: "3j7bhOvW6jw"
+  },
+  { title: "Admirin' You (16D Festival Trap Drop)", artist: "Karan Aujla ft. Preston Pablo", film: "Single", isSpatial: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  { title: "Players (16D Audio Bass Boost)", artist: "Karan Aujla & Badshah", film: "Single", isSpatial: true,
+    youtubeId: "CeFQO9MQNqs"
+  },
+  { title: "Levels (16D Hard Drill Bass Drop)", artist: "Sidhu Moose Wala ft. Sunny Malton", film: "Single", isSpatial: true,
+    youtubeId: "tpFljbJxZiw"
+  },
   { title: "The Last Ride (16D 90s Boom-Bap / 808 Drop)", artist: "Sidhu Moose Wala, Wazir Patar", film: "Single", youtubeId: "uzEflg9g70o", isSpatial: true },
-  { title: "Moosedrilla (16D Aggressive Drill Drop)", artist: "Sidhu Moose Wala ft. DIVINE", film: "Single", isSpatial: true },
+  { title: "Moosedrilla (16D Aggressive Drill Drop)", artist: "Sidhu Moose Wala ft. DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "GFUJ5mG_4NI"
+  },
 { title: "Devil (16D Heavy Bass Drop)", artist: "Sidhu Moose Wala, Byg Byrd", film: "PBX 1", isSpatial: true, youtubeId: "lnkXQ3dOruY" },
   { title: "G-Shit (16D Audio)", artist: "Sidhu Moose Wala, The Kidd, Blocknoi Twitch", film: "Moosetape", youtubeId: "prwzUKh0ji4", isSpatial: true },
-  { title: "Bitch I’m Back (16D Sliding 808 Drop)", artist: "Sidhu Moose Wala, The Kidd", film: "Single", isSpatial: true },
-  { title: "Same Beef (16D Sub-Bass Drop)", artist: "Sidhu Moose Wala & Bohemia", film: "Single", isSpatial: true },
-  { title: "Baller (16D Massive 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "Cheques (16D Spatial Trap Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "No Love (16D Reverb & Hard Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "One Love (16D Sub-Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "Brown Munde (16D Festival Trap Drop)", artist: "AP Dhillon, Gurinder Gill, Shinda Kahlon", film: "Single", isSpatial: true },
+  { title: "Bitch I’m Back (16D Sliding 808 Drop)", artist: "Sidhu Moose Wala, The Kidd", film: "Single", isSpatial: true,
+    youtubeId: "W5NgXKe4SJk"
+  },
+  { title: "Same Beef (16D Sub-Bass Drop)", artist: "Sidhu Moose Wala & Bohemia", film: "Single", isSpatial: true,
+    youtubeId: "qk2WMmiiVFE"
+  },
+  { title: "Baller (16D Massive 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "xR3V5Ow2dTI"
+  },
+  { title: "Cheques (16D Spatial Trap Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "4tywp83zkmk"
+  },
+  { title: "No Love (16D Reverb & Hard Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "6RrEQJNZwPQ"
+  },
+  { title: "One Love (16D Sub-Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "0pWsCiBvLOk"
+  },
+  { title: "Brown Munde (16D Festival Trap Drop)", artist: "AP Dhillon, Gurinder Gill, Shinda Kahlon", film: "Single", isSpatial: true,
+    youtubeId: "VNs_cCtdbPc"
+  },
   { title: "Insane (16D 360° Moving Bass)", artist: "AP Dhillon, Gurinder Gill", film: "Single", youtubeId: "TeAF3lCuDUk", isSpatial: true },
-  { title: "Excuses (Slowed + 16D Subwoofer Drop)", artist: "AP Dhillon, Intense", film: "Single", isSpatial: true },
-  { title: "Ex Files (16D SMG Drill Drop)", artist: "BAGGH-E SMG, Farmaan SMG, Big Kay SMG, Mxrci", film: "Single", isSpatial: true },
-  { title: "NYPD (16D Dark Drill Drop)", artist: "SMG Crew, Farmaan SMG", film: "Single", isSpatial: true },
-  { title: "Headliner / Shimmy Shimmy (16D Hard Trap Drop)", artist: "Navaan Sandhu, Haakam", film: "Bipolar", isSpatial: true },
-  { title: "Kabze (16D Haryanvi Bass Blast)", artist: "Pintu Pabra, Shiva Choudhary", film: "Single", isSpatial: true },
-  { title: "Naam Chale (16D Audio)", artist: "Vikram Sarkar", film: "Thought Music / All Good Music", isSpatial: true },
-  { title: "Jatt Mehkma (16D 808 Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true },
-  { title: "Moonlight (16D Spatial Bass Edit)", artist: "Yo Yo Honey Singh ft. Priceless", film: "Glory", isSpatial: true },
-  { title: "Payal (16D Heavy Drop Mix)", artist: "Yo Yo Honey Singh ft. Nora Fatehi", film: "Glory", isSpatial: true },
-  { title: "Millionaire (16D Club Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true },
-  { title: "Blue Eyes (Hardstyle / Sub-Bass Boost 16D)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true },
-  { title: "Love Dose (16D Trap Remix)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true },
-  { title: "Dhurandhar - Title Track / Naal Nachna (16D Bass Boosted)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true },
-  { title: "KGF Theme: Monster (16D Extreme Bass Blast)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true },
-  { title: "Vikram Title Track / Rolex Theme (16D Trap Edit)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true },
-  { title: "Sher Khul Gaye (16D Dance Mix)", artist: "Vishal & Shekhar", film: "Fighter", isSpatial: true },
-  { title: "Ghamand Kar (16D Epic War Drums & Bass)", artist: "Ajay-Atul", film: "Tanhaji", isSpatial: true },
-  { title: "Jee Karda (16D Rock-EDM Hard Drop)", artist: "Divya Kumar", film: "Badlapur", isSpatial: true },
-  { title: "Deva Deva (Slowed + 16D Sub-Bass Blast)", artist: "Arijit Singh", film: "Brahmāstra", isSpatial: true },
+  { title: "Excuses (Slowed + 16D Subwoofer Drop)", artist: "AP Dhillon, Intense", film: "Single", isSpatial: true,
+    youtubeId: "vX2cDW8LUWk"
+  },
+  { title: "Ex Files (16D SMG Drill Drop)", artist: "BAGGH-E SMG, Farmaan SMG, Big Kay SMG, Mxrci", film: "Single", isSpatial: true,
+    youtubeId: "phzMx7cZs04"
+  },
+  { title: "NYPD (16D Dark Drill Drop)", artist: "SMG Crew, Farmaan SMG", film: "Single", isSpatial: true,
+    youtubeId: "a5RhLw9SqJE"
+  },
+  { title: "Headliner / Shimmy Shimmy (16D Hard Trap Drop)", artist: "Navaan Sandhu, Haakam", film: "Bipolar", isSpatial: true,
+    youtubeId: "GE6w7DRyqcM"
+  },
+  { title: "Kabze (16D Haryanvi Bass Blast)", artist: "Pintu Pabra, Shiva Choudhary", film: "Single", isSpatial: true,
+    youtubeId: "Oyw1Eo21q5k"
+  },
+  { title: "Naam Chale (16D Audio)", artist: "Vikram Sarkar", film: "Thought Music / All Good Music", isSpatial: true,
+    youtubeId: "tYKrORILFOg"
+  },
+  { title: "Jatt Mehkma (16D 808 Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true,
+    youtubeId: "vrjndQ4BXMU"
+  },
+  { title: "Moonlight (16D Spatial Bass Edit)", artist: "Yo Yo Honey Singh ft. Priceless", film: "Glory", isSpatial: true,
+    youtubeId: "JF42RpxAEko"
+  },
+  { title: "Payal (16D Heavy Drop Mix)", artist: "Yo Yo Honey Singh ft. Nora Fatehi", film: "Glory", isSpatial: true,
+    youtubeId: "a-PAcmi5Kas"
+  },
+  { title: "Millionaire (16D Club Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true,
+    youtubeId: "uiNBqLphO2Y"
+  },
+  { title: "Blue Eyes (Hardstyle / Sub-Bass Boost 16D)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true,
+    youtubeId: "NbyHNASFi6U"
+  },
+  { title: "Love Dose (16D Trap Remix)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true,
+    youtubeId: "KpaSvprz01g"
+  },
+  { title: "Dhurandhar - Title Track / Naal Nachna (16D Bass Boosted)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
+    youtubeId: "TFTnJzWRTJ8"
+  },
+  { title: "KGF Theme: Monster (16D Extreme Bass Blast)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true,
+    youtubeId: "R4He_Gcn7cA"
+  },
+  { title: "Vikram Title Track / Rolex Theme (16D Trap Edit)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true,
+    youtubeId: "IXTqQY-TiYQ"
+  },
+  { title: "Sher Khul Gaye (16D Dance Mix)", artist: "Vishal & Shekhar", film: "Fighter", isSpatial: true,
+    youtubeId: "e5Bj4Pf86sc"
+  },
+  { title: "Ghamand Kar (16D Epic War Drums & Bass)", artist: "Ajay-Atul", film: "Tanhaji", isSpatial: true,
+    youtubeId: "3qKi29UR2g4"
+  },
+  { title: "Jee Karda (16D Rock-EDM Hard Drop)", artist: "Divya Kumar", film: "Badlapur", isSpatial: true,
+    youtubeId: "C-JUAWxDkrA"
+  },
+  { title: "Deva Deva (Slowed + 16D Sub-Bass Blast)", artist: "Arijit Singh", film: "Brahmāstra", isSpatial: true,
+    youtubeId: "mNuhKUOD_A0"
+  },
   { title: "Makasam", artist: "KR$NA", film: "Single", youtubeId: "cUfTYaVEnoA", isSpatial: true },
-  { title: "Prarthana", artist: "KR$NA ft. Seedhe Maut", film: "Single", isSpatial: true },
+  { title: "Prarthana", artist: "KR$NA ft. Seedhe Maut", film: "Single", isSpatial: true,
+    youtubeId: "OKPAPX_fGVw"
+  },
   { title: "Khatta Flow", artist: "Seedhe Maut & KR$NA", film: "Single", youtubeId: "9UuwPhr_H2c", isSpatial: true },
-  { title: "No Cap (16D Hard Drill Drop)", artist: "KR$NA", film: "Single", isSpatial: true },
-  { title: "Kahaani", artist: "Seedhe Maut", film: "Single", isSpatial: true },
-  { title: "Dhundhala (16D Spatial Bass Drop)", artist: "Yashraj ft. Talwiinder & Dropped Out", film: "Single", isSpatial: true },
-  { title: "Hola Amigo (16D Aggressive Trap Drop)", artist: "KR$NA ft. Seedhe Maut & Umair", film: "Single", isSpatial: true },
-  { title: "Saza-E-Maut", artist: "KR$NA & Raftaar", film: "Single", isSpatial: true },
+  { title: "No Cap (16D Hard Drill Drop)", artist: "KR$NA", film: "Single", isSpatial: true,
+    youtubeId: "PejQbGZraqg"
+  },
+  { title: "Kahaani", artist: "Seedhe Maut", film: "Single", isSpatial: true,
+    youtubeId: "VEQ-XJWiQMM"
+  },
+  { title: "Dhundhala (16D Spatial Bass Drop)", artist: "Yashraj ft. Talwiinder & Dropped Out", film: "Single", isSpatial: true,
+    youtubeId: "Xy1Pzu1yZGg"
+  },
+  { title: "Hola Amigo (16D Aggressive Trap Drop)", artist: "KR$NA ft. Seedhe Maut & Umair", film: "Single", isSpatial: true,
+    youtubeId: "De9VIp37CjY"
+  },
+  { title: "Saza-E-Maut", artist: "KR$NA & Raftaar", film: "Single", isSpatial: true,
+    youtubeId: "o907r6NsK9s"
+  },
   { title: "Boom Shaka", artist: "Dhanda Nyoliwala ft. KR$NA", film: "Single", youtubeId: "7CwwStR5KBI", isSpatial: true },
-  { title: "Bohot Sahi", artist: "J Trix ft. Kr$na", film: "Single", isSpatial: true },
-  { title: "Fubuki", artist: "Rawal x Bharg", film: "Single", isSpatial: true },
-  { title: "3:59 AM", artist: "DIVINE", film: "Single", isSpatial: true },
-  { title: "Kohinoor", artist: "DIVINE", film: "Single", isSpatial: true },
-  { title: "Tadipaar (16D Hard Trap Drop)", artist: "MC Stan", film: "Single", isSpatial: true },
-  { title: "Basti Ka Hasti (16D Subwoofer Drop)", artist: "MC Stan", film: "Single", isSpatial: true },
-  { title: "Company (16D Club Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true },
-  { title: "Machayenge", artist: "Emiway Bantai", film: "Single", isSpatial: true },
-  { title: "Punya Paap", artist: "DIVINE", film: "Single", isSpatial: true },
-  { title: "Angaar", artist: "Ikka ft. Raftaar", film: "Single", isSpatial: true },
-  { title: "Joota Japani", artist: "KR$NA", film: "Single", isSpatial: true },
-  { title: "Chhabi Kar", artist: "Emiway Bantai", film: "Single", isSpatial: true },
-  { title: "Satya", artist: "DIVINE", film: "Single", isSpatial: true },
+  { title: "Bohot Sahi", artist: "J Trix ft. Kr$na", film: "Single", isSpatial: true,
+    youtubeId: "n89UlGvWbHs"
+  },
+  { title: "Fubuki", artist: "Rawal x Bharg", film: "Single", isSpatial: true,
+    youtubeId: "D_VSfZQ55j0"
+  },
+  { title: "3:59 AM", artist: "DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "eLSePtRKFhg"
+  },
+  { title: "Kohinoor", artist: "DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "8q_eV_RErE4"
+  },
+  { title: "Tadipaar (16D Hard Trap Drop)", artist: "MC Stan", film: "Single", isSpatial: true,
+    youtubeId: "AKd-3Asq60M"
+  },
+  { title: "Basti Ka Hasti (16D Subwoofer Drop)", artist: "MC Stan", film: "Single", isSpatial: true,
+    youtubeId: "l0AvFp0_k14"
+  },
+  { title: "Company (16D Club Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true,
+    youtubeId: "GuGYYdwcPYw"
+  },
+  { title: "Machayenge", artist: "Emiway Bantai", film: "Single", isSpatial: true,
+    youtubeId: "7tNPxY_ntEA"
+  },
+  { title: "Punya Paap", artist: "DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "4wTTAWjNlDM"
+  },
+  { title: "Angaar", artist: "Ikka ft. Raftaar", film: "Single", isSpatial: true,
+    youtubeId: "GpjrKSyjXDE"
+  },
+  { title: "Joota Japani", artist: "KR$NA", film: "Single", isSpatial: true,
+    youtubeId: "vR16Gu-Uq00"
+  },
+  { title: "Chhabi Kar", artist: "Emiway Bantai", film: "Single", isSpatial: true,
+    youtubeId: "JMncZHRrIBY"
+  },
+  { title: "Satya", artist: "DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "rO4DbBjaWJY"
+  },
   { title: "So High (16D Original Heavy Bass Drop)", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "u_nTzhCEb1Y", isSpatial: true },
   { title: "295 (16D Spatial Trap Drop)", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "tG6CJKqQQIo", isSpatial: true },
-  { title: "They Know", artist: "Karan Aujla", film: "Single", isSpatial: true },
+  { title: "They Know", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "RehtHw2Gvfw"
+  },
   { title: "Drippy", artist: "Sidhu Moose Wala x AR Paisley", film: "Single", youtubeId: "wyEAqyG1ka0", isSpatial: true },
   { title: "Barota", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "5feboL6vAtg", isSpatial: true },
   { title: "Watch Out", artist: "Sidhu Moose Wala ft. Sikander Kahlon", film: "Single", youtubeId: "RL_SzW2zP6E", isSpatial: true },
   { title: "Dawood", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "UV7kWo3EYdk", isSpatial: true },
   { title: "Selfmade", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "b3o4nN-olpM", isSpatial: true },
   { title: "Bad", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "FpvIURClDY4", isSpatial: true },
-  { title: "0 To 100", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true },
+  { title: "0 To 100", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
+    youtubeId: "pHtHF5Amw8Q"
+  },
 { title: "Expert Jatt (16D Audio / Subwoofer Bass Test)", artist: "Nawab", film: "Single", isSpatial: true, youtubeId: "LRcFuPUiY2s" },
 { title: "Mere Varga (16D Spatial Bass Edit)", artist: "Kaka", film: "Single", isSpatial: true, youtubeId: "No4DviM7WC0" },
-  { title: "Chitta Kurta (16D 808 Bass Boost Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
-  { title: "Mexico (16D Moving Bassline Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
-  { title: "East Side Flow (16D Hard Street Drop)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true },
-  { title: "Signed To God (16D Heavy 808 Trap)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true },
-  { title: "Old Skool (16D Hard Bass Drop)", artist: "Prem Dhillon ft. Sidhu Moose Wala", film: "Single", isSpatial: true },
-  { title: "Majhail (16D Rolling Trap Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true },
-  { title: "Daku (16D Sub-Bass Blast Drop)", artist: "Chani Nattan & Inderpal Moga", film: "Single", isSpatial: true },
-  { title: "Humnava Mere (16D Slowed Sub-Bass)", artist: "Jubin Nautiyal", film: "Single", isSpatial: true },
+  { title: "Chitta Kurta (16D 808 Bass Boost Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "nBrBwGgY-Kg"
+  },
+  { title: "Mexico (16D Moving Bassline Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "Fifv0zWPDlk"
+  },
+  { title: "East Side Flow (16D Hard Street Drop)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
+    youtubeId: "jmigBo42low"
+  },
+  { title: "Signed To God (16D Heavy 808 Trap)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
+    youtubeId: "7DPcBQ1sjX4"
+  },
+  { title: "Old Skool (16D Hard Bass Drop)", artist: "Prem Dhillon ft. Sidhu Moose Wala", film: "Single", isSpatial: true,
+    youtubeId: "hBlO1i_WTiY"
+  },
+  { title: "Majhail (16D Rolling Trap Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
+    youtubeId: "yzIyufV6ADk"
+  },
+  { title: "Daku (16D Sub-Bass Blast Drop)", artist: "Chani Nattan & Inderpal Moga", film: "Single", isSpatial: true,
+    youtubeId: "WOdnRhWeHoY"
+  },
+  { title: "Humnava Mere (16D Slowed Sub-Bass)", artist: "Jubin Nautiyal", film: "Single", isSpatial: true,
+    youtubeId: "TqR_jWfHW4g"
+  },
   { title: "Pachtaoge (16D Lo-Fi Deep Bass)", artist: "Arijit Singh", film: "Single", youtubeId: "-z3_pbNeR2Y", isSpatial: true },
-  { title: "Mann Bharryaa 2.0 (16D Spatial Drop)", artist: "B Praak", film: "Shershaah", isSpatial: true },
-  { title: "Bekhayali (16D Metal/Trap Hybrid)", artist: "Sachet Tandon", film: "Kabir Singh", isSpatial: true },
+  { title: "Mann Bharryaa 2.0 (16D Spatial Drop)", artist: "B Praak", film: "Shershaah", isSpatial: true,
+    youtubeId: "JEgKJZEYsIU"
+  },
+  { title: "Bekhayali (16D Metal/Trap Hybrid)", artist: "Sachet Tandon", film: "Kabir Singh", isSpatial: true,
+    youtubeId: "HTQ2pSM49dc"
+  },
   { title: "O Saathi (16D Reverb & Sub-Bass)", artist: "Atif Aslam", film: "Baaghi 2", youtubeId: "YuXLN23ZGQo", isSpatial: true },
   { title: "Nanchaku (16D Heavy Drill Drop)", artist: "Seedhe Maut ft. MC Stan", film: "Single", youtubeId: "7IHqIfpQsBk", isSpatial: true },
   { title: "Mirchi (16D Club Trap Drop)", artist: "DIVINE ft. Stylo G & MC Altaf", film: "Single", youtubeId: "wUmtFSmjKsU", isSpatial: true },
-  { title: "52 Bars (16D Beat Switch Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true },
-  { title: "Players (16D Heavy Drop Edit)", artist: "Badshah & Karan Aujla", film: "Single", isSpatial: true },
-  { title: "White Brown Black (16D Bass Blast Drop)", artist: "Karan Aujla & Avvy Sra", film: "Single", isSpatial: true },
-  { title: "Tauba Tauba (16D Trap Beat Drop)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true },
-  { title: "On Top (16D Aggressive Brass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
-  { title: "Don't Look (16D Trap Drop)", artist: "Karan Aujla & Jay Trak", film: "Single", isSpatial: true },
-  { title: "Jhanjar (16D Heavy Sub-Bass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true },
-  { title: "Kya Baat Aa (16D Bass Drop Mix)", artist: "Karan Aujla", film: "Single", isSpatial: true },
-  { title: "Signed To God (16D Distorted Trap Drop)", artist: "Sidhu Moose Wala, Steel Banglez & The Kidd", film: "Single", isSpatial: true },
-  { title: "G-Shit (16D Underground Trap Drop)", artist: "Sidhu Moose Wala ft. Blocknoi Twitch", film: "Moosetape", isSpatial: true },
+  { title: "52 Bars (16D Beat Switch Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
+    youtubeId: "4DfVxVeqk2o"
+  },
+  { title: "Players (16D Heavy Drop Edit)", artist: "Badshah & Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "CeFQO9MQNqs"
+  },
+  { title: "White Brown Black (16D Bass Blast Drop)", artist: "Karan Aujla & Avvy Sra", film: "Single", isSpatial: true,
+    youtubeId: "BtQp2U6hJII"
+  },
+  { title: "Tauba Tauba (16D Trap Beat Drop)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "LK7-_dgAVQE"
+  },
+  { title: "On Top (16D Aggressive Brass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "tMgEYaclnQ0"
+  },
+  { title: "Don't Look (16D Trap Drop)", artist: "Karan Aujla & Jay Trak", film: "Single", isSpatial: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  { title: "Jhanjar (16D Heavy Sub-Bass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "ZnGMxARIxoY"
+  },
+  { title: "Kya Baat Aa (16D Bass Drop Mix)", artist: "Karan Aujla", film: "Single", isSpatial: true,
+    youtubeId: "x-KbnJ9fvJc"
+  },
+  { title: "Signed To God (16D Distorted Trap Drop)", artist: "Sidhu Moose Wala, Steel Banglez & The Kidd", film: "Single", isSpatial: true,
+    youtubeId: "7DPcBQ1sjX4"
+  },
+  { title: "G-Shit (16D Underground Trap Drop)", artist: "Sidhu Moose Wala ft. Blocknoi Twitch", film: "Moosetape", isSpatial: true,
+    youtubeId: "YPPEZiDF4Xw"
+  },
 { title: "These Days (16D Subwoofer Trap Drop)", artist: "Sidhu Moose Wala ft. Bohemia", film: "Single", isSpatial: true, youtubeId: "MZRwvfoc3aU" },
-  { title: "GOAT (16D Hard Bass Beat Switch)", artist: "Sidhu Moose Wala, Wazir Patar", film: "Single", isSpatial: true },
-  { title: "Celebrity Killer (16D UK Drill Drop)", artist: "Sidhu Moose Wala ft. Tion Wayne", film: "Single", isSpatial: true },
-  { title: "IDGAF (16D Hard Trap Drop)", artist: "Sidhu Moose Wala ft. Morrisson", film: "Single", isSpatial: true },
-  { title: "Hood Anthem (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "King Shit (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "Dior (16D Rolling 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true },
-  { title: "Insane (16D Dark Synth Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true },
-  { title: "Spaceship (16D Synthwave Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true },
-  { title: "Foreigns (16D Drill Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true },
-  { title: "Tere Te (16D Club Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true },
-  { title: "Dil Nu (16D Heavy Drop Mix)", artist: "AP Dhillon", film: "Single", isSpatial: true },
-  { title: "Wo Noor (16D Trap Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true },
-  { title: "Baazigar (16D Hard Trap Drop)", artist: "DIVINE ft. Armani White", film: "Single", isSpatial: true },
-  { title: "Gunehgar (16D Dark Bass Drop)", artist: "DIVINE & Hit-Boy", film: "Single", isSpatial: true },
-  { title: "I Guess (16D Sliding 808 Drop)", artist: "KR$NA", film: "Single", isSpatial: true },
-  { title: "Big Moves (16D Street Trap Drop)", artist: "Raga", film: "Single", isSpatial: true },
-  { title: "Machayenge 4 (16D Heavy Diss Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true },
+  { title: "GOAT (16D Hard Bass Beat Switch)", artist: "Sidhu Moose Wala, Wazir Patar", film: "Single", isSpatial: true,
+    youtubeId: "M8vDwlHigJA"
+  },
+  { title: "Celebrity Killer (16D UK Drill Drop)", artist: "Sidhu Moose Wala ft. Tion Wayne", film: "Single", isSpatial: true,
+    youtubeId: "MyYAglA_Cdk"
+  },
+  { title: "IDGAF (16D Hard Trap Drop)", artist: "Sidhu Moose Wala ft. Morrisson", film: "Single", isSpatial: true,
+    youtubeId: "ctVAt8WGwJQ"
+  },
+  { title: "Hood Anthem (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "jjiC7PfoIaY"
+  },
+  { title: "King Shit (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "d2ofxg8pHfQ"
+  },
+  { title: "Dior (16D Rolling 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true,
+    youtubeId: "vyrPwLoIYkc"
+  },
+  { title: "Insane (16D Dark Synth Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
+    youtubeId: "cqP8I5aaud8"
+  },
+  { title: "Spaceship (16D Synthwave Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
+    youtubeId: "RatDV50alQE"
+  },
+  { title: "Foreigns (16D Drill Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
+    youtubeId: "jWz5on5N14E"
+  },
+  { title: "Tere Te (16D Club Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
+    youtubeId: "fG70qm6usR8"
+  },
+  { title: "Dil Nu (16D Heavy Drop Mix)", artist: "AP Dhillon", film: "Single", isSpatial: true,
+    youtubeId: "p2EdDiiVHh4"
+  },
+  { title: "Wo Noor (16D Trap Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
+    youtubeId: "HrcjFEK58ik"
+  },
+  { title: "Baazigar (16D Hard Trap Drop)", artist: "DIVINE ft. Armani White", film: "Single", isSpatial: true,
+    youtubeId: "sek3FhByr6w"
+  },
+  { title: "Gunehgar (16D Dark Bass Drop)", artist: "DIVINE & Hit-Boy", film: "Single", isSpatial: true,
+    youtubeId: "shSUDi4b2y8"
+  },
+  { title: "I Guess (16D Sliding 808 Drop)", artist: "KR$NA", film: "Single", isSpatial: true,
+    youtubeId: "Qg9LxRHLbAk"
+  },
+  { title: "Big Moves (16D Street Trap Drop)", artist: "Raga", film: "Single", isSpatial: true,
+    youtubeId: "vakdxu3pzBE"
+  },
+  { title: "Machayenge 4 (16D Heavy Diss Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true,
+    youtubeId: "CSGFVogqhD0"
+  },
 { title: "Chore NCR Aale (16D Haryanvi Drill Drop)", artist: "MC Square & Paradox", film: "Single", isSpatial: true, youtubeId: "ydV_DOwndoI" },
-  { title: "Jadugar (16D Beat Switch Drop)", artist: "Paradox", film: "Single", isSpatial: true },
-  { title: "California Love (16D West Coast Trap Drop)", artist: "Cheema Y, Gur Sidhu", film: "Single", isSpatial: true },
+  { title: "Jadugar (16D Beat Switch Drop)", artist: "Paradox", film: "Single", isSpatial: true,
+    youtubeId: "IOcGS4D1tM0"
+  },
+  { title: "California Love (16D West Coast Trap Drop)", artist: "Cheema Y, Gur Sidhu", film: "Single", isSpatial: true,
+    youtubeId: "rSxTumD4kew"
+  },
   { title: "Roll Deep (16D Heavy Bass Drop)", artist: "Tegi Pannu & Sukha", film: "Single", youtubeId: "ixgaS-3FfK4", isSpatial: true },
-  { title: "8 Parche (16D Trap Remix Drop)", artist: "Baani Sandhu & Gur Sidhu", film: "Single", isSpatial: true },
-  { title: "Amplifier (16D Hardstyle / Trap Drop Mix)", artist: "Imran Khan", film: "Single", isSpatial: true },
+  { title: "8 Parche (16D Trap Remix Drop)", artist: "Baani Sandhu & Gur Sidhu", film: "Single", isSpatial: true,
+    youtubeId: "8WWv5_k8D14"
+  },
+  { title: "Amplifier (16D Hardstyle / Trap Drop Mix)", artist: "Imran Khan", film: "Single", isSpatial: true,
+    youtubeId: "_pkjkn3qZbM"
+  },
 { title: "Bewafa (16D Dubstep / Trap Drop)", artist: "Imran Khan", film: "Single", isSpatial: true, youtubeId: "rGGLINL6xfc" },
   { title: "Satisfya (16D Subwoofer Trap Drop)", artist: "Imran Khan", film: "Single", youtubeId: "pfVODjDBFxU", isSpatial: true },
-  { title: "President (16D Heavy Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true },
-  { title: "Attraction (16D Spatial Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true },
-  { title: "Sheesha / Aakhya Mai Aakh Ghali (16D Bass Drop)", artist: "Mitta Ror", film: "Single", isSpatial: true },
-  { title: "Together (16D Hard Trap Edit)", artist: "Nirvair Pannu, Deol Harman", film: "Single", isSpatial: true },
-  { title: "Arjan Vailly (16D Hard Drill / Dhol Drop)", artist: "Bhupinder Babbal", film: "Animal", isSpatial: true },
-  { title: "KGF: Monster Theme (16D Extreme Subwoofer Drop)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true },
-  { title: "Rolex Theme / Vikram (16D Distorted 808 Drop)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true },
+  { title: "President (16D Heavy Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true,
+    youtubeId: "0FnZO-U5oHo"
+  },
+  { title: "Attraction (16D Spatial Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true,
+    youtubeId: "lDxw_BRqul8"
+  },
+  { title: "Sheesha / Aakhya Mai Aakh Ghali (16D Bass Drop)", artist: "Mitta Ror", film: "Single", isSpatial: true,
+    youtubeId: "aRNfSqsgrgE"
+  },
+  { title: "Together (16D Hard Trap Edit)", artist: "Nirvair Pannu, Deol Harman", film: "Single", isSpatial: true,
+    youtubeId: "TuCTTCu0Rvg"
+  },
+  { title: "Arjan Vailly (16D Hard Drill / Dhol Drop)", artist: "Bhupinder Babbal", film: "Animal", isSpatial: true,
+    youtubeId: "0hYehuznQac"
+  },
+  { title: "KGF: Monster Theme (16D Extreme Subwoofer Drop)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true,
+    youtubeId: "R4He_Gcn7cA"
+  },
+  { title: "Rolex Theme / Vikram (16D Distorted 808 Drop)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true,
+    youtubeId: "rBLCjz8as0E"
+  },
   { title: "Aaj Ki Raat (16D Club Drop Mix)", artist: "Sachin-Jigar", film: "Stree 2", youtubeId: "Dq4HAzBtslo", isSpatial: true },
-  { title: "Aayi Nai (16D Bass Blast Drop)", artist: "Sachin-Jigar", film: "Stree 2", isSpatial: true },
-  { title: "Shararat (16D Trap Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true },
-  { title: "Run Down The City - Monica (16D Heavy Bass Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true },
-  { title: "Pushpa Pushpa (16D Subwoofer Drop)", artist: "Devi Sri Prasad", film: "Pushpa 2: The Rule", isSpatial: true },
-  { title: "Kala Chashma (16D Trap / Future Bass Drop)", artist: "Badshah", film: "Baar Baar Dekho", isSpatial: true },
-  { title: "Hookah Bar (16D Psy-Bass / Hardstyle Drop)", artist: "Himesh Reshammiya", film: "Khiladi 786", isSpatial: true },
-  { title: "Dhan Te Nan (16D Electro Dubstep Drop)", artist: "Sukhwinder Singh", film: "Kaminey", isSpatial: true },
-  { title: "Aashiqui Mein Teri (16D Hard Bass Drop)", artist: "Himesh Reshammiya", film: "36 China Town", isSpatial: true },
-  { title: "Zara Zara Touch Me (16D Electro Trap Drop)", artist: "Monali Thakur", film: "Race", isSpatial: true },
-  { title: "Dus Bahane 2.0 (16D Heavy Drop Remix)", artist: "Vishal & Shekhar", film: "Baaghi 3", isSpatial: true },
-  { title: "Ghungroo (16D Festival EDM Drop)", artist: "Arijit Singh", film: "War", isSpatial: true },
-  { title: "Jhoome Jo Pathaan (16D Hard Drop Remix)", artist: "Arijit Singh", film: "Pathaan", isSpatial: true },
+  { title: "Aayi Nai (16D Bass Blast Drop)", artist: "Sachin-Jigar", film: "Stree 2", isSpatial: true,
+    youtubeId: "4Zw3R2CO-MM"
+  },
+  { title: "Shararat (16D Trap Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
+    youtubeId: "dePa1Wtv88s"
+  },
+  { title: "Run Down The City - Monica (16D Heavy Bass Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
+    youtubeId: "aT4N7jn2Eww"
+  },
+  { title: "Pushpa Pushpa (16D Subwoofer Drop)", artist: "Devi Sri Prasad", film: "Pushpa 2: The Rule", isSpatial: true,
+    youtubeId: "CLP0DfbMEkY"
+  },
+  { title: "Kala Chashma (16D Trap / Future Bass Drop)", artist: "Badshah", film: "Baar Baar Dekho", isSpatial: true,
+    youtubeId: "k4yXQkG2s1E"
+  },
+  { title: "Hookah Bar (16D Psy-Bass / Hardstyle Drop)", artist: "Himesh Reshammiya", film: "Khiladi 786", isSpatial: true,
+    youtubeId: "b4b1cMVZOUU"
+  },
+  { title: "Dhan Te Nan (16D Electro Dubstep Drop)", artist: "Sukhwinder Singh", film: "Kaminey", isSpatial: true,
+    youtubeId: "HvnMMAV8m5A"
+  },
+  { title: "Aashiqui Mein Teri (16D Hard Bass Drop)", artist: "Himesh Reshammiya", film: "36 China Town", isSpatial: true,
+    youtubeId: "pYiYSt5pGoU"
+  },
+  { title: "Zara Zara Touch Me (16D Electro Trap Drop)", artist: "Monali Thakur", film: "Race", isSpatial: true,
+    youtubeId: "vNlpgORSV7k"
+  },
+  { title: "Dus Bahane 2.0 (16D Heavy Drop Remix)", artist: "Vishal & Shekhar", film: "Baaghi 3", isSpatial: true,
+    youtubeId: "mIWpsOjQNDw"
+  },
+  { title: "Ghungroo (16D Festival EDM Drop)", artist: "Arijit Singh", film: "War", isSpatial: true,
+    youtubeId: "caySD0OJJvk"
+  },
+  { title: "Jhoome Jo Pathaan (16D Hard Drop Remix)", artist: "Arijit Singh", film: "Pathaan", isSpatial: true,
+    youtubeId: "pacvj3n-RLw"
+  },
 { title: "Illegal Weapon 2.0 (16D EDM Bass Drop)", artist: "Jasmine Sandlas", film: "Street Dancer 3D", isSpatial: true, youtubeId: "HLoJnZU3WcQ" },
-  { title: "Kar Gayi Chull (16D Bounce Trap Drop)", artist: "Badshah", film: "Kapoor & Sons", isSpatial: true },
-  { title: "Aankh Marey (16D Hard Bass Drop)", artist: "Neha Kakkar", film: "Simmba", isSpatial: true },
-  { title: "Six (16D Audio)", artist: "Guru Randhawa, Kiran Bajwa, Gurjit Gill", film: "Single", isSpatial: true },
-  { title: "Tauba Tauba (16D Trap Remix)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true }
+  { title: "Kar Gayi Chull (16D Bounce Trap Drop)", artist: "Badshah", film: "Kapoor & Sons", isSpatial: true,
+    youtubeId: "Bea019pOw5w"
+  },
+  { title: "Aankh Marey (16D Hard Bass Drop)", artist: "Neha Kakkar", film: "Simmba", isSpatial: true,
+    youtubeId: "_KhQT-LGb-4"
+  },
+  { title: "Six (16D Audio)", artist: "Guru Randhawa, Kiran Bajwa, Gurjit Gill", film: "Single", isSpatial: true,
+    youtubeId: "PEdDI1A17qc"
+  },
+  { title: "Tauba Tauba (16D Trap Remix)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true,
+    youtubeId: "LK7-_dgAVQE"
+  }
 ];
 
 // Combine all four lists and remove exact duplicates dynamically
@@ -438,7 +718,9 @@ const listGlobal = [
 { title: "Out of the Blue", artist: "System F (Ferry Corsten)", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Qgx_V0So0qk" },
 { title: "Airwave", artist: "Rank 1", film: "Vocal & Melodic", isGlobal: true, youtubeId: "reimbkBhL1A" },
 { title: "Take Me Away (Into the Night)", artist: "4 Strings", film: "Vocal & Melodic", isGlobal: true, youtubeId: "hBc3zfexMrk" },
-  { title: "Toca Me / Toca's Miracle", artist: "Fragma", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Toca Me / Toca's Miracle", artist: "Fragma", film: "Vocal & Melodic", isGlobal: true,
+    youtubeId: "ahaUNhScopE"
+  },
 { title: "On A Good Day", artist: "Above & Beyond pres. OceanLab", film: "Vocal & Melodic", isGlobal: true, youtubeId: "LthW0Zt4y8s" },
 { title: "Till the Sky Falls Down", artist: "Dash Berlin", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Tr7C0nBHOHI" },
 { title: "Flaming June", artist: "BT", film: "Vocal & Melodic", isGlobal: true, youtubeId: "ic-NqkDTROY" },
@@ -447,7 +729,9 @@ const listGlobal = [
 { title: "Universal Nation", artist: "Push", film: "Vocal & Melodic", isGlobal: true, youtubeId: "mxGMfKtqi8o" },
 { title: "Gouryella", artist: "Gouryella (Ferry Corsten & Tiësto)", film: "Vocal & Melodic", isGlobal: true, youtubeId: "0uAt2SDDYJM" },
 { title: "1998 (Paul van Dyk Remix)", artist: "Binary Finary", film: "Vocal & Melodic", isGlobal: true, youtubeId: "E_CFtuh81DM" },
-  { title: "Big Sky (Agnelli & Nelson Remix)", artist: "John O'Callaghan ft. Audrey Gallagher", film: "Vocal & Melodic", isGlobal: true },
+  { title: "Big Sky (Agnelli & Nelson Remix)", artist: "John O'Callaghan ft. Audrey Gallagher", film: "Vocal & Melodic", isGlobal: true,
+    youtubeId: "6xWKFSrjSbI"
+  },
 { title: "We Control The Sunlight", artist: "Aly & Fila ft. Jwaydan", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Ad_eViMKuF8" },
 { title: "Man On The Run", artist: "Dash Berlin with Cerf, Mitiska & Jaren", film: "Vocal & Melodic", isGlobal: true, youtubeId: "C7Qsj6MGVHE" },
 { title: "Xpander", artist: "Sasha", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "HRqPeKbYoGw" },
@@ -460,56 +744,140 @@ const listGlobal = [
 { title: "Lethal Industry", artist: "Tiësto", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "f-xKKx5eVZg" },
 { title: "The Age of Love (Jam & Spoon Remix)", artist: "Age of Love", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "0YVvcTIGy40" },
 { title: "The New World", artist: "Markus Schulz", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "BMTK8OiUWIg" },
-  { title: "Helsinki Scorchin'", artist: "Super8 & Tab", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Helsinki Scorchin'", artist: "Super8 & Tab", film: "Golden Era & Progressive", isGlobal: true,
+    youtubeId: "ahaUNhScopE"
+  },
 { title: "Burned With Desire (Rising Star Vocal Mix)", artist: "Armin van Buuren ft. Justine Suissa", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "N3KFopyDs64" },
 { title: "Seven Cities (Solarstone Atlantis Mix)", artist: "Solarstone", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "awxQuhay_mo" },
 { title: "RAMsterdam (Jorn van Deynhoven Remix)", artist: "RAM", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "xBMwMjGPmaM" },
 { title: "Beautiful", artist: "Ferry Corsten", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "WdGwqUtJ03o" },
 { title: "Alone Tonight", artist: "Above & Beyond", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "ur1F0eb2VL8" },
-  { title: "Are You Fine?", artist: "Kyau & Albert", film: "Golden Era & Progressive", isGlobal: true },
-  { title: "Out of the Sky", artist: "Lange ft. Sarah Howells", film: "Golden Era & Progressive", isGlobal: true },
-  { title: "Faces", artist: "Andy Moor & Ashley Wallbridge ft. Meighan Nealon", film: "Golden Era & Progressive", isGlobal: true },
-  { title: "Strange World (2000 Remake)", artist: "Push", film: "Golden Era & Progressive", isGlobal: true },
+  { title: "Are You Fine?", artist: "Kyau & Albert", film: "Golden Era & Progressive", isGlobal: true,
+    youtubeId: "tWsS8XSIL0Q"
+  },
+  { title: "Out of the Sky", artist: "Lange ft. Sarah Howells", film: "Golden Era & Progressive", isGlobal: true,
+    youtubeId: "lLjsxzCcTwo"
+  },
+  { title: "Faces", artist: "Andy Moor & Ashley Wallbridge ft. Meighan Nealon", film: "Golden Era & Progressive", isGlobal: true,
+    youtubeId: "ea0Lr55TOds"
+  },
+  { title: "Strange World (2000 Remake)", artist: "Push", film: "Golden Era & Progressive", isGlobal: true,
+    youtubeId: "n4Hh2G_Ygh8"
+  },
 { title: "Great Spirit", artist: "Vini Vici & Armin van Buuren ft. Hilight Tribe", film: "Modern & Festival", isGlobal: true, youtubeId: "yo4pmauhugo" },
 { title: "Free Tibet (Vini Vici Remix)", artist: "Vini Vici", film: "Modern & Festival", isGlobal: true, youtubeId: "0lBjcaMokvo" },
 { title: "Deep Jungle Walk", artist: "Astrix", film: "Modern & Festival", isGlobal: true, youtubeId: "lIuEuJvKos4" },
-  { title: "Anahera", artist: "Ferry Corsten pres. Gouryella", film: "Modern & Festival", isGlobal: true },
-  { title: "United", artist: "Armin van Buuren vs. Vini Vici", film: "Modern & Festival", isGlobal: true },
-  { title: "U (Bryan Kearney Remix)", artist: "Gareth Emery ft. Bo Bruce", film: "Modern & Festival", isGlobal: true },
-  { title: "Thing Called Love", artist: "Above & Beyond ft. Richard Bedford", film: "Modern & Festival", isGlobal: true },
-  { title: "Dark Warrior", artist: "Andrew Rayel", film: "Modern & Festival", isGlobal: true },
-  { title: "Chakra", artist: "W&W & Vini Vici", film: "Modern & Festival", isGlobal: true },
-  { title: "Through Your Eyes", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true },
-  { title: "43", artist: "ilan Bluestone", film: "Modern & Festival", isGlobal: true },
-  { title: "Waiting for the Night", artist: "Armin van Buuren ft. Fiora", film: "Modern & Festival", isGlobal: true },
-  { title: "Pikachu", artist: "Key4050 (John O'Callaghan & Bryan Kearney)", film: "Modern & Festival", isGlobal: true },
-  { title: "Visions", artist: "MaRLo", film: "Modern & Festival", isGlobal: true },
-  { title: "Lost Language", artist: "Aly & Fila", film: "Modern & Festival", isGlobal: true },
-  { title: "Sirens of the Sea (Above & Beyond Club Mix)", artist: "OceanLab", film: "Modern & Festival", isGlobal: true },
-  { title: "Opus", artist: "Eric Prydz", film: "Modern & Festival", isGlobal: true },
-  { title: "L.E.D. There Be Light", artist: "Rank 1", film: "Modern & Festival", isGlobal: true },
-  { title: "Sun In Your Eyes", artist: "Above & Beyond", film: "Modern & Festival", isGlobal: true },
-  { title: "Keep Your Dreams Alive", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true },
-  { title: "Komodo (Save a Soul)", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Bellissima", artist: "DJ Quicksilver", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Ayla (Veracocha / Taucher Remix)", artist: "Ayla", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Heaven Scent", artist: "Bedrock", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Mysterious Times ft. Tina Cousins", artist: "Sash!", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Protect Your Mind (Braveheart)", artist: "DJ Sakin & Friends", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Lizard", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Madagascar (Ferry Corsten Remix)", artist: "Art of Trance", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Love Shines Through", artist: "Chakra", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "The Theme", artist: "Jurgen Vries", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Beachball", artist: "Nalin & Kane", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Beautiful", artist: "Matt Darey ft. Marcella Woods", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "What Ya Got 4 Me", artist: "Signum", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Fire Wire", artist: "Cosmic Gate", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Blue Fear", artist: "Armin van Buuren", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "The Spell (Solarstone Pure Mix)", artist: "Solarstone & Clare Stagg", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Anthem", artist: "Filo & Peri ft. Eric Lumiere", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Elektra", artist: "Super8 & Tab", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Happiness Happening", artist: "Lost Witness", film: "Heritage & Club Classics", isGlobal: true },
-  { title: "Stella", artist: "Jam & Spoon", film: "Heritage & Club Classics", isGlobal: true },
+  { title: "Anahera", artist: "Ferry Corsten pres. Gouryella", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "7ZMZHbAKvGA"
+  },
+  { title: "United", artist: "Armin van Buuren vs. Vini Vici", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "PVurTWZu7VU"
+  },
+  { title: "U (Bryan Kearney Remix)", artist: "Gareth Emery ft. Bo Bruce", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "jF7qGaKKD4M"
+  },
+  { title: "Thing Called Love", artist: "Above & Beyond ft. Richard Bedford", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "ZgRnLM9Vi24"
+  },
+  { title: "Dark Warrior", artist: "Andrew Rayel", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "CE4TdjQK_V4"
+  },
+  { title: "Chakra", artist: "W&W & Vini Vici", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "Dx_qGfJq_Go"
+  },
+  { title: "Through Your Eyes", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "2Zzpp9Ktb3k"
+  },
+  { title: "43", artist: "ilan Bluestone", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "exFy7ppnFkA"
+  },
+  { title: "Waiting for the Night", artist: "Armin van Buuren ft. Fiora", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "SJ_tpbriGpE"
+  },
+  { title: "Pikachu", artist: "Key4050 (John O'Callaghan & Bryan Kearney)", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "B2wxoZL3IaM"
+  },
+  { title: "Visions", artist: "MaRLo", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "mTemgyKTmhw"
+  },
+  { title: "Lost Language", artist: "Aly & Fila", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "VqqnRKA1kxM"
+  },
+  { title: "Sirens of the Sea (Above & Beyond Club Mix)", artist: "OceanLab", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "RjWLs8pDCYw"
+  },
+  { title: "Opus", artist: "Eric Prydz", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "CzqJelgEBsA"
+  },
+  { title: "L.E.D. There Be Light", artist: "Rank 1", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "VwxnB4kL0nM"
+  },
+  { title: "Sun In Your Eyes", artist: "Above & Beyond", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "PCKSLa1tsAk"
+  },
+  { title: "Keep Your Dreams Alive", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true,
+    youtubeId: "yAw1nLVxFs8"
+  },
+  { title: "Komodo (Save a Soul)", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "hem6LPHa5zQ"
+  },
+  { title: "Bellissima", artist: "DJ Quicksilver", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "YQQokcoOzeY"
+  },
+  { title: "Ayla (Veracocha / Taucher Remix)", artist: "Ayla", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "LtRsf9wAc4E"
+  },
+  { title: "Heaven Scent", artist: "Bedrock", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "iqh5bMu9Jmo"
+  },
+  { title: "Mysterious Times ft. Tina Cousins", artist: "Sash!", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "y1T1dS-bh4s"
+  },
+  { title: "Protect Your Mind (Braveheart)", artist: "DJ Sakin & Friends", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "xz2Yq02HX4E"
+  },
+  { title: "Lizard", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "B2jPPGTtgC0"
+  },
+  { title: "Madagascar (Ferry Corsten Remix)", artist: "Art of Trance", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "uuH_nYKXqHM"
+  },
+  { title: "Love Shines Through", artist: "Chakra", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "zRayl-nl8rs"
+  },
+  { title: "The Theme", artist: "Jurgen Vries", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "srwCUS8jiXw"
+  },
+  { title: "Beachball", artist: "Nalin & Kane", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "FwXskdcCRIk"
+  },
+  { title: "Beautiful", artist: "Matt Darey ft. Marcella Woods", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "WdGwqUtJ03o"
+  },
+  { title: "What Ya Got 4 Me", artist: "Signum", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "NnI5upfK6mA"
+  },
+  { title: "Fire Wire", artist: "Cosmic Gate", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "jlwPNroYv1U"
+  },
+  { title: "Blue Fear", artist: "Armin van Buuren", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "vfgnh7Thp-A"
+  },
+  { title: "The Spell (Solarstone Pure Mix)", artist: "Solarstone & Clare Stagg", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "-bAo69SJwFk"
+  },
+  { title: "Anthem", artist: "Filo & Peri ft. Eric Lumiere", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "gDMfAiX7zRk"
+  },
+  { title: "Elektra", artist: "Super8 & Tab", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "fBn8F9VIbDU"
+  },
+  { title: "Happiness Happening", artist: "Lost Witness", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "jYsfR7e4gHI"
+  },
+  { title: "Stella", artist: "Jam & Spoon", film: "Heritage & Club Classics", isGlobal: true,
+    youtubeId: "zLy--cFj6W0"
+  },
 ];
 
 const listGoa = [
@@ -533,7 +901,9 @@ const listGoa = [
 { title: "Smashing the Opponent", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true, youtubeId: "HDs5OlRLr9M" },
 { title: "People Can Fly", artist: "Astral Projection", film: "Iconic Anthems", isGoa: true, youtubeId: "kJSyBUZshfs" },
 { title: "Neurochemistry", artist: "Ace Ventura & Liquid Soul", film: "Iconic Anthems", isGoa: true, youtubeId: "gOKopmV4rFI" },
-  { title: "Wire-Tap", artist: "GMS & Vini Vici", film: "Iconic Anthems", isGoa: true },
+  { title: "Wire-Tap", artist: "GMS & Vini Vici", film: "Iconic Anthems", isGoa: true,
+    youtubeId: "A_70gFGTCR4"
+  },
 { title: "Ayahuasca", artist: "1200 Micrograms", film: "Iconic Anthems", isGoa: true, youtubeId: "5kom6v1jNkM" },
 { title: "Sahara", artist: "Astrix", film: "Iconic Anthems", isGoa: true, youtubeId: "5_ehdwsv5BI" },
 { title: "Heavyweight", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true, youtubeId: "h4YvkZeLrjs" },
@@ -2691,39 +3061,103 @@ const listRemix = [
 
 
 const listKTrance = [
-  { title: "Uff Teri Adaa x I Adore You | SORVV Afrohouse Flip", artist: "Hugel | Shankar Mahadevan | 2025 (SORVV)", film: "K//TRANCE", isKTrance: true },
-  { title: "Sahiba X Titanium (SORVV Afro Edit)", artist: "Jasleen Royal | Sia | BollyTech (SORVV)", film: "K//TRANCE", isKTrance: true },
-  { title: "Arjan Vailley X Jatt Don't Care X Alameyo X Anchor Point", artist: "Krautek & Ryan Nogar Mashup (Krautek)", film: "K//TRANCE", isKTrance: true },
-  { title: "Alameyo X Jee Karda X Jatt Don't Care (Aarmash Edit)", artist: "AARMASH", film: "K//TRANCE", isKTrance: true },
-  { title: "Papi (Bhabi)", artist: "Eden Shalev", film: "K//TRANCE", isKTrance: true },
-  { title: "Papi x Aria x Tujhe Bhula Diya // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
+  { title: "Uff Teri Adaa x I Adore You | SORVV Afrohouse Flip", artist: "Hugel | Shankar Mahadevan | 2025 (SORVV)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "jaoHIhutbgU"
+  },
+  { title: "Sahiba X Titanium (SORVV Afro Edit)", artist: "Jasleen Royal | Sia | BollyTech (SORVV)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "LuvExjG_lsQ"
+  },
+  { title: "Arjan Vailley X Jatt Don't Care X Alameyo X Anchor Point", artist: "Krautek & Ryan Nogar Mashup (Krautek)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  { title: "Alameyo X Jee Karda X Jatt Don't Care (Aarmash Edit)", artist: "AARMASH", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  { title: "Papi (Bhabi)", artist: "Eden Shalev", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "0RazWJu8qog"
+  },
+  { title: "Papi x Aria x Tujhe Bhula Diya // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "C6J9VTcBkEw"
+  },
   { title: "Tenu Leke x Say What | Dj Ganesh | Afro Bollywood", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true, youtubeId: "00LKC7mKz6Y" },
-  { title: "CHAR BAJ GAYE X ALAMEYO (MASHUP)", artist: "D-Rain", film: "K//TRANCE", isKTrance: true },
-  { title: "Adore You x Tujhe Bhula Diya (Afro Bollywood Mashup)", artist: "Vishal Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true },
-  { title: "FE!N x Paisa Hai Toh (DJ Suketu Mashup)", artist: "DJ Suketu", film: "K//TRANCE", isKTrance: true },
-  { title: "Move With Woh Lamhe | Dj Ganesh | Afro House", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true },
-  { title: "Big Dawgs x Karan Aujla (Trapperx Mashup)", artist: "Hanumankind | Karan Aujla | Trapperx (Trapperx)", film: "K//TRANCE", isKTrance: true },
-  { title: "Vem Dançar Kuduro", artist: "Lucenzo", film: "K//TRANCE", isKTrance: true },
-  { title: "Jimmy Jimmy Jimmy Aaja (BollyTech Mix)", artist: "Deepanshu Ruhela, Priyank, Parvati Khan & I", film: "K//TRANCE", isKTrance: true },
-  { title: "CHAR BAJ GAYE (BOLLYTECH EDIT)", artist: "Dj Dextron", film: "K//TRANCE", isKTrance: true },
-  { title: "Big Dawgs X Winning Speech", artist: "IAMPRANN", film: "K//TRANCE", isKTrance: true },
-  { title: "Jawani Jan-E-Man House Trap", artist: "DJ Percy & Asha Bhosle", film: "K//TRANCE", isKTrance: true },
-  { title: "Ek Pal Ka Jeena Tech Remix | Kaho Naa Pyaar Hai", artist: "Hrithik Roshan | Lucky Ali | KTONIKK (KTONIKK)", film: "K//TRANCE", isKTrance: true },
-  { title: "Desi Girl x Akon Sexy Bitch", artist: "David Guetta | Vishal & Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true },
-  { title: "Naadan Parindey (Rumble) // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
-  { title: "RANGILO MARO DHOLNA - ROHAN MUKATI EDIT", artist: "Rohan Mukati", film: "K//TRANCE", isKTrance: true },
-  { title: "Tune O Rangeele (Brazilian Funk Mix)", artist: "Knockwell & Lata Mangeshkar", film: "K//TRANCE", isKTrance: true },
-  { title: "Aaj Sajeya x Kudmayi (Mashup)", artist: "Knockwell, Goldie Sohel & Pritam", film: "K//TRANCE", isKTrance: true },
-  { title: "Papi X Move It X Aahun Aahun (Private Edit)", artist: "DJ Missy K", film: "K//TRANCE", isKTrance: true },
-  { title: "MAMTA'S INTERLUDE - Trance Remix", artist: "Gauntlet. & NARCO", film: "K//TRANCE", isKTrance: true },
-  { title: "Joota Japani", artist: "KR$NA and Mukesh", film: "K//TRANCE", isKTrance: true },
-  { title: "Rasputin", artist: "Majestic & Boney M.", film: "K//TRANCE", isKTrance: true },
-  { title: "Mockingbird", artist: "Tiësto, Dimitri Vegas & Like Mike & Gabry Ponte", film: "K//TRANCE", isKTrance: true },
-  { title: "Woops (Dimitri Vegas & Junkie Kid Remix)", artist: "Bountyhunter, Dimitri Vegas & Junkie Kid", film: "K//TRANCE", isKTrance: true },
-  { title: "Aria (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES & AEXTRAX", film: "K//TRANCE", isKTrance: true },
-  { title: "Dernière Danse (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES, Zantryc and AEXTRAX", film: "K//TRANCE", isKTrance: true },
-  { title: "São Paulo", artist: "The Weeknd & Anitta", film: "K//TRANCE", isKTrance: true },
-  { title: "Ankhe Khuli x Fire Fire // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true },
+  { title: "CHAR BAJ GAYE X ALAMEYO (MASHUP)", artist: "D-Rain", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "EgiRj6DNqvE"
+  },
+  { title: "Adore You x Tujhe Bhula Diya (Afro Bollywood Mashup)", artist: "Vishal Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "Q7mtgh-wCMM"
+  },
+  { title: "FE!N x Paisa Hai Toh (DJ Suketu Mashup)", artist: "DJ Suketu", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "DEc4ovyG3Ww"
+  },
+  { title: "Move With Woh Lamhe | Dj Ganesh | Afro House", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "ZYjbzUSR3gc"
+  },
+  { title: "Big Dawgs x Karan Aujla (Trapperx Mashup)", artist: "Hanumankind | Karan Aujla | Trapperx (Trapperx)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "ggAveCJfdBU"
+  },
+  { title: "Vem Dançar Kuduro", artist: "Lucenzo", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "uv9CjsQNtf4"
+  },
+  { title: "Jimmy Jimmy Jimmy Aaja (BollyTech Mix)", artist: "Deepanshu Ruhela, Priyank, Parvati Khan & I", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "2FfTO-Bu-nY"
+  },
+  { title: "CHAR BAJ GAYE (BOLLYTECH EDIT)", artist: "Dj Dextron", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "EMZRf48PEis"
+  },
+  { title: "Big Dawgs X Winning Speech", artist: "IAMPRANN", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "vPwot7jrOf8"
+  },
+  { title: "Jawani Jan-E-Man House Trap", artist: "DJ Percy & Asha Bhosle", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "eQt2XlFTq3U"
+  },
+  { title: "Ek Pal Ka Jeena Tech Remix | Kaho Naa Pyaar Hai", artist: "Hrithik Roshan | Lucky Ali | KTONIKK (KTONIKK)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "1fJ2YWKFOds"
+  },
+  { title: "Desi Girl x Akon Sexy Bitch", artist: "David Guetta | Vishal & Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "XU3pFs_MwXk"
+  },
+  { title: "Naadan Parindey (Rumble) // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "SSd3zEBVpj4"
+  },
+  { title: "RANGILO MARO DHOLNA - ROHAN MUKATI EDIT", artist: "Rohan Mukati", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "WgJBQfFVXQU"
+  },
+  { title: "Tune O Rangeele (Brazilian Funk Mix)", artist: "Knockwell & Lata Mangeshkar", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "W6Op1RjLXQg"
+  },
+  { title: "Aaj Sajeya x Kudmayi (Mashup)", artist: "Knockwell, Goldie Sohel & Pritam", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "PGer5XYPaPk"
+  },
+  { title: "Papi X Move It X Aahun Aahun (Private Edit)", artist: "DJ Missy K", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "fODdPEatDqU"
+  },
+  { title: "MAMTA'S INTERLUDE - Trance Remix", artist: "Gauntlet. & NARCO", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  { title: "Joota Japani", artist: "KR$NA and Mukesh", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "vR16Gu-Uq00"
+  },
+  { title: "Rasputin", artist: "Majestic & Boney M.", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "b8XADglx9z4"
+  },
+  { title: "Mockingbird", artist: "Tiësto, Dimitri Vegas & Like Mike & Gabry Ponte", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "LCY0SUhS6ec"
+  },
+  { title: "Woops (Dimitri Vegas & Junkie Kid Remix)", artist: "Bountyhunter, Dimitri Vegas & Junkie Kid", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "9NixMYOdiOE"
+  },
+  { title: "Aria (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES & AEXTRAX", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "lZj1S8mbXZw"
+  },
+  { title: "Dernière Danse (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES, Zantryc and AEXTRAX", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "lasnA_VSYoA"
+  },
+  { title: "São Paulo", artist: "The Weeknd & Anitta", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "AQ5NlI-SJR0"
+  },
+  { title: "Ankhe Khuli x Fire Fire // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
+    youtubeId: "JDWWZZawcbw"
+  },
 ];
 
 const listIndoHouse = [
@@ -2733,7 +3167,7 @@ const listIndoHouse = [
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true,
-    "youtubeId": "zXy_8U-_RNc"
+    "youtubeId": "zXy_8U-_RNc",
   },
   {
     "title": "Aa Zara",
