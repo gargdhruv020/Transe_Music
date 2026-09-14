@@ -12,6 +12,7 @@ import { SystemInterruptionListener } from "@/app/utils/systemInterruptionListen
 import { PhoneCallAudioBypass, unlockHardwareAudioBus } from "@/app/utils/phoneCallAudioBypass";
 import { ServiceWorkerBackgroundAnchor } from "@/app/utils/serviceWorkerBackgroundAnchor";
 import { AntiEvictionMediaAnchor } from "@/app/utils/antiEvictionMediaAnchor";
+import { getLikedTrackIds, toggleLikedTrack, subscribeToLikedTracks } from "@/app/utils/likedTracksStore";
 
 /* ── Web Audio Hardware Audio Bus Unlocker ─────────── */
 
@@ -293,9 +294,39 @@ export default function Player() {
   const [shuffle, setShuffle] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showRemixList, setShowRemixList] = useState(false);
-  const [queueMode, setQueueMode] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle">("all");
-  const [playlistTab, setPlaylistTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle">("all");
-  const [remixTab, setRemixTab] = useState<"all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle">("all-remix");
+  type PlaylistQueueMode = "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle" | "liked";
+  const [queueMode, setQueueMode] = useState<PlaylistQueueMode>("all");
+  const [playlistTab, setPlaylistTab] = useState<PlaylistQueueMode>("all");
+  const [remixTab, setRemixTab] = useState<PlaylistQueueMode>("all-remix");
+  const [likedIds, setLikedIds] = useState<Set<number>>(() => getLikedTrackIds());
+
+  useEffect(() => {
+    setLikedIds(getLikedTrackIds());
+    const unsubscribe = subscribeToLikedTracks((updated) => {
+      setLikedIds(updated);
+    });
+    return unsubscribe;
+  }, []);
+
+  const getActiveQueue = useCallback((mode: string) => {
+    if (mode === "liked") {
+      const filtered = tracks.filter(t => likedIds.has(t.id));
+      return filtered.length > 0 ? filtered : tracks;
+    }
+    if (mode === "16d") return tracks.filter(t => t.isSpatial);
+    if (mode === "global") return tracks.filter(t => t.isGlobal);
+    if (mode === "goa") return tracks.filter(t => t.isGoa);
+    if (mode === "all-remix") return tracks.filter(t => t.isRemix);
+    if (mode === "remix") return tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle);
+    if (mode === "ktrance") return tracks.filter(t => t.isKTrance);
+    if (mode === "indo-house") return tracks.filter(t => (t as any).isIndoHouse);
+    if (mode === "sufi") return tracks.filter(t => (t as any).isSufi);
+    if (mode === "afro") return tracks.filter(t => (t as any).isAfro);
+    if (mode === "ea-afro") return tracks.filter(t => (t as any).isEAndAAfro);
+    if (mode === "x") return tracks.filter(t => (t as any).isX);
+    if (mode === "hustle") return tracks.filter(t => (t as any).isHustle).sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0));
+    return tracks;
+  }, [likedIds]);
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -706,7 +737,7 @@ export default function Player() {
   useEffect(() => {
     if (!currentVideoId || isPlaying === false) return;
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : queueMode === "hustle" ? tracks.filter(t => (t as any).isHustle).sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0)) : tracks;
+    const activeQueue = getActiveQueue(queueMode);
     if (activeQueue.length === 0) return;
 
     let queueIndex = activeQueue.findIndex(t => t.id === track.id);
@@ -1182,7 +1213,7 @@ export default function Player() {
       } catch (_) {}
     }
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : queueMode === "hustle" ? tracks.filter(t => (t as any).isHustle).sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0)) : tracks;
+    const activeQueue = getActiveQueue(queueMode);
     const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
 
     let queueIndex = safeQueue.findIndex(t => t.id === track.id);
@@ -1264,7 +1295,7 @@ export default function Player() {
       } catch (_) {}
     }
 
-    const activeQueue = queueMode === "16d" ? tracks.filter(t => t.isSpatial) : queueMode === "global" ? tracks.filter(t => t.isGlobal) : queueMode === "goa" ? tracks.filter(t => t.isGoa) : queueMode === "all-remix" ? tracks.filter(t => t.isRemix) : queueMode === "remix" ? tracks.filter(t => t.isRemix && !(t as any).isIndoHouse && !(t as any).isSufi && !(t as any).isAfro && !(t as any).isEAndAAfro && !(t as any).isX && !(t as any).isHustle) : queueMode === "ktrance" ? tracks.filter(t => t.isKTrance) : queueMode === "indo-house" ? tracks.filter(t => (t as any).isIndoHouse) : queueMode === "sufi" ? tracks.filter(t => (t as any).isSufi) : queueMode === "afro" ? tracks.filter(t => (t as any).isAfro) : queueMode === "ea-afro" ? tracks.filter(t => (t as any).isEAndAAfro) : queueMode === "x" ? tracks.filter(t => (t as any).isX) : queueMode === "hustle" ? tracks.filter(t => (t as any).isHustle).sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0)) : tracks;
+    const activeQueue = getActiveQueue(queueMode);
     const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
 
     let queueIndex = safeQueue.findIndex(t => t.id === track.id);
@@ -1600,7 +1631,7 @@ export default function Player() {
     } catch (_) {}
   }, [isPlaying]);
 
-  const handleTrackSelect = useCallback((trackId: number, mode: "all" | "16d" | "global" | "goa" | "remix" | "ktrance" | "indo-house" | "sufi" | "afro" | "ea-afro" | "x" | "all-remix" | "hustle") => {
+  const handleTrackSelect = useCallback((trackId: number, mode: PlaylistQueueMode) => {
     abortCrossfade();
     // 0. Unlock hardware audio bus and create YT player if needed — MUST be synchronous in user gesture
     unlockHardwareAudioBus();
@@ -1903,20 +1934,41 @@ export default function Player() {
       {/* Vinyl */}
       <Vinyl track={track} isPlaying={isPlaying} size={66} />
 
-      {/* Info: Title & Artist (Spacious, dedicated text block with proper truncation) */}
-      <div className="flex flex-col justify-center min-w-[150px] max-w-[220px] flex-shrink-0">
-        <p
-          className={`truncate font-semibold text-white text-[14px] leading-tight ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
-          title={track.title}
+      {/* Info: Title & Artist + Like Button */}
+      <div className="flex items-center gap-2.5 min-w-[170px] max-w-[240px] flex-shrink-0">
+        <div className="flex flex-col justify-center min-w-0 flex-1">
+          <p
+            className={`truncate font-semibold text-white text-[14px] leading-tight ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
+            title={track.title}
+          >
+            {track.title} {!currentVideoId && isPlaying && "• Loading..."}
+          </p>
+          <p
+            className="truncate text-white/60 text-[12px] mt-1"
+            title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
+          >
+            {track.artist} {track.film ? `· ${track.film}` : ""}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleLikedTrack(track.id);
+          }}
+          aria-label={likedIds.has(track.id) ? "Unlike track" : "Like track"}
+          className="group flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 active:scale-90 transition-all p-1 flex-shrink-0"
         >
-          {track.title} {!currentVideoId && isPlaying && "• Loading..."}
-        </p>
-        <p
-          className="truncate text-white/60 text-[12px] mt-1"
-          title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
-        >
-          {track.artist} {track.film ? `· ${track.film}` : ""}
-        </p>
+          {likedIds.has(track.id) ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] animate-[heart-pop_0.2s_ease-out]">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/30 group-hover:text-rose-400 transition-colors">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          )}
+        </button>
       </div>
 
       {/* Seek Bar (Flexible middle space — wide progress bar with clear timestamps) */}
@@ -2004,22 +2056,43 @@ export default function Player() {
           />
         </div>
 
-        {/* Title + Artist */}
-        <div className="text-center w-full px-2">
-          <p
-            className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
-            style={{ fontSize: "16px" }}
-            title={track.title}
+        {/* Title + Artist + Like button */}
+        <div className="flex items-center justify-center gap-2 w-full px-2">
+          <div className="text-center min-w-0 flex-1 pl-6">
+            <p
+              className={`truncate font-semibold text-white ${!currentVideoId && isPlaying ? "animate-pulse opacity-60" : ""}`}
+              style={{ fontSize: "16px" }}
+              title={track.title}
+            >
+              {track.title} {!currentVideoId && isPlaying && "• Loading..."}
+            </p>
+            <p
+              className="truncate text-white/60 mt-0.5"
+              style={{ fontSize: "12.5px" }}
+              title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
+            >
+              {track.artist} {track.film ? `· ${track.film}` : ""}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleLikedTrack(track.id);
+            }}
+            aria-label={likedIds.has(track.id) ? "Unlike track" : "Like track"}
+            className="group flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 active:scale-90 transition-all p-1 flex-shrink-0"
           >
-            {track.title} {!currentVideoId && isPlaying && "• Loading..."}
-          </p>
-          <p
-            className="truncate text-white/60 mt-0.5"
-            style={{ fontSize: "12.5px" }}
-            title={`${track.artist} ${track.film ? "· " + track.film : ""}`}
-          >
-            {track.artist} {track.film ? `· ${track.film}` : ""}
-          </p>
+            {likedIds.has(track.id) ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] animate-[heart-pop_0.2s_ease-out]">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/30 group-hover:text-rose-400 transition-colors">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
 
