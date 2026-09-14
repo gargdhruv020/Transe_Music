@@ -15,6 +15,7 @@ export interface Track {
   isAfro?: boolean;
   isEAndAAfro?: boolean;
   isX?: boolean;
+  isClub?: boolean;
   isHustle?: boolean;
   hustleSeason?: string;
   hustleNum?: number;
@@ -6523,218 +6524,218 @@ const listAfro = [
 ];
 const listEAAfro = [
   {
-    "title": "50 Cent",
-    "artist": "Candy Shop (Omada Afro House Remix)",
+    "title": "Candy Shop",
+    "artist": "50 Cent (Omada Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Aaron Smith",
-    "artist": "Dancin (Paul Wad Samaha Loxivice Afro House Remix)",
+    "title": "Dancin",
+    "artist": "Aaron Smith (Paul Wad Samaha Loxivice Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Adele",
-    "artist": "Rolling in the Deep (Dorian Mercier Afro House Remix)",
+    "title": "Rolling in the Deep",
+    "artist": "Adele (Dorian Mercier Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Adele",
-    "artist": "Set Fire To The Rain (Arabic Afro House)",
+    "title": "Set Fire To The Rain",
+    "artist": "Adele (Arabic Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Ahmed Saad",
-    "artist": "El Youm El Helw Dah (Arabic Afro House)",
+    "title": "El Youm El Helw Dah",
+    "artist": "Ahmed Saad (Arabic Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Akon",
-    "artist": "Right Now (Papple Afro House Remix)",
+    "title": "Right Now",
+    "artist": "Akon (Papple Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Akon ft. Snoop Dogg",
-    "artist": "I Wanna Love You (Gangster Afro House Remix)",
+    "title": "I Wanna Love You",
+    "artist": "Akon ft. Snoop Dogg (Gangster Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Alok",
-    "artist": "Hear Me Now (Camo Afro House Remix)",
+    "title": "Hear Me Now",
+    "artist": "Alok (Camo Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Amr Diab",
-    "artist": "Wala Ala Balo (Arabic Afro House)",
+    "title": "Wala Ala Balo",
+    "artist": "Amr Diab (Arabic Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Bad Bunny",
-    "artist": "DtMf (Arabic Afro House / Peter Base Afro House)",
+    "title": "DtMf",
+    "artist": "Bad Bunny (Arabic Afro House / Peter Base Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Bad Bunny",
-    "artist": "EoO (Dave Ruthwell x SGX Afro House Remix)",
+    "title": "EoO",
+    "artist": "Bad Bunny (Dave Ruthwell x SGX Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Bad Bunny",
-    "artist": "Nuevayol (Alex Tolino / Jiinio Afro House Remix)",
+    "title": "Nuevayol",
+    "artist": "Bad Bunny (Alex Tolino / Jiinio Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Beyoncé & Shakira",
-    "artist": "Beautiful Liar (Rose Caviar Afro House Remix)",
+    "title": "Beautiful Liar",
+    "artist": "Beyoncé & Shakira (Rose Caviar Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Black Coffee",
-    "artist": "Your Eyes ft. Shekhinah (Kari Vibin Afro House Remix)",
+    "title": "Your Eyes",
+    "artist": "Black Coffee ft. Shekhinah (Kari Vibin Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Black Eyed Peas",
-    "artist": "My Humps (Dave Ruthwell Afro House)",
+    "title": "My Humps",
+    "artist": "Black Eyed Peas (Dave Ruthwell Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
     "title": "Bongo Bong Je Ne T'aime Plus",
-    "artist": "(Alauze Afro House Remix)",
+    "artist": "Manu Chao (Alauze Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Britney Spears",
-    "artist": "Gimme More (Arthur Miro Afro House Remix)",
+    "title": "Gimme More",
+    "artist": "Britney Spears (Arthur Miro Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Calvin Harris",
-    "artist": "Blessings (Zneno Altea Sanny Grooves Afro House)",
+    "title": "Blessings",
+    "artist": "Calvin Harris (Zneno Altea Sanny Grooves Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Cloonee",
-    "artist": "Stephanie (Sammy Flash Afro House Remix)",
+    "title": "Stephanie",
+    "artist": "Cloonee (Sammy Flash Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Daddy Yankee",
-    "artist": "Gasolina (Broski Afro House Remix)",
+    "title": "Gasolina",
+    "artist": "Daddy Yankee (Broski Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Daft Punk",
-    "artist": "One More Time (Maesic FromParis Afro House Remix)",
+    "title": "One More Time",
+    "artist": "Daft Punk (Maesic FromParis Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "David Guetta & Kid Cudi",
-    "artist": "Memories (Cortex_o Peace Afro House)",
+    "title": "Memories",
+    "artist": "David Guetta & Kid Cudi (Cortex_o Peace Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "David Guetta ft. Sia",
-    "artist": "Titanium (Vani Afro House Remix)",
+    "title": "Titanium",
+    "artist": "David Guetta ft. Sia (Vani Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Drake",
-    "artist": "Hotline Bling (Samuel Prince Afro House Remix)",
+    "title": "Hotline Bling",
+    "artist": "Drake (Samuel Prince Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Drake",
-    "artist": "One Dance (Graszias Afro House)",
+    "title": "One Dance",
+    "artist": "Drake (Graszias Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Dua Lipa & Elton John",
-    "artist": "Cold Heart (Kidy Afro House Remix)",
+    "title": "Cold Heart",
+    "artist": "Dua Lipa & Elton John (Kidy Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Ebru Gündeş",
-    "artist": "Çingenem (Luminoise Millforlife Afro House)",
+    "title": "Çingenem",
+    "artist": "Ebru Gündeş (Luminoise Millforlife Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Enur feat. Natasja",
-    "artist": "Calabria (Lst Cntrl Afro House Remix)",
+    "title": "Calabria",
+    "artist": "Enur feat. Natasja (Lst Cntrl Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Farruko",
-    "artist": "Pepas (Daiwik Afro House Remix)",
+    "title": "Pepas",
+    "artist": "Farruko (Daiwik Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Gims",
-    "artist": "Ninao (Boro Afro House Remix)",
+    "title": "Ninao",
+    "artist": "Gims (Boro Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Gipsy Kings",
-    "artist": "Bamboléo (Jayson Alanzo Damie Afro House Remix)",
+    "title": "Bamboléo",
+    "artist": "Gipsy Kings (Jayson Alanzo Damie Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
@@ -6747,78 +6748,78 @@ const listEAAfro = [
     "isEAndAAfro": true
   },
   {
-    "title": "Haddaway",
-    "artist": "What Is Love (Kyoma Afro House Remix)",
+    "title": "What Is Love",
+    "artist": "Haddaway (Kyoma Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Hamaki",
-    "artist": "Wahda Wahda (Arabic Afro House Remix)",
+    "title": "Wahda Wahda",
+    "artist": "Hamaki (Arabic Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Hugel",
-    "artist": "I Adore You (Ceti Afro House Remix) / I Adore You x Tere Liye EDIT (128 BPM)",
+    "title": "I Adore You",
+    "artist": "Hugel (Ceti Afro House Remix / Tere Liye Edit)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Hugel x Salif",
-    "artist": "Bam Bam (Sammy Flash Afro House Remix)",
+    "title": "Bam Bam",
+    "artist": "Hugel x Salif (Sammy Flash Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Inna",
-    "artist": "Yalla (Alex Luckystrike Arabic Afro House Remix)",
+    "title": "Yalla",
+    "artist": "Inna (Alex Luckystrike Arabic Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Jamaican Bam Bam_Ya Habibi",
-    "artist": "Hugel (Arabic",
+    "title": "Ya Habibi",
+    "artist": "Hugel (Arabic Jamaican Bam Bam Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Jonas Blue & Malive",
-    "artist": "Edge Of Desire (Noyadi Afro House Remix)",
+    "title": "Edge Of Desire",
+    "artist": "Jonas Blue & Malive (Noyadi Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Justin Bieber",
-    "artist": "Beauty And A Beat (Noyadi Afro House Remix)",
+    "title": "Beauty And A Beat",
+    "artist": "Justin Bieber (Noyadi Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Justin Timberlake",
-    "artist": "Señorita (Laureano x Sam Oui Afro House)",
+    "title": "Señorita",
+    "artist": "Justin Timberlake (Laureano x Sam Oui Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Kelly Rowland",
-    "artist": "When Love Takes Over (Heliograph Palau Afro House)",
+    "title": "When Love Takes Over",
+    "artist": "Kelly Rowland (Heliograph Palau Afro House)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Khaled",
-    "artist": "C'est La Vie (Kidy x DJ Bliss Arabic Afro House Remix)",
+    "title": "C'est La Vie",
+    "artist": "Khaled (Kidy x DJ Bliss Arabic Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
@@ -6831,36 +6832,36 @@ const listEAAfro = [
     "isEAndAAfro": true
   },
   {
-    "title": "Lana Del Rey",
-    "artist": "Summertime Sadness (Afro House Remix)",
+    "title": "Summertime Sadness",
+    "artist": "Lana Del Rey (Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Lana Del Rey",
-    "artist": "Young and Beautiful (Autograf Afro House Remix)",
+    "title": "Young and Beautiful",
+    "artist": "Lana Del Rey (Autograf Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Leona Lewis",
-    "artist": "Bleeding Love (Ferrand Afro House Remix)",
+    "title": "Bleeding Love",
+    "artist": "Leona Lewis (Ferrand Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Madcon",
-    "artist": "Beggin (Arabic Afro House Remix)",
+    "title": "Beggin",
+    "artist": "Madcon (Arabic Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Madonna",
-    "artist": "La Isla Bonita (Millforlife Afro House Remix)",
+    "title": "La Isla Bonita",
+    "artist": "Madonna (Millforlife Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
@@ -6873,174 +6874,175 @@ const listEAAfro = [
     "isEAndAAfro": true
   },
   {
-    "title": "Pitbull",
-    "artist": "I Know You Want Me (James Lucas Afro House Remix)",
+    "title": "I Know You Want Me",
+    "artist": "Pitbull (James Lucas Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Pitbull & Ne",
-    "artist": "Yo",
+    "title": "Give Me Everything",
+    "artist": "Pitbull & Ne-Yo (Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rihanna",
-    "artist": "Diamonds (Koshi_Broder Afro House Remix)",
+    "title": "Diamonds",
+    "artist": "Rihanna (Koshi_Broder Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rihanna",
-    "artist": "Don't Stop The Music (Qoozy Afro House Remix)",
+    "title": "Don't Stop The Music",
+    "artist": "Rihanna (Qoozy Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rihanna",
-    "artist": "Only Girl (SHVS Afro House Remix)",
+    "title": "Only Girl (In the World)",
+    "artist": "Rihanna (SHVS Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rihanna",
-    "artist": "Umbrella (Daniel Best Afro House Remix)",
+    "title": "Umbrella",
+    "artist": "Rihanna (Daniel Best Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rihanna",
-    "artist": "We Found Love (Adrian Forsén Afro House Remix)",
+    "title": "We Found Love",
+    "artist": "Rihanna (Adrian Forsén Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Rui Da Silva",
-    "artist": "Touch Me (Lian Wolf Afro House Remix)",
+    "title": "Touch Me",
+    "artist": "Rui Da Silva (Lian Wolf Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Sam Smith",
-    "artist": "La La La (Lumont Afro House Remix)",
+    "title": "La La La",
+    "artist": "Sam Smith (Lumont Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Santana",
-    "artist": "Maria (Casa Mata Afro House Remix)",
+    "title": "Maria Maria",
+    "artist": "Santana (Casa Mata Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Sean Paul",
-    "artist": "Temperature (Gameboys Afro House Remix)",
+    "title": "Temperature",
+    "artist": "Sean Paul (Gameboys Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Sean Paul",
-    "artist": "We Be Burnin (Zorden Afro House Remix)",
+    "title": "We Be Burnin",
+    "artist": "Sean Paul (Zorden Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Shaggy",
-    "artist": "Hey Sexy Lady (Zorden x Lukade Afro House Remix)",
+    "title": "Hey Sexy Lady",
+    "artist": "Shaggy (Zorden x Lukade Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Shakira",
-    "artist": "Hips Don't Lie (Asin Afro House Remix)",
+    "title": "Hips Don't Lie",
+    "artist": "Shakira (Asin Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Shimza",
-    "artist": "Fire Fire (Afro House Remix)",
+    "title": "Fire Fire",
+    "artist": "Shimza (Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Shouse",
-    "artist": "Love Tonight (Ofen Afro House Remix)",
+    "title": "Love Tonight",
+    "artist": "Shouse (Ofen Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
     "title": "Somebody That I Used To Know",
-    "artist": "(Heliograph x Palau Afro House) / Ilahi x Somebody To Love EDIT (128 BPM)",
+    "artist": "Gotye (Heliograph x Palau Afro House / Ilahi Edit)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Stromae",
-    "artist": "Alors On Danse (Adrian Forsén x Senatvs Afro House Remix)",
+    "title": "Alors On Danse",
+    "artist": "Stromae (Adrian Forsén x Senatvs Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "The Neighbourhood",
-    "artist": "Sweater Weather (Dave Afro House Remix)",
+    "title": "Sweater Weather",
+    "artist": "The Neighbourhood (Dave Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "The Weeknd",
-    "artist": "Cry For Me (Koshi Daymaan Afro House Remix)",
+    "title": "Cry For Me",
+    "artist": "The Weeknd (Koshi Daymaan Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Timbaland",
-    "artist": "The Way I Are (Higher Lane Hlx Afro House Remix)",
+    "title": "The Way I Are",
+    "artist": "Timbaland (Higher Lane Hlx Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Tyla",
-    "artist": "Chanel (Raimm Afro House Remix)",
+    "title": "Chanel",
+    "artist": "Tyla (Raimm Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
-    "title": "Tyla",
-    "artist": "Water (ABERCI Afro House Remix)",
+    "title": "Water",
+    "artist": "Tyla (ABERCI Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   },
   {
     "title": "Where Have You Been",
-    "artist": "(Lino x Laabs Afro House Remix)",
+    "artist": "Rihanna (Lino x Laabs Afro House Remix)",
     "film": "Remix",
     "isRemix": true,
     "isEAndAAfro": true
   }
 ];
+
 const listSufi = [
   {
     "title": "Mera Yaar (Original Sufi Version)",
@@ -8759,14 +8761,6 @@ const listClub = [
     youtubeId: "N2cPyl83tkQ"
   },
   {
-    title: "Meherbaan x Ferrari",
-    artist: "Bang Bang! x James Hype",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "CgeleP7nWN0"
-  },
-  {
     title: "Shayad x Rave Tool",
     artist: "Love Aaj Kal 2 x Peak Tech Edit",
     film: "Remix",
@@ -8839,14 +8833,6 @@ const listClub = [
     youtubeId: "RPCGOiDT9BE"
   },
   {
-    title: "Kabira x Clarity",
-    artist: "Yeh Jawaani Hai Deewani x Zedd",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "jHNNMj5bNQw"
-  },
-  {
     title: "Pee Loon x Sunset Lover",
     artist: "Once Upon A Time In Mumbaai x Petit Biscuit",
     film: "Remix",
@@ -8869,14 +8855,6 @@ const listClub = [
     isRemix: true,
     isClub: true,
     youtubeId: "nBtDsQ4fhXY"
-  },
-  {
-    title: "Dil Sambhal Ja Zara x Piece Of Your Heart",
-    artist: "Murder 2 x Meduza",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "5-OqPhet-NU"
   },
   {
     title: "Khuda Jaane x Without You",
@@ -8935,22 +8913,6 @@ const listClub = [
     youtubeId: "s4yy40jRTu4"
   },
   {
-    title: "Jiyein Kyun x Leave The World Behind",
-    artist: "Dum Maaro Dum x Axwell & Ingrosso",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "sJW37INWnYk"
-  },
-  {
-    title: "Mast Magan x In My Mind",
-    artist: "2 States x Dynoro & Gigi D'Agostino",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xitd9mEZIHk"
-  },
-  {
     title: "Sun Saathiya x This Is What You Came For",
     artist: "ABCD 2 x Calvin Harris & Rihanna",
     film: "Remix",
@@ -8975,14 +8937,6 @@ const listClub = [
     youtubeId: "dLa_ryRjC7M"
   },
   {
-    title: "Dekha Ek Khwaab x Stay",
-    artist: "Silsila x The Kid LAROI & Justin Bieber",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Nef_1GA-rVU"
-  },
-  {
     title: "Mitwa x Opus",
     artist: "Kabhi Alvida Naa Kehna x Eric Prydz",
     film: "Remix",
@@ -8999,44 +8953,12 @@ const listClub = [
     youtubeId: "QkPxhZO-0hc"
   },
   {
-    title: "Dil Diyan Gallan x I Wanna Know",
-    artist: "Tiger Zinda Hai x Alesso",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "SAcpESN_Fk4"
-  },
-  {
     title: "Tera Hone Laga Hoon x Wake Me Up",
     artist: "Ajab Prem Ki Ghazab Kahani x Avicii",
     film: "Remix",
     isRemix: true,
     isClub: true,
     youtubeId: "rTuxUAuJRyY"
-  },
-  {
-    title: "Tu Chahiye x Red Lights",
-    artist: "Bajrangi Bhaijaan x Tiësto",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zuvla6ABKbs"
-  },
-  {
-    title: "Pani Da Rang x Rather Be",
-    artist: "Vicky Donor x Clean Bandit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "EiItLWWxgOI"
-  },
-  {
-    title: "Samjhawan x Middle",
-    artist: "Humpty Sharma Ki Dulhania x DJ Snake",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "KXs2zgqLpVk"
   },
   {
     title: "Nazar Na Lag Jaaye x Silence",
@@ -9055,22 +8977,6 @@ const listClub = [
     youtubeId: "FM7MFYoylVs"
   },
   {
-    title: "Bakhuda Tumhi Ho x Tremor (Melodic Drop)",
-    artist: "Kismat Konnection x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ENklhABDmck"
-  },
-  {
-    title: "Hua Hain Aaj Pehli Baar x Sweet Dreams",
-    artist: "Sanam Re x Eurythmics Tech Flip",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DGVJtAHzzDQ"
-  },
-  {
     title: "Tu Jaane Na x Mammoth (Festival Vocal Flip)",
     artist: "APKGK x DVLM",
     film: "Remix",
@@ -9087,28 +8993,12 @@ const listClub = [
     youtubeId: "OAZZKCWGoJE"
   },
   {
-    title: "Main Rang Sharbaton Ka x Spectrum",
-    artist: "Phata Poster Nikhla Hero x Zedd",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "RBCk1SyC1PA"
-  },
-  {
     title: "Sunn Raha Hai Na Tu x Animals (Melodic Drop)",
     artist: "Aashiqui 2 x Martin Garrix",
     film: "Remix",
     isRemix: true,
     isClub: true,
     youtubeId: "z3UHfi9vpbc"
-  },
-  {
-    title: "Banjaara x Turn Off The Lights",
-    artist: "Ek Villain x Fred Again..",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Q22MCFC0CP0"
   },
   {
     title: "Te Amo x I Took A Pill In Ibiza",
@@ -9127,36 +9017,12 @@ const listClub = [
     youtubeId: "oJZNxU2tj_0"
   },
   {
-    title: "Moh Moh Ke Dhaage x Stargazing",
-    artist: "Dum Laga Ke Haisha x Kygo",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "peBsfgbOlYM"
-  },
-  {
     title: "Ghar More Pardesiya x Baianá",
     artist: "Kalank x Bakermat Afro-House Edit",
     film: "Remix",
     isRemix: true,
     isClub: true,
     youtubeId: "Deb9SA9Sfe4"
-  },
-  {
-    title: "Pal Pal Dil Ke Paas x Do It To It",
-    artist: "Blackmail x ACRAZE Tech Flip",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "NA-q7WCRfDU"
-  },
-  {
-    title: "Ishq Wala Love x The Nights",
-    artist: "Student of the Year x Avicii",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "N2cPyl83tkQ"
   },
   {
     title: "Meherbaan x Ten Feet Tall",
@@ -9181,14 +9047,6 @@ const listClub = [
     isRemix: true,
     isClub: true,
     youtubeId: "xvtNS6hbVy4"
-  },
-  {
-    title: "Kinna Sohna x Losing It",
-    artist: "Marjaavaan x FISHER Tech House Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8CLJS3DoDhg"
   },
   {
     title: "Woh Din x Summer",
@@ -9221,14 +9079,6 @@ const listClub = [
     isRemix: true,
     isClub: true,
     youtubeId: "Rd9wF5fAnVw"
-  },
-  {
-    title: "Besharam Rang x Drugs From Amsterdam",
-    artist: "Pathaan x Mau P",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "juuIhW8V1Xw"
   },
   {
     title: "Aankh Marey x Move Your Body",
@@ -9383,14 +9233,6 @@ const listClub = [
     youtubeId: "bpOJmRlgg-4"
   },
   {
-    title: "Hookah Bar x Party Till We Die",
-    artist: "Khiladi 786 x MAKJ & Timmy Trumpet",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "IDTS7zoI5pw"
-  },
-  {
     title: "Illegal Weapon x Spaceman",
     artist: "Street Dancer 3D x Hardwell",
     film: "Remix",
@@ -9495,14 +9337,6 @@ const listClub = [
     youtubeId: "Ee_9J9lGgS0"
   },
   {
-    title: "Show Me The Thumka x Drugs From Amsterdam",
-    artist: "TJMM x Mau P",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "juuIhW8V1Xw"
-  },
-  {
     title: "Subah Hone Na De x Greyhound",
     artist: "Desi Boyz x Swedish House Mafia",
     film: "Remix",
@@ -9535,14 +9369,6 @@ const listClub = [
     youtubeId: "2I3NgxDAiqE"
   },
   {
-    title: "Vele x Bla Bla Bla",
-    artist: "Student of the Year x Gigi D'Agostino",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "g6t8g6ka4W0"
-  },
-  {
     title: "Yaar Naa Miley x Animals",
     artist: "Kick x Martin Garrix",
     film: "Remix",
@@ -9557,30 +9383,6 @@ const listClub = [
     isRemix: true,
     isClub: true,
     youtubeId: "stjZKBhQ3lg"
-  },
-  {
-    title: "Malhari x Laserbeam",
-    artist: "Bajirao Mastani x Ray Volpe",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Tauba Tauba x Losing It",
-    artist: "Bad Newz x FISHER",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "tJQKMpf5ANE"
-  },
-  {
-    title: "Badtameez Dil x Spaceman",
-    artist: "Yeh Jawaani Hai Deewani x Hardwell",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "II2EO3Nw4m0"
   },
   {
     title: "Zingaat x Booyah",
@@ -9605,46 +9407,6 @@ const listClub = [
     isRemix: true,
     isClub: true,
     youtubeId: "070t4rVokoA"
-  },
-  {
-    title: "Abhi Toh Party x Heads Will Roll",
-    artist: "Khoobsurat x Yeah Yeah Yeahs",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "rzcCpHLA_8g"
-  },
-  {
-    title: "Chammak Challo x Low",
-    artist: "Ra.One x Flo Rida Club Flip",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ufHLYw9q7vQ"
-  },
-  {
-    title: "Dus Bahane x Piece Of Your Heart",
-    artist: "Dus x Meduza Tech Drop",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "KWjV25q34Hw"
-  },
-  {
-    title: "Ek Do Teen x Gasolina",
-    artist: "Tezaab x Daddy Yankee Hard Trap",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Om9zu4NTtd4"
-  },
-  {
-    title: "Lungi Dance x Turn Up The Speakers",
-    artist: "Chennai Express x Afrojack & Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "dzHdo4yxidc"
   },
   {
     title: "Bahu Kale Ki x Satisfaction",
@@ -13067,15 +12829,41 @@ const listHustle = [
 ];
 
 const merged = [...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listEAAfro !== "undefined" ? listEAAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
-const uniqueMap = new Map<string, { title: string; artist: string; film: string; youtubeId?: string; startSeconds?: number; isSpatial?: boolean; isGlobal?: boolean; isGoa?: boolean; isRemix?: boolean; isKTrance?: boolean; isIndoHouse?: boolean; isSufi?: boolean; isAfro?: boolean; isEAndAAfro?: boolean; isX?: boolean; isClub?: boolean; isHustle?: boolean; hustleSeason?: string; hustleNum?: number }>();
+
+// Helper to canonicalize track titles for strict distinct deduplication
+function normalizeTitleKey(title: string): string {
+  if (!title) return "";
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[\(\)\[\]\{\}]/g, "")
+    .replace(/[\-_/\\:]/g, " ")
+    .replace(/\s+/g, " ");
+}
+
+const uniqueTitleMap = new Map<string, any>();
+const uniqueAudioMap = new Map<string, any>();
+const uniqueTrackList: any[] = [];
 
 for (const t of merged) {
-  const key = `${t.title.toLowerCase()} - ${t.artist.toLowerCase()}`;
   const item = t as any;
-  if (!uniqueMap.has(key)) {
-    uniqueMap.set(key, { ...t });
+  const tKey = normalizeTitleKey(item.title);
+  const aKey = (item.youtubeId && item.youtubeId.trim()) ? `yt:${item.youtubeId.trim()}` : ((item.audioUrl && item.audioUrl.trim()) ? `url:${item.audioUrl.trim()}` : "");
+
+  let existing: any = null;
+  if (tKey && uniqueTitleMap.has(tKey)) {
+    existing = uniqueTitleMap.get(tKey);
+  } else if (aKey && uniqueAudioMap.has(aKey)) {
+    existing = uniqueAudioMap.get(aKey);
+  }
+
+  if (!existing) {
+    const copy = { ...t };
+    if (tKey) uniqueTitleMap.set(tKey, copy);
+    if (aKey) uniqueAudioMap.set(aKey, copy);
+    uniqueTrackList.push(copy);
   } else {
-    const existing = uniqueMap.get(key)!;
+    // Retain exactly ONE instance in the database with merged playlist tags and flags
     if (item.isSpatial) existing.isSpatial = true;
     if (item.isGlobal) existing.isGlobal = true;
     if (item.isGoa) existing.isGoa = true;
@@ -13088,16 +12876,22 @@ for (const t of merged) {
     if (item.isX) existing.isX = true;
     if (item.isClub) existing.isClub = true;
     if (item.isHustle) existing.isHustle = true;
-    if (item.hustleSeason) existing.hustleSeason = item.hustleSeason;
-    if (item.hustleNum) existing.hustleNum = item.hustleNum;
-    if (item.startSeconds !== undefined) existing.startSeconds = item.startSeconds;
-    if (item.youtubeId && !existing.youtubeId) existing.youtubeId = item.youtubeId;
+    if (item.hustleSeason && !existing.hustleSeason) existing.hustleSeason = item.hustleSeason;
+    if (item.hustleNum && !existing.hustleNum) existing.hustleNum = item.hustleNum;
+    if (item.startSeconds !== undefined && existing.startSeconds === undefined) existing.startSeconds = item.startSeconds;
+    if (item.youtubeId && !existing.youtubeId) {
+      existing.youtubeId = item.youtubeId;
+      uniqueAudioMap.set(`yt:${item.youtubeId.trim()}`, existing);
+    }
+    if (item.audioUrl && !existing.audioUrl) {
+      existing.audioUrl = item.audioUrl;
+      uniqueAudioMap.set(`url:${item.audioUrl.trim()}`, existing);
+    }
   }
 }
 
-// Convert unique map entries to the rawTracks array, preserving youtubeId, startSeconds, and isSpatial fields
-// All tracks on this site are 16D audio — mark every track as spatial
-const rawTracks: Track[] = Array.from(uniqueMap.values()).map((track, idx) => ({
+// Convert unique track entries to rawTracks array with unique sequential IDs
+const rawTracks: Track[] = uniqueTrackList.map((track, idx) => ({
   id: idx + 1,
   title: track.title,
   artist: track.artist,

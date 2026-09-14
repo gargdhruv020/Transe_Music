@@ -298,10 +298,22 @@ export default function TrackList({
         t.film.toLowerCase().includes(q)
       );
     });
+    let finalResult = result;
     if (activeTab === "hustle") {
-      return [...result].sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0));
+      finalResult = [...result].sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0));
     }
-    return result;
+
+    // Defense-in-depth distinct enforcement: guarantee 100% unique items rendered in UI
+    const seenSlugs = new Set<string>();
+    const distinctResult: Track[] = [];
+    for (const t of finalResult) {
+      const slug = t.title.toLowerCase().trim().replace(/[\(\)\[\]\{\}]/g, "").replace(/\s+/g, " ");
+      if (!seenSlugs.has(slug)) {
+        seenSlugs.add(slug);
+        distinctResult.push(t);
+      }
+    }
+    return distinctResult;
   }, [searchQuery, activeTab, isRemixOnly, likedIds]);
 
   const handleHeaderPlayClick = (e: React.MouseEvent) => {
