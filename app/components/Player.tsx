@@ -730,13 +730,11 @@ export default function Player() {
           resolvedCacheRef.current[cacheKey] = data.videoId;
           setCurrentVideoId(data.videoId);
         } else if (!controller.signal.aborted) {
-          console.error(`Could not resolve videoId for: ${currentTrack.title}. Auto-skipping...`);
-          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1500);
+          console.warn(`Could not resolve videoId for: ${currentTrack.title}. Retaining player state.`);
         }
       } catch (e: any) {
         if (e.name !== "AbortError") {
-          console.error(`Search API resolution error for: ${currentTrack.title}`, e);
-          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1500);
+          console.warn(`Search API resolution notice for: ${currentTrack.title}`, e);
         }
       }
     }
@@ -1305,9 +1303,9 @@ export default function Player() {
       lastLoadedVideoIdRef.current = null;
       setCurrentVideoId(null);
       autoPlayPendingRef.current = true;
-      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
         try {
-          ytPlayerRef.current.playVideo();
+          ytPlayerRef.current.pauseVideo();
         } catch (_) {}
       }
     }
@@ -1402,9 +1400,9 @@ export default function Player() {
       lastLoadedVideoIdRef.current = null;
       setCurrentVideoId(null);
       autoPlayPendingRef.current = true;
-      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
         try {
-          ytPlayerRef.current.playVideo();
+          ytPlayerRef.current.pauseVideo();
         } catch (_) {}
       }
     }
@@ -1766,8 +1764,8 @@ export default function Player() {
       lastLoadedVideoIdRef.current = null;
       setCurrentVideoId(null);
       autoPlayPendingRef.current = true;
-      if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-        try { ytPlayerRef.current.playVideo(); } catch (_) {}
+      if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
+        try { ytPlayerRef.current.pauseVideo(); } catch (_) {}
       }
     }
   }, [currentIndex, getTrackYoutubeId, initMediaSession, ensurePlayerReady, abortCrossfade]);
