@@ -326,6 +326,7 @@ export default function Player() {
     if (mode === "afro") return tracks.filter(t => (t as any).isAfro);
     if (mode === "x") return tracks.filter(t => (t as any).isX);
     if (mode === "hustle") return tracks.filter(t => (t as any).isHustle).sort((a, b) => ((a as any).hustleNum || 0) - ((b as any).hustleNum || 0));
+    if (mode === "all") return tracks.filter(t => t.isSpatial || t.isGlobal || t.isGoa || t.isKTrance || (t.isRemix && !(t as any).isClub && !(t as any).isHaryanvi && !(t as any).isHustle));
     return tracks;
   }, [likedIds]);
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);

@@ -4,8 +4,9 @@ export interface Track {
   artist: string;
   film: string;
   youtubeId?: string;
+  audioUrl?: string;
   startSeconds?: number;
-  isSpatial?: boolean;
+  isSpatial: boolean;
   isGlobal?: boolean;
   isGoa?: boolean;
   isRemix?: boolean;
@@ -19,974 +20,3777 @@ export interface Track {
   isHustle?: boolean;
   hustleSeason?: string;
   hustleNum?: number;
-  audioUrl?: string;
 }
 
-const list1 = [
-  // 🌀 Psytrance & Progressive Psy Mixes (1–20)
-  { title: "Chaiyya Chaiyya", artist: "Iconic Indian Psytrance Edit", film: "Dil Se", youtubeId: "K-pX4qwtAxA" },
-  { title: "Kajra Re", artist: "Ethnic Psytrance Remix", film: "Bunty Aur Babli", youtubeId: "4dsFQFCvVGU" },
-  { title: "Beedi Jalaile", artist: "Dark Psytrance Mix", film: "Omkara", youtubeId: "uUPBMV3DAck" },
-  { title: "Dhan Te Nan", artist: "High-BPM Psytrance Edit", film: "Kaminey", youtubeId: "4QVu6Vo6Jhw" },
-  { title: "Choli Ke Peeche", artist: "Progressive Psytrance Remix", film: "Khalnayak", youtubeId: "3OXiqmUhB70" },
-  { title: "Mar Jawaan", artist: "Psytrance Mashup (DJ NYK Edit)", film: "Fashion", youtubeId: "JNZi3k2Tiy8" },
-  { title: "Bulleya (Ae Dil Hai Mushkil)", artist: "Psytrance Edit", film: "Ae Dil Hai Mushkil", youtubeId: "hXh35CtnSyU" },
-  { title: "Raataan Lambiyan", artist: "Progressive Psy Remix", film: "Shershaah", youtubeId: "-JVBDtaHQaA" },
-  { title: "Dil Sambhal Ja Zara", artist: "Dark Psytrance Remix", film: "Murder 2", youtubeId: "fA_xoB27LH4" },
-  { title: "Ghar More Pardesiya", artist: "Ethnic Indian Psytrance Edit", film: "Kalank", youtubeId: "b5WF7yZcc1w" },
-  { title: "Nagada Nagada", artist: "Dhol Psytrance Mix", film: "Jab We Met", youtubeId: "b27sfD4zJ6Y" },
-  { title: "Dola Re Dola", artist: "Classical Folk Psy Edit", film: "Devdas", youtubeId: "B4HbUt58eFU" },
-  { title: "Engine Ki Seeti", artist: "Psytrance Remix", film: "Khoobsurat", youtubeId: "YWhbDQeWfNk" },
-  { title: "Piya Tu Ab To Aaja", artist: "Retro Psytrance Flip", film: "Caravan", youtubeId: "hOroPhFi4do" },
-  { title: "Aali Re", artist: "Folk Psytrance Mix", film: "No One Killed Jessica", youtubeId: "HRnbmQYAIp0" },
-  { title: "Chinta Ta Ta Chita Chita", artist: "Psytrance Edit", film: "Rowdy Rathore", youtubeId: "JhJHom7_6UQ" },
-  { title: "Rang De Basanti", artist: "High Energy Psy Remix", film: "Rang De Basanti", youtubeId: "Azhtn4ptHQI" },
-  { title: "Chogada", artist: "Garba Psytrance Mix", film: "Loveyatri", youtubeId: "8vwKq2K7jyg" },
-  { title: "Balam Pichkari", artist: "Psytrance / Festival Edit", film: "Yeh Jawaani Hai Deewani", youtubeId: "QJDZu5berXs" },
-  { title: "Lovely (Happy New Year)", artist: "Progressive Psy Edit", film: "Happy New Year", youtubeId: "9hGQwtXzfY4" },
-
-  // 🌙 Melodic Techno & Deep House Mixes (21–40)
-  { title: "Kesariya", artist: "Deep House Remix", film: "Brahmāstra", youtubeId: "ptOcA86r7E8" },
-  { title: "Kabira", artist: "Organic House / Deep House Mix", film: "Yeh Jawaani Hai Deewani", youtubeId: "mXxbnXo29eM" },
-  { title: "Kun Faya Kun", artist: "Melodic Techno Edit", film: "Rockstar", youtubeId: "wi-_9gpJxpQ" },
-  { title: "Aayat", artist: "Melodic Techno / Deep Remix", film: "Bajirao Mastani", youtubeId: "vKDsAB1ccn0" },
-  { title: "Shayad", artist: "Progressive Melodic House Edit", film: "Love Aaj Kal", youtubeId: "HI5eULhmGOw" },
-  { title: "Ranjha", artist: "Organic Deep House Mix", film: "Shershaah", youtubeId: "hPHU3oXzDaw" },
-  { title: "Agar Tum Saath Ho", artist: "Atmospheric Deep House Remix", film: "Tamasha", youtubeId: "PYgnCOpmpMU" },
-  { title: "Mast Magan", artist: "Melodic Techno Mix", film: "2 States", youtubeId: "ZrhQCtQJ13s" },
-  { title: "Pani Da Rang", artist: "Chill Psytrance / Organic House", film: "Vicky Donor",
-    youtubeId: "zRzD3-a9_qc"
-  },
-  { title: "Galliyan", artist: "Deep House Remix", film: "Ek Villain", youtubeId: "CGDezb6Jgoc" },
-  { title: "Subha Hun Ki Sham Se", artist: "Deep House Edit", film: "Retro", youtubeId: "8dfIIse1fmM" },
-  { title: "Dil Diyan Gallan", artist: "Deep House / Chillstep Mix", film: "Tiger Zinda Hai", youtubeId: "IdPlBcRZjbI" },
-  { title: "Tera Ban Jaunga", artist: "Melodic House Remix", film: "Kabir Singh", youtubeId: "D7DQ72P1qdM" },
-  { title: "Soch (Hardy Sandhu)", artist: "Deep House Flip", film: "Airlift", youtubeId: "KU6PF32U6V0" },
-  { title: "Kalla Sohna Nai", artist: "Deep House Edit", film: "Single", youtubeId: "TIHmXfJc0os" },
-  { title: "Manike", artist: "Deep House Club Mix", film: "Thank God", youtubeId: "-44OSXNSGtM" },
-  { title: "Ban Ja Rani", artist: "Deep House Edit", film: "Tumhari Sulu", youtubeId: "LT0N96j-pG8" },
-  { title: "Tere Naina", artist: "Melodic House Edit", film: "My Name Is Khan", youtubeId: "lHC1xPUgP5Q" },
-  { title: "Sajdaa", artist: "Melodic Techno Mix", film: "My Name Is Khan", youtubeId: "HrFh_1axc1g" },
-  { title: "Mitwa", artist: "Progressive House Edit", film: "Kabhi Alvida Naa Kehna", youtubeId: "6LtpYX3G0wc" },
-
-  // ⚡ Slap House & Tech House Edits (41–60)
-  { title: "Besharam Rang", artist: "Tech House Remix", film: "Pathaan", youtubeId: "qZ2c0QamOCg" },
-  { title: "Chaleya", artist: "Slap House Edit", film: "Jawan", youtubeId: "2s4JJwveyQQ" },
-  { title: "Senorita (ZNMD)", artist: "Tech House Edit", film: "Zindagi Na Milegi Dobara", youtubeId: "CAHgJlOsNhM" },
-  { title: "High Rated Gabru", artist: "Slap House Mix", film: "Nawabzaade", youtubeId: "MwuG3YntNhI" },
-  { title: "Bom Diggy Diggy", artist: "Tech House Edit", film: "Sonu Ke Titu Ki Sweety", youtubeId: "yntV3qwOr-c" },
-  { title: "Lamberghini", artist: "Slap House Remix", film: "Single", youtubeId: "5X7WWVTrBvM" },
-  { title: "Illegal Weapon 2.0", artist: "Tech House / Slap Mix", film: "Street Dancer 3D", youtubeId: "1mwjRrS_9Os" },
-  { title: "Suit Suit", artist: "Club Tech House Mix", film: "Hindi Medium", youtubeId: "Wo-aefcEfrA" },
-  { title: "Dus Bahane 2.0", artist: "Slap House Remix", film: "Baaghi 3", youtubeId: "ebrZhf5BZGs" },
-  { title: "Crazy Kiya Re", artist: "Tech House Edit", film: "Dhoom 2", youtubeId: "C0toSl4FAKM" },
-  { title: "Proper Patola", artist: "Tech House Edit", film: "Namaste England", youtubeId: "s_yDx4yb3zE" },
-  { title: "Slow Motion (Bharat)", artist: "Tech House Mix", film: "Bharat", youtubeId: "mClOxV5jGpY" },
-  { title: "Muqabla (Street Dancer 3D)", artist: "Tech House Edit", film: "Street Dancer 3D", youtubeId: "9NfUb-e3DP8" },
-  { title: "Dance Ka Bhoot", artist: "Slap House Mix", film: "Brahmāstra", youtubeId: "j9FWubgR__g" },
-  { title: "Nashe Si Chadh Gayi", artist: "Tech House Remix", film: "Befikre", youtubeId: "u4FbmqEW_AU" },
-  { title: "Nadiyon Paar", artist: "Slap House / Tech Remix", film: "Roohi", youtubeId: "K5wQDhYiUIs" },
-  { title: "O Bedardeya", artist: "Deep Slap House Mix", film: "Tu Jhoothi Main Makkaar", youtubeId: "IBxJUr_zFuI" },
-  { title: "Gimme More x Desi Beat", artist: "Tech House Flip", film: "Bodyguard",
-    youtubeId: "cARCtDPFt3g"
-  },
-  { title: "Daddy Whip", artist: "Desi Bass House Edit", film: "Single", youtubeId: "ZWNCR9cfkPw" },
-  { title: "Kahani Suno", artist: "Tech House Remix", film: "Kaifi Khalil", youtubeId: "gaPSrCXRPsw" },
-
-  // 🔥 High-Energy Electro & Club EDM (61–80)
-  { title: "Jawan Title Track", artist: "Dark EDM / Club Mix", film: "Jawan", youtubeId: "sed86UEe_x0" },
-  { title: "Nacho Nacho (RRR)", artist: "High Energy EDM / Hardstyle Mix", film: "RRR", youtubeId: "Ohocc4eD05Y" },
-  { title: "Jhoome Jo Pathaan", artist: "Electro House Mix", film: "Pathaan", youtubeId: "nKUJ5WgpWmM" },
-  { title: "Swag Se Swagat", artist: "Electro House Remix", film: "Tiger Zinda Hai", youtubeId: "_cPRjoX3kvM" },
-  { title: "Garmi", artist: "Bass Boosted Club Mix", film: "Street Dancer 3D", youtubeId: "9bb74SbJJRg" },
-  { title: "Badtameez Dil", artist: "Big Room EDM Remix", film: "Yeh Jawaani Hai Deewani", youtubeId: "WRz22ibD3qI" },
-  { title: "Dance Pe Chance", artist: "Electro House Remix", film: "Rab Ne Bana Di Jodi", youtubeId: "AvO_umNLFhE" },
-  { title: "Subah Subah", artist: "Commercial EDM Remix", film: "Sonu Ke Titu Ki Sweety", youtubeId: "PBxtTvxBp80" },
-  { title: "Dil Chori", artist: "Melbourne Bounce / EDM Mix", film: "Sonu Ke Titu Ki Sweety", youtubeId: "S65zMe3NScQ" },
-  { title: "Cheez Badi (Machine)", artist: "Electro House Mix", film: "Machine", youtubeId: "52o8srvFLvc" },
-  { title: "Tamma Tamma Again", artist: "Electro Bounce Mix", film: "Badrinath Ki Dulhania", youtubeId: "Db7MAK5hVmU" },
-  { title: "Kar Gayi Chull", artist: "Bass House Remix", film: "Kapoor & Sons", youtubeId: "NTHz9ephYTw" },
-  { title: "Let's Nacho", artist: "EDM / Bounce Remix", film: "Kapoor & Sons", youtubeId: "M_SUHP_8CI8" },
-  { title: "High Heels Te Nachche", artist: "Commercial Club Remix", film: "Ki & Ka", youtubeId: "mc4b_euqg6A" },
-  { title: "Rock Tha Party", artist: "Hard Dance / EDM Mix", film: "Rocky Handsome", youtubeId: "jjGBkSjITF4" },
-  { title: "Saturday Saturday", artist: "Bounce House Remix", film: "Humpty Sharma Ki Dulhania", youtubeId: "rW9_-dVCmrM" },
-  { title: "Abhi Toh Party Shuru Hui Hai", artist: "High Energy Electro", film: "Khoobsurat", youtubeId: "E-YNx1e2abg" },
-  { title: "Party All Night", artist: "Electro House Edit", film: "Boss", youtubeId: "Ak3NZekDOGc" },
-  { title: "Lungi Dance", artist: "Festival EDM Mix", film: "Chennai Express", youtubeId: "nSUVNlC1zGs" },
-  { title: "1234 Get On The Dance Floor", artist: "Desi EDM Flip", film: "Chennai Express", youtubeId: "nSPBJNqayF0" },
-
-  // 🔊 Classics, Retro & Folk EDM Fusions (81–100)
-  { title: "Mauja Hi Mauja", artist: "Festival EDM Remix", film: "Jab We Met", youtubeId: "E-t3nejFRDo" },
-  { title: "Subhah Hone Na De", artist: "Trance / House Edit", film: "Desi Boyz", youtubeId: "3SLXNc41-Uc" },
-  { title: "Desi Boyz (Title Track)", artist: "Electro Remix", film: "Desi Boyz", youtubeId: "nr3ul-3k_9E" },
-  { title: "Chammak Challo", artist: "Global EDM Edit", film: "Ra.One", youtubeId: "oAVhUAaVCVQ" },
-  { title: "Criminal (Ra.One)", artist: "Slap House / Electro", film: "Ra.One", youtubeId: "VIV3nS7KRok" },
-  { title: "Dope Shope", artist: "Bass House Remix", film: "Honey Singh", youtubeId: "rT0lgxmkPQ4" },
-  { title: "Angreji Beat", artist: "Tech House Mix", film: "Honey Singh", youtubeId: "0x1BoFyJK0E" },
-  { title: "Sadi Gali", artist: "Electro Folk Remix", film: "Tanu Weds Manu", youtubeId: "yuYiVWe0J-8" },
-  { title: "Character Dheela", artist: "Progressive Electro Mix", film: "Ready", youtubeId: "p_0zsIyYs08" },
-  { title: "Dhinka Chika", artist: "Commercial Bounce Remix", film: "Ready", youtubeId: "0l_sWiV5y7U" },
-  { title: "Zindagi Do Pal Ki", artist: "Ambient Trance Remix", film: "Kites", youtubeId: "4DbVdym2M90" },
-  { title: "Mahi Ve (Kal Ho Naa Ho)", artist: "Uplifting Trance Remix", film: "Kal Ho Naa Ho", youtubeId: "ikRuqEMhBqY" },
-  { title: "It's the Time to Disco", artist: "Retro Electro House Mix", film: "Kal Ho Naa Ho", youtubeId: "IKaRLcOVj7I" },
-  { title: "Dhoom Machale", artist: "Hardstyle / Big Room EDM Edit", film: "Dhoom", youtubeId: "wckDP1_HuGw" },
-  { title: "Aankh Marey", artist: "Club Bounce Remix", film: "Simmba", youtubeId: "Et3PQvkcEtA" },
-  { title: "Mere Gully Mein", artist: "Bass House Remix", film: "Gully Boy", youtubeId: "pGmbUdf6lEM" },
-  { title: "Apna Time Aayega", artist: "Trap / Dubstep Remix", film: "Gully Boy", youtubeId: "EDQqPeezINs" },
-  { title: "Laung Laachi", artist: "Tropical EDM Mix", film: "Laung Laachi", youtubeId: "z2w3ggdyGA8" },
-  { title: "Makhna (Drive)", artist: "Tropical House Remix", film: "Drive", youtubeId: "VWehckbG_i0" },
-  { title: "Tera Yaar Hoon Main", artist: "Progressive House Edit", film: "Sonu Ke Titu Ki Sweety", youtubeId: "1CESVshqWxA" }
-];
-
-const list2 = [
-  { title: "Jimmy Jimmy (Trance)", artist: "Sameer Sen, Abhijit, Paroma, etc.", film: "Disco Dancer Remix",
-    youtubeId: "fRSLPx0HSvw"
-  },
-  { title: "PYAAR KA PUNCHNAMA - Remix", artist: "Mika Singh, Luv Ranjan, Akasa", film: "Pyaar Ka Punchnama", youtubeId: "zN6YlySa_44" },
-  { title: "Timmy Reworks", artist: "Timmy Reworks, Pritam", film: "Pritam Edit", youtubeId: "LemcOS6EGBQ" },
-  { title: "Bhool Bhulaiyaa", artist: "Timmy Reworks, Pritam", film: "Bhool Bhulaiyaa", youtubeId: "mll82yN_XZA" },
-  { title: "Ek Do Teen - Psy Trance", artist: "Meet Bros, Neha Kakkar, Dhvani Bhanushali", film: "Baaghi 2", youtubeId: "JhaVdknWerA" },
-  { title: "Dum Karo Dum (Psytrance)", artist: "Meet Bros, Dev Negi", film: "Dum Maaro Dum", youtubeId: "NDmrjwJXBlU" },
-  { title: "Aao Huzur - Psytrance", artist: "Meet Bros, Neha Kakkar, Monali Thakur", film: "Psy Remix",
-    youtubeId: "DxH123syr4o"
-  },
-  { title: "Aap Jaisa Koi (Psytrance)", artist: "Arijit Singh, Yash Narvekar, Dhvani Bhanushali", film: "An Action Hero", youtubeId: "Ovu5FepCzcc" },
-  { title: "Ang Laga De - Melodic Techno Remix", artist: "Deepanshu, Melodic", film: "Goliyon Ki Raasleela", youtubeId: "VS2WMYuDk1Y" },
-  { title: "Yeh Sham Mastani - Bollywood Trance", artist: "Deepanshu, Timmy Reworks", film: "Retro Remix", youtubeId: "LemcOS6EGBQ" },
-  { title: "Naino Mein Sapna - Tech House Remix", artist: "Deepanshu, Timmy Reworks, Pritam", film: "Himmatwala", youtubeId: "ME6qRuoa9cg" },
-  { title: "Laila O Laila Remix", artist: "Badshah, Pawandeep Rajan, Deepanshu", film: "Raees", youtubeId: "6Mc38m3xlac" },
-  { title: "Aali Re", artist: "Pritam", film: "No One Killed Jessica", youtubeId: "HRnbmQYAIp0" },
-  { title: "Naa Ja - Psy Trance", artist: "Pawandeep Rajan, Deepanshu", film: "Sooryavanshi", youtubeId: "riStn36xCQc" },
-  { title: "Jawani Jan-E-Man - Tech House Trance", artist: "DJ Rink, DJ Lemon", film: "Namak Halaal", youtubeId: "nFbLjsQbdlo" },
-  { title: "Bachna Ae Haseeno - Trance", artist: "Kishore Kumar, R.D. Burman", film: "Bachna Ae Haseeno", youtubeId: "E8X2Z_xFt4M" },
-  { title: "Aaj Tera Jawan - Tech House Remix", artist: "DJ Rink, Amit Kumar", film: "Kasme Vaade", youtubeId: "BgX2YIWcCsQ" },
-  { title: "Radha Nachegi - Tech House Mix", artist: "DJ Rink, Vishal & Shekhar", film: "Tevar", youtubeId: "K9UUbq0SZcw" },
-  { title: "Suno Suno Kaho Kaho (Trance Edit)", artist: "DJ Rink, R.D. Burman", film: "Classic", youtubeId: "FJzLg6W4QRo" },
-  { title: "Main Hoon Don (Tech House Remix)", artist: "DJ Rink, Kishore Kumar", film: "Don", youtubeId: "8FL2FLv5xC0" },
-  { title: "Chura Liya Hai Tumne Jo Dil (Tech House)", artist: "Asha Bhosle, Mohammad Rafi, DJ Rink", film: "Yaadon Ki Baaraat", youtubeId: "xwJpIN_XF0A" },
-  { title: "Roop Tera Mastana (Trance Remix)", artist: "DJ Rink, Kishore Kumar", film: "Aradhana", youtubeId: "d2wjhJstSP4" },
-  { title: "Koi Mil Gaya (Tech House Mix)", artist: "Kishore Kumar, Asha Bhosle", film: "Kuch Kuch Hota Hai", youtubeId: "7qydPABqOvA" },
-  { title: "Deewane Hum Nahi (Remix)", artist: "Aditya Yadav, DJ Rink, Deepanshu", film: "Deewane", youtubeId: "0A5MVZgga5U" },
-  { title: "Pehla Pyaar - Deep House Mix", artist: "Armaan Malik, Vishal Mishra, Amaal Mallik", film: "Kabir Singh", youtubeId: "AJY70JDIZIk" },
-  { title: "Aaja Aaja - Tech Remix", artist: "Asha Bhosle, R.D. Burman", film: "Teesri Manzil", youtubeId: "8fXmvexIPMQ" },
-  { title: "Humne Dekhi Hai - Deep House Remix", artist: "Lata Mangeshkar, R.D. Burman", film: "Khamoshi", youtubeId: "doPtBhDTpj0" },
-  { title: "Shona Shona", artist: "Tony Kakkar", film: "Single", youtubeId: "N9lqbhVVTck" },
-  { title: "Dil Tera - Slap House Remix", artist: "DJ Rink", film: "Slap House", youtubeId: "z7uBkxKi2D8" },
-  { title: "Lea", artist: "DJ Rink", film: "DJ Rink", youtubeId: "85Gy_cde77k" },
-  { title: "Deewana", artist: "Pawandeep Rajan, Deepanshu", film: "Single", youtubeId: "SYzV_sJST1I" },
-  { title: "Kazi Rnk", artist: "Kishore Kumar", film: "Kazi Rnk", youtubeId: "l3Q_zHd3kCA" },
-  { title: "Pauli", artist: "Yo Yo Honey Singh", film: "Honey Singh", youtubeId: "q3EsYvIapPQ" },
-  { title: "Priyatam", artist: "Pawandeep Rajan", film: "Pawandeep", youtubeId: "7mR31IcdQwU" },
-  { title: "Dil Bagi", artist: "Pawandeep Rajan", film: "Pawandeep", youtubeId: "x8HMrGNAKAY" },
-  { title: "Humse Pyar - Psy Trance", artist: "Pritam", film: "Pritam", youtubeId: "hM9QDpLHhdw" },
-  { title: "Kabhie Kabhie Aditi - Tech House Remix", artist: "A.R. Rahman, Blaaze, Rashid Ali", film: "Jaane Tu... Ya Jaane Na", youtubeId: "dbdtBQ16CXc" },
-  { title: "Parda Hai Parda - Trance Mix", artist: "Mohammed Rafi, Asha Bhosle", film: "Amar Akbar Anthony", youtubeId: "WCBkUNedgrk" },
-  { title: "Chot Dil Pe Lagi - Slap Mix", artist: "Kumar Sanu, Alka Yagnik, DJ Rink", film: "Dil Ka Rishta", youtubeId: "zCamH8ur5hw" },
-  { title: "Dil To Pagal Hai - Club Mix", artist: "DJ Rink, Uttam Singh", film: "Dil To Pagal Hai", youtubeId: "zIdexaFwsck" },
-  { title: "Tum - Slap Flip", artist: "Pritam", film: "Ludo", youtubeId: "iKCGyy04ato" },
-  { title: "Roop Tera Mastana - Slap Mix", artist: "Kishore Kumar, R.D. Burman", film: "Aradhana",
-    youtubeId: "dyEdcOhxJNQ"
-  },
-  { title: "Sanam Re - Psy Trance Mix", artist: "Mithoon, Arijit Singh", film: "Sanam Re", youtubeId: "yCldJqnoNcw" },
-  { title: "Zara Zara - Psytrance Mix", artist: "Bombay Jayashri, Harris Jayaraj", film: "Rehnaa Hai Terre Dil Mein", youtubeId: "buI_0KiInJ8" },
-  { title: "Shona Shona - Remix", artist: "Tony Kakkar, Neha Kakkar", film: "Single", youtubeId: "N9lqbhVVTck" },
-  { title: "Piya Tu Ab To Aaja (Trance Remix)", artist: "Asha Bhosle, R.D. Burman", film: "Caravan", youtubeId: "hOroPhFi4do" },
-  { title: "Aaj Tera Jawan - Slap House Remix", artist: "DJ Rink, Amit Kumar", film: "Kasme Vaade",
-    youtubeId: "NlsVaeP6CEA"
-  },
-  { title: "Yeh Jawaani Hai Deewani - Off-The-Wall Edit", artist: "Kishore Kumar, R.D. Burman", film: "Yeh Jawaani Hai Deewani", youtubeId: "jHNNMj5bNQw" },
-  { title: "Humma Humma - Tech House Mix", artist: "A.R. Rahman, Badshah", film: "OK Jaanu", youtubeId: "H8HEFjx552I" },
-  { title: "Dil Cheez Kya Hai - Deep House Remix", artist: "Asha Bhosle, Khayyam", film: "Umrao Jaan", youtubeId: "eFcs3p1moMA" },
-  { title: "Dilbar - Melodic Psytrance Mix", artist: "Tanishk Bagchi, Neha Kakkar", film: "Satyameva Jayate", youtubeId: "jTZnWupUS50" },
-{ title: "Chura Liya Hai - Trance Edit", artist: "Asha Bhosle, R.D. Burman", film: "Yaadon Ki Baaraat", youtubeId: "gQCpSKO8sL0" },
-  { title: "Pyar Ki Kasam - Tech House Mix", artist: "R.D. Burman", film: "Retro", youtubeId: "Im8ZdmObSzo" },
-  { title: "Dum Karo Dum - Psytrance Mix", artist: "Asha Bhosle, R.D. Burman", film: "Hare Rama Hare Krishna", youtubeId: "NDmrjwJXBlU" },
-  { title: "Tujhe Dekha Toh - Psytrance", artist: "Jatin-Lalit, Kumar Sanu", film: "Dilwale Dulhania Le Jayenge", youtubeId: "YGaDzrsgFn4" },
-{ title: "Radha Nachegi - Trance Mix", artist: "Vishal & Shekhar", film: "Tevar", youtubeId: "I4pGSV68Td0" },
-{ title: "Aaja Aaja - Trance Mix", artist: "Asha Bhosle, R.D. Burman", film: "Teesri Manzil", youtubeId: "_Q2UOPqYEK8" },
-  { title: "Koi Mil Gaya - EDM Edit", artist: "Kishore Kumar, Asha Bhosle", film: "Kuch Kuch Hota Hai", youtubeId: "Q1gvYNPswII" },
-  { title: "Aaj Tone - Trance Edit", artist: "DJ Rink, Kishore Kumar", film: "Classic", youtubeId: "RL_f-GU_SaU" },
-  { title: "Dil Hai Ke Manta Nahin - Deep House", artist: "Kumar Sanu, Anuradha Paudwal", film: "Dil Hai Ke Manta Nahin", youtubeId: "C9efe0rjDlE" },
-  { title: "Choti Si Asha - Electro Trance Remix", artist: "A.R. Rahman, Minmini", film: "Roja", youtubeId: "esrRdJ9JTFE" },
-  { title: "Until", artist: "DJ Rink, Pawandeep Rajan", film: "DJ Rink", youtubeId: "ON0i3dPKfJk" }
-];
-
-const list3 = [
-  { title: "Mahishasura Mardini – Droplex Remix", artist: "Ethnic Psytrance", film: "Devi Stotram", youtubeId: "Qz4LC9Pmo7Y" },
-  { title: "Silsila Yeh Chahat Ka", artist: "Progressive Psytrance Edit", film: "Devdas", youtubeId: "NQDlHbS5ya8" },
-  { title: "Bolo Har Har Har (Shiva)", artist: "High-BPM Psy Edit", film: "Shivaay", youtubeId: "nMjYG4uayM4" },
-  { title: "Hai Rama Ye Kya Hua", artist: "Progressive Psy Remix", film: "Rangeela", youtubeId: "byAxJ9N_1dA" },
-  { title: "Tip Tip Barsa Phani", artist: "Dark Psytrance Flip", film: "Mohra",
-    youtubeId: "yMUA3wqd1qA"
-  },
-  { title: "Piya (DJ NYK)", artist: "Ethnic Progressive Psy", film: "DJ NYK", youtubeId: "aiIUwVKd3Yw" },
-  { title: "Shiva Tandava Stotram", artist: "Festival Psytrance Remix", film: "Shiva Stotram", youtubeId: "cxzUFGftYeo" },
-  { title: "Deva Deva (Brahmastra)", artist: "Progressive Psy Edit", film: "Brahmāstra", youtubeId: "6l8RnAIaVpo" },
-  { title: "Manali Trance", artist: "Goa Psytrance Edit", film: "The Shaukeens", youtubeId: "wtF0ZuMCw4U" },
-  { title: "San Sanana", artist: "Psytrance Remix", film: "Asoka", youtubeId: "_GGin5lPMbo" },
-  { title: "Ganesha Mantra", artist: "Full-On Psytrance Edit", film: "Devotional", youtubeId: "8mn17GZXjQ4" },
-  { title: "Gully Boy Mashup", artist: "Psytrance Edit", film: "Gully Boy", youtubeId: "K3atMxOw0aE" },
-  { title: "Galliyan (Ek Villain)", artist: "Psytrance Flip", film: "Ek Villain", youtubeId: "O9CxpVHwNlc" },
-  { title: "Ghoomar", artist: "Rajasthani Folk Psytrance Mix", film: "Padmaavat", youtubeId: "wHfblAn_0iM" },
-  { title: "Aayat (Bajirao Mastani)", artist: "Melodic Psy Edit", film: "Bajirao Mastani", youtubeId: "vKDsAB1ccn0" },
-  { title: "Sun Saathiya", artist: "Progressive Psytrance Edit", film: "ABCD 2", youtubeId: "FrgAmPnMwRA" },
-  { title: "Dard-E-Disco", artist: "Dark Psytrance Flip", film: "Om Shanti Om", youtubeId: "Jnymuo4f-1A" },
-  { title: "Kamli (Dhoom 3)", artist: "High-Energy Psy Remix", film: "Dhoom 3", youtubeId: "KuT0l96RXBA" },
-  { title: "Jhumka Gira Re", artist: "Retro Psytrance Edit", film: "Classic",
-    youtubeId: "04-qv2QoEJU"
-  },
-  { title: "Malhari", artist: "High-BPM Dhol Psytrance Mix", film: "Bajirao Mastani", youtubeId: "CQBPNOX80bI" },
-  { title: "Dil To Pagal Hai", artist: "Progressive Psy Edit", film: "Dil To Pagal Hai", youtubeId: "J0ZfvjK__ko" },
-  { title: "Saiyaan (Kailash Kher)", artist: "Deep Progressive Psy", film: "Kailash Kher", youtubeId: "TuUVVKVdZm4" },
-  { title: "Mitwa (Kabhi Alvida Naa Kehna)", artist: "Melodic Psy Remix", film: "Kabhi Alvida Naa Kehna", youtubeId: "6LtpYX3G0wc" },
-  { title: "Ghanan Ghanan", artist: "Indian Ethnic Psytrance Mix", film: "Lagaan", youtubeId: "bypl4JefIaY" },
-  { title: "Shubharambh (Kai Po Che)", artist: "Festive Psy Edit", film: "Kai Po Che", youtubeId: "22MO_iJIQoM" },
-  { title: "Kun Faya Kun", artist: "Sufi Progressive Psy Remix", film: "Rockstar", youtubeId: "dNpHJUTrqQU" },
-{ title: "Tere Bina (Guru)", artist: "Organic Progressive Psy Edit", film: "Guru", youtubeId: "ny8lXZg9b74" },
-  { title: "Vande Mataram (A.R. Rahman)", artist: "High-Voltage Psy Remix", film: "A.R. Rahman", youtubeId: "sO_rn41gJdU" },
-  { title: "Maha Mrityunjaya Mantra", artist: "Psytrance Edit", film: "Devotional", youtubeId: "5ab5E6TdW5U" },
-  { title: "Namo Namo (Kedarnath)", artist: "Progressive Psytrance Flip", film: "Kedarnath", youtubeId: "ednU5RyMc3Y" },
-  { title: "Jai Jai Shivshankar", artist: "Festival Psytrance Remix", film: "War", youtubeId: "oGneAab3e88" },
-  { title: "Aankh Marey", artist: "Slap-Psytrance Mix", film: "Simmba", youtubeId: "Ay-kHJZzmsw" },
-  { title: "Aisa Jadoo Dala Re", artist: "Retro Psytrance Edit", film: "Khakee", youtubeId: "ToL9ecPfP_Y" },
-  { title: "Kukdoo Koo (Barfi!)", artist: "Bounce Psy Remix", film: "Barfi!",
-    youtubeId: "av5YCk2U5Ac"
-  },
-  { title: "Nadiyon Paar", artist: "Dark Progressive Psy Edit", film: "Roohi", youtubeId: "PKno7lqfHsU" },
-  { title: "Chhalia (Kurbaan)", artist: "Psytrance Edit", film: "Kurbaan",
-    youtubeId: "b0PfRRvQPOg"
-  },
-  { title: "Duniyaa (Luka Chuppi)", artist: "Melodic Psy Remix", film: "Luka Chuppi", youtubeId: "vzAr40-v3u0" },
-  { title: "Mast Kalandar", artist: "Tribal Sufi Psytrance Mix", film: "Heyy Babyy", youtubeId: "AwWwjEHHydQ" },
-  { title: "Pasoori", artist: "Indian/Pakistani Psytrance Bootleg", film: "Coke Studio",
-    youtubeId: "HzMfmeKITaw"
-  },
-  { title: "Param Sundari", artist: "Folk Psytrance Flip", film: "Mimi",
-    youtubeId: "w4ClQO0FFQg"
-  },
-  { title: "Pinga (Bajirao Mastani)", artist: "Classical Psytrance Remix", film: "Bajirao Mastani",
-    youtubeId: "KMuOUIfFOPw"
-  },
-  { title: "Breathless (Shankar Mahadevan)", artist: "High-BPM Psy Remix", film: "Shankar Mahadevan",
-    youtubeId: "oRnUIwQiP4w"
-  },
-  { title: "Jaan Nisaar", artist: "Atmospheric Progressive Psy Edit", film: "Kedarnath",
-    youtubeId: "RF7srXtwub0"
-  },
-  { title: "Challa (Jab Tak Hai Jaan)", artist: "Punjabi Folk Psy Edit", film: "Jab Tak Hai Jaan", youtubeId: "b_soLl__eHI" },
-  { title: "O Saki Saki", artist: "High-Energy Psytrance Edit", film: "Batla House",
-    youtubeId: "IUvPVi-D7ho"
-  },
-  { title: "Dil Cheez Tujhe Dedi", artist: "Club Psytrance Remix", film: "Airlift", youtubeId: "XKnGKKbK_mo" },
-  { title: "Tattad Tattad", artist: "Gujarati Folk Psy Edit", film: "Goliyon Ki Raasleela",
-    youtubeId: "sIooFGRBZJY"
-  },
-  { title: "Tum Hi Ho", artist: "Deep Progressive Psytrance Remix", film: "Aashiqui 2",
-    youtubeId: "WjPueYPwsO8"
-  },
-  { title: "Ghar Kab Aayoge (Border)", artist: "Emotional Progressive Psy Edit", film: "Border", youtubeId: "oodOj8jx8ds" },
-  { title: "Main Tera Boyfriend", artist: "Drop-Heavy Psytrance Flip", film: "Raabta",
-    youtubeId: "7uXu91IB3sA"
-  },
-  { title: "Piya Ghar Aaya (Remix) Live", artist: "Nusrat Fateh Ali Khan & Asad", film: "Nusrat Fateh Ali Khan", youtubeId: "g4xVDns_PO4", startSeconds: 50 },
-];
-
-const list4 = [
-  { title: "O Maahi (16D Audio)", artist: "Arijit Singh, Pritam, Shah Rukh Khan", film: "Dunki", youtubeId: "1JaMbp6BK0s", isSpatial: true },
-  { title: "Chal Tere Ishq Mein", artist: "Neeti Mohan, Vishal Mishra, Mithoon", film: "Gadar 2", youtubeId: "p_oYiDR6S0E", isSpatial: true },
-  { title: "Sahiba x Samjho Na (16D Mashup)", artist: "Aditya Rikhari / Wishes", film: "Mashup", youtubeId: "072mkD_3-dA", isSpatial: true },
-  { title: "Qeher (16D Audio)", artist: "Guru Randhawa", film: "Dhamaal 4", isSpatial: true,
-    youtubeId: "vW8f3DsOUtY"
-  },
-  { title: "Ban Ja Tu (16D Audio)", artist: "Charan Preet x Badshah ft. Ahsii", film: "Single", isSpatial: true,
-    youtubeId: "mCKbvedLakE"
-  },
-  { title: "7.7 Magnitude (16D Heavy Trap Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
-    youtubeId: "Pf311ETArlk"
-  },
-  { title: "52 Bars (16D Spatial Trap Edit)", artist: "Karan Aujla", film: "Single", youtubeId: "lU3nWOKRqco", isSpatial: true },
-  { title: "Winning Speech (16D Brass & Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true,
-    youtubeId: "vsWxs1tuwDk"
-  },
-  { title: "Softly (16D Club Trap Remix)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
-    youtubeId: "cWMxCE2HTag"
-  },
-  { title: "Low Fade / C Walk (16D Spatial Trap Drop)", artist: "Karan Aujla, Mxrci", film: "Single", isSpatial: true,
-    youtubeId: "3j7bhOvW6jw"
-  },
-  { title: "Admirin' You (16D Festival Trap Drop)", artist: "Karan Aujla ft. Preston Pablo", film: "Single", isSpatial: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  { title: "Players (16D Audio Bass Boost)", artist: "Karan Aujla & Badshah", film: "Single", isSpatial: true,
-    youtubeId: "CeFQO9MQNqs"
-  },
-  { title: "Levels (16D Hard Drill Bass Drop)", artist: "Sidhu Moose Wala ft. Sunny Malton", film: "Single", isSpatial: true,
-    youtubeId: "tpFljbJxZiw"
-  },
-  { title: "The Last Ride (16D 90s Boom-Bap / 808 Drop)", artist: "Sidhu Moose Wala, Wazir Patar", film: "Single", youtubeId: "uzEflg9g70o", isSpatial: true },
-  { title: "Moosedrilla (16D Aggressive Drill Drop)", artist: "Sidhu Moose Wala ft. DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "GFUJ5mG_4NI"
-  },
-{ title: "Devil (16D Heavy Bass Drop)", artist: "Sidhu Moose Wala, Byg Byrd", film: "PBX 1", isSpatial: true, youtubeId: "lnkXQ3dOruY" },
-  { title: "G-Shit (16D Audio)", artist: "Sidhu Moose Wala, The Kidd, Blocknoi Twitch", film: "Moosetape", youtubeId: "prwzUKh0ji4", isSpatial: true },
-  { title: "Bitch I’m Back (16D Sliding 808 Drop)", artist: "Sidhu Moose Wala, The Kidd", film: "Single", isSpatial: true,
-    youtubeId: "W5NgXKe4SJk"
-  },
-  { title: "Same Beef (16D Sub-Bass Drop)", artist: "Sidhu Moose Wala & Bohemia", film: "Single", isSpatial: true,
-    youtubeId: "qk2WMmiiVFE"
-  },
-  { title: "Baller (16D Massive 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "xR3V5Ow2dTI"
-  },
-  { title: "Cheques (16D Spatial Trap Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "4tywp83zkmk"
-  },
-  { title: "No Love (16D Reverb & Hard Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "6RrEQJNZwPQ"
-  },
-  { title: "One Love (16D Sub-Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "0pWsCiBvLOk"
-  },
-  { title: "Brown Munde (16D Festival Trap Drop)", artist: "AP Dhillon, Gurinder Gill, Shinda Kahlon", film: "Single", isSpatial: true,
-    youtubeId: "VNs_cCtdbPc"
-  },
-  { title: "Insane (16D 360° Moving Bass)", artist: "AP Dhillon, Gurinder Gill", film: "Single", youtubeId: "TeAF3lCuDUk", isSpatial: true },
-  { title: "Excuses (Slowed + 16D Subwoofer Drop)", artist: "AP Dhillon, Intense", film: "Single", isSpatial: true,
-    youtubeId: "vX2cDW8LUWk"
-  },
-  { title: "Ex Files (16D SMG Drill Drop)", artist: "BAGGH-E SMG, Farmaan SMG, Big Kay SMG, Mxrci", film: "Single", isSpatial: true,
-    youtubeId: "phzMx7cZs04"
-  },
-  { title: "NYPD (16D Dark Drill Drop)", artist: "SMG Crew, Farmaan SMG", film: "Single", isSpatial: true,
-    youtubeId: "a5RhLw9SqJE"
-  },
-  { title: "Headliner / Shimmy Shimmy (16D Hard Trap Drop)", artist: "Navaan Sandhu, Haakam", film: "Bipolar", isSpatial: true,
-    youtubeId: "GE6w7DRyqcM"
-  },
-  { title: "Kabze (16D Haryanvi Bass Blast)", artist: "Pintu Pabra, Shiva Choudhary", film: "Single", isSpatial: true,
-    youtubeId: "Oyw1Eo21q5k"
-  },
-  { title: "Naam Chale (16D Audio)", artist: "Vikram Sarkar", film: "Thought Music / All Good Music", isSpatial: true,
-    youtubeId: "tYKrORILFOg"
-  },
-  { title: "Jatt Mehkma (16D 808 Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true,
-    youtubeId: "vrjndQ4BXMU"
-  },
-  { title: "Moonlight (16D Spatial Bass Edit)", artist: "Yo Yo Honey Singh ft. Priceless", film: "Glory", isSpatial: true,
-    youtubeId: "JF42RpxAEko"
-  },
-  { title: "Payal (16D Heavy Drop Mix)", artist: "Yo Yo Honey Singh ft. Nora Fatehi", film: "Glory", isSpatial: true,
-    youtubeId: "a-PAcmi5Kas"
-  },
-  { title: "Millionaire (16D Club Trap Drop)", artist: "Yo Yo Honey Singh", film: "Glory", isSpatial: true,
-    youtubeId: "uiNBqLphO2Y"
-  },
-  { title: "Blue Eyes (Hardstyle / Sub-Bass Boost 16D)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true,
-    youtubeId: "NbyHNASFi6U"
-  },
-  { title: "Love Dose (16D Trap Remix)", artist: "Yo Yo Honey Singh", film: "Single", isSpatial: true,
-    youtubeId: "KpaSvprz01g"
-  },
-  { title: "Dhurandhar - Title Track / Naal Nachna (16D Bass Boosted)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
-    youtubeId: "TFTnJzWRTJ8"
-  },
-  { title: "KGF Theme: Monster (16D Extreme Bass Blast)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true,
-    youtubeId: "R4He_Gcn7cA"
-  },
-  { title: "Vikram Title Track / Rolex Theme (16D Trap Edit)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true,
-    youtubeId: "IXTqQY-TiYQ"
-  },
-  { title: "Sher Khul Gaye (16D Dance Mix)", artist: "Vishal & Shekhar", film: "Fighter", isSpatial: true,
-    youtubeId: "e5Bj4Pf86sc"
-  },
-  { title: "Ghamand Kar (16D Epic War Drums & Bass)", artist: "Ajay-Atul", film: "Tanhaji", isSpatial: true,
-    youtubeId: "3qKi29UR2g4"
-  },
-  { title: "Jee Karda (16D Rock-EDM Hard Drop)", artist: "Divya Kumar", film: "Badlapur", isSpatial: true,
-    youtubeId: "C-JUAWxDkrA"
-  },
-  { title: "Deva Deva (Slowed + 16D Sub-Bass Blast)", artist: "Arijit Singh", film: "Brahmāstra", isSpatial: true,
-    youtubeId: "mNuhKUOD_A0"
-  },
-  { title: "Makasam", artist: "KR$NA", film: "Single", youtubeId: "cUfTYaVEnoA", isSpatial: true },
-  { title: "Prarthana", artist: "KR$NA ft. Seedhe Maut", film: "Single", isSpatial: true,
-    youtubeId: "OKPAPX_fGVw"
-  },
-  { title: "Khatta Flow", artist: "Seedhe Maut & KR$NA", film: "Single", youtubeId: "9UuwPhr_H2c", isSpatial: true },
-  { title: "No Cap (16D Hard Drill Drop)", artist: "KR$NA", film: "Single", isSpatial: true,
-    youtubeId: "PejQbGZraqg"
-  },
-  { title: "Kahaani", artist: "Seedhe Maut", film: "Single", isSpatial: true,
-    youtubeId: "VEQ-XJWiQMM"
-  },
-  { title: "Dhundhala (16D Spatial Bass Drop)", artist: "Yashraj ft. Talwiinder & Dropped Out", film: "Single", isSpatial: true,
-    youtubeId: "Xy1Pzu1yZGg"
-  },
-  { title: "Hola Amigo (16D Aggressive Trap Drop)", artist: "KR$NA ft. Seedhe Maut & Umair", film: "Single", isSpatial: true,
-    youtubeId: "De9VIp37CjY"
-  },
-  { title: "Saza-E-Maut", artist: "KR$NA & Raftaar", film: "Single", isSpatial: true,
-    youtubeId: "o907r6NsK9s"
-  },
-  { title: "Boom Shaka", artist: "Dhanda Nyoliwala ft. KR$NA", film: "Single", youtubeId: "7CwwStR5KBI", isSpatial: true },
-  { title: "Bohot Sahi", artist: "J Trix ft. Kr$na", film: "Single", isSpatial: true,
-    youtubeId: "n89UlGvWbHs"
-  },
-  { title: "Fubuki", artist: "Rawal x Bharg", film: "Single", isSpatial: true,
-    youtubeId: "D_VSfZQ55j0"
-  },
-  { title: "3:59 AM", artist: "DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "eLSePtRKFhg"
-  },
-  { title: "Kohinoor", artist: "DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "8q_eV_RErE4"
-  },
-  { title: "Tadipaar (16D Hard Trap Drop)", artist: "MC Stan", film: "Single", isSpatial: true,
-    youtubeId: "AKd-3Asq60M"
-  },
-  { title: "Basti Ka Hasti (16D Subwoofer Drop)", artist: "MC Stan", film: "Single", isSpatial: true,
-    youtubeId: "l0AvFp0_k14"
-  },
-  { title: "Company (16D Club Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true,
-    youtubeId: "GuGYYdwcPYw"
-  },
-  { title: "Machayenge", artist: "Emiway Bantai", film: "Single", isSpatial: true,
-    youtubeId: "7tNPxY_ntEA"
-  },
-  { title: "Punya Paap", artist: "DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "4wTTAWjNlDM"
-  },
-  { title: "Angaar", artist: "Ikka ft. Raftaar", film: "Single", isSpatial: true,
-    youtubeId: "GpjrKSyjXDE"
-  },
-  { title: "Joota Japani", artist: "KR$NA", film: "Single", isSpatial: true,
-    youtubeId: "vR16Gu-Uq00"
-  },
-  { title: "Chhabi Kar", artist: "Emiway Bantai", film: "Single", isSpatial: true,
-    youtubeId: "JMncZHRrIBY"
-  },
-  { title: "Satya", artist: "DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "rO4DbBjaWJY"
-  },
-  { title: "So High (16D Original Heavy Bass Drop)", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "u_nTzhCEb1Y", isSpatial: true },
-  { title: "295 (16D Spatial Trap Drop)", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "tG6CJKqQQIo", isSpatial: true },
-  { title: "They Know", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "RehtHw2Gvfw"
-  },
-  { title: "Drippy", artist: "Sidhu Moose Wala x AR Paisley", film: "Single", youtubeId: "wyEAqyG1ka0", isSpatial: true },
-  { title: "Barota", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "5feboL6vAtg", isSpatial: true },
-  { title: "Watch Out", artist: "Sidhu Moose Wala ft. Sikander Kahlon", film: "Single", youtubeId: "RL_SzW2zP6E", isSpatial: true },
-  { title: "Dawood", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "UV7kWo3EYdk", isSpatial: true },
-  { title: "Selfmade", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "b3o4nN-olpM", isSpatial: true },
-  { title: "Bad", artist: "Sidhu Moose Wala", film: "Single", youtubeId: "FpvIURClDY4", isSpatial: true },
-  { title: "0 To 100", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
-    youtubeId: "pHtHF5Amw8Q"
-  },
-{ title: "Expert Jatt (16D Audio / Subwoofer Bass Test)", artist: "Nawab", film: "Single", isSpatial: true, youtubeId: "LRcFuPUiY2s" },
-{ title: "Mere Varga (16D Spatial Bass Edit)", artist: "Kaka", film: "Single", isSpatial: true, youtubeId: "No4DviM7WC0" },
-  { title: "Chitta Kurta (16D 808 Bass Boost Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "nBrBwGgY-Kg"
-  },
-  { title: "Mexico (16D Moving Bassline Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "Fifv0zWPDlk"
-  },
-  { title: "East Side Flow (16D Hard Street Drop)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
-    youtubeId: "jmigBo42low"
-  },
-  { title: "Signed To God (16D Heavy 808 Trap)", artist: "Sidhu Moose Wala", film: "Single", isSpatial: true,
-    youtubeId: "7DPcBQ1sjX4"
-  },
-  { title: "Old Skool (16D Hard Bass Drop)", artist: "Prem Dhillon ft. Sidhu Moose Wala", film: "Single", isSpatial: true,
-    youtubeId: "hBlO1i_WTiY"
-  },
-  { title: "Majhail (16D Rolling Trap Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
-    youtubeId: "yzIyufV6ADk"
-  },
-  { title: "Daku (16D Sub-Bass Blast Drop)", artist: "Chani Nattan & Inderpal Moga", film: "Single", isSpatial: true,
-    youtubeId: "WOdnRhWeHoY"
-  },
-  { title: "Humnava Mere (16D Slowed Sub-Bass)", artist: "Jubin Nautiyal", film: "Single", isSpatial: true,
-    youtubeId: "TqR_jWfHW4g"
-  },
-  { title: "Pachtaoge (16D Lo-Fi Deep Bass)", artist: "Arijit Singh", film: "Single", youtubeId: "-z3_pbNeR2Y", isSpatial: true },
-  { title: "Mann Bharryaa 2.0 (16D Spatial Drop)", artist: "B Praak", film: "Shershaah", isSpatial: true,
-    youtubeId: "JEgKJZEYsIU"
-  },
-  { title: "Bekhayali (16D Metal/Trap Hybrid)", artist: "Sachet Tandon", film: "Kabir Singh", isSpatial: true,
-    youtubeId: "HTQ2pSM49dc"
-  },
-  { title: "O Saathi (16D Reverb & Sub-Bass)", artist: "Atif Aslam", film: "Baaghi 2", youtubeId: "YuXLN23ZGQo", isSpatial: true },
-  { title: "Nanchaku (16D Heavy Drill Drop)", artist: "Seedhe Maut ft. MC Stan", film: "Single", youtubeId: "7IHqIfpQsBk", isSpatial: true },
-  { title: "Mirchi (16D Club Trap Drop)", artist: "DIVINE ft. Stylo G & MC Altaf", film: "Single", youtubeId: "wUmtFSmjKsU", isSpatial: true },
-  { title: "52 Bars (16D Beat Switch Drop)", artist: "Karan Aujla, Ikky", film: "Single", isSpatial: true,
-    youtubeId: "4DfVxVeqk2o"
-  },
-  { title: "Players (16D Heavy Drop Edit)", artist: "Badshah & Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "CeFQO9MQNqs"
-  },
-  { title: "White Brown Black (16D Bass Blast Drop)", artist: "Karan Aujla & Avvy Sra", film: "Single", isSpatial: true,
-    youtubeId: "BtQp2U6hJII"
-  },
-  { title: "Tauba Tauba (16D Trap Beat Drop)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "LK7-_dgAVQE"
-  },
-  { title: "On Top (16D Aggressive Brass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "tMgEYaclnQ0"
-  },
-  { title: "Don't Look (16D Trap Drop)", artist: "Karan Aujla & Jay Trak", film: "Single", isSpatial: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  { title: "Jhanjar (16D Heavy Sub-Bass Drop)", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "ZnGMxARIxoY"
-  },
-  { title: "Kya Baat Aa (16D Bass Drop Mix)", artist: "Karan Aujla", film: "Single", isSpatial: true,
-    youtubeId: "x-KbnJ9fvJc"
-  },
-  { title: "Signed To God (16D Distorted Trap Drop)", artist: "Sidhu Moose Wala, Steel Banglez & The Kidd", film: "Single", isSpatial: true,
-    youtubeId: "7DPcBQ1sjX4"
-  },
-  { title: "G-Shit (16D Underground Trap Drop)", artist: "Sidhu Moose Wala ft. Blocknoi Twitch", film: "Moosetape", isSpatial: true,
-    youtubeId: "YPPEZiDF4Xw"
-  },
-{ title: "These Days (16D Subwoofer Trap Drop)", artist: "Sidhu Moose Wala ft. Bohemia", film: "Single", isSpatial: true, youtubeId: "MZRwvfoc3aU" },
-  { title: "GOAT (16D Hard Bass Beat Switch)", artist: "Sidhu Moose Wala, Wazir Patar", film: "Single", isSpatial: true,
-    youtubeId: "M8vDwlHigJA"
-  },
-  { title: "Celebrity Killer (16D UK Drill Drop)", artist: "Sidhu Moose Wala ft. Tion Wayne", film: "Single", isSpatial: true,
-    youtubeId: "MyYAglA_Cdk"
-  },
-  { title: "IDGAF (16D Hard Trap Drop)", artist: "Sidhu Moose Wala ft. Morrisson", film: "Single", isSpatial: true,
-    youtubeId: "ctVAt8WGwJQ"
-  },
-  { title: "Hood Anthem (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "jjiC7PfoIaY"
-  },
-  { title: "King Shit (16D Heavy Bass Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "d2ofxg8pHfQ"
-  },
-  { title: "Dior (16D Rolling 808 Drop)", artist: "Shubh", film: "Single", isSpatial: true,
-    youtubeId: "vyrPwLoIYkc"
-  },
-  { title: "Insane (16D Dark Synth Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
-    youtubeId: "cqP8I5aaud8"
-  },
-  { title: "Spaceship (16D Synthwave Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
-    youtubeId: "RatDV50alQE"
-  },
-  { title: "Foreigns (16D Drill Drop)", artist: "AP Dhillon & Gurinder Gill", film: "Single", isSpatial: true,
-    youtubeId: "jWz5on5N14E"
-  },
-  { title: "Tere Te (16D Club Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
-    youtubeId: "fG70qm6usR8"
-  },
-  { title: "Dil Nu (16D Heavy Drop Mix)", artist: "AP Dhillon", film: "Single", isSpatial: true,
-    youtubeId: "p2EdDiiVHh4"
-  },
-  { title: "Wo Noor (16D Trap Bass Drop)", artist: "AP Dhillon", film: "Single", isSpatial: true,
-    youtubeId: "HrcjFEK58ik"
-  },
-  { title: "Baazigar (16D Hard Trap Drop)", artist: "DIVINE ft. Armani White", film: "Single", isSpatial: true,
-    youtubeId: "sek3FhByr6w"
-  },
-  { title: "Gunehgar (16D Dark Bass Drop)", artist: "DIVINE & Hit-Boy", film: "Single", isSpatial: true,
-    youtubeId: "shSUDi4b2y8"
-  },
-  { title: "I Guess (16D Sliding 808 Drop)", artist: "KR$NA", film: "Single", isSpatial: true,
-    youtubeId: "Qg9LxRHLbAk"
-  },
-  { title: "Big Moves (16D Street Trap Drop)", artist: "Raga", film: "Single", isSpatial: true,
-    youtubeId: "vakdxu3pzBE"
-  },
-  { title: "Machayenge 4 (16D Heavy Diss Trap Drop)", artist: "Emiway Bantai", film: "Single", isSpatial: true,
-    youtubeId: "CSGFVogqhD0"
-  },
-{ title: "Chore NCR Aale (16D Haryanvi Drill Drop)", artist: "MC Square & Paradox", film: "Single", isSpatial: true, youtubeId: "ydV_DOwndoI" },
-  { title: "Jadugar (16D Beat Switch Drop)", artist: "Paradox", film: "Single", isSpatial: true,
-    youtubeId: "IOcGS4D1tM0"
-  },
-  { title: "California Love (16D West Coast Trap Drop)", artist: "Cheema Y, Gur Sidhu", film: "Single", isSpatial: true,
-    youtubeId: "rSxTumD4kew"
-  },
-  { title: "Roll Deep (16D Heavy Bass Drop)", artist: "Tegi Pannu & Sukha", film: "Single", youtubeId: "ixgaS-3FfK4", isSpatial: true },
-  { title: "8 Parche (16D Trap Remix Drop)", artist: "Baani Sandhu & Gur Sidhu", film: "Single", isSpatial: true,
-    youtubeId: "8WWv5_k8D14"
-  },
-  { title: "Amplifier (16D Hardstyle / Trap Drop Mix)", artist: "Imran Khan", film: "Single", isSpatial: true,
-    youtubeId: "_pkjkn3qZbM"
-  },
-{ title: "Bewafa (16D Dubstep / Trap Drop)", artist: "Imran Khan", film: "Single", isSpatial: true, youtubeId: "rGGLINL6xfc" },
-  { title: "Satisfya (16D Subwoofer Trap Drop)", artist: "Imran Khan", film: "Single", youtubeId: "pfVODjDBFxU", isSpatial: true },
-  { title: "President (16D Heavy Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true,
-    youtubeId: "0FnZO-U5oHo"
-  },
-  { title: "Attraction (16D Spatial Trap Drop)", artist: "Sukha", film: "Single", isSpatial: true,
-    youtubeId: "lDxw_BRqul8"
-  },
-  { title: "Sheesha / Aakhya Mai Aakh Ghali (16D Bass Drop)", artist: "Mitta Ror", film: "Single", isSpatial: true,
-    youtubeId: "aRNfSqsgrgE"
-  },
-  { title: "Together (16D Hard Trap Edit)", artist: "Nirvair Pannu, Deol Harman", film: "Single", isSpatial: true,
-    youtubeId: "TuCTTCu0Rvg"
-  },
-  { title: "Arjan Vailly (16D Hard Drill / Dhol Drop)", artist: "Bhupinder Babbal", film: "Animal", isSpatial: true,
-    youtubeId: "0hYehuznQac"
-  },
-  { title: "KGF: Monster Theme (16D Extreme Subwoofer Drop)", artist: "Anirudh Ravichander", film: "KGF Chapter 2", isSpatial: true,
-    youtubeId: "R4He_Gcn7cA"
-  },
-  { title: "Rolex Theme / Vikram (16D Distorted 808 Drop)", artist: "Anirudh Ravichander", film: "Vikram", isSpatial: true,
-    youtubeId: "rBLCjz8as0E"
-  },
-  { title: "Aaj Ki Raat (16D Club Drop Mix)", artist: "Sachin-Jigar", film: "Stree 2", youtubeId: "Dq4HAzBtslo", isSpatial: true },
-  { title: "Aayi Nai (16D Bass Blast Drop)", artist: "Sachin-Jigar", film: "Stree 2", isSpatial: true,
-    youtubeId: "4Zw3R2CO-MM"
-  },
-  { title: "Shararat (16D Trap Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
-    youtubeId: "dePa1Wtv88s"
-  },
-  { title: "Run Down The City - Monica (16D Heavy Bass Drop)", artist: "Simran Choudhary", film: "Dhurandhar", isSpatial: true,
-    youtubeId: "aT4N7jn2Eww"
-  },
-  { title: "Pushpa Pushpa (16D Subwoofer Drop)", artist: "Devi Sri Prasad", film: "Pushpa 2: The Rule", isSpatial: true,
-    youtubeId: "CLP0DfbMEkY"
-  },
-  { title: "Kala Chashma (16D Trap / Future Bass Drop)", artist: "Badshah", film: "Baar Baar Dekho", isSpatial: true,
-    youtubeId: "k4yXQkG2s1E"
-  },
-  { title: "Hookah Bar (16D Psy-Bass / Hardstyle Drop)", artist: "Himesh Reshammiya", film: "Khiladi 786", isSpatial: true,
-    youtubeId: "b4b1cMVZOUU"
-  },
-  { title: "Dhan Te Nan (16D Electro Dubstep Drop)", artist: "Sukhwinder Singh", film: "Kaminey", isSpatial: true,
-    youtubeId: "HvnMMAV8m5A"
-  },
-  { title: "Aashiqui Mein Teri (16D Hard Bass Drop)", artist: "Himesh Reshammiya", film: "36 China Town", isSpatial: true,
-    youtubeId: "pYiYSt5pGoU"
-  },
-  { title: "Zara Zara Touch Me (16D Electro Trap Drop)", artist: "Monali Thakur", film: "Race", isSpatial: true,
-    youtubeId: "vNlpgORSV7k"
-  },
-  { title: "Dus Bahane 2.0 (16D Heavy Drop Remix)", artist: "Vishal & Shekhar", film: "Baaghi 3", isSpatial: true,
-    youtubeId: "mIWpsOjQNDw"
-  },
-  { title: "Ghungroo (16D Festival EDM Drop)", artist: "Arijit Singh", film: "War", isSpatial: true,
-    youtubeId: "caySD0OJJvk"
-  },
-  { title: "Jhoome Jo Pathaan (16D Hard Drop Remix)", artist: "Arijit Singh", film: "Pathaan", isSpatial: true,
-    youtubeId: "pacvj3n-RLw"
-  },
-{ title: "Illegal Weapon 2.0 (16D EDM Bass Drop)", artist: "Jasmine Sandlas", film: "Street Dancer 3D", isSpatial: true, youtubeId: "HLoJnZU3WcQ" },
-  { title: "Kar Gayi Chull (16D Bounce Trap Drop)", artist: "Badshah", film: "Kapoor & Sons", isSpatial: true,
-    youtubeId: "Bea019pOw5w"
-  },
-  { title: "Aankh Marey (16D Hard Bass Drop)", artist: "Neha Kakkar", film: "Simmba", isSpatial: true,
-    youtubeId: "_KhQT-LGb-4"
-  },
-  { title: "Six (16D Audio)", artist: "Guru Randhawa, Kiran Bajwa, Gurjit Gill", film: "Single", isSpatial: true,
-    youtubeId: "PEdDI1A17qc"
-  },
-  { title: "Tauba Tauba (16D Trap Remix)", artist: "Karan Aujla x DIVINE", film: "Single", isSpatial: true,
-    youtubeId: "LK7-_dgAVQE"
+const list1: any[] = [
+  {
+    "title": "Chaiyya Chaiyya",
+    "artist": "Iconic Indian Psytrance Edit",
+    "film": "Dil Se",
+    "youtubeId": "K-pX4qwtAxA"
+  },
+  {
+    "title": "Kajra Re",
+    "artist": "Ethnic Psytrance Remix",
+    "film": "Bunty Aur Babli",
+    "youtubeId": "4dsFQFCvVGU"
+  },
+  {
+    "title": "Beedi Jalaile",
+    "artist": "Dark Psytrance Mix",
+    "film": "Omkara",
+    "youtubeId": "uUPBMV3DAck"
+  },
+  {
+    "title": "Dhan Te Nan",
+    "artist": "High-BPM Psytrance Edit",
+    "film": "Kaminey",
+    "youtubeId": "4QVu6Vo6Jhw"
+  },
+  {
+    "title": "Choli Ke Peeche",
+    "artist": "Progressive Psytrance Remix",
+    "film": "Khalnayak",
+    "youtubeId": "3OXiqmUhB70"
+  },
+  {
+    "title": "Mar Jawaan",
+    "artist": "Psytrance Mashup (DJ NYK Edit)",
+    "film": "Fashion",
+    "youtubeId": "JNZi3k2Tiy8"
+  },
+  {
+    "title": "Bulleya (Ae Dil Hai Mushkil)",
+    "artist": "Psytrance Edit",
+    "film": "Ae Dil Hai Mushkil",
+    "youtubeId": "hXh35CtnSyU"
+  },
+  {
+    "title": "Raataan Lambiyan",
+    "artist": "Progressive Psy Remix",
+    "film": "Shershaah",
+    "youtubeId": "-JVBDtaHQaA"
+  },
+  {
+    "title": "Dil Sambhal Ja Zara",
+    "artist": "Dark Psytrance Remix",
+    "film": "Murder 2",
+    "youtubeId": "fA_xoB27LH4"
+  },
+  {
+    "title": "Ghar More Pardesiya",
+    "artist": "Ethnic Indian Psytrance Edit",
+    "film": "Kalank",
+    "youtubeId": "b5WF7yZcc1w"
+  },
+  {
+    "title": "Nagada Nagada",
+    "artist": "Dhol Psytrance Mix",
+    "film": "Jab We Met",
+    "youtubeId": "b27sfD4zJ6Y"
+  },
+  {
+    "title": "Dola Re Dola",
+    "artist": "Classical Folk Psy Edit",
+    "film": "Devdas",
+    "youtubeId": "B4HbUt58eFU"
+  },
+  {
+    "title": "Engine Ki Seeti",
+    "artist": "Psytrance Remix",
+    "film": "Khoobsurat",
+    "youtubeId": "YWhbDQeWfNk"
+  },
+  {
+    "title": "Piya Tu Ab To Aaja",
+    "artist": "Retro Psytrance Flip",
+    "film": "Caravan",
+    "youtubeId": "hOroPhFi4do"
+  },
+  {
+    "title": "Aali Re",
+    "artist": "Folk Psytrance Mix",
+    "film": "No One Killed Jessica",
+    "youtubeId": "HRnbmQYAIp0"
+  },
+  {
+    "title": "Chinta Ta Ta Chita Chita",
+    "artist": "Psytrance Edit",
+    "film": "Rowdy Rathore",
+    "youtubeId": "JhJHom7_6UQ"
+  },
+  {
+    "title": "Rang De Basanti",
+    "artist": "High Energy Psy Remix",
+    "film": "Rang De Basanti",
+    "youtubeId": "Azhtn4ptHQI"
+  },
+  {
+    "title": "Chogada",
+    "artist": "Garba Psytrance Mix",
+    "film": "Loveyatri",
+    "youtubeId": "8vwKq2K7jyg"
+  },
+  {
+    "title": "Balam Pichkari",
+    "artist": "Psytrance / Festival Edit",
+    "film": "Yeh Jawaani Hai Deewani",
+    "youtubeId": "QJDZu5berXs"
+  },
+  {
+    "title": "Lovely (Happy New Year)",
+    "artist": "Progressive Psy Edit",
+    "film": "Happy New Year",
+    "youtubeId": "9hGQwtXzfY4"
+  },
+  {
+    "title": "Kesariya",
+    "artist": "Deep House Remix",
+    "film": "Brahmāstra",
+    "youtubeId": "ptOcA86r7E8"
+  },
+  {
+    "title": "Kabira",
+    "artist": "Organic House / Deep House Mix",
+    "film": "Yeh Jawaani Hai Deewani",
+    "youtubeId": "mXxbnXo29eM"
+  },
+  {
+    "title": "Kun Faya Kun",
+    "artist": "Melodic Techno Edit",
+    "film": "Rockstar",
+    "youtubeId": "wi-_9gpJxpQ"
+  },
+  {
+    "title": "Aayat",
+    "artist": "Melodic Techno / Deep Remix",
+    "film": "Bajirao Mastani",
+    "youtubeId": "vKDsAB1ccn0"
+  },
+  {
+    "title": "Shayad",
+    "artist": "Progressive Melodic House Edit",
+    "film": "Love Aaj Kal",
+    "youtubeId": "HI5eULhmGOw"
+  },
+  {
+    "title": "Ranjha",
+    "artist": "Organic Deep House Mix",
+    "film": "Shershaah",
+    "youtubeId": "hPHU3oXzDaw"
+  },
+  {
+    "title": "Agar Tum Saath Ho",
+    "artist": "Atmospheric Deep House Remix",
+    "film": "Tamasha",
+    "youtubeId": "PYgnCOpmpMU"
+  },
+  {
+    "title": "Mast Magan",
+    "artist": "Melodic Techno Mix",
+    "film": "2 States",
+    "youtubeId": "ZrhQCtQJ13s"
+  },
+  {
+    "title": "Pani Da Rang",
+    "artist": "Chill Psytrance / Organic House",
+    "film": "Vicky Donor",
+    "youtubeId": "zRzD3-a9_qc"
+  },
+  {
+    "title": "Galliyan",
+    "artist": "Deep House Remix",
+    "film": "Ek Villain",
+    "youtubeId": "CGDezb6Jgoc"
+  },
+  {
+    "title": "Subha Hun Ki Sham Se",
+    "artist": "Deep House Edit",
+    "film": "Retro",
+    "youtubeId": "8dfIIse1fmM"
+  },
+  {
+    "title": "Dil Diyan Gallan",
+    "artist": "Deep House / Chillstep Mix",
+    "film": "Tiger Zinda Hai",
+    "youtubeId": "IdPlBcRZjbI"
+  },
+  {
+    "title": "Tera Ban Jaunga",
+    "artist": "Melodic House Remix",
+    "film": "Kabir Singh",
+    "youtubeId": "D7DQ72P1qdM"
+  },
+  {
+    "title": "Soch (Hardy Sandhu)",
+    "artist": "Deep House Flip",
+    "film": "Airlift",
+    "youtubeId": "KU6PF32U6V0"
+  },
+  {
+    "title": "Kalla Sohna Nai",
+    "artist": "Deep House Edit",
+    "film": "Single",
+    "youtubeId": "TIHmXfJc0os"
+  },
+  {
+    "title": "Manike",
+    "artist": "Deep House Club Mix",
+    "film": "Thank God",
+    "youtubeId": "-44OSXNSGtM"
+  },
+  {
+    "title": "Ban Ja Rani",
+    "artist": "Deep House Edit",
+    "film": "Tumhari Sulu",
+    "youtubeId": "LT0N96j-pG8"
+  },
+  {
+    "title": "Tere Naina",
+    "artist": "Melodic House Edit",
+    "film": "My Name Is Khan",
+    "youtubeId": "lHC1xPUgP5Q"
+  },
+  {
+    "title": "Sajdaa",
+    "artist": "Melodic Techno Mix",
+    "film": "My Name Is Khan",
+    "youtubeId": "HrFh_1axc1g"
+  },
+  {
+    "title": "Mitwa",
+    "artist": "Progressive House Edit",
+    "film": "Kabhi Alvida Naa Kehna",
+    "youtubeId": "6LtpYX3G0wc"
+  },
+  {
+    "title": "Besharam Rang",
+    "artist": "Tech House Remix",
+    "film": "Pathaan",
+    "youtubeId": "qZ2c0QamOCg"
+  },
+  {
+    "title": "Chaleya",
+    "artist": "Slap House Edit",
+    "film": "Jawan",
+    "youtubeId": "2s4JJwveyQQ"
+  },
+  {
+    "title": "Senorita (ZNMD)",
+    "artist": "Tech House Edit",
+    "film": "Zindagi Na Milegi Dobara",
+    "youtubeId": "CAHgJlOsNhM"
+  },
+  {
+    "title": "High Rated Gabru",
+    "artist": "Slap House Mix",
+    "film": "Nawabzaade",
+    "youtubeId": "MwuG3YntNhI"
+  },
+  {
+    "title": "Bom Diggy Diggy",
+    "artist": "Tech House Edit",
+    "film": "Sonu Ke Titu Ki Sweety",
+    "youtubeId": "yntV3qwOr-c"
+  },
+  {
+    "title": "Lamberghini",
+    "artist": "Slap House Remix",
+    "film": "Single",
+    "youtubeId": "5X7WWVTrBvM"
+  },
+  {
+    "title": "Illegal Weapon 2.0",
+    "artist": "Tech House / Slap Mix",
+    "film": "Street Dancer 3D",
+    "youtubeId": "1mwjRrS_9Os"
+  },
+  {
+    "title": "Suit Suit",
+    "artist": "Club Tech House Mix",
+    "film": "Hindi Medium",
+    "youtubeId": "Wo-aefcEfrA"
+  },
+  {
+    "title": "Dus Bahane 2.0",
+    "artist": "Slap House Remix",
+    "film": "Baaghi 3",
+    "youtubeId": "ebrZhf5BZGs"
+  },
+  {
+    "title": "Crazy Kiya Re",
+    "artist": "Tech House Edit",
+    "film": "Dhoom 2",
+    "youtubeId": "C0toSl4FAKM"
+  },
+  {
+    "title": "Proper Patola",
+    "artist": "Tech House Edit",
+    "film": "Namaste England",
+    "youtubeId": "s_yDx4yb3zE"
+  },
+  {
+    "title": "Slow Motion (Bharat)",
+    "artist": "Tech House Mix",
+    "film": "Bharat",
+    "youtubeId": "mClOxV5jGpY"
+  },
+  {
+    "title": "Muqabla (Street Dancer 3D)",
+    "artist": "Tech House Edit",
+    "film": "Street Dancer 3D",
+    "youtubeId": "9NfUb-e3DP8"
+  },
+  {
+    "title": "Dance Ka Bhoot",
+    "artist": "Slap House Mix",
+    "film": "Brahmāstra",
+    "youtubeId": "j9FWubgR__g"
+  },
+  {
+    "title": "Nashe Si Chadh Gayi",
+    "artist": "Tech House Remix",
+    "film": "Befikre",
+    "youtubeId": "u4FbmqEW_AU"
+  },
+  {
+    "title": "Nadiyon Paar",
+    "artist": "Slap House / Tech Remix",
+    "film": "Roohi",
+    "youtubeId": "K5wQDhYiUIs"
+  },
+  {
+    "title": "O Bedardeya",
+    "artist": "Deep Slap House Mix",
+    "film": "Tu Jhoothi Main Makkaar",
+    "youtubeId": "IBxJUr_zFuI"
+  },
+  {
+    "title": "Gimme More x Desi Beat",
+    "artist": "Tech House Flip",
+    "film": "Bodyguard",
+    "youtubeId": "cARCtDPFt3g"
+  },
+  {
+    "title": "Daddy Whip",
+    "artist": "Desi Bass House Edit",
+    "film": "Single",
+    "youtubeId": "ZWNCR9cfkPw"
+  },
+  {
+    "title": "Kahani Suno",
+    "artist": "Tech House Remix",
+    "film": "Kaifi Khalil",
+    "youtubeId": "gaPSrCXRPsw"
+  },
+  {
+    "title": "Jawan Title Track",
+    "artist": "Dark EDM / Club Mix",
+    "film": "Jawan",
+    "youtubeId": "sed86UEe_x0"
+  },
+  {
+    "title": "Nacho Nacho (RRR)",
+    "artist": "High Energy EDM / Hardstyle Mix",
+    "film": "RRR",
+    "youtubeId": "Ohocc4eD05Y"
+  },
+  {
+    "title": "Jhoome Jo Pathaan",
+    "artist": "Electro House Mix",
+    "film": "Pathaan",
+    "youtubeId": "nKUJ5WgpWmM"
+  },
+  {
+    "title": "Swag Se Swagat",
+    "artist": "Electro House Remix",
+    "film": "Tiger Zinda Hai",
+    "youtubeId": "_cPRjoX3kvM"
+  },
+  {
+    "title": "Garmi",
+    "artist": "Bass Boosted Club Mix",
+    "film": "Street Dancer 3D",
+    "youtubeId": "9bb74SbJJRg"
+  },
+  {
+    "title": "Badtameez Dil",
+    "artist": "Big Room EDM Remix",
+    "film": "Yeh Jawaani Hai Deewani",
+    "youtubeId": "WRz22ibD3qI"
+  },
+  {
+    "title": "Dance Pe Chance",
+    "artist": "Electro House Remix",
+    "film": "Rab Ne Bana Di Jodi",
+    "youtubeId": "AvO_umNLFhE"
+  },
+  {
+    "title": "Subah Subah",
+    "artist": "Commercial EDM Remix",
+    "film": "Sonu Ke Titu Ki Sweety",
+    "youtubeId": "PBxtTvxBp80"
+  },
+  {
+    "title": "Dil Chori",
+    "artist": "Melbourne Bounce / EDM Mix",
+    "film": "Sonu Ke Titu Ki Sweety",
+    "youtubeId": "S65zMe3NScQ"
+  },
+  {
+    "title": "Cheez Badi (Machine)",
+    "artist": "Electro House Mix",
+    "film": "Machine",
+    "youtubeId": "52o8srvFLvc"
+  },
+  {
+    "title": "Tamma Tamma Again",
+    "artist": "Electro Bounce Mix",
+    "film": "Badrinath Ki Dulhania",
+    "youtubeId": "Db7MAK5hVmU"
+  },
+  {
+    "title": "Kar Gayi Chull",
+    "artist": "Bass House Remix",
+    "film": "Kapoor & Sons",
+    "youtubeId": "NTHz9ephYTw"
+  },
+  {
+    "title": "Let's Nacho",
+    "artist": "EDM / Bounce Remix",
+    "film": "Kapoor & Sons",
+    "youtubeId": "M_SUHP_8CI8"
+  },
+  {
+    "title": "High Heels Te Nachche",
+    "artist": "Commercial Club Remix",
+    "film": "Ki & Ka",
+    "youtubeId": "mc4b_euqg6A"
+  },
+  {
+    "title": "Rock Tha Party",
+    "artist": "Hard Dance / EDM Mix",
+    "film": "Rocky Handsome",
+    "youtubeId": "jjGBkSjITF4"
+  },
+  {
+    "title": "Saturday Saturday",
+    "artist": "Bounce House Remix",
+    "film": "Humpty Sharma Ki Dulhania",
+    "youtubeId": "rW9_-dVCmrM"
+  },
+  {
+    "title": "Abhi Toh Party Shuru Hui Hai",
+    "artist": "High Energy Electro",
+    "film": "Khoobsurat",
+    "youtubeId": "E-YNx1e2abg"
+  },
+  {
+    "title": "Party All Night",
+    "artist": "Electro House Edit",
+    "film": "Boss",
+    "youtubeId": "Ak3NZekDOGc"
+  },
+  {
+    "title": "Lungi Dance",
+    "artist": "Festival EDM Mix",
+    "film": "Chennai Express",
+    "youtubeId": "nSUVNlC1zGs"
+  },
+  {
+    "title": "1234 Get On The Dance Floor",
+    "artist": "Desi EDM Flip",
+    "film": "Chennai Express",
+    "youtubeId": "nSPBJNqayF0"
+  },
+  {
+    "title": "Mauja Hi Mauja",
+    "artist": "Festival EDM Remix",
+    "film": "Jab We Met",
+    "youtubeId": "E-t3nejFRDo"
+  },
+  {
+    "title": "Subhah Hone Na De",
+    "artist": "Trance / House Edit",
+    "film": "Desi Boyz",
+    "youtubeId": "3SLXNc41-Uc"
+  },
+  {
+    "title": "Desi Boyz (Title Track)",
+    "artist": "Electro Remix",
+    "film": "Desi Boyz",
+    "youtubeId": "nr3ul-3k_9E"
+  },
+  {
+    "title": "Chammak Challo",
+    "artist": "Global EDM Edit",
+    "film": "Ra.One",
+    "youtubeId": "oAVhUAaVCVQ"
+  },
+  {
+    "title": "Criminal (Ra.One)",
+    "artist": "Slap House / Electro",
+    "film": "Ra.One",
+    "youtubeId": "VIV3nS7KRok"
+  },
+  {
+    "title": "Dope Shope",
+    "artist": "Bass House Remix",
+    "film": "Honey Singh",
+    "youtubeId": "rT0lgxmkPQ4"
+  },
+  {
+    "title": "Angreji Beat",
+    "artist": "Tech House Mix",
+    "film": "Honey Singh",
+    "youtubeId": "0x1BoFyJK0E"
+  },
+  {
+    "title": "Sadi Gali",
+    "artist": "Electro Folk Remix",
+    "film": "Tanu Weds Manu",
+    "youtubeId": "yuYiVWe0J-8"
+  },
+  {
+    "title": "Character Dheela",
+    "artist": "Progressive Electro Mix",
+    "film": "Ready",
+    "youtubeId": "p_0zsIyYs08"
+  },
+  {
+    "title": "Dhinka Chika",
+    "artist": "Commercial Bounce Remix",
+    "film": "Ready",
+    "youtubeId": "0l_sWiV5y7U"
+  },
+  {
+    "title": "Zindagi Do Pal Ki",
+    "artist": "Ambient Trance Remix",
+    "film": "Kites",
+    "youtubeId": "4DbVdym2M90"
+  },
+  {
+    "title": "Mahi Ve (Kal Ho Naa Ho)",
+    "artist": "Uplifting Trance Remix",
+    "film": "Kal Ho Naa Ho",
+    "youtubeId": "ikRuqEMhBqY"
+  },
+  {
+    "title": "It's the Time to Disco",
+    "artist": "Retro Electro House Mix",
+    "film": "Kal Ho Naa Ho",
+    "youtubeId": "IKaRLcOVj7I"
+  },
+  {
+    "title": "Dhoom Machale",
+    "artist": "Hardstyle / Big Room EDM Edit",
+    "film": "Dhoom",
+    "youtubeId": "wckDP1_HuGw"
+  },
+  {
+    "title": "Aankh Marey",
+    "artist": "Club Bounce Remix",
+    "film": "Simmba",
+    "youtubeId": "Et3PQvkcEtA"
+  },
+  {
+    "title": "Mere Gully Mein",
+    "artist": "Bass House Remix",
+    "film": "Gully Boy",
+    "youtubeId": "pGmbUdf6lEM"
+  },
+  {
+    "title": "Apna Time Aayega",
+    "artist": "Trap / Dubstep Remix",
+    "film": "Gully Boy",
+    "youtubeId": "EDQqPeezINs"
+  },
+  {
+    "title": "Laung Laachi",
+    "artist": "Tropical EDM Mix",
+    "film": "Laung Laachi",
+    "youtubeId": "z2w3ggdyGA8"
+  },
+  {
+    "title": "Makhna (Drive)",
+    "artist": "Tropical House Remix",
+    "film": "Drive",
+    "youtubeId": "VWehckbG_i0"
+  },
+  {
+    "title": "Tera Yaar Hoon Main",
+    "artist": "Progressive House Edit",
+    "film": "Sonu Ke Titu Ki Sweety",
+    "youtubeId": "1CESVshqWxA"
   }
 ];
 
-// Combine all four lists and remove exact duplicates dynamically
-const listGlobal = [
-  { title: "Sandstorm", artist: "Darude", film: "Global Anthems", youtubeId: "UdWRghH6EzY", isGlobal: true },
-  { title: "Better Off Alone", artist: "Alice Deejay", film: "Global Anthems", youtubeId: "Ck0LO6b6OQc", isGlobal: true },
-  { title: "Adagio for Strings", artist: "Tiësto", film: "Global Anthems", youtubeId: "EiS9isTa82Y", isGlobal: true },
-  { title: "Children", artist: "Robert Miles", film: "Global Anthems", youtubeId: "CC5ca6Hsb2Q", isGlobal: true },
-  { title: "Insomnia", artist: "Faithless", film: "Global Anthems", youtubeId: "f2sv98d0gS4", isGlobal: true },
-  { title: "9 PM (Till I Come)", artist: "ATB", film: "Global Anthems", youtubeId: "QFGMQZyvnmY", isGlobal: true },
-  { title: "In and Out of Love", artist: "Armin van Buuren ft. Sharon den Adel", film: "Global Anthems", youtubeId: "krHqVGz_o18", isGlobal: true },
-  { title: "Sun & Moon", artist: "Above & Beyond ft. Richard Bedford", film: "Global Anthems", youtubeId: "ll5ykbAumD4", isGlobal: true },
-  { title: "Silence (Tiësto's In Search of Sunrise Remix)", artist: "Delerium ft. Sarah McLachlan", film: "Global Anthems", youtubeId: "ugsQypXvJQw", isGlobal: true },
-  { title: "Concrete Angel", artist: "Gareth Emery ft. Christina Novelli", film: "Global Anthems", youtubeId: "f3GRM0Yz7wM", isGlobal: true },
-  { title: "Miracle", artist: "Calvin Harris & Ellie Goulding", film: "Global Anthems", youtubeId: "961v0E3b01g", isGlobal: true },
-  { title: "For an Angel (PvD E-Werk Club Mix)", artist: "Paul van Dyk", film: "Global Anthems", youtubeId: "evPhEkujDxw", isGlobal: true },
-  { title: "Ecstasy", artist: "ATB", film: "Global Anthems", youtubeId: "LI_3Jsyuma4", isGlobal: true },
-  { title: "As The Rush Comes (Gabriel & Dresden Sweeping Strings Mix)", artist: "Motorcycle", film: "Global Anthems", youtubeId: "TwNV5ytRh5I", isGlobal: true },
-  { title: "Café Del Mar (Three 'N One Remix)", artist: "Energy 52", film: "Global Anthems", youtubeId: "yyvp_nCM15Q", isGlobal: true },
-  { title: "Castles in the Sky", artist: "Ian Van Dahl ft. Marsha", film: "Global Anthems", youtubeId: "npYyiwpPR2I", isGlobal: true },
-  { title: "This Is What It Feels Like", artist: "Armin van Buuren ft. Trevor Guthrie", film: "Global Anthems", youtubeId: "HukyFUAVuGo", isGlobal: true },
-  { title: "Saltwater", artist: "Chicane ft. Moya Brennan", film: "Global Anthems", youtubeId: "UZmg8NnVe74", isGlobal: true },
-  { title: "Waiting", artist: "Dash Berlin ft. Emma Hewitt", film: "Global Anthems", youtubeId: "pH_H1cfttVw", isGlobal: true },
-{ title: "Exploration of Space", artist: "Cosmic Gate", film: "Global Anthems", isGlobal: true, youtubeId: "NE2AvbROl5k" },
-{ title: "Satellite", artist: "OceanLab (Above & Beyond)", film: "Vocal & Melodic", isGlobal: true, youtubeId: "GrOy-0wBlGo" },
-{ title: "Shivers", artist: "Armin van Buuren ft. Susana", film: "Vocal & Melodic", isGlobal: true, youtubeId: "zCmDEnN8gkw" },
-{ title: "Traffic", artist: "Tiësto", film: "Vocal & Melodic", isGlobal: true, youtubeId: "cSW3y98ObQY" },
-{ title: "Southern Sun (Tiësto Remix)", artist: "Paul Oakenfold", film: "Vocal & Melodic", isGlobal: true, youtubeId: "UgiqJxYCuh8" },
-{ title: "Carte Blanche", artist: "Veracocha", film: "Vocal & Melodic", isGlobal: true, youtubeId: "L0KokdO6WR4" },
-{ title: "Out of the Blue", artist: "System F (Ferry Corsten)", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Qgx_V0So0qk" },
-{ title: "Airwave", artist: "Rank 1", film: "Vocal & Melodic", isGlobal: true, youtubeId: "reimbkBhL1A" },
-{ title: "Take Me Away (Into the Night)", artist: "4 Strings", film: "Vocal & Melodic", isGlobal: true, youtubeId: "hBc3zfexMrk" },
-  { title: "Toca Me / Toca's Miracle", artist: "Fragma", film: "Vocal & Melodic", isGlobal: true,
-    youtubeId: "ahaUNhScopE"
+const list2: any[] = [
+  {
+    "title": "Jimmy Jimmy (Trance)",
+    "artist": "Sameer Sen, Abhijit, Paroma, etc.",
+    "film": "Disco Dancer Remix",
+    "youtubeId": "fRSLPx0HSvw"
   },
-{ title: "On A Good Day", artist: "Above & Beyond pres. OceanLab", film: "Vocal & Melodic", isGlobal: true, youtubeId: "LthW0Zt4y8s" },
-{ title: "Till the Sky Falls Down", artist: "Dash Berlin", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Tr7C0nBHOHI" },
-{ title: "Flaming June", artist: "BT", film: "Vocal & Melodic", isGlobal: true, youtubeId: "ic-NqkDTROY" },
-{ title: "Nothing But You", artist: "Paul van Dyk ft. Hemstock & Jennings", film: "Vocal & Melodic", isGlobal: true, youtubeId: "BuxM6OQKIOw" },
-{ title: "Silence", artist: "Tiësto", film: "Vocal & Melodic", isGlobal: true, youtubeId: "LqCcdtM7Qe4" },
-{ title: "Universal Nation", artist: "Push", film: "Vocal & Melodic", isGlobal: true, youtubeId: "mxGMfKtqi8o" },
-{ title: "Gouryella", artist: "Gouryella (Ferry Corsten & Tiësto)", film: "Vocal & Melodic", isGlobal: true, youtubeId: "0uAt2SDDYJM" },
-{ title: "1998 (Paul van Dyk Remix)", artist: "Binary Finary", film: "Vocal & Melodic", isGlobal: true, youtubeId: "E_CFtuh81DM" },
-  { title: "Big Sky (Agnelli & Nelson Remix)", artist: "John O'Callaghan ft. Audrey Gallagher", film: "Vocal & Melodic", isGlobal: true,
-    youtubeId: "6xWKFSrjSbI"
+  {
+    "title": "PYAAR KA PUNCHNAMA - Remix",
+    "artist": "Mika Singh, Luv Ranjan, Akasa",
+    "film": "Pyaar Ka Punchnama",
+    "youtubeId": "zN6YlySa_44"
   },
-{ title: "We Control The Sunlight", artist: "Aly & Fila ft. Jwaydan", film: "Vocal & Melodic", isGlobal: true, youtubeId: "Ad_eViMKuF8" },
-{ title: "Man On The Run", artist: "Dash Berlin with Cerf, Mitiska & Jaren", film: "Vocal & Melodic", isGlobal: true, youtubeId: "C7Qsj6MGVHE" },
-{ title: "Xpander", artist: "Sasha", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "HRqPeKbYoGw" },
-{ title: "Offshore", artist: "Chicane", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "7BYTIATwb0E" },
-{ title: "Communication", artist: "Armin van Buuren", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "bn1ycNxQMvk" },
-{ title: "Greece 2000", artist: "Three Drives on a Vinyl", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "25BGvZ-SSro" },
-{ title: "Tuvan", artist: "Gaia", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "4dBZ5_jPqX0" },
-{ title: "Be Your Sound", artist: "Cosmic Gate ft. Emma Hewitt", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "5MBL0eJrMCo" },
-{ title: "Good For Me", artist: "Above & Beyond ft. Zoë Johnston", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "yUOWsl7TDtY" },
-{ title: "Lethal Industry", artist: "Tiësto", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "f-xKKx5eVZg" },
-{ title: "The Age of Love (Jam & Spoon Remix)", artist: "Age of Love", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "0YVvcTIGy40" },
-{ title: "The New World", artist: "Markus Schulz", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "BMTK8OiUWIg" },
-  { title: "Helsinki Scorchin'", artist: "Super8 & Tab", film: "Golden Era & Progressive", isGlobal: true,
-    youtubeId: "ahaUNhScopE"
+  {
+    "title": "Timmy Reworks",
+    "artist": "Timmy Reworks, Pritam",
+    "film": "Pritam Edit",
+    "youtubeId": "LemcOS6EGBQ"
   },
-{ title: "Burned With Desire (Rising Star Vocal Mix)", artist: "Armin van Buuren ft. Justine Suissa", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "N3KFopyDs64" },
-{ title: "Seven Cities (Solarstone Atlantis Mix)", artist: "Solarstone", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "awxQuhay_mo" },
-{ title: "RAMsterdam (Jorn van Deynhoven Remix)", artist: "RAM", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "xBMwMjGPmaM" },
-{ title: "Beautiful", artist: "Ferry Corsten", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "WdGwqUtJ03o" },
-{ title: "Alone Tonight", artist: "Above & Beyond", film: "Golden Era & Progressive", isGlobal: true, youtubeId: "ur1F0eb2VL8" },
-  { title: "Are You Fine?", artist: "Kyau & Albert", film: "Golden Era & Progressive", isGlobal: true,
-    youtubeId: "tWsS8XSIL0Q"
+  {
+    "title": "Bhool Bhulaiyaa",
+    "artist": "Timmy Reworks, Pritam",
+    "film": "Bhool Bhulaiyaa",
+    "youtubeId": "mll82yN_XZA"
   },
-  { title: "Out of the Sky", artist: "Lange ft. Sarah Howells", film: "Golden Era & Progressive", isGlobal: true,
-    youtubeId: "lLjsxzCcTwo"
+  {
+    "title": "Ek Do Teen - Psy Trance",
+    "artist": "Meet Bros, Neha Kakkar, Dhvani Bhanushali",
+    "film": "Baaghi 2",
+    "youtubeId": "JhaVdknWerA"
   },
-  { title: "Faces", artist: "Andy Moor & Ashley Wallbridge ft. Meighan Nealon", film: "Golden Era & Progressive", isGlobal: true,
-    youtubeId: "ea0Lr55TOds"
+  {
+    "title": "Dum Karo Dum (Psytrance)",
+    "artist": "Meet Bros, Dev Negi",
+    "film": "Dum Maaro Dum",
+    "youtubeId": "NDmrjwJXBlU"
   },
-  { title: "Strange World (2000 Remake)", artist: "Push", film: "Golden Era & Progressive", isGlobal: true,
-    youtubeId: "n4Hh2G_Ygh8"
+  {
+    "title": "Aao Huzur - Psytrance",
+    "artist": "Meet Bros, Neha Kakkar, Monali Thakur",
+    "film": "Psy Remix",
+    "youtubeId": "DxH123syr4o"
   },
-{ title: "Great Spirit", artist: "Vini Vici & Armin van Buuren ft. Hilight Tribe", film: "Modern & Festival", isGlobal: true, youtubeId: "yo4pmauhugo" },
-{ title: "Free Tibet (Vini Vici Remix)", artist: "Vini Vici", film: "Modern & Festival", isGlobal: true, youtubeId: "0lBjcaMokvo" },
-{ title: "Deep Jungle Walk", artist: "Astrix", film: "Modern & Festival", isGlobal: true, youtubeId: "lIuEuJvKos4" },
-  { title: "Anahera", artist: "Ferry Corsten pres. Gouryella", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "7ZMZHbAKvGA"
+  {
+    "title": "Aap Jaisa Koi (Psytrance)",
+    "artist": "Arijit Singh, Yash Narvekar, Dhvani Bhanushali",
+    "film": "An Action Hero",
+    "youtubeId": "Ovu5FepCzcc"
   },
-  { title: "United", artist: "Armin van Buuren vs. Vini Vici", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "PVurTWZu7VU"
+  {
+    "title": "Ang Laga De - Melodic Techno Remix",
+    "artist": "Deepanshu, Melodic",
+    "film": "Goliyon Ki Raasleela",
+    "youtubeId": "VS2WMYuDk1Y"
   },
-  { title: "U (Bryan Kearney Remix)", artist: "Gareth Emery ft. Bo Bruce", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "jF7qGaKKD4M"
+  {
+    "title": "Yeh Sham Mastani - Bollywood Trance",
+    "artist": "Deepanshu, Timmy Reworks",
+    "film": "Retro Remix",
+    "youtubeId": "LemcOS6EGBQ"
   },
-  { title: "Thing Called Love", artist: "Above & Beyond ft. Richard Bedford", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "ZgRnLM9Vi24"
+  {
+    "title": "Naino Mein Sapna - Tech House Remix",
+    "artist": "Deepanshu, Timmy Reworks, Pritam",
+    "film": "Himmatwala",
+    "youtubeId": "ME6qRuoa9cg"
   },
-  { title: "Dark Warrior", artist: "Andrew Rayel", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "CE4TdjQK_V4"
+  {
+    "title": "Laila O Laila Remix",
+    "artist": "Badshah, Pawandeep Rajan, Deepanshu",
+    "film": "Raees",
+    "youtubeId": "6Mc38m3xlac"
   },
-  { title: "Chakra", artist: "W&W & Vini Vici", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "Dx_qGfJq_Go"
+  {
+    "title": "Aali Re",
+    "artist": "Pritam",
+    "film": "No One Killed Jessica",
+    "youtubeId": "HRnbmQYAIp0"
   },
-  { title: "Through Your Eyes", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "2Zzpp9Ktb3k"
+  {
+    "title": "Naa Ja - Psy Trance",
+    "artist": "Pawandeep Rajan, Deepanshu",
+    "film": "Sooryavanshi",
+    "youtubeId": "riStn36xCQc"
   },
-  { title: "43", artist: "ilan Bluestone", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "exFy7ppnFkA"
+  {
+    "title": "Jawani Jan-E-Man - Tech House Trance",
+    "artist": "DJ Rink, DJ Lemon",
+    "film": "Namak Halaal",
+    "youtubeId": "nFbLjsQbdlo"
   },
-  { title: "Waiting for the Night", artist: "Armin van Buuren ft. Fiora", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "SJ_tpbriGpE"
+  {
+    "title": "Bachna Ae Haseeno - Trance",
+    "artist": "Kishore Kumar, R.D. Burman",
+    "film": "Bachna Ae Haseeno",
+    "youtubeId": "E8X2Z_xFt4M"
   },
-  { title: "Pikachu", artist: "Key4050 (John O'Callaghan & Bryan Kearney)", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "B2wxoZL3IaM"
+  {
+    "title": "Aaj Tera Jawan - Tech House Remix",
+    "artist": "DJ Rink, Amit Kumar",
+    "film": "Kasme Vaade",
+    "youtubeId": "BgX2YIWcCsQ"
   },
-  { title: "Visions", artist: "MaRLo", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "mTemgyKTmhw"
+  {
+    "title": "Radha Nachegi - Tech House Mix",
+    "artist": "DJ Rink, Vishal & Shekhar",
+    "film": "Tevar",
+    "youtubeId": "K9UUbq0SZcw"
   },
-  { title: "Lost Language", artist: "Aly & Fila", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "VqqnRKA1kxM"
+  {
+    "title": "Suno Suno Kaho Kaho (Trance Edit)",
+    "artist": "DJ Rink, R.D. Burman",
+    "film": "Classic",
+    "youtubeId": "FJzLg6W4QRo"
   },
-  { title: "Sirens of the Sea (Above & Beyond Club Mix)", artist: "OceanLab", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "RjWLs8pDCYw"
+  {
+    "title": "Main Hoon Don (Tech House Remix)",
+    "artist": "DJ Rink, Kishore Kumar",
+    "film": "Don",
+    "youtubeId": "8FL2FLv5xC0"
   },
-  { title: "Opus", artist: "Eric Prydz", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "CzqJelgEBsA"
+  {
+    "title": "Chura Liya Hai Tumne Jo Dil (Tech House)",
+    "artist": "Asha Bhosle, Mohammad Rafi, DJ Rink",
+    "film": "Yaadon Ki Baaraat",
+    "youtubeId": "xwJpIN_XF0A"
   },
-  { title: "L.E.D. There Be Light", artist: "Rank 1", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "VwxnB4kL0nM"
+  {
+    "title": "Roop Tera Mastana (Trance Remix)",
+    "artist": "DJ Rink, Kishore Kumar",
+    "film": "Aradhana",
+    "youtubeId": "d2wjhJstSP4"
   },
-  { title: "Sun In Your Eyes", artist: "Above & Beyond", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "PCKSLa1tsAk"
+  {
+    "title": "Koi Mil Gaya (Tech House Mix)",
+    "artist": "Kishore Kumar, Asha Bhosle",
+    "film": "Kuch Kuch Hota Hai",
+    "youtubeId": "7qydPABqOvA"
   },
-  { title: "Keep Your Dreams Alive", artist: "Giuseppe Ottaviani", film: "Modern & Festival", isGlobal: true,
-    youtubeId: "yAw1nLVxFs8"
+  {
+    "title": "Deewane Hum Nahi (Remix)",
+    "artist": "Aditya Yadav, DJ Rink, Deepanshu",
+    "film": "Deewane",
+    "youtubeId": "0A5MVZgga5U"
   },
-  { title: "Komodo (Save a Soul)", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "hem6LPHa5zQ"
+  {
+    "title": "Pehla Pyaar - Deep House Mix",
+    "artist": "Armaan Malik, Vishal Mishra, Amaal Mallik",
+    "film": "Kabir Singh",
+    "youtubeId": "AJY70JDIZIk"
   },
-  { title: "Bellissima", artist: "DJ Quicksilver", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "YQQokcoOzeY"
+  {
+    "title": "Aaja Aaja - Tech Remix",
+    "artist": "Asha Bhosle, R.D. Burman",
+    "film": "Teesri Manzil",
+    "youtubeId": "8fXmvexIPMQ"
   },
-  { title: "Ayla (Veracocha / Taucher Remix)", artist: "Ayla", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "LtRsf9wAc4E"
+  {
+    "title": "Humne Dekhi Hai - Deep House Remix",
+    "artist": "Lata Mangeshkar, R.D. Burman",
+    "film": "Khamoshi",
+    "youtubeId": "doPtBhDTpj0"
   },
-  { title: "Heaven Scent", artist: "Bedrock", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "iqh5bMu9Jmo"
+  {
+    "title": "Shona Shona",
+    "artist": "Tony Kakkar",
+    "film": "Single",
+    "youtubeId": "N9lqbhVVTck"
   },
-  { title: "Mysterious Times ft. Tina Cousins", artist: "Sash!", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "y1T1dS-bh4s"
+  {
+    "title": "Dil Tera - Slap House Remix",
+    "artist": "DJ Rink",
+    "film": "Slap House",
+    "youtubeId": "z7uBkxKi2D8"
   },
-  { title: "Protect Your Mind (Braveheart)", artist: "DJ Sakin & Friends", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "xz2Yq02HX4E"
+  {
+    "title": "Lea",
+    "artist": "DJ Rink",
+    "film": "DJ Rink",
+    "youtubeId": "85Gy_cde77k"
   },
-  { title: "Lizard", artist: "Mauro Picotto", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "B2jPPGTtgC0"
+  {
+    "title": "Deewana",
+    "artist": "Pawandeep Rajan, Deepanshu",
+    "film": "Single",
+    "youtubeId": "SYzV_sJST1I"
   },
-  { title: "Madagascar (Ferry Corsten Remix)", artist: "Art of Trance", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "uuH_nYKXqHM"
+  {
+    "title": "Kazi Rnk",
+    "artist": "Kishore Kumar",
+    "film": "Kazi Rnk",
+    "youtubeId": "l3Q_zHd3kCA"
   },
-  { title: "Love Shines Through", artist: "Chakra", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "zRayl-nl8rs"
+  {
+    "title": "Pauli",
+    "artist": "Yo Yo Honey Singh",
+    "film": "Honey Singh",
+    "youtubeId": "q3EsYvIapPQ"
   },
-  { title: "The Theme", artist: "Jurgen Vries", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "srwCUS8jiXw"
+  {
+    "title": "Priyatam",
+    "artist": "Pawandeep Rajan",
+    "film": "Pawandeep",
+    "youtubeId": "7mR31IcdQwU"
   },
-  { title: "Beachball", artist: "Nalin & Kane", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "FwXskdcCRIk"
+  {
+    "title": "Dil Bagi",
+    "artist": "Pawandeep Rajan",
+    "film": "Pawandeep",
+    "youtubeId": "x8HMrGNAKAY"
   },
-  { title: "Beautiful", artist: "Matt Darey ft. Marcella Woods", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "WdGwqUtJ03o"
+  {
+    "title": "Humse Pyar - Psy Trance",
+    "artist": "Pritam",
+    "film": "Pritam",
+    "youtubeId": "hM9QDpLHhdw"
   },
-  { title: "What Ya Got 4 Me", artist: "Signum", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "NnI5upfK6mA"
+  {
+    "title": "Kabhie Kabhie Aditi - Tech House Remix",
+    "artist": "A.R. Rahman, Blaaze, Rashid Ali",
+    "film": "Jaane Tu... Ya Jaane Na",
+    "youtubeId": "dbdtBQ16CXc"
   },
-  { title: "Fire Wire", artist: "Cosmic Gate", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "jlwPNroYv1U"
+  {
+    "title": "Parda Hai Parda - Trance Mix",
+    "artist": "Mohammed Rafi, Asha Bhosle",
+    "film": "Amar Akbar Anthony",
+    "youtubeId": "WCBkUNedgrk"
   },
-  { title: "Blue Fear", artist: "Armin van Buuren", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "vfgnh7Thp-A"
+  {
+    "title": "Chot Dil Pe Lagi - Slap Mix",
+    "artist": "Kumar Sanu, Alka Yagnik, DJ Rink",
+    "film": "Dil Ka Rishta",
+    "youtubeId": "zCamH8ur5hw"
   },
-  { title: "The Spell (Solarstone Pure Mix)", artist: "Solarstone & Clare Stagg", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "-bAo69SJwFk"
+  {
+    "title": "Dil To Pagal Hai - Club Mix",
+    "artist": "DJ Rink, Uttam Singh",
+    "film": "Dil To Pagal Hai",
+    "youtubeId": "zIdexaFwsck"
   },
-  { title: "Anthem", artist: "Filo & Peri ft. Eric Lumiere", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "gDMfAiX7zRk"
+  {
+    "title": "Tum - Slap Flip",
+    "artist": "Pritam",
+    "film": "Ludo",
+    "youtubeId": "iKCGyy04ato"
   },
-  { title: "Elektra", artist: "Super8 & Tab", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "fBn8F9VIbDU"
+  {
+    "title": "Roop Tera Mastana - Slap Mix",
+    "artist": "Kishore Kumar, R.D. Burman",
+    "film": "Aradhana",
+    "youtubeId": "dyEdcOhxJNQ"
   },
-  { title: "Happiness Happening", artist: "Lost Witness", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "jYsfR7e4gHI"
+  {
+    "title": "Sanam Re - Psy Trance Mix",
+    "artist": "Mithoon, Arijit Singh",
+    "film": "Sanam Re",
+    "youtubeId": "yCldJqnoNcw"
   },
-  { title: "Stella", artist: "Jam & Spoon", film: "Heritage & Club Classics", isGlobal: true,
-    youtubeId: "zLy--cFj6W0"
+  {
+    "title": "Zara Zara - Psytrance Mix",
+    "artist": "Bombay Jayashri, Harris Jayaraj",
+    "film": "Rehnaa Hai Terre Dil Mein",
+    "youtubeId": "buI_0KiInJ8"
   },
+  {
+    "title": "Shona Shona - Remix",
+    "artist": "Tony Kakkar, Neha Kakkar",
+    "film": "Single",
+    "youtubeId": "N9lqbhVVTck"
+  },
+  {
+    "title": "Piya Tu Ab To Aaja (Trance Remix)",
+    "artist": "Asha Bhosle, R.D. Burman",
+    "film": "Caravan",
+    "youtubeId": "hOroPhFi4do"
+  },
+  {
+    "title": "Aaj Tera Jawan - Slap House Remix",
+    "artist": "DJ Rink, Amit Kumar",
+    "film": "Kasme Vaade",
+    "youtubeId": "NlsVaeP6CEA"
+  },
+  {
+    "title": "Yeh Jawaani Hai Deewani - Off-The-Wall Edit",
+    "artist": "Kishore Kumar, R.D. Burman",
+    "film": "Yeh Jawaani Hai Deewani",
+    "youtubeId": "jHNNMj5bNQw"
+  },
+  {
+    "title": "Humma Humma - Tech House Mix",
+    "artist": "A.R. Rahman, Badshah",
+    "film": "OK Jaanu",
+    "youtubeId": "H8HEFjx552I"
+  },
+  {
+    "title": "Dil Cheez Kya Hai - Deep House Remix",
+    "artist": "Asha Bhosle, Khayyam",
+    "film": "Umrao Jaan",
+    "youtubeId": "eFcs3p1moMA"
+  },
+  {
+    "title": "Dilbar - Melodic Psytrance Mix",
+    "artist": "Tanishk Bagchi, Neha Kakkar",
+    "film": "Satyameva Jayate",
+    "youtubeId": "jTZnWupUS50"
+  },
+  {
+    "title": "Chura Liya Hai - Trance Edit",
+    "artist": "Asha Bhosle, R.D. Burman",
+    "film": "Yaadon Ki Baaraat",
+    "youtubeId": "gQCpSKO8sL0"
+  },
+  {
+    "title": "Pyar Ki Kasam - Tech House Mix",
+    "artist": "R.D. Burman",
+    "film": "Retro",
+    "youtubeId": "Im8ZdmObSzo"
+  },
+  {
+    "title": "Dum Karo Dum - Psytrance Mix",
+    "artist": "Asha Bhosle, R.D. Burman",
+    "film": "Hare Rama Hare Krishna",
+    "youtubeId": "NDmrjwJXBlU"
+  },
+  {
+    "title": "Tujhe Dekha Toh - Psytrance",
+    "artist": "Jatin-Lalit, Kumar Sanu",
+    "film": "Dilwale Dulhania Le Jayenge",
+    "youtubeId": "YGaDzrsgFn4"
+  },
+  {
+    "title": "Radha Nachegi - Trance Mix",
+    "artist": "Vishal & Shekhar",
+    "film": "Tevar",
+    "youtubeId": "I4pGSV68Td0"
+  },
+  {
+    "title": "Aaja Aaja - Trance Mix",
+    "artist": "Asha Bhosle, R.D. Burman",
+    "film": "Teesri Manzil",
+    "youtubeId": "_Q2UOPqYEK8"
+  },
+  {
+    "title": "Koi Mil Gaya - EDM Edit",
+    "artist": "Kishore Kumar, Asha Bhosle",
+    "film": "Kuch Kuch Hota Hai",
+    "youtubeId": "Q1gvYNPswII"
+  },
+  {
+    "title": "Aaj Tone - Trance Edit",
+    "artist": "DJ Rink, Kishore Kumar",
+    "film": "Classic",
+    "youtubeId": "RL_f-GU_SaU"
+  },
+  {
+    "title": "Dil Hai Ke Manta Nahin - Deep House",
+    "artist": "Kumar Sanu, Anuradha Paudwal",
+    "film": "Dil Hai Ke Manta Nahin",
+    "youtubeId": "C9efe0rjDlE"
+  },
+  {
+    "title": "Choti Si Asha - Electro Trance Remix",
+    "artist": "A.R. Rahman, Minmini",
+    "film": "Roja",
+    "youtubeId": "esrRdJ9JTFE"
+  },
+  {
+    "title": "Until",
+    "artist": "DJ Rink, Pawandeep Rajan",
+    "film": "DJ Rink",
+    "youtubeId": "ON0i3dPKfJk"
+  }
 ];
 
-const listGoa = [
-  { title: "Mahadeva", artist: "Astral Projection", film: "Iconic Anthems", youtubeId: "Ix0lduF1Co4", isGoa: true },
-  { title: "Free Tibet (Vini Vici Remix)", artist: "Hilight Tribe", film: "Iconic Anthems", youtubeId: "0lBjcaMokvo", isGoa: true },
-  { title: "Deep Jungle Walk", artist: "Astrix", film: "Iconic Anthems", youtubeId: "lIuEuJvKos4", isGoa: true },
-  { title: "Shiva’s India (Outsiders Remix)", artist: "1200 Micrograms", film: "Iconic Anthems", youtubeId: "qJtWEhl5smA", isGoa: true },
-  { title: "Great Spirit", artist: "Armin van Buuren vs. Vini Vici ft. Hilight Tribe", film: "Iconic Anthems", youtubeId: "yo4pmauhugo", isGoa: true },
-  { title: "L.S.D.", artist: "Hallucinogen", film: "Iconic Anthems", youtubeId: "iIsVzSMRw8E", isGoa: true },
-{ title: "Mahishasura Mardini (Droplex & Psy Edit)", artist: "Shanti People", film: "Iconic Anthems", isGoa: true, youtubeId: "Qz4LC9Pmo7Y" },
-{ title: "Becoming Insane", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true, youtubeId: "wVwQYSVNJVM" },
-{ title: "Kabalah", artist: "Astral Projection", film: "Iconic Anthems", isGoa: true, youtubeId: "mvF8zruukjU" },
-{ title: "Teleport", artist: "Man With No Name", film: "Iconic Anthems", isGoa: true, youtubeId: "efc7WLCVWmw" },
-{ title: "Chakra", artist: "Vini Vici & W&W", film: "Iconic Anthems", isGoa: true, youtubeId: "Dx_qGfJq_Go" },
-{ title: "Pranava", artist: "Astrix & Ace Ventura", film: "Iconic Anthems", isGoa: true, youtubeId: "0JEmUHq2QNw" },
-{ title: "Universe Inside Me", artist: "Liquid Soul & Vini Vici", film: "Iconic Anthems", isGoa: true, youtubeId: "yvBK1rSUzTc" },
-{ title: "Pistolero", artist: "Juno Reactor", film: "Iconic Anthems", isGoa: true, youtubeId: "wZqNUo6y52Q" },
-{ title: "Parvati Valley", artist: "Blastoyz", film: "Iconic Anthems", isGoa: true, youtubeId: "FHUo4NQPaxs" },
-{ title: "The Prayer", artist: "Electric Universe", film: "Iconic Anthems", isGoa: true, youtubeId: "Jtb1THFjA2o" },
-{ title: "Tandava", artist: "Shanti People", film: "Iconic Anthems", isGoa: true, youtubeId: "iiTeiOdAJSQ" },
-{ title: "Smashing the Opponent", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true, youtubeId: "HDs5OlRLr9M" },
-{ title: "People Can Fly", artist: "Astral Projection", film: "Iconic Anthems", isGoa: true, youtubeId: "kJSyBUZshfs" },
-{ title: "Neurochemistry", artist: "Ace Ventura & Liquid Soul", film: "Iconic Anthems", isGoa: true, youtubeId: "gOKopmV4rFI" },
-  { title: "Wire-Tap", artist: "GMS & Vini Vici", film: "Iconic Anthems", isGoa: true,
-    youtubeId: "A_70gFGTCR4"
+const list3: any[] = [
+  {
+    "title": "Mahishasura Mardini – Droplex Remix",
+    "artist": "Ethnic Psytrance",
+    "film": "Devi Stotram",
+    "youtubeId": "Qz4LC9Pmo7Y"
   },
-{ title: "Ayahuasca", artist: "1200 Micrograms", film: "Iconic Anthems", isGoa: true, youtubeId: "5kom6v1jNkM" },
-{ title: "Sahara", artist: "Astrix", film: "Iconic Anthems", isGoa: true, youtubeId: "5_ehdwsv5BI" },
-{ title: "Heavyweight", artist: "Infected Mushroom", film: "Iconic Anthems", isGoa: true, youtubeId: "h4YvkZeLrjs" },
-{ title: "Bungee Jump", artist: "Captain Hook & Astrix", film: "Iconic Anthems", isGoa: true, youtubeId: "tIGH8nWZXOQ" },
-{ title: "Floor-Essence", artist: "Man With No Name", film: "Golden Era & Acid", isGoa: true, youtubeId: "S6DiMtRD70Y" },
-{ title: "Let’s Turn On", artist: "Doof", film: "Golden Era & Acid", isGoa: true, youtubeId: "_IUtwc1SzTA" },
-{ title: "Geomantik", artist: "Prana", film: "Golden Era & Acid", isGoa: true, youtubeId: "MFd7_zTci_g" },
-{ title: "Liquid Sun", artist: "Astral Projection", film: "Golden Era & Acid", isGoa: true, youtubeId: "0KYdyzYuKAg" },
-{ title: "Der Damm", artist: "Hallucinogen", film: "Golden Era & Acid", isGoa: true, youtubeId: "-v2WPraVyhA" },
-{ title: "Canopy", artist: "Total Eclipse", film: "Golden Era & Acid", isGoa: true, youtubeId: "oNH3akWXaV8" },
-{ title: "Alcyone", artist: "Pleiadians", film: "Golden Era & Acid", isGoa: true, youtubeId: "FYAGSQIt1jY" },
-{ title: "Sugar Rush", artist: "Man With No Name", film: "Golden Era & Acid", isGoa: true, youtubeId: "-neNVbU2KpY" },
-{ title: "High Energy Protons", artist: "Juno Reactor", film: "Golden Era & Acid", isGoa: true, youtubeId: "HeD-hpqaDfk" },
-{ title: "Searching For UFOs", artist: "Astral Projection", film: "Golden Era & Acid", isGoa: true, youtubeId: "rcs31PkDWGM" },
-{ title: "Cor", artist: "Green Nuns of the Revolution", film: "Golden Era & Acid", isGoa: true, youtubeId: "rGsouPH0ayQ" },
-{ title: "Dansul Ielelor", artist: "E-Mantra", film: "Golden Era & Acid", isGoa: true, youtubeId: "zHx-N0EOh6Y" },
-{ title: "A Bit of Goa", artist: "Koxbox", film: "Golden Era & Acid", isGoa: true, youtubeId: "9M5ShTEE-UU" },
-{ title: "Cannabanoid", artist: "Cosmosis", film: "Golden Era & Acid", isGoa: true, youtubeId: "ilWeV9isl5o" },
-{ title: "X-File", artist: "Chakra & Edi Mis", film: "Golden Era & Acid", isGoa: true, youtubeId: "scOydQ2QWU4" },
-{ title: "Deep Space 5D", artist: "Dimension 5", film: "Golden Era & Acid", isGoa: true, youtubeId: "ixP7HP2hwt0" },
-{ title: "Trash Shiva", artist: "Transwave", film: "Golden Era & Acid", isGoa: true, youtubeId: "VyiPWKJh4kg" },
-{ title: "Epilogue", artist: "Asia 2001", film: "Golden Era & Acid", isGoa: true, youtubeId: "0mVFOMSY4nI" },
-{ title: "Magnetic Activity", artist: "MFG (Message From God)", film: "Golden Era & Acid", isGoa: true, youtubeId: "KXl730YLodc" },
-{ title: "Trip Tonite", artist: "Etnica", film: "Golden Era & Acid", isGoa: true, youtubeId: "UEkeptXz63A" },
-{ title: "Camel", artist: "Indoor", film: "Golden Era & Acid", isGoa: true, youtubeId: "cNlPs0v6b34" },
-{ title: "Kreak", artist: "Space Cat", film: "Golden Era & Acid", isGoa: true, youtubeId: "P9VlJ4VOF84" },
-{ title: "Bust a Move", artist: "Infected Mushroom", film: "Golden Era & Acid", isGoa: true, youtubeId: "J4mulG7cglQ" },
-{ title: "Divine Moments of Truth (D.M.T.)", artist: "Shpongle", film: "Golden Era & Acid", isGoa: true, youtubeId: "8CXhYAiPIZY" },
-{ title: "Forest of the Saints (Live Ritual Edit)", artist: "Goa Gil", film: "Golden Era & Acid", isGoa: true, youtubeId: "6Af0I6BVQBo" },
-{ title: "Shankara", artist: "Shanti People", film: "Vedic & Tribal", isGoa: true, youtubeId: "iiTeiOdAJSQ" },
-{ title: "Karma", artist: "Vini Vici & Reality Test ft. Shanti People", film: "Vedic & Tribal", isGoa: true, youtubeId: "Z_7JKe7Idao" },
-{ title: "Kabalah", artist: "Blastoyz & Reality Test", film: "Vedic & Tribal", isGoa: true, youtubeId: "83q0276ovCQ" },
-{ title: "Sem Chão", artist: "Mandragora", film: "Vedic & Tribal", isGoa: true, youtubeId: "EL037NUroYY" },
-{ title: "1000 Sterne", artist: "Neelix", film: "Vedic & Tribal", isGoa: true, youtubeId: "wAeml8gaHoI" },
-{ title: "Artcore", artist: "Astrix", film: "Vedic & Tribal", isGoa: true, youtubeId: "pzS3ipQIQDk" },
-{ title: "Wake and Bake", artist: "Avalon & Laughing Buddha", film: "Vedic & Tribal", isGoa: true, youtubeId: "mZgQgcxLLd4" },
-{ title: "Shankara", artist: "Hilight Tribe", film: "Vedic & Tribal", isGoa: true, youtubeId: "hLEn0yQFtrs" },
-{ title: "Key to the Universe", artist: "Sesto Sento", film: "Vedic & Tribal", isGoa: true, youtubeId: "y1vKzg7FSAc" },
-{ title: "Stomping Ground", artist: "Ace Ventura", film: "Vedic & Tribal", isGoa: true, youtubeId: "SBX9gyNbnLU" },
-{ title: "Adhana", artist: "Vini Vici & Astrix", film: "Vedic & Tribal", isGoa: true, youtubeId: "Aooy7iw-7cY" },
-{ title: "Cherokee", artist: "Neelix", film: "Vedic & Tribal", isGoa: true, youtubeId: "U0g0GaZtAEo" },
-{ title: "Hit and Run", artist: "Skazi", film: "Vedic & Tribal", isGoa: true, youtubeId: "FvHjjhnslNg" },
-{ title: "Mama India", artist: "Technical Hitch", film: "Vedic & Tribal", isGoa: true, youtubeId: "xEsIkXk5hmo" },
-{ title: "A Journey in Trance", artist: "Talamasca", film: "Vedic & Tribal", isGoa: true, youtubeId: "XPDzEyORJVI" },
-{ title: "Life Frequency", artist: "Liquid Soul & Outsiders", film: "Vedic & Tribal", isGoa: true, youtubeId: "X-RyuuXhyiU" },
-{ title: "Awake", artist: "Astrix & Tristan", film: "Vedic & Tribal", isGoa: true, youtubeId: "zAm1OJ8Lvgw" },
-{ title: "Rumble on the Jungle", artist: "Tristan & Avalon", film: "Vedic & Tribal", isGoa: true, youtubeId: "LE_FTeHBLrA" },
-{ title: "Step Aside", artist: "Blastoyz", film: "Vedic & Tribal", isGoa: true, youtubeId: "BaE5gLZ83xs" },
-{ title: "Spitfire", artist: "Infected Mushroom", film: "Vedic & Tribal", isGoa: true, youtubeId: "U4XOZeJb2ZQ" },
-{ title: "The Tree", artist: "Vini Vici & WHITENO1SE", film: "Vedic & Tribal", isGoa: true, youtubeId: "0lBjcaMokvo" },
-{ title: "God Is God", artist: "Juno Reactor", film: "Vedic & Tribal", isGoa: true, youtubeId: "v8LY2VgiikE" },
-{ title: "Raya", artist: "Outsiders & Volcano", film: "Vedic & Tribal", isGoa: true, youtubeId: "rP7YmmZuhD4" },
-{ title: "The Alien Jams", artist: "Ajja & Cosmosis", film: "Vedic & Tribal", isGoa: true, youtubeId: "R3T_9NdqlsI" },
-{ title: "Prime Time", artist: "Ace Ventura & Symbolic", film: "Vedic & Tribal", isGoa: true, youtubeId: "2BHnthbpk2I" },
-{ title: "We Are Intelligent", artist: "Laughing Buddha", film: "Twilight Underground", isGoa: true, youtubeId: "MCX4YqcW7kU" },
-{ title: "Deep Mind", artist: "Tristan", film: "Twilight Underground", isGoa: true, youtubeId: "2SF_ejQkVJg" },
-{ title: "Tumbleweed", artist: "Dickster & Burn in Noise", film: "Twilight Underground", isGoa: true, youtubeId: "a6H7hcIjuVU" },
-{ title: "Duck Fuzz", artist: "Fungus Funk", film: "Twilight Underground", isGoa: true, youtubeId: "gIZg37e2cpo" },
-{ title: "The Mushroom Network", artist: "Earthling & Virtual Light", film: "Twilight Underground", isGoa: true, youtubeId: "1ZeIfg0bT6c" },
-{ title: "Navigate", artist: "Filteria", film: "Twilight Underground", isGoa: true, youtubeId: "-vxGiH1wSUU" },
-{ title: "Cyclone in Your Heart", artist: "Crossing Mind", film: "Twilight Underground", isGoa: true, youtubeId: "4RA-q6xMjMo" },
-{ title: "Just Another Jam", artist: "Sonic Species", film: "Twilight Underground", isGoa: true, youtubeId: "GAjw9ShIsEk" },
-{ title: "Source of Light", artist: "Braincell", film: "Twilight Underground", isGoa: true, youtubeId: "n4HPc8757qo" },
-{ title: "Vuuv Festival Anthem", artist: "Burn in Noise", film: "Twilight Underground", isGoa: true, youtubeId: "NwRUREdM1mg" },
-{ title: "Orange Sunshine", artist: "Hypnocoustics", film: "Twilight Underground", isGoa: true, youtubeId: "IWanz09wk2c" },
-{ title: "Origin", artist: "Captain Hook", film: "Twilight Underground", isGoa: true, youtubeId: "wfEUjkhqXeE" },
-{ title: "Cyber Space", artist: "Symbolic & Waio", film: "Twilight Underground", isGoa: true, youtubeId: "hggG_TARAjs" },
-{ title: "Floating Waves", artist: "Protonica", film: "Twilight Underground", isGoa: true, youtubeId: "jWwKQVJexP0" },
-{ title: "Dragonfly", artist: "Zen Mechanics & Egorythmia", film: "Twilight Underground", isGoa: true, youtubeId: "DufGGaNC3sY" },
-{ title: "The Seed", artist: "Ritmo & Sphera", film: "Twilight Underground", isGoa: true, youtubeId: "N2y948aWD2c" },
-{ title: "Salvia Divinorum", artist: "E-Clip", film: "Twilight Underground", isGoa: true, youtubeId: "kwZq4yaaCfE" },
-{ title: "Flying Objects", artist: "Faders", film: "Twilight Underground", isGoa: true, youtubeId: "gtk2wpmtcvc" },
-{ title: "Mantra", artist: "Electric Universe", film: "Twilight Underground", isGoa: true, youtubeId: "Oo0o84-TJTU" },
-{ title: "Million Little Pieces", artist: "Freedom Fighters & Ryanosaurus", film: "Twilight Underground", isGoa: true, youtubeId: "Ng317420V3k" },
-{ title: "Whispering Gallery", artist: "Arjuna", film: "Twilight Underground", isGoa: true, youtubeId: "MBSfZ9O96fc" },
-{ title: "Rings of Fairy", artist: "Atriohm", film: "Twilight Underground", isGoa: true, youtubeId: "ZCI1rzPp5J4" },
-{ title: "Acid Country", artist: "Dust", film: "Twilight Underground", isGoa: true, youtubeId: "okYLtLtGXtA" },
-{ title: "Ritual of the Elements", artist: "Parasense", film: "Twilight Underground", isGoa: true, youtubeId: "AxjFWf2IMDo" },
-{ title: "Spirit of the Forest", artist: "Kindzadza", film: "Twilight Underground", isGoa: true, youtubeId: "t-D9Iu2JnTY" },
+  {
+    "title": "Silsila Yeh Chahat Ka",
+    "artist": "Progressive Psytrance Edit",
+    "film": "Devdas",
+    "youtubeId": "NQDlHbS5ya8"
+  },
+  {
+    "title": "Bolo Har Har Har (Shiva)",
+    "artist": "High-BPM Psy Edit",
+    "film": "Shivaay",
+    "youtubeId": "nMjYG4uayM4"
+  },
+  {
+    "title": "Hai Rama Ye Kya Hua",
+    "artist": "Progressive Psy Remix",
+    "film": "Rangeela",
+    "youtubeId": "byAxJ9N_1dA"
+  },
+  {
+    "title": "Tip Tip Barsa Phani",
+    "artist": "Dark Psytrance Flip",
+    "film": "Mohra",
+    "youtubeId": "yMUA3wqd1qA"
+  },
+  {
+    "title": "Piya (DJ NYK)",
+    "artist": "Ethnic Progressive Psy",
+    "film": "DJ NYK",
+    "youtubeId": "aiIUwVKd3Yw"
+  },
+  {
+    "title": "Shiva Tandava Stotram",
+    "artist": "Festival Psytrance Remix",
+    "film": "Shiva Stotram",
+    "youtubeId": "cxzUFGftYeo"
+  },
+  {
+    "title": "Deva Deva (Brahmastra)",
+    "artist": "Progressive Psy Edit",
+    "film": "Brahmāstra",
+    "youtubeId": "6l8RnAIaVpo"
+  },
+  {
+    "title": "Manali Trance",
+    "artist": "Goa Psytrance Edit",
+    "film": "The Shaukeens",
+    "youtubeId": "wtF0ZuMCw4U"
+  },
+  {
+    "title": "San Sanana",
+    "artist": "Psytrance Remix",
+    "film": "Asoka",
+    "youtubeId": "_GGin5lPMbo"
+  },
+  {
+    "title": "Ganesha Mantra",
+    "artist": "Full-On Psytrance Edit",
+    "film": "Devotional",
+    "youtubeId": "8mn17GZXjQ4"
+  },
+  {
+    "title": "Gully Boy Mashup",
+    "artist": "Psytrance Edit",
+    "film": "Gully Boy",
+    "youtubeId": "K3atMxOw0aE"
+  },
+  {
+    "title": "Galliyan (Ek Villain)",
+    "artist": "Psytrance Flip",
+    "film": "Ek Villain",
+    "youtubeId": "O9CxpVHwNlc"
+  },
+  {
+    "title": "Ghoomar",
+    "artist": "Rajasthani Folk Psytrance Mix",
+    "film": "Padmaavat",
+    "youtubeId": "wHfblAn_0iM"
+  },
+  {
+    "title": "Aayat (Bajirao Mastani)",
+    "artist": "Melodic Psy Edit",
+    "film": "Bajirao Mastani",
+    "youtubeId": "vKDsAB1ccn0"
+  },
+  {
+    "title": "Sun Saathiya",
+    "artist": "Progressive Psytrance Edit",
+    "film": "ABCD 2",
+    "youtubeId": "FrgAmPnMwRA"
+  },
+  {
+    "title": "Dard-E-Disco",
+    "artist": "Dark Psytrance Flip",
+    "film": "Om Shanti Om",
+    "youtubeId": "Jnymuo4f-1A"
+  },
+  {
+    "title": "Kamli (Dhoom 3)",
+    "artist": "High-Energy Psy Remix",
+    "film": "Dhoom 3",
+    "youtubeId": "KuT0l96RXBA"
+  },
+  {
+    "title": "Jhumka Gira Re",
+    "artist": "Retro Psytrance Edit",
+    "film": "Classic",
+    "youtubeId": "04-qv2QoEJU"
+  },
+  {
+    "title": "Malhari",
+    "artist": "High-BPM Dhol Psytrance Mix",
+    "film": "Bajirao Mastani",
+    "youtubeId": "CQBPNOX80bI"
+  },
+  {
+    "title": "Dil To Pagal Hai",
+    "artist": "Progressive Psy Edit",
+    "film": "Dil To Pagal Hai",
+    "youtubeId": "J0ZfvjK__ko"
+  },
+  {
+    "title": "Saiyaan (Kailash Kher)",
+    "artist": "Deep Progressive Psy",
+    "film": "Kailash Kher",
+    "youtubeId": "TuUVVKVdZm4"
+  },
+  {
+    "title": "Mitwa (Kabhi Alvida Naa Kehna)",
+    "artist": "Melodic Psy Remix",
+    "film": "Kabhi Alvida Naa Kehna",
+    "youtubeId": "6LtpYX3G0wc"
+  },
+  {
+    "title": "Ghanan Ghanan",
+    "artist": "Indian Ethnic Psytrance Mix",
+    "film": "Lagaan",
+    "youtubeId": "bypl4JefIaY"
+  },
+  {
+    "title": "Shubharambh (Kai Po Che)",
+    "artist": "Festive Psy Edit",
+    "film": "Kai Po Che",
+    "youtubeId": "22MO_iJIQoM"
+  },
+  {
+    "title": "Kun Faya Kun",
+    "artist": "Sufi Progressive Psy Remix",
+    "film": "Rockstar",
+    "youtubeId": "dNpHJUTrqQU"
+  },
+  {
+    "title": "Tere Bina (Guru)",
+    "artist": "Organic Progressive Psy Edit",
+    "film": "Guru",
+    "youtubeId": "ny8lXZg9b74"
+  },
+  {
+    "title": "Vande Mataram (A.R. Rahman)",
+    "artist": "High-Voltage Psy Remix",
+    "film": "A.R. Rahman",
+    "youtubeId": "sO_rn41gJdU"
+  },
+  {
+    "title": "Maha Mrityunjaya Mantra",
+    "artist": "Psytrance Edit",
+    "film": "Devotional",
+    "youtubeId": "5ab5E6TdW5U"
+  },
+  {
+    "title": "Namo Namo (Kedarnath)",
+    "artist": "Progressive Psytrance Flip",
+    "film": "Kedarnath",
+    "youtubeId": "ednU5RyMc3Y"
+  },
+  {
+    "title": "Jai Jai Shivshankar",
+    "artist": "Festival Psytrance Remix",
+    "film": "War",
+    "youtubeId": "oGneAab3e88"
+  },
+  {
+    "title": "Aankh Marey",
+    "artist": "Slap-Psytrance Mix",
+    "film": "Simmba",
+    "youtubeId": "Ay-kHJZzmsw"
+  },
+  {
+    "title": "Aisa Jadoo Dala Re",
+    "artist": "Retro Psytrance Edit",
+    "film": "Khakee",
+    "youtubeId": "ToL9ecPfP_Y"
+  },
+  {
+    "title": "Kukdoo Koo (Barfi!)",
+    "artist": "Bounce Psy Remix",
+    "film": "Barfi!",
+    "youtubeId": "av5YCk2U5Ac"
+  },
+  {
+    "title": "Nadiyon Paar",
+    "artist": "Dark Progressive Psy Edit",
+    "film": "Roohi",
+    "youtubeId": "PKno7lqfHsU"
+  },
+  {
+    "title": "Chhalia (Kurbaan)",
+    "artist": "Psytrance Edit",
+    "film": "Kurbaan",
+    "youtubeId": "b0PfRRvQPOg"
+  },
+  {
+    "title": "Duniyaa (Luka Chuppi)",
+    "artist": "Melodic Psy Remix",
+    "film": "Luka Chuppi",
+    "youtubeId": "vzAr40-v3u0"
+  },
+  {
+    "title": "Mast Kalandar",
+    "artist": "Tribal Sufi Psytrance Mix",
+    "film": "Heyy Babyy",
+    "youtubeId": "AwWwjEHHydQ"
+  },
+  {
+    "title": "Pasoori",
+    "artist": "Indian/Pakistani Psytrance Bootleg",
+    "film": "Coke Studio",
+    "youtubeId": "HzMfmeKITaw"
+  },
+  {
+    "title": "Param Sundari",
+    "artist": "Folk Psytrance Flip",
+    "film": "Mimi",
+    "youtubeId": "w4ClQO0FFQg"
+  },
+  {
+    "title": "Pinga (Bajirao Mastani)",
+    "artist": "Classical Psytrance Remix",
+    "film": "Bajirao Mastani",
+    "youtubeId": "KMuOUIfFOPw"
+  },
+  {
+    "title": "Breathless (Shankar Mahadevan)",
+    "artist": "High-BPM Psy Remix",
+    "film": "Shankar Mahadevan",
+    "youtubeId": "oRnUIwQiP4w"
+  },
+  {
+    "title": "Jaan Nisaar",
+    "artist": "Atmospheric Progressive Psy Edit",
+    "film": "Kedarnath",
+    "youtubeId": "RF7srXtwub0"
+  },
+  {
+    "title": "Challa (Jab Tak Hai Jaan)",
+    "artist": "Punjabi Folk Psy Edit",
+    "film": "Jab Tak Hai Jaan",
+    "youtubeId": "b_soLl__eHI"
+  },
+  {
+    "title": "O Saki Saki",
+    "artist": "High-Energy Psytrance Edit",
+    "film": "Batla House",
+    "youtubeId": "IUvPVi-D7ho"
+  },
+  {
+    "title": "Dil Cheez Tujhe Dedi",
+    "artist": "Club Psytrance Remix",
+    "film": "Airlift",
+    "youtubeId": "XKnGKKbK_mo"
+  },
+  {
+    "title": "Tattad Tattad",
+    "artist": "Gujarati Folk Psy Edit",
+    "film": "Goliyon Ki Raasleela",
+    "youtubeId": "sIooFGRBZJY"
+  },
+  {
+    "title": "Tum Hi Ho",
+    "artist": "Deep Progressive Psytrance Remix",
+    "film": "Aashiqui 2",
+    "youtubeId": "WjPueYPwsO8"
+  },
+  {
+    "title": "Ghar Kab Aayoge (Border)",
+    "artist": "Emotional Progressive Psy Edit",
+    "film": "Border",
+    "youtubeId": "oodOj8jx8ds"
+  },
+  {
+    "title": "Main Tera Boyfriend",
+    "artist": "Drop-Heavy Psytrance Flip",
+    "film": "Raabta",
+    "youtubeId": "7uXu91IB3sA"
+  },
+  {
+    "title": "Piya Ghar Aaya (Remix) Live",
+    "artist": "Nusrat Fateh Ali Khan & Asad",
+    "film": "Nusrat Fateh Ali Khan",
+    "youtubeId": "g4xVDns_PO4",
+    "startSeconds": 50
+  }
 ];
 
-const listRemix = [
+const list4: any[] = [
+  {
+    "title": "O Maahi (16D Audio)",
+    "artist": "Arijit Singh, Pritam, Shah Rukh Khan",
+    "film": "Dunki",
+    "youtubeId": "1JaMbp6BK0s",
+    "isSpatial": true
+  },
+  {
+    "title": "Chal Tere Ishq Mein",
+    "artist": "Neeti Mohan, Vishal Mishra, Mithoon",
+    "film": "Gadar 2",
+    "youtubeId": "p_oYiDR6S0E",
+    "isSpatial": true
+  },
+  {
+    "title": "Sahiba x Samjho Na (16D Mashup)",
+    "artist": "Aditya Rikhari / Wishes",
+    "film": "Mashup",
+    "youtubeId": "072mkD_3-dA",
+    "isSpatial": true
+  },
+  {
+    "title": "Qeher (16D Audio)",
+    "artist": "Guru Randhawa",
+    "film": "Dhamaal 4",
+    "isSpatial": true,
+    "youtubeId": "vW8f3DsOUtY"
+  },
+  {
+    "title": "Ban Ja Tu (16D Audio)",
+    "artist": "Charan Preet x Badshah ft. Ahsii",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "mCKbvedLakE"
+  },
+  {
+    "title": "7.7 Magnitude (16D Heavy Trap Drop)",
+    "artist": "Karan Aujla, Ikky",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "Pf311ETArlk"
+  },
+  {
+    "title": "52 Bars (16D Spatial Trap Edit)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "youtubeId": "lU3nWOKRqco",
+    "isSpatial": true
+  },
+  {
+    "title": "Winning Speech (16D Brass & Trap Drop)",
+    "artist": "Karan Aujla, Mxrci",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "vsWxs1tuwDk"
+  },
+  {
+    "title": "Softly (16D Club Trap Remix)",
+    "artist": "Karan Aujla, Ikky",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "cWMxCE2HTag"
+  },
+  {
+    "title": "Low Fade / C Walk (16D Spatial Trap Drop)",
+    "artist": "Karan Aujla, Mxrci",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "3j7bhOvW6jw"
+  },
+  {
+    "title": "Admirin' You (16D Festival Trap Drop)",
+    "artist": "Karan Aujla ft. Preston Pablo",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Players (16D Audio Bass Boost)",
+    "artist": "Karan Aujla & Badshah",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "CeFQO9MQNqs"
+  },
+  {
+    "title": "Levels (16D Hard Drill Bass Drop)",
+    "artist": "Sidhu Moose Wala ft. Sunny Malton",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "tpFljbJxZiw"
+  },
+  {
+    "title": "The Last Ride (16D 90s Boom-Bap / 808 Drop)",
+    "artist": "Sidhu Moose Wala, Wazir Patar",
+    "film": "Single",
+    "youtubeId": "uzEflg9g70o",
+    "isSpatial": true
+  },
+  {
+    "title": "Moosedrilla (16D Aggressive Drill Drop)",
+    "artist": "Sidhu Moose Wala ft. DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "GFUJ5mG_4NI"
+  },
+  {
+    "title": "Devil (16D Heavy Bass Drop)",
+    "artist": "Sidhu Moose Wala, Byg Byrd",
+    "film": "PBX 1",
+    "isSpatial": true,
+    "youtubeId": "lnkXQ3dOruY"
+  },
+  {
+    "title": "G-Shit (16D Audio)",
+    "artist": "Sidhu Moose Wala, The Kidd, Blocknoi Twitch",
+    "film": "Moosetape",
+    "youtubeId": "prwzUKh0ji4",
+    "isSpatial": true
+  },
+  {
+    "title": "Bitch I’m Back (16D Sliding 808 Drop)",
+    "artist": "Sidhu Moose Wala, The Kidd",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "W5NgXKe4SJk"
+  },
+  {
+    "title": "Same Beef (16D Sub-Bass Drop)",
+    "artist": "Sidhu Moose Wala & Bohemia",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "qk2WMmiiVFE"
+  },
+  {
+    "title": "Baller (16D Massive 808 Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "xR3V5Ow2dTI"
+  },
+  {
+    "title": "Cheques (16D Spatial Trap Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "4tywp83zkmk"
+  },
+  {
+    "title": "No Love (16D Reverb & Hard Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "6RrEQJNZwPQ"
+  },
+  {
+    "title": "One Love (16D Sub-Bass Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "0pWsCiBvLOk"
+  },
+  {
+    "title": "Brown Munde (16D Festival Trap Drop)",
+    "artist": "AP Dhillon, Gurinder Gill, Shinda Kahlon",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "VNs_cCtdbPc"
+  },
+  {
+    "title": "Insane (16D 360° Moving Bass)",
+    "artist": "AP Dhillon, Gurinder Gill",
+    "film": "Single",
+    "youtubeId": "TeAF3lCuDUk",
+    "isSpatial": true
+  },
+  {
+    "title": "Excuses (Slowed + 16D Subwoofer Drop)",
+    "artist": "AP Dhillon, Intense",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "vX2cDW8LUWk"
+  },
+  {
+    "title": "Ex Files (16D SMG Drill Drop)",
+    "artist": "BAGGH-E SMG, Farmaan SMG, Big Kay SMG, Mxrci",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "phzMx7cZs04"
+  },
+  {
+    "title": "NYPD (16D Dark Drill Drop)",
+    "artist": "SMG Crew, Farmaan SMG",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "a5RhLw9SqJE"
+  },
+  {
+    "title": "Headliner / Shimmy Shimmy (16D Hard Trap Drop)",
+    "artist": "Navaan Sandhu, Haakam",
+    "film": "Bipolar",
+    "isSpatial": true,
+    "youtubeId": "GE6w7DRyqcM"
+  },
+  {
+    "title": "Kabze (16D Haryanvi Bass Blast)",
+    "artist": "Pintu Pabra, Shiva Choudhary",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "Oyw1Eo21q5k"
+  },
+  {
+    "title": "Naam Chale (16D Audio)",
+    "artist": "Vikram Sarkar",
+    "film": "Thought Music / All Good Music",
+    "isSpatial": true,
+    "youtubeId": "tYKrORILFOg"
+  },
+  {
+    "title": "Jatt Mehkma (16D 808 Trap Drop)",
+    "artist": "Yo Yo Honey Singh",
+    "film": "Glory",
+    "isSpatial": true,
+    "youtubeId": "vrjndQ4BXMU"
+  },
+  {
+    "title": "Moonlight (16D Spatial Bass Edit)",
+    "artist": "Yo Yo Honey Singh ft. Priceless",
+    "film": "Glory",
+    "isSpatial": true,
+    "youtubeId": "JF42RpxAEko"
+  },
+  {
+    "title": "Payal (16D Heavy Drop Mix)",
+    "artist": "Yo Yo Honey Singh ft. Nora Fatehi",
+    "film": "Glory",
+    "isSpatial": true,
+    "youtubeId": "a-PAcmi5Kas"
+  },
+  {
+    "title": "Millionaire (16D Club Trap Drop)",
+    "artist": "Yo Yo Honey Singh",
+    "film": "Glory",
+    "isSpatial": true,
+    "youtubeId": "uiNBqLphO2Y"
+  },
+  {
+    "title": "Blue Eyes (Hardstyle / Sub-Bass Boost 16D)",
+    "artist": "Yo Yo Honey Singh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "NbyHNASFi6U"
+  },
+  {
+    "title": "Love Dose (16D Trap Remix)",
+    "artist": "Yo Yo Honey Singh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "KpaSvprz01g"
+  },
+  {
+    "title": "Dhurandhar - Title Track / Naal Nachna (16D Bass Boosted)",
+    "artist": "Simran Choudhary",
+    "film": "Dhurandhar",
+    "isSpatial": true,
+    "youtubeId": "TFTnJzWRTJ8"
+  },
+  {
+    "title": "KGF Theme: Monster (16D Extreme Bass Blast)",
+    "artist": "Anirudh Ravichander",
+    "film": "KGF Chapter 2",
+    "isSpatial": true,
+    "youtubeId": "R4He_Gcn7cA"
+  },
+  {
+    "title": "Vikram Title Track / Rolex Theme (16D Trap Edit)",
+    "artist": "Anirudh Ravichander",
+    "film": "Vikram",
+    "isSpatial": true,
+    "youtubeId": "IXTqQY-TiYQ"
+  },
+  {
+    "title": "Sher Khul Gaye (16D Dance Mix)",
+    "artist": "Vishal & Shekhar",
+    "film": "Fighter",
+    "isSpatial": true,
+    "youtubeId": "e5Bj4Pf86sc"
+  },
+  {
+    "title": "Ghamand Kar (16D Epic War Drums & Bass)",
+    "artist": "Ajay-Atul",
+    "film": "Tanhaji",
+    "isSpatial": true,
+    "youtubeId": "3qKi29UR2g4"
+  },
+  {
+    "title": "Jee Karda (16D Rock-EDM Hard Drop)",
+    "artist": "Divya Kumar",
+    "film": "Badlapur",
+    "isSpatial": true,
+    "youtubeId": "C-JUAWxDkrA"
+  },
+  {
+    "title": "Deva Deva (Slowed + 16D Sub-Bass Blast)",
+    "artist": "Arijit Singh",
+    "film": "Brahmāstra",
+    "isSpatial": true,
+    "youtubeId": "mNuhKUOD_A0"
+  },
+  {
+    "title": "Makasam",
+    "artist": "KR$NA",
+    "film": "Single",
+    "youtubeId": "cUfTYaVEnoA",
+    "isSpatial": true
+  },
+  {
+    "title": "Prarthana",
+    "artist": "KR$NA ft. Seedhe Maut",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "OKPAPX_fGVw"
+  },
+  {
+    "title": "Khatta Flow",
+    "artist": "Seedhe Maut & KR$NA",
+    "film": "Single",
+    "youtubeId": "9UuwPhr_H2c",
+    "isSpatial": true
+  },
+  {
+    "title": "No Cap (16D Hard Drill Drop)",
+    "artist": "KR$NA",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "PejQbGZraqg"
+  },
+  {
+    "title": "Kahaani",
+    "artist": "Seedhe Maut",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "VEQ-XJWiQMM"
+  },
+  {
+    "title": "Dhundhala (16D Spatial Bass Drop)",
+    "artist": "Yashraj ft. Talwiinder & Dropped Out",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "Xy1Pzu1yZGg"
+  },
+  {
+    "title": "Hola Amigo (16D Aggressive Trap Drop)",
+    "artist": "KR$NA ft. Seedhe Maut & Umair",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "De9VIp37CjY"
+  },
+  {
+    "title": "Saza-E-Maut",
+    "artist": "KR$NA & Raftaar",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "o907r6NsK9s"
+  },
+  {
+    "title": "Boom Shaka",
+    "artist": "Dhanda Nyoliwala ft. KR$NA",
+    "film": "Single",
+    "youtubeId": "7CwwStR5KBI",
+    "isSpatial": true
+  },
+  {
+    "title": "Bohot Sahi",
+    "artist": "J Trix ft. Kr$na",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "n89UlGvWbHs"
+  },
+  {
+    "title": "Fubuki",
+    "artist": "Rawal x Bharg",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "D_VSfZQ55j0"
+  },
+  {
+    "title": "3:59 AM",
+    "artist": "DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "eLSePtRKFhg"
+  },
+  {
+    "title": "Kohinoor",
+    "artist": "DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "8q_eV_RErE4"
+  },
+  {
+    "title": "Tadipaar (16D Hard Trap Drop)",
+    "artist": "MC Stan",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "AKd-3Asq60M"
+  },
+  {
+    "title": "Basti Ka Hasti (16D Subwoofer Drop)",
+    "artist": "MC Stan",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "l0AvFp0_k14"
+  },
+  {
+    "title": "Company (16D Club Trap Drop)",
+    "artist": "Emiway Bantai",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "GuGYYdwcPYw"
+  },
+  {
+    "title": "Machayenge",
+    "artist": "Emiway Bantai",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "7tNPxY_ntEA"
+  },
+  {
+    "title": "Punya Paap",
+    "artist": "DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "4wTTAWjNlDM"
+  },
+  {
+    "title": "Angaar",
+    "artist": "Ikka ft. Raftaar",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "GpjrKSyjXDE"
+  },
+  {
+    "title": "Joota Japani",
+    "artist": "KR$NA",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "vR16Gu-Uq00"
+  },
+  {
+    "title": "Chhabi Kar",
+    "artist": "Emiway Bantai",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "JMncZHRrIBY"
+  },
+  {
+    "title": "Satya",
+    "artist": "DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "rO4DbBjaWJY"
+  },
+  {
+    "title": "So High (16D Original Heavy Bass Drop)",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "u_nTzhCEb1Y",
+    "isSpatial": true
+  },
+  {
+    "title": "295 (16D Spatial Trap Drop)",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "tG6CJKqQQIo",
+    "isSpatial": true
+  },
+  {
+    "title": "They Know",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "RehtHw2Gvfw"
+  },
+  {
+    "title": "Drippy",
+    "artist": "Sidhu Moose Wala x AR Paisley",
+    "film": "Single",
+    "youtubeId": "wyEAqyG1ka0",
+    "isSpatial": true
+  },
+  {
+    "title": "Barota",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "5feboL6vAtg",
+    "isSpatial": true
+  },
+  {
+    "title": "Watch Out",
+    "artist": "Sidhu Moose Wala ft. Sikander Kahlon",
+    "film": "Single",
+    "youtubeId": "RL_SzW2zP6E",
+    "isSpatial": true
+  },
+  {
+    "title": "Dawood",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "UV7kWo3EYdk",
+    "isSpatial": true
+  },
+  {
+    "title": "Selfmade",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "b3o4nN-olpM",
+    "isSpatial": true
+  },
+  {
+    "title": "Bad",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "youtubeId": "FpvIURClDY4",
+    "isSpatial": true
+  },
+  {
+    "title": "0 To 100",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "pHtHF5Amw8Q"
+  },
+  {
+    "title": "Expert Jatt (16D Audio / Subwoofer Bass Test)",
+    "artist": "Nawab",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "LRcFuPUiY2s"
+  },
+  {
+    "title": "Mere Varga (16D Spatial Bass Edit)",
+    "artist": "Kaka",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "No4DviM7WC0"
+  },
+  {
+    "title": "Chitta Kurta (16D 808 Bass Boost Drop)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "nBrBwGgY-Kg"
+  },
+  {
+    "title": "Mexico (16D Moving Bassline Drop)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "Fifv0zWPDlk"
+  },
+  {
+    "title": "East Side Flow (16D Hard Street Drop)",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "jmigBo42low"
+  },
+  {
+    "title": "Signed To God (16D Heavy 808 Trap)",
+    "artist": "Sidhu Moose Wala",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "7DPcBQ1sjX4"
+  },
+  {
+    "title": "Old Skool (16D Hard Bass Drop)",
+    "artist": "Prem Dhillon ft. Sidhu Moose Wala",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "hBlO1i_WTiY"
+  },
+  {
+    "title": "Majhail (16D Rolling Trap Drop)",
+    "artist": "AP Dhillon & Gurinder Gill",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "yzIyufV6ADk"
+  },
+  {
+    "title": "Daku (16D Sub-Bass Blast Drop)",
+    "artist": "Chani Nattan & Inderpal Moga",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "WOdnRhWeHoY"
+  },
+  {
+    "title": "Humnava Mere (16D Slowed Sub-Bass)",
+    "artist": "Jubin Nautiyal",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "TqR_jWfHW4g"
+  },
+  {
+    "title": "Pachtaoge (16D Lo-Fi Deep Bass)",
+    "artist": "Arijit Singh",
+    "film": "Single",
+    "youtubeId": "-z3_pbNeR2Y",
+    "isSpatial": true
+  },
+  {
+    "title": "Mann Bharryaa 2.0 (16D Spatial Drop)",
+    "artist": "B Praak",
+    "film": "Shershaah",
+    "isSpatial": true,
+    "youtubeId": "JEgKJZEYsIU"
+  },
+  {
+    "title": "Bekhayali (16D Metal/Trap Hybrid)",
+    "artist": "Sachet Tandon",
+    "film": "Kabir Singh",
+    "isSpatial": true,
+    "youtubeId": "HTQ2pSM49dc"
+  },
+  {
+    "title": "O Saathi (16D Reverb & Sub-Bass)",
+    "artist": "Atif Aslam",
+    "film": "Baaghi 2",
+    "youtubeId": "YuXLN23ZGQo",
+    "isSpatial": true
+  },
+  {
+    "title": "Nanchaku (16D Heavy Drill Drop)",
+    "artist": "Seedhe Maut ft. MC Stan",
+    "film": "Single",
+    "youtubeId": "7IHqIfpQsBk",
+    "isSpatial": true
+  },
+  {
+    "title": "Mirchi (16D Club Trap Drop)",
+    "artist": "DIVINE ft. Stylo G & MC Altaf",
+    "film": "Single",
+    "youtubeId": "wUmtFSmjKsU",
+    "isSpatial": true
+  },
+  {
+    "title": "52 Bars (16D Beat Switch Drop)",
+    "artist": "Karan Aujla, Ikky",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "4DfVxVeqk2o"
+  },
+  {
+    "title": "Players (16D Heavy Drop Edit)",
+    "artist": "Badshah & Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "CeFQO9MQNqs"
+  },
+  {
+    "title": "White Brown Black (16D Bass Blast Drop)",
+    "artist": "Karan Aujla & Avvy Sra",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "BtQp2U6hJII"
+  },
+  {
+    "title": "Tauba Tauba (16D Trap Beat Drop)",
+    "artist": "Karan Aujla x DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "LK7-_dgAVQE"
+  },
+  {
+    "title": "On Top (16D Aggressive Brass Drop)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "tMgEYaclnQ0"
+  },
+  {
+    "title": "Don't Look (16D Trap Drop)",
+    "artist": "Karan Aujla & Jay Trak",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Jhanjar (16D Heavy Sub-Bass Drop)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "ZnGMxARIxoY"
+  },
+  {
+    "title": "Kya Baat Aa (16D Bass Drop Mix)",
+    "artist": "Karan Aujla",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "x-KbnJ9fvJc"
+  },
+  {
+    "title": "Signed To God (16D Distorted Trap Drop)",
+    "artist": "Sidhu Moose Wala, Steel Banglez & The Kidd",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "7DPcBQ1sjX4"
+  },
+  {
+    "title": "G-Shit (16D Underground Trap Drop)",
+    "artist": "Sidhu Moose Wala ft. Blocknoi Twitch",
+    "film": "Moosetape",
+    "isSpatial": true,
+    "youtubeId": "YPPEZiDF4Xw"
+  },
+  {
+    "title": "These Days (16D Subwoofer Trap Drop)",
+    "artist": "Sidhu Moose Wala ft. Bohemia",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "MZRwvfoc3aU"
+  },
+  {
+    "title": "GOAT (16D Hard Bass Beat Switch)",
+    "artist": "Sidhu Moose Wala, Wazir Patar",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "M8vDwlHigJA"
+  },
+  {
+    "title": "Celebrity Killer (16D UK Drill Drop)",
+    "artist": "Sidhu Moose Wala ft. Tion Wayne",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "MyYAglA_Cdk"
+  },
+  {
+    "title": "IDGAF (16D Hard Trap Drop)",
+    "artist": "Sidhu Moose Wala ft. Morrisson",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "ctVAt8WGwJQ"
+  },
+  {
+    "title": "Hood Anthem (16D Heavy Bass Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "jjiC7PfoIaY"
+  },
+  {
+    "title": "King Shit (16D Heavy Bass Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "d2ofxg8pHfQ"
+  },
+  {
+    "title": "Dior (16D Rolling 808 Drop)",
+    "artist": "Shubh",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "vyrPwLoIYkc"
+  },
+  {
+    "title": "Insane (16D Dark Synth Drop)",
+    "artist": "AP Dhillon & Gurinder Gill",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "cqP8I5aaud8"
+  },
+  {
+    "title": "Spaceship (16D Synthwave Bass Drop)",
+    "artist": "AP Dhillon",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "RatDV50alQE"
+  },
+  {
+    "title": "Foreigns (16D Drill Drop)",
+    "artist": "AP Dhillon & Gurinder Gill",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "jWz5on5N14E"
+  },
+  {
+    "title": "Tere Te (16D Club Drop)",
+    "artist": "AP Dhillon",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "fG70qm6usR8"
+  },
+  {
+    "title": "Dil Nu (16D Heavy Drop Mix)",
+    "artist": "AP Dhillon",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "p2EdDiiVHh4"
+  },
+  {
+    "title": "Wo Noor (16D Trap Bass Drop)",
+    "artist": "AP Dhillon",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "HrcjFEK58ik"
+  },
+  {
+    "title": "Baazigar (16D Hard Trap Drop)",
+    "artist": "DIVINE ft. Armani White",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "sek3FhByr6w"
+  },
+  {
+    "title": "Gunehgar (16D Dark Bass Drop)",
+    "artist": "DIVINE & Hit-Boy",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "shSUDi4b2y8"
+  },
+  {
+    "title": "I Guess (16D Sliding 808 Drop)",
+    "artist": "KR$NA",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "Qg9LxRHLbAk"
+  },
+  {
+    "title": "Big Moves (16D Street Trap Drop)",
+    "artist": "Raga",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "vakdxu3pzBE"
+  },
+  {
+    "title": "Machayenge 4 (16D Heavy Diss Trap Drop)",
+    "artist": "Emiway Bantai",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "CSGFVogqhD0"
+  },
+  {
+    "title": "Chore NCR Aale (16D Haryanvi Drill Drop)",
+    "artist": "MC Square & Paradox",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "ydV_DOwndoI"
+  },
+  {
+    "title": "Jadugar (16D Beat Switch Drop)",
+    "artist": "Paradox",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "IOcGS4D1tM0"
+  },
+  {
+    "title": "California Love (16D West Coast Trap Drop)",
+    "artist": "Cheema Y, Gur Sidhu",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "rSxTumD4kew"
+  },
+  {
+    "title": "Roll Deep (16D Heavy Bass Drop)",
+    "artist": "Tegi Pannu & Sukha",
+    "film": "Single",
+    "youtubeId": "ixgaS-3FfK4",
+    "isSpatial": true
+  },
+  {
+    "title": "8 Parche (16D Trap Remix Drop)",
+    "artist": "Baani Sandhu & Gur Sidhu",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "8WWv5_k8D14"
+  },
+  {
+    "title": "Amplifier (16D Hardstyle / Trap Drop Mix)",
+    "artist": "Imran Khan",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "_pkjkn3qZbM"
+  },
+  {
+    "title": "Bewafa (16D Dubstep / Trap Drop)",
+    "artist": "Imran Khan",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "rGGLINL6xfc"
+  },
+  {
+    "title": "Satisfya (16D Subwoofer Trap Drop)",
+    "artist": "Imran Khan",
+    "film": "Single",
+    "youtubeId": "pfVODjDBFxU",
+    "isSpatial": true
+  },
+  {
+    "title": "President (16D Heavy Trap Drop)",
+    "artist": "Sukha",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "0FnZO-U5oHo"
+  },
+  {
+    "title": "Attraction (16D Spatial Trap Drop)",
+    "artist": "Sukha",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "lDxw_BRqul8"
+  },
+  {
+    "title": "Sheesha / Aakhya Mai Aakh Ghali (16D Bass Drop)",
+    "artist": "Mitta Ror",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "aRNfSqsgrgE"
+  },
+  {
+    "title": "Together (16D Hard Trap Edit)",
+    "artist": "Nirvair Pannu, Deol Harman",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "TuCTTCu0Rvg"
+  },
+  {
+    "title": "Arjan Vailly (16D Hard Drill / Dhol Drop)",
+    "artist": "Bhupinder Babbal",
+    "film": "Animal",
+    "isSpatial": true,
+    "youtubeId": "0hYehuznQac"
+  },
+  {
+    "title": "KGF: Monster Theme (16D Extreme Subwoofer Drop)",
+    "artist": "Anirudh Ravichander",
+    "film": "KGF Chapter 2",
+    "isSpatial": true,
+    "youtubeId": "R4He_Gcn7cA"
+  },
+  {
+    "title": "Rolex Theme / Vikram (16D Distorted 808 Drop)",
+    "artist": "Anirudh Ravichander",
+    "film": "Vikram",
+    "isSpatial": true,
+    "youtubeId": "rBLCjz8as0E"
+  },
+  {
+    "title": "Aaj Ki Raat (16D Club Drop Mix)",
+    "artist": "Sachin-Jigar",
+    "film": "Stree 2",
+    "youtubeId": "Dq4HAzBtslo",
+    "isSpatial": true
+  },
+  {
+    "title": "Aayi Nai (16D Bass Blast Drop)",
+    "artist": "Sachin-Jigar",
+    "film": "Stree 2",
+    "isSpatial": true,
+    "youtubeId": "4Zw3R2CO-MM"
+  },
+  {
+    "title": "Shararat (16D Trap Drop)",
+    "artist": "Simran Choudhary",
+    "film": "Dhurandhar",
+    "isSpatial": true,
+    "youtubeId": "dePa1Wtv88s"
+  },
+  {
+    "title": "Run Down The City - Monica (16D Heavy Bass Drop)",
+    "artist": "Simran Choudhary",
+    "film": "Dhurandhar",
+    "isSpatial": true,
+    "youtubeId": "aT4N7jn2Eww"
+  },
+  {
+    "title": "Pushpa Pushpa (16D Subwoofer Drop)",
+    "artist": "Devi Sri Prasad",
+    "film": "Pushpa 2: The Rule",
+    "isSpatial": true,
+    "youtubeId": "CLP0DfbMEkY"
+  },
+  {
+    "title": "Kala Chashma (16D Trap / Future Bass Drop)",
+    "artist": "Badshah",
+    "film": "Baar Baar Dekho",
+    "isSpatial": true,
+    "youtubeId": "k4yXQkG2s1E"
+  },
+  {
+    "title": "Hookah Bar (16D Psy-Bass / Hardstyle Drop)",
+    "artist": "Himesh Reshammiya",
+    "film": "Khiladi 786",
+    "isSpatial": true,
+    "youtubeId": "b4b1cMVZOUU"
+  },
+  {
+    "title": "Dhan Te Nan (16D Electro Dubstep Drop)",
+    "artist": "Sukhwinder Singh",
+    "film": "Kaminey",
+    "isSpatial": true,
+    "youtubeId": "HvnMMAV8m5A"
+  },
+  {
+    "title": "Aashiqui Mein Teri (16D Hard Bass Drop)",
+    "artist": "Himesh Reshammiya",
+    "film": "36 China Town",
+    "isSpatial": true,
+    "youtubeId": "pYiYSt5pGoU"
+  },
+  {
+    "title": "Zara Zara Touch Me (16D Electro Trap Drop)",
+    "artist": "Monali Thakur",
+    "film": "Race",
+    "isSpatial": true,
+    "youtubeId": "vNlpgORSV7k"
+  },
+  {
+    "title": "Dus Bahane 2.0 (16D Heavy Drop Remix)",
+    "artist": "Vishal & Shekhar",
+    "film": "Baaghi 3",
+    "isSpatial": true,
+    "youtubeId": "mIWpsOjQNDw"
+  },
+  {
+    "title": "Ghungroo (16D Festival EDM Drop)",
+    "artist": "Arijit Singh",
+    "film": "War",
+    "isSpatial": true,
+    "youtubeId": "caySD0OJJvk"
+  },
+  {
+    "title": "Jhoome Jo Pathaan (16D Hard Drop Remix)",
+    "artist": "Arijit Singh",
+    "film": "Pathaan",
+    "isSpatial": true,
+    "youtubeId": "pacvj3n-RLw"
+  },
+  {
+    "title": "Illegal Weapon 2.0 (16D EDM Bass Drop)",
+    "artist": "Jasmine Sandlas",
+    "film": "Street Dancer 3D",
+    "isSpatial": true,
+    "youtubeId": "HLoJnZU3WcQ"
+  },
+  {
+    "title": "Kar Gayi Chull (16D Bounce Trap Drop)",
+    "artist": "Badshah",
+    "film": "Kapoor & Sons",
+    "isSpatial": true,
+    "youtubeId": "Bea019pOw5w"
+  },
+  {
+    "title": "Aankh Marey (16D Hard Bass Drop)",
+    "artist": "Neha Kakkar",
+    "film": "Simmba",
+    "isSpatial": true,
+    "youtubeId": "_KhQT-LGb-4"
+  },
+  {
+    "title": "Six (16D Audio)",
+    "artist": "Guru Randhawa, Kiran Bajwa, Gurjit Gill",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "PEdDI1A17qc"
+  },
+  {
+    "title": "Tauba Tauba (16D Trap Remix)",
+    "artist": "Karan Aujla x DIVINE",
+    "film": "Single",
+    "isSpatial": true,
+    "youtubeId": "LK7-_dgAVQE"
+  }
+];
+
+const listGlobal: any[] = [
+  {
+    "title": "Sandstorm",
+    "artist": "Darude",
+    "film": "Global Anthems",
+    "youtubeId": "UdWRghH6EzY",
+    "isGlobal": true
+  },
+  {
+    "title": "Better Off Alone",
+    "artist": "Alice Deejay",
+    "film": "Global Anthems",
+    "youtubeId": "Ck0LO6b6OQc",
+    "isGlobal": true
+  },
+  {
+    "title": "Adagio for Strings",
+    "artist": "Tiësto",
+    "film": "Global Anthems",
+    "youtubeId": "EiS9isTa82Y",
+    "isGlobal": true
+  },
+  {
+    "title": "Children",
+    "artist": "Robert Miles",
+    "film": "Global Anthems",
+    "youtubeId": "CC5ca6Hsb2Q",
+    "isGlobal": true
+  },
+  {
+    "title": "Insomnia",
+    "artist": "Faithless",
+    "film": "Global Anthems",
+    "youtubeId": "f2sv98d0gS4",
+    "isGlobal": true
+  },
+  {
+    "title": "9 PM (Till I Come)",
+    "artist": "ATB",
+    "film": "Global Anthems",
+    "youtubeId": "QFGMQZyvnmY",
+    "isGlobal": true
+  },
+  {
+    "title": "In and Out of Love",
+    "artist": "Armin van Buuren ft. Sharon den Adel",
+    "film": "Global Anthems",
+    "youtubeId": "krHqVGz_o18",
+    "isGlobal": true
+  },
+  {
+    "title": "Sun & Moon",
+    "artist": "Above & Beyond ft. Richard Bedford",
+    "film": "Global Anthems",
+    "youtubeId": "ll5ykbAumD4",
+    "isGlobal": true
+  },
+  {
+    "title": "Silence (Tiësto's In Search of Sunrise Remix)",
+    "artist": "Delerium ft. Sarah McLachlan",
+    "film": "Global Anthems",
+    "youtubeId": "ugsQypXvJQw",
+    "isGlobal": true
+  },
+  {
+    "title": "Concrete Angel",
+    "artist": "Gareth Emery ft. Christina Novelli",
+    "film": "Global Anthems",
+    "youtubeId": "f3GRM0Yz7wM",
+    "isGlobal": true
+  },
+  {
+    "title": "Miracle",
+    "artist": "Calvin Harris & Ellie Goulding",
+    "film": "Global Anthems",
+    "youtubeId": "961v0E3b01g",
+    "isGlobal": true
+  },
+  {
+    "title": "For an Angel (PvD E-Werk Club Mix)",
+    "artist": "Paul van Dyk",
+    "film": "Global Anthems",
+    "youtubeId": "evPhEkujDxw",
+    "isGlobal": true
+  },
+  {
+    "title": "Ecstasy",
+    "artist": "ATB",
+    "film": "Global Anthems",
+    "youtubeId": "LI_3Jsyuma4",
+    "isGlobal": true
+  },
+  {
+    "title": "As The Rush Comes (Gabriel & Dresden Sweeping Strings Mix)",
+    "artist": "Motorcycle",
+    "film": "Global Anthems",
+    "youtubeId": "TwNV5ytRh5I",
+    "isGlobal": true
+  },
+  {
+    "title": "Café Del Mar (Three 'N One Remix)",
+    "artist": "Energy 52",
+    "film": "Global Anthems",
+    "youtubeId": "yyvp_nCM15Q",
+    "isGlobal": true
+  },
+  {
+    "title": "Castles in the Sky",
+    "artist": "Ian Van Dahl ft. Marsha",
+    "film": "Global Anthems",
+    "youtubeId": "npYyiwpPR2I",
+    "isGlobal": true
+  },
+  {
+    "title": "This Is What It Feels Like",
+    "artist": "Armin van Buuren ft. Trevor Guthrie",
+    "film": "Global Anthems",
+    "youtubeId": "HukyFUAVuGo",
+    "isGlobal": true
+  },
+  {
+    "title": "Saltwater",
+    "artist": "Chicane ft. Moya Brennan",
+    "film": "Global Anthems",
+    "youtubeId": "UZmg8NnVe74",
+    "isGlobal": true
+  },
+  {
+    "title": "Waiting",
+    "artist": "Dash Berlin ft. Emma Hewitt",
+    "film": "Global Anthems",
+    "youtubeId": "pH_H1cfttVw",
+    "isGlobal": true
+  },
+  {
+    "title": "Exploration of Space",
+    "artist": "Cosmic Gate",
+    "film": "Global Anthems",
+    "isGlobal": true,
+    "youtubeId": "NE2AvbROl5k"
+  },
+  {
+    "title": "Satellite",
+    "artist": "OceanLab (Above & Beyond)",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "GrOy-0wBlGo"
+  },
+  {
+    "title": "Shivers",
+    "artist": "Armin van Buuren ft. Susana",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "zCmDEnN8gkw"
+  },
+  {
+    "title": "Traffic",
+    "artist": "Tiësto",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "cSW3y98ObQY"
+  },
+  {
+    "title": "Southern Sun (Tiësto Remix)",
+    "artist": "Paul Oakenfold",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "UgiqJxYCuh8"
+  },
+  {
+    "title": "Carte Blanche",
+    "artist": "Veracocha",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "L0KokdO6WR4"
+  },
+  {
+    "title": "Out of the Blue",
+    "artist": "System F (Ferry Corsten)",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "Qgx_V0So0qk"
+  },
+  {
+    "title": "Airwave",
+    "artist": "Rank 1",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "reimbkBhL1A"
+  },
+  {
+    "title": "Take Me Away (Into the Night)",
+    "artist": "4 Strings",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "hBc3zfexMrk"
+  },
+  {
+    "title": "Toca Me / Toca's Miracle",
+    "artist": "Fragma",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "On A Good Day",
+    "artist": "Above & Beyond pres. OceanLab",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "LthW0Zt4y8s"
+  },
+  {
+    "title": "Till the Sky Falls Down",
+    "artist": "Dash Berlin",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "Tr7C0nBHOHI"
+  },
+  {
+    "title": "Flaming June",
+    "artist": "BT",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "ic-NqkDTROY"
+  },
+  {
+    "title": "Nothing But You",
+    "artist": "Paul van Dyk ft. Hemstock & Jennings",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "BuxM6OQKIOw"
+  },
+  {
+    "title": "Silence",
+    "artist": "Tiësto",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "LqCcdtM7Qe4"
+  },
+  {
+    "title": "Universal Nation",
+    "artist": "Push",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "mxGMfKtqi8o"
+  },
+  {
+    "title": "Gouryella",
+    "artist": "Gouryella (Ferry Corsten & Tiësto)",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "0uAt2SDDYJM"
+  },
+  {
+    "title": "1998 (Paul van Dyk Remix)",
+    "artist": "Binary Finary",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "E_CFtuh81DM"
+  },
+  {
+    "title": "Big Sky (Agnelli & Nelson Remix)",
+    "artist": "John O'Callaghan ft. Audrey Gallagher",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "6xWKFSrjSbI"
+  },
+  {
+    "title": "We Control The Sunlight",
+    "artist": "Aly & Fila ft. Jwaydan",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "Ad_eViMKuF8"
+  },
+  {
+    "title": "Man On The Run",
+    "artist": "Dash Berlin with Cerf, Mitiska & Jaren",
+    "film": "Vocal & Melodic",
+    "isGlobal": true,
+    "youtubeId": "C7Qsj6MGVHE"
+  },
+  {
+    "title": "Xpander",
+    "artist": "Sasha",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "HRqPeKbYoGw"
+  },
+  {
+    "title": "Offshore",
+    "artist": "Chicane",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "7BYTIATwb0E"
+  },
+  {
+    "title": "Communication",
+    "artist": "Armin van Buuren",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "bn1ycNxQMvk"
+  },
+  {
+    "title": "Greece 2000",
+    "artist": "Three Drives on a Vinyl",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "25BGvZ-SSro"
+  },
+  {
+    "title": "Tuvan",
+    "artist": "Gaia",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "4dBZ5_jPqX0"
+  },
+  {
+    "title": "Be Your Sound",
+    "artist": "Cosmic Gate ft. Emma Hewitt",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "5MBL0eJrMCo"
+  },
+  {
+    "title": "Good For Me",
+    "artist": "Above & Beyond ft. Zoë Johnston",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "yUOWsl7TDtY"
+  },
+  {
+    "title": "Lethal Industry",
+    "artist": "Tiësto",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "f-xKKx5eVZg"
+  },
+  {
+    "title": "The Age of Love (Jam & Spoon Remix)",
+    "artist": "Age of Love",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "0YVvcTIGy40"
+  },
+  {
+    "title": "The New World",
+    "artist": "Markus Schulz",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "BMTK8OiUWIg"
+  },
+  {
+    "title": "Helsinki Scorchin'",
+    "artist": "Super8 & Tab",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Burned With Desire (Rising Star Vocal Mix)",
+    "artist": "Armin van Buuren ft. Justine Suissa",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "N3KFopyDs64"
+  },
+  {
+    "title": "Seven Cities (Solarstone Atlantis Mix)",
+    "artist": "Solarstone",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "awxQuhay_mo"
+  },
+  {
+    "title": "RAMsterdam (Jorn van Deynhoven Remix)",
+    "artist": "RAM",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "xBMwMjGPmaM"
+  },
+  {
+    "title": "Beautiful",
+    "artist": "Ferry Corsten",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "WdGwqUtJ03o"
+  },
+  {
+    "title": "Alone Tonight",
+    "artist": "Above & Beyond",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "ur1F0eb2VL8"
+  },
+  {
+    "title": "Are You Fine?",
+    "artist": "Kyau & Albert",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "tWsS8XSIL0Q"
+  },
+  {
+    "title": "Out of the Sky",
+    "artist": "Lange ft. Sarah Howells",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "lLjsxzCcTwo"
+  },
+  {
+    "title": "Faces",
+    "artist": "Andy Moor & Ashley Wallbridge ft. Meighan Nealon",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "ea0Lr55TOds"
+  },
+  {
+    "title": "Strange World (2000 Remake)",
+    "artist": "Push",
+    "film": "Golden Era & Progressive",
+    "isGlobal": true,
+    "youtubeId": "n4Hh2G_Ygh8"
+  },
+  {
+    "title": "Great Spirit",
+    "artist": "Vini Vici & Armin van Buuren ft. Hilight Tribe",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "yo4pmauhugo"
+  },
+  {
+    "title": "Free Tibet (Vini Vici Remix)",
+    "artist": "Vini Vici",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "0lBjcaMokvo"
+  },
+  {
+    "title": "Deep Jungle Walk",
+    "artist": "Astrix",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "lIuEuJvKos4"
+  },
+  {
+    "title": "Anahera",
+    "artist": "Ferry Corsten pres. Gouryella",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "7ZMZHbAKvGA"
+  },
+  {
+    "title": "United",
+    "artist": "Armin van Buuren vs. Vini Vici",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "PVurTWZu7VU"
+  },
+  {
+    "title": "U (Bryan Kearney Remix)",
+    "artist": "Gareth Emery ft. Bo Bruce",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "jF7qGaKKD4M"
+  },
+  {
+    "title": "Thing Called Love",
+    "artist": "Above & Beyond ft. Richard Bedford",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "ZgRnLM9Vi24"
+  },
+  {
+    "title": "Dark Warrior",
+    "artist": "Andrew Rayel",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "CE4TdjQK_V4"
+  },
+  {
+    "title": "Chakra",
+    "artist": "W&W & Vini Vici",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "Dx_qGfJq_Go"
+  },
+  {
+    "title": "Through Your Eyes",
+    "artist": "Giuseppe Ottaviani",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "2Zzpp9Ktb3k"
+  },
+  {
+    "title": "43",
+    "artist": "ilan Bluestone",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "exFy7ppnFkA"
+  },
+  {
+    "title": "Waiting for the Night",
+    "artist": "Armin van Buuren ft. Fiora",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "SJ_tpbriGpE"
+  },
+  {
+    "title": "Pikachu",
+    "artist": "Key4050 (John O'Callaghan & Bryan Kearney)",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "B2wxoZL3IaM"
+  },
+  {
+    "title": "Visions",
+    "artist": "MaRLo",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "mTemgyKTmhw"
+  },
+  {
+    "title": "Lost Language",
+    "artist": "Aly & Fila",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "VqqnRKA1kxM"
+  },
+  {
+    "title": "Sirens of the Sea (Above & Beyond Club Mix)",
+    "artist": "OceanLab",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "RjWLs8pDCYw"
+  },
+  {
+    "title": "Opus",
+    "artist": "Eric Prydz",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "CzqJelgEBsA"
+  },
+  {
+    "title": "L.E.D. There Be Light",
+    "artist": "Rank 1",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "VwxnB4kL0nM"
+  },
+  {
+    "title": "Sun In Your Eyes",
+    "artist": "Above & Beyond",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "PCKSLa1tsAk"
+  },
+  {
+    "title": "Keep Your Dreams Alive",
+    "artist": "Giuseppe Ottaviani",
+    "film": "Modern & Festival",
+    "isGlobal": true,
+    "youtubeId": "yAw1nLVxFs8"
+  },
+  {
+    "title": "Komodo (Save a Soul)",
+    "artist": "Mauro Picotto",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "hem6LPHa5zQ"
+  },
+  {
+    "title": "Bellissima",
+    "artist": "DJ Quicksilver",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "YQQokcoOzeY"
+  },
+  {
+    "title": "Ayla (Veracocha / Taucher Remix)",
+    "artist": "Ayla",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "LtRsf9wAc4E"
+  },
+  {
+    "title": "Heaven Scent",
+    "artist": "Bedrock",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "iqh5bMu9Jmo"
+  },
+  {
+    "title": "Mysterious Times ft. Tina Cousins",
+    "artist": "Sash!",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "y1T1dS-bh4s"
+  },
+  {
+    "title": "Protect Your Mind (Braveheart)",
+    "artist": "DJ Sakin & Friends",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "xz2Yq02HX4E"
+  },
+  {
+    "title": "Lizard",
+    "artist": "Mauro Picotto",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "B2jPPGTtgC0"
+  },
+  {
+    "title": "Madagascar (Ferry Corsten Remix)",
+    "artist": "Art of Trance",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "uuH_nYKXqHM"
+  },
+  {
+    "title": "Love Shines Through",
+    "artist": "Chakra",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "zRayl-nl8rs"
+  },
+  {
+    "title": "The Theme",
+    "artist": "Jurgen Vries",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "srwCUS8jiXw"
+  },
+  {
+    "title": "Beachball",
+    "artist": "Nalin & Kane",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "FwXskdcCRIk"
+  },
+  {
+    "title": "Beautiful",
+    "artist": "Matt Darey ft. Marcella Woods",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "WdGwqUtJ03o"
+  },
+  {
+    "title": "What Ya Got 4 Me",
+    "artist": "Signum",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "NnI5upfK6mA"
+  },
+  {
+    "title": "Fire Wire",
+    "artist": "Cosmic Gate",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "jlwPNroYv1U"
+  },
+  {
+    "title": "Blue Fear",
+    "artist": "Armin van Buuren",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "vfgnh7Thp-A"
+  },
+  {
+    "title": "The Spell (Solarstone Pure Mix)",
+    "artist": "Solarstone & Clare Stagg",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "-bAo69SJwFk"
+  },
+  {
+    "title": "Anthem",
+    "artist": "Filo & Peri ft. Eric Lumiere",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "gDMfAiX7zRk"
+  },
+  {
+    "title": "Elektra",
+    "artist": "Super8 & Tab",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "fBn8F9VIbDU"
+  },
+  {
+    "title": "Happiness Happening",
+    "artist": "Lost Witness",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "jYsfR7e4gHI"
+  },
+  {
+    "title": "Stella",
+    "artist": "Jam & Spoon",
+    "film": "Heritage & Club Classics",
+    "isGlobal": true,
+    "youtubeId": "zLy--cFj6W0"
+  }
+];
+
+const listGoa: any[] = [
+  {
+    "title": "Mahadeva",
+    "artist": "Astral Projection",
+    "film": "Iconic Anthems",
+    "youtubeId": "Ix0lduF1Co4",
+    "isGoa": true
+  },
+  {
+    "title": "Free Tibet (Vini Vici Remix)",
+    "artist": "Hilight Tribe",
+    "film": "Iconic Anthems",
+    "youtubeId": "0lBjcaMokvo",
+    "isGoa": true
+  },
+  {
+    "title": "Deep Jungle Walk",
+    "artist": "Astrix",
+    "film": "Iconic Anthems",
+    "youtubeId": "lIuEuJvKos4",
+    "isGoa": true
+  },
+  {
+    "title": "Shiva’s India (Outsiders Remix)",
+    "artist": "1200 Micrograms",
+    "film": "Iconic Anthems",
+    "youtubeId": "qJtWEhl5smA",
+    "isGoa": true
+  },
+  {
+    "title": "Great Spirit",
+    "artist": "Armin van Buuren vs. Vini Vici ft. Hilight Tribe",
+    "film": "Iconic Anthems",
+    "youtubeId": "yo4pmauhugo",
+    "isGoa": true
+  },
+  {
+    "title": "L.S.D.",
+    "artist": "Hallucinogen",
+    "film": "Iconic Anthems",
+    "youtubeId": "iIsVzSMRw8E",
+    "isGoa": true
+  },
+  {
+    "title": "Mahishasura Mardini (Droplex & Psy Edit)",
+    "artist": "Shanti People",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "Qz4LC9Pmo7Y"
+  },
+  {
+    "title": "Becoming Insane",
+    "artist": "Infected Mushroom",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "wVwQYSVNJVM"
+  },
+  {
+    "title": "Kabalah",
+    "artist": "Astral Projection",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "mvF8zruukjU"
+  },
+  {
+    "title": "Teleport",
+    "artist": "Man With No Name",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "efc7WLCVWmw"
+  },
+  {
+    "title": "Chakra",
+    "artist": "Vini Vici & W&W",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "Dx_qGfJq_Go"
+  },
+  {
+    "title": "Pranava",
+    "artist": "Astrix & Ace Ventura",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "0JEmUHq2QNw"
+  },
+  {
+    "title": "Universe Inside Me",
+    "artist": "Liquid Soul & Vini Vici",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "yvBK1rSUzTc"
+  },
+  {
+    "title": "Pistolero",
+    "artist": "Juno Reactor",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "wZqNUo6y52Q"
+  },
+  {
+    "title": "Parvati Valley",
+    "artist": "Blastoyz",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "FHUo4NQPaxs"
+  },
+  {
+    "title": "The Prayer",
+    "artist": "Electric Universe",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "Jtb1THFjA2o"
+  },
+  {
+    "title": "Tandava",
+    "artist": "Shanti People",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "iiTeiOdAJSQ"
+  },
+  {
+    "title": "Smashing the Opponent",
+    "artist": "Infected Mushroom",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "HDs5OlRLr9M"
+  },
+  {
+    "title": "People Can Fly",
+    "artist": "Astral Projection",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "kJSyBUZshfs"
+  },
+  {
+    "title": "Neurochemistry",
+    "artist": "Ace Ventura & Liquid Soul",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "gOKopmV4rFI"
+  },
+  {
+    "title": "Wire-Tap",
+    "artist": "GMS & Vini Vici",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "A_70gFGTCR4"
+  },
+  {
+    "title": "Ayahuasca",
+    "artist": "1200 Micrograms",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "5kom6v1jNkM"
+  },
+  {
+    "title": "Sahara",
+    "artist": "Astrix",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "5_ehdwsv5BI"
+  },
+  {
+    "title": "Heavyweight",
+    "artist": "Infected Mushroom",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "h4YvkZeLrjs"
+  },
+  {
+    "title": "Bungee Jump",
+    "artist": "Captain Hook & Astrix",
+    "film": "Iconic Anthems",
+    "isGoa": true,
+    "youtubeId": "tIGH8nWZXOQ"
+  },
+  {
+    "title": "Floor-Essence",
+    "artist": "Man With No Name",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "S6DiMtRD70Y"
+  },
+  {
+    "title": "Let’s Turn On",
+    "artist": "Doof",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "_IUtwc1SzTA"
+  },
+  {
+    "title": "Geomantik",
+    "artist": "Prana",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "MFd7_zTci_g"
+  },
+  {
+    "title": "Liquid Sun",
+    "artist": "Astral Projection",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "0KYdyzYuKAg"
+  },
+  {
+    "title": "Der Damm",
+    "artist": "Hallucinogen",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "-v2WPraVyhA"
+  },
+  {
+    "title": "Canopy",
+    "artist": "Total Eclipse",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "oNH3akWXaV8"
+  },
+  {
+    "title": "Alcyone",
+    "artist": "Pleiadians",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "FYAGSQIt1jY"
+  },
+  {
+    "title": "Sugar Rush",
+    "artist": "Man With No Name",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "-neNVbU2KpY"
+  },
+  {
+    "title": "High Energy Protons",
+    "artist": "Juno Reactor",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "HeD-hpqaDfk"
+  },
+  {
+    "title": "Searching For UFOs",
+    "artist": "Astral Projection",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "rcs31PkDWGM"
+  },
+  {
+    "title": "Cor",
+    "artist": "Green Nuns of the Revolution",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "rGsouPH0ayQ"
+  },
+  {
+    "title": "Dansul Ielelor",
+    "artist": "E-Mantra",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "zHx-N0EOh6Y"
+  },
+  {
+    "title": "A Bit of Goa",
+    "artist": "Koxbox",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "9M5ShTEE-UU"
+  },
+  {
+    "title": "Cannabanoid",
+    "artist": "Cosmosis",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "ilWeV9isl5o"
+  },
+  {
+    "title": "X-File",
+    "artist": "Chakra & Edi Mis",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "scOydQ2QWU4"
+  },
+  {
+    "title": "Deep Space 5D",
+    "artist": "Dimension 5",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "ixP7HP2hwt0"
+  },
+  {
+    "title": "Trash Shiva",
+    "artist": "Transwave",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "VyiPWKJh4kg"
+  },
+  {
+    "title": "Epilogue",
+    "artist": "Asia 2001",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "0mVFOMSY4nI"
+  },
+  {
+    "title": "Magnetic Activity",
+    "artist": "MFG (Message From God)",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "KXl730YLodc"
+  },
+  {
+    "title": "Trip Tonite",
+    "artist": "Etnica",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "UEkeptXz63A"
+  },
+  {
+    "title": "Camel",
+    "artist": "Indoor",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "cNlPs0v6b34"
+  },
+  {
+    "title": "Kreak",
+    "artist": "Space Cat",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "P9VlJ4VOF84"
+  },
+  {
+    "title": "Bust a Move",
+    "artist": "Infected Mushroom",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "J4mulG7cglQ"
+  },
+  {
+    "title": "Divine Moments of Truth (D.M.T.)",
+    "artist": "Shpongle",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "8CXhYAiPIZY"
+  },
+  {
+    "title": "Forest of the Saints (Live Ritual Edit)",
+    "artist": "Goa Gil",
+    "film": "Golden Era & Acid",
+    "isGoa": true,
+    "youtubeId": "6Af0I6BVQBo"
+  },
+  {
+    "title": "Shankara",
+    "artist": "Shanti People",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "iiTeiOdAJSQ"
+  },
+  {
+    "title": "Karma",
+    "artist": "Vini Vici & Reality Test ft. Shanti People",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "Z_7JKe7Idao"
+  },
+  {
+    "title": "Kabalah",
+    "artist": "Blastoyz & Reality Test",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "83q0276ovCQ"
+  },
+  {
+    "title": "Sem Chão",
+    "artist": "Mandragora",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "EL037NUroYY"
+  },
+  {
+    "title": "1000 Sterne",
+    "artist": "Neelix",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "wAeml8gaHoI"
+  },
+  {
+    "title": "Artcore",
+    "artist": "Astrix",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "pzS3ipQIQDk"
+  },
+  {
+    "title": "Wake and Bake",
+    "artist": "Avalon & Laughing Buddha",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "mZgQgcxLLd4"
+  },
+  {
+    "title": "Shankara",
+    "artist": "Hilight Tribe",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "hLEn0yQFtrs"
+  },
+  {
+    "title": "Key to the Universe",
+    "artist": "Sesto Sento",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "y1vKzg7FSAc"
+  },
+  {
+    "title": "Stomping Ground",
+    "artist": "Ace Ventura",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "SBX9gyNbnLU"
+  },
+  {
+    "title": "Adhana",
+    "artist": "Vini Vici & Astrix",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "Aooy7iw-7cY"
+  },
+  {
+    "title": "Cherokee",
+    "artist": "Neelix",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "U0g0GaZtAEo"
+  },
+  {
+    "title": "Hit and Run",
+    "artist": "Skazi",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "FvHjjhnslNg"
+  },
+  {
+    "title": "Mama India",
+    "artist": "Technical Hitch",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "xEsIkXk5hmo"
+  },
+  {
+    "title": "A Journey in Trance",
+    "artist": "Talamasca",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "XPDzEyORJVI"
+  },
+  {
+    "title": "Life Frequency",
+    "artist": "Liquid Soul & Outsiders",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "X-RyuuXhyiU"
+  },
+  {
+    "title": "Awake",
+    "artist": "Astrix & Tristan",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "zAm1OJ8Lvgw"
+  },
+  {
+    "title": "Rumble on the Jungle",
+    "artist": "Tristan & Avalon",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "LE_FTeHBLrA"
+  },
+  {
+    "title": "Step Aside",
+    "artist": "Blastoyz",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "BaE5gLZ83xs"
+  },
+  {
+    "title": "Spitfire",
+    "artist": "Infected Mushroom",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "U4XOZeJb2ZQ"
+  },
+  {
+    "title": "The Tree",
+    "artist": "Vini Vici & WHITENO1SE",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "0lBjcaMokvo"
+  },
+  {
+    "title": "God Is God",
+    "artist": "Juno Reactor",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "v8LY2VgiikE"
+  },
+  {
+    "title": "Raya",
+    "artist": "Outsiders & Volcano",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "rP7YmmZuhD4"
+  },
+  {
+    "title": "The Alien Jams",
+    "artist": "Ajja & Cosmosis",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "R3T_9NdqlsI"
+  },
+  {
+    "title": "Prime Time",
+    "artist": "Ace Ventura & Symbolic",
+    "film": "Vedic & Tribal",
+    "isGoa": true,
+    "youtubeId": "2BHnthbpk2I"
+  },
+  {
+    "title": "We Are Intelligent",
+    "artist": "Laughing Buddha",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "MCX4YqcW7kU"
+  },
+  {
+    "title": "Deep Mind",
+    "artist": "Tristan",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "2SF_ejQkVJg"
+  },
+  {
+    "title": "Tumbleweed",
+    "artist": "Dickster & Burn in Noise",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "a6H7hcIjuVU"
+  },
+  {
+    "title": "Duck Fuzz",
+    "artist": "Fungus Funk",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "gIZg37e2cpo"
+  },
+  {
+    "title": "The Mushroom Network",
+    "artist": "Earthling & Virtual Light",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "1ZeIfg0bT6c"
+  },
+  {
+    "title": "Navigate",
+    "artist": "Filteria",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "-vxGiH1wSUU"
+  },
+  {
+    "title": "Cyclone in Your Heart",
+    "artist": "Crossing Mind",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "4RA-q6xMjMo"
+  },
+  {
+    "title": "Just Another Jam",
+    "artist": "Sonic Species",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "GAjw9ShIsEk"
+  },
+  {
+    "title": "Source of Light",
+    "artist": "Braincell",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "n4HPc8757qo"
+  },
+  {
+    "title": "Vuuv Festival Anthem",
+    "artist": "Burn in Noise",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "NwRUREdM1mg"
+  },
+  {
+    "title": "Orange Sunshine",
+    "artist": "Hypnocoustics",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "IWanz09wk2c"
+  },
+  {
+    "title": "Origin",
+    "artist": "Captain Hook",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "wfEUjkhqXeE"
+  },
+  {
+    "title": "Cyber Space",
+    "artist": "Symbolic & Waio",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "hggG_TARAjs"
+  },
+  {
+    "title": "Floating Waves",
+    "artist": "Protonica",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "jWwKQVJexP0"
+  },
+  {
+    "title": "Dragonfly",
+    "artist": "Zen Mechanics & Egorythmia",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "DufGGaNC3sY"
+  },
+  {
+    "title": "The Seed",
+    "artist": "Ritmo & Sphera",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "N2y948aWD2c"
+  },
+  {
+    "title": "Salvia Divinorum",
+    "artist": "E-Clip",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "kwZq4yaaCfE"
+  },
+  {
+    "title": "Flying Objects",
+    "artist": "Faders",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "gtk2wpmtcvc"
+  },
+  {
+    "title": "Mantra",
+    "artist": "Electric Universe",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "Oo0o84-TJTU"
+  },
+  {
+    "title": "Million Little Pieces",
+    "artist": "Freedom Fighters & Ryanosaurus",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "Ng317420V3k"
+  },
+  {
+    "title": "Whispering Gallery",
+    "artist": "Arjuna",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "MBSfZ9O96fc"
+  },
+  {
+    "title": "Rings of Fairy",
+    "artist": "Atriohm",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "ZCI1rzPp5J4"
+  },
+  {
+    "title": "Acid Country",
+    "artist": "Dust",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "okYLtLtGXtA"
+  },
+  {
+    "title": "Ritual of the Elements",
+    "artist": "Parasense",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "AxjFWf2IMDo"
+  },
+  {
+    "title": "Spirit of the Forest",
+    "artist": "Kindzadza",
+    "film": "Twilight Underground",
+    "isGoa": true,
+    "youtubeId": "t-D9Iu2JnTY"
+  }
+];
+
+const listRemix: any[] = [
   {
     "title": "Mera Yaar x Alif Allah",
     "artist": "Extended Sufi House Mix (DJ Abhii Edit)",
@@ -3059,116 +5863,248 @@ const listRemix = [
   }
 ];
 
-
-
-const listKTrance = [
-  { title: "Uff Teri Adaa x I Adore You | SORVV Afrohouse Flip", artist: "Hugel | Shankar Mahadevan | 2025 (SORVV)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "jaoHIhutbgU"
+const listKTrance: any[] = [
+  {
+    "title": "Uff Teri Adaa x I Adore You | SORVV Afrohouse Flip",
+    "artist": "Hugel | Shankar Mahadevan | 2025 (SORVV)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "jaoHIhutbgU"
   },
-  { title: "Sahiba X Titanium (SORVV Afro Edit)", artist: "Jasleen Royal | Sia | BollyTech (SORVV)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "LuvExjG_lsQ"
+  {
+    "title": "Sahiba X Titanium (SORVV Afro Edit)",
+    "artist": "Jasleen Royal | Sia | BollyTech (SORVV)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "LuvExjG_lsQ"
   },
-  { title: "Arjan Vailley X Jatt Don't Care X Alameyo X Anchor Point", artist: "Krautek & Ryan Nogar Mashup (Krautek)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "ahaUNhScopE"
+  {
+    "title": "Arjan Vailley X Jatt Don't Care X Alameyo X Anchor Point",
+    "artist": "Krautek & Ryan Nogar Mashup (Krautek)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "ahaUNhScopE"
   },
-  { title: "Alameyo X Jee Karda X Jatt Don't Care (Aarmash Edit)", artist: "AARMASH", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "ahaUNhScopE"
+  {
+    "title": "Alameyo X Jee Karda X Jatt Don't Care (Aarmash Edit)",
+    "artist": "AARMASH",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "ahaUNhScopE"
   },
-  { title: "Papi (Bhabi)", artist: "Eden Shalev", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "0RazWJu8qog"
+  {
+    "title": "Papi (Bhabi)",
+    "artist": "Eden Shalev",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "0RazWJu8qog"
   },
-  { title: "Papi x Aria x Tujhe Bhula Diya // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "C6J9VTcBkEw"
+  {
+    "title": "Papi x Aria x Tujhe Bhula Diya // Flipsyd",
+    "artist": "FLIPSYD",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "C6J9VTcBkEw"
   },
-  { title: "Tenu Leke x Say What | Dj Ganesh | Afro Bollywood", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true, youtubeId: "00LKC7mKz6Y" },
-  { title: "CHAR BAJ GAYE X ALAMEYO (MASHUP)", artist: "D-Rain", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "EgiRj6DNqvE"
+  {
+    "title": "Tenu Leke x Say What | Dj Ganesh | Afro Bollywood",
+    "artist": "Dj Ganesh Bombay",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "00LKC7mKz6Y"
   },
-  { title: "Adore You x Tujhe Bhula Diya (Afro Bollywood Mashup)", artist: "Vishal Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "Q7mtgh-wCMM"
+  {
+    "title": "CHAR BAJ GAYE X ALAMEYO (MASHUP)",
+    "artist": "D-Rain",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "EgiRj6DNqvE"
   },
-  { title: "FE!N x Paisa Hai Toh (DJ Suketu Mashup)", artist: "DJ Suketu", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "DEc4ovyG3Ww"
+  {
+    "title": "Adore You x Tujhe Bhula Diya (Afro Bollywood Mashup)",
+    "artist": "Vishal Shekhar | DJ Ganesh (Dj Ganesh Bombay)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "Q7mtgh-wCMM"
   },
-  { title: "Move With Woh Lamhe | Dj Ganesh | Afro House", artist: "Dj Ganesh Bombay", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "ZYjbzUSR3gc"
+  {
+    "title": "FE!N x Paisa Hai Toh (DJ Suketu Mashup)",
+    "artist": "DJ Suketu",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "DEc4ovyG3Ww"
   },
-  { title: "Big Dawgs x Karan Aujla (Trapperx Mashup)", artist: "Hanumankind | Karan Aujla | Trapperx (Trapperx)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "ggAveCJfdBU"
+  {
+    "title": "Move With Woh Lamhe | Dj Ganesh | Afro House",
+    "artist": "Dj Ganesh Bombay",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "ZYjbzUSR3gc"
   },
-  { title: "Vem Dançar Kuduro", artist: "Lucenzo", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "uv9CjsQNtf4"
+  {
+    "title": "Big Dawgs x Karan Aujla (Trapperx Mashup)",
+    "artist": "Hanumankind | Karan Aujla | Trapperx (Trapperx)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "ggAveCJfdBU"
   },
-  { title: "Jimmy Jimmy Jimmy Aaja (BollyTech Mix)", artist: "Deepanshu Ruhela, Priyank, Parvati Khan & I", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "2FfTO-Bu-nY"
+  {
+    "title": "Vem Dançar Kuduro",
+    "artist": "Lucenzo",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "uv9CjsQNtf4"
   },
-  { title: "CHAR BAJ GAYE (BOLLYTECH EDIT)", artist: "Dj Dextron", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "EMZRf48PEis"
+  {
+    "title": "Jimmy Jimmy Jimmy Aaja (BollyTech Mix)",
+    "artist": "Deepanshu Ruhela, Priyank, Parvati Khan & I",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "2FfTO-Bu-nY"
   },
-  { title: "Big Dawgs X Winning Speech", artist: "IAMPRANN", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "vPwot7jrOf8"
+  {
+    "title": "CHAR BAJ GAYE (BOLLYTECH EDIT)",
+    "artist": "Dj Dextron",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "EMZRf48PEis"
   },
-  { title: "Jawani Jan-E-Man House Trap", artist: "DJ Percy & Asha Bhosle", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "eQt2XlFTq3U"
+  {
+    "title": "Big Dawgs X Winning Speech",
+    "artist": "IAMPRANN",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "vPwot7jrOf8"
   },
-  { title: "Ek Pal Ka Jeena Tech Remix | Kaho Naa Pyaar Hai", artist: "Hrithik Roshan | Lucky Ali | KTONIKK (KTONIKK)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "1fJ2YWKFOds"
+  {
+    "title": "Jawani Jan-E-Man House Trap",
+    "artist": "DJ Percy & Asha Bhosle",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "eQt2XlFTq3U"
   },
-  { title: "Desi Girl x Akon Sexy Bitch", artist: "David Guetta | Vishal & Shekhar | DJ Ganesh (Dj Ganesh Bombay)", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "XU3pFs_MwXk"
+  {
+    "title": "Ek Pal Ka Jeena Tech Remix | Kaho Naa Pyaar Hai",
+    "artist": "Hrithik Roshan | Lucky Ali | KTONIKK (KTONIKK)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "1fJ2YWKFOds"
   },
-  { title: "Naadan Parindey (Rumble) // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "SSd3zEBVpj4"
+  {
+    "title": "Desi Girl x Akon Sexy Bitch",
+    "artist": "David Guetta | Vishal & Shekhar | DJ Ganesh (Dj Ganesh Bombay)",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "XU3pFs_MwXk"
   },
-  { title: "RANGILO MARO DHOLNA - ROHAN MUKATI EDIT", artist: "Rohan Mukati", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "WgJBQfFVXQU"
+  {
+    "title": "Naadan Parindey (Rumble) // Flipsyd",
+    "artist": "FLIPSYD",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "SSd3zEBVpj4"
   },
-  { title: "Tune O Rangeele (Brazilian Funk Mix)", artist: "Knockwell & Lata Mangeshkar", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "W6Op1RjLXQg"
+  {
+    "title": "RANGILO MARO DHOLNA - ROHAN MUKATI EDIT",
+    "artist": "Rohan Mukati",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "WgJBQfFVXQU"
   },
-  { title: "Aaj Sajeya x Kudmayi (Mashup)", artist: "Knockwell, Goldie Sohel & Pritam", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "PGer5XYPaPk"
+  {
+    "title": "Tune O Rangeele (Brazilian Funk Mix)",
+    "artist": "Knockwell & Lata Mangeshkar",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "W6Op1RjLXQg"
   },
-  { title: "Papi X Move It X Aahun Aahun (Private Edit)", artist: "DJ Missy K", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "fODdPEatDqU"
+  {
+    "title": "Aaj Sajeya x Kudmayi (Mashup)",
+    "artist": "Knockwell, Goldie Sohel & Pritam",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "PGer5XYPaPk"
   },
-  { title: "MAMTA'S INTERLUDE - Trance Remix", artist: "Gauntlet. & NARCO", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "ahaUNhScopE"
+  {
+    "title": "Papi X Move It X Aahun Aahun (Private Edit)",
+    "artist": "DJ Missy K",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "fODdPEatDqU"
   },
-  { title: "Joota Japani", artist: "KR$NA and Mukesh", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "vR16Gu-Uq00"
+  {
+    "title": "MAMTA'S INTERLUDE - Trance Remix",
+    "artist": "Gauntlet. & NARCO",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "ahaUNhScopE"
   },
-  { title: "Rasputin", artist: "Majestic & Boney M.", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "b8XADglx9z4"
+  {
+    "title": "Joota Japani",
+    "artist": "KR$NA and Mukesh",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "vR16Gu-Uq00"
   },
-  { title: "Mockingbird", artist: "Tiësto, Dimitri Vegas & Like Mike & Gabry Ponte", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "LCY0SUhS6ec"
+  {
+    "title": "Rasputin",
+    "artist": "Majestic & Boney M.",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "b8XADglx9z4"
   },
-  { title: "Woops (Dimitri Vegas & Junkie Kid Remix)", artist: "Bountyhunter, Dimitri Vegas & Junkie Kid", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "9NixMYOdiOE"
+  {
+    "title": "Mockingbird",
+    "artist": "Tiësto, Dimitri Vegas & Like Mike & Gabry Ponte",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "LCY0SUhS6ec"
   },
-  { title: "Aria (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES & AEXTRAX", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "lZj1S8mbXZw"
+  {
+    "title": "Woops (Dimitri Vegas & Junkie Kid Remix)",
+    "artist": "Bountyhunter, Dimitri Vegas & Junkie Kid",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "9NixMYOdiOE"
   },
-  { title: "Dernière Danse (Hard Techno Edit)", artist: "Sandro Cardio, GEWOONRAVES, Zantryc and AEXTRAX", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "lasnA_VSYoA"
+  {
+    "title": "Aria (Hard Techno Edit)",
+    "artist": "Sandro Cardio, GEWOONRAVES & AEXTRAX",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "lZj1S8mbXZw"
   },
-  { title: "São Paulo", artist: "The Weeknd & Anitta", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "AQ5NlI-SJR0"
+  {
+    "title": "Dernière Danse (Hard Techno Edit)",
+    "artist": "Sandro Cardio, GEWOONRAVES, Zantryc and AEXTRAX",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "lasnA_VSYoA"
   },
-  { title: "Ankhe Khuli x Fire Fire // Flipsyd", artist: "FLIPSYD", film: "K//TRANCE", isKTrance: true,
-    youtubeId: "JDWWZZawcbw"
+  {
+    "title": "São Paulo",
+    "artist": "The Weeknd & Anitta",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "AQ5NlI-SJR0"
   },
+  {
+    "title": "Ankhe Khuli x Fire Fire // Flipsyd",
+    "artist": "FLIPSYD",
+    "film": "K//TRANCE",
+    "isKTrance": true,
+    "youtubeId": "JDWWZZawcbw"
+  }
 ];
 
-const listIndoHouse = [
+const listIndoHouse: any[] = [
   {
     "title": "Mera Yaar (Wo Noor Ka Jharna)",
     "artist": "Melodic Techno / Deep Indo-House Flip",
     "film": "Remix",
     "isRemix": true,
     "isIndoHouse": true,
-    "youtubeId": "zXy_8U-_RNc",
+    "youtubeId": "zXy_8U-_RNc"
   },
   {
     "title": "Aa Zara",
@@ -6028,7 +8964,8 @@ const listIndoHouse = [
     "youtubeId": "KAIyRiigews"
   }
 ];
-const listAfro = [
+
+const listAfro: any[] = [
   {
     "title": "Mera Yaar (Sufi Extended Vocal Mix)",
     "artist": "Organic Afro House Edit (122 BPM)",
@@ -6957,8 +9894,7 @@ const listAfro = [
   }
 ];
 
-
-const listSufi = [
+const listSufi: any[] = [
   {
     "title": "Mera Yaar (Original Sufi Version)",
     "artist": "Javed Bashir & Shankar-Ehsaan-Loy",
@@ -7738,8 +10674,7 @@ const listSufi = [
   }
 ];
 
-
-const listX = [
+const listX: any[] = [
   {
     "title": "Baap Se x Ferrari (James Hype Tech Rework)",
     "artist": "Seedhe Maut x KR$NA",
@@ -8351,1067 +11286,7 @@ const listX = [
   }
 ];
 
-
-const listClub = [
-  {
-    title: "Tauba Tauba x Losing It",
-    artist: "Karan Aujla x FISHER",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Aaj Ki Raat x Tremor",
-    artist: "Stree 2 x DVLM & Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Winning Speech x Laserbeam",
-    artist: "Karan Aujla x Ray Volpe",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Malhari x Booyah",
-    artist: "Bajirao Mastani x Showtek",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Apna Bana Le x Laserbeam",
-    artist: "Bhediya x Ray Volpe",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Kesariya x Tremor",
-    artist: "Brahmāstra x Dimitri Vegas & Like Mike",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "T2wdiA-IDH4"
-  },
-  {
-    title: "Tum Hi Ho x Spaceman",
-    artist: "Aashiqui 2 x Hardwell",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "-JxmOPtjlJE"
-  },
-  {
-    title: "Raataan Lambiyan x Mammoth",
-    artist: "Shershaah x DVLM & MOGUAI",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "yldN7geOZfc"
-  },
-  {
-    title: "Kabira x Booyah",
-    artist: "Yeh Jawaani Hai Deewani x Showtek",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "jHNNMj5bNQw"
-  },
-  {
-    title: "Pee Loon x Losing It",
-    artist: "Once Upon A Time In Mumbaai x FISHER",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "dE4hhfuIpw4"
-  },
-  {
-    title: "Tum Se Hi x Satisfaction",
-    artist: "Jab We Met x Benny Benassi",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Cb6wuzOurPc"
-  },
-  {
-    title: "Zaalima x Drugs From Amsterdam",
-    artist: "Raees x Mau P",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "t55amDg4qZM"
-  },
-  {
-    title: "Dil Sambhal Ja Zara x Animals",
-    artist: "Murder 2 x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "5-OqPhet-NU"
-  },
-  {
-    title: "Khuda Jaane x Kernkraft 400",
-    artist: "Bachna Ae Haseeno x Zombie Nation",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "cmMiyZaSELo"
-  },
-  {
-    title: "Subhanallah x Turn Up The Speakers",
-    artist: "YJHD x Afrojack & Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "dzHdo4yxidc"
-  },
-  {
-    title: "Ishq Sufiyana x Tsunami",
-    artist: "The Dirty Picture x DVBBS & Borgeous",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "lC_pM7a9wl0"
-  },
-  {
-    title: "Hasi Ban Gaye x Party Till We Die",
-    artist: "Hamari Adhuri Kahani x MAKJ & Timmy Trumpet",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "IDTS7zoI5pw"
-  },
-  {
-    title: "Soch Na Sake x Rave Tool",
-    artist: "Airlift x Industrial Drop Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "LYheoXR4Yo8"
-  },
-  {
-    title: "Agar Tum Saath Ho x Bonkers",
-    artist: "Tamasha x Dizzee Rascal",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ukmTXXLJ4kM"
-  },
-  {
-    title: "Chaleya x Ferrari",
-    artist: "Jawan x James Hype",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "CgeleP7nWN0"
-  },
-  {
-    title: "Jiyein Kyun x Move Your Body",
-    artist: "Dum Maaro Dum x Öwnboss",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "sJW37INWnYk"
-  },
-  {
-    title: "Mast Magan x Do It To It",
-    artist: "2 States x ACRAZE",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xitd9mEZIHk"
-  },
-  {
-    title: "Sun Saathiya x Bounce Generation",
-    artist: "ABCD 2 x TJR & VINAI",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "UNs50T6EYwE"
-  },
-  {
-    title: "Jeena Jeena x Heads Will Roll",
-    artist: "Badlapur x A-Trak",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zFdi834FiZ4"
-  },
-  {
-    title: "Tere Sang Yaara x Riverside",
-    artist: "Rustom x Sidney Samson",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "dxkPZ_4PlDE"
-  },
-  {
-    title: "Dekha Ek Khwaab x Jump & Sweat",
-    artist: "Silsila x Garmiani",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Nef_1GA-rVU"
-  },
-  {
-    title: "Mitwa x Turn Off The Lights",
-    artist: "KANK x Fred Again..",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Q22MCFC0CP0"
-  },
-  {
-    title: "Heer Raanjhana x Bla Bla Bla",
-    artist: "Bachchhan Paandey x Gigi D'Agostino",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "g6t8g6ka4W0"
-  },
-  {
-    title: "Dil Diyan Gallan x Intoxicated",
-    artist: "Tiger Zinda Hai x Martin Solveig",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "SAcpESN_Fk4"
-  },
-  {
-    title: "Tera Hone Laga Hoon x Low Frequency",
-    artist: "APKGK x Denney",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "H_lYTvMZ3lU"
-  },
-  {
-    title: "Tu Chahiye x Trumpets",
-    artist: "Bajrangi Bhaijaan x Sak Noel",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zuvla6ABKbs"
-  },
-  {
-    title: "Pani Da Rang x Greyhound",
-    artist: "Vicky Donor x Swedish House Mafia",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "EiItLWWxgOI"
-  },
-  {
-    title: "Samjhawan x Gasolina",
-    artist: "HSKD x Daddy Yankee Hard Trap",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "KXs2zgqLpVk"
-  },
-  {
-    title: "Nazar Na Lag Jaaye x Better Off Alone",
-    artist: "Stree x Alice Deejay",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Lgs9QUtWc3M"
-  },
-  {
-    title: "Kaun Tujhe x Lay Low",
-    artist: "M.S. Dhoni x Tiësto",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "fRYtYrzlPpQ"
-  },
-  {
-    title: "Bakhuda Tumhi Ho x Tremor",
-    artist: "Kismat Konnection x DVLM",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ENklhABDmck"
-  },
-  {
-    title: "Hua Hain Aaj Pehli Baar x Laserbeam",
-    artist: "Sanam Re x Ray Volpe",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DGVJtAHzzDQ"
-  },
-  {
-    title: "Tu Jaane Na x Mammoth",
-    artist: "APKGK x DVLM",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "RpKxgkLiRw4"
-  },
-  {
-    title: "Khaab x Spaceman",
-    artist: "Akhil x Hardwell",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "2eliQ_KR8yA"
-  },
-  {
-    title: "Main Rang Sharbaton Ka x Booyah",
-    artist: "PPNH x Showtek",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "RBCk1SyC1PA"
-  },
-  {
-    title: "Sunn Raha Hai Na Tu x Animals",
-    artist: "Aashiqui 2 x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "EwfEbt8IDCc"
-  },
-  {
-    title: "Banjaara x Drugs From Amsterdam",
-    artist: "Ek Villain x Mau P",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "juuIhW8V1Xw"
-  },
-  {
-    title: "Te Amo x Losing It",
-    artist: "Dum Maaro Dum x FISHER",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "3N3n23loy24"
-  },
-  {
-    title: "Hawayein x Satisfaction",
-    artist: "Jab Harry Met Sejal x Benny Benassi",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "cYOB941gyXI"
-  },
-  {
-    title: "Enna Sona x Move Your Body",
-    artist: "OK Jaanu x Öwnboss",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mrdRHsIkK_c"
-  },
-  {
-    title: "Moh Moh Ke Dhaage x Kernkraft 400",
-    artist: "Dum Laga Ke Haisha x Zombie Nation",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "peBsfgbOlYM"
-  },
-  {
-    title: "Ghar More Pardesiya x Turn Up The Speakers",
-    artist: "Kalank x Afrojack",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9lkiKsMZazw"
-  },
-  {
-    title: "Pal Pal Dil Ke Paas x Do It To It",
-    artist: "Blackmail x ACRAZE",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "cvQWzlNIjt8"
-  },
-  {
-    title: "Ishq Wala Love x Tsunami",
-    artist: "SOTY x DVBBS",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "N2cPyl83tkQ"
-  },
-  {
-    title: "Shayad x Rave Tool",
-    artist: "Love Aaj Kal 2 x Peak Tech Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xf_R641_aAc"
-  },
-  {
-    title: "Rasiya x Bonkers",
-    artist: "Brahmāstra x Dizzee Rascal",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Ci40ae8BlcE"
-  },
-  {
-    title: "Kinna Sohna x Heads Will Roll",
-    artist: "Marjaavaan x A-Trak",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8CLJS3DoDhg"
-  },
-  {
-    title: "Woh Din x Bounce Generation",
-    artist: "Chhichhore x TJR",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xC1cj9zhh6k"
-  },
-  {
-    title: "Chaiyya Chaiyya x Kernkraft 400",
-    artist: "A.R. Rahman x Zombie Nation",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "79TEKzCxZM0"
-  },
-  {
-    title: "Apna Bana Le x Miracle",
-    artist: "Bhediya x Calvin Harris & Ellie Goulding",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "961v0E3b01g"
-  },
-  {
-    title: "Kesariya x Don't You Worry Child",
-    artist: "Brahmāstra x Swedish House Mafia",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "hKM5JkIDTeE"
-  },
-  {
-    title: "Raataan Lambiyan x Under The Stars",
-    artist: "Shershaah x Melodic Techno Mix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Kp76nzS7pwA"
-  },
-  {
-    title: "Tum Hi Ho x Reload",
-    artist: "Aashiqui 2 x Sebastian Ingrosso & Tommy Trash",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "RPCGOiDT9BE"
-  },
-  {
-    title: "Pee Loon x Sunset Lover",
-    artist: "Once Upon A Time In Mumbaai x Petit Biscuit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "D8XFTglfSMg"
-  },
-  {
-    title: "Tum Se Hi x Ocean",
-    artist: "Jab We Met x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mt9xg0mmt28"
-  },
-  {
-    title: "Zaalima x Cold Water",
-    artist: "Raees x Major Lazer & Justin Bieber",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "nBtDsQ4fhXY"
-  },
-  {
-    title: "Khuda Jaane x Without You",
-    artist: "Bachna Ae Haseeno x David Guetta & Usher",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "o3PaG9r-qJU"
-  },
-  {
-    title: "Subhanallah x Titanium",
-    artist: "Yeh Jawaani Hai Deewani x David Guetta & Sia",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "QYO6AlxiRE4"
-  },
-  {
-    title: "Ishq Sufiyana x Sun & Moon",
-    artist: "The Dirty Picture x Above & Beyond",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "5RT6QMKJTjQ"
-  },
-  {
-    title: "Hasi Ban Gaye x Heroes (We Could Be)",
-    artist: "Hamari Adhuri Kahani x Alesso",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "n3zqZICNFSg"
-  },
-  {
-    title: "Soch Na Sake x Stay The Night",
-    artist: "Airlift x Zedd & Hayley Williams",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "i-gyZ35074k"
-  },
-  {
-    title: "Agar Tum Saath Ho x Faded",
-    artist: "Tamasha x Alan Walker",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "2tUr3yzqctI"
-  },
-  {
-    title: "Chaleya x Padam Padam",
-    artist: "Jawan x Kylie Minogue Tech Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "s4yy40jRTu4"
-  },
-  {
-    title: "Sun Saathiya x This Is What You Came For",
-    artist: "ABCD 2 x Calvin Harris & Rihanna",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kOkQ4T5WO9E"
-  },
-  {
-    title: "Jeena Jeena x Calling (Lose My Mind)",
-    artist: "Badlapur x Sebastian Ingrosso & Alesso",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9G1I16gJBvU"
-  },
-  {
-    title: "Tere Sang Yaara x If I Lose Myself",
-    artist: "Rustom x Alesso vs OneRepublic",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "dLa_ryRjC7M"
-  },
-  {
-    title: "Mitwa x Opus",
-    artist: "Kabhi Alvida Naa Kehna x Eric Prydz",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "6LtpYX3G0wc"
-  },
-  {
-    title: "Heer Raanjhana x How Deep Is Your Love",
-    artist: "Bachchhan Paandey x Calvin Harris",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "QkPxhZO-0hc"
-  },
-  {
-    title: "Tera Hone Laga Hoon x Wake Me Up",
-    artist: "Ajab Prem Ki Ghazab Kahani x Avicii",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "rTuxUAuJRyY"
-  },
-  {
-    title: "Nazar Na Lag Jaaye x Silence",
-    artist: "Stree x Marshmello & Khalid",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "-JMtKCqnkm0"
-  },
-  {
-    title: "Kaun Tujhe x Something Just Like This",
-    artist: "M.S. Dhoni x The Chainsmokers & Coldplay",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "FM7MFYoylVs"
-  },
-  {
-    title: "Tu Jaane Na x Mammoth (Festival Vocal Flip)",
-    artist: "APKGK x DVLM",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "P8PWN1OmZOA"
-  },
-  {
-    title: "Khaab x Beautiful Now",
-    artist: "Akhil x Zedd",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "OAZZKCWGoJE"
-  },
-  {
-    title: "Sunn Raha Hai Na Tu x Animals (Melodic Drop)",
-    artist: "Aashiqui 2 x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "z3UHfi9vpbc"
-  },
-  {
-    title: "Te Amo x I Took A Pill In Ibiza",
-    artist: "Dum Maaro Dum x Mike Posner & Seeb",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "foE1mO2yM04"
-  },
-  {
-    title: "Hawayein x Levels",
-    artist: "Jab Harry Met Sejal x Avicii",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "oJZNxU2tj_0"
-  },
-  {
-    title: "Ghar More Pardesiya x Baianá",
-    artist: "Kalank x Bakermat Afro-House Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Deb9SA9Sfe4"
-  },
-  {
-    title: "Meherbaan x Ten Feet Tall",
-    artist: "Bang Bang! x Afrojack",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "bltr_Dsk5EY"
-  },
-  {
-    title: "Shayad x High On Life",
-    artist: "Love Aaj Kal 2 x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Lpjcm1F8tY8"
-  },
-  {
-    title: "Rasiya x The Veldt",
-    artist: "Brahmāstra x deadmau5",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xvtNS6hbVy4"
-  },
-  {
-    title: "Woh Din x Summer",
-    artist: "Chhichhore x Calvin Harris",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "bbbQaYIlmMU"
-  },
-  {
-    title: "Badtameez Dil x Spaceman",
-    artist: "YJHD x Hardwell",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "II2EO3Nw4m0"
-  },
-  {
-    title: "Dhan Te Nan x Mammoth",
-    artist: "Kaminey x DVLM & MOGUAI",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "AKF2whlGnr4"
-  },
-  {
-    title: "Zingaat x Rave Tool",
-    artist: "Dhadak x High-Energy Festival Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Rd9wF5fAnVw"
-  },
-  {
-    title: "Aankh Marey x Move Your Body",
-    artist: "Simmba x Öwnboss",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "_KhQT-LGb-4"
-  },
-  {
-    title: "Choli Ke Peeche x Satisfaction",
-    artist: "Crew x Benny Benassi",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "co4EBYZZhg4"
-  },
-  {
-    title: "Ghungroo x Ferrari",
-    artist: "War x James Hype",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "XUwCeFgFKQc"
-  },
-  {
-    title: "Dope Shope x Do It To It",
-    artist: "Yo Yo Honey Singh x ACRAZE",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "NrXdauEv9HY"
-  },
-  {
-    title: "Dum Maaro Dum x Turn Off The Lights",
-    artist: "Asha Bhosle x Fred Again..",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kOrRYDJ4AuY"
-  },
-  {
-    title: "Sadda Haq x Heads Will Roll",
-    artist: "Rockstar x A-Trak",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mk2W-Xo_qAQ"
-  },
-  {
-    title: "Bhaag D.K. Bose x Bonkers",
-    artist: "Delhi Belly x Dizzee Rascal",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "IQEDu8SPHao"
-  },
-  {
-    title: "Kala Chashma x Bounce Generation",
-    artist: "Baar Baar Dekho x TJR & VINAI",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "4WRJHbL4dAk"
-  },
-  {
-    title: "52 Bars x Animals",
-    artist: "Karan Aujla x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "4DfVxVeqk2o"
-  },
-  {
-    title: "Softly x Ferrari",
-    artist: "Karan Aujla x James Hype",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "cWMxCE2HTag"
-  },
-  {
-    title: "On Top x Tsunami",
-    artist: "Karan Aujla x DVBBS & Borgeous",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "0EWbonj7f18"
-  },
-  {
-    title: "Admirin' You x Turn Up The Speakers",
-    artist: "Karan Aujla x Afrojack & Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "k85UB5b6pJU"
-  },
-  {
-    title: "White Brown Black x Piece Of Your Heart",
-    artist: "Karan Aujla x Meduza",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BtQp2U6hJII"
-  },
-  {
-    title: "Jee Karda x Animals",
-    artist: "Badlapur x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "IPYTxAHeR_o"
-  },
-  {
-    title: "Abhi Toh Party x Heads Will Roll",
-    artist: "Badshah x A-Trak",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "O3c4dPxN1qM"
-  },
-  {
-    title: "Chammak Challo x Low",
-    artist: "Ra.One x Flo Rida Club Edit",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "LWViwRT2DO4"
-  },
-  {
-    title: "Dus Bahane x Piece Of Your Heart",
-    artist: "Dus x Meduza",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "KWjV25q34Hw"
-  },
-  {
-    title: "Ek Do Teen x Gasolina",
-    artist: "Tezaab x Daddy Yankee",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "CCF1_jI8Prk"
-  },
-  {
-    title: "Gandi Baat x Levels",
-    artist: "R... Rajkumar x Avicii",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "bpOJmRlgg-4"
-  },
-  {
-    title: "Illegal Weapon x Spaceman",
-    artist: "Street Dancer 3D x Hardwell",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "GOkJguI8kYc"
-  },
-  {
-    title: "Jai Jai Shivshankar x Mammoth",
-    artist: "War x DVLM",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "oGneAab3e88"
-  },
-  {
-    title: "Jhoome Jo Pathaan x Lay Low",
-    artist: "Pathaan x Tiësto",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxWlaYCA8MU"
-  },
-  {
-    title: "Kar Gayi Chull x Better Off Alone",
-    artist: "Kapoor & Sons x Alice Deejay",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "NTHz9ephYTw"
-  },
-  {
-    title: "Khadke Glassy x Bounce Generation",
-    artist: "Jabariya Jodi x TJR",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YcDw4h3SUfI"
-  },
-  {
-    title: "Lahu Munh Lag Gaya x Ferrari",
-    artist: "Ram-Leela x James Hype",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "szVW_w-W8cQ"
-  },
-  {
-    title: "London Thumakda x Danza Kuduro",
-    artist: "Queen x Don Omar",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "WyawIree6iQ"
-  },
-  {
-    title: "Lungi Dance x Turn Up The Speakers",
-    artist: "Chennai Express x Afrojack",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "fbwCgt1hMD4"
-  },
-  {
-    title: "Naacho Naacho x Jump & Sweat",
-    artist: "RRR x Garmiani",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "sAzlWScHTc4"
-  },
-  {
-    title: "O Saki Saki x Do It To It",
-    artist: "Batla House x ACRAZE",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "_uUdJalMaF8"
-  },
-  {
-    title: "Party All Night x Riverside",
-    artist: "Boss x Sidney Samson",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Wd7H311MrWA"
-  },
-  {
-    title: "Sauda Khara Khara x Low Frequency",
-    artist: "Good Newwz x Denney",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "LYEqeUr-158"
-  },
-  {
-    title: "Shanivaar Raati x Tsunami",
-    artist: "Main Tera Hero x DVBBS",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Ee_9J9lGgS0"
-  },
-  {
-    title: "Subah Hone Na De x Greyhound",
-    artist: "Desi Boyz x Swedish House Mafia",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Y7G-tYRzwYY"
-  },
-  {
-    title: "Tamanche Pe Disco x Bonkers",
-    artist: "Bullett Raja x Dizzee Rascal",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ju12RhZFGRo"
-  },
-  {
-    title: "The Humma Song x Trumpets",
-    artist: "OK Jaanu x Sak Noel",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "1tVL11ULjYY"
-  },
-  {
-    title: "Tune Maari Entriyaan x Intoxicated",
-    artist: "Gunday x Martin Solveig",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "2I3NgxDAiqE"
-  },
-  {
-    title: "Yaar Naa Miley x Animals",
-    artist: "Kick x Martin Garrix",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "bp6oHlllWHA"
-  },
-  {
-    title: "Zinda Banda x Turn Off The Lights",
-    artist: "Jawan x Fred Again..",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "stjZKBhQ3lg"
-  },
-  {
-    title: "Zingaat x Booyah",
-    artist: "Dhadak x Showtek",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "5mMYlA-2yX4"
-  },
-  {
-    title: "Jee Karda x Rave Tool",
-    artist: "Badlapur x High-Energy Industrial Drop",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "VAJK04HOLd0"
-  },
-  {
-    title: "Chambal Ka Daku x Laserbeam",
-    artist: "Haryanvi Trap x Ray Volpe",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "070t4rVokoA"
-  },
-  {
-    title: "Bahu Kale Ki x Satisfaction",
-    artist: "Ajay Hooda x Benny Benassi",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Mlj0hdOG4QQ"
-  },
-  {
-    title: "Systum x Do It To It",
-    artist: "Masoom Sharma x ACRAZE",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "CQW4A3cV2Oo"
-  }
-];
-
-const listHustle = [
+const listHustle: any[] = [
   {
     "title": "Baaghi",
     "artist": "M-Zee Bella",
@@ -12810,3296 +14685,6705 @@ const listHustle = [
     "isHustle": true,
     "hustleSeason": "S5",
     "hustleNum": 309
-  }
-,
-  {
-    title: "Aaj Ki Raat x Tauba Tauba (Stree 2 x Bad Newz)",
-    artist: "Vocal hook exchange layered over a high-BPM driving tech groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Badtameez Dil x Dilliwaali Girlfriend (Yeh Jawaani Hai Deewani)",
-    artist: "Dual vocal hook collision over an aggressive electro-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Malhari x Zingaat (Bajirao Mastani x Dhadak)",
-    artist: "Dhol rhythms from Malhari running under Zingaat's vocal shout with a festival brass drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Chaiyya Chaiyya x Dhan Te Nan (Dil Se x Kaminey)",
-    artist: "Vintage Rahman rhythm chopped with Dhan Te Nan’s aggressive bass riff.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Besharam Rang x Ghungroo (Pathaan x War)",
-    artist: "Seductive verses leading into Ghungroo’s high-energy vocal hook over a rolling tech drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Choli Ke Peeche x Aaj Ki Raat (Crew x Don)",
-    artist: "Classic vocal cuts layered across a 128 BPM club drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Kala Chashma x Kar Gayi Chull (Baar Baar Dekho x Kapoor & Sons)",
-    artist: "Punjabi hook running continuously over Chull’s synth build and drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Aankh Marey x Cheez Badi (Simmba x Machine)",
-    artist: "Rapid vocal back-and-forth layered over an aggressive Brazilian bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Sadda Haq x Jee Karda (Rockstar x Badlapur)",
-    artist: "Aggressive rock vocals layered over Jee Karda's heavy electronic drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Jhoome Jo Pathaan x Besharam Rang (Pathaan)",
-    artist: "Pathaan vocal hook looped over Besharam Rang’s syncopated sub-bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Abhi Toh Party Shuru Hui Hai x Kar Gayi Chull (Khoobsurat x Kapoor & Sons)",
-    artist: "Party rap cadence matched over peak-time bounce beats.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Dus Bahane x Right Here Right Now (Dus x Bluffmaster)",
-    artist: "Dual 2000s club anthems layered over a punchy bass-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Subah Hone Na De x Desi Boyz (Desi Boyz)",
-    artist: "Simultaneous vocal arrangement driving into a big-room electro build.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Hookah Bar x Party On My Mind (Khiladi 786 x Race 2)",
-    artist: "Melodic hooks running together over a hard-hitting club synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Dope Shope x Angreji Beat (International Villager x Cocktail)",
-    artist: "Honey Singh vocals layered over aggressive driving house bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Jai Jai Shivshankar x Ghungroo (War)",
-    artist: "Hrithik dance track battle drop with fast-paced club kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Nashe Si Chadh Gayi x Ude Dil Befikre (Befikre)",
-    artist: "High-energy vocal chop overlap backed by driving 126 BPM tech house.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Balam Pichkari x Badtameez Dil (Yeh Jawaani Hai Deewani)",
-    artist: "Percussive folk build colliding with a peak-time stadium synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "The Humma Song x Muqabla (OK Jaanu x Street Dancer 3D)",
-    artist: "Rahman melody mashup over a hard slap-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Show Me The Thumka x Pyaar Hota Kayi Baar Hai (Tu Jhoothi Main Makkaar)",
-    artist: "Fast-paced Ranbir Kapoor club collision over punchy tech drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Chammak Challo x Criminal (Ra.One)",
-    artist: "Akon vocals layered across Vishal-Shekhar’s electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "O Saki Saki x Dilbar (Batla House x Satyameva Jayate)",
-    artist: "Nora Fatehi peak-time battle drop with dark Middle Eastern synth riffs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "London Thumakda x Gallan Goodiyaan (Queen x Dil Dhadakne Do)",
-    artist: "Wedding energy forced into high-BPM festival basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Lungi Dance x One Two Three Four (Chennai Express)",
-    artist: "South-Indian percussion clash layered over aggressive festival horns.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Illegal Weapon 2.0 x Morni Banke (Street Dancer 3D x Badhaai Ho)",
-    artist: "Punjabi-Bolly club crossover on an aggressive bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Gandi Baat x Saree Ke Fall Sa (R... Rajkumar)",
-    artist: "High-intensity mass-appeal vocal blend over modern electro drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Tamanche Pe Disco x Babli Badmaash (Bullett Raja x Shootout at Wadala)",
-    artist: "Gritty street vocals over heavy electronic stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Khadke Glassy x Dil Chori (Jabariya Jodi x Sonu Ke Titu Ki Sweety)",
-    artist: "Rap layers riding over hard club kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "First Class x Slow Motion (Kalank x Bharat)",
-    artist: "Fast-tempo vocal exchange driving directly into a big-room drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Lahu Munh Lag Gaya x Nagada Sang Dhol (Goliyon Ki Raasleela Ram-Leela)",
-    artist: "Folk garba rhythms amplified by aggressive club drops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Tune Maari Entriyaan x Jashn-E-Ishqa (Gunday)",
-    artist: "High-octane commercial hooks over driving four-on-the-floor kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Dil Chori x Makhna (Sonu Ke Titu Ki Sweety x Drive)",
-    artist: "Honey Singh vocals layered across a tech-house club rhythm.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Zinda Banda x Not Ramaiya Vastavaiya (Jawan)",
-    artist: "Anirudh festival percussion clashing on a hard peak-time drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Genda Phool x Chittiyaan Kalaiyaan (Badshah x Roy)",
-    artist: "Folk-rap vocals layered directly over rolling bass grooves.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Bhaag D.K. Bose x Dhan Te Nan (Delhi Belly x Kaminey)",
-    artist: "Relentless rock-rap overlap slamming into distorted electro saws.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Ek Do Teen x Tamma Tamma Again (Baaghi 2 x Badrinath Ki Dulhania)",
-    artist: "Retro-remake vocal battle layered over a bouncy festival bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Taal Se Taal x Chaiyya Chaiyya (Taal x Dil Se)",
-    artist: "Classical vocal runs colliding with fast-paced tribal house drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Dum Maaro Dum x Hare Ram Hare Krishna (Dum Maaro Dum x Bhool Bhulaiyaa)",
-    artist: "Psychedelic vocal hooks over driving minimal techno bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Shanivaar Raati x Palat Tera Hero Idhar Hai (Main Tera Hero)",
-    artist: "Energetic party vocals combined over a massive synth drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Sweety Tera Drama x Twist (Bareilly Ki Barfi x Love Aaj Kal)",
-    artist: "Upbeat Punjabi-Bollywood hooks layered over modern dancefloor kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Paisa Paisa x Subah Hone Na De (De Dana Dan x Desi Boyz)",
-    artist: "High-energy throwback hooks layered over an electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Vele x Student Of The Year (Disco Song) (Student of the Year)",
-    artist: "Vishal-Shekhar college anthems colliding on peak-time club drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Khaike Paan Banaraswala x O O Jane Jaana (Don x Pyaar Kiya To Darna Kya)",
-    artist: "Vintage energetic hooks reworked over a rolling club bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Aashiq Banaya Aapne x Jhalak Dikhla Jaa (Aashiq Banaya Aapne x Aksar)",
-    artist: "Himesh Reshammiya vocal chops over a high-energy bass-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Rock Tha Party x Saturday Saturday (Rocky Handsome x Humpty Sharma Ki Dulhania)",
-    artist: "Heavy club bass drops with dual party vocals.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Mundiyan To Bach Ke x Baaki Baatein Peene Baad (Baaghi 2 x Arjun Kanungo)",
-    artist: "Tumbi hooks laced over aggressive club drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana (Rave Flip)",
-    artist: "Nostalgic wedding vocal samples chopped aggressively over peak-time synths.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Ainvayi Ainvayi x Thug Le (Band Baaja Baaraat x Ladies vs Ricky Bahl)",
-    artist: "Dynamic male/female vocal trade-offs over driving tech house.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Gali Gali x Dilbar (KGF x Satyameva Jayate)",
-    artist: "Dual item-track hooks colliding over an aggressive festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Bhool Bhulaiyaa Title Track x Character Dheela (Bhool Bhulaiyaa x Ready)",
-    artist: "High-tempo vocal rhythms running simultaneously into an electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Aaj Ki Raat x Tauba Tauba x Besharam Rang (Stree 2 x Bad Newz x Pathaan)",
-    artist: "Vocal call-and-response running across a 128 BPM tech-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Badtameez Dil x Dilliwaali Girlfriend x Balam Pichkari (Yeh Jawaani Hai Deewani)",
-    artist: "Triple Ranbir Kapoor vocal overlap layered on an electro-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Malhari x Zingaat x Dhan Te Nan (Bajirao Mastani x Dhadak x Kaminey)",
-    artist: "Dhol percussion, energetic chants, and gritty rock stabs colliding over a massive festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Chaiyya Chaiyya x Dhan Te Nan x Sadda Haq (Dil Se x Kaminey x Rockstar)",
-    artist: "Sukhwinder Singh hooks chopped over heavy rock-electro synths.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Besharam Rang x Ghungroo x Jai Jai Shivshankar (Pathaan x War)",
-    artist: "Seductive verses building into dual Hrithik Roshan vocal hooks over a rolling bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Choli Ke Peeche x Aaj Ki Raat x O Saki Saki (Crew x Don x Batla House)",
-    artist: "Triple female vocal battle built over a punchy bass-house kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Kala Chashma x Kar Gayi Chull x Abhi Toh Party (Baar Baar Dekho x Kapoor & Sons x Khoobsurat)",
-    artist: "Non-stop party rap cadence layered over a peak-time bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Aankh Marey x Cheez Badi x Dilbar (Simmba x Machine x Satyameva Jayate)",
-    artist: "90s remake vocal chops layered across an aggressive Brazilian bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Jhoome Jo Pathaan x Besharam Rang x Not Ramaiya Vastavaiya (Pathaan x Jawan)",
-    artist: "SRK peak-time vocal trade-offs over driving four-on-the-floor kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Subah Hone Na De x Desi Boyz x Hookah Bar (Desi Boyz x Khiladi 786)",
-    artist: "Dual Akshay Kumar hooks matched with Himesh Reshammiya melodies on a festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Dope Shope x Angreji Beat x Blue Eyes (International Villager x Cocktail)",
-    artist: "Honey Singh rap verses and hooks intertwined over heavy tech-house bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Ghungroo x Nashe Si Chadh Gayi x Ude Dil Befikre (War x Befikre)",
-    artist: "Vishal-Shekhar dance vocals overlapping on a driving 126 BPM groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "The Humma Song x Muqabla x Urvashi (OK Jaanu x Street Dancer 3D)",
-    artist: "Classic A.R. Rahman dance melodies colliding over a hard slap-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Show Me The Thumka x Pyaar Hota Kayi Baar Hai x Badtameez Dil (Tu Jhoothi Main Makkaar x YJHD)",
-    artist: "Triple Ranbir dance hooks driving into a high-energy tech drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Chammak Challo x Criminal x Right Here Right Now (Ra.One x Bluffmaster)",
-    artist: "Akon vocals and retro hip-hop flows layered over aggressive electro saws.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "London Thumakda x Gallan Goodiyaan x Sadi Gali (Queen x Dil Dhadakne Do x Tanu Weds Manu)",
-    artist: "Dhol rhythms and Punjabi-Bolly hooks layered over a high-BPM rave synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Lungi Dance x One Two Three Four x Zingaat (Chennai Express x Dhadak)",
-    artist: "Fast-paced regional percussion clash driving an aggressive stadium brass drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Illegal Weapon 2.0 x Morni Banke x High Rated Gabru (Street Dancer 3D x Badhaai Ho x Nawabzaade)",
-    artist: "Punjabi-Bollywood hooks trading off over an aggressive bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Gandi Baat x Saree Ke Fall Sa x Tamanche Pe Disco (R... Rajkumar x Bullett Raja)",
-    artist: "Raw massy vocal delivery riding simultaneously on heavy electronic stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Khadke Glassy x Dil Chori x Makhna (Jabariya Jodi x Sonu Ke Titu Ki Sweety x Drive)",
-    artist: "Triple party-rap vocal blend layered over a rolling tech groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Lahu Munh Lag Gaya x Nagada Sang Dhol x Dholida (Ram-Leela x Gangubai Kathiawadi)",
-    artist: "High-intensity garba vocal layers colliding over an aggressive club drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Zinda Banda x Not Ramaiya Vastavaiya x Chaleya (Jawan)",
-    artist: "Anirudh festival percussion and vocal hooks running continuously into a peak drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Genda Phool x Chittiyaan Kalaiyaan x Baby Doll (Badshah x Roy x Ragini MMS 2)",
-    artist: "Melodic hooks running simultaneously over driving basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Bhaag D.K. Bose x Dhan Te Nan x Jee Karda (Delhi Belly x Kaminey x Badlapur)",
-    artist: "Aggressive rock-rap shouts crashing over distorted electro-house drops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Ek Do Teen x Tamma Tamma Again x Cheez Badi (Baaghi 2 x Badrinath Ki Dulhania x Machine)",
-    artist: "90s remake hooks running in sync over a driving festival beat.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Taal Se Taal x Chaiyya Chaiyya x Ramta Jogi (Taal x Dil Se)",
-    artist: "Classical vocal runs colliding over fast-paced tribal house drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Dum Maaro Dum x Hare Ram Hare Krishna x Bhool Bhulaiyaa (Dum Maaro Dum x Bhool Bhulaiyaa)",
-    artist: "Psychedelic vocal hooks laced across minimal techno basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Shanivaar Raati x Palat Tera Hero Idhar Hai x Besharmi Ki Height (Main Tera Hero)",
-    artist: "Non-stop Varun Dhawan vocal anthems built over a peak-time synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Sweety Tera Drama x Twist x Chor Bazari (Bareilly Ki Barfi x Love Aaj Kal)",
-    artist: "Upbeat hooks running simultaneously into an aggressive electro build.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Paisa Paisa x Subah Hone Na De x Right Here Right Now (De Dana Dan x Desi Boyz x Bluffmaster)",
-    artist: "2000s commercial party hooks colliding over a bass-heavy drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Vele x The Disco Song x Kukkad (Student of the Year)",
-    artist: "Vishal-Shekhar college club anthems overlapping on massive mainstage kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Aashiq Banaya Aapne x Jhalak Dikhla Jaa x Naam Hai Tera (Aashiq Banaya Aapne x Aksar x Aap Kaa Surroor)",
-    artist: "High-energy Himesh vocal chops over an aggressive bass-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Rock Tha Party x Saturday Saturday x Kar Gayi Chull (Rocky Handsome x HSKD x Kapoor & Sons)",
-    artist: "Relentless party anthems driving into a hard club bounce.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Mundiyan To Bach Ke x Baaki Baatein Peene Baad x Kala Chashma (Baaghi 2 x Arjun Kanungo x Baar Baar Dekho)",
-    artist: "Punjabi tumbi hooks colliding over an aggressive drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Ainvayi Ainvayi x Thug Le x Dum Dum (Band Baaja Baaraat x Ladies vs Ricky Bahl)",
-    artist: "Dynamic vocal trade-offs running over high-BPM tech drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Gali Gali x Dilbar x O Saki Saki (KGF x Satyameva Jayate x Batla House)",
-    artist: "Middle Eastern synth riffs and female item hooks over an aggressive drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Bhool Bhulaiyaa Title Track x Character Dheela x Dhinka Chika (Bhool Bhulaiyaa x Ready)",
-    artist: "Fast vocal rhythms layered over an energetic electro-saw synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "First Class x Slow Motion x Dil Chori (Kalank x Bharat x SKTKS)",
-    artist: "Fast-tempo vocal exchange driving directly into a big-room drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Dus Bahane x Right Here Right Now x Dus Bahane 2.0 (Dus x Bluffmaster x Baaghi 3)",
-    artist: "Nostalgic vocal interplay backed by an aggressive tech drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Tune Maari Entriyaan x Jashn-E-Ishqa x Asalaam-E-Ishqum (Gunday)",
-    artist: "High-octane commercial hooks over driving four-on-the-floor festival kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Balam Pichkari x Chitiyan Kalaiyan x Baby Doll (YJHD x Roy x Ragini MMS 2)",
-    artist: "Playful vocal hooks locked into a driving club baseline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Khaike Paan Banaraswala x O O Jane Jaana x Jumma Chumma (Don x PKTDK x Hum)",
-    artist: "Vintage high-energy vocals layered over an aggressive tech-house sub-bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana x Bole Chudiyan (HSKCS x HAHK x K3G)",
-    artist: "Classic wedding hooks chopped aggressively over a 128 BPM rave drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Garmi x Muqabla x Illegal Weapon 2.0 (Street Dancer 3D)",
-    artist: "High-impact dance battle vocals colliding over a heavy festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Party On My Mind x Lat Lag Gayi x Dilliwaali Girlfriend (Race 2 x YJHD)",
-    artist: "Seductive dancefloor vocals running simultaneously over rolling basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Makhna x Proper Patola x Tareefan (Drive x Namaste England x Veere Di Wedding)",
-    artist: "Sleek urban vocal cadences over a punchy slap-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Dil Dance Maare x Marjaani x Billo Rani (Tashan x Billu x Dhan Dhana Dhan Goal)",
-    artist: "Fast-paced retro vocals running across an aggressive electronic drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Sooraj Dooba Hain x Subah Hone Na De x Senorita (Roy x Desi Boyz x ZNMD)",
-    artist: "Melodic summer party hooks layered over a peak-time progressive drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Dilli Ki Raat x Darde Disco x It's The Time To Disco (Indoo Ki Jawani x Om Shanti Om x KHNH)",
-    artist: "Disco vocal hooks mashed into an aggressive club beat.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Tauba Tauba x Aaj Ki Raat x Zingaat (Bad Newz x Stree 2 x Dhadak)",
-    artist: "Modern Punjabi flow, high-energy Hindi club vocals, and folk chants colliding over a heavy peak-time drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  }
-,
-  {
-    title: "Arjan Vailly x Malhari (Animal x Bajirao Mastani)",
-    artist: "Raw Punjabi battle-cry energy overlaid on rapid dhol rhythms and brass festival stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "s-K7HinTAgA"
-  },
-  {
-    title: "Aayi Nai x Zingaat (Stree 2 x Dhadak)",
-    artist: "Upbeat regional Bhojpuri folk hook overlapping relentless Marathi street percussion.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "What Jhumka? x Show Me The Thumka (Rocky Aur Rani Kii Prem Kahaani x Tu Jhoothi Main Makkaar)",
-    artist: "Fast-paced vocal exchanges driving into an aggressive tech-house bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "xV22cenBGb8"
-  },
-  {
-    title: "Sher Khul Gaye x Ghungroo (Fighter x War)",
-    artist: "Dual Hrithik Roshan dance-groove vocals colliding over a driving four-on-the-floor club bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ChNT2E1jJQI"
-  },
-  {
-    title: "Jamal Kudu x Dum Maaro Dum (Animal x Hare Rama Hare Krishna)",
-    artist: "Chanted Iranian-folk vocal chops colliding with vintage psychedelic synth hooks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "luO5Fffkcnc"
-  },
-  {
-    title: "Naina x Tareefan (Crew x Veere Di Wedding)",
-    artist: "Diljit Dosanjh verses layered smoothly over Badshah’s urban club cadence.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Not Ramaiya Vastavaiya x Badtameez Dil (Jawan x Yeh Jawaani Hai Deewani)",
-    artist: "Anirudh's high-tempo dance hook interwoven with Ranbir Kapoor’s rapid vocal run.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Ishq Jaisa Kuch x Nashe Si Chadh Gayi (Fighter x Befikre)",
-    artist: "Seductive vocal chops trading bars over a rolling 126 BPM tech-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 (Bhool Bhulaiyaa 3 x Shehzada)",
-    artist: "Kartik Aaryan peak-time anthems layered over aggressive electro synths.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Lutt Putt Gaya x Twist (Dunki x Love Aaj Kal)",
-    artist: "Upbeat commercial hooks trading off over an aggressive festival bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Dance Ka Bhoot x Saree Ke Fall Sa (Brahmāstra x R... Rajkumar)",
-    artist: "High-energy festival dhol build colliding directly with massy electro stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Baby Bring It On x Zingaat (Madgaon Express x Dhadak)",
-    artist: "Dual high-BPM party anthems colliding on aggressive Dutch-house synth leads.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Chaleya x Apna Bana Le (Jawan x Bhediya)",
-    artist: "Arijit Singh vocal stems intertwined over a driving festival progressive drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Pyaar Hota Kayi Baar Hai x Subah Hone Na De (Tu Jhoothi Main Makkaar x Desi Boyz)",
-    artist: "High-energy commercial vocals running simultaneously into a peak-time club build.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Kaavaalaa (Hindi) x Muqabla (Jailer x Street Dancer 3D)",
-    artist: "Infectious tribal dance hook layered across Prabhu Deva's electro-funk bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Main Nikla Gaddi Leke x Khadke Glassy (Gadar 2 x Jabariya Jodi)",
-    artist: "High-octane Punjabi-folk shouts riding an aggressive bounce-house kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Kusu Kusu x O Saki Saki (Satyameva Jayate 2 x Batla House)",
-    artist: "Nora Fatehi item-track hooks running simultaneously over Middle Eastern synth stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Tip Tip Barsa Paani x Choli Ke Peeche (Sooryavanshi x Crew)",
-    artist: "Classic 90s remake vocal chops layered across a distorted 128 BPM saw-wave drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Chandigarh Mein x Makhna (Good Newwz x Drive)",
-    artist: "Polished urban party vocals traded off over an aggressive slap-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Sauda Khara Khara x Proper Patola (Good Newwz x Namaste England)",
-    artist: "Heavy Punjabi club hooks colliding on a driving four-on-the-floor beat.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Coka 2.0 x Illegal Weapon 2.0 (Liger x Street Dancer 3D)",
-    artist: "High-intensity Punjabi bass vocals layered directly over an aggressive club kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Ra Ra Rakkamma x Chikni Chameli (Vikrant Rona x Agneepath)",
-    artist: "Fast-paced regional dance verses building into a massive stadium drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Param Sundari x Genda Phool (Mimi x Badshah)",
-    artist: "Folk melodies and rap verses trading bars over a rolling sub-bass drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "BurjKhalifa x Dope Shope (Laxmii x International Villager)",
-    artist: "Commercial urban party flows running side-by-side into an electronic club drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Nadiyon Paar x Chamma Chamma (Roohi x Fraud Saiyaan)",
-    artist: "Hypnotic vocal loops driving into an aggressive Brazilian bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Morani Baga Ma x Morni Banke (Animal x Badhaai Ho)",
-    artist: "Rajasthani folk vocals chopped and overlaid with modern Punjabi dancefloor rhythms.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Lazy Lamhe x Besharam Rang (Thoda Pyaar Thoda Magic x Pathaan)",
-    artist: "Sultry vocal verses laced across a driving minimal-tech groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Touch Me Touch Me x Zara Zara Touch Me (Race)",
-    artist: "Classic thriller dance vocals intertwined over punchy four-on-the-floor house beats.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "High Rated Gabru x Ban Ja Rani (Nawabzaade x Tumhari Sulu)",
-    artist: "Guru Randhawa hooks layered seamlessly over a hard club rhythm.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Coca Cola Tu x She Move It Like (Luka Chuppi x Badshah)",
-    artist: "Bouncy pop hooks matched with high-tempo rap cadences on a festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Chhote Chhote Peg x Chaar Botal Vodka (Sonu Ke Titu Ki Sweety x Ragini MMS 2)",
-    artist: "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Buzz x Naah (Aastha Gill x Harrdy Sandhu)",
-    artist: "Modern pop-club vocal duets layered over driving punchy kicks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Kya Baat Ay 2.0 x Bijlee Bijlee (Govinda Naam Mera x Harrdy Sandhu)",
-    artist: "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Pappi Jhappi x Gandi Baat (Govinda Naam Mera x R... Rajkumar)",
-    artist: "Quirky mass-appeal vocal deliveries riding together on an aggressive electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Jeda Nasha x Jehda Nasha (An Action Hero x Amar Jalal)",
-    artist: "Modern dancefloor remake vocals colliding with raw original folk stems over driving club drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Alcoholia x Dhan Te Nan (Vikram Vedha x Kaminey)",
-    artist: "Raw, unhinged vocal chants layered over heavy rock-infused electronic basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Besharmi Ki Height x Hookah Bar (Main Tera Hero x Khiladi 786)",
-    artist: "2010s peak-time commercial hooks locked into a massive festival build.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Fevicol Se x Munni Badnaam Hui (Dabangg 2 x Dabangg)",
-    artist: "Classic rustic item-song vocal hooks trading bars over aggressive festival brass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Sheila Ki Jawani x Chikni Chameli (Tees Maar Khan x Agneepath)",
-    artist: "High-BPM item track battle drop featuring dual female vocal hooks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Dhoom Machale x Crazy Kiya Re (Dhoom x Dhoom 2)",
-    artist: "Sunidhi Chauhan vocal runs intertwined over driving tech-house percussion.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Paisa Yeh Paisa x Bhaag D.K. Bose (Total Dhamaal x Delhi Belly)",
-    artist: "High-energy vocal madness slamming into aggressive rock-techno drops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Slow Motion x First Class (Bharat x Kalank)",
-    artist: "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Kala Chashma x Dilliwaali Girlfriend (Baar Baar Dekho x Yeh Jawaani Hai Deewani)",
-    artist: "Iconic hooklines colliding directly over a 128 BPM bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Ainvayi Ainvayi x London Thumakda (Band Baaja Baaraat x Queen)",
-    artist: "High-tempo wedding dance vocals layered into an aggressive club mix.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Muqabla x Zingaat (Street Dancer 3D x Dhadak)",
-    artist: "Fast rhythmic shouting chops riding alongside Prabhu Deva's synth hooks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Tauba Tauba x Aankh Marey (Bad Newz x Simmba)",
-    artist: "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Dilbar x Kamli (Satyameva Jayate x Dhoom 3)",
-    artist: "High-energy vocal runs colliding over a driving tech-house bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Tumse Milke Dil Ka Jo Haal x Chammak Challo (Main Hoon Na x Ra.One)",
-    artist: "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Gali Gali x Tip Tip Barsa Paani (KGF x Sooryavanshi)",
-    artist: "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna (Bhool Bhulaiyaa x Commando 3)",
-    artist: "Iconic vocal chants overlaid directly across dark minimal techno synths.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Arjan Vailly x Malhari x Dhan Te Nan (Animal x Bajirao Mastani x Kaminey)",
-    artist: "Raw folk battle shouts and live dhol percussion colliding over an aggressive rock-electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Aayi Nai x Zingaat x Baby Bring It On (Stree 2 x Dhadak x Madgaon Express)",
-    artist: "High-BPM Bhojpuri vocal hooks and Marathi street rhythms driving into an intense festival brass drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "What Jhumka? x Show Me The Thumka x Badtameez Dil (RRKPK x TJMM x YJHD)",
-    artist: "Triple Ranbir-Alia era commercial vocal trade-offs layered over a 128 BPM bouncy tech-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Sher Khul Gaye x Ghungroo x Jai Jai Shivshankar (Fighter x War)",
-    artist: "Hrithik Roshan dance-groove vocals trading bars across a driving four-on-the-floor electro bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Jamal Kudu x Dum Maaro Dum x Hare Ram Hare Krishna (Animal x Dum Maaro Dum x Bhool Bhulaiyaa)",
-    artist: "Hypnotic Iranian vocal chops and retro hooks layered over a rolling minimal tech kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Naina x Tareefan x Proper Patola (Crew x Veere Di Wedding x Namaste England)",
-    artist: "Urban Punjabi flows and female vocal harmonies intertwined across an aggressive slap-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Not Ramaiya Vastavaiya x Zinda Banda x Badtameez Dil (Jawan x YJHD)",
-    artist: "Anirudh festival percussion and rapid vocal runs crashing into an electro-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Ishq Jaisa Kuch x Nashe Si Chadh Gayi x Besharam Rang (Fighter x Befikre x Pathaan)",
-    artist: "Sultry Vishal-Shekhar verses and high-energy vocal hooks layered over a driving 126 BPM bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 x Dil Chori (BB3 x Shehzada x SKTKS)",
-    artist: "High-energy Kartik Aaryan party anthems riding simultaneously on an aggressive saw-wave synth.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Lutt Putt Gaya x Twist x Chor Bazari (Dunki x Love Aaj Kal)",
-    artist: "Upbeat vocal cadences trading off over an aggressive four-on-the-floor festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Dance Ka Bhoot x Saree Ke Fall Sa x Gandi Baat (Brahmāstra x R... Rajkumar)",
-    artist: "Festival dhol build matched with raw massy vocal shouts over heavy electronic stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Kaavaalaa (Hindi) x Muqabla x The Humma Song (Jailer x Street Dancer 3D x OK Jaanu)",
-    artist: "Infectious tribal rhythm layered with iconic dance hooks over an aggressive slap-house kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Main Nikla Gaddi Leke x Khadke Glassy x Dil Chori (Gadar 2 x Jabariya Jodi x SKTKS)",
-    artist: "High-octane Punjabi-folk shouts riding continuously on a bouncy bass-house drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Kusu Kusu x O Saki Saki x Dilbar (Satyameva Jayate 2 x Batla House x Satyameva Jayate)",
-    artist: "Triple Nora Fatehi item hooks running simultaneously over dark Middle Eastern synth riffs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Tip Tip Barsa Paani x Choli Ke Peeche x Aaj Ki Raat (Sooryavanshi x Crew x Stree 2)",
-    artist: "90s remake vocal chops running in sync over an aggressive 128 BPM club drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Chandigarh Mein x Makhna x Proper Patola (Good Newwz x Drive x Namaste England)",
-    artist: "Urban party vocals trading off seamlessly over a punchy club groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Sauda Khara Khara x Coka 2.0 x Illegal Weapon 2.0 (Good Newwz x Liger x Street Dancer 3D)",
-    artist: "Heavy Punjabi club hooks and rapid female vocals colliding on a hard four-on-the-floor beat.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Ra Ra Rakkamma x Chikni Chameli x Sheila Ki Jawani (Vikrant Rona x Agneepath x Tees Maar Khan)",
-    artist: "Fast-paced regional dance verses and classic item hooks crashing into a massive stadium drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Param Sundari x Genda Phool x Chittiyaan Kalaiyaan (Mimi x Badshah x Roy)",
-    artist: "Folk melodies and female pop vocal chops riding together on a rolling sub-bass drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "BurjKhalifa x Dope Shope x Angreji Beat (Laxmii x International Villager)",
-    artist: "Commercial urban party flows running side-by-side into a driving electronic drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Nadiyon Paar x Chamma Chamma x Aankh Marey (Roohi x Fraud Saiyaan x Simmba)",
-    artist: "Hypnotic dance loops and party hooks driving an aggressive Brazilian bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Morani Baga Ma x Morni Banke x London Thumakda (Animal x Badhaai Ho x Queen)",
-    artist: "Rajasthani folk vocal chops and Punjabi wedding anthems layered on an aggressive festival beat.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Lazy Lamhe x Besharam Rang x Ghungroo (Thoda Pyaar Thoda Magic x Pathaan x War)",
-    artist: "Sultry vocal verses trading bars across a driving minimal-tech groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Touch Me Touch Me x Zara Zara Touch Me x Race Saanson Ki (Race)",
-    artist: "Iconic thriller dance vocal hooks intertwined over punchy four-on-the-floor house beats.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "High Rated Gabru x Ban Ja Rani x Suit Suit (Nawabzaade x Tumhari Sulu x Hindi Medium)",
-    artist: "Guru Randhawa hooks layered seamlessly over a driving tech rhythm.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Coca Cola Tu x She Move It Like x Buzz (Luka Chuppi x Badshah x Aastha Gill)",
-    artist: "Pop hooks matched with fast-paced rap cadences over a heavy festival drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Chhote Chhote Peg x Chaar Botal Vodka x Blue Eyes (SKTKS x Ragini MMS 2 x Honey Singh)",
-    artist: "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Kya Baat Ay 2.0 x Bijlee Bijlee x Naah (Govinda Naam Mera x Harrdy Sandhu)",
-    artist: "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Pappi Jhappi x Gandi Baat x Saree Ke Fall Sa (Govinda Naam Mera x R... Rajkumar)",
-    artist: "Mass-appeal vocal deliveries riding together on an aggressive electro drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Jeda Nasha x Jehda Nasha x Kusu Kusu (An Action Hero x Amar Jalal x Satyameva Jayate 2)",
-    artist: "Modern dancefloor vocals and hypnotic folk stems running simultaneously over driving club drums.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Alcoholia x Dhan Te Nan x Jee Karda (Vikram Vedha x Kaminey x Badlapur)",
-    artist: "Gritty street vocals and rock shouts colliding over heavy electronic basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Besharmi Ki Height x Hookah Bar x Subah Hone Na De (Main Tera Hero x Khiladi 786 x Desi Boyz)",
-    artist: "Peak-time commercial hooks locked into a massive mainstage festival build.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Fevicol Se x Munni Badnaam Hui x Chikni Chameli (Dabangg 2 x Dabangg x Agneepath)",
-    artist: "Classic rustic item-track hooks trading bars over aggressive festival brass stabs.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Sheila Ki Jawani x Chikni Chameli x O Saki Saki (Tees Maar Khan x Agneepath x Batla House)",
-    artist: "High-BPM item-track battle drop featuring rapid-fire female vocal chops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Dhoom Machale x Crazy Kiya Re x Kamli (Dhoom x Dhoom 2 x Dhoom 3)",
-    artist: "Iconic Dhoom franchise vocal runs intertwined over driving tech-house percussion.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Paisa Yeh Paisa x Bhaag D.K. Bose x Dhan Te Nan (Total Dhamaal x Delhi Belly x Kaminey)",
-    artist: "High-energy vocal madness slamming into aggressive rock-techno drops.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Slow Motion x First Class x Gallan Goodiyaan (Bharat x Kalank x Dil Dhadakne Do)",
-    artist: "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Kala Chashma x Dilliwaali Girlfriend x Kar Gayi Chull (Baar Baar Dekho x YJHD x Kapoor & Sons)",
-    artist: "Iconic party hooks colliding directly over a 128 BPM bounce drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Ainvayi Ainvayi x London Thumakda x Sadi Gali (Band Baaja Baaraat x Queen x Tanu Weds Manu)",
-    artist: "High-tempo wedding dance vocals layered into an aggressive club mix.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Muqabla x Zingaat x Malhari (Street Dancer 3D x Dhadak x Bajirao Mastani)",
-    artist: "Relentless regional percussion chops and chants riding alongside Prabhu Deva's synth hooks.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Tauba Tauba x Aankh Marey x Cheez Badi (Bad Newz x Simmba x Machine)",
-    artist: "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops over heavy bass.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Dilbar x Kamli x Gali Gali (Satyameva Jayate x Dhoom 3 x KGF)",
-    artist: "High-energy female vocal runs colliding over a driving tech-house bassline.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Tumse Milke Dil Ka Jo Haal x Chammak Challo x Criminal (Main Hoon Na x Ra.One)",
-    artist: "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Gali Gali x Tip Tip Barsa Paani x Choli Ke Peeche (KGF x Sooryavanshi x Crew)",
-    artist: "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna x Character Dheela (BB1 x Commando 3 x Ready)",
-    artist: "Iconic vocal chants overlaid directly across dark minimal techno synths.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Makhna x Dil Chori x Chhote Chhote Peg (Drive x SKTKS)",
-    artist: "Urban Punjabi-Hindi verses running together across a rolling bounce-house groove.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Chak Lein De x Sadda Haq x Jee Karda (Chandni Chowk to China x Rockstar x Badlapur)",
-    artist: "High-energy motivational rock vocals colliding over distorted electro saws.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Garmi x Muqabla x Aankh Marey (Street Dancer 3D x Simmba)",
-    artist: "Dance battle vocal chops layered together over an aggressive peak-time festival kick.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Lat Lag Gayi x Party On My Mind x Besharam Rang (Race 2 x Pathaan)",
-    artist: "Sultry dancefloor vocals running simultaneously over punchy basslines.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Tauba Tauba x Aaj Ki Raat x Aayi Nai (Bad Newz x Stree 2)",
-    artist: "Modern Punjabi flow, dark Hindi club vocals, and high-energy folk hooks slamming into a peak-time tech drop.",
-    film: "Remix",
-    isRemix: true,
-    isClub: true,
-    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    "title": "Aaj Ki Raat x Tauba Tauba (Stree 2 x Bad Newz)",
+    "artist": "Vocal hook exchange layered over a high-BPM driving tech groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "Badtameez Dil x Dilliwaali Girlfriend (Yeh Jawaani Hai Deewani)",
+    "artist": "Dual vocal hook collision over an aggressive electro-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Malhari x Zingaat (Bajirao Mastani x Dhadak)",
+    "artist": "Dhol rhythms from Malhari running under Zingaat's vocal shout with a festival brass drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Chaiyya Chaiyya x Dhan Te Nan (Dil Se x Kaminey)",
+    "artist": "Vintage Rahman rhythm chopped with Dhan Te Nan’s aggressive bass riff.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Besharam Rang x Ghungroo (Pathaan x War)",
+    "artist": "Seductive verses leading into Ghungroo’s high-energy vocal hook over a rolling tech drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Choli Ke Peeche x Aaj Ki Raat (Crew x Don)",
+    "artist": "Classic vocal cuts layered across a 128 BPM club drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Kala Chashma x Kar Gayi Chull (Baar Baar Dekho x Kapoor & Sons)",
+    "artist": "Punjabi hook running continuously over Chull’s synth build and drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Aankh Marey x Cheez Badi (Simmba x Machine)",
+    "artist": "Rapid vocal back-and-forth layered over an aggressive Brazilian bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Sadda Haq x Jee Karda (Rockstar x Badlapur)",
+    "artist": "Aggressive rock vocals layered over Jee Karda's heavy electronic drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Jhoome Jo Pathaan x Besharam Rang (Pathaan)",
+    "artist": "Pathaan vocal hook looped over Besharam Rang’s syncopated sub-bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Abhi Toh Party Shuru Hui Hai x Kar Gayi Chull (Khoobsurat x Kapoor & Sons)",
+    "artist": "Party rap cadence matched over peak-time bounce beats.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Dus Bahane x Right Here Right Now (Dus x Bluffmaster)",
+    "artist": "Dual 2000s club anthems layered over a punchy bass-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Subah Hone Na De x Desi Boyz (Desi Boyz)",
+    "artist": "Simultaneous vocal arrangement driving into a big-room electro build.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Hookah Bar x Party On My Mind (Khiladi 786 x Race 2)",
+    "artist": "Melodic hooks running together over a hard-hitting club synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Dope Shope x Angreji Beat (International Villager x Cocktail)",
+    "artist": "Honey Singh vocals layered over aggressive driving house bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Jai Jai Shivshankar x Ghungroo (War)",
+    "artist": "Hrithik dance track battle drop with fast-paced club kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Nashe Si Chadh Gayi x Ude Dil Befikre (Befikre)",
+    "artist": "High-energy vocal chop overlap backed by driving 126 BPM tech house.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Balam Pichkari x Badtameez Dil (Yeh Jawaani Hai Deewani)",
+    "artist": "Percussive folk build colliding with a peak-time stadium synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "The Humma Song x Muqabla (OK Jaanu x Street Dancer 3D)",
+    "artist": "Rahman melody mashup over a hard slap-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Show Me The Thumka x Pyaar Hota Kayi Baar Hai (Tu Jhoothi Main Makkaar)",
+    "artist": "Fast-paced Ranbir Kapoor club collision over punchy tech drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Chammak Challo x Criminal (Ra.One)",
+    "artist": "Akon vocals layered across Vishal-Shekhar’s electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "O Saki Saki x Dilbar (Batla House x Satyameva Jayate)",
+    "artist": "Nora Fatehi peak-time battle drop with dark Middle Eastern synth riffs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "London Thumakda x Gallan Goodiyaan (Queen x Dil Dhadakne Do)",
+    "artist": "Wedding energy forced into high-BPM festival basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Lungi Dance x One Two Three Four (Chennai Express)",
+    "artist": "South-Indian percussion clash layered over aggressive festival horns.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Illegal Weapon 2.0 x Morni Banke (Street Dancer 3D x Badhaai Ho)",
+    "artist": "Punjabi-Bolly club crossover on an aggressive bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Gandi Baat x Saree Ke Fall Sa (R... Rajkumar)",
+    "artist": "High-intensity mass-appeal vocal blend over modern electro drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Tamanche Pe Disco x Babli Badmaash (Bullett Raja x Shootout at Wadala)",
+    "artist": "Gritty street vocals over heavy electronic stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Khadke Glassy x Dil Chori (Jabariya Jodi x Sonu Ke Titu Ki Sweety)",
+    "artist": "Rap layers riding over hard club kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "First Class x Slow Motion (Kalank x Bharat)",
+    "artist": "Fast-tempo vocal exchange driving directly into a big-room drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Lahu Munh Lag Gaya x Nagada Sang Dhol (Goliyon Ki Raasleela Ram-Leela)",
+    "artist": "Folk garba rhythms amplified by aggressive club drops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Tune Maari Entriyaan x Jashn-E-Ishqa (Gunday)",
+    "artist": "High-octane commercial hooks over driving four-on-the-floor kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Dil Chori x Makhna (Sonu Ke Titu Ki Sweety x Drive)",
+    "artist": "Honey Singh vocals layered across a tech-house club rhythm.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Zinda Banda x Not Ramaiya Vastavaiya (Jawan)",
+    "artist": "Anirudh festival percussion clashing on a hard peak-time drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Genda Phool x Chittiyaan Kalaiyaan (Badshah x Roy)",
+    "artist": "Folk-rap vocals layered directly over rolling bass grooves.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Dhan Te Nan (Delhi Belly x Kaminey)",
+    "artist": "Relentless rock-rap overlap slamming into distorted electro saws.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Ek Do Teen x Tamma Tamma Again (Baaghi 2 x Badrinath Ki Dulhania)",
+    "artist": "Retro-remake vocal battle layered over a bouncy festival bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Taal Se Taal x Chaiyya Chaiyya (Taal x Dil Se)",
+    "artist": "Classical vocal runs colliding with fast-paced tribal house drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Dum Maaro Dum x Hare Ram Hare Krishna (Dum Maaro Dum x Bhool Bhulaiyaa)",
+    "artist": "Psychedelic vocal hooks over driving minimal techno bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Shanivaar Raati x Palat Tera Hero Idhar Hai (Main Tera Hero)",
+    "artist": "Energetic party vocals combined over a massive synth drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Sweety Tera Drama x Twist (Bareilly Ki Barfi x Love Aaj Kal)",
+    "artist": "Upbeat Punjabi-Bollywood hooks layered over modern dancefloor kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Paisa Paisa x Subah Hone Na De (De Dana Dan x Desi Boyz)",
+    "artist": "High-energy throwback hooks layered over an electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Vele x Student Of The Year (Disco Song) (Student of the Year)",
+    "artist": "Vishal-Shekhar college anthems colliding on peak-time club drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Khaike Paan Banaraswala x O O Jane Jaana (Don x Pyaar Kiya To Darna Kya)",
+    "artist": "Vintage energetic hooks reworked over a rolling club bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Aashiq Banaya Aapne x Jhalak Dikhla Jaa (Aashiq Banaya Aapne x Aksar)",
+    "artist": "Himesh Reshammiya vocal chops over a high-energy bass-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Rock Tha Party x Saturday Saturday (Rocky Handsome x Humpty Sharma Ki Dulhania)",
+    "artist": "Heavy club bass drops with dual party vocals.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Mundiyan To Bach Ke x Baaki Baatein Peene Baad (Baaghi 2 x Arjun Kanungo)",
+    "artist": "Tumbi hooks laced over aggressive club drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana (Rave Flip)",
+    "artist": "Nostalgic wedding vocal samples chopped aggressively over peak-time synths.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Ainvayi Ainvayi x Thug Le (Band Baaja Baaraat x Ladies vs Ricky Bahl)",
+    "artist": "Dynamic male/female vocal trade-offs over driving tech house.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Gali Gali x Dilbar (KGF x Satyameva Jayate)",
+    "artist": "Dual item-track hooks colliding over an aggressive festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Bhool Bhulaiyaa Title Track x Character Dheela (Bhool Bhulaiyaa x Ready)",
+    "artist": "High-tempo vocal rhythms running simultaneously into an electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Aaj Ki Raat x Tauba Tauba x Besharam Rang (Stree 2 x Bad Newz x Pathaan)",
+    "artist": "Vocal call-and-response running across a 128 BPM tech-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Badtameez Dil x Dilliwaali Girlfriend x Balam Pichkari (Yeh Jawaani Hai Deewani)",
+    "artist": "Triple Ranbir Kapoor vocal overlap layered on an electro-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Malhari x Zingaat x Dhan Te Nan (Bajirao Mastani x Dhadak x Kaminey)",
+    "artist": "Dhol percussion, energetic chants, and gritty rock stabs colliding over a massive festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Chaiyya Chaiyya x Dhan Te Nan x Sadda Haq (Dil Se x Kaminey x Rockstar)",
+    "artist": "Sukhwinder Singh hooks chopped over heavy rock-electro synths.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Besharam Rang x Ghungroo x Jai Jai Shivshankar (Pathaan x War)",
+    "artist": "Seductive verses building into dual Hrithik Roshan vocal hooks over a rolling bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Choli Ke Peeche x Aaj Ki Raat x O Saki Saki (Crew x Don x Batla House)",
+    "artist": "Triple female vocal battle built over a punchy bass-house kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Kala Chashma x Kar Gayi Chull x Abhi Toh Party (Baar Baar Dekho x Kapoor & Sons x Khoobsurat)",
+    "artist": "Non-stop party rap cadence layered over a peak-time bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Aankh Marey x Cheez Badi x Dilbar (Simmba x Machine x Satyameva Jayate)",
+    "artist": "90s remake vocal chops layered across an aggressive Brazilian bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Jhoome Jo Pathaan x Besharam Rang x Not Ramaiya Vastavaiya (Pathaan x Jawan)",
+    "artist": "SRK peak-time vocal trade-offs over driving four-on-the-floor kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Subah Hone Na De x Desi Boyz x Hookah Bar (Desi Boyz x Khiladi 786)",
+    "artist": "Dual Akshay Kumar hooks matched with Himesh Reshammiya melodies on a festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Dope Shope x Angreji Beat x Blue Eyes (International Villager x Cocktail)",
+    "artist": "Honey Singh rap verses and hooks intertwined over heavy tech-house bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Ghungroo x Nashe Si Chadh Gayi x Ude Dil Befikre (War x Befikre)",
+    "artist": "Vishal-Shekhar dance vocals overlapping on a driving 126 BPM groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "The Humma Song x Muqabla x Urvashi (OK Jaanu x Street Dancer 3D)",
+    "artist": "Classic A.R. Rahman dance melodies colliding over a hard slap-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Show Me The Thumka x Pyaar Hota Kayi Baar Hai x Badtameez Dil (Tu Jhoothi Main Makkaar x YJHD)",
+    "artist": "Triple Ranbir dance hooks driving into a high-energy tech drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Chammak Challo x Criminal x Right Here Right Now (Ra.One x Bluffmaster)",
+    "artist": "Akon vocals and retro hip-hop flows layered over aggressive electro saws.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "London Thumakda x Gallan Goodiyaan x Sadi Gali (Queen x Dil Dhadakne Do x Tanu Weds Manu)",
+    "artist": "Dhol rhythms and Punjabi-Bolly hooks layered over a high-BPM rave synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Lungi Dance x One Two Three Four x Zingaat (Chennai Express x Dhadak)",
+    "artist": "Fast-paced regional percussion clash driving an aggressive stadium brass drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Illegal Weapon 2.0 x Morni Banke x High Rated Gabru (Street Dancer 3D x Badhaai Ho x Nawabzaade)",
+    "artist": "Punjabi-Bollywood hooks trading off over an aggressive bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Gandi Baat x Saree Ke Fall Sa x Tamanche Pe Disco (R... Rajkumar x Bullett Raja)",
+    "artist": "Raw massy vocal delivery riding simultaneously on heavy electronic stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Khadke Glassy x Dil Chori x Makhna (Jabariya Jodi x Sonu Ke Titu Ki Sweety x Drive)",
+    "artist": "Triple party-rap vocal blend layered over a rolling tech groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Lahu Munh Lag Gaya x Nagada Sang Dhol x Dholida (Ram-Leela x Gangubai Kathiawadi)",
+    "artist": "High-intensity garba vocal layers colliding over an aggressive club drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Zinda Banda x Not Ramaiya Vastavaiya x Chaleya (Jawan)",
+    "artist": "Anirudh festival percussion and vocal hooks running continuously into a peak drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Genda Phool x Chittiyaan Kalaiyaan x Baby Doll (Badshah x Roy x Ragini MMS 2)",
+    "artist": "Melodic hooks running simultaneously over driving basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Dhan Te Nan x Jee Karda (Delhi Belly x Kaminey x Badlapur)",
+    "artist": "Aggressive rock-rap shouts crashing over distorted electro-house drops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Ek Do Teen x Tamma Tamma Again x Cheez Badi (Baaghi 2 x Badrinath Ki Dulhania x Machine)",
+    "artist": "90s remake hooks running in sync over a driving festival beat.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Taal Se Taal x Chaiyya Chaiyya x Ramta Jogi (Taal x Dil Se)",
+    "artist": "Classical vocal runs colliding over fast-paced tribal house drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Dum Maaro Dum x Hare Ram Hare Krishna x Bhool Bhulaiyaa (Dum Maaro Dum x Bhool Bhulaiyaa)",
+    "artist": "Psychedelic vocal hooks laced across minimal techno basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Shanivaar Raati x Palat Tera Hero Idhar Hai x Besharmi Ki Height (Main Tera Hero)",
+    "artist": "Non-stop Varun Dhawan vocal anthems built over a peak-time synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Sweety Tera Drama x Twist x Chor Bazari (Bareilly Ki Barfi x Love Aaj Kal)",
+    "artist": "Upbeat hooks running simultaneously into an aggressive electro build.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Paisa Paisa x Subah Hone Na De x Right Here Right Now (De Dana Dan x Desi Boyz x Bluffmaster)",
+    "artist": "2000s commercial party hooks colliding over a bass-heavy drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Vele x The Disco Song x Kukkad (Student of the Year)",
+    "artist": "Vishal-Shekhar college club anthems overlapping on massive mainstage kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Aashiq Banaya Aapne x Jhalak Dikhla Jaa x Naam Hai Tera (Aashiq Banaya Aapne x Aksar x Aap Kaa Surroor)",
+    "artist": "High-energy Himesh vocal chops over an aggressive bass-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Rock Tha Party x Saturday Saturday x Kar Gayi Chull (Rocky Handsome x HSKD x Kapoor & Sons)",
+    "artist": "Relentless party anthems driving into a hard club bounce.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Mundiyan To Bach Ke x Baaki Baatein Peene Baad x Kala Chashma (Baaghi 2 x Arjun Kanungo x Baar Baar Dekho)",
+    "artist": "Punjabi tumbi hooks colliding over an aggressive drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Ainvayi Ainvayi x Thug Le x Dum Dum (Band Baaja Baaraat x Ladies vs Ricky Bahl)",
+    "artist": "Dynamic vocal trade-offs running over high-BPM tech drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Gali Gali x Dilbar x O Saki Saki (KGF x Satyameva Jayate x Batla House)",
+    "artist": "Middle Eastern synth riffs and female item hooks over an aggressive drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Bhool Bhulaiyaa Title Track x Character Dheela x Dhinka Chika (Bhool Bhulaiyaa x Ready)",
+    "artist": "Fast vocal rhythms layered over an energetic electro-saw synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "First Class x Slow Motion x Dil Chori (Kalank x Bharat x SKTKS)",
+    "artist": "Fast-tempo vocal exchange driving directly into a big-room drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Dus Bahane x Right Here Right Now x Dus Bahane 2.0 (Dus x Bluffmaster x Baaghi 3)",
+    "artist": "Nostalgic vocal interplay backed by an aggressive tech drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Tune Maari Entriyaan x Jashn-E-Ishqa x Asalaam-E-Ishqum (Gunday)",
+    "artist": "High-octane commercial hooks over driving four-on-the-floor festival kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Balam Pichkari x Chitiyan Kalaiyan x Baby Doll (YJHD x Roy x Ragini MMS 2)",
+    "artist": "Playful vocal hooks locked into a driving club baseline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Khaike Paan Banaraswala x O O Jane Jaana x Jumma Chumma (Don x PKTDK x Hum)",
+    "artist": "Vintage high-energy vocals layered over an aggressive tech-house sub-bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana x Bole Chudiyan (HSKCS x HAHK x K3G)",
+    "artist": "Classic wedding hooks chopped aggressively over a 128 BPM rave drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Garmi x Muqabla x Illegal Weapon 2.0 (Street Dancer 3D)",
+    "artist": "High-impact dance battle vocals colliding over a heavy festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Party On My Mind x Lat Lag Gayi x Dilliwaali Girlfriend (Race 2 x YJHD)",
+    "artist": "Seductive dancefloor vocals running simultaneously over rolling basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Makhna x Proper Patola x Tareefan (Drive x Namaste England x Veere Di Wedding)",
+    "artist": "Sleek urban vocal cadences over a punchy slap-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Dil Dance Maare x Marjaani x Billo Rani (Tashan x Billu x Dhan Dhana Dhan Goal)",
+    "artist": "Fast-paced retro vocals running across an aggressive electronic drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Sooraj Dooba Hain x Subah Hone Na De x Senorita (Roy x Desi Boyz x ZNMD)",
+    "artist": "Melodic summer party hooks layered over a peak-time progressive drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Dilli Ki Raat x Darde Disco x It's The Time To Disco (Indoo Ki Jawani x Om Shanti Om x KHNH)",
+    "artist": "Disco vocal hooks mashed into an aggressive club beat.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Tauba Tauba x Aaj Ki Raat x Zingaat (Bad Newz x Stree 2 x Dhadak)",
+    "artist": "Modern Punjabi flow, high-energy Hindi club vocals, and folk chants colliding over a heavy peak-time drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Arjan Vailly x Malhari (Animal x Bajirao Mastani)",
+    "artist": "Raw Punjabi battle-cry energy overlaid on rapid dhol rhythms and brass festival stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "s-K7HinTAgA"
+  },
+  {
+    "title": "Aayi Nai x Zingaat (Stree 2 x Dhadak)",
+    "artist": "Upbeat regional Bhojpuri folk hook overlapping relentless Marathi street percussion.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "What Jhumka? x Show Me The Thumka (Rocky Aur Rani Kii Prem Kahaani x Tu Jhoothi Main Makkaar)",
+    "artist": "Fast-paced vocal exchanges driving into an aggressive tech-house bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xV22cenBGb8"
+  },
+  {
+    "title": "Sher Khul Gaye x Ghungroo (Fighter x War)",
+    "artist": "Dual Hrithik Roshan dance-groove vocals colliding over a driving four-on-the-floor club bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ChNT2E1jJQI"
+  },
+  {
+    "title": "Jamal Kudu x Dum Maaro Dum (Animal x Hare Rama Hare Krishna)",
+    "artist": "Chanted Iranian-folk vocal chops colliding with vintage psychedelic synth hooks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "luO5Fffkcnc"
+  },
+  {
+    "title": "Naina x Tareefan (Crew x Veere Di Wedding)",
+    "artist": "Diljit Dosanjh verses layered smoothly over Badshah’s urban club cadence.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Not Ramaiya Vastavaiya x Badtameez Dil (Jawan x Yeh Jawaani Hai Deewani)",
+    "artist": "Anirudh's high-tempo dance hook interwoven with Ranbir Kapoor’s rapid vocal run.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Ishq Jaisa Kuch x Nashe Si Chadh Gayi (Fighter x Befikre)",
+    "artist": "Seductive vocal chops trading bars over a rolling 126 BPM tech-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 (Bhool Bhulaiyaa 3 x Shehzada)",
+    "artist": "Kartik Aaryan peak-time anthems layered over aggressive electro synths.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Lutt Putt Gaya x Twist (Dunki x Love Aaj Kal)",
+    "artist": "Upbeat commercial hooks trading off over an aggressive festival bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Dance Ka Bhoot x Saree Ke Fall Sa (Brahmāstra x R... Rajkumar)",
+    "artist": "High-energy festival dhol build colliding directly with massy electro stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Baby Bring It On x Zingaat (Madgaon Express x Dhadak)",
+    "artist": "Dual high-BPM party anthems colliding on aggressive Dutch-house synth leads.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Chaleya x Apna Bana Le (Jawan x Bhediya)",
+    "artist": "Arijit Singh vocal stems intertwined over a driving festival progressive drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Pyaar Hota Kayi Baar Hai x Subah Hone Na De (Tu Jhoothi Main Makkaar x Desi Boyz)",
+    "artist": "High-energy commercial vocals running simultaneously into a peak-time club build.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Kaavaalaa (Hindi) x Muqabla (Jailer x Street Dancer 3D)",
+    "artist": "Infectious tribal dance hook layered across Prabhu Deva's electro-funk bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Main Nikla Gaddi Leke x Khadke Glassy (Gadar 2 x Jabariya Jodi)",
+    "artist": "High-octane Punjabi-folk shouts riding an aggressive bounce-house kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "Kusu Kusu x O Saki Saki (Satyameva Jayate 2 x Batla House)",
+    "artist": "Nora Fatehi item-track hooks running simultaneously over Middle Eastern synth stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Tip Tip Barsa Paani x Choli Ke Peeche (Sooryavanshi x Crew)",
+    "artist": "Classic 90s remake vocal chops layered across a distorted 128 BPM saw-wave drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Chandigarh Mein x Makhna (Good Newwz x Drive)",
+    "artist": "Polished urban party vocals traded off over an aggressive slap-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Sauda Khara Khara x Proper Patola (Good Newwz x Namaste England)",
+    "artist": "Heavy Punjabi club hooks colliding on a driving four-on-the-floor beat.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Coka 2.0 x Illegal Weapon 2.0 (Liger x Street Dancer 3D)",
+    "artist": "High-intensity Punjabi bass vocals layered directly over an aggressive club kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Ra Ra Rakkamma x Chikni Chameli (Vikrant Rona x Agneepath)",
+    "artist": "Fast-paced regional dance verses building into a massive stadium drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Param Sundari x Genda Phool (Mimi x Badshah)",
+    "artist": "Folk melodies and rap verses trading bars over a rolling sub-bass drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "BurjKhalifa x Dope Shope (Laxmii x International Villager)",
+    "artist": "Commercial urban party flows running side-by-side into an electronic club drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Nadiyon Paar x Chamma Chamma (Roohi x Fraud Saiyaan)",
+    "artist": "Hypnotic vocal loops driving into an aggressive Brazilian bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Morani Baga Ma x Morni Banke (Animal x Badhaai Ho)",
+    "artist": "Rajasthani folk vocals chopped and overlaid with modern Punjabi dancefloor rhythms.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Lazy Lamhe x Besharam Rang (Thoda Pyaar Thoda Magic x Pathaan)",
+    "artist": "Sultry vocal verses laced across a driving minimal-tech groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Touch Me Touch Me x Zara Zara Touch Me (Race)",
+    "artist": "Classic thriller dance vocals intertwined over punchy four-on-the-floor house beats.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "High Rated Gabru x Ban Ja Rani (Nawabzaade x Tumhari Sulu)",
+    "artist": "Guru Randhawa hooks layered seamlessly over a hard club rhythm.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Coca Cola Tu x She Move It Like (Luka Chuppi x Badshah)",
+    "artist": "Bouncy pop hooks matched with high-tempo rap cadences on a festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Chhote Chhote Peg x Chaar Botal Vodka (Sonu Ke Titu Ki Sweety x Ragini MMS 2)",
+    "artist": "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Buzz x Naah (Aastha Gill x Harrdy Sandhu)",
+    "artist": "Modern pop-club vocal duets layered over driving punchy kicks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Kya Baat Ay 2.0 x Bijlee Bijlee (Govinda Naam Mera x Harrdy Sandhu)",
+    "artist": "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Pappi Jhappi x Gandi Baat (Govinda Naam Mera x R... Rajkumar)",
+    "artist": "Quirky mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "Jeda Nasha x Jehda Nasha (An Action Hero x Amar Jalal)",
+    "artist": "Modern dancefloor remake vocals colliding with raw original folk stems over driving club drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Alcoholia x Dhan Te Nan (Vikram Vedha x Kaminey)",
+    "artist": "Raw, unhinged vocal chants layered over heavy rock-infused electronic basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Besharmi Ki Height x Hookah Bar (Main Tera Hero x Khiladi 786)",
+    "artist": "2010s peak-time commercial hooks locked into a massive festival build.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Fevicol Se x Munni Badnaam Hui (Dabangg 2 x Dabangg)",
+    "artist": "Classic rustic item-song vocal hooks trading bars over aggressive festival brass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Sheila Ki Jawani x Chikni Chameli (Tees Maar Khan x Agneepath)",
+    "artist": "High-BPM item track battle drop featuring dual female vocal hooks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Dhoom Machale x Crazy Kiya Re (Dhoom x Dhoom 2)",
+    "artist": "Sunidhi Chauhan vocal runs intertwined over driving tech-house percussion.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Paisa Yeh Paisa x Bhaag D.K. Bose (Total Dhamaal x Delhi Belly)",
+    "artist": "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Slow Motion x First Class (Bharat x Kalank)",
+    "artist": "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Kala Chashma x Dilliwaali Girlfriend (Baar Baar Dekho x Yeh Jawaani Hai Deewani)",
+    "artist": "Iconic hooklines colliding directly over a 128 BPM bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Ainvayi Ainvayi x London Thumakda (Band Baaja Baaraat x Queen)",
+    "artist": "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Muqabla x Zingaat (Street Dancer 3D x Dhadak)",
+    "artist": "Fast rhythmic shouting chops riding alongside Prabhu Deva's synth hooks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Tauba Tauba x Aankh Marey (Bad Newz x Simmba)",
+    "artist": "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Dilbar x Kamli (Satyameva Jayate x Dhoom 3)",
+    "artist": "High-energy vocal runs colliding over a driving tech-house bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Tumse Milke Dil Ka Jo Haal x Chammak Challo (Main Hoon Na x Ra.One)",
+    "artist": "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Gali Gali x Tip Tip Barsa Paani (KGF x Sooryavanshi)",
+    "artist": "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna (Bhool Bhulaiyaa x Commando 3)",
+    "artist": "Iconic vocal chants overlaid directly across dark minimal techno synths.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Arjan Vailly x Malhari x Dhan Te Nan (Animal x Bajirao Mastani x Kaminey)",
+    "artist": "Raw folk battle shouts and live dhol percussion colliding over an aggressive rock-electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Aayi Nai x Zingaat x Baby Bring It On (Stree 2 x Dhadak x Madgaon Express)",
+    "artist": "High-BPM Bhojpuri vocal hooks and Marathi street rhythms driving into an intense festival brass drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "What Jhumka? x Show Me The Thumka x Badtameez Dil (RRKPK x TJMM x YJHD)",
+    "artist": "Triple Ranbir-Alia era commercial vocal trade-offs layered over a 128 BPM bouncy tech-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Sher Khul Gaye x Ghungroo x Jai Jai Shivshankar (Fighter x War)",
+    "artist": "Hrithik Roshan dance-groove vocals trading bars across a driving four-on-the-floor electro bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Jamal Kudu x Dum Maaro Dum x Hare Ram Hare Krishna (Animal x Dum Maaro Dum x Bhool Bhulaiyaa)",
+    "artist": "Hypnotic Iranian vocal chops and retro hooks layered over a rolling minimal tech kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Naina x Tareefan x Proper Patola (Crew x Veere Di Wedding x Namaste England)",
+    "artist": "Urban Punjabi flows and female vocal harmonies intertwined across an aggressive slap-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Not Ramaiya Vastavaiya x Zinda Banda x Badtameez Dil (Jawan x YJHD)",
+    "artist": "Anirudh festival percussion and rapid vocal runs crashing into an electro-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Ishq Jaisa Kuch x Nashe Si Chadh Gayi x Besharam Rang (Fighter x Befikre x Pathaan)",
+    "artist": "Sultry Vishal-Shekhar verses and high-energy vocal hooks layered over a driving 126 BPM bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 x Dil Chori (BB3 x Shehzada x SKTKS)",
+    "artist": "High-energy Kartik Aaryan party anthems riding simultaneously on an aggressive saw-wave synth.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Lutt Putt Gaya x Twist x Chor Bazari (Dunki x Love Aaj Kal)",
+    "artist": "Upbeat vocal cadences trading off over an aggressive four-on-the-floor festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Dance Ka Bhoot x Saree Ke Fall Sa x Gandi Baat (Brahmāstra x R... Rajkumar)",
+    "artist": "Festival dhol build matched with raw massy vocal shouts over heavy electronic stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Kaavaalaa (Hindi) x Muqabla x The Humma Song (Jailer x Street Dancer 3D x OK Jaanu)",
+    "artist": "Infectious tribal rhythm layered with iconic dance hooks over an aggressive slap-house kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Main Nikla Gaddi Leke x Khadke Glassy x Dil Chori (Gadar 2 x Jabariya Jodi x SKTKS)",
+    "artist": "High-octane Punjabi-folk shouts riding continuously on a bouncy bass-house drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Kusu Kusu x O Saki Saki x Dilbar (Satyameva Jayate 2 x Batla House x Satyameva Jayate)",
+    "artist": "Triple Nora Fatehi item hooks running simultaneously over dark Middle Eastern synth riffs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Tip Tip Barsa Paani x Choli Ke Peeche x Aaj Ki Raat (Sooryavanshi x Crew x Stree 2)",
+    "artist": "90s remake vocal chops running in sync over an aggressive 128 BPM club drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Chandigarh Mein x Makhna x Proper Patola (Good Newwz x Drive x Namaste England)",
+    "artist": "Urban party vocals trading off seamlessly over a punchy club groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Sauda Khara Khara x Coka 2.0 x Illegal Weapon 2.0 (Good Newwz x Liger x Street Dancer 3D)",
+    "artist": "Heavy Punjabi club hooks and rapid female vocals colliding on a hard four-on-the-floor beat.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Ra Ra Rakkamma x Chikni Chameli x Sheila Ki Jawani (Vikrant Rona x Agneepath x Tees Maar Khan)",
+    "artist": "Fast-paced regional dance verses and classic item hooks crashing into a massive stadium drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Param Sundari x Genda Phool x Chittiyaan Kalaiyaan (Mimi x Badshah x Roy)",
+    "artist": "Folk melodies and female pop vocal chops riding together on a rolling sub-bass drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "BurjKhalifa x Dope Shope x Angreji Beat (Laxmii x International Villager)",
+    "artist": "Commercial urban party flows running side-by-side into a driving electronic drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "Nadiyon Paar x Chamma Chamma x Aankh Marey (Roohi x Fraud Saiyaan x Simmba)",
+    "artist": "Hypnotic dance loops and party hooks driving an aggressive Brazilian bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Morani Baga Ma x Morni Banke x London Thumakda (Animal x Badhaai Ho x Queen)",
+    "artist": "Rajasthani folk vocal chops and Punjabi wedding anthems layered on an aggressive festival beat.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Lazy Lamhe x Besharam Rang x Ghungroo (Thoda Pyaar Thoda Magic x Pathaan x War)",
+    "artist": "Sultry vocal verses trading bars across a driving minimal-tech groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Touch Me Touch Me x Zara Zara Touch Me x Race Saanson Ki (Race)",
+    "artist": "Iconic thriller dance vocal hooks intertwined over punchy four-on-the-floor house beats.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "High Rated Gabru x Ban Ja Rani x Suit Suit (Nawabzaade x Tumhari Sulu x Hindi Medium)",
+    "artist": "Guru Randhawa hooks layered seamlessly over a driving tech rhythm.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Coca Cola Tu x She Move It Like x Buzz (Luka Chuppi x Badshah x Aastha Gill)",
+    "artist": "Pop hooks matched with fast-paced rap cadences over a heavy festival drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Chhote Chhote Peg x Chaar Botal Vodka x Blue Eyes (SKTKS x Ragini MMS 2 x Honey Singh)",
+    "artist": "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Kya Baat Ay 2.0 x Bijlee Bijlee x Naah (Govinda Naam Mera x Harrdy Sandhu)",
+    "artist": "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Pappi Jhappi x Gandi Baat x Saree Ke Fall Sa (Govinda Naam Mera x R... Rajkumar)",
+    "artist": "Mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Jeda Nasha x Jehda Nasha x Kusu Kusu (An Action Hero x Amar Jalal x Satyameva Jayate 2)",
+    "artist": "Modern dancefloor vocals and hypnotic folk stems running simultaneously over driving club drums.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Alcoholia x Dhan Te Nan x Jee Karda (Vikram Vedha x Kaminey x Badlapur)",
+    "artist": "Gritty street vocals and rock shouts colliding over heavy electronic basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Besharmi Ki Height x Hookah Bar x Subah Hone Na De (Main Tera Hero x Khiladi 786 x Desi Boyz)",
+    "artist": "Peak-time commercial hooks locked into a massive mainstage festival build.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
+  },
+  {
+    "title": "Fevicol Se x Munni Badnaam Hui x Chikni Chameli (Dabangg 2 x Dabangg x Agneepath)",
+    "artist": "Classic rustic item-track hooks trading bars over aggressive festival brass stabs.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mLbG_sQcsBY"
+  },
+  {
+    "title": "Sheila Ki Jawani x Chikni Chameli x O Saki Saki (Tees Maar Khan x Agneepath x Batla House)",
+    "artist": "High-BPM item-track battle drop featuring rapid-fire female vocal chops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zEsVOsLZo8s"
+  },
+  {
+    "title": "Dhoom Machale x Crazy Kiya Re x Kamli (Dhoom x Dhoom 2 x Dhoom 3)",
+    "artist": "Iconic Dhoom franchise vocal runs intertwined over driving tech-house percussion.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc"
+  },
+  {
+    "title": "Paisa Yeh Paisa x Bhaag D.K. Bose x Dhan Te Nan (Total Dhamaal x Delhi Belly x Kaminey)",
+    "artist": "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w1p7N0vD5z4"
+  },
+  {
+    "title": "Slow Motion x First Class x Gallan Goodiyaan (Bharat x Kalank x Dil Dhadakne Do)",
+    "artist": "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r8P_Gvj7_7E"
+  },
+  {
+    "title": "Kala Chashma x Dilliwaali Girlfriend x Kar Gayi Chull (Baar Baar Dekho x YJHD x Kapoor & Sons)",
+    "artist": "Iconic party hooks colliding directly over a 128 BPM bounce drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PvWhAlMGam4"
+  },
+  {
+    "title": "Ainvayi Ainvayi x London Thumakda x Sadi Gali (Band Baaja Baaraat x Queen x Tanu Weds Manu)",
+    "artist": "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BqqeZxesXq8"
+  },
+  {
+    "title": "Muqabla x Zingaat x Malhari (Street Dancer 3D x Dhadak x Bajirao Mastani)",
+    "artist": "Relentless regional percussion chops and chants riding alongside Prabhu Deva's synth hooks.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w"
+  },
+  {
+    "title": "Tauba Tauba x Aankh Marey x Cheez Badi (Bad Newz x Simmba x Machine)",
+    "artist": "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops over heavy bass.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Dilbar x Kamli x Gali Gali (Satyameva Jayate x Dhoom 3 x KGF)",
+    "artist": "High-energy female vocal runs colliding over a driving tech-house bassline.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9gpXOxiNIok"
+  },
+  {
+    "title": "Tumse Milke Dil Ka Jo Haal x Chammak Challo x Criminal (Main Hoon Na x Ra.One)",
+    "artist": "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNedQIpgdak"
+  },
+  {
+    "title": "Gali Gali x Tip Tip Barsa Paani x Choli Ke Peeche (KGF x Sooryavanshi x Crew)",
+    "artist": "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G-YRF-AE6p0"
+  },
+  {
+    "title": "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna x Character Dheela (BB1 x Commando 3 x Ready)",
+    "artist": "Iconic vocal chants overlaid directly across dark minimal techno synths.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kAmcygnlW0w"
+  },
+  {
+    "title": "Makhna x Dil Chori x Chhote Chhote Peg (Drive x SKTKS)",
+    "artist": "Urban Punjabi-Hindi verses running together across a rolling bounce-house groove.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qKq4M3K6U-g"
+  },
+  {
+    "title": "Chak Lein De x Sadda Haq x Jee Karda (Chandni Chowk to China x Rockstar x Badlapur)",
+    "artist": "High-energy motivational rock vocals colliding over distorted electro saws.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8ZhwlX2EDiA"
+  },
+  {
+    "title": "Garmi x Muqabla x Aankh Marey (Street Dancer 3D x Simmba)",
+    "artist": "Dance battle vocal chops layered together over an aggressive peak-time festival kick.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Gv_4t6iF8t0"
+  },
+  {
+    "title": "Lat Lag Gayi x Party On My Mind x Besharam Rang (Race 2 x Pathaan)",
+    "artist": "Sultry dancefloor vocals running simultaneously over punchy basslines.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9xGj5g_bZ_g"
+  },
+  {
+    "title": "Tauba Tauba x Aaj Ki Raat x Aayi Nai (Bad Newz x Stree 2)",
+    "artist": "Modern Punjabi flow, dark Hindi club vocals, and high-energy folk hooks slamming into a peak-time tech drop.",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxW5y24s3oU"
   }
 ];
 
-
-const listHaryanvi = [
-  {
-    title: "Chambal Ka Daku (Heavy Bass Drop Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "aOHOAMAYGIU"
-  },
-  {
-    title: "Systum (Tech-House Club Mix)",
-    artist: "Masoom Sharma & Elvish Yadav",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "NDtK4PEJ58c"
-  },
-  {
-    title: "2 Numbari (Sub-Bass Club Rework)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "MVF-GCOY2kI"
-  },
-  {
-    title: "Badnam Gabru (Drill Bass Flip)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "LxSJrwi8oqY"
-  },
-  {
-    title: "Kala Daman (Extended Bass Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ZZ86YrRjIOs"
-  },
-  {
-    title: "Dada Sadhu (Hard Trap Festival Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Jail Karawegi (Peak-Time Electro Drop)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Badmashi (Low-End Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Gunda Raj (Heavy Bassline Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Kalesh (Industrial Bass Drop)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Raaj (Sub-Woofer Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Pistol (Trap Bass Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Randa Party (Club Bounce Edit)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Boli Haryanvi (Hard Dance Rework)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Moto (Festival Bassline Edit)",
-    artist: "Diler Kharkiya & Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Albelo (Club Tech Flip)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Diler Harkesh (Aggressive Bass Mix)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Fauji (Extended Peak-Time Edit)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Feel (Club Slap-House Mix)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Parindey (Tech Bass Rework)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Yaar Ki Shaadi (High-BPM Club Mix)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Feelings (Deep Bassline Flip)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Baazigar (Drill Drop Mix)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Army (Hardstyle Club Edit)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Sweet Poison (Tech-House Drop)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Yaariyan (Extended Club Edit)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Gangwar (Aggressive Trap Mix)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Raajneeti (Hard Bass Rework)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Gaam Ka Desi (UK Drill Club Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Haryanvi Swag (Peak-Time Electro Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Desi Desi Na Bolya Kar (Hard Slap Mix)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "2 Raflaan (Tech Bass Edit)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Bapu Tera Putt (Bassline Extended Edit)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Badmashi Ka Rog (Heavy Bass Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Asla (Hard Trap Drop Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Haryane Ka Chhora (Club Punch Rework)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Choudhar Jaat Ki (Sub-Bass Club Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Solid Body (Extended Bass Flip)",
-    artist: "Raju Punjabi & Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Sandal (Tech-House Edit)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Zero Figure (High-Energy Club Rework)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Tu Cheez Lajawab (Peak-Time Electro Edit)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Aala Re Aala (Hard Trap Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Fair Lovely (Slap-House Edit)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Desi Ka Pavva (Extended Bassline)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Kache Kateinge (Club Bounce Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Bholenath (Psy-Trance Club Mix)",
-    artist: "Kaka",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Bhole Baba (Trance Festival Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Bam Lahiri (Industrial Rave Mix)",
-    artist: "Traditional / DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Damru Bajaya (Psy Bass Edit)",
-    artist: "Narender Bhagana",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Mahadev (Peak-Time Trap Mix)",
-    artist: "Kaka",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Bahu Kale Ki (Slap-House Club Mix)",
-    artist: "Ajay Hooda & Gajender Phogat",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Gypsy / Balam Thanedar (Electro-Saw Drop)",
-    artist: "GD Kaur & Pranjal Dahiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "52 Gaj Ka Daman (Festival Bounce Edit)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Kabootar (High-Energy Dance Mix)",
-    artist: "Renuka Panwar & Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Matak Chalungi (Club Tech Flip)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "DJ Pe Nachungi (Extended Club Edit)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Chhatri (Slap-House Rework)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Balam Ka System (Brazilian Bass Flip)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Lala Lala Lori (Club House Rework)",
-    artist: "Fazilpuria & Afsana Khan",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Chhaliya (Peak-Time Dance Mix)",
-    artist: "Ajay Hooda & Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Tagdi (Big-Room Festival Drop)",
-    artist: "Ajay Hooda & Gagan Haryanvi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Goli Chal Javegi (Bassline Club Edit)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Gajban Pani Ne Chali (High-BPM Electro Mix)",
-    artist: "Vishvajeet Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Kothe Upar Kothri / Ghungroo (Tech-House Edit)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Bandook Chalegi (Festival Hardstyle Drop)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Teri Aakhya Ka Yo Kajal (Club Extended Mix)",
-    artist: "DC Madana & Sapna",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Bahu Jamidar Ki (Slap-Bass Edit)",
-    artist: "Vinod Chimpa",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Dhanak Ka Tota (Tech-House Mix)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Gore Tan Pe Marjani (Extended Club Flip)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Madam Baith Bolero Mein (Hard Dance Edit)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Teri Lat Lag Jagi (Sub-Bass Club Mix)",
-    artist: "Sonu Sharma & Ruchika",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Thada Bhartar (Club Bounce Edit)",
-    artist: "Raju Punjabi & Sushila Thakar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Chetak (High-Energy Electro Mix)",
-    artist: "Raj Mawar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Laad Ladaun (Club Slap Rework)",
-    artist: "Raj Mawar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Kasoota (Hard Bass Club Edit)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Jimmy Choo (Tech House Drop)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Pallo Latke (Haryanvi Trap Flip)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Angoor (Extended Club Mix)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Koka (High-BPM Dance Rework)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Balam Chhoto (Slap Bass Mix)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Chhori Tu Pataka (Peak-Time Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Jhumke (Club Tech Rework)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Tokk (Sub-Bass Extended Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Goli Wargi (Hardstyle Club Flip)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Nakhro (Club Tech Edit)",
-    artist: "Raj Mawar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Gulabo (Festival Bassline Mix)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Mote Mote Nain (Slap House Flip)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Padosan (Club Bounce Edit)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Sharab (Extended Bass Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Hookah (Hard Trap Club Edit)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Yaar Ki Gaadi (Drill Bassline Rework)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Bullet (Sub-Woofer Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Scorpian (Aggressive Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Kaafila (Industrial Bass Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Route (High-BPM Club Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Desi Look (Peak-Time Bounce)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Suit Ki Kadhai (Tech House Flip)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Dori (Slap-Bass Club Mix)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Hathiyar (Hard Trap Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Parcha (Sub-Bass Peak-Time Flip)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Kar Gayi Chull (Haryanvi Peak-Time Mix)",
-    artist: "Badshah & Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Chull 2.0 (Club Slap-House Rework)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "2 Many Girls (Extended Club Mix)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Haryana Roadways (High-BPM Electro Mix)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Billori Akh (Club Tech Flip)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Jalebi Juda (Slap-House Rework)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Kala Tikka (Extended Club Mix)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Lal Dupatta (Tech-House Club Edit)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Payal Chham Chham (Festival Bounce Mix)",
-    artist: "Vishvajeet Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Dil Ki Dhadkan (Sub-Bass Club Edit)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Sapna Ka Dance (Electro Rave Edit)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Engine Ki Seeti (Haryanvi Bass Mix)",
-    artist: "Traditional / DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Chunni Mein (Slap-Bass Rework)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Gaam Ki Haveli (Extended Club Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Thar (Heavy Bassline Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Fortuner (Drill Drop Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "32 Bore (Hard Trap Rework)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Raflaan (Peak-Time Bass Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Badmash (Industrial Club Edit)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Yaaran Da Tashan (High-BPM Edit)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Chhori Bindass (Club Bounce Mix)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Rotiyaan (Tech House Club Edit)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Doodh Ki Katori (Slap-House Mix)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Tik Tok (Festival Bassline Edit)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Gaam Ka Chhora (Extended Peak-Time Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Mitti Ka Khilona (Sub-Bass Rework)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Haveli Pe Aa Jana (Hard Trap Club Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Jija Tu Kala (High-Energy Dance Mix)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Bhabhi Aali (Club Tech Rework)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Sarpanch (Sub-Woofer Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Thekedar (Slap-Bass Extended Mix)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Gaddi Fortuner (Peak-Time Bounce)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Jatt Brand (Club Bassline Rework)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Shehar Ki Chhori (Tech-House Drop)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Akhada (Hardstyle Festival Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Desi Gym (High-BPM Workout Club Edit)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Fauji Ki Bandook (Sub-Bass Club Edit)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Daaru Ki Botal (Extended Club Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Peg Patiala (Haryanvi Bassline Rework)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Chora Jaat Ka (Aggressive Trap Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Gujjar Ka Kharcha (Heavy Bass Drop)",
-    artist: "Traditional / DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Rajputana Swag (Peak-Time Festival Mix)",
-    artist: "DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Yadav Brand (Hard Bounce Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Jaat Land (Industrial Bass Rework)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Randa Squad (High-Energy Dance Edit)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Bachelor Party (Tech-House Flip)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Sharaabi Yaar (Extended Club Bass)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Gaam Ka Pradhan (Sub-Bass Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Chhori Patola (Slap-House Edit)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "London Ka Tour (Club Bounce Mix)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Haryanvi Mashup 1 (Peak-Time Club Mix)",
-    artist: "Laddi Gill & Gurmeet Bhadana",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Haryanvi Mashup 2 (Extended Bassline Rework)",
-    artist: "Totaram Sondhiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Haryanvi Mashup 3 (Big-Room Festival Edit)",
-    artist: "Laddi Gill",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Haryanvi Mashup 4 (High-Energy Club Flip)",
-    artist: "Totaram Sondhiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Haryanvi Mashup 5 (Hard Trap & Slap Mix)",
-    artist: "Totaram Sondhiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Haryanvi Mashup 6 (Industrial Bass Edit)",
-    artist: "Laddi Gill",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Haryanvi Mashup 7 (Tech-House Extended Mix)",
-    artist: "Gurmeet Bhadana",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Haryanvi Mashup 8 (Sub-Woofer Peak Edit)",
-    artist: "Totaram Sondhiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Haryanvi Mashup 9 (Festival Bounce Mix)",
-    artist: "Laddi Gill",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Haryanvi Mashup 10 (Hardstyle Club Rework)",
-    artist: "Totaram Sondhiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Nonstop Haryanvi DJ War Edit (Part 1)",
-    artist: "Club Mix",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Nonstop Haryanvi DJ War Edit (Part 2)",
-    artist: "Bassline Mix",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Balamji (High-BPM Dance Rework)",
-    artist: "Renuka Panwar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Chunni Sitare Wali (Slap-House Club Mix)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Ghungroo Tut Jaega (Sub-Bass Edit)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "5KKro3nIHCw"
-  },
-  {
-    title: "Badli Badli Laage (Peak-Time Electro Mix)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "English Medium (Club Bounce Edit)",
-    artist: "Sapna Choudhary",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "URxsOjGMg4w"
-  },
-  {
-    title: "Chetak 2.0 (High-Energy Bassline Rework)",
-    artist: "Raj Mawar",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "xDwTiMQ-sJU"
-  },
-  {
-    title: "Raasleela (Tech-House Festival Flip)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "g1vB19nUpAA"
-  },
-  {
-    title: "Kaalja (Slap-Bass Club Mix)",
-    artist: "Diler Kharkiya",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "iSHRJYXv8zU"
-  },
-  {
-    title: "Aam Jaat (Sub-Woofer Club Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PwH8HHUADuo"
-  },
-  {
-    title: "Haryana Hood (Drill Trap Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Yaari Ka Rutba (Hard Trap Rework)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Don (Aggressive Bassline Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Baap Baap Hota Hai (Industrial Rave Edit)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Gadi Number (Slap-House Club Mix)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Red Suit (Tech-House Extended Mix)",
-    artist: "Surender Romio",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "Ghoonghat Ki Oot Mein (Peak-Time Electro Drop)",
-    artist: "Ruchika Jangid",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Bhabhi Ri Bhabhi (Club Bounce Edit)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Khap Panchayat (Sub-Bass Hard Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Police Ki Gaddi (Trap Bass Edit)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Kacheri (Hardstyle Club Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
-  },
-  {
-    title: "Mukadma (Sub-Woofer Bassline)",
-    artist: "Sumit Goswami",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "BqqeZxesXq8"
-  },
-  {
-    title: "Zaildar (High-BPM Electro Mix)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNwq-N2Y76w"
-  },
-  {
-    title: "Landlord (Club Tech Flip)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "ahaUNhScopE"
-  },
-  {
-    title: "Pehalwan (Workout Bassline Mix)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9gpXOxiNIok"
-  },
-  {
-    title: "Dangal (Heavy Dhol Bass Drop)",
-    artist: "Traditional / DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "DNedQIpgdak"
-  },
-  {
-    title: "Akhada Bass (Industrial Rave Rework)",
-    artist: "Masoom Sharma",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "G-YRF-AE6p0"
-  },
-  {
-    title: "Gaam Ka Tashan (Extended Club Edit)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "kAmcygnlW0w"
-  },
-  {
-    title: "Chhori Tu Haryana Ki (Slap-House Rework)",
-    artist: "Fazilpuria",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "qKq4M3K6U-g"
-  },
-  {
-    title: "Desi Swagger (Club Bounce Mix)",
-    artist: "MD KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "8ZhwlX2EDiA"
-  },
-  {
-    title: "Royal Jaat (Festival Big-Room Mix)",
-    artist: "DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "Gv_4t6iF8t0"
-  },
-  {
-    title: "Haryanvi Swag Anthem (Peak-Time Edit)",
-    artist: "KD",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "9xGj5g_bZ_g"
-  },
-  {
-    title: "Bass Rani Haryanvi Rework (Trap Flip)",
-    artist: "Nucleya Style DJ Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "YxW5y24s3oU"
-  },
-  {
-    title: "Baaraat Dance (High-Energy Dhol Mix)",
-    artist: "Ajay Hooda",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "mLbG_sQcsBY"
-  },
-  {
-    title: "DJ Wale Babu Haryanvi Flip (Tech House Mix)",
-    artist: "Club Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "zEsVOsLZo8s"
-  },
-  {
-    title: "Khet Khaliyan (Sub-Bass Extended Rework)",
-    artist: "Raju Punjabi",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "eQWK1Iz_qBc"
-  },
-  {
-    title: "Haryanvi Drill Nonstop Set (Vol. 1)",
-    artist: "Underground Mix",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "w1p7N0vD5z4"
-  },
-  {
-    title: "Peak-Time Desi Techno Edit (Vol. 2)",
-    artist: "Hardstyle Rework",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "r8P_Gvj7_7E"
-  },
-  {
-    title: "Haryanvi Bass War Finale (130",
-    artist: "140 BPM Mainstage Drop) – Festival Edit",
-    film: "Haryanvi",
-    isRemix: true,
-    isHaryanvi: true,
-    youtubeId: "PvWhAlMGam4"
+const listClub: any[] = [
+  {
+    "title": "Tauba Tauba x Losing It",
+    "artist": "Karan Aujla x FISHER",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE",
+    "videoTitle": "Tauba Tauba X Losing it | Bolly Tech | Karan aujla | Fisher | ( Mashup by Xemx )",
+    "author": "XEMX"
+  },
+  {
+    "title": "Aaj Ki Raat x Tremor",
+    "artist": "Stree 2 x DVLM & Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-nobw5Szkhk",
+    "videoTitle": "Dimitri Vegas, Martin Garrix, Like Mike - Tremor (Mashup) | DJ V-REN",
+    "author": "DJ V-REN"
+  },
+  {
+    "title": "Winning Speech x Laserbeam",
+    "artist": "Karan Aujla x Ray Volpe",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "EyI2ChkxL0c",
+    "videoTitle": "Ray Volpe - Laserbeam (Sullivan King Remix)",
+    "author": "Disciple"
+  },
+  {
+    "title": "Malhari x Booyah",
+    "artist": "Bajirao Mastani x Showtek",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "X7dJtvenmmE",
+    "videoTitle": "Pinga (feat. Sito Rocks) (Radio Mix)",
+    "author": "Sak Noel - Topic"
+  },
+  {
+    "title": "Apna Bana Le x Laserbeam",
+    "artist": "Bhediya x Ray Volpe",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ytz7qSH9QPI",
+    "videoTitle": "Ray Volpe - Laserbeam",
+    "author": "Disciple"
+  },
+  {
+    "title": "Kesariya x Tremor",
+    "artist": "Brahmāstra x Dimitri Vegas & Like Mike",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zPPgu_jCTv8",
+    "videoTitle": "Kesariya x Limitless | Arjit Singh x Martin Garrix and Mesto | MgO Mashup",
+    "author": "MgO Music"
+  },
+  {
+    "title": "Tum Hi Ho x Spaceman",
+    "artist": "Aashiqui 2 x Hardwell",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DXPqHnc9Z7k",
+    "videoTitle": "Bidhan Lama Mashup ~ Foxynepal",
+    "author": "Foxynepal"
+  },
+  {
+    "title": "Raataan Lambiyan x Mammoth",
+    "artist": "Shershaah x DVLM & MOGUAI",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "S2BOXJG71FY",
+    "videoTitle": "Raataan Lambiyan (Lyrics) | Jubin Nautiyal | Asees Kaur | Tanishk Bagchi",
+    "author": "The Other Side"
+  },
+  {
+    "title": "Kabira x Booyah",
+    "artist": "Yeh Jawaani Hai Deewani x Showtek",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "jHNNMj5bNQw",
+    "videoTitle": "\"Kabira Full Song\" Yeh Jawaani Hai Deewani | Pritam | Ranbir Kapoor, Deepika Padukone",
+    "author": "T-Series"
+  },
+  {
+    "title": "Pee Loon x Losing It",
+    "artist": "Once Upon A Time In Mumbaai x FISHER",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "W6hU_lBfQxM",
+    "videoTitle": "Pee Loon Tere Hoton Ki Song | Once Upon A Time in Mumbai | Emraan Hashmi",
+    "author": "T-Series"
+  },
+  {
+    "title": "Tum Se Hi x Satisfaction",
+    "artist": "Jab We Met x Benny Benassi",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2_wpOmM1d8w",
+    "videoTitle": "Benny Benassi & Chris Brown - Paradise (Official Video)",
+    "author": "Ultra Records"
+  },
+  {
+    "title": "Zaalima x Drugs From Amsterdam",
+    "artist": "Raees x Mau P",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Pirzg-F_aag",
+    "videoTitle": "Chaar Diwaari X @raftaarmusic  - FAREBI (Official Video) | Pyaar Diwaari Arc 3",
+    "author": "Chaar Diwaari"
+  },
+  {
+    "title": "Dil Sambhal Ja Zara x Animals",
+    "artist": "Murder 2 x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tUFgMRS1CG8",
+    "videoTitle": "Aay Dil SamBal ja ZARA HQ  M LOVEB   YouTube",
+    "author": "Ihtesham ahmad"
+  },
+  {
+    "title": "Khuda Jaane x Kernkraft 400",
+    "artist": "Bachna Ae Haseeno x Zombie Nation",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "SIoPCd8onW8",
+    "videoTitle": "jason derulo feat nicki minaj & ty dolla $ign - swalla remix kaanyh",
+    "author": "kaanyh music"
+  },
+  {
+    "title": "Subhanallah x Turn Up The Speakers",
+    "artist": "YJHD x Afrojack & Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "CC699k4B_Cg",
+    "videoTitle": "Chand Sifarish 8D Audio Song - Fanna (HIGH QUALITY) 🎧",
+    "author": "8D Bollywood Gaana "
+  },
+  {
+    "title": "Ishq Sufiyana x Tsunami",
+    "artist": "The Dirty Picture x DVBBS & Borgeous",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "g4duF9B8Q80",
+    "videoTitle": "DJ Shaan Demo Drop + Special Guest! Session seven!",
+    "author": "SHAAN"
+  },
+  {
+    "title": "Hasi Ban Gaye x Party Till We Die",
+    "artist": "Hamari Adhuri Kahani x MAKJ & Timmy Trumpet",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rGGLINL6xfc",
+    "videoTitle": "Excuses X Bewafa - (Mashup) AP Dhillon & Imran Khan | DJ Sumit Rajwanshi | SR Music Official",
+    "author": "SR Music Official "
+  },
+  {
+    "title": "Soch Na Sake x Rave Tool",
+    "artist": "Airlift x Industrial Drop Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KU6PF32U6V0",
+    "videoTitle": "SOCH NA SAKE VS LET IT QUIT - APOORV VERMA 2016 DEEP HOUSE MASHUP",
+    "author": "Apoorv Verma Official"
+  },
+  {
+    "title": "Agar Tum Saath Ho x Bonkers",
+    "artist": "Tamasha x Dizzee Rascal",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "wmAhQSolKjo",
+    "videoTitle": "Psycho Re - Lyrical Video | ABCD | Prabhu Deva, Ganesh Acharya, Remo | Sachin & Jigar | Mika Singh",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Chaleya x Ferrari",
+    "artist": "Jawan x James Hype",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ftg56LQ1DCQ",
+    "videoTitle": "Summer Ferrari | Dj Amar | VIP Edit | Mashup | Ap Dhillon | James hype",
+    "author": "AMAR GUPTA"
+  },
+  {
+    "title": "Jiyein Kyun x Move Your Body",
+    "artist": "Dum Maaro Dum x Öwnboss",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TjQu5x5VyrU",
+    "videoTitle": "Neva Fallin'",
+    "author": "Mister Nucci - Topic"
+  },
+  {
+    "title": "Mast Magan x Do It To It",
+    "artist": "2 States x ACRAZE",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "pT_XLf0h8tk",
+    "videoTitle": "The Place of Dragons: A Mystery 🐉🔍 | A Thrilling Suspenseful Adventure by William Le Queux",
+    "author": "Storytime Haven"
+  },
+  {
+    "title": "Sun Saathiya x Bounce Generation",
+    "artist": "ABCD 2 x TJR & VINAI",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bN5HaInImG4",
+    "videoTitle": "Sun Saathiya 8D Audio Song - Disney's ABCD 2 (Varun Dhawan , Shraddha Kapoor )",
+    "author": "8D Bollywood Gaana "
+  },
+  {
+    "title": "Jeena Jeena x Heads Will Roll",
+    "artist": "Badlapur x A-Trak",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nmjWFiW5Ty4",
+    "videoTitle": "Dheeme Dheeme (Pati Patni Aur Woh) | DJ G-Trak Remix | Promo",
+    "author": "DJ G-Trak"
+  },
+  {
+    "title": "Tere Sang Yaara x Riverside",
+    "artist": "Rustom x Sidney Samson",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5gwy0gcjIkI",
+    "videoTitle": "Tere Sang Yaara - Rustom | Akshay Kumar & Ileana D'cruz | Arko | Manoj Muntashir",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Dekha Ek Khwaab x Jump & Sweat",
+    "artist": "Silsila x Garmiani",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hnbF4v6OFqM",
+    "videoTitle": "Dekha Ek Khwaab Toh Yeh Silsile Hue - Female Version | Evergreen Old Hindi Song |",
+    "author": "90's Bollywood Melodious"
+  },
+  {
+    "title": "Mitwa x Turn Off The Lights",
+    "artist": "KANK x Fred Again..",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "SSd3zEBVpj4",
+    "videoTitle": "Naadan Parindey ( Rumble ) // Flipsyd",
+    "author": "FLIPSYD"
+  },
+  {
+    "title": "Heer Raanjhana x Bla Bla Bla",
+    "artist": "Bachchhan Paandey x Gigi D'Agostino",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "l-nDXyVCpTs",
+    "videoTitle": "Ishq Nachaawe - Kho Gaye Hum Kahan | Siddhant, Ananya, Adarsh | Rashmeet K, Karan K, Yashraj, Dhrruv",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Dil Diyan Gallan x Intoxicated",
+    "artist": "Tiger Zinda Hai x Martin Solveig",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Dz_RFwlUIGs",
+    "videoTitle": "All Star but it's a depressing acoustic cover by We Are One",
+    "author": "We Are One"
+  },
+  {
+    "title": "Tera Hone Laga Hoon x Low Frequency",
+    "artist": "APKGK x Denney",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IHoqgjoIVk4",
+    "videoTitle": "Tera Hone Laga Hoon Lyrics - Ajab Prem Ki Gazab Kahaani | Pritam, Atif Aslam, Alisha Chinai 💗🎧",
+    "author": "Velvet Frequency "
+  },
+  {
+    "title": "Tu Chahiye x Trumpets",
+    "artist": "Bajrangi Bhaijaan x Sak Noel",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "63Yo5ZnN7oo",
+    "videoTitle": "Timmy Trumpet - Cold (DJ Dammy Remix)",
+    "author": "DJ Dammy"
+  },
+  {
+    "title": "Pani Da Rang x Greyhound",
+    "artist": "Vicky Donor x Swedish House Mafia",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "WSwr9ge4k_8",
+    "videoTitle": "DONT YOU WORRY CHILD vs HAYE MERA DIL - DJ NYK ft. VIPIN ( MASHUP MIX )",
+    "author": "DJ NYK"
+  },
+  {
+    "title": "Samjhawan x Gasolina",
+    "artist": "HSKD x Daddy Yankee Hard Trap",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "yQ6d627OZig",
+    "videoTitle": "Samjhawan (Lyrics) - Arijit Singh & Shreya Ghoshal",
+    "author": "seventyskye"
+  },
+  {
+    "title": "Nazar Na Lag Jaaye x Better Off Alone",
+    "artist": "Stree x Alice Deejay",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JIdyVgRwhkg",
+    "videoTitle": "Nazar -Faris Shafi",
+    "author": "Faris Shafi"
+  },
+  {
+    "title": "Kaun Tujhe x Lay Low",
+    "artist": "M.S. Dhoni x Tiësto",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "cAS1d6cl3m0",
+    "videoTitle": "Kaun Tujhe -  Kishore Kumar (Unplugged) | MS DHONI | Amaal Mallik, Palak   Sushant Singh",
+    "author": "Fauxanism"
+  },
+  {
+    "title": "Bakhuda Tumhi Ho x Tremor",
+    "artist": "Kismat Konnection x DVLM",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ENklhABDmck",
+    "videoTitle": "Bakhuda Tumhi Ho (Remix) - Kismat Konnection | Shahid & Vidya Balan | Atif Aslam & Alka | Pritam",
+    "author": "Tips Official"
+  },
+  {
+    "title": "Hua Hain Aaj Pehli Baar x Laserbeam",
+    "artist": "Sanam Re x Ray Volpe",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "d9Sgpq0fehw",
+    "videoTitle": "RAY VOLPE @ Bass Canyon 2026 (Full Set)",
+    "author": "RAY VOLPE"
+  },
+  {
+    "title": "Tu Jaane Na x Mammoth",
+    "artist": "APKGK x DVLM",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "estNgy3He1g",
+    "videoTitle": "ASLI SONA - VIDVANSHI X GURI SANDHU | YOGITA RAWAT, MAMMOTH |Uttar Ka Rasta EP| Official Music Video",
+    "author": "VIDVANSHI"
+  },
+  {
+    "title": "Khaab x Spaceman",
+    "artist": "Akhil x Hardwell",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "E8rpY2FwKkY",
+    "videoTitle": "\"Soch Hardy Sandhu\" Full Video Song | Romantic Punjabi Song 2013",
+    "author": "T-Series Apna Punjab"
+  },
+  {
+    "title": "Main Rang Sharbaton Ka x Booyah",
+    "artist": "PPNH x Showtek",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4IeHtuR6brw",
+    "videoTitle": "Main rang sharbaton ka ( Lyrics) | Phata Poster Nikhla Hero",
+    "author": "Life with Music "
+  },
+  {
+    "title": "Sunn Raha Hai Na Tu x Animals",
+    "artist": "Aashiqui 2 x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "iitFMliq2lA",
+    "videoTitle": "Zeus Roy ft Martin Garrix - Tum hi ho vs Dua vs Animals",
+    "author": "Zeus Roy"
+  },
+  {
+    "title": "Banjaara x Drugs From Amsterdam",
+    "artist": "Ek Villain x Mau P",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tH_q8SWewLI",
+    "videoTitle": "Buying Guns as FAKE School Student!",
+    "author": "Ayush Bhandari"
+  },
+  {
+    "title": "Te Amo x Losing It",
+    "artist": "Dum Maaro Dum x FISHER",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "yNWZb3aRxdU",
+    "videoTitle": "Te Amo - Dum Maro Dum | Dance Choreography- Skool of Hip Hop",
+    "author": "Skool Of Hip Hop"
+  },
+  {
+    "title": "Hawayein x Satisfaction",
+    "artist": "Jab Harry Met Sejal x Benny Benassi",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JGNN6JwUEdE",
+    "videoTitle": "Push push sex",
+    "author": "Dark Warriior"
+  },
+  {
+    "title": "Enna Sona x Move Your Body",
+    "artist": "OK Jaanu x Öwnboss",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "aSY6eGaEJjE",
+    "videoTitle": "Enna Sona (Remix) 2017 - OK Jaanu - DJ Vik4S",
+    "author": "Vik4S"
+  },
+  {
+    "title": "Moh Moh Ke Dhaage x Kernkraft 400",
+    "artist": "Dum Laga Ke Haisha x Zombie Nation",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AAWpE2ek2No",
+    "videoTitle": "Yeah a riverside - Momo alias Me & Myself",
+    "author": "Maurice Schmitz"
+  },
+  {
+    "title": "Ghar More Pardesiya x Turn Up The Speakers",
+    "artist": "Kalank x Afrojack",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ICVkDu4E76o",
+    "videoTitle": "Bollywood Love Mashup By Setu Tripathi |Teaser | Releasing on 03 March 2019",
+    "author": "Setu Tripathi"
+  },
+  {
+    "title": "Pal Pal Dil Ke Paas x Do It To It",
+    "artist": "Blackmail x ACRAZE",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "lgTHGZF3BQw",
+    "videoTitle": "Pal Pal Dil Ke Paas - Title | Arijit Singh | Karan Deol, Sahher | Parampara, Sachet, Rishi Rich",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Ishq Wala Love x Tsunami",
+    "artist": "SOTY x DVBBS",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zns53qYaQIo",
+    "videoTitle": "Salaam-E-Ishq (Full Song) Film - Salaam-E-Ishq",
+    "author": "T-Series"
+  },
+  {
+    "title": "Shayad x Rave Tool",
+    "artist": "Love Aaj Kal 2 x Peak Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "iaiojPxULFI",
+    "videoTitle": "Rao Sahab Retro | Vikram Sarkar | Daulatpuria | Nidhi Negi | New Haryanvi Songs Haryanavi 2024",
+    "author": "All Good Music"
+  },
+  {
+    "title": "Rasiya x Bonkers",
+    "artist": "Brahmāstra x Dizzee Rascal",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tdgrxfz0F6Q",
+    "videoTitle": "Band Kar Generator | Singer Radheshyam Rasiya | Band Kar Jarnetor | RANGOLI STUDIO DELHI",
+    "author": "RANGOLI FILMS DELHI"
+  },
+  {
+    "title": "Kinna Sohna x Heads Will Roll",
+    "artist": "Marjaavaan x A-Trak",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zIvKigQ9cVY",
+    "videoTitle": "Rubicon Drill : Laddi Chahal (Official Video) | Parmish Verma | Gurlez Akhtar | EP - Forever",
+    "author": "Parmish Verma"
+  },
+  {
+    "title": "Woh Din x Bounce Generation",
+    "artist": "Chhichhore x TJR",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0zmIgxfZz0M",
+    "videoTitle": "Boom Shaka",
+    "author": "Krsna - Topic"
+  },
+  {
+    "title": "Chaiyya Chaiyya x Kernkraft 400",
+    "artist": "A.R. Rahman x Zombie Nation",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Q8DyPg2aM_A",
+    "videoTitle": "Farruko - Nazareno (Dhol mix) - DJ ALI JI",
+    "author": "DJ ALI JI"
+  },
+  {
+    "title": "Apna Bana Le x Miracle",
+    "artist": "Bhediya x Calvin Harris & Ellie Goulding",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "obK3xVgSVb0",
+    "videoTitle": "Calvin Harris & Ellie Goulding - Miracle (Mave & VIANI Remix)",
+    "author": "Radiant Music"
+  },
+  {
+    "title": "Kesariya x Don't You Worry Child",
+    "artist": "Brahmāstra x Swedish House Mafia",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hKM5JkIDTeE",
+    "videoTitle": "Kesariya X Don't You Worry Child (VJAI Mashup) | Brahmāstra | Swedish House Mafia | Ranbir K Alia",
+    "author": "VJAI"
+  },
+  {
+    "title": "Raataan Lambiyan x Under The Stars",
+    "artist": "Shershaah x Melodic Techno Mix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "EL_P_CVUX-o",
+    "videoTitle": "MANIKE - DJ HITU REMIX l THANK GOD l Nora Fatehi l Sidhart M l YOHANI l JUBIN #yohani #manikemovevfx",
+    "author": "Dj Hitu"
+  },
+  {
+    "title": "Tum Hi Ho x Reload",
+    "artist": "Aashiqui 2 x Sebastian Ingrosso & Tommy Trash",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dcgk8AUjrX4",
+    "videoTitle": "Trash Dj (Bassrover! Remix)",
+    "author": "The Incredible Melting Man - Topic"
+  },
+  {
+    "title": "Pee Loon x Sunset Lover",
+    "artist": "Once Upon A Time In Mumbaai x Petit Biscuit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ew7_HAhF8Rw",
+    "videoTitle": "Vasu Raina - Whispers",
+    "author": "Vasu Raina"
+  },
+  {
+    "title": "Tum Se Hi x Ocean",
+    "artist": "Jab We Met x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mt9xg0mmt28",
+    "videoTitle": "Full Video: Tum Se Hi | Jab We Met | Kareena Kapoor, Shahid Kapoor | Mohit Chauhan | Pritam",
+    "author": "T-Series"
+  },
+  {
+    "title": "Zaalima x Cold Water",
+    "artist": "Raees x Major Lazer & Justin Bieber",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "jK0K-2Gz780",
+    "videoTitle": "Major Lazer - Lean On | Jind Mahi (Vidya Mashup Cover ft Ricky Jatt, Raashi Kulkarni, Raginder Momi)",
+    "author": "Vidya Vox"
+  },
+  {
+    "title": "Khuda Jaane x Without You",
+    "artist": "Bachna Ae Haseeno x David Guetta & Usher",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nCKRkqyKncw",
+    "videoTitle": "Khuda Jaane ( Bachna Ae Haseeno Movie ) - DJ Pramuka EDM Remake",
+    "author": "DJ Pramuka Official"
+  },
+  {
+    "title": "Subhanallah x Titanium",
+    "artist": "Yeh Jawaani Hai Deewani x David Guetta & Sia",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PR2JGFF3IzM",
+    "videoTitle": "David Guetta and Sia - Titanium",
+    "author": "Gaurav Bagaria"
+  },
+  {
+    "title": "Ishq Sufiyana x Sun & Moon",
+    "artist": "The Dirty Picture x Above & Beyond",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "cvBwKeJRoNc",
+    "videoTitle": "Tum Jo Aaye x Ye Tune Kya Kiya x Ishq Sufiyana I Khudgharz",
+    "author": "Khudgharz"
+  },
+  {
+    "title": "Hasi Ban Gaye x Heroes (We Could Be)",
+    "artist": "Hamari Adhuri Kahani x Alesso",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5YGc9Y_BRXU",
+    "videoTitle": "Dj Zack 2011 @ David Guetta - Love Takes Over & Memories",
+    "author": "Fabry Sevenfold"
+  },
+  {
+    "title": "Soch Na Sake x Stay The Night",
+    "artist": "Airlift x Zedd & Hayley Williams",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oPNv4dxWJHc",
+    "videoTitle": "\"Soch Na Sake\" Love in LoFi Vol.1 : DJ Chetas & DJ NYK | T-Series",
+    "author": "T-Series"
+  },
+  {
+    "title": "Agar Tum Saath Ho x Faded",
+    "artist": "Tamasha x Alan Walker",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dZse1_yBeKI",
+    "videoTitle": "Agar Tum Saath Ho X Can We Kiss Forever 💔 [Full Version] | Shadow Empire |",
+    "author": "GURUxGAMING"
+  },
+  {
+    "title": "Chaleya x Padam Padam",
+    "artist": "Jawan x Kylie Minogue Tech Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GJd7wnPhX8o",
+    "videoTitle": "Challeya  X Hayyoda ( Jawan Film )",
+    "author": "Firangi Sangeet"
+  },
+  {
+    "title": "Sun Saathiya x This Is What You Came For",
+    "artist": "ABCD 2 x Calvin Harris & Rihanna",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2ZFyi22tGtU",
+    "videoTitle": "Calvin Harris & Rihanna   This Is What You Came For Vidya Vox Tabla Remix Cover ft  Jomy George",
+    "author": "Bollywood Songs"
+  },
+  {
+    "title": "Jeena Jeena x Calling (Lose My Mind)",
+    "artist": "Badlapur x Sebastian Ingrosso & Alesso",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "RL8CVrWG_fU",
+    "videoTitle": "Alesso years Aleteo dj musta",
+    "author": "dj musta"
+  },
+  {
+    "title": "Tere Sang Yaara x If I Lose Myself",
+    "artist": "Rustom x Alesso vs OneRepublic",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TGB9SNGoEKg",
+    "videoTitle": "Mashup Master - Dynamite/Post To Be - Taio Cruz and Omarion",
+    "author": "Isaac Cosand"
+  },
+  {
+    "title": "Mitwa x Opus",
+    "artist": "Kabhi Alvida Naa Kehna x Eric Prydz",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ru_5PA8cwkE",
+    "videoTitle": "Mitwa - Full Video | Shahrukh Khan | Rani Mukherjee | Shafqat Amanat Ali | Shankar Mahadevan | KANK",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Heer Raanjhana x How Deep Is Your Love",
+    "artist": "Bachchhan Paandey x Calvin Harris",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gca_jmcRYlE",
+    "videoTitle": "Heer Raanjhana | Wedding Highlight 2023 | Smit x Kavya | Mann Kesar Kesar | Film by Versatilegrapher",
+    "author": "Versatilegrapher"
+  },
+  {
+    "title": "Tera Hone Laga Hoon x Wake Me Up",
+    "artist": "Ajab Prem Ki Ghazab Kahani x Avicii",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rTuxUAuJRyY",
+    "videoTitle": "Tera Hone Laga Hoon Lyrical - Ajab Prem Ki Ghazab Kahani | Atif Aslam | Ranbir, Katrina K | Pritam",
+    "author": "Tips Official"
+  },
+  {
+    "title": "Nazar Na Lag Jaaye x Silence",
+    "artist": "Stree x Marshmello & Khalid",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PBBdBy427u0",
+    "videoTitle": "Gravity ~ Falling into its depths...",
+    "author": "Piyush Hasija"
+  },
+  {
+    "title": "Kaun Tujhe x Something Just Like This",
+    "artist": "M.S. Dhoni x The Chainsmokers & Coldplay",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8YLtmmIq7ZQ",
+    "videoTitle": "Ms Dhoni ft. HYM FOR THE WEEKEND",
+    "author": "A Cricket Mashup"
+  },
+  {
+    "title": "Tu Jaane Na x Mammoth (Festival Vocal Flip)",
+    "artist": "APKGK x DVLM",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-K5d_kIhJXc",
+    "videoTitle": "UK 7 KE BARS || MAMMOTH X GURI SANDHU || J TOWN MUSIC || Official Video | DEHRADUN UK07 | RAP SONG |",
+    "author": "J Town Music"
+  },
+  {
+    "title": "Khaab x Beautiful Now",
+    "artist": "Akhil x Zedd",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2eliQ_KR8yA",
+    "videoTitle": "KHAAB | AKHIL | PARMISH VERMA |  PUNJABI SONG 2025 | CROWN RECORDS | LATEST PUNJABI 2025 |",
+    "author": "Crown Records"
+  },
+  {
+    "title": "Sunn Raha Hai Na Tu x Animals (Melodic Drop)",
+    "artist": "Aashiqui 2 x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sqxFW3RXGdo",
+    "videoTitle": "MARTIN GARRIX LIVE @ TOMORROWLAND 2026 (W2)",
+    "author": "Martin Garrix"
+  },
+  {
+    "title": "Te Amo x I Took A Pill In Ibiza",
+    "artist": "Dum Maaro Dum x Mike Posner & Seeb",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bxviLrPzQhg",
+    "videoTitle": "Mashaal Durrani.. I took a pill in ibiza",
+    "author": "Dinesh"
+  },
+  {
+    "title": "Hawayein x Levels",
+    "artist": "Jab Harry Met Sejal x Avicii",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "LTFujjsmUG0",
+    "videoTitle": "Hawayein (KRiz NAir Bootleg)| Jab Harry Met Sejal |Shah Rukh Khan| Pritam | Imtiaz Ali| Arijit Singh",
+    "author": "Kriz Nair"
+  },
+  {
+    "title": "Ghar More Pardesiya x Baianá",
+    "artist": "Kalank x Bakermat Afro-House Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Fdk3brbEkPw",
+    "videoTitle": "Ghar More Pardesiya - Kalank | Varun, Alia & Madhuri| Shreya & Vaishali| Pritam| Amitabh| Abhishek",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Meherbaan x Ten Feet Tall",
+    "artist": "Bang Bang! x Afrojack",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IwC9_zRw2VY",
+    "videoTitle": "Jism Pe Till Ka Matlab Kiya Hai? | Mole On  Body Parts | Mehrban Ali | Mehrban TV",
+    "author": "Mehrban TV"
+  },
+  {
+    "title": "Shayad x High On Life",
+    "artist": "Love Aaj Kal 2 x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "x-GgFu-vEV8",
+    "videoTitle": "YEAR-END MEGAMIX 2024 | NIKHIL MUSIQ | 4K",
+    "author": "Nikhil Musiq"
+  },
+  {
+    "title": "Rasiya x The Veldt",
+    "artist": "Brahmāstra x deadmau5",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6xoB4ZiKKn0",
+    "videoTitle": "THE LAST RIDE - Offical Video |  Sidhu Moose Wala | Wazir Patar",
+    "author": "Sidhu Moose Wala"
+  },
+  {
+    "title": "Woh Din x Summer",
+    "artist": "Chhichhore x Calvin Harris",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4hqYSNlKzwg",
+    "videoTitle": "Summer Of X",
+    "author": "ChrisX - Topic"
+  },
+  {
+    "title": "Badtameez Dil x Spaceman",
+    "artist": "YJHD x Hardwell",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Im9HHMU60Hs",
+    "videoTitle": "Mi Gente / Badtameez Dil MASHUP [Latin/Bollywood Remix]",
+    "author": "Tesher"
+  },
+  {
+    "title": "Dhan Te Nan x Mammoth",
+    "artist": "Kaminey x DVLM & MOGUAI",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "3h1EuJkgL_A",
+    "videoTitle": "Dimitri Vegas X Chitta Ve    Mashup Mix DJ Shuvo  Full Song",
+    "author": "D J Shuvo"
+  },
+  {
+    "title": "Zingaat x Rave Tool",
+    "artist": "Dhadak x High-Energy Festival Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "jsfojG0UF0A",
+    "videoTitle": "SAIRAT VS EDM VS ZINGAT VS  welcome TO THE jungle bitch  VS EDM #J@KNAP mash",
+    "author": "Pankaj Howal"
+  },
+  {
+    "title": "Aankh Marey x Move Your Body",
+    "artist": "Simmba x Öwnboss",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8iQU0ubwVdY",
+    "videoTitle": "Move Your Body Full Song | Johnny Gaddaar | Hard Kaur | Shankar Ehsaan Loy",
+    "author": "T-Series"
+  },
+  {
+    "title": "Choli Ke Peeche x Satisfaction",
+    "artist": "Crew x Benny Benassi",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JuZpSPmocdU",
+    "videoTitle": "Baile Funk",
+    "author": "Release - Topic"
+  },
+  {
+    "title": "Ghungroo x Ferrari",
+    "artist": "War x James Hype",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XUwCeFgFKQc",
+    "videoTitle": "James Hype, SYNC @ HÏ Ibiza - Full set",
+    "author": "James Hype"
+  },
+  {
+    "title": "Dope Shope x Do It To It",
+    "artist": "Yo Yo Honey Singh x ACRAZE",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dHsV56I1GwE",
+    "videoTitle": "Dope Shope (Full Song ) | Yo Yo Honey Singh | Deep Money | | Latest Punjabi Song 2023",
+    "author": "Being Punjabi"
+  },
+  {
+    "title": "Dum Maaro Dum x Turn Off The Lights",
+    "artist": "Asha Bhosle x Fred Again..",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8BbdTa6_Aak",
+    "videoTitle": "Protocol Radio 546 by Nicky Romero (PRR546)",
+    "author": "Nicky Romero"
+  },
+  {
+    "title": "Sadda Haq x Heads Will Roll",
+    "artist": "Rockstar x A-Trak",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6xeYav0rbz8",
+    "videoTitle": "Rockstar (Yeah Yeah)",
+    "author": "RubiconBand"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Bonkers",
+    "artist": "Delhi Belly x Dizzee Rascal",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IQEDu8SPHao"
+  },
+  {
+    "title": "Kala Chashma x Bounce Generation",
+    "artist": "Baar Baar Dekho x TJR & VINAI",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5iW2rlGvtdw",
+    "videoTitle": "It's my life vs Bounce Generation (BonJovi x TJR&Vinai) Remix",
+    "author": "WW X"
+  },
+  {
+    "title": "52 Bars x Animals",
+    "artist": "Karan Aujla x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ggAveCJfdBU",
+    "videoTitle": "Big Dawgs x Karan Aujla (Trapperx Mashup) Hanumankind | Karan Aujla | Trapperx",
+    "author": "Trapperx"
+  },
+  {
+    "title": "Softly x Ferrari",
+    "artist": "Karan Aujla x James Hype",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "au5uNkCKzaY",
+    "videoTitle": "Badshah X Karan Aujla - God Damn (Official Video) | Hiten | Ek THA RAJA",
+    "author": "Badshah"
+  },
+  {
+    "title": "On Top x Tsunami",
+    "artist": "Karan Aujla x DVBBS & Borgeous",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "QaRHAvWT6Gg",
+    "videoTitle": "HARD - ROOM ● DVBBS & HEARTKILLER - WELCOME { BASS BOOSTED}",
+    "author": "Lofi & Reverd Remix"
+  },
+  {
+    "title": "Admirin' You x Turn Up The Speakers",
+    "artist": "Karan Aujla x Afrojack & Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "FKx_lMM4wEM",
+    "videoTitle": "Karan Aujla - Admirin’ You (Unplugged) | Making Memories | Latest Punjabi Songs 2023",
+    "author": "Karan Aujla"
+  },
+  {
+    "title": "White Brown Black x Piece Of Your Heart",
+    "artist": "Karan Aujla x Meduza",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zr_sTaYTCnU",
+    "videoTitle": "Wizkid - Piece of My Heart (Official Video) ft. Brent Faiyaz",
+    "author": "WizkidVEVO"
+  },
+  {
+    "title": "Jee Karda x Animals",
+    "artist": "Badlapur x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZbZCzfX8AOo",
+    "videoTitle": "Jee karda (EDM mix)",
+    "author": "BDM vs EDM"
+  },
+  {
+    "title": "Abhi Toh Party x Heads Will Roll",
+    "artist": "Badshah x A-Trak",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "d8FpVgzRlkI",
+    "videoTitle": "Sax Roll (Radio Edit)",
+    "author": "DJ Mom's - Topic"
+  },
+  {
+    "title": "Chammak Challo x Low",
+    "artist": "Ra.One x Flo Rida Club Edit",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1uoOdb45-Wk",
+    "videoTitle": "MULTILINGUAL MADNESS🔥Chammak Challo Remix 🇮🇳 x 🇪🇸 x 🇺🇸#쩐다 ",
+    "author": "MD MEHEDI HASAN "
+  },
+  {
+    "title": "Dus Bahane x Piece Of Your Heart",
+    "artist": "Dus x Meduza",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ptD0VFYmxJE",
+    "videoTitle": "HARD-STYLE ◉ Meduza - Piece Of Your Heart (KEKU Remix) ft. Goodboys",
+    "author": "BrutishHeavyMusic"
+  },
+  {
+    "title": "Ek Do Teen x Gasolina",
+    "artist": "Tezaab x Daddy Yankee",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9JkMbmhZYlg",
+    "videoTitle": "dj anjum gasolina mix",
+    "author": "TheDjanjum"
+  },
+  {
+    "title": "Gandi Baat x Levels",
+    "artist": "R... Rajkumar x Avicii",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0r2tTgOCIDE",
+    "videoTitle": "Bollywood Tapori Dance Mix | Orginal Mix | Party Songs |  Tapori Wedding Hits | Dj G-Spark | India",
+    "author": "Dj G-Spark"
+  },
+  {
+    "title": "Illegal Weapon x Spaceman",
+    "artist": "Street Dancer 3D x Hardwell",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5DbKiLoq4cg",
+    "videoTitle": "I Am A Disco Dancer 2.0 | Bollywood Zumba | Tiger Shroff | Vishal Choreogarphy | Bosco | Easy Steps",
+    "author": "Vishal Dance Fitness "
+  },
+  {
+    "title": "Jai Jai Shivshankar x Mammoth",
+    "artist": "War x DVLM",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "aG2hjBWMMX0",
+    "videoTitle": "Free Fire Holi Music Video ft. Hrithik Roshan | Song: DNA Mein Dance By Vishal & Shekhar",
+    "author": "Free Fire India Official"
+  },
+  {
+    "title": "Jhoome Jo Pathaan x Lay Low",
+    "artist": "Pathaan x Tiësto",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "OIjbVS9CFL4",
+    "videoTitle": "Jhoome Jo Pathaan Song Lyrics | Shah Rukh Khan,Deepika Vishal & Sheykhar,Arijit Singh,Sukriti,Kumaar",
+    "author": "Lyrics world 1.0"
+  },
+  {
+    "title": "Kar Gayi Chull x Better Off Alone",
+    "artist": "Kapoor & Sons x Alice Deejay",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eWF2gRkhZ_0",
+    "videoTitle": "[nightcore] Way Back When - Kodaline",
+    "author": "aesthetic nightcore"
+  },
+  {
+    "title": "Khadke Glassy x Bounce Generation",
+    "artist": "Jabariya Jodi x TJR",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "RJV2WfLjRj0",
+    "videoTitle": "Glassy(Bass Boosted) || Ashok Mastie || Yo Yo Honey Singh || KM Bass Boosted",
+    "author": "KM "
+  },
+  {
+    "title": "Lahu Munh Lag Gaya x Ferrari",
+    "artist": "Ram-Leela x James Hype",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nKGECvWPGvI",
+    "videoTitle": "AAJA NA FERRARI MEIN (Full Video) | Armaan Malik | Amaal Mallik | T-Series | Latest Hindi Song 2017",
+    "author": "T-Series"
+  },
+  {
+    "title": "London Thumakda x Danza Kuduro",
+    "artist": "Queen x Don Omar",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sh6qXIM_gik",
+    "videoTitle": "Don Omar_- Danza :-Kuduro(Remix Song)DJ PRO OFFICIAL -Video_2021",
+    "author": "DJ PRO Official"
+  },
+  {
+    "title": "Lungi Dance x Turn Up The Speakers",
+    "artist": "Chennai Express x Afrojack",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "7wBNiim48qg",
+    "videoTitle": "\"1234 Get on the Dance Floor\" Song Making Chennai Express | Shah Rukh Khan & Priyamani",
+    "author": "T-Series"
+  },
+  {
+    "title": "Naacho Naacho x Jump & Sweat",
+    "artist": "RRR x Garmiani",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "L8Dlb0_xhRA",
+    "videoTitle": "Jungkook Singing Indian Song Nattu Kuthu 😱 | Jungkook Sing Hindi song | Jungkook Sing Tamil Song",
+    "author": "BTS fact Bangla"
+  },
+  {
+    "title": "O Saki Saki x Do It To It",
+    "artist": "Batla House x ACRAZE",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_uUdJalMaF8",
+    "videoTitle": "Full Song: O SAKI SAKI | Batla House | Nora Fatehi, Tanishk B,Neha K,Tulsi K, B Praak,Vishal-Shekhar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Party All Night x Riverside",
+    "artist": "Boss x Sidney Samson",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V775PPuBc7Y",
+    "videoTitle": "Sidney Samson - Riverside (Official Music Video)",
+    "author": "Spinnin' Records"
+  },
+  {
+    "title": "Sauda Khara Khara x Low Frequency",
+    "artist": "Good Newwz x Denney",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KbU4jv86Atk",
+    "videoTitle": "Sauda Khara Khara - Good Newwz Bass Boosted | Sukhbir | Dj Chetas | Diljit | Xenon Bass Boosted |",
+    "author": "Xenon Bass Boosted"
+  },
+  {
+    "title": "Shanivaar Raati x Tsunami",
+    "artist": "Main Tera Hero x DVBBS",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "v7jiFpX5SU4",
+    "videoTitle": "\"Suno Na Sangemarmar\" Full Song Youngistaan | Arijit Singh | Jackky Bhagnani, Neha Sharma",
+    "author": "T-Series"
+  },
+  {
+    "title": "Subah Hone Na De x Greyhound",
+    "artist": "Desi Boyz x Swedish House Mafia",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "r4Pv7hF-IJg",
+    "videoTitle": "Swedish House Mafia - Greyhound (Myke Oxman Venom Bootleg)",
+    "author": "schapenen"
+  },
+  {
+    "title": "Tamanche Pe Disco x Bonkers",
+    "artist": "Bullett Raja x Dizzee Rascal",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TmOy3r_gXmM",
+    "videoTitle": "Koncept - Shiny Disco Balls (Original Mix) [Pandemic Digital]",
+    "author": "Toolbox Digital Shop"
+  },
+  {
+    "title": "The Humma Song x Trumpets",
+    "artist": "OK Jaanu x Sak Noel",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-cR5Zq5OasY",
+    "videoTitle": "The Humma Song - Freestyle Dance - Bollywood Meets Popping?",
+    "author": "Merrick Hanna"
+  },
+  {
+    "title": "Tune Maari Entriyaan x Intoxicated",
+    "artist": "Gunday x Martin Solveig",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "L8_XhdofUHY",
+    "videoTitle": "New Cash Shit Challenge Tiktok Compilation 2019",
+    "author": "TIKTOKI"
+  },
+  {
+    "title": "Yaar Naa Miley x Animals",
+    "artist": "Kick x Martin Garrix",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bp6oHlllWHA",
+    "videoTitle": "Yaar Na Milye Vs Animals ( Mix )",
+    "author": "djs4dance"
+  },
+  {
+    "title": "Zinda Banda x Turn Off The Lights",
+    "artist": "Jawan x Fred Again..",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HDJq4LpXAN0",
+    "videoTitle": "Galat Launda – Fotty Seven ft. MojoJojo |  Bhavin Bhanushali | Hindi Rap | hattke",
+    "author": "I-POPSTAR"
+  },
+  {
+    "title": "Zingaat x Booyah",
+    "artist": "Dhadak x Showtek",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8Cc8hFlHmgw",
+    "videoTitle": "booyah",
+    "author": "DJ Stan Playlist"
+  },
+  {
+    "title": "Jee Karda x Rave Tool",
+    "artist": "Badlapur x High-Energy Industrial Drop",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KWqpaPCDp6Q",
+    "videoTitle": "Kahani - Jee Karda Movement | Jee Karda x Anchor Point",
+    "author": "Kahani"
+  },
+  {
+    "title": "Chambal Ka Daku x Laserbeam",
+    "artist": "Haryanvi Trap x Ray Volpe",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "070t4rVokoA"
+  },
+  {
+    "title": "Bahu Kale Ki x Satisfaction",
+    "artist": "Ajay Hooda x Benny Benassi",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Mlj0hdOG4QQ",
+    "videoTitle": "Bahu Kale Ki || Ajay Hooda || Gajender Phogat & Anu Kadyan || New D J song 2018 || Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Systum x Do It To It",
+    "artist": "Masoom Sharma x ACRAZE",
+    "film": "Remix",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-WDeA_KD_ds",
+    "videoTitle": "😀FREE FIRE AND BHOJPURI SONG MILAKAR VIRAL VIDEO KAISE BANAYE 🔵",
+    "author": "Technical oppo"
+  },
+  {
+    "title": "Meherbaan x Ferrari",
+    "artist": "Bang Bang! x James Hype",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8DQMb234ccM",
+    "videoTitle": "CAR SONG | TURBO | SAHO BANG BANG SONG REMIX",
+    "author": "MASALA BONDA"
+  },
+  {
+    "title": "Kabira x Clarity",
+    "artist": "Yeh Jawaani Hai Deewani x Zedd",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V3NHpNmYY8U",
+    "videoTitle": "Ilahi 8K Video Song | Ranbir Kapoor, Arijit Singh | Yeh Jawaani Hai Deewani | Pritam, Amitabh B",
+    "author": "T-Series"
+  },
+  {
+    "title": "Dil Sambhal Ja Zara x Piece Of Your Heart",
+    "artist": "Murder 2 x Meduza",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "uTQTnig-p2o",
+    "videoTitle": "Phir Mohabbat Mashup | Aftermorning Chillout | Emraan Hashmi | Murder 2",
+    "author": "Aftermorning"
+  },
+  {
+    "title": "Hasi Ban Gaye x Heroes",
+    "artist": "We Could Be) (Hamari Adhuri Kahani x Alesso",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5YGc9Y_BRXU",
+    "videoTitle": "Dj Zack 2011 @ David Guetta - Love Takes Over & Memories",
+    "author": "Fabry Sevenfold"
+  },
+  {
+    "title": "Jiyein Kyun x Leave The World Behind",
+    "artist": "Dum Maaro Dum x Axwell & Ingrosso",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5iXi58d4bpY",
+    "videoTitle": "Wrong Places - Karen Harding (DJ Captivate Remix)",
+    "author": "DJCaptivate"
+  },
+  {
+    "title": "Mast Magan x In My Mind",
+    "artist": "2 States x Dynoro & Gigi D'Agostino",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gvPjxYkXloU",
+    "videoTitle": "Feelings song 16D Audio Full Eqalized Ise Headphone",
+    "author": "SR Tridey studios"
+  },
+  {
+    "title": "Jeena Jeena x Calling",
+    "artist": "Lose My Mind) (Badlapur x Sebastian Ingrosso & Alesso",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "E6nT4l4E-Vg",
+    "videoTitle": "Jeena Jeena🎶 Khai × Third [BL] FMV♥️ || Theory Of Love || Thai Hindi Mix 💕",
+    "author": "Kpopkdrama BL"
+  },
+  {
+    "title": "Dekha Ek Khwaab x Stay",
+    "artist": "Silsila x The Kid LAROI & Justin Bieber",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Nef_1GA-rVU",
+    "videoTitle": "Dekha Ek Khwab x Laila (Full Version) - Sush & Yohan x @oyeeditorranna  Mashup",
+    "author": "Sush & Yohan Music"
+  },
+  {
+    "title": "Dil Diyan Gallan x I Wanna Know",
+    "artist": "Tiger Zinda Hai x Alesso",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "p_wTIAA8l88",
+    "videoTitle": "Hawaiian Love Song (I Wanna Lick a Jicama)",
+    "author": "conradbirdy"
+  },
+  {
+    "title": "Tu Chahiye x Red Lights",
+    "artist": "Bajrangi Bhaijaan x Tiësto",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "SN958msmXeI",
+    "videoTitle": "SWAG SE SOLO Song: Salman Khan | Remo D'souza | Sachet Tandon, Tanishk Bagchi Vayu | Bhushan Kumar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Pani Da Rang x Rather Be",
+    "artist": "Vicky Donor x Clean Bandit",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "a3IBDZD_b4k",
+    "videoTitle": "2 become 1 guitar instrumental cover",
+    "author": "GuitarDad333"
+  },
+  {
+    "title": "Samjhawan x Middle",
+    "artist": "Humpty Sharma Ki Dulhania x DJ Snake",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "H2f7MZaw3Yo",
+    "videoTitle": "Arijit Singh, Shreya Ghoshal - Samjhawan - Lyric video | Alia B, Varun D | Humpty Sharma Ki Dulhania",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Hua Hain Aaj Pehli Baar x Sweet Dreams",
+    "artist": "Sanam Re x Eurythmics Tech Flip",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "u8nADE60s3Q",
+    "videoTitle": "Lofi_Hua Hain Aaj Pehli Baar ( Slower + Reverb ) SANAM RE Pulkit Samrat Urvashi",
+    "author": "Apna MOHIT Vlogs"
+  },
+  {
+    "title": "Main Rang Sharbaton Ka x Spectrum",
+    "artist": "Phata Poster Nikhla Hero x Zedd",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_Cg4nZO8UC4",
+    "videoTitle": "Lofi Song | Main Rang Sharbaton Ka | Relaxing song | Hindi Bollywood | songs | Feel This Vibes",
+    "author": "Trending lofi songs"
+  },
+  {
+    "title": "Banjaara x Turn Off The Lights",
+    "artist": "Ek Villain x Fred Again..",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "OQKcoVyRmgc",
+    "videoTitle": "Vlad and Niki turn into heroes video for kids",
+    "author": "Vlad and Niki"
+  },
+  {
+    "title": "Moh Moh Ke Dhaage x Stargazing",
+    "artist": "Dum Laga Ke Haisha x Kygo",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "j0JCpFOdxEE",
+    "videoTitle": "Late Night Drives | Video Jukebox | Hindi Songs | Bollywood Calm & Chill Mix",
+    "author": "YRF"
+  },
+  {
+    "title": "Ishq Wala Love x The Nights",
+    "artist": "Student of the Year x Avicii",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "N2cPyl83tkQ",
+    "videoTitle": "Ishq Wala Love | 4K | Alia Bhatt, Sidharth Malhotra, Varun Dhawan | Neeti Mohan | Salim Merchant",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Kinna Sohna x Losing It",
+    "artist": "Marjaavaan x FISHER Tech House Edit",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TIqUAX17nMI",
+    "videoTitle": "Kinna Sona x No more drama Mashup | Musicino | Katrina kaif X Charlie puth | Bollywood  remix Mashup",
+    "author": "Musicano"
+  },
+  {
+    "title": "Besharam Rang x Drugs From Amsterdam",
+    "artist": "Pathaan x Mau P",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "fyuaq0jFfJE",
+    "videoTitle": "Sak Noel x Belcastro  - Meet Her At The Pressure Parade (Jean Luc Mashup)",
+    "author": "Dj Club top music "
+  },
+  {
+    "title": "Hookah Bar x Party Till We Die",
+    "artist": "Khiladi 786 x MAKJ & Timmy Trumpet",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dVbAf0XgyOM",
+    "videoTitle": "Bande d'annonce | HIGH NIGHT PARTY | SAMURAI EVENETS",
+    "author": "Mohamed Iskander Haouem"
+  },
+  {
+    "title": "Show Me The Thumka x Drugs From Amsterdam",
+    "artist": "TJMM x Mau P",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ASQVhojPqOk",
+    "videoTitle": "A Prince of Swindlers 👑💰 | A Tale of Deceit and Adventure by Guy Boothby",
+    "author": "Storytime Haven"
+  },
+  {
+    "title": "Vele x Bla Bla Bla",
+    "artist": "Student of the Year x Gigi D'Agostino",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "C9lRTa6r0UY",
+    "videoTitle": "The lavender dragon by Eden Phillpotts | Fantasy Full Audiobook",
+    "author": "Storytime Haven"
+  },
+  {
+    "title": "Malhari x Laserbeam",
+    "artist": "Bajirao Mastani x Ray Volpe",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oU706jVWVBg",
+    "videoTitle": "Shake That (Original Mix) JUNGLE TERROR .INC",
+    "author": "DHOKEN GENRE MUSIK"
+  },
+  {
+    "title": "Aaj Ki Raat x Tauba Tauba",
+    "artist": "Vocal hook exchange layered over a high-BPM driving tech groove.  Badtameez Dil x Dilliwaali Girlfriend (Yeh Jawaani Hai Deewani) – Dual vocal hook collision over an aggressive electro-house drop.Malhari x Zingaat (Bajirao Mastani x Dhadak) – Dhol rhythms from Malhari running under Zingaat's vocal shout with a festival brass drop.Chaiyya Chaiyya x Dhan Te Nan (Dil Se x Kaminey) – Vintage Rahman rhythm chopped with Dhan Te Nan’s aggressive bass riff.Besharam Rang x Ghungroo (Pathaan x War) – Seductive verses leading into Ghungroo’s high-energy vocal hook over a rolling tech drop.Choli Ke Peeche x Aaj Ki Raat (Crew x Don) – Classic vocal cuts layered across a 128 BPM club drop.Kala Chashma x Kar Gayi Chull (Baar Baar Dekho x Kapoor & Sons) – Punjabi hook running continuously over Chull’s synth build and drop.Aankh Marey x Cheez Badi (Simmba x Machine) – Rapid vocal back-and-forth layered over an aggressive Brazilian bassline.Sadda Haq x Jee Karda (Rockstar x Badlapur) – Aggressive rock vocals layered over Jee Karda's heavy electronic drop.Jhoome Jo Pathaan x Besharam Rang (Pathaan) – Pathaan vocal hook looped over Besharam Rang’s syncopated sub-bass.Abhi Toh Party Shuru Hui Hai x Kar Gayi Chull (Khoobsurat x Kapoor & Sons) – Party rap cadence matched over peak-time bounce beats.Dus Bahane x Right Here Right Now (Dus x Bluffmaster) – Dual 2000s club anthems layered over a punchy bass-house groove.Subah Hone Na De x Desi Boyz (Desi Boyz) – Simultaneous vocal arrangement driving into a big-room electro build.Hookah Bar x Party On My Mind (Khiladi 786 x Race 2) – Melodic hooks running together over a hard-hitting club synth.Dope Shope x Angreji Beat (International Villager x Cocktail) – Honey Singh vocals layered over aggressive driving house bass.Jai Jai Shivshankar x Ghungroo (War) – Hrithik dance track battle drop with fast-paced club kicks.Nashe Si Chadh Gayi x Ude Dil Befikre (Befikre) – High-energy vocal chop overlap backed by driving 126 BPM tech house.Balam Pichkari x Badtameez Dil (Yeh Jawaani Hai Deewani) – Percussive folk build colliding with a peak-time stadium synth.The Humma Song x Muqabla (OK Jaanu x Street Dancer 3D) – Rahman melody mashup over a hard slap-house drop.Show Me The Thumka x Pyaar Hota Kayi Baar Hai (Tu Jhoothi Main Makkaar) – Fast-paced Ranbir Kapoor club collision over punchy tech drums.Chammak Challo x Criminal (Ra.One) – Akon vocals layered across Vishal-Shekhar’s electro drop.O Saki Saki x Dilbar (Batla House x Satyameva Jayate) – Nora Fatehi peak-time battle drop with dark Middle Eastern synth riffs.London Thumakda x Gallan Goodiyaan (Queen x Dil Dhadakne Do) – Wedding energy forced into high-BPM festival basslines.Lungi Dance x One Two Three Four (Chennai Express) – South-Indian percussion clash layered over aggressive festival horns.Illegal Weapon 2.0 x Morni Banke (Street Dancer 3D x Badhaai Ho) – Punjabi-Bolly club crossover on an aggressive bounce drop.Gandi Baat x Saree Ke Fall Sa (R... Rajkumar) – High-intensity mass-appeal vocal blend over modern electro drums.Tamanche Pe Disco x Babli Badmaash (Bullett Raja x Shootout at Wadala) – Gritty street vocals over heavy electronic stabs.Khadke Glassy x Dil Chori (Jabariya Jodi x Sonu Ke Titu Ki Sweety) – Rap layers riding over hard club kicks.First Class x Slow Motion (Kalank x Bharat) – Fast-tempo vocal exchange driving directly into a big-room drop.Lahu Munh Lag Gaya x Nagada Sang Dhol (Goliyon Ki Raasleela Ram-Leela) – Folk garba rhythms amplified by aggressive club drops.Tune Maari Entriyaan x Jashn-E-Ishqa (Gunday) – High-octane commercial hooks over driving four-on-the-floor kicks.Dil Chori x Makhna (Sonu Ke Titu Ki Sweety x Drive) – Honey Singh vocals layered across a tech-house club rhythm.Zinda Banda x Not Ramaiya Vastavaiya (Jawan) – Anirudh festival percussion clashing on a hard peak-time drop.Genda Phool x Chittiyaan Kalaiyaan (Badshah x Roy) – Folk-rap vocals layered directly over rolling bass grooves.Bhaag D.K. Bose x Dhan Te Nan (Delhi Belly x Kaminey) – Relentless rock-rap overlap slamming into distorted electro saws.Ek Do Teen x Tamma Tamma Again (Baaghi 2 x Badrinath Ki Dulhania) – Retro-remake vocal battle layered over a bouncy festival bass.Taal Se Taal x Chaiyya Chaiyya (Taal x Dil Se) – Classical vocal runs colliding with fast-paced tribal house drums.Dum Maaro Dum x Hare Ram Hare Krishna (Dum Maaro Dum x Bhool Bhulaiyaa) – Psychedelic vocal hooks over driving minimal techno bass.Shanivaar Raati x Palat Tera Hero Idhar Hai (Main Tera Hero) – Energetic party vocals combined over a massive synth drop.Sweety Tera Drama x Twist (Bareilly Ki Barfi x Love Aaj Kal) – Upbeat Punjabi-Bollywood hooks layered over modern dancefloor kicks.Paisa Paisa x Subah Hone Na De (De Dana Dan x Desi Boyz) – High-energy throwback hooks layered over an electro drop.Vele x Student Of The Year (Disco Song) (Student of the Year) – Vishal-Shekhar college anthems colliding on peak-time club drums.Khaike Paan Banaraswala x O O Jane Jaana (Don x Pyaar Kiya To Darna Kya) – Vintage energetic hooks reworked over a rolling club bassline.Aashiq Banaya Aapne x Jhalak Dikhla Jaa (Aashiq Banaya Aapne x Aksar) – Himesh Reshammiya vocal chops over a high-energy bass-house drop.Rock Tha Party x Saturday Saturday (Rocky Handsome x Humpty Sharma Ki Dulhania) – Heavy club bass drops with dual party vocals.Mundiyan To Bach Ke x Baaki Baatein Peene Baad (Baaghi 2 x Arjun Kanungo) – Tumbi hooks laced over aggressive club drums.Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana (Rave Flip) – Nostalgic wedding vocal samples chopped aggressively over peak-time synths.Ainvayi Ainvayi x Thug Le (Band Baaja Baaraat x Ladies vs Ricky Bahl) – Dynamic male/female vocal trade-offs over driving tech house.Gali Gali x Dilbar (KGF x Satyameva Jayate) – Dual item-track hooks colliding over an aggressive festival drop.Bhool Bhulaiyaa Title Track x Character Dheela (Bhool Bhulaiyaa x Ready) – High-tempo vocal rhythms running simultaneously into an electro drop.",
+    "film": "Stree 2 x Bad Newz",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xZLqv17URiM",
+    "videoTitle": "Aaj ki raat X O Sajna X Tauba Tauba Mashup 2024 | Visual Asik | Dj Strange |Bollywood Dance Mashup",
+    "author": "VISUAL ASIK"
+  },
+  {
+    "title": "Aaj Ki Raat x Tauba Tauba x Besharam Rang",
+    "artist": "Vocal call-and-response running across a 128 BPM tech-house drop.",
+    "film": "Stree 2 x Bad Newz x Pathaan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YpHy3Zkzh8w",
+    "videoTitle": "Party Hits of 2024 | Tauba Tauba | Aaj Ki Raat | Aayi Nai,Vicky Kaushal,Tamannaah,Diljit,Karan Aujla",
+    "author": "Saregama Music"
+  },
+  {
+    "title": "Badtameez Dil x Dilliwaali Girlfriend x Balam Pichkari",
+    "artist": "Triple Ranbir Kapoor vocal overlap layered on an electro-house drop.",
+    "film": "Yeh Jawaani Hai Deewani",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1cDoRqPnCXU",
+    "videoTitle": "Dilliwali Girlfriend Full Song Yeh Jawaani Hai Deewani | Ranbir Kapoor, Deepika Padukone | Pritam",
+    "author": "T-Series"
+  },
+  {
+    "title": "Malhari x Zingaat x Dhan Te Nan",
+    "artist": "Dhol percussion, energetic chants, and gritty rock stabs colliding over a massive festival drop.",
+    "film": "Bajirao Mastani x Dhadak x Kaminey",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "l_MyUGq7pgs",
+    "videoTitle": "Malhari - Full Video Song | Bajirao Mastani | Ranveer Singh | Vishal Dadlani | Sanjay Leela Bhansali",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Chaiyya Chaiyya x Dhan Te Nan x Sadda Haq",
+    "artist": "Sukhwinder Singh hooks chopped over heavy rock-electro synths.",
+    "film": "Dil Se x Kaminey x Rockstar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DNwq-N2Y76w",
+    "videoTitle": "Dhan Te Nan Aaja Aaja x Gulabi x Gulaabo || TRAP LIVE PERFORMANCE || KAIZMA2K23",
+    "author": "KAIZMA"
+  },
+  {
+    "title": "Besharam Rang x Ghungroo x Jai Jai Shivshankar",
+    "artist": "Seductive verses building into dual Hrithik Roshan vocal hooks over a rolling bassline.",
+    "film": "Pathaan x War",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qFkNATtc3mc",
+    "videoTitle": "Ghungroo Song | WAR | Hrithik Roshan, Vaani Kapoor | Arijit Singh, Shilpa | Vishal & Shekhar, Kumaar",
+    "author": "YRF"
+  },
+  {
+    "title": "Choli Ke Peeche x Aaj Ki Raat x O Saki Saki",
+    "artist": "Triple female vocal battle built over a punchy bass-house kick.",
+    "film": "Crew x Don x Batla House",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "VGBiUnddVtQ",
+    "videoTitle": "Choli Ke Peeche X Choliya Ke Hook Raja Ji | Item Song Mashup | #mashup  #bohemia  #remix",
+    "author": "ORBIT MUSIC"
+  },
+  {
+    "title": "Kala Chashma x Kar Gayi Chull x Abhi Toh Party",
+    "artist": "Non-stop party rap cadence layered over a peak-time bounce drop.",
+    "film": "Baar Baar Dekho x Kapoor & Sons x Khoobsurat",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2YQUo7-ZAr8",
+    "videoTitle": "ABHI TO PARTY SHURU HU HAI X KAR GAYI CHULL 💖//MAX HINDI REMIX SONG ||2026🥰💖#uttamohdar",
+    "author": "UTTAM REPORTER"
+  },
+  {
+    "title": "Aankh Marey x Cheez Badi x Dilbar",
+    "artist": "90s remake vocal chops layered across an aggressive Brazilian bassline.",
+    "film": "Simmba x Machine x Satyameva Jayate",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mFhsRAv5xFY",
+    "videoTitle": "Cheez Badi | Dilbar | Aankh Marey | Dil Chori | Tamma Tamma Live Performance by Zenith Dance Troupe",
+    "author": "Zenith Dance troupe"
+  },
+  {
+    "title": "Jhoome Jo Pathaan x Besharam Rang x Not Ramaiya Vastavaiya",
+    "artist": "SRK peak-time vocal trade-offs over driving four-on-the-floor kicks.",
+    "film": "Pathaan x Jawan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YxWlaYCA8MU",
+    "videoTitle": "Jhoome Jo Pathaan Song | Shah Rukh Khan, Deepika | Vishal & Sheykhar, Arijit Singh, Sukriti, Kumaar",
+    "author": "YRF"
+  },
+  {
+    "title": "Subah Hone Na De x Desi Boyz x Hookah Bar",
+    "artist": "Dual Akshay Kumar hooks matched with Himesh Reshammiya melodies on a festival drop.",
+    "film": "Desi Boyz x Khiladi 786",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Mm7ijWjQ3b8",
+    "videoTitle": "Subha Hone Na De x Moving To The Sun (Mashup) | Hugel | Akshay Kumar | Mika Singh",
+    "author": "Akhil Talreja"
+  },
+  {
+    "title": "Dope Shope x Angreji Beat x Blue Eyes",
+    "artist": "Honey Singh rap verses and hooks intertwined over heavy tech-house bass.",
+    "film": "International Villager x Cocktail",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0x1BoFyJK0E",
+    "videoTitle": "Angrezi Beat Jamaican Bam Bam (Neel Chhabra Mashup) | Afro House | Hugel | Yo Yo Honey Singh",
+    "author": "Neel S Chhabra"
+  },
+  {
+    "title": "Ghungroo x Nashe Si Chadh Gayi x Ude Dil Befikre",
+    "artist": "Vishal-Shekhar dance vocals overlapping on a driving 126 BPM groove.",
+    "film": "War x Befikre",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HoCwa6gnmM0",
+    "videoTitle": "Nashe Si Chadh Gayi | Full Song | Befikre, Ranveer Singh, Vaani Kapoor, Arijit Singh, Vishal-Shekhar",
+    "author": "YRF"
+  },
+  {
+    "title": "The Humma Song x Muqabla x Urvashi",
+    "artist": "Classic A.R. Rahman dance melodies colliding over a hard slap-house drop.",
+    "film": "OK Jaanu x Street Dancer 3D",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5j7Jm0nkylE",
+    "videoTitle": "Urvashi × Humma Humma | Indian Classical Progressive Fusion | The Binary Bandish",
+    "author": "The Binary Bandish"
+  },
+  {
+    "title": "Show Me The Thumka x Pyaar Hota Kayi Baar Hai x Badtameez Dil",
+    "artist": "Triple Ranbir dance hooks driving into a high-energy tech drop.",
+    "film": "Tu Jhoothi Main Makkaar x YJHD",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2yeRRm9AIxI",
+    "videoTitle": "Pyaar Hota Kayi Baar Hai (Full video) Tu Jhoothi Main Makkaar |Ranbir,Shraddha,Pritam,Arijit,Amitabh",
+    "author": "T-Series"
+  },
+  {
+    "title": "Chammak Challo x Criminal x Right Here Right Now",
+    "artist": "Akon vocals and retro hip-hop flows layered over aggressive electro saws.",
+    "film": "Ra.One x Bluffmaster",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "RU3mRtjDsLQ",
+    "videoTitle": "Chammak Challo (slowed & reverb) |Best part| - Akon, Hamsika Iyer [ Edit Audio ]",
+    "author": "Aozune"
+  },
+  {
+    "title": "London Thumakda x Gallan Goodiyaan x Sadi Gali",
+    "artist": "Dhol rhythms and Punjabi-Bolly hooks layered over a high-BPM rave synth.",
+    "film": "Queen x Dil Dhadakne Do x Tanu Weds Manu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "43NdOebkS_w",
+    "videoTitle": "London Thumakda x Gallan Goodiyan | Dance Cover | Sangeet Choreography | SWS Choreography",
+    "author": "Swirl with Shivani"
+  },
+  {
+    "title": "Lungi Dance x One Two Three Four x Zingaat",
+    "artist": "Fast-paced regional percussion clash driving an aggressive stadium brass drop.",
+    "film": "Chennai Express x Dhadak",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BS5JpTbOXWA",
+    "videoTitle": "Lungi Dance x 1234 | Beginners Mix Batch | Yashdeep Malhotra Choreography | Step Up Student Zone",
+    "author": "DMates by Step Up"
+  },
+  {
+    "title": "Illegal Weapon 2.0 x Morni Banke x High Rated Gabru",
+    "artist": "Punjabi-Bollywood hooks trading off over an aggressive bounce drop.",
+    "film": "Street Dancer 3D x Badhaai Ho x Nawabzaade",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "DxCfhmYe-Cw",
+    "videoTitle": "High Rated Gabru | Nawabzaade | Varun D, Shraddha K | Guru Randhawa | Raghav Punit Dharmesh",
+    "author": "T-Series"
+  },
+  {
+    "title": "Gandi Baat x Saree Ke Fall Sa x Tamanche Pe Disco",
+    "artist": "Raw massy vocal delivery riding simultaneously on heavy electronic stabs.",
+    "film": "R... Rajkumar x Bullett Raja",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ju12RhZFGRo",
+    "videoTitle": "Tamanche Pe Disco:RDB Feat Nindy Kaur and Raftaar | Bullett Raja | Saif Ali Khan, Sonakshi Sinha",
+    "author": "T-Series"
+  },
+  {
+    "title": "Khadke Glassy x Dil Chori x Makhna",
+    "artist": "Triple party-rap vocal blend layered over a rolling tech groove.",
+    "film": "Jabariya Jodi x Sonu Ke Titu Ki Sweety x Drive",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AmrRPNwrGQU",
+    "videoTitle": "Glassy | Yo Yo Honey Singh & Ashok Mastie | Channi Rakhala | Vinnil Markan | 1st Song",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Lahu Munh Lag Gaya x Nagada Sang Dhol x Dholida",
+    "artist": "High-intensity garba vocal layers colliding over an aggressive club drop.",
+    "film": "Ram-Leela x Gangubai Kathiawadi",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_LR2uq7od20",
+    "videoTitle": "Nagada Megamix 2.0 (Sush & Yohan x @Beatzhacker)  - Chandra, Dholida, Khalasi, LISA, Pop Smoke +",
+    "author": "Sush & Yohan Music"
+  },
+  {
+    "title": "Zinda Banda x Not Ramaiya Vastavaiya x Chaleya",
+    "artist": "Anirudh festival percussion and vocal hooks running continuously into a peak drop.",
+    "film": "Jawan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mVS1JQ0nPUc",
+    "videoTitle": "Jawan Mashup - Live | Chaleya X Zinda Banda X Not Ramaiya Vastavaiya | @AnirudhOfficial",
+    "author": "Gaurav Singh"
+  },
+  {
+    "title": "Genda Phool x Chittiyaan Kalaiyaan x Baby Doll",
+    "artist": "Melodic hooks running simultaneously over driving basslines.",
+    "film": "Badshah x Roy x Ragini MMS 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "N7s9GHEO70o",
+    "videoTitle": "Baby Doll/Chittiyaan Kalaiyaan Ep 8★Jonita Gandhi &Meet Bros |Mixtape Punjabi Season 2 Radhika&Vinay",
+    "author": "T-Series"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Dhan Te Nan x Jee Karda",
+    "artist": "Aggressive rock-rap shouts crashing over distorted electro-house drops.",
+    "film": "Delhi Belly x Kaminey x Badlapur",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AKF2whlGnr4",
+    "videoTitle": "Dhan Te Nan Full Video Song | Kaminey | Shahid Kapoor, Priyanka Chopra | Vishal Bharadwaj",
+    "author": "T-Series"
+  },
+  {
+    "title": "Ek Do Teen x Tamma Tamma Again x Cheez Badi",
+    "artist": "90s remake hooks running in sync over a driving festival beat.",
+    "film": "Baaghi 2 x Badrinath Ki Dulhania x Machine",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "i4uJWdRb1C4",
+    "videoTitle": "Tamma Tamma Again | Varun , Alia | Bappi L, Anuradha P | Tanishk, Badshah |  \"Badrinath Ki Dulhania\"",
+    "author": "T-Series"
+  },
+  {
+    "title": "Taal Se Taal x Chaiyya Chaiyya x Ramta Jogi",
+    "artist": "Classical vocal runs colliding over fast-paced tribal house drums.",
+    "film": "Taal x Dil Se",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_yuhV3udQ3o",
+    "videoTitle": "Ramta Jogi | Taal | Aishwarya Rai | Anil Kapoor | Alka Yagnik | Sukhwinder | A.R.Rahman | 90's Hits",
+    "author": "Tips Official"
+  },
+  {
+    "title": "Dum Maaro Dum x Hare Ram Hare Krishna x Bhool Bhulaiyaa",
+    "artist": "Psychedelic vocal hooks laced across minimal techno basslines.",
+    "film": "Dum Maaro Dum x Bhool Bhulaiyaa",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6sei-GAj34o",
+    "videoTitle": "Dum Maro Dum X Teri Aankhen Bhool Bhulaiya - Anshika Chonker || Indian idol season 16 Speaker Phod🔥",
+    "author": "RO45 LOFI"
+  },
+  {
+    "title": "Shanivaar Raati x Palat Tera Hero Idhar Hai x Besharmi Ki Height",
+    "artist": "Non-stop Varun Dhawan vocal anthems built over a peak-time synth.",
+    "film": "Main Tera Hero",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9vkcYxbGdTE",
+    "videoTitle": "Palat Tera Hero Idhar Hai (Full Video) Song Main Tera Hero | Arijit Singh | Varun Dhawan",
+    "author": "T-Series"
+  },
+  {
+    "title": "Sweety Tera Drama x Twist x Chor Bazari",
+    "artist": "Upbeat hooks running simultaneously into an aggressive electro build.",
+    "film": "Bareilly Ki Barfi x Love Aaj Kal",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TjJNVk0__Eg",
+    "videoTitle": "WEDDING MASHUP 10 - new songs 2025 Chor bazari panwadi bijuriya. Online class whtsp msg 98253 73973 ",
+    "author": "RITU'S DANCE STUDIO"
+  },
+  {
+    "title": "Paisa Paisa x Subah Hone Na De x Right Here Right Now",
+    "artist": "2000s commercial party hooks colliding over a bass-heavy drop.",
+    "film": "De Dana Dan x Desi Boyz x Bluffmaster",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JX409_Bq7m0",
+    "videoTitle": "Right Here Right Now | Lyrical | Bluff Master | Abhishek Bachchan | Priyanka Chopra |  HD Video",
+    "author": "Saregama Music"
+  },
+  {
+    "title": "Vele x The Disco Song x Kukkad",
+    "artist": "Vishal-Shekhar college club anthems overlapping on massive mainstage kicks.",
+    "film": "Student of the Year",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1Na8nKEUjYI",
+    "videoTitle": "Vishal & Shekhar, Shahid Mallya, Nisha Mascarenhas, Marianne D'cruz Aiman - Kukkad",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Aashiq Banaya Aapne x Jhalak Dikhla Jaa x Naam Hai Tera",
+    "artist": "High-energy Himesh vocal chops over an aggressive bass-house drop.",
+    "film": "Aashiq Banaya Aapne x Aksar x Aap Kaa Surroor",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UsIpEC2Do7g",
+    "videoTitle": "Himesh Reshammiya X Emraan Hashmi Mashup 2026 | Aashiq Banaya Aapne | Jhalak Dikhla Jaa",
+    "author": "Rish Mashup 2.0"
+  },
+  {
+    "title": "Rock Tha Party x Saturday Saturday x Kar Gayi Chull",
+    "artist": "Relentless party anthems driving into a hard club bounce.",
+    "film": "Rocky Handsome x HSKD x Kapoor & Sons",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0fXlZ3vnQd0",
+    "videoTitle": "Saturday Saturday - Indeep Bakshi feat Badshah | Official HD Official Song Video",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Mundiyan To Bach Ke x Baaki Baatein Peene Baad x Kala Chashma",
+    "artist": "Punjabi tumbi hooks colliding over an aggressive drop.",
+    "film": "Baaghi 2 x Arjun Kanungo x Baar Baar Dekho",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0VmN1MAx53I",
+    "videoTitle": "LA MAMA x MUNDIYA x BOOYAH (MASHUP) DJ ANKIT RAMCHANDANI",
+    "author": "DJ ANKIT RAMCHANDANI"
+  },
+  {
+    "title": "Ainvayi Ainvayi x Thug Le x Dum Dum",
+    "artist": "Dynamic vocal trade-offs running over high-BPM tech drums.",
+    "film": "Band Baaja Baaraat x Ladies vs Ricky Bahl",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "pElk1ShPrcE",
+    "videoTitle": "Ainvayi Ainvayi Song | Band Baaja Baaraat | Ranveer Singh, Anushka Sharma |  Sunidhi Chauhan, Salim",
+    "author": "YRF"
+  },
+  {
+    "title": "Gali Gali x Dilbar x O Saki Saki",
+    "artist": "Middle Eastern synth riffs and female item hooks over an aggressive drop.",
+    "film": "KGF x Satyameva Jayate x Batla House",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "glHLT2bjfrQ",
+    "videoTitle": "Dilbar X Saki Saki Dance Performance at Our Sister’s Haldi!💛💃",
+    "author": "twinasauruz"
+  },
+  {
+    "title": "Bhool Bhulaiyaa Title Track x Character Dheela x Dhinka Chika",
+    "artist": "Fast vocal rhythms layered over an energetic electro-saw synth.",
+    "film": "Bhool Bhulaiyaa x Ready",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rIvnoryqXGY",
+    "videoTitle": "Character Dheela 2.0 (Video) Shehzada | Kartik, Kriti | Neeraj, Pritam | Rohit D | Bhushan Kumar",
+    "author": "T-Series"
+  },
+  {
+    "title": "First Class x Slow Motion x Dil Chori",
+    "artist": "Fast-tempo vocal exchange driving directly into a big-room drop.",
+    "film": "Kalank x Bharat x SKTKS",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KX06ksuS6Xo",
+    "videoTitle": "Diljit Dosanjh: CLASH (Official) Music Video | G.O.A.T.",
+    "author": "Diljit Dosanjh"
+  },
+  {
+    "title": "Dus Bahane x Right Here Right Now x Dus Bahane 2.0",
+    "artist": "Nostalgic vocal interplay backed by an aggressive tech drop.",
+    "film": "Dus x Bluffmaster x Baaghi 3",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qE3DfF66DNA",
+    "videoTitle": "Dus Bahane Karke Le Gaye Dil | Dus | Zayed K, Abhishek B | K K, Shaan | Vishal Dadlani, Shekhar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Tune Maari Entriyaan x Jashn-E-Ishqa x Asalaam-E-Ishqum",
+    "artist": "High-octane commercial hooks over driving four-on-the-floor festival kicks.",
+    "film": "Gunday",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BGU3FkUGH0M",
+    "videoTitle": "Asalaam-e-Ishqum Song | Gunday | Ranveer Singh, Arjun Kapoor, Priyanka | Neha Bhasin, Bappi Lahiri",
+    "author": "YRF"
+  },
+  {
+    "title": "Balam Pichkari x Chitiyan Kalaiyan x Baby Doll",
+    "artist": "Playful vocal hooks locked into a driving club baseline.",
+    "film": "YJHD x Roy x Ragini MMS 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "lt_X5xPFftI",
+    "videoTitle": "Baby Doll Full Song With Lyrics ★ Ragini MMS 2 ★ Sunny Leone",
+    "author": "T-Series"
+  },
+  {
+    "title": "Khaike Paan Banaraswala x O O Jane Jaana x Jumma Chumma",
+    "artist": "Vintage high-energy vocals layered over an aggressive tech-house sub-bass.",
+    "film": "Don x PKTDK x Hum",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "u2KeTY03iL4",
+    "videoTitle": "KHAIKE PAAN BANARAS WALA",
+    "author": "Udit Narayan - Topic"
+  },
+  {
+    "title": "Chhote Chhote Bhaiyon Ke x Didi Tera Devar Deewana x Bole Chudiyan",
+    "artist": "Classic wedding hooks chopped aggressively over a 128 BPM rave drop.",
+    "film": "HSKCS x HAHK x K3G",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JtKjcyc5wh0",
+    "videoTitle": "Chhote Chhote Bhaiyon Ke - Hindi Lyrical | Salman Khan, Saif Ali Khan, Tabu, Karishma | HSSH",
+    "author": "Bollywood Classics"
+  },
+  {
+    "title": "Garmi x Muqabla x Illegal Weapon 2.0",
+    "artist": "High-impact dance battle vocals colliding over a heavy festival drop.",
+    "film": "Street Dancer 3D",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "3YF6qSSGasA",
+    "videoTitle": "Garmi X Muqabla | Shradha Bothra Choreography | Varun D | Nora F | Shradha K | Street Dancer Medley",
+    "author": "Shradha "
+  },
+  {
+    "title": "Party On My Mind x Lat Lag Gayi x Dilliwaali Girlfriend",
+    "artist": "Seductive dancefloor vocals running simultaneously over rolling basslines.",
+    "film": "Race 2 x YJHD",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "uBodOFsWgnw",
+    "videoTitle": "There's Party On My Mind - Yo Yo Honey Singh, KK | Race 2 | Saturday Night Party Song",
+    "author": "Bollywood Jalwa"
+  },
+  {
+    "title": "Makhna x Proper Patola x Tareefan",
+    "artist": "Sleek urban vocal cadences over a punchy slap-house groove.",
+    "film": "Drive x Namaste England x Veere Di Wedding",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YmXJp4RtBCM",
+    "videoTitle": "Proper Patola - Official Video | Namaste England | Arjun | Parineeti | Badshah | Diljit | Aastha",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Dil Dance Maare x Marjaani x Billo Rani",
+    "artist": "Fast-paced retro vocals running across an aggressive electronic drop.",
+    "film": "Tashan x Billu x Dhan Dhana Dhan Goal",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "l7wqkrtE2ZI",
+    "videoTitle": "Dil Dance Maare Song | Tashan | Akshay Kumar, Saif Ali Khan, Kareena Kapoor | Vishal and Shekhar",
+    "author": "YRF"
+  },
+  {
+    "title": "Sooraj Dooba Hain x Subah Hone Na De x Senorita",
+    "artist": "Melodic summer party hooks layered over a peak-time progressive drop.",
+    "film": "Roy x Desi Boyz x ZNMD",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "i3a_a1Hm-Ts",
+    "videoTitle": "Sooraj Dooba Hai x Nachde Ne Saare x Tum Hi Ho Bandhu x Uff Teri Ada x Latt Lag Gyi (SAVoustic)",
+    "author": "SAVoustic Music"
+  },
+  {
+    "title": "Dilli Ki Raat x Darde Disco x It's The Time To Disco",
+    "artist": "Disco vocal hooks mashed into an aggressive club beat.",
+    "film": "Indoo Ki Jawani x Om Shanti Om x KHNH",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "M03GOY5eINg",
+    "videoTitle": "It's the Time to Disco - Kal Ho Naa Ho | Shahrukh, Saif, Preity | Shankar Ehsaan Loy",
+    "author": "SonyMusicIndiaVEVO"
+  },
+  {
+    "title": "Tauba Tauba x Aaj Ki Raat x Zingaat",
+    "artist": "Modern Punjabi flow, high-energy Hindi club vocals, and folk chants colliding over a heavy peak-time drop.",
+    "film": "Bad Newz x Stree 2 x Dhadak",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "wQeQHoT9o10",
+    "videoTitle": "Diwali Party Songs 2025 | Aaj Ki Raat | Tauba Tauba | What Jhumka | Bollywood Hits | Hindi Songs",
+    "author": "Saregama Music"
+  },
+  {
+    "title": "add these songs in club list and check duplicate from these songs",
+    "artist": "Club Remix",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XUzNGR_3pDw",
+    "videoTitle": "HOW TO MAKE A MEDLEY FOR A WEDDING PERFORMANCE OR HOW TO JOIN SONGS FOR A DANCE. Learn from a Pro DJ",
+    "author": "DJ Deep Bhamra"
+  },
+  {
+    "title": "Arjan Vailly x Malhari",
+    "artist": "Raw Punjabi battle-cry energy overlaid on rapid dhol rhythms and brass festival stabs.",
+    "film": "Animal x Bajirao Mastani",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "s-K7HinTAgA",
+    "videoTitle": "Arjan Vailly (Slowed + Reverb) - Bhupinder Babbal | BARATO NATION",
+    "author": "BARATO NATION"
+  },
+  {
+    "title": "Aayi Nai x Zingaat",
+    "artist": "Upbeat regional Bhojpuri folk hook overlapping relentless Marathi street percussion.",
+    "film": "Stree 2 x Dhadak",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ztUF1DOUMt4",
+    "videoTitle": "Zingaat Hindi  - Full Video | Dhadak | Ishaan & Janhvi | Ajay-Atul | Amitabh Bhattacharya",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "What Jhumka? x Show Me The Thumka",
+    "artist": "Fast-paced vocal exchanges driving into an aggressive tech-house bounce drop.",
+    "film": "Rocky Aur Rani Kii Prem Kahaani x Tu Jhoothi Main Makkaar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xV22cenBGb8",
+    "videoTitle": "What Jhumka x Show Me The Thumka (DJMattz Mashup | Instagram Viral",
+    "author": "DJMattz"
+  },
+  {
+    "title": "Sher Khul Gaye x Ghungroo",
+    "artist": "Dual Hrithik Roshan dance-groove vocals colliding over a driving four-on-the-floor club bassline.",
+    "film": "Fighter x War",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "exdsbFvhocI",
+    "videoTitle": "FIGHTER: Sher Khul Gaye (Full Video) Hrithik, Deepika, Vishal-Sheykhar, Benny, Shilpa, Kumaar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Jamal Kudu x Dum Maaro Dum",
+    "artist": "Chanted Iranian-folk vocal chops colliding with vintage psychedelic synth hooks.",
+    "film": "Animal x Hare Rama Hare Krishna",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "luO5Fffkcnc",
+    "videoTitle": "DJ KAWAL - JAMAL KUDU (REMIX) | ANIMAL | BOBBY DOEL l ENTRY SONG | RANBIR, RASHMIKA",
+    "author": "DJ Kawal"
+  },
+  {
+    "title": "Naina x Tareefan",
+    "artist": "Diljit Dosanjh verses layered smoothly over Badshah’s urban club cadence.",
+    "film": "Crew x Veere Di Wedding",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "3SWc5G8Gx7E",
+    "videoTitle": "Tareefan | Veere Di Wedding | QARAN  Ft. Badshah | Kareena Kapoor Khan, Sonam Kapoor, Swara & Shikha",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Not Ramaiya Vastavaiya x Badtameez Dil",
+    "artist": "Anirudh's high-tempo dance hook interwoven with Ranbir Kapoor’s rapid vocal run.",
+    "film": "Jawan x Yeh Jawaani Hai Deewani",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HOr5eGwagw0",
+    "videoTitle": "JAWAN: Ramaiya Vastavaiya | Arijit singh | Shahrukh khan Deepika padukone Nayantara jawan song",
+    "author": "Filmy Store"
+  },
+  {
+    "title": "Ishq Jaisa Kuch x Nashe Si Chadh Gayi",
+    "artist": "Seductive vocal chops trading bars over a rolling 126 BPM tech-house groove.",
+    "film": "Fighter x Befikre",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_tEjIYtGBwc",
+    "videoTitle": "Nashe Si Chadh Gayi Song Lyrics | Vishal and Shekhar | Arijit Singh | 🎧🎤 ❤️",
+    "author": "KUNUMUSIC"
+  },
+  {
+    "title": "Bhool Bhulaiyaa 3",
+    "artist": "Kartik Aaryan peak-time anthems layered over aggressive electro synths.",
+    "film": "Title Track) x Character Dheela 2.0 (Bhool Bhulaiyaa 3 x Shehzada",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Cus-6cnyt1s",
+    "videoTitle": "Bhool Bhulaiyaa 3 - Title Track | Kartik A | Pitbull, Diljit, Neeraj S, Tanishk, Pritam | Bhushan K",
+    "author": "T-Series"
+  },
+  {
+    "title": "Lutt Putt Gaya x Twist",
+    "artist": "Upbeat commercial hooks trading off over an aggressive festival bassline.",
+    "film": "Dunki x Love Aaj Kal",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w_EQg4TO1Nc",
+    "videoTitle": "Chor Bazari Phir Se | Bhool Chuk Maaf | Rajkummar, Wamiqa | Pritam, Tanishk, Irshad, Neeraj, Sunidhi",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Dance Ka Bhoot x Saree Ke Fall Sa",
+    "artist": "High-energy festival dhol build colliding directly with massy electro stabs.",
+    "film": "Brahmāstra x R... Rajkumar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qUM0UrliOLk",
+    "videoTitle": "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 𝐭𝐡𝐚𝐭 𝐰𝐢𝐥𝐥 𝐦𝐚𝐤𝐞 𝐲𝐨𝐮 𝐝𝐚𝐧𝐜𝐞 𝐚𝐭 3𝐚𝐦 💃 | Bollywood Party Songs 🔥 | Hindi Dance Playlist",
+    "author": "Faded Mp3"
+  },
+  {
+    "title": "Baby Bring It On x Zingaat",
+    "artist": "Dual high-BPM party anthems colliding on aggressive Dutch-house synth leads.",
+    "film": "Madgaon Express x Dhadak",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "m3hqkxYjdBk",
+    "videoTitle": "Baby Bring It On - Madgaon Express | Nora Fatehi, Divyenndu, Avinash | Ajay-Atul, Nikhita G, Kumaar",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Chaleya x Apna Bana Le",
+    "artist": "Arijit Singh vocal stems intertwined over a driving festival progressive drop.",
+    "film": "Jawan x Bhediya",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rxs5buRMIvY",
+    "videoTitle": "Bollywood love 2023 mashup | apna bana le x chaleya x heeriye x maan meri jaan | slowed reverb",
+    "author": "Feel by Vocals"
+  },
+  {
+    "title": "Pyaar Hota Kayi Baar Hai x Subah Hone Na De",
+    "artist": "High-energy commercial vocals running simultaneously into a peak-time club build.",
+    "film": "Tu Jhoothi Main Makkaar x Desi Boyz",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Y7G-tYRzwYY",
+    "videoTitle": "\"Subha Hone Na De Full Song\"| Desi Boyz | Akshay Kumar ,John Abraham | Pritam |  Mika Singh, Kumaar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Kaavaalaa",
+    "artist": "Infectious tribal dance hook layered across Prabhu Deva's electro-funk bassline.",
+    "film": "Hindi) x Muqabla (Jailer x Street Dancer 3D",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "lM8h5Mm6ODo",
+    "videoTitle": "JAILER - Kaavaalaa Video Song | Superstar Rajinikanth | Sun Pictures | Anirudh | Nelson | Tamannaah",
+    "author": "Sun TV"
+  },
+  {
+    "title": "Main Nikla Gaddi Leke x Khadke Glassy",
+    "artist": "High-octane Punjabi-folk shouts riding an aggressive bounce-house kick.",
+    "film": "Gadar 2 x Jabariya Jodi",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "s8khkWHpI9U",
+    "videoTitle": "KHADKE GLASSY || Dance Cover || Krazzy Dance Academy || Holi Special",
+    "author": "Krazzy Dance Academy"
+  },
+  {
+    "title": "Kusu Kusu x O Saki Saki",
+    "artist": "Nora Fatehi item-track hooks running simultaneously over Middle Eastern synth stabs.",
+    "film": "Satyameva Jayate 2 x Batla House",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "RgzLnmTaCAU",
+    "videoTitle": "Kusu Kusu Song Ft Nora Fatehi | Satyameva Jayate 2 | John A, Divya K | Tanishk B, Zahrah Khan, Dev N",
+    "author": "T-Series"
+  },
+  {
+    "title": "Tip Tip Barsa Paani x Choli Ke Peeche",
+    "artist": "Classic 90s remake vocal chops layered across a distorted 128 BPM saw-wave drop.",
+    "film": "Sooryavanshi x Crew",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "VMsn5-a45-s",
+    "videoTitle": "Tip Tip Barsa Paani | Akshay Kumar, Raveena Tandon | Udit Narayan | Superhit Romantic Song | Mohra",
+    "author": "Udit Narayan Hit Songs"
+  },
+  {
+    "title": "Chandigarh Mein x Makhna",
+    "artist": "Polished urban party vocals traded off over an aggressive slap-house groove.",
+    "film": "Good Newwz x Drive",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "CvkVklGfOIE",
+    "videoTitle": "Apna Time Aayega X Chandigarh Mein X Yaad Piya X Makhna X Sakhiyaan X Coka | Best Party Mashup Song",
+    "author": "Aditya meena app"
+  },
+  {
+    "title": "Sauda Khara Khara x Proper Patola",
+    "artist": "Heavy Punjabi club hooks colliding on a driving four-on-the-floor beat.",
+    "film": "Good Newwz x Namaste England",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4pNwmsxXuZA",
+    "videoTitle": "Sauda Khara Khara 8K Video | Good Newwz | Akshay Kumar, Diljit Dosanjh, Kiara Advani |Sukhbir,Dhvani",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Coka 2.0 x Illegal Weapon 2.0",
+    "artist": "High-intensity Punjabi bass vocals layered directly over an aggressive club kick.",
+    "film": "Liger x Street Dancer 3D",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "qGHDQ0JrUy0",
+    "videoTitle": "Illegal Weapon 2.0 (From \"Street Dancer 3D\")",
+    "author": "Jasmine Sandlas - Topic"
+  },
+  {
+    "title": "Ra Ra Rakkamma x Chikni Chameli",
+    "artist": "Fast-paced regional dance verses building into a massive stadium drop.",
+    "film": "Vikrant Rona x Agneepath",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4s5yWW5CXlk",
+    "videoTitle": "Uyi Amma + Chammak Chalo + Chikni Chameli | Aura ’25 | GDC School Of Dance",
+    "author": "GDC School Of Dance"
+  },
+  {
+    "title": "Param Sundari x Genda Phool",
+    "artist": "Folk melodies and rap verses trading bars over a rolling sub-bass drop.",
+    "film": "Mimi x Badshah",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w4ClQO0FFQg",
+    "videoTitle": "Param Sundari -Official Video | Mimi | Kriti Sanon, Pankaj Tripathi | @ARRahman| Shreya Ghoshal",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "BurjKhalifa x Dope Shope",
+    "artist": "Commercial urban party flows running side-by-side into an electronic club drop.",
+    "film": "Laxmii x International Villager",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "NrXdauEv9HY",
+    "videoTitle": "Dope Shope (Official Video) | Yo Yo Honey Singh & Deep Money | International Villager | Superhit",
+    "author": "Speed Records"
+  },
+  {
+    "title": "Nadiyon Paar x Chamma Chamma",
+    "artist": "Hypnotic vocal loops driving into an aggressive Brazilian bassline.",
+    "film": "Roohi x Fraud Saiyaan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bElSEuhdCnc",
+    "videoTitle": "Nadiyon Par X Yimmy X Naina X Kaavalayya X Jamal Kudu | Mirchi Dance Crew",
+    "author": "Mirchi Dance Crew"
+  },
+  {
+    "title": "Morani Baga Ma x Morni Banke",
+    "artist": "Rajasthani folk vocals chopped and overlaid with modern Punjabi dancefloor rhythms.",
+    "film": "Animal x Badhaai Ho",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "QI3fEPhPMUM",
+    "videoTitle": "Morni - 8K Video | Badshah | Sharvi Yadav | Preity Mukhundhan | Hiten",
+    "author": "Saregama Music"
+  },
+  {
+    "title": "Lazy Lamhe x Besharam Rang",
+    "artist": "Sultry vocal verses laced across a driving minimal-tech groove.",
+    "film": "Thoda Pyaar Thoda Magic x Pathaan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "y3eswvMoyug",
+    "videoTitle": "TAEHYUNG || LAZY LAMHE ft Bollywood [FMV] √",
+    "author": "SAMI_BTS K-jv"
+  },
+  {
+    "title": "Touch Me Touch Me x Zara Zara Touch Me",
+    "artist": "Classic thriller dance vocals intertwined over punchy four-on-the-floor house beats.",
+    "film": "Race",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PTCiRFRz2fI",
+    "videoTitle": "Zara Zara Touch Me - 8K | Race | Katrina Kaif, Saif Ali Khan | Monali Thakur | Pritam | Party Song",
+    "author": "Tips Official"
+  },
+  {
+    "title": "High Rated Gabru x Ban Ja Rani",
+    "artist": "Guru Randhawa hooks layered seamlessly over a hard club rhythm.",
+    "film": "Nawabzaade x Tumhari Sulu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sln0ssx1dKs",
+    "videoTitle": "LYRICAL: High Rated Gabru/Ban Ja Rani | T-Series Mixtape Punjabi | Guru Randhawa | Neha Kakkar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Coca Cola Tu x She Move It Like",
+    "artist": "Bouncy pop hooks matched with high-tempo rap cadences on a festival drop.",
+    "film": "Luka Chuppi x Badshah",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ci0WbaUH3no",
+    "videoTitle": "She Move It Like - Official Video | Badshah | Warina Hussain | ONE Album",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Chhote Chhote Peg x Chaar Botal Vodka",
+    "artist": "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    "film": "Sonu Ke Titu Ki Sweety x Ragini MMS 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eXNfz_Rs-KQ",
+    "videoTitle": "𝐂𝐡𝐚𝐭𝐩𝐚𝐭𝐢 𝐇𝐨𝐧𝐞𝐲 𝐬𝐢𝐧𝐠𝐡 𝐩𝐥𝐚𝐲𝐥𝐢𝐬𝐭 𝐜𝐮𝐳 𝐲𝐨𝐮 𝐫𝐞𝐚𝐥𝐥𝐲 𝐧𝐞𝐞𝐝 𝐭𝐡𝐢𝐬. 𝐛𝐲 𝐫𝐢𝐞_𝐟𝐲𝐩.",
+    "author": "rie"
+  },
+  {
+    "title": "Buzz x Naah",
+    "artist": "Modern pop-club vocal duets layered over driving punchy kicks.",
+    "film": "Aastha Gill x Harrdy Sandhu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8qs2dZO6wcc",
+    "videoTitle": "Naah -  Harrdy Sandhu Feat. Nora Fatehi | Jaani | B Praak | Official Music Video",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Kya Baat Ay 2.0 x Bijlee Bijlee",
+    "artist": "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    "film": "Govinda Naam Mera x Harrdy Sandhu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "7CNeqA9PBYE",
+    "videoTitle": "Kyaa Baat Haii 2.0 | Govinda Naam Mera | Vicky, Kiara | Harrdy, Tanishk, Nikhita, Jaani, B Praak",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Pappi Jhappi x Gandi Baat",
+    "artist": "Quirky mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    "film": "Govinda Naam Mera x R... Rajkumar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "FOv5BCVKq0Q",
+    "videoTitle": "Pappi Jhappi | Govinda Naam Mera | Vicky, Kiara | Meet Bros., Harry Arora, Kumaar",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Jeda Nasha x Jehda Nasha",
+    "artist": "Modern dancefloor remake vocals colliding with raw original folk stems over driving club drums.",
+    "film": "An Action Hero x Amar Jalal",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Fhro0p2x6R4",
+    "videoTitle": "Nasha x Let The Music Play (@DJLEMONOFFICIAL & JAZ Scape) Mashup",
+    "author": "JAZ Scape"
+  },
+  {
+    "title": "Alcoholia x Dhan Te Nan",
+    "artist": "Raw, unhinged vocal chants layered over heavy rock-infused electronic basslines.",
+    "film": "Vikram Vedha x Kaminey",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HvnMMAV8m5A",
+    "videoTitle": "Dhan Te Nan - Full (Audio) Song | Kaminey | Shahid Kapoor, Priyanka Chopra | Vishal Bharadwaj",
+    "author": "T-Series Bollywood Classics"
+  },
+  {
+    "title": "Besharmi Ki Height x Hookah Bar",
+    "artist": "2010s peak-time commercial hooks locked into a massive festival build.",
+    "film": "Main Tera Hero x Khiladi 786",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Jb_9kvrjkBY",
+    "videoTitle": "Besharmi ki height (slowed+reverb)",
+    "author": "𝙐𝙣𝙞𝘽𝙖𝙚"
+  },
+  {
+    "title": "Fevicol Se x Munni Badnaam Hui",
+    "artist": "Classic rustic item-song vocal hooks trading bars over aggressive festival brass.",
+    "film": "Dabangg 2 x Dabangg",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Wb2f2lVPrWo",
+    "videoTitle": "\"Munni Badnaam Hui Remix\" Full Song Dabangg | Malaika Arora Khan",
+    "author": "T-Series"
+  },
+  {
+    "title": "Sheila Ki Jawani x Chikni Chameli",
+    "artist": "High-BPM item track battle drop featuring dual female vocal hooks.",
+    "film": "Tees Maar Khan x Agneepath",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "938tRtrLoCM",
+    "videoTitle": "Chikni chameli X Fevicol se X Tip tip barsa Pani X Sheila ki Jawani | Mashup song | On request",
+    "author": "♡ Miss Sweetheart ♡"
+  },
+  {
+    "title": "Dhoom Machale x Crazy Kiya Re",
+    "artist": "Sunidhi Chauhan vocal runs intertwined over driving tech-house percussion.",
+    "film": "Dhoom x Dhoom 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "J2Bh68GTUOU",
+    "videoTitle": "Crazy Kiya Re | Full Song | Dhoom:2 | Aishwarya Rai, Hrithik Roshan, Sunidhi Chauhan, Pritam, Sameer",
+    "author": "YRF"
+  },
+  {
+    "title": "Paisa Yeh Paisa x Bhaag D.K. Bose",
+    "artist": "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    "film": "Total Dhamaal x Delhi Belly",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1JqcIxZLL5w",
+    "videoTitle": "Bhaag DK Bose - Remix",
+    "author": "GasCan"
+  },
+  {
+    "title": "Slow Motion x First Class",
+    "artist": "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    "film": "Bharat x Kalank",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "kKs1bTMKwdg",
+    "videoTitle": "Everyone Mocked His D-Rank Talent—Until He Killed an LV100 Legendary Dungeon Boss at LV1!",
+    "author": "Mania Comics Legends"
+  },
+  {
+    "title": "Kala Chashma x Dilliwaali Girlfriend",
+    "artist": "Iconic hooklines colliding directly over a 128 BPM bounce drop.",
+    "film": "Baar Baar Dekho x Yeh Jawaani Hai Deewani",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tSE8T0hKBVM",
+    "videoTitle": "Kala chashma x chammak challo x diliwali girlfriend",
+    "author": "Bindu T"
+  },
+  {
+    "title": "Ainvayi Ainvayi x London Thumakda",
+    "artist": "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    "film": "Band Baaja Baaraat x Queen",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "n1QGYz0XeRY",
+    "videoTitle": "Ainvayi Ainvayi || Band Baja Baarat || Dance Cover || Move It Like",
+    "author": "Move It Like"
+  },
+  {
+    "title": "Muqabla x Zingaat",
+    "artist": "Fast rhythmic shouting chops riding alongside Prabhu Deva's synth hooks.",
+    "film": "Street Dancer 3D x Dhadak",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JhgdLHypNwA",
+    "videoTitle": "Dj Chetas Zingaat Vs Ping Pong | Live At Toybeach | Life Is A Mashup",
+    "author": "Naresh Darvesh"
+  },
+  {
+    "title": "Tauba Tauba x Aankh Marey",
+    "artist": "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops.",
+    "film": "Bad Newz x Simmba",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oRtOwoQpXhc",
+    "videoTitle": "Tauba Tauba X Levitating X YKWIM | Mashup | Ft. Karan Aujla, Dua Lipa & Sultan -  DJ HARSH SHARMA",
+    "author": "DJ HARSH SHARMA"
+  },
+  {
+    "title": "Dilbar x Kamli",
+    "artist": "High-energy vocal runs colliding over a driving tech-house bassline.",
+    "film": "Satyameva Jayate x Dhoom 3",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nOrhBRSN4rs",
+    "videoTitle": "Kamli kamli x Dilbar dilbar dance performance by a( BCA 1) student",
+    "author": "S.A.B Villagers Vlogs "
+  },
+  {
+    "title": "Tumse Milke Dil Ka Jo Haal x Chammak Challo",
+    "artist": "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    "film": "Main Hoon Na x Ra.One",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "R2f3kdVvra8",
+    "videoTitle": "CHAMMAK CHALLO X DIL KA JO HAL HAI !! REMIX !! DJ ABK2 OFFICIAL ",
+    "author": "DJ ABK 2 OFFICIAL "
+  },
+  {
+    "title": "Gali Gali x Tip Tip Barsa Paani",
+    "artist": "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    "film": "KGF x Sooryavanshi",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Vc0b0JeKlV4",
+    "videoTitle": "TIP TIP BARSA PAANI | HUSNN HAI | KUSU KUSU | GALI GALI MIX FINAL",
+    "author": "Ajay Bag"
+  },
+  {
+    "title": "Bhool Bhulaiyaa",
+    "artist": "Iconic vocal chants overlaid directly across dark minimal techno synths.",
+    "film": "Title Track) x Hare Ram Hare Krishna (Bhool Bhulaiyaa x Commando 3",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "B9_nql5xBFo",
+    "videoTitle": "Bhool Bhulaiyaa Title Track (Full Video) | Akshay Kumar, Vidya Balan | Neeraj Shridhar | Pritam",
+    "author": "T-Series"
+  },
+  {
+    "title": "Arjan Vailly x Malhari x Dhan Te Nan",
+    "artist": "Raw folk battle shouts and live dhol percussion colliding over an aggressive rock-electro drop.",
+    "film": "Animal x Bajirao Mastani x Kaminey",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ncNHTJHFKYc",
+    "videoTitle": "AFTERAll - Live at Royal Melbourne | Australia Tour | Bolly Tech | Bolly Afro",
+    "author": "AFTERAll Music"
+  },
+  {
+    "title": "Aayi Nai x Zingaat x Baby Bring It On",
+    "artist": "High-BPM Bhojpuri vocal hooks and Marathi street rhythms driving into an intense festival brass drop.",
+    "film": "Stree 2 x Dhadak x Madgaon Express",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zkt7DfOUlyM",
+    "videoTitle": "Bring It On | Jaundya Na Balasaheb | Ajay-Atul | Bhau Kadam & Saie Tamhankar",
+    "author": "Zee Music Marathi"
+  },
+  {
+    "title": "What Jhumka? x Show Me The Thumka x Badtameez Dil",
+    "artist": "Triple Ranbir-Alia era commercial vocal trade-offs layered over a 128 BPM bouncy tech-house drop.",
+    "film": "RRKPK x TJMM x YJHD",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sbl65JJQQWs",
+    "videoTitle": "What Jhumka x Badtameez Dil | Bollywood Mashup",
+    "author": "Jones Kalarickal"
+  },
+  {
+    "title": "Sher Khul Gaye x Ghungroo x Jai Jai Shivshankar",
+    "artist": "Hrithik Roshan dance-groove vocals trading bars across a driving four-on-the-floor electro bassline.",
+    "film": "Fighter x War",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oGneAab3e88",
+    "videoTitle": "Jai Jai Shivshankar | Full Song | WAR | Hrithik, Tiger | Vishal & Shekhar, Benny | Holi Song",
+    "author": "YRF"
+  },
+  {
+    "title": "Jamal Kudu x Dum Maaro Dum x Hare Ram Hare Krishna",
+    "artist": "Hypnotic Iranian vocal chops and retro hooks layered over a rolling minimal tech kick.",
+    "film": "Animal x Dum Maaro Dum x Bhool Bhulaiyaa",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "CrreMOdWITM",
+    "videoTitle": "Jamal Kudu X Meme { Trending Mix } Deej Abhay Aby #djsong  #trending#animals #abrarsentryjamalkudu",
+    "author": "DJ Aditya prayagraj   "
+  },
+  {
+    "title": "Naina x Tareefan x Proper Patola",
+    "artist": "Urban Punjabi flows and female vocal harmonies intertwined across an aggressive slap-house groove.",
+    "film": "Crew x Veere Di Wedding x Namaste England",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "3u6lLWGjFLY",
+    "videoTitle": "Naina | Crew | Diljit Dosanjh, Ft. Badshah | Tabu, Kareena Kapoor Khan, Kriti Sanon | Raj Ranjodh",
+    "author": "Tips Official"
+  },
+  {
+    "title": "Not Ramaiya Vastavaiya x Zinda Banda x Badtameez Dil",
+    "artist": "Anirudh festival percussion and rapid vocal runs crashing into an electro-house drop.",
+    "film": "Jawan x YJHD",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "m3OtL4peEWU",
+    "videoTitle": "Jawan: Not Ramaiya Vastavaiya Extended Version (Hindi): Shah Rukh Khan |Atlee |Anirudh |Nayanthara",
+    "author": "T-Series"
+  },
+  {
+    "title": "Ishq Jaisa Kuch x Nashe Si Chadh Gayi x Besharam Rang",
+    "artist": "Sultry Vishal-Shekhar verses and high-energy vocal hooks layered over a driving 126 BPM bassline.",
+    "film": "Fighter x Befikre x Pathaan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Uo_OSlQZlgY",
+    "videoTitle": "Besharam Rang (From \"Pathaan\")",
+    "author": "Shilpa Rao - Topic"
+  },
+  {
+    "title": "Lutt Putt Gaya x Twist x Chor Bazari",
+    "artist": "Upbeat vocal cadences trading off over an aggressive four-on-the-floor festival drop.",
+    "film": "Dunki x Love Aaj Kal",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w_EQg4TO1Nc",
+    "videoTitle": "Chor Bazari Phir Se | Bhool Chuk Maaf | Rajkummar, Wamiqa | Pritam, Tanishk, Irshad, Neeraj, Sunidhi",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Dance Ka Bhoot x Saree Ke Fall Sa x Gandi Baat",
+    "artist": "Festival dhol build matched with raw massy vocal shouts over heavy electronic stabs.",
+    "film": "Brahmāstra x R... Rajkumar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "vvLBXO94EfA",
+    "videoTitle": "Gandi Baat | Full Video Song | R...Rajkumar | Shahid Kapoor | Sonakshi Sinha | Pritam",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Main Nikla Gaddi Leke x Khadke Glassy x Dil Chori",
+    "artist": "High-octane Punjabi-folk shouts riding continuously on a bouncy bass-house drop.",
+    "film": "Gadar 2 x Jabariya Jodi x SKTKS",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "iy8q8jRC2yU",
+    "videoTitle": "Khadke Glassy - Lyrical | Jabariya Jodi | Sidharth Malhotra & Parineeti Chopra | Yo Yo Honey Singh",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Kusu Kusu x O Saki Saki x Dilbar",
+    "artist": "Triple Nora Fatehi item hooks running simultaneously over dark Middle Eastern synth riffs.",
+    "film": "Satyameva Jayate 2 x Batla House x Satyameva Jayate",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tYtwHkiV2jw",
+    "videoTitle": "Saki saki re || Kusu kusu || Dilbar dilbar ||Hay garmi || Ek to kam || Nora fatehi Mashup",
+    "author": "village girl Trisha"
+  },
+  {
+    "title": "Tip Tip Barsa Paani x Choli Ke Peeche x Aaj Ki Raat",
+    "artist": "90s remake vocal chops running in sync over an aggressive 128 BPM club drop.",
+    "film": "Sooryavanshi x Crew x Stree 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hxjPnI41AFM",
+    "videoTitle": "Tiger Pop और Vartika की \"Chura Ke Dil\" पे ज़बरदस्त जुगलबंदी | India's Best Dancer | Best Of Top 5",
+    "author": "SET India"
+  },
+  {
+    "title": "Chandigarh Mein x Makhna x Proper Patola",
+    "artist": "Urban party vocals trading off seamlessly over a punchy club groove.",
+    "film": "Good Newwz x Drive x Namaste England",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JKyt7k9_xvU",
+    "videoTitle": "Apna Time Aayega X Chandigarh Mein X Yaad Piya X Makhna X Sakhiyaan X Coka | Best Party Mashup Song",
+    "author": "tik tok lover"
+  },
+  {
+    "title": "Sauda Khara Khara x Coka 2.0 x Illegal Weapon 2.0",
+    "artist": "Heavy Punjabi club hooks and rapid female vocals colliding on a hard four-on-the-floor beat.",
+    "film": "Good Newwz x Liger x Street Dancer 3D",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AcrUS_JUI1M",
+    "videoTitle": "Illegal Weapon 2.0 - Street Dancer & Sauda Khara Khara - Sukhbir ( Quarantine Dance )",
+    "author": "Passion Struckk"
+  },
+  {
+    "title": "Ra Ra Rakkamma x Chikni Chameli x Sheila Ki Jawani",
+    "artist": "Fast-paced regional dance verses and classic item hooks crashing into a massive stadium drop.",
+    "film": "Vikrant Rona x Agneepath x Tees Maar Khan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "wVjvqk9Ikxc",
+    "videoTitle": "Oo Antava X Chammak Challo | DJ THEVAR |",
+    "author": "DJ THEVAR "
+  },
+  {
+    "title": "Param Sundari x Genda Phool x Chittiyaan Kalaiyaan",
+    "artist": "Folk melodies and female pop vocal chops riding together on a rolling sub-bass drop.",
+    "film": "Mimi x Badshah x Roy",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "fxJd99SXG5Q",
+    "videoTitle": "Dandiya Mashup (Param Sundari X Nadiyon Paar)",
+    "author": "A. R. Rahman - Topic"
+  },
+  {
+    "title": "BurjKhalifa x Dope Shope x Angreji Beat",
+    "artist": "Commercial urban party flows running side-by-side into a driving electronic drop.",
+    "film": "Laxmii x International Villager",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "K0TRGmWSqgM",
+    "videoTitle": "Angreji Beat (HD Video) | Yo Yo Honey Singh | Gippy Grewal | New Punjabi Songs 2026",
+    "author": "Being Punjabi"
+  },
+  {
+    "title": "Nadiyon Paar x Chamma Chamma x Aankh Marey",
+    "artist": "Hypnotic dance loops and party hooks driving an aggressive Brazilian bassline.",
+    "film": "Roohi x Fraud Saiyaan x Simmba",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_KhQT-LGb-4",
+    "videoTitle": "SIMMBA: Aankh Marey | Ranveer Singh, Sara Ali Khan | Tanishk Bagchi,Mika Singh,Neha Kakkar,  Kumar S",
+    "author": "T-Series"
+  },
+  {
+    "title": "Morani Baga Ma x Morni Banke x London Thumakda",
+    "artist": "Rajasthani folk vocal chops and Punjabi wedding anthems layered on an aggressive festival beat.",
+    "film": "Animal x Badhaai Ho x Queen",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ub6HP2AcRiw",
+    "videoTitle": "Indian Wedding Dance | Ban Than Chali | London Thumakda | Morni Banke | Kesha Patel",
+    "author": "Kesha Patel"
+  },
+  {
+    "title": "Lazy Lamhe x Besharam Rang x Ghungroo",
+    "artist": "Sultry vocal verses trading bars across a driving minimal-tech groove.",
+    "film": "Thoda Pyaar Thoda Magic x Pathaan x War",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "v5OpzTd9O_c",
+    "videoTitle": "Besharam Rang - Melodic Techno Mix | Kronix | Pathaan | Shilpa Rao | SRK #besharamrangremix",
+    "author": "Kronix | Producer "
+  },
+  {
+    "title": "Touch Me Touch Me x Zara Zara Touch Me x Race Saanson Ki",
+    "artist": "Iconic thriller dance vocal hooks intertwined over punchy four-on-the-floor house beats.",
+    "film": "Race",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PifTuxrPubo",
+    "videoTitle": "Zara Zara Touch Me - Race | Katrina Kaif, Saif Ali Khan | Monali Thakur | Pritam",
+    "author": "DJ Party Songs"
+  },
+  {
+    "title": "High Rated Gabru x Ban Ja Rani x Suit Suit",
+    "artist": "Guru Randhawa hooks layered seamlessly over a driving tech rhythm.",
+    "film": "Nawabzaade x Tumhari Sulu x Hindi Medium",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "y_uUB3CBqOc",
+    "videoTitle": "High Rated Gabru/Ban Ja Rani | T-Series Mixtape Punjabi | Guru Randhawa, Neha Kakkar | Bhushan Kumar",
+    "author": "T-Series"
+  },
+  {
+    "title": "Coca Cola Tu x She Move It Like x Buzz",
+    "artist": "Pop hooks matched with fast-paced rap cadences over a heavy festival drop.",
+    "film": "Luka Chuppi x Badshah x Aastha Gill",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dUaCEs3HfdI",
+    "videoTitle": "Aastha Gill - Buzz feat Badshah | Priyank Sharma | Official Music Video",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Chhote Chhote Peg x Chaar Botal Vodka x Blue Eyes",
+    "artist": "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    "film": "SKTKS x Ragini MMS 2 x Honey Singh",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Nn_94mWHGqU",
+    "videoTitle": "Chhote Chhote Peg   Yo Yo Honey Singh Tapori Mix",
+    "author": "RH Multimedia"
+  },
+  {
+    "title": "Kya Baat Ay 2.0 x Bijlee Bijlee x Naah",
+    "artist": "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    "film": "Govinda Naam Mera x Harrdy Sandhu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "G0Hx6uN2AJE",
+    "videoTitle": "Harrdy Sandhu - Kya Baat Ay | Jaani | B Praak | Arvindr Khaira | Official Music Video",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Pappi Jhappi x Gandi Baat x Saree Ke Fall Sa",
+    "artist": "Mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    "film": "Govinda Naam Mera x R... Rajkumar",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "tatni5rlnpU",
+    "videoTitle": "A desi playlist which will make you dance at 3a.m 🤍🌙 Hindi playlist|| Ghostpuff ||",
+    "author": "GhostPuff"
+  },
+  {
+    "title": "Jeda Nasha x Jehda Nasha x Kusu Kusu",
+    "artist": "Modern dancefloor vocals and hypnotic folk stems running simultaneously over driving club drums.",
+    "film": "An Action Hero x Amar Jalal x Satyameva Jayate 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6zf2dNLS-fs",
+    "videoTitle": "Jehda Nasha(Full Video)An Action Hero | Ayushmann Nora |Tanishk Faridkot Amar IP Singh,Yohani,Harjot",
+    "author": "T-Series"
+  },
+  {
+    "title": "Alcoholia x Dhan Te Nan x Jee Karda",
+    "artist": "Gritty street vocals and rock shouts colliding over heavy electronic basslines.",
+    "film": "Vikram Vedha x Kaminey x Badlapur",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "FzPmjXSv6Rs",
+    "videoTitle": "LITTLE NOISE - AFRO BOLLYTECH VOL 1 | Non Stop Mix",
+    "author": "Little Noise Music "
+  },
+  {
+    "title": "Besharmi Ki Height x Hookah Bar x Subah Hone Na De",
+    "artist": "Peak-time commercial hooks locked into a massive mainstage festival build.",
+    "film": "Main Tera Hero x Khiladi 786 x Desi Boyz",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "f7zvLJhEMKk",
+    "videoTitle": "Besharmi ki height (slowed+reverb)",
+    "author": "Pradabae"
+  },
+  {
+    "title": "Fevicol Se x Munni Badnaam Hui x Chikni Chameli",
+    "artist": "Classic rustic item-track hooks trading bars over aggressive festival brass stabs.",
+    "film": "Dabangg 2 x Dabangg x Agneepath",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Svspj4Q6-5g",
+    "videoTitle": "Dabangg 2: Fevicol Se 8K Full Song | Salman Khan | Kareena Kapoor | Sonakshi Sinha",
+    "author": "T-Series"
+  },
+  {
+    "title": "Sheila Ki Jawani x Chikni Chameli x O Saki Saki",
+    "artist": "High-BPM item-track battle drop featuring rapid-fire female vocal chops.",
+    "film": "Tees Maar Khan x Agneepath x Batla House",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sYng1PxhNLg",
+    "videoTitle": "Solo & Group mix dance | Farewell Dance |Saki saki |Chikni Chameli |Shila ki jawani |",
+    "author": "Atul Sharma vlogs"
+  },
+  {
+    "title": "Dhoom Machale x Crazy Kiya Re x Kamli",
+    "artist": "Iconic Dhoom franchise vocal runs intertwined over driving tech-house percussion.",
+    "film": "Dhoom x Dhoom 2 x Dhoom 3",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hw7lTRxzV-4",
+    "videoTitle": "Manasi की Crazy Performance ने उसे बनाया Badshah का Favorite | Indian Idol S15 | Performance",
+    "author": "SET India"
+  },
+  {
+    "title": "Paisa Yeh Paisa x Bhaag D.K. Bose x Dhan Te Nan",
+    "artist": "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    "film": "Total Dhamaal x Delhi Belly x Kaminey",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4QVu6Vo6Jhw",
+    "videoTitle": "Dhan Te Nan Lyrical Video Song | Kaminey | Shahid Kapoor, Priyanka Chopra | Vishal Bharadwaj",
+    "author": "T-Series Bollywood Classics"
+  },
+  {
+    "title": "Slow Motion x First Class x Gallan Goodiyaan",
+    "artist": "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    "film": "Bharat x Kalank x Dil Dhadakne Do",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "YQQn6i-96eY",
+    "videoTitle": "Gallan Goodiyaan | Dance Cover | Wedding Choreography | Bollywood Song | Easy Dance | Nritya Nation",
+    "author": "Nritya Nation Official"
+  },
+  {
+    "title": "Kala Chashma x Dilliwaali Girlfriend x Kar Gayi Chull",
+    "artist": "Iconic party hooks colliding directly over a 128 BPM bounce drop.",
+    "film": "Baar Baar Dekho x YJHD x Kapoor & Sons",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "NTHz9ephYTw",
+    "videoTitle": "Kar Gayi Chull - Kapoor & Sons | Sidharth Malhotra, Alia Bhatt | Badshah | Amaal Mallik | Fazilpuria",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Ainvayi Ainvayi x London Thumakda x Sadi Gali",
+    "artist": "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    "film": "Band Baaja Baaraat x Queen x Tanu Weds Manu",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZnRif5sw4jw",
+    "videoTitle": "Gallan Goodiyan X London Thumakda💃🏻 , Dance mix , wedding dance performance ",
+    "author": "Pratiksha Gupta"
+  },
+  {
+    "title": "Muqabla x Zingaat x Malhari",
+    "artist": "Relentless regional percussion chops and chants riding alongside Prabhu Deva's synth hooks.",
+    "film": "Street Dancer 3D x Dhadak x Bajirao Mastani",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eQWK1Iz_qBc",
+    "videoTitle": "Illuminati x Malhari (JAZ Scape Mashup)",
+    "author": "JAZ Scape"
+  },
+  {
+    "title": "Tauba Tauba x Aankh Marey x Cheez Badi",
+    "artist": "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops over heavy bass.",
+    "film": "Bad Newz x Simmba x Machine",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KEJyXZiPsvw",
+    "videoTitle": "Best wedding dance song  remix | Aankh marey | Morni Banke  | Cutiepie | Sweety tera drama",
+    "author": "Vibe"
+  },
+  {
+    "title": "Dilbar x Kamli x Gali Gali",
+    "artist": "High-energy female vocal runs colliding over a driving tech-house bassline.",
+    "film": "Satyameva Jayate x Dhoom 3 x KGF",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "10_-0xyuagM",
+    "videoTitle": "DILBAR - Satyameva Jayate (Lyrics) | John Abraham, Nora Fatehi, Tanishk Bagchi, Neha Kakkar, Ikka",
+    "author": "Lyrics TOWN"
+  },
+  {
+    "title": "Tumse Milke Dil Ka Jo Haal x Chammak Challo x Criminal",
+    "artist": "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    "film": "Main Hoon Na x Ra.One",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mXkbWKr5ovU",
+    "videoTitle": "Tumse Milke Dilka Jo Haal [Full Song] | Main Hoon Na | Shahrukh Khan",
+    "author": "T-Series"
+  },
+  {
+    "title": "Gali Gali x Tip Tip Barsa Paani x Choli Ke Peeche",
+    "artist": "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    "film": "KGF x Sooryavanshi x Crew",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Xcy_2wSpStc",
+    "videoTitle": "Best Lazy Dance | Best Funny Dance | Emotionless Dance | Lyrical Dance | lazy dance by IT Students",
+    "author": "Kundan Sharma"
+  },
+  {
+    "title": "Makhna x Dil Chori x Chhote Chhote Peg",
+    "artist": "Urban Punjabi-Hindi verses running together across a rolling bounce-house groove.",
+    "film": "Drive x SKTKS",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ydswJzQQQC8",
+    "videoTitle": "Dil Chori x Chhote Chhote Peg | Mashup | Sonu Ke Titu Ki Sweety | Yo Yo Honey Singh",
+    "author": "happylofi"
+  },
+  {
+    "title": "Chak Lein De x Sadda Haq x Jee Karda",
+    "artist": "High-energy motivational rock vocals colliding over distorted electro saws.",
+    "film": "Chandni Chowk to China x Rockstar x Badlapur",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_2HbGh9dTvk",
+    "videoTitle": "Jee Karda (Full Audio Song) | Badlapur | Varun Dhawan & Nawazuddin Siddiqui",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Garmi x Muqabla x Aankh Marey",
+    "artist": "Dance battle vocal chops layered together over an aggressive peak-time festival kick.",
+    "film": "Street Dancer 3D x Simmba",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "U9EQZ4EnKLo",
+    "videoTitle": "Muqabla,Aankh Mare,Dus Bahane Medley",
+    "author": "Team Vaky"
+  },
+  {
+    "title": "Lat Lag Gayi x Party On My Mind x Besharam Rang",
+    "artist": "Sultry dancefloor vocals running simultaneously over punchy basslines.",
+    "film": "Race 2 x Pathaan",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "H_gu0Pq87CY",
+    "videoTitle": "Race 2 Mashup - Race 2 | Saif Ali Khan, Deepika, Jacqueline, Ameesha, John & Anil Kapoor | Pritam",
+    "author": "Tips Official"
+  },
+  {
+    "title": "Tauba Tauba x Aaj Ki Raat x Aayi Nai",
+    "artist": "Modern Punjabi flow, dark Hindi club vocals, and high-energy folk hooks slamming into a peak-time tech drop.",
+    "film": "Bad Newz x Stree 2",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "LK7-_dgAVQE",
+    "videoTitle": "Tauba Tauba | Bad Newz | Vicky Kaushal | Triptii Dimri | Karan Aujla",
+    "author": "Saregama Music"
+  },
+  {
+    "title": "add all these songs in club list",
+    "artist": "Club Remix",
+    "film": "Bollywood Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "uYldufd3QNQ",
+    "videoTitle": "FARZI (CHEEMA Y) X JAMAICAN BAM BAM || AFRO REMIX || (dj prbx)",
+    "author": "DJ PRBX"
   }
 ];
 
-const merged = [...(typeof listHaryanvi !== "undefined" ? listHaryanvi : []), ...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
+const listHaryanvi: any[] = [
+  {
+    "title": "Chambal Ka Daku (Heavy Bass Drop Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2_3kLZS0FKY",
+    "videoTitle": "Chambal Ke Dakku [BASS BOOSTED] SONG DEEP BASS NAMO MASOON SHARMA | ARYAN BASS",
+    "author": "Aryan Bass"
+  },
+  {
+    "title": "Systum (Tech-House Club Mix)",
+    "artist": "Masoom Sharma & Elvish Yadav",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "QohIp3-Ygxk",
+    "videoTitle": "SADI SUN - Elvish Yadav & Simrat Kaur Randhawa | Harsh Nussi | Anshul Garg",
+    "author": "Play DMF"
+  },
+  {
+    "title": "2 Numbari (Sub-Bass Club Rework)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "wYaSn-zChMs",
+    "videoTitle": "2 Numberi Masoom Sharma New Haryanvi Latest Song 2021 Bass Boosted Song",
+    "author": "JBL Trap"
+  },
+  {
+    "title": "Badnam Gabru (Drill Bass Flip)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "zfK305I1yNw",
+    "videoTitle": "BADNAAM GABRU I CONCERT HALL 🔊 SURROUNDING SOUND #haryanvi #bassboosted#music#trending #concerthall",
+    "author": "MAFIA"
+  },
+  {
+    "title": "Kala Daman (Extended Bass Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "xnVAT1e1VoQ",
+    "videoTitle": "Kala Daman Bass Boosted | Renuka Panwar | Kay D | New Haryanvi Songs Haryanavi 2021",
+    "author": "SY Techie Song"
+  },
+  {
+    "title": "Dada Sadhu (Hard Trap Festival Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "gfBTUmBwtq0",
+    "videoTitle": "Dada (Official Video) | Masoom Sharma | Sapna Choudhary | Prem Vats | New Haryanvi Song 2026",
+    "author": "Mahra Tora"
+  },
+  {
+    "title": "Jail Karawegi (Peak-Time Electro Drop)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2fUpGHEO8Bs",
+    "videoTitle": "Ek Khatola Jail Ke Bhitar | Masoom Sharma | High Gain Remix - Dj Tushar Gautam X Dj Pari Nand Nagri",
+    "author": "DJ GAUTAM PRODUCTION OF DELHI"
+  },
+  {
+    "title": "Badmashi (Low-End Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "5HYoJeiAYKw",
+    "videoTitle": "MASOOM SHARMA ; Badmashi On Top | Rahul Lamba | Nisha Bhatt | Swara Verma | New Hindi Song 2025",
+    "author": "Filmy Facts HR08"
+  },
+  {
+    "title": "Gunda Raj (Heavy Bassline Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "KUF4gE1EBUE",
+    "videoTitle": "Gundagarh (Official Video) Masoom Sharma | Ashu Twinkle | Pulkit S, Manvi B | New Haryanvi Song 2025",
+    "author": "Anand Haryanvi"
+  },
+  {
+    "title": "Kalesh (Industrial Bass Drop)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "7VIkpI6mxSE",
+    "videoTitle": "Masoom Sharma : Bhaichara | Kaash Beniwal | Mithuu Worldz | Shiva Chaudhary | New Haryanvi Song 2025",
+    "author": "Milan Records"
+  },
+  {
+    "title": "Raaj (Sub-Woofer Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Yapi0DpVDd8",
+    "videoTitle": "Tuition Badmashi Kaa (8D AUDIO) Hemant Faujdar, Kiran, Masoom Sharma, Manisha S, Mukesh J, Aman J",
+    "author": "8D Active Music"
+  },
+  {
+    "title": "Pistol (Trap Bass Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "-r_Lj6aCNV0",
+    "videoTitle": "Pistol 4 5 Ka (BASS BOOSTED) Masoom Sharma | Shivani Yadav | New Haryanvi Bass Boosted Songs 2026",
+    "author": "𝙍𝙚𝙘𝙖𝙥 𝙈𝙤𝙫𝙞𝙚𝙨𝙨 "
+  },
+  {
+    "title": "Randa Party (Club Bounce Edit)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2rBd4KHmrf4",
+    "videoTitle": "Sare jamjam nach ke dikha do | VideoMusic| Nonstop Party Song| NewDjRemix | Round2hell HrCrazyStatus",
+    "author": "Hr Crazy Status"
+  },
+  {
+    "title": "Boli Haryanvi (Hard Dance Rework)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Z1GZTTg3kd4",
+    "videoTitle": "High Court (Official Music Video) Diler Kharkiya | Haryanvi song 2025",
+    "author": "Diler Kharkiya"
+  },
+  {
+    "title": "Moto (Festival Bassline Edit)",
+    "artist": "Diler Kharkiya & Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "kMoy9lcVcrY",
+    "videoTitle": "MOTO - Dixie x Costary x B WAVE",
+    "author": "B_WAVE"
+  },
+  {
+    "title": "Albelo (Club Tech Flip)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "GTHxTw4hPrU",
+    "videoTitle": "Mein Angreji Padi Likhi |  मैं अंग्रेजी पड़ी लिखी || Vijay Verma || Haryanvi Song Haryanavi",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Diler Harkesh (Aggressive Bass Mix)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "q1y-ZbxrH4s",
+    "videoTitle": "High Court Diler Kharkiya Song Dj Remix | Hard Bass Vibration Competition Mix |Dj Chandu Hd ",
+    "author": "MIXER CHANDU "
+  },
+  {
+    "title": "Fauji (Extended Peak-Time Edit)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ptlfNSJyfBU",
+    "videoTitle": "Jija Ji (Official Video) Diler Kharkiya | Preeti Jangra | Kehar Kharkiya | New Haryanvi Song 2025",
+    "author": "Sonotek Music"
+  },
+  {
+    "title": "Feel (Club Slap-House Mix)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "-QuiDAufvQo",
+    "videoTitle": "Feelings | Tropical vs Trap Remix | Dj Dalal London | Sumit Goswami | KHATRI | Haryanvi DJ Song 2021",
+    "author": "DJ HUNTER YTC"
+  },
+  {
+    "title": "Parindey (Tech Bass Rework)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ZEkW7pd5vo0",
+    "videoTitle": "Parindey Lyrical Video | SUMIT GOSWAMI | New Haryanvi Songs Haryanavi 2019 | Haryanvi Maina",
+    "author": "Haryanvi Maina"
+  },
+  {
+    "title": "Yaar Ki Shaadi (High-BPM Club Mix)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Q8hw-mAuKFQ",
+    "videoTitle": "Mere Yaar Ki Shadi Hai Dance Remix - DJ Kailash Raipur | Mere Yaar Ki Shadi Hai Dj Mix | DJ Mohit Mk",
+    "author": "DJ Mohit Mk"
+  },
+  {
+    "title": "Feelings (Deep Bassline Flip)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "FDk3P_Nruyk",
+    "videoTitle": "Feelings Sumit Goswami [Bass boosted] KHATRI|DBB|Haryanvi Song 2020 Latest song",
+    "author": "DEEP BOOSTED BASS (DBB)"
+  },
+  {
+    "title": "Baazigar (Drill Drop Mix)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "AkdFJKldHUo",
+    "videoTitle": "DIVINE Baazigar Ft. KR$NA By (Decade x Rishabh)",
+    "author": "DECADE"
+  },
+  {
+    "title": "Army (Hardstyle Club Edit)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "729n8l90byw",
+    "videoTitle": "Army",
+    "author": "Sumit Goswami - Topic"
+  },
+  {
+    "title": "Sweet Poison (Tech-House Drop)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "QFTAWTjVtFU",
+    "videoTitle": "Baarish Ki Jaaye Moombahton DJ remix song Latest DJ song DJ Sonu",
+    "author": "DjSAHU Sonu"
+  },
+  {
+    "title": "Yaariyan (Extended Club Edit)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "dB8CvI31FfY",
+    "videoTitle": "Sumit Goswami all song 🎶🎤sumit goswami 11 top songs🎧🎵 Dj mix jukebox sumit Goswamnon stop song i",
+    "author": "Archit Mishra musical"
+  },
+  {
+    "title": "Gangwar (Aggressive Trap Mix)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "SEpTl9hlyq8",
+    "videoTitle": "SUMIT GOSWAMI - ARMY (GANGWAR 2) | SHANKY GOSWAMI | New Haryanvi Songs Haryanavi | SONOTEK",
+    "author": "Sonotek Music"
+  },
+  {
+    "title": "Raajneeti (Hard Bass Rework)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "dp9aZ2NHN_E",
+    "videoTitle": "Le_aau_safari_ji_karda___Dj_Remix||Hard bass||Sumit goswami song||MAHADEV DJ PRODUCTION",
+    "author": "MAHADEV DJ PRODUCTION"
+  },
+  {
+    "title": "Gaam Ka Desi (UK Drill Club Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "1GgPK1dGW6o",
+    "videoTitle": "Chora Gaam Ka Song | Sumit Goswami | Boys Attitude Song | Sun le main Chora Gaam Ka | chota gaam ka",
+    "author": "LOVE REZ"
+  },
+  {
+    "title": "Haryanvi Swag (Peak-Time Electro Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "igX5G1c4kTs",
+    "videoTitle": "JAZBAATI BANDE (Full Video) Khasa Aala Chahar | KD DESIROCK | KHAAS REEL | Haryanvi Songs 2021",
+    "author": "White Hill Dhaakad"
+  },
+  {
+    "title": "Desi Desi Na Bolya Kar (Hard Slap Mix)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "NCc0vovj7KM",
+    "videoTitle": "✓ DESI DESI (OFFICIAL VIDEO) Raju Punjabi, MD & KD DESIROCK , Vicky Kajla | New Haryanvi Songs",
+    "author": "Sonotek"
+  },
+  {
+    "title": "2 Raflaan (Tech Bass Edit)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "NkgmX511d0s",
+    "videoTitle": "Dunaali (Official Song) MD Desi Rockstar | AK Jatti | Geetanjali Mishra | Latest Haryanvi Song 2021",
+    "author": "Sonotek Music"
+  },
+  {
+    "title": "Bapu Tera Putt (Bassline Extended Edit)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "rxY7MXJCQVo",
+    "videoTitle": "Bapu Tere Putt Nu Star Akhde : Sidhu Moose Wala | Baapu Song | Sidhu Moose Wala Trending Song 2022",
+    "author": "Six Star Saga"
+  },
+  {
+    "title": "Badmashi Ka Rog (Heavy Bass Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "j67MMW8h9Ic",
+    "videoTitle": "MASOOM SHARMA : Chulla Nondh (Official Video) Nidhi Sharma Ft. Harsh Sandhu | New Haryanvi Song 2024",
+    "author": "HKI MUSIC"
+  },
+  {
+    "title": "Asla (Hard Trap Drop Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "PgjrJAyGHQc",
+    "videoTitle": "WARNING (Slowed & Reverb) | Masoom Sharma | Malika Kaliraman | New Haryanvi Songs Haryanavi 2025",
+    "author": "ɪᴛs' ꝛᴀᴊ"
+  },
+  {
+    "title": "Haryane Ka Chhora (Club Punch Rework)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "r4Cdibl_MaA",
+    "videoTitle": "Haryana Ka chora|NJ Nindaniya | Dhull Saab|Lamba Thada Chora  | New Haryanvi Song 2024 Jaat Song2024",
+    "author": "Moc Ministry of Cinemas"
+  },
+  {
+    "title": "Choudhar Jaat Ki (Sub-Bass Club Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "JFnb3P0VHRs",
+    "videoTitle": "Choudhar Jaat Ki | Kon Rees Karega Duniya Me Mhare | Raju Punjabi | New Haryanvi Songs 2024",
+    "author": "Aansh Music"
+  },
+  {
+    "title": "Solid Body (Extended Bass Flip)",
+    "artist": "Raju Punjabi & Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "CQWZtM9C9sI",
+    "videoTitle": "Solid body - Ajay Hooda, Raju Punjabi and Anjali ragahv (Lyrics)",
+    "author": "Vibezone"
+  },
+  {
+    "title": "Sandal (Tech-House Edit)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ajSBOb7U0DY",
+    "videoTitle": "Sandal | सैंडल | Haryanvi DJ Song 2016 | Vijay Varma, Anjali Raghav | Raju Punjabi, Sonika Singh",
+    "author": "Voice of Heart Music"
+  },
+  {
+    "title": "Zero Figure (High-Energy Club Rework)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "6iTjoV4oHQY",
+    "videoTitle": "Latest Haryanvi Song 2017 Zero Figure  T M Kharkhoda, Sapna Chaudhary   New VIDEO SONG",
+    "author": "Royal Rajsthan "
+  },
+  {
+    "title": "Tu Cheez Lajawab (Peak-Time Electro Edit)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Vi7-HjOtyKA",
+    "videoTitle": "Tu Cheej Lajwaab | तू चीज लाजबाब | Pardeep Boora & Sapna Chaudhary | New Haryanvi Song",
+    "author": "Sonotek Digital"
+  },
+  {
+    "title": "Aala Re Aala (Hard Trap Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "S1g_C34cqZI",
+    "videoTitle": "HOOKE AALA JAAT - Raju Punjabi, Pardeep Boora | VR Bros | New Haryanvi Song 2018 | Nav Haryanvi",
+    "author": "Nav Haryanvi"
+  },
+  {
+    "title": "Fair Lovely (Slap-House Edit)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "E_iwMtz2Mz4",
+    "videoTitle": "Fair & Lovely || Raju Punjabi & Sonika Singh || New Latest D J Song 2017 || Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Desi Ka Pavva (Extended Bassline)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "HKXfSei0k30",
+    "videoTitle": "Mai So Khau Tere Sar ki (Official Video) Raju Punjabi | Sushila Takhar | Latest Haryanvi Song 2025",
+    "author": "@Love Records"
+  },
+  {
+    "title": "Kache Kateinge (Club Bounce Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "dQw4w9WgXcQ"
+  },
+  {
+    "title": "Bholenath (Psy-Trance Club Mix)",
+    "artist": "Kaka",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "a4pi2zKbf8Q",
+    "videoTitle": "Bholenath (A Love Story) – Kaka WRLD | Main Bhola Parvat Ka",
+    "author": "Pellet Drum Productions"
+  },
+  {
+    "title": "Bhole Baba (Trance Festival Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "--YDrVkgh7E",
+    "videoTitle": "Hum to Bhole Hain (Full Song) Masoom Sharma, Srishati Sharma, Manjeet Mor | Bhole Baba Song 2026",
+    "author": "Masoom Sharma"
+  },
+  {
+    "title": "Bam Lahiri (Industrial Rave Mix)",
+    "artist": "Traditional / DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "GkFYVJG2lrg",
+    "videoTitle": "Shiv Stuti (Bum Lehri) BxckBencher | Shri Bansi Jogi | 1995 - 2025 | Latest New Song",
+    "author": "BxckBencher "
+  },
+  {
+    "title": "Damru Bajaya (Psy Bass Edit)",
+    "artist": "Narender Bhagana",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "hjD2b8MtJJc",
+    "videoTitle": "SHANKRA (Official Video) | Narender Bhagana | Sunny Joon| Bijender Jaji | Kanwar Jaji",
+    "author": "Redtune Music"
+  },
+  {
+    "title": "Mahadev (Peak-Time Trap Mix)",
+    "artist": "Kaka",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "kTJmO0gLPGY",
+    "videoTitle": "Kaka WRLD - Bholenath 2 (The Destroyer) | Official Audio",
+    "author": "Pellet Drum Productions"
+  },
+  {
+    "title": "Bahu Kale Ki (Slap-House Club Mix)",
+    "artist": "Ajay Hooda & Gajender Phogat",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Mlj0hdOG4QQ",
+    "videoTitle": "Bahu Kale Ki || Ajay Hooda || Gajender Phogat & Anu Kadyan || New D J song 2018 || Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Gypsy / Balam Thanedar (Electro-Saw Drop)",
+    "artist": "GD Kaur & Pranjal Dahiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cZSrWoBMSrg",
+    "videoTitle": "Gypsy (Balam Thanedar) - GD Kaur ft. Pranjal Dahiya & Dinesh Golan | Haryanvi Song | Real Music",
+    "author": "Real Music"
+  },
+  {
+    "title": "52 Gaj Ka Daman (Festival Bounce Edit)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "CZt-rVn2BJs",
+    "videoTitle": "52 GAJ KA DAMAN | PRANJAL DAHIYA | AMAN JAJI | RENUKA PANWAR  | MUKESH JAJI | SAHIL SANDHU",
+    "author": "Mahra Tora"
+  },
+  {
+    "title": "Kabootar (High-Energy Dance Mix)",
+    "artist": "Renuka Panwar & Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Eb28L8PO-qc",
+    "videoTitle": "Kabootar 2(Official Video) Renuka Panwar |Surender Romio|Aamin Barodi|Sahil Sandhu|New Haryanvi Song",
+    "author": "Dhaakad Music"
+  },
+  {
+    "title": "Matak Chalungi (Club Tech Flip)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "3Osb9EUYum0",
+    "videoTitle": "52 Gaj Ka Damen Phar Matak Chalungi ~ Renuka Panwar New Haryanvi Hit Song 2020",
+    "author": "Aditya Kaushik"
+  },
+  {
+    "title": "DJ Pe Nachungi (Extended Club Edit)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "qz1e9oCwXmE",
+    "videoTitle": "Naal Nachna x Aaaja Nachle (Farooq Got Audio Remix) | Afsana Khan x Hans Raj Hans",
+    "author": "Farooq"
+  },
+  {
+    "title": "Chhatri (Slap-House Rework)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "q09QvdvB1Iw",
+    "videoTitle": "Geeta Zaildar: Chattri Full Song | Latest Punjabi Songs 2016 | Aman Hayer | T-Series Apna Punjab",
+    "author": "T-Series Apna Punjab"
+  },
+  {
+    "title": "Balam Ka System (Brazilian Bass Flip)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cl-fJfpRiDk",
+    "videoTitle": "Hawa Hawa Ae Hawa (BASS BOOSTED) | Full Remix Song #bassboosted #remix #music",
+    "author": "SRT-REMIX2"
+  },
+  {
+    "title": "Lala Lala Lori (Club House Rework)",
+    "artist": "Fazilpuria & Afsana Khan",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "hNYGYjnnyuA",
+    "videoTitle": "Million Dollar | Official Song | Fazilpuria & Lauren Gottlieb | Rossh",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Chhaliya (Peak-Time Dance Mix)",
+    "artist": "Ajay Hooda & Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ui75YBBgk-0",
+    "videoTitle": "Balam (Official Video) | Sapna Choudhary | Mahi Gaur | Ruchika Jangid | New Haryanvi Song 2022",
+    "author": "Desi Geet"
+  },
+  {
+    "title": "Tagdi (Big-Room Festival Drop)",
+    "artist": "Ajay Hooda & Gagan Haryanvi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "t9dWF8jQRog",
+    "videoTitle": "तागड़ी # Tagdi # Ajay Hooda # New DJ Song 2018 # Gagan & Anu Kadyan # Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Goli Chal Javegi (Bassline Club Edit)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Ger_7-Ai7lk",
+    "videoTitle": "Goli Chal Javegi  || Latest Song 2016 || New Melody Song || Mor Music Company",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Gajban Pani Ne Chali (High-BPM Electro Mix)",
+    "artist": "Vishvajeet Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "MD2Or5ZxBSs",
+    "videoTitle": "Gajban Pani Ne Challi | Vishvjeet Chaudhary Ft. Sapna Choudhary",
+    "author": "Single Track Haryanvi"
+  },
+  {
+    "title": "Kothe Upar Kothri / Ghungroo (Tech-House Edit)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "0mrqjNU15-Y",
+    "videoTitle": "Jai Vikraanta - Kothe Uper Kothri Main Us Pe Rail Chala Doongi - Alka Yagnik",
+    "author": "Shemaroo"
+  },
+  {
+    "title": "Bandook Chalegi (Festival Hardstyle Drop)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "WRgNXE3ITag",
+    "videoTitle": "Bandook Ka Riwaaz DJ Remix VIKAS GAURAV Productions sapna choudhary latest haryanvi DJ song 2022",
+    "author": "DJ GAURAV VIKAS "
+  },
+  {
+    "title": "Teri Aakhya Ka Yo Kajal (Club Extended Mix)",
+    "artist": "DC Madana & Sapna",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "zC6bs6rFWG4",
+    "videoTitle": "Sapna Super Hit Song Teri Aakhya Ka Yo Kajal | Lyrics Video | New Haryanvi Song 2018 | Sonotek",
+    "author": "Sonotek Punjabi"
+  },
+  {
+    "title": "Bahu Jamidar Ki (Slap-Bass Edit)",
+    "artist": "Vinod Chimpa",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "we-RbtAjW54",
+    "videoTitle": "Vinod chimpa",
+    "author": "Omjee Prajapati"
+  },
+  {
+    "title": "Dhanak Ka Tota (Tech-House Mix)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "sLsTWm17h8U",
+    "videoTitle": "Matak Matak Ke (Official Video) Sapna Choudhary | Ruchika Jangid | New Haryanvi Song 2026 | Sonotek",
+    "author": "Sonotek Music"
+  },
+  {
+    "title": "Gore Tan Pe Marjani (Extended Club Flip)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "VGiO8AJ9gE8",
+    "videoTitle": "Bahu Rangeeli | Ruchika Jangid | Gori Nagori | Kay D | New Haryanvi Song | Sonotek Music World",
+    "author": "Sonotek Music World"
+  },
+  {
+    "title": "Madam Baith Bolero Mein (Hard Dance Edit)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "PJyK_DHUfjY",
+    "videoTitle": "Madam Baith Bolero Mein | Chanpreet Channi, Minakshi Panchal | Haryanvi Song | Sonotek",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Teri Lat Lag Jagi (Sub-Bass Club Mix)",
+    "artist": "Sonu Sharma & Ruchika",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "XqUl0LtdYw8",
+    "videoTitle": "Latest Haryanvi Song 2017 | Teri Lat Lag Jagi | New Haryanvi Song | Sonu Sharma | Rucika | Maina",
+    "author": "Haryanvi Maina"
+  },
+  {
+    "title": "Thada Bhartar (Club Bounce Edit)",
+    "artist": "Raju Punjabi & Sushila Thakar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Uq4dyDHgqAI",
+    "videoTitle": "Thada Bhartar | Sapna Chaudhary, Raju Punjabi | Sushila Takhar, Ronit | Latest Haryanvi Song 2020",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Chetak (High-Energy Electro Mix)",
+    "artist": "Raj Mawar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "UZjPQ-r5LyA",
+    "videoTitle": "Chetak - Sapna Chaudhary | Raj Mawar | Mehar Risky | New Haryanvi Songs Haryanavi | Sapna Choudhary",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Laad Ladaun (Club Slap Rework)",
+    "artist": "Raj Mawar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "YcIrGqyNdC4",
+    "videoTitle": "Laad Ladaunga | Vijay Varma, Raj Mawar, Mahi, Sakshi D | New Haryanvi Songs Haryanavi 2025 | DJ Song",
+    "author": "Vijay Varma Official"
+  },
+  {
+    "title": "Kasoota (Hard Bass Club Edit)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "G47KEW-Xon4",
+    "videoTitle": "Ghana Kasoota (8D Audio) |@Raftaar | Surbhi Jyoti | @Rashmeet Kaur | 3D Surround Sounds | HQ",
+    "author": "Just Rahulz"
+  },
+  {
+    "title": "Jimmy Choo (Tech House Drop)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "0S8sA4ygEfc",
+    "videoTitle": "JIMMY CHOO | JIMMY CHOO FULL SONG| FAZILPURIA | PRIYANKA GOYAT | #jimmychoo #newsong  #partymusic",
+    "author": "9XM"
+  },
+  {
+    "title": "Pallo Latke (Haryanvi Trap Flip)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "FjQk-2jHevs",
+    "videoTitle": "Pallo Latke | Jyotica Tangri | Shaadi Mein Zaroor Aana |Rajkummar & Kriti Kharbanda | Fazilpuria",
+    "author": "Zee Music Company"
+  },
+  {
+    "title": "Angoor (Extended Club Mix)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "OdbrTKjTs-g",
+    "videoTitle": "\"Soven De Piya\" - New Haryanvi Romantic Song - Full Song 2017 - TR - Sonu Kundu - Sonika Singh -NDJ",
+    "author": "NDJ Film Official"
+  },
+  {
+    "title": "Koka (High-BPM Dance Rework)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "9UaG7UL5yS4",
+    "videoTitle": "COCO COLA (Official Video) Ruchika Jangid | Kay D | New Haryanvi Songs Haryanavi 2020 | New DJ Song",
+    "author": "Nav Haryanvi"
+  },
+  {
+    "title": "Balam Chhoto (Slap Bass Mix)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Osl_iMma8sI",
+    "videoTitle": "Balam Chhoto So | Hit New Rajasthani DJ Dance Song | Seema Mishra | Veena Music",
+    "author": "Veena Music"
+  },
+  {
+    "title": "Chhori Tu Pataka (Peak-Time Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "wcwOUyORkvk",
+    "videoTitle": "Chatpati Haryanvi playlist for a self obsessed person ",
+    "author": "Kiara♡"
+  },
+  {
+    "title": "Jhumke (Club Tech Rework)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "PRixiTErxuc",
+    "videoTitle": "Nainital K Jhumke (Official Video) Renuka Panwar, Anjali Raghav | New Haryanvi Songs Haryanavi",
+    "author": "Black Key Tunes Haryanvi"
+  },
+  {
+    "title": "Tokk (Sub-Bass Extended Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2pQSKqOE7Rs",
+    "videoTitle": "Tokk | Ek Suthri Tu Top | Pranjal Dahiya, Kay D | Vishvajeet Choudhary | New Haryanvi Dj Songs 2020",
+    "author": "Haridhum Music"
+  },
+  {
+    "title": "Goli Wargi (Hardstyle Club Flip)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "b6S5UcRJuVw",
+    "videoTitle": "Shoot Out - MD KD DESIROCK | Haryanvi Songs Haryanavi 2020 | Meri Jaan Thi Pistol Bargi Re",
+    "author": "Desi Rock"
+  },
+  {
+    "title": "Nakhro (Club Tech Edit)",
+    "artist": "Raj Mawar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "wUF5qwrFDek",
+    "videoTitle": "32 Bore (Official Video) Raj Mawar & Ashu Twinkle | Haryanvi Song Video 2025 | #haryanvisong",
+    "author": "White Hill Dhaakad"
+  },
+  {
+    "title": "Gulabo (Festival Bassline Mix)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "47YvkG8OqzI",
+    "videoTitle": "Latest Haryanvi Song - Gulabo - गुलाबो - Sonu Shrama, Ajay Hooda Sonika Singh Haryanvi Hits 2018",
+    "author": "JAWAN MUSIC"
+  },
+  {
+    "title": "Mote Mote Nain (Slap House Flip)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "s1xAfOoZiN4",
+    "videoTitle": "Mote Mote Nain - Renuka Panwar | New Haryanvi Video Songs 2023 | T-SERIES HARYANVI",
+    "author": "T-SERIES HARYANVI"
+  },
+  {
+    "title": "Padosan (Club Bounce Edit)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cUqqasIG7bk",
+    "videoTitle": "PADOSAN - Surender Romio | Mukesh Jaji | Aman Jaji ( Jal Ja Khun Padosan ka) New Haryanvi djSong2024",
+    "author": "Hello Beats"
+  },
+  {
+    "title": "Sharab (Extended Bass Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "aTySxIPTRjk",
+    "videoTitle": "Masoom Sharma Viral Songs Playlist  ▄︻デ══━一💥l Masoom Nonstop Songs 2026 | Sharp Shooter, Jailer",
+    "author": "The Hood"
+  },
+  {
+    "title": "Hookah (Hard Trap Club Edit)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "jzKYAGNoEs4",
+    "videoTitle": "Pooranviram Meri Maa Mera Rab | Maa Song | मेरे होंठ जो खुलै तो तेरा नाम आवै | KD DESIROCK AkkiAryan",
+    "author": "Desi Rock"
+  },
+  {
+    "title": "Yaar Ki Gaadi (Drill Bassline Rework)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "O93irdmz134",
+    "videoTitle": "सिलाई मशीन की सुई और सटल की सेटिंग करे । siali machine repair । sewing machine shuttle setting ।",
+    "author": "Nusrat Sewing Machine "
+  },
+  {
+    "title": "Bullet (Sub-Woofer Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "na3f6y1Rn3c",
+    "videoTitle": "Road pe chaale mini cooper , Ghode 3 , masoom Sharma new song",
+    "author": "Music World"
+  },
+  {
+    "title": "Scorpian (Aggressive Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "s6ZR2Ve18H0",
+    "videoTitle": "FEEL BADMASHA AALI (Official Video)-Masoom Sharma & Ashu | Sanket & Divyanka | New Haryanvi songs",
+    "author": "Gaurika Records"
+  },
+  {
+    "title": "Kaafila (Industrial Bass Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "qoUlJpJ5Iw4",
+    "videoTitle": "Masoom Sharma : KAFILA (Official Video) Aamin Barodi | Muskan Thakur | New Haryanvi Song 2026",
+    "author": "Haryanvi Bol"
+  },
+  {
+    "title": "Route (High-BPM Club Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "nYGXeiQJUb8",
+    "videoTitle": "Best of Emraan Hashmi (Nonstop Remixes) - Priyanshu Nayak || A Compilation Of Alltime Superhit Songs",
+    "author": "Priyanshu Nayak"
+  },
+  {
+    "title": "Desi Look (Peak-Time Bounce)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "O2t0BsiyeJE",
+    "videoTitle": "'Desi Look' FULL Song with LYRICS | Sunny Leone | Kanika Kapoor | Ek Paheli Leela",
+    "author": "T-Series"
+  },
+  {
+    "title": "Suit Ki Kadhai (Tech House Flip)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "qRfCC0lmAdI",
+    "videoTitle": "Kale Ke Papa - Ruchika Jangid ft. Pranjal Dahiya & Aman Jaji | Haryanvi Song | Real Music",
+    "author": "Real Music"
+  },
+  {
+    "title": "Dori (Slap-Bass Club Mix)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "nibbDZ1yZ30",
+    "videoTitle": "Renuka Panwar | 61-62 Challu (Official Video) | Sahil Sandhu | New Haryanvi Song 2024",
+    "author": "Dhaakad Music"
+  },
+  {
+    "title": "Hathiyar (Hard Trap Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "QJJWMwinIFk",
+    "videoTitle": "Baaghi - Masoom Sharma, Ashu Twinkle, Feat. Abhay Baisla, Maahie Sharma | New Haryanvi Video Song",
+    "author": "T-SERIES HARYANVI"
+  },
+  {
+    "title": "Parcha (Sub-Bass Peak-Time Flip)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "h5p3zqf1Wrc",
+    "videoTitle": "Sidhu Moosewala X Karan Aujla - The Gangsters Remix (Part 2) | Sifar Safar X Wavy | Chill Vibes",
+    "author": "Chill Vibes"
+  },
+  {
+    "title": "Kar Gayi Chull (Haryanvi Peak-Time Mix)",
+    "artist": "Badshah & Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "NTHz9ephYTw",
+    "videoTitle": "Kar Gayi Chull - Kapoor & Sons | Sidharth Malhotra, Alia Bhatt | Badshah | Amaal Mallik | Fazilpuria",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "Chull 2.0 (Club Slap-House Rework)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Bea019pOw5w",
+    "videoTitle": "Chull – Badshah & Fazilpuria | Superhit Haryanvi Party Hit Song | Dance Anthem",
+    "author": "Sony Music India"
+  },
+  {
+    "title": "2 Many Girls (Extended Club Mix)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "PJGVDaSaQWQ",
+    "videoTitle": "'2 Many Girls' FULL VIDEO SONG | Fazilpuria, Badshah | T-Series",
+    "author": "T-Series"
+  },
+  {
+    "title": "Haryana Roadways (High-BPM Electro Mix)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "bdAgJDQin24",
+    "videoTitle": "DJ Tournament Ep 5. | DJ Bravo 🇬🇧 VS DJ Awol 🇮🇪 | By DJ Jesse",
+    "author": "DJ Jesse"
+  },
+  {
+    "title": "Billori Akh (Club Tech Flip)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Wt5BB1ZtZsw",
+    "videoTitle": "Billori Akh | Daljeet Kalsi | Sapna Chaudhary | Kaptan Laadi & RDK | Jagga Jiunda E",
+    "author": "Music Sound"
+  },
+  {
+    "title": "Jalebi Juda (Slap-House Rework)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "RkNsHkLk1OU",
+    "videoTitle": "Jalebi Juda (Lyrical Video) - New Haryanvi Dj Songs Haryanavi 2019 | Rakesh Tanwar ,Anjali Raghav",
+    "author": "Voice of Heart Music"
+  },
+  {
+    "title": "Kala Tikka (Extended Club Mix)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "dHiM_-INgZM",
+    "videoTitle": "Kaala Tikka Laya Kar",
+    "author": "Ruchika Jangid - Topic"
+  },
+  {
+    "title": "Lal Dupatta (Tech-House Club Edit)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "l1wmMlCWd8s",
+    "videoTitle": "DJ OM ROCK MOOD GARAM NEW HARYANVI SONG REMIX DJ PUNCH VIBRATION MIX BY DJ OM ROCK 2022",
+    "author": "EDM KING DJ OM ROCK"
+  },
+  {
+    "title": "Payal Chham Chham (Festival Bounce Mix)",
+    "artist": "Vishvajeet Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "f6MIYAf1vfY",
+    "videoTitle": "हरियाणे की छोरी -Latest Haryanvi Cultural Song and Dance |Amit Saini | Somvir Kathurwal |Shalu Kirar",
+    "author": "Shalu Kirar"
+  },
+  {
+    "title": "Dil Ki Dhadkan (Sub-Bass Club Edit)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "bx9jNdoqPTo",
+    "videoTitle": "Tere Bargi - Latest Haryanvi Songs Haryanvi - Diler Kharkiya Ft Anjali Arora - Sadgi Teri Ne Dil",
+    "author": "SagaHits"
+  },
+  {
+    "title": "Sapna Ka Dance (Electro Rave Edit)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "TtobQeGjTpM",
+    "videoTitle": "Sapna Dance - Teri Aakhya Ka Kajal I Sapna Chaudhary I Live Dance Performance 2026 I Tashan Haryanvi",
+    "author": "Tashan Haryanvi"
+  },
+  {
+    "title": "Engine Ki Seeti (Haryanvi Bass Mix)",
+    "artist": "Traditional / DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "YWhbDQeWfNk",
+    "videoTitle": "OFFICIAL: 'Engine Ki Seeti' FULL VIDEO Song | Khoobsurat | Sonam Kapoor, Fawad Khan",
+    "author": "T-Series"
+  },
+  {
+    "title": "Chunni Mein (Slap-Bass Rework)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "WTOmEQNCwCw",
+    "videoTitle": "Dayan (Official Video) Ajay Hooda | Peehu Yadav | New Haryanvi Song | Ajay Hooda New Song | Sonotek",
+    "author": "Sonotek Music"
+  },
+  {
+    "title": "Gaam Ki Haveli (Extended Club Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "NQ6PNyZbs88",
+    "videoTitle": "Lofar",
+    "author": "Masoom Sharma - Topic"
+  },
+  {
+    "title": "Thar (Heavy Bassline Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "aFSGHvDU4fI",
+    "videoTitle": "Badnam Gabru [BASS BOOSTED] Remix || Masoom Sharma|| Latest Bass Boosted Haryanvi song 2021",
+    "author": "DEEP BOOSTED BASS (DBB)"
+  },
+  {
+    "title": "Fortuner (Drill Drop Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ZVSBQFnHVo0",
+    "videoTitle": "Rubicon Drill : Laddi Chahal (BASS BOOSTED) | Parmish Verma | New Punjabi Songs 2023 [4K]",
+    "author": "Next Level Bass"
+  },
+  {
+    "title": "32 Bore (Hard Trap Rework)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "lCwMmH-GIn8",
+    "videoTitle": "Dj Vibration Sound check || खतरनाक DJ साउंड चेक || JBL Sound Check || full bass check || Top check |",
+    "author": "Global Deep Drillers"
+  },
+  {
+    "title": "Raflaan (Peak-Time Bass Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "NEonPmF-cVo",
+    "videoTitle": "ZAMANAT II OFFICIAL VIDEO II MASOOM SHARMA II ASHU TWINKLE II MANJEET M...",
+    "author": "Rohit Takdaina001"
+  },
+  {
+    "title": "Badmash (Industrial Club Edit)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Mk132xeCnMQ",
+    "videoTitle": "Badmash Bolu Su (Official Video) || KD DESI ROCK || Rap Song || New Haryanvi Song 2021 | Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Yaaran Da Tashan (High-BPM Edit)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Bd88W08T2R0",
+    "videoTitle": "Tashan Haryanvi By Md KD DESIROCK & Akki Aryan | Haryanvi Songs Haryanavi 2021 | Desi Rock",
+    "author": "Desi Rock"
+  },
+  {
+    "title": "Chhori Bindass (Club Bounce Mix)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "JfqEFThW-vQ",
+    "videoTitle": "Chhori Bindass | Sapna Choudhary | Aakash Akki, AK Jatti | New Haryanvi Song | Sonotek",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Rotiyaan (Tech House Club Edit)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "C15_fu8sTrQ",
+    "videoTitle": "#ETAWHA.  MAHIYA I CUTE LOVE STORY I PRASHANT SHARMA I VARSHA RAJPOOT I BY MIX HOME TUBE",
+    "author": "Game tech"
+  },
+  {
+    "title": "Doodh Ki Katori (Slap-House Mix)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "p7OhYgEwUWo",
+    "videoTitle": "Kothe Upar Kothri Mai Uspar Relchala Dungu Hindi Dj Song Dj Remix Song Dj Rohit Kumar No.1 New Remix",
+    "author": "Dj Rohit Kumar No.1"
+  },
+  {
+    "title": "Tik Tok (Festival Bassline Edit)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "fUxS-dKtskk",
+    "videoTitle": "Desi Nakhre Surender Romio | Vandna Jangir (Official Video) Ft Anjali Raghav 👍 2022",
+    "author": "TPZ Haryanvi"
+  },
+  {
+    "title": "Gaam Ka Chhora (Extended Peak-Time Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "R1VxjQ16HrQ",
+    "videoTitle": "RAJU PUNJABI | GAAM KA DESI CHHORA | FULL VIDEO | ARJUN | RICHA HOODA | VR BROS | NEW SONG 2018",
+    "author": "VR BROS ENTERTAINMENT"
+  },
+  {
+    "title": "Mitti Ka Khilona (Sub-Bass Rework)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "5GrY2vcoCxY",
+    "videoTitle": "Ek khadi se kali thar | Raju Punjabi | New Haryanvi Songs 2024 Song : slow and reversed",
+    "author": "Rahul yadav"
+  },
+  {
+    "title": "Haveli Pe Aa Jana (Hard Trap Club Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "1TlHM1lR09o",
+    "videoTitle": "Mahila Mittar (FULL SONG) - Masoom Sharma, Khushi Baliyan, Kulbir, Komal C | New Haryanvi Songs 2025",
+    "author": "DAKS Music"
+  },
+  {
+    "title": "Jija Tu Kala (High-Energy Dance Mix)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "vJop8AsLYdA",
+    "videoTitle": "Jija Tu Kaala Main Gori Ghani (Remix) | Dance Mix |  Haryanvi DJ Remix Song 2026",
+    "author": "Show-Keen Productions"
+  },
+  {
+    "title": "Bhabhi Aali (Club Tech Rework)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "DkwZpQYflZk",
+    "videoTitle": "Over Age | Surender Romio & Anjali99 | Ft. Nidhi Sharma | Official Music Video | #haryanvisong",
+    "author": "Mahra Tora"
+  },
+  {
+    "title": "Sarpanch (Sub-Woofer Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "TZnAkDTUE0Y",
+    "videoTitle": "Sarpanch (Official Video) Masoom Sharma | Shiva Choudhary | Harry Lather | New Haryanvi Song 2025",
+    "author": "Masoom Sharma"
+  },
+  {
+    "title": "Thekedar (Slap-Bass Extended Mix)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "zSaddAr8cA0",
+    "videoTitle": "Thekedara Ka Byah | Masoom Sharma new song  | Shivani Yadav | New Haryanvi Songs Haryanavi 2024",
+    "author": "Purple Music"
+  },
+  {
+    "title": "Gaddi Fortuner (Peak-Time Bounce)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "eSUPbqtiOrE",
+    "videoTitle": "ARBI GHODE (Official Video) - Masoom Sharma | Jaivir Rathee | New Haryanvi Songs 2024 | Bounce Music",
+    "author": "Bounce Music"
+  },
+  {
+    "title": "Jatt Brand (Club Bassline Rework)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "iOv4yzcgbRU",
+    "videoTitle": "BEAT PE BOTY DJ REWORK IN DILIP JAYCLEYA",
+    "author": "THE_DILIP_OFFICIAL_ SONI_"
+  },
+  {
+    "title": "Shehar Ki Chhori (Tech-House Drop)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Tnfs0MZsBBE",
+    "videoTitle": "Ram Ram | MC SQUARE | Hustle 2.0",
+    "author": "KaanPhod Music"
+  },
+  {
+    "title": "Akhada (Hardstyle Festival Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "itENU-5XnvQ",
+    "videoTitle": "🎶 Defqon.1 Countdown 2018 | Best Hardstyle Mix ♦",
+    "author": "Hardstyleofchoice"
+  },
+  {
+    "title": "Desi Gym (High-BPM Workout Club Edit)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "nCh2oy6xWho",
+    "videoTitle": "Bollywood Workout Mashup 2026 | Non Stop Hindi Gym Songs 2026 💪🔥",
+    "author": "Desi DJ Adda"
+  },
+  {
+    "title": "Fauji Ki Bandook (Sub-Bass Club Edit)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ksHq08S_Un8",
+    "videoTitle": "Fojiyan Ke Tambu Me | फोजिया के तम्बू में | MD Desi Rockstar & KD DESIROCK | Haryanvi Shiv Bhajan",
+    "author": "Sonotek Bhakti"
+  },
+  {
+    "title": "Daaru Ki Botal (Extended Club Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "bzW9fmwcmG4",
+    "videoTitle": "Daru Badnaam | Kamal Kahlon & Param Singh | Official Video | Pratik Studio | Latest Punjabi Songs",
+    "author": "VIP Records"
+  },
+  {
+    "title": "Peg Patiala (Haryanvi Bassline Rework)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "QjD_JPz5Ops",
+    "videoTitle": "OLHA MEIN PATOLA AJAY HOODA OLD SUPERHIT HARYANVI SONG REMIX DJ DEEPAK PRODUCTION #remix2023",
+    "author": "DEEPAK PRODUCTION🤟"
+  },
+  {
+    "title": "Chora Jaat Ka (Aggressive Trap Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "4_0r_e-AnCo",
+    "videoTitle": "Chora Jaat Ka : MASOOM SHARMA, SONIKA SINGH | New Haryanvi Songs Haryanavi 2020 | Sonotek",
+    "author": "Haryanvi Music Club"
+  },
+  {
+    "title": "Gujjar Ka Kharcha (Heavy Bass Drop)",
+    "artist": "Traditional / DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "X5lTbzKYeq4",
+    "videoTitle": "Gujjar Jaati Veero Ki & Gujjar Ke Charche MASHUP Official Club (Remix) Dj Ajay Aurangabad",
+    "author": "AJAY AURANGABAD"
+  },
+  {
+    "title": "Rajputana Swag (Peak-Time Festival Mix)",
+    "artist": "DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "0xM2-Bj1-LU",
+    "videoTitle": "Rajput Sarkar 3 (राजपूत सरकार 3)| @officialvikrantthakur  , @officialrahulthakur , Keddy Katladi",
+    "author": "V R Official"
+  },
+  {
+    "title": "Yadav Brand (Hard Bounce Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "BU7tDrJUO38",
+    "videoTitle": "Yadav Brand song bass boosted 🎧",
+    "author": "music lab bass boosted"
+  },
+  {
+    "title": "Jaat Land (Industrial Bass Rework)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "szUSkYTXq7A",
+    "videoTitle": "Ramayan Ka Saar (Full Song) Masoom Sharma | Amar Karnawal | Pinna Music | New Haryanvi Song 2025",
+    "author": "Masoom Sharma"
+  },
+  {
+    "title": "Randa Squad (High-Energy Dance Edit)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Jx3_hN4b9UY",
+    "videoTitle": "Aari Thi Marjaani Bandook Banke : Mukesh Foji | Ajay Hooda | Anu Kadyan | Haryanvi Song",
+    "author": "D2K Beats"
+  },
+  {
+    "title": "Bachelor Party (Tech-House Flip)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "AgiRLkaR3FM",
+    "videoTitle": "Bachelor party - girl dancing on solid body song -",
+    "author": "Trending Rajasthan"
+  },
+  {
+    "title": "Sharaabi Yaar (Extended Club Bass)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "hzTg4zPBtDU",
+    "videoTitle": "\"3 Peg Sharry Mann\" (Full Video) | Mista Baaz | Parmish Verma | Ravi Raj | Latest Punjabi Songs 2016",
+    "author": "T-Series Apna Punjab"
+  },
+  {
+    "title": "Gaam Ka Pradhan (Sub-Bass Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "fKLYe6bnXFQ",
+    "videoTitle": "DJ Pe Lath Bajwade Gi",
+    "author": "Masoom Sharma - Topic"
+  },
+  {
+    "title": "Chhori Patola (Slap-House Edit)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "_WnXZbvqpgk",
+    "videoTitle": "Olha Mein Patola | Slowed + Reverb | Haryanvi Song | Ajay Hooda | Masoom Sharma | Hey Shivam ",
+    "author": "Hey Shivam"
+  },
+  {
+    "title": "London Ka Tour (Club Bounce Mix)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "zk3TC7O7eO8",
+    "videoTitle": "DJ Dance Video | 52 Gaj Ka Daman | Renuka Panwar & Kay D",
+    "author": "Renuka Panwar"
+  },
+  {
+    "title": "Haryanvi Mashup 1 (Peak-Time Club Mix)",
+    "artist": "Laddi Gill & Gurmeet Bhadana",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "rEvArAKQPkw",
+    "videoTitle": "Halka Dupatta Tera Muh Dikhe | THM 8 - Gurmeet Bhadana, Lokesh Gurjar, Desi King, Totaram, Baba",
+    "author": "I am Desi World"
+  },
+  {
+    "title": "Haryanvi Mashup 2 (Extended Bassline Rework)",
+    "artist": "Totaram Sondhiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "b44T0FPt6mU",
+    "videoTitle": "RAJASTHANI FOLK ANTHEM 2 FULL SONG | SUMSA SUPARI | RASHMI N. | MR. RADHEY | NEW FOLK MASHUP 2022",
+    "author": "Sumsa Supari"
+  },
+  {
+    "title": "Haryanvi Mashup 3 (Big-Room Festival Edit)",
+    "artist": "Laddi Gill",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "FtXcRgYvpd0",
+    "videoTitle": "The Haryanvi Mashup 3 | Lokesh Gurjar | Gurmeet Bhadana | Desi King | Baba Bhairupia | Akki Kalyan",
+    "author": "I am Desi World"
+  },
+  {
+    "title": "Haryanvi Mashup 4 (High-Energy Club Flip)",
+    "artist": "Totaram Sondhiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "tvRRxEVBKqk",
+    "videoTitle": "New Haryanvi Mashup 4 - Official Video | Akash Dixit | Masoom sharma | kanchan Nagar | Mannu Pahari",
+    "author": "Prime Time Originals"
+  },
+  {
+    "title": "Haryanvi Mashup 5 (Hard Trap & Slap Mix)",
+    "artist": "Totaram Sondhiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "alt1I8HfZus",
+    "videoTitle": "THM 5, Mat Rakhe Dhunge Pe - Lokesh Gurjar | Gurmeet Bhadana | Desi King | Baba | Totaram | Priyanka",
+    "author": "I am Desi World"
+  },
+  {
+    "title": "Haryanvi Mashup 6 (Industrial Bass Edit)",
+    "artist": "Laddi Gill",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cE9HqlsjCd8",
+    "videoTitle": "The Haryanvi Mashup 12, Gurmeet Bhadana, Lokesh Gurjar, Desi King, Totaram, Priyanka N,",
+    "author": "Desi Raag"
+  },
+  {
+    "title": "Haryanvi Mashup 7 (Tech-House Extended Mix)",
+    "artist": "Gurmeet Bhadana",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "FNQghjEz-FM",
+    "videoTitle": "Dale",
+    "author": "MASF - Topic"
+  },
+  {
+    "title": "Haryanvi Mashup 8 (Sub-Woofer Peak Edit)",
+    "artist": "Totaram Sondhiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "v-85MDmn1bw",
+    "videoTitle": "The Haryanvi Mashup 8 Lyrics | Gurmeet Bhadana | Lokesh Gurjar | Desi King | THM8 | Baba Bhairupia",
+    "author": "Nomadic Gaurav"
+  },
+  {
+    "title": "Haryanvi Mashup 9 (Festival Bounce Mix)",
+    "artist": "Laddi Gill",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "8LWfVLQYrKw",
+    "videoTitle": "The Haryanvi Mashup 10",
+    "author": "Totaram Sondhiya - Topic"
+  },
+  {
+    "title": "Haryanvi Mashup 10 (Hardstyle Club Rework)",
+    "artist": "Totaram Sondhiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ZjRS9_LiyBc",
+    "videoTitle": "The Haryanvi Mashup 10, Gurmeet Bhadana, Lokesh Gurjar, Desi King, Totaram Sondhiya, Priyanka Nagar",
+    "author": "Desi Raag"
+  },
+  {
+    "title": "Nonstop Haryanvi DJ War Edit (Part 1)",
+    "artist": "Club Mix",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "nC4bDgukWC8",
+    "videoTitle": "World War (Official Video) - Saaaj Tomar ft. Ira Chauhan | Haryanvi Song | Real Music",
+    "author": "Real Music"
+  },
+  {
+    "title": "Nonstop Haryanvi DJ War Edit (Part 2)",
+    "artist": "Bassline Mix",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "A4OyNqxdnAw",
+    "videoTitle": "Dj Song💙 || Top Dj | Hard Bass ❤️‍🔥 | JBL Dj Remix | Old Hindi Dj Song 🥀| | Dj Remix Song 2025",
+    "author": "JBL RemiX Beat "
+  },
+  {
+    "title": "Balamji (High-BPM Dance Rework)",
+    "artist": "Renuka Panwar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "SEqQp7bJLUQ",
+    "videoTitle": "Balam Ji Tu Satrong Renuka Panwar  Sumer Rajput  Divya jangir New Haryanvi Song 2022",
+    "author": "NDJ Digital"
+  },
+  {
+    "title": "Chunni Sitare Wali (Slap-House Club Mix)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "e9D9nGSDbKY",
+    "videoTitle": "Chunri Sitare Wali (Official Video) New Haryanvi Song / 💞 Mehboob Khan_Priya Sharma /  Its Mk Studio",
+    "author": "Its Mk Studio"
+  },
+  {
+    "title": "Ghungroo Tut Jaega (Sub-Bass Edit)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "1XjSl2dc9-Y",
+    "videoTitle": "SAPNA CHOUDHARY | Ghungroo Toot Jayega [ Official Remix Song ]  | Dj Dks Deepesh X Manoj",
+    "author": "☞𝐃𝐣 𝐃𝐤𝐬 𝐎𝐟 𝐃𝐞𝐥𝐡𝐢☜"
+  },
+  {
+    "title": "Badli Badli Laage (Peak-Time Electro Mix)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "gi0nqupQ94E",
+    "videoTitle": "Badli Badli Laage | Sapna Chaudhary, Vicky Kajla | Ruchika Jangid, New Haryanvi Songs Haryanavi 2020",
+    "author": "Sonotek"
+  },
+  {
+    "title": "English Medium (Club Bounce Edit)",
+    "artist": "Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "yxWhD4a21sQ",
+    "videoTitle": "सपना चौधरी और मासूम शर्मा ने स्टेज पर मचाया धमाल I English Medium I Dance Performance 2026 I Sonotek",
+    "author": "Sonotek Ragni"
+  },
+  {
+    "title": "Chetak 2.0 (High-Energy Bassline Rework)",
+    "artist": "Raj Mawar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "xDwTiMQ-sJU",
+    "videoTitle": "Chetak 2.0",
+    "author": "Raj Mawar - Topic"
+  },
+  {
+    "title": "Raasleela (Tech-House Festival Flip)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "5LhwcQdHhbQ",
+    "videoTitle": "राधारानी जनम के बाद Banke Bihari मंदिर मे रास लीला | Radha Krishna Milan Leela",
+    "author": "Madhur Rasleela"
+  },
+  {
+    "title": "Kaalja (Slap-Bass Club Mix)",
+    "artist": "Diler Kharkiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "sZrKbyVKqK8",
+    "videoTitle": "Kaalja Dre New Haryanvi Video Gd Kaur,Feat Raj Mawer,Yashpal Bajana,Sonika Singh Haryanvi 2019",
+    "author": "T-SERIES HARYANVI"
+  },
+  {
+    "title": "Aam Jaat (Sub-Woofer Club Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "mXCERdDK56k",
+    "videoTitle": "BYAH KE LAVANGE ( Feat. Sachin Jaat & Swarnima Chuhnx ) Masoom Sharma | Ashu Twinkle | HR MUSIC",
+    "author": "HR MUSIC"
+  },
+  {
+    "title": "Haryana Hood (Drill Trap Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "7ygHBSh4LTw",
+    "videoTitle": "Haryana Hood x Unstoppable - Irshad Khan x Dhanda Nyoliwala | DRILL REMIX",
+    "author": "Ether"
+  },
+  {
+    "title": "Yaari Ka Rutba (Hard Trap Rework)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "bPTdNRgEtgg",
+    "videoTitle": "Labh Heera - Rutba Yaari Da (Official Video) Shavy Vik | New Punjabi Song 2024 | New Punjabi Songs",
+    "author": "I Studios"
+  },
+  {
+    "title": "Don (Aggressive Bassline Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2Pta29pxTbk",
+    "videoTitle": "Madam Ji (Official Video) Masoom Sharma | Amar Karnawal, Pinna Music | New Haryanvi Song 2025",
+    "author": "Masoom Sharma"
+  },
+  {
+    "title": "Baap Baap Hota Hai (Industrial Rave Edit)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "YRxzw3bSkvE",
+    "videoTitle": "MASOOM SHARMA : BAAP (OFFICIAL VIDEO) | Amar Karnawal I Manjeet Mor I New Haryanvi Song 2026",
+    "author": "Haryanvi Bol"
+  },
+  {
+    "title": "Gadi Number (Slap-House Club Mix)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ou-litQ9hWQ",
+    "videoTitle": "SOLID BODY || Ajay Hooda & Anjali Raghav || Raju Punjabi & Sheenam || New song of 2015 || Mor Music",
+    "author": "Mor Haryanvi"
+  },
+  {
+    "title": "Red Suit (Tech-House Extended Mix)",
+    "artist": "Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "tYHJwczMgHo",
+    "videoTitle": "Maregi | Khushi Baliyan | Raj Mawar & Ashu Twinkle | Haryanvi Song 2024 | Haryanvi Song 2024 |",
+    "author": "Crystal Music Haryanvi "
+  },
+  {
+    "title": "Ghoonghat Ki Oot Mein (Peak-Time Electro Drop)",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Ye43FbcVZQ0",
+    "videoTitle": "Ghunghat Bain : Ajay Hooda | Ruchika Jangid | Surender Romio | Haryanvi Song",
+    "author": "Gem Tunes Haryanvi"
+  },
+  {
+    "title": "Bhabhi Ri Bhabhi (Club Bounce Edit)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "OGIvZMVRqbM",
+    "videoTitle": "Age Gap | Ajay Hooda | Sana Sultan | Surender Romio | Ruchika Jangid | New Haryanvi Song 2023",
+    "author": "DAKS Music"
+  },
+  {
+    "title": "Khap Panchayat (Sub-Bass Hard Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cTHI_SVtnTo",
+    "videoTitle": "70 SARPANCH MASOOM SHARMA REMIX | AMAR K | SARKAR GHAR KI ME DJ REMIX SONG 2024 | DJ SAHIL BADSIKRI",
+    "author": "DJ SAHIL BADSIKRI"
+  },
+  {
+    "title": "Police Ki Gaddi (Trap Bass Edit)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "GQCLrtd5vrc",
+    "videoTitle": "Police (Full Song) | DJ Flow Ft. Afsana Khan, Shree Brar | Punjabi Song 2020 | Ishtar Punjabi",
+    "author": "Ishtar Punjabi"
+  },
+  {
+    "title": "Kacheri (Hardstyle Club Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "M2eHFVXP4DM",
+    "videoTitle": "Kashyap Kom Dilero Ki - Saurabh Kashyap - New Haryanvi Song - Hard Bass Remix By Dj Ganesh Kashyap",
+    "author": "Dj Ganesh Kashyap"
+  },
+  {
+    "title": "Mukadma (Sub-Woofer Bassline)",
+    "artist": "Sumit Goswami",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ZVk49KmJ-SE",
+    "videoTitle": "60 MUKADME : MASOOM SHARMA | Manjeet Mor, Shivani Yadav, Shiva Chaudhary | New Haryanvi Song 2024",
+    "author": "Tuffan Music"
+  },
+  {
+    "title": "Zaildar (High-BPM Electro Mix)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "aOHOAMAYGIU",
+    "videoTitle": "Chambal K Dakku | Masoom Sharma | Swara Verma | Rahul Muana | Ruba Khan | New Haryanvi Song 2025",
+    "author": "Bajewala Records Haryanvi"
+  },
+  {
+    "title": "Landlord (Club Tech Flip)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2ExVSgd_Kuk",
+    "videoTitle": "Bandekhani",
+    "author": "Masoom Sharma - Topic"
+  },
+  {
+    "title": "Pehalwan (Workout Bassline Mix)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "W8llfTFuOto",
+    "videoTitle": "KD Jadhav ने कैसे जीता था 1952 Helsinki Olympics में Wrestling Bronze Medal? Vijeta Episode-1",
+    "author": "The Lallantop"
+  },
+  {
+    "title": "Dangal (Heavy Dhol Bass Drop)",
+    "artist": "Traditional / DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "EDjWTVHrMgQ",
+    "videoTitle": "Ganpati Mashup 2023 | DJ Arjav | Nonstop Ganpati DJ Songs | New Visarjan Mashup | Ganesha Festival",
+    "author": "djarjav"
+  },
+  {
+    "title": "Akhada Bass (Industrial Rave Rework)",
+    "artist": "Masoom Sharma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "DpDaIH5Znss",
+    "videoTitle": "Rangdaar Ke Akhada Aawata Dj Humming Bass | Pramod Premi | Akhada Mela DJ Song 2025 | Dj Hariom 2025",
+    "author": "Dj Hariom Basantpur"
+  },
+  {
+    "title": "Gaam Ka Tashan (Extended Club Edit)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "1LsjOGhVBCA",
+    "videoTitle": "म्हारे गाम का पानी # Mahre Gaam Ka Pani #New Haryanvi Songs # Meeta Baroda # Raju Punjabi #NDJ Music",
+    "author": "NDJ MUSIC"
+  },
+  {
+    "title": "Chhori Tu Haryana Ki (Slap-House Rework)",
+    "artist": "Fazilpuria",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "GI30zqFk0sU",
+    "videoTitle": "LALA LORI : Fazilpuria ft. Deepti | Afsana Khan | Jaani | SukhE | Haryanvi Songs Haryanavi 2021",
+    "author": "White Hill Dhaakad"
+  },
+  {
+    "title": "Desi Swagger (Club Bounce Mix)",
+    "artist": "MD KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "8_aYuYJyVFs",
+    "videoTitle": "Vele x SOTY x Ritzzze x Desi Swagger Remix",
+    "author": "Ritzzze"
+  },
+  {
+    "title": "Royal Jaat (Festival Big-Room Mix)",
+    "artist": "DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "xpU3hYijieo",
+    "videoTitle": "Jaat | Royal Jaat | Siddh B | Rohit Malik, Jonu Chariya, Mad Deep | Haryanvi Video Song | Sonotek",
+    "author": "Sonotek"
+  },
+  {
+    "title": "Haryanvi Swag Anthem (Peak-Time Edit)",
+    "artist": "KD",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "AEgCI5f_iBc",
+    "videoTitle": "On The Way (Official Video) | Khasa Aala Chahar Ft. KD DESIROCK | New Haryanvi Songs Haryanavi 2022",
+    "author": "Nav Haryanvi"
+  },
+  {
+    "title": "Bass Rani Haryanvi Rework (Trap Flip)",
+    "artist": "Nucleya Style DJ Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "EXTdj7rons4",
+    "videoTitle": "Soundcheck 🔥 Sidhu Moosewala Song 295 Dj Remix | DJ Sound Check JBL Bass Mix | Dj Song | Bass Song",
+    "author": "DJ SHYAM GURJAR"
+  },
+  {
+    "title": "Baaraat Dance (High-Energy Dhol Mix)",
+    "artist": "Ajay Hooda",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "7I3uy9yESiQ",
+    "videoTitle": "Barati - Ajay Hooda | Pooja Hooda | Pardeep , Peehu | New Haryanvi Song 2025 | T-Series Haryanvi",
+    "author": "T-SERIES HARYANVI"
+  },
+  {
+    "title": "DJ Wale Babu Haryanvi Flip (Tech House Mix)",
+    "artist": "Club Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cDw--CTpRgc",
+    "videoTitle": "DJ REMIX EDM MIX FLP PROJECT | Tapori Circuit Mix | FL STUDIO SONG 2025  FLP",
+    "author": "Fl Bazer"
+  },
+  {
+    "title": "Khet Khaliyan (Sub-Bass Extended Rework)",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "G7KG7bgK6Bg",
+    "videoTitle": "Baat Gori Ki # Joban Rulta Hande # Anjali Raghav_Raju Punjabi_Sanju Khewriya # Latest Haryanvi Song",
+    "author": "NDJ MUSIC"
+  },
+  {
+    "title": "Haryanvi Drill Nonstop Set (Vol. 1)",
+    "artist": "Underground Mix",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "CQW4A3cV2Oo",
+    "videoTitle": "Masoom Sharma X Dhanda Nyoliwala Mashup - Deejay Rax | Best of Haryanvi | Haryanvi Dance Mashup",
+    "author": "Deejay Rax"
+  },
+  {
+    "title": "Peak-Time Desi Techno Edit (Vol. 2)",
+    "artist": "Hardstyle Rework",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "rdykdUqPXYc",
+    "videoTitle": "Ricchi E Poveri - Sara Perche Ti Amo (MaTiAsS Hardstyle Remix)",
+    "author": "MaTiAsS"
+  },
+  {
+    "title": "Haryanvi Bass War Finale (130",
+    "artist": "140 BPM Mainstage Drop) – Festival Edit",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "jMjmnSraNe8",
+    "videoTitle": "BERETTA (Official Video) Amanraj Gill, Jaya Rohilla ft. Shivani Yadav | New Haryanvi Song 2025",
+    "author": "Nav Haryanvi"
+  }
+];
 
-// Helper to canonicalize track titles for strict distinct deduplication
-function normalizeTitleKey(title: string): string {
-  if (!title) return "";
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[\(\)\[\]\{\}]/g, "")
-    .replace(/[\-_/\\:]/g, " ")
-    .replace(/\s+/g, " ");
+// Helper to assign sequential IDs and strict isolated category tags
+let nextTrackId = 1;
+
+function tagCategory(list: any[], flags: Partial<Track>): Track[] {
+  return list.map((item) => ({
+    id: nextTrackId++,
+    title: item.title,
+    artist: item.artist || "Unknown Artist",
+    film: item.film || "Trance Sangeet",
+    youtubeId: item.youtubeId,
+    audioUrl: item.audioUrl,
+    startSeconds: item.startSeconds,
+    isSpatial: flags.isSpatial ?? false,
+    isGlobal: flags.isGlobal ?? false,
+    isGoa: flags.isGoa ?? false,
+    isRemix: flags.isRemix ?? false,
+    isKTrance: flags.isKTrance ?? false,
+    isIndoHouse: flags.isIndoHouse ?? false,
+    isSufi: flags.isSufi ?? false,
+    isAfro: flags.isAfro ?? false,
+    isX: flags.isX ?? false,
+    isClub: flags.isClub ?? false,
+    isHaryanvi: flags.isHaryanvi ?? false,
+    isHustle: flags.isHustle ?? false,
+    hustleSeason: item.hustleSeason,
+    hustleNum: item.hustleNum,
+  }));
 }
 
-const uniqueTitleMap = new Map<string, any>();
-const uniqueTrackList: any[] = [];
+// Convert unique track entries to rawTracks array with strictly isolated categories and unique IDs
+const rawTracks: Track[] = [
+  ...tagCategory([...list1, ...list2, ...list3, ...list4], { isSpatial: true }),
+  ...tagCategory(listGlobal, { isGlobal: true }),
+  ...tagCategory(listGoa, { isGoa: true }),
+  ...tagCategory(listKTrance, { isKTrance: true }),
+  ...tagCategory(listRemix, { isRemix: true }),
+  ...tagCategory(listIndoHouse, { isRemix: true, isIndoHouse: true }),
+  ...tagCategory(listAfro, { isRemix: true, isAfro: true }),
+  ...tagCategory(listSufi, { isRemix: true, isSufi: true }),
+  ...tagCategory(listX, { isRemix: true, isX: true }),
+  ...tagCategory(listHustle, { isRemix: true, isHustle: true }),
+  ...tagCategory(listClub, { isRemix: true, isClub: true }),
+  ...tagCategory(listHaryanvi, { isRemix: true, isHaryanvi: true }),
+];
 
-for (const t of merged) {
-  const item = t as any;
-  const tKey = normalizeTitleKey(item.title);
-
-  let existing: any = null;
-  if (tKey && uniqueTitleMap.has(tKey)) {
-    existing = uniqueTitleMap.get(tKey);
-  }
-
-  if (!existing) {
-    const copy = { ...t };
-    if (tKey) uniqueTitleMap.set(tKey, copy);
-    uniqueTrackList.push(copy);
-  } else {
-    // Retain exactly ONE instance in the database with merged playlist tags and flags
-    if (item.isSpatial) existing.isSpatial = true;
-    if (item.isGlobal) existing.isGlobal = true;
-    if (item.isGoa) existing.isGoa = true;
-    if (item.isRemix) existing.isRemix = true;
-    if (item.isKTrance) existing.isKTrance = true;
-    if (item.isIndoHouse) existing.isIndoHouse = true;
-    if (item.isSufi) existing.isSufi = true;
-    if (item.isAfro) existing.isAfro = true;
-    if (item.isX) existing.isX = true;
-    if (item.isClub) existing.isClub = true;
-    if (item.isHaryanvi) existing.isHaryanvi = true;
-    if (item.isHustle) existing.isHustle = true;
-    if (item.hustleSeason && !existing.hustleSeason) existing.hustleSeason = item.hustleSeason;
-    if (item.hustleNum && !existing.hustleNum) existing.hustleNum = item.hustleNum;
-    if (item.startSeconds !== undefined && existing.startSeconds === undefined) existing.startSeconds = item.startSeconds;
-    if (item.youtubeId && !existing.youtubeId) {
-      existing.youtubeId = item.youtubeId;
-    }
-    if (item.audioUrl && !existing.audioUrl) {
-      existing.audioUrl = item.audioUrl;
-    }
-  }
-}
-
-// Convert unique track entries to rawTracks array with unique sequential IDs
-const rawTracks: Track[] = uniqueTrackList.map((track, idx) => ({
-  id: idx + 1,
-  title: track.title,
-  artist: track.artist,
-  film: track.film,
-  youtubeId: track.youtubeId,
-  startSeconds: track.startSeconds,
-  isSpatial: track.isSpatial ?? ((track.isGlobal || track.isGoa || track.isRemix || track.isKTrance || track.isClub) ? false : true),
-  isGlobal: track.isGlobal ?? false,
-  isGoa: track.isGoa ?? false,
-  isRemix: track.isRemix ?? false,
-  isKTrance: track.isKTrance ?? false,
-  isIndoHouse: track.isIndoHouse ?? false,
-  isSufi: track.isSufi ?? false,
-  isAfro: track.isAfro ?? false,
-  isX: track.isX ?? false,
-  isClub: track.isClub ?? false,
-  isHaryanvi: (track as any).isHaryanvi ?? false,
-  isHustle: track.isHustle ?? false,
-  hustleSeason: track.hustleSeason,
-  hustleNum: (track as any).hustleNum,
-  audioUrl: (track as any).audioUrl,
-}));
-
-// Stable deterministic pseudo-random number generator to prevent chunk-evaluation mismatches and hydration errors
+// Stable deterministic pseudo-random number generator to prevent hydration errors
 function seedableRandom(seed: number) {
   let s = seed;
   return function() {
@@ -16108,22 +21392,8 @@ function seedableRandom(seed: number) {
   };
 }
 
-// Fisher-Yates Shuffle function to randomize track order deterministically on load and assign clean sequential IDs (1 to length)
-function shuffleAndReindex(array: Track[]): Track[] {
-  const arr = [...array];
-  const rand = seedableRandom(42); // Stable seed
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr.map((track, index) => ({
-    ...track,
-    id: index + 1,
-  }));
-}
-
-// Export the deterministically shuffled and sequential re-indexed tracks
-export const tracks: Track[] = shuffleAndReindex(rawTracks);
+// Export the sequential deterministic tracks
+export const tracks: Track[] = rawTracks;
 
 export function getRandomDuration(): number {
   return Math.floor(Math.random() * 120) + 180;
