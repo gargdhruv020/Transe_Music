@@ -15,6 +15,7 @@ export interface Track {
   isAfro?: boolean;
   isX?: boolean;
   isClub?: boolean;
+  isHaryanvi?: boolean;
   isHustle?: boolean;
   hustleSeason?: string;
   hustleNum?: number;
@@ -14414,7 +14415,1611 @@ const listHustle = [
   }
 ];
 
-const merged = [...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
+
+const listHaryanvi = [
+  {
+    title: "Chambal Ka Daku (Heavy Bass Drop Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "aOHOAMAYGIU"
+  },
+  {
+    title: "Systum (Tech-House Club Mix)",
+    artist: "Masoom Sharma & Elvish Yadav",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "NDtK4PEJ58c"
+  },
+  {
+    title: "2 Numbari (Sub-Bass Club Rework)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "MVF-GCOY2kI"
+  },
+  {
+    title: "Badnam Gabru (Drill Bass Flip)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "LxSJrwi8oqY"
+  },
+  {
+    title: "Kala Daman (Extended Bass Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ZZ86YrRjIOs"
+  },
+  {
+    title: "Dada Sadhu (Hard Trap Festival Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Jail Karawegi (Peak-Time Electro Drop)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Badmashi (Low-End Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Gunda Raj (Heavy Bassline Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Kalesh (Industrial Bass Drop)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Raaj (Sub-Woofer Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Pistol (Trap Bass Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Randa Party (Club Bounce Edit)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Boli Haryanvi (Hard Dance Rework)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Moto (Festival Bassline Edit)",
+    artist: "Diler Kharkiya & Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Albelo (Club Tech Flip)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Diler Harkesh (Aggressive Bass Mix)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Fauji (Extended Peak-Time Edit)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Feel (Club Slap-House Mix)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Parindey (Tech Bass Rework)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Yaar Ki Shaadi (High-BPM Club Mix)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Feelings (Deep Bassline Flip)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Baazigar (Drill Drop Mix)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Army (Hardstyle Club Edit)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Sweet Poison (Tech-House Drop)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Yaariyan (Extended Club Edit)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Gangwar (Aggressive Trap Mix)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Raajneeti (Hard Bass Rework)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Gaam Ka Desi (UK Drill Club Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Haryanvi Swag (Peak-Time Electro Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Desi Desi Na Bolya Kar (Hard Slap Mix)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "2 Raflaan (Tech Bass Edit)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Bapu Tera Putt (Bassline Extended Edit)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Badmashi Ka Rog (Heavy Bass Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Asla (Hard Trap Drop Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Haryane Ka Chhora (Club Punch Rework)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Choudhar Jaat Ki (Sub-Bass Club Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Solid Body (Extended Bass Flip)",
+    artist: "Raju Punjabi & Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Sandal (Tech-House Edit)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Zero Figure (High-Energy Club Rework)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Tu Cheez Lajawab (Peak-Time Electro Edit)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Aala Re Aala (Hard Trap Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Fair Lovely (Slap-House Edit)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Desi Ka Pavva (Extended Bassline)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Kache Kateinge (Club Bounce Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Bholenath (Psy-Trance Club Mix)",
+    artist: "Kaka",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Bhole Baba (Trance Festival Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Bam Lahiri (Industrial Rave Mix)",
+    artist: "Traditional / DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Damru Bajaya (Psy Bass Edit)",
+    artist: "Narender Bhagana",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Mahadev (Peak-Time Trap Mix)",
+    artist: "Kaka",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Bahu Kale Ki (Slap-House Club Mix)",
+    artist: "Ajay Hooda & Gajender Phogat",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Gypsy / Balam Thanedar (Electro-Saw Drop)",
+    artist: "GD Kaur & Pranjal Dahiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "52 Gaj Ka Daman (Festival Bounce Edit)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Kabootar (High-Energy Dance Mix)",
+    artist: "Renuka Panwar & Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Matak Chalungi (Club Tech Flip)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "DJ Pe Nachungi (Extended Club Edit)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Chhatri (Slap-House Rework)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Balam Ka System (Brazilian Bass Flip)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Lala Lala Lori (Club House Rework)",
+    artist: "Fazilpuria & Afsana Khan",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Chhaliya (Peak-Time Dance Mix)",
+    artist: "Ajay Hooda & Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Tagdi (Big-Room Festival Drop)",
+    artist: "Ajay Hooda & Gagan Haryanvi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Goli Chal Javegi (Bassline Club Edit)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Gajban Pani Ne Chali (High-BPM Electro Mix)",
+    artist: "Vishvajeet Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Kothe Upar Kothri / Ghungroo (Tech-House Edit)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Bandook Chalegi (Festival Hardstyle Drop)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Teri Aakhya Ka Yo Kajal (Club Extended Mix)",
+    artist: "DC Madana & Sapna",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Bahu Jamidar Ki (Slap-Bass Edit)",
+    artist: "Vinod Chimpa",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Dhanak Ka Tota (Tech-House Mix)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Gore Tan Pe Marjani (Extended Club Flip)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Madam Baith Bolero Mein (Hard Dance Edit)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Teri Lat Lag Jagi (Sub-Bass Club Mix)",
+    artist: "Sonu Sharma & Ruchika",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Thada Bhartar (Club Bounce Edit)",
+    artist: "Raju Punjabi & Sushila Thakar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Chetak (High-Energy Electro Mix)",
+    artist: "Raj Mawar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Laad Ladaun (Club Slap Rework)",
+    artist: "Raj Mawar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Kasoota (Hard Bass Club Edit)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Jimmy Choo (Tech House Drop)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Pallo Latke (Haryanvi Trap Flip)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Angoor (Extended Club Mix)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Koka (High-BPM Dance Rework)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Balam Chhoto (Slap Bass Mix)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Chhori Tu Pataka (Peak-Time Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Jhumke (Club Tech Rework)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Tokk (Sub-Bass Extended Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Goli Wargi (Hardstyle Club Flip)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Nakhro (Club Tech Edit)",
+    artist: "Raj Mawar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Gulabo (Festival Bassline Mix)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Mote Mote Nain (Slap House Flip)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Padosan (Club Bounce Edit)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Sharab (Extended Bass Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Hookah (Hard Trap Club Edit)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Yaar Ki Gaadi (Drill Bassline Rework)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Bullet (Sub-Woofer Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Scorpian (Aggressive Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Kaafila (Industrial Bass Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Route (High-BPM Club Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Desi Look (Peak-Time Bounce)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Suit Ki Kadhai (Tech House Flip)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Dori (Slap-Bass Club Mix)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Hathiyar (Hard Trap Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Parcha (Sub-Bass Peak-Time Flip)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Kar Gayi Chull (Haryanvi Peak-Time Mix)",
+    artist: "Badshah & Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Chull 2.0 (Club Slap-House Rework)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "2 Many Girls (Extended Club Mix)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Haryana Roadways (High-BPM Electro Mix)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Billori Akh (Club Tech Flip)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Jalebi Juda (Slap-House Rework)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Kala Tikka (Extended Club Mix)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Lal Dupatta (Tech-House Club Edit)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Payal Chham Chham (Festival Bounce Mix)",
+    artist: "Vishvajeet Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Dil Ki Dhadkan (Sub-Bass Club Edit)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Sapna Ka Dance (Electro Rave Edit)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Engine Ki Seeti (Haryanvi Bass Mix)",
+    artist: "Traditional / DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Chunni Mein (Slap-Bass Rework)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Gaam Ki Haveli (Extended Club Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Thar (Heavy Bassline Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Fortuner (Drill Drop Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "32 Bore (Hard Trap Rework)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Raflaan (Peak-Time Bass Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Badmash (Industrial Club Edit)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Yaaran Da Tashan (High-BPM Edit)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Chhori Bindass (Club Bounce Mix)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Rotiyaan (Tech House Club Edit)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Doodh Ki Katori (Slap-House Mix)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Tik Tok (Festival Bassline Edit)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Gaam Ka Chhora (Extended Peak-Time Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Mitti Ka Khilona (Sub-Bass Rework)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Haveli Pe Aa Jana (Hard Trap Club Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Jija Tu Kala (High-Energy Dance Mix)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Bhabhi Aali (Club Tech Rework)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Sarpanch (Sub-Woofer Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Thekedar (Slap-Bass Extended Mix)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Gaddi Fortuner (Peak-Time Bounce)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Jatt Brand (Club Bassline Rework)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Shehar Ki Chhori (Tech-House Drop)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Akhada (Hardstyle Festival Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Desi Gym (High-BPM Workout Club Edit)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Fauji Ki Bandook (Sub-Bass Club Edit)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Daaru Ki Botal (Extended Club Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Peg Patiala (Haryanvi Bassline Rework)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Chora Jaat Ka (Aggressive Trap Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Gujjar Ka Kharcha (Heavy Bass Drop)",
+    artist: "Traditional / DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Rajputana Swag (Peak-Time Festival Mix)",
+    artist: "DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Yadav Brand (Hard Bounce Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Jaat Land (Industrial Bass Rework)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Randa Squad (High-Energy Dance Edit)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Bachelor Party (Tech-House Flip)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Sharaabi Yaar (Extended Club Bass)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Gaam Ka Pradhan (Sub-Bass Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Chhori Patola (Slap-House Edit)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "London Ka Tour (Club Bounce Mix)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Haryanvi Mashup 1 (Peak-Time Club Mix)",
+    artist: "Laddi Gill & Gurmeet Bhadana",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Haryanvi Mashup 2 (Extended Bassline Rework)",
+    artist: "Totaram Sondhiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Haryanvi Mashup 3 (Big-Room Festival Edit)",
+    artist: "Laddi Gill",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Haryanvi Mashup 4 (High-Energy Club Flip)",
+    artist: "Totaram Sondhiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Haryanvi Mashup 5 (Hard Trap & Slap Mix)",
+    artist: "Totaram Sondhiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Haryanvi Mashup 6 (Industrial Bass Edit)",
+    artist: "Laddi Gill",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Haryanvi Mashup 7 (Tech-House Extended Mix)",
+    artist: "Gurmeet Bhadana",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Haryanvi Mashup 8 (Sub-Woofer Peak Edit)",
+    artist: "Totaram Sondhiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Haryanvi Mashup 9 (Festival Bounce Mix)",
+    artist: "Laddi Gill",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Haryanvi Mashup 10 (Hardstyle Club Rework)",
+    artist: "Totaram Sondhiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Nonstop Haryanvi DJ War Edit (Part 1)",
+    artist: "Club Mix",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Nonstop Haryanvi DJ War Edit (Part 2)",
+    artist: "Bassline Mix",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Balamji (High-BPM Dance Rework)",
+    artist: "Renuka Panwar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Chunni Sitare Wali (Slap-House Club Mix)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Ghungroo Tut Jaega (Sub-Bass Edit)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "5KKro3nIHCw"
+  },
+  {
+    title: "Badli Badli Laage (Peak-Time Electro Mix)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "English Medium (Club Bounce Edit)",
+    artist: "Sapna Choudhary",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "URxsOjGMg4w"
+  },
+  {
+    title: "Chetak 2.0 (High-Energy Bassline Rework)",
+    artist: "Raj Mawar",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "xDwTiMQ-sJU"
+  },
+  {
+    title: "Raasleela (Tech-House Festival Flip)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "g1vB19nUpAA"
+  },
+  {
+    title: "Kaalja (Slap-Bass Club Mix)",
+    artist: "Diler Kharkiya",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "iSHRJYXv8zU"
+  },
+  {
+    title: "Aam Jaat (Sub-Woofer Club Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PwH8HHUADuo"
+  },
+  {
+    title: "Haryana Hood (Drill Trap Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Yaari Ka Rutba (Hard Trap Rework)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Don (Aggressive Bassline Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Baap Baap Hota Hai (Industrial Rave Edit)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Gadi Number (Slap-House Club Mix)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Red Suit (Tech-House Extended Mix)",
+    artist: "Surender Romio",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Ghoonghat Ki Oot Mein (Peak-Time Electro Drop)",
+    artist: "Ruchika Jangid",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Bhabhi Ri Bhabhi (Club Bounce Edit)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Khap Panchayat (Sub-Bass Hard Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Police Ki Gaddi (Trap Bass Edit)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Kacheri (Hardstyle Club Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Mukadma (Sub-Woofer Bassline)",
+    artist: "Sumit Goswami",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Zaildar (High-BPM Electro Mix)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Landlord (Club Tech Flip)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Pehalwan (Workout Bassline Mix)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Dangal (Heavy Dhol Bass Drop)",
+    artist: "Traditional / DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Akhada Bass (Industrial Rave Rework)",
+    artist: "Masoom Sharma",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Gaam Ka Tashan (Extended Club Edit)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Chhori Tu Haryana Ki (Slap-House Rework)",
+    artist: "Fazilpuria",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Desi Swagger (Club Bounce Mix)",
+    artist: "MD KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Royal Jaat (Festival Big-Room Mix)",
+    artist: "DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Haryanvi Swag Anthem (Peak-Time Edit)",
+    artist: "KD",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Bass Rani Haryanvi Rework (Trap Flip)",
+    artist: "Nucleya Style DJ Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Baaraat Dance (High-Energy Dhol Mix)",
+    artist: "Ajay Hooda",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "DJ Wale Babu Haryanvi Flip (Tech House Mix)",
+    artist: "Club Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Khet Khaliyan (Sub-Bass Extended Rework)",
+    artist: "Raju Punjabi",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Haryanvi Drill Nonstop Set (Vol. 1)",
+    artist: "Underground Mix",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Peak-Time Desi Techno Edit (Vol. 2)",
+    artist: "Hardstyle Rework",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Haryanvi Bass War Finale (130",
+    artist: "140 BPM Mainstage Drop) – Festival Edit",
+    film: "Haryanvi",
+    isRemix: true,
+    isHaryanvi: true,
+    youtubeId: "PvWhAlMGam4"
+  }
+];
+
+const merged = [...(typeof listHaryanvi !== "undefined" ? listHaryanvi : []), ...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
 
 // Helper to canonicalize track titles for strict distinct deduplication
 function normalizeTitleKey(title: string): string {
@@ -14460,6 +16065,7 @@ for (const t of merged) {
     if (item.isAfro) existing.isAfro = true;
     if (item.isX) existing.isX = true;
     if (item.isClub) existing.isClub = true;
+    if (item.isHaryanvi) existing.isHaryanvi = true;
     if (item.isHustle) existing.isHustle = true;
     if (item.hustleSeason && !existing.hustleSeason) existing.hustleSeason = item.hustleSeason;
     if (item.hustleNum && !existing.hustleNum) existing.hustleNum = item.hustleNum;
@@ -14493,6 +16099,7 @@ const rawTracks: Track[] = uniqueTrackList.map((track, idx) => ({
   isAfro: track.isAfro ?? false,
   isX: track.isX ?? false,
   isClub: track.isClub ?? false,
+  isHaryanvi: (track as any).isHaryanvi ?? false,
   isHustle: track.isHustle ?? false,
   hustleSeason: track.hustleSeason,
   hustleNum: (track as any).hustleNum,

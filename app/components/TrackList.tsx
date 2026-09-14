@@ -18,7 +18,8 @@ export type PlaylistTabType =
   | "all-remix" 
   | "hustle" 
   | "liked"
-  | "club";
+  | "club"
+  | "haryanvi";
 
 /* ── Close Icon ───────────────────────────────────── */
 function CloseIcon() {
@@ -275,7 +276,8 @@ export default function TrackList({
       } else if (isRemixOnly) {
         if (!t.isRemix) return false;
         if (activeTab === "club" && !(t as any).isClub) return false;
-        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isX || (t as any).isHustle || (t as any).isClub)) return false;
+        if (activeTab === "haryanvi" && !(t as any).isHaryanvi) return false;
+        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isX || (t as any).isHustle || (t as any).isClub || (t as any).isHaryanvi)) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
         if (activeTab === "sufi" && !(t as any).isSufi) return false;
         if (activeTab === "afro" && !(t as any).isAfro) return false;
@@ -283,6 +285,7 @@ export default function TrackList({
         if (activeTab === "hustle" && !(t as any).isHustle) return false;
       } else {
         if (activeTab === "club" && !(t as any).isClub) return false;
+        if (activeTab === "haryanvi" && !(t as any).isHaryanvi) return false;
         if (activeTab === "16d" && !t.isSpatial) return false;
         if (activeTab === "global" && !t.isGlobal) return false;
         if (activeTab === "goa" && !t.isGoa) return false;
@@ -408,6 +411,17 @@ export default function TrackList({
               Club
             </button>
             <button
+              onClick={() => onTabChange?.("haryanvi")}
+              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                activeTab === "haryanvi"
+                  ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-white shadow-[0_0_12px_rgba(16,185,129,0.25)]"
+                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] flex-shrink-0" />
+              Haryanvi
+            </button>
+            <button
               onClick={() => onTabChange?.("remix")}
               className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
                 activeTab === "remix"
@@ -512,6 +526,17 @@ export default function TrackList({
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b] flex-shrink-0" />
             Club
+          </button>
+          <button
+            onClick={() => onTabChange?.("haryanvi")}
+            className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
+              activeTab === "haryanvi"
+                ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-white shadow-[0_0_12px_rgba(16,185,129,0.25)]"
+                : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] flex-shrink-0" />
+            Haryanvi
           </button>
           <button
             onClick={() => onTabChange?.("16d")}
