@@ -26,12 +26,11 @@ export async function GET(request: NextRequest) {
       if (tab === "global") return !!t.isGlobal;
       if (tab === "goa") return !!t.isGoa;
       if (tab === "all-remix") return !!t.isRemix;
-      if (tab === "remix") return !!t.isRemix && !t.isIndoHouse && !t.isSufi && !t.isAfro && !t.isEAndAAfro && !t.isX && !t.isHustle && !t.isClub;
+      if (tab === "remix") return !!t.isRemix && !t.isIndoHouse && !t.isSufi && !t.isAfro && !t.isX && !t.isHustle && !t.isClub;
       if (tab === "ktrance") return !!t.isKTrance;
       if (tab === "indo-house") return !!t.isIndoHouse;
       if (tab === "sufi") return !!t.isSufi;
       if (tab === "afro") return !!t.isAfro;
-      if (tab === "ea-afro") return !!t.isEAndAAfro;
       if (tab === "x") return !!t.isX;
       if (tab === "hustle") return !!t.isHustle;
       return true;

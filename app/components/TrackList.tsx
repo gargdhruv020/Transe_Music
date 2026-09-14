@@ -14,7 +14,6 @@ export type PlaylistTabType =
   | "indo-house" 
   | "sufi" 
   | "afro" 
-  | "ea-afro" 
   | "x" 
   | "all-remix" 
   | "hustle" 
@@ -276,11 +275,10 @@ export default function TrackList({
       } else if (isRemixOnly) {
         if (!t.isRemix) return false;
         if (activeTab === "club" && !(t as any).isClub) return false;
-        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isEAndAAfro || (t as any).isX || (t as any).isHustle || (t as any).isClub)) return false;
+        if (activeTab === "remix" && ((t as any).isIndoHouse || (t as any).isSufi || (t as any).isAfro || (t as any).isX || (t as any).isHustle || (t as any).isClub)) return false;
         if (activeTab === "indo-house" && !(t as any).isIndoHouse) return false;
         if (activeTab === "sufi" && !(t as any).isSufi) return false;
         if (activeTab === "afro" && !(t as any).isAfro) return false;
-        if (activeTab === "ea-afro" && !(t as any).isEAndAAfro) return false;
         if (activeTab === "x" && !(t as any).isX) return false;
         if (activeTab === "hustle" && !(t as any).isHustle) return false;
       } else {
@@ -452,17 +450,6 @@ export default function TrackList({
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#e76f51] flex-shrink-0" />
               Afro
-            </button>
-            <button
-              onClick={() => onTabChange?.("ea-afro")}
-              className={`flex-shrink-0 snap-start px-4 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full border transition-all duration-200 flex items-center justify-center gap-1.5 ${
-                activeTab === "ea-afro"
-                  ? "bg-[oklch(0.72_0.20_190)]/15 border-[oklch(0.72_0.20_190)]/30 text-white shadow-md"
-                  : "bg-transparent border-transparent text-[#9ca3af] hover:text-white"
-              }`}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8] flex-shrink-0" />
-              E & A Afro
             </button>
             <button
               onClick={() => onTabChange?.("x")}
