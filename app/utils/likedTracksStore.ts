@@ -1,11 +1,13 @@
 /**
  * ====================================================================================
- * USER-ISOLATED LIKED TRACKS STORE & BACKEND SYNC
+ * USER-ISOLATED PERSISTENT LIKED TRACKS STORE & BACKEND SYNC
  * ====================================================================================
  *
- * Provides private, user-isolated liked tracks state for each individual user.
- * - Optimistic local state for instant 0ms UI toggles.
- * - Background synchronization with /api/likes backend.
+ * Provides persistent, user-isolated liked tracks state for each individual user.
+ * - 100% persistent across page refreshes, browser reloads, and offline states via localStorage.
+ * - Instant 0ms optimistic UI updates on like/unlike toggles.
+ * - Multi-tab storage event synchronization.
+ * - Bidirectional background synchronization with /api/likes backend without erasing local data.
  * - Dispatches custom events so all UI components update in real-time.
  */
 
@@ -14,7 +16,11 @@ const CHANGE_EVENT = "transe_liked_tracks_changed";
 
 let cachedLikedIds: Set<number> | null = null;
 let isInitialSyncDone = false;
+let isStorageListenerAttached = false;
 
+/**
+ * Synchronously loads liked tracks from localStorage.
+ */
 function loadFromStorage(): Set<number> {
   if (typeof window === "undefined") return new Set();
   try {
@@ -22,7 +28,7 @@ function loadFromStorage(): Set<number> {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
-        return new Set(parsed.map(Number).filter((n) => !isNaN(n)));
+        return new Set(parsed.map(Number).filter((n) => !isNaN(n) && n > 0));
       }
     }
   } catch (e) {
@@ -31,6 +37,9 @@ function loadFromStorage(): Set<number> {
   return new Set();
 }
 
+/**
+ * Synchronously writes liked tracks to localStorage.
+ */
 function saveToStorage(set: Set<number>): void {
   if (typeof window === "undefined") return;
   try {
@@ -41,6 +50,9 @@ function saveToStorage(set: Set<number>): void {
   }
 }
 
+/**
+ * Notifies all active UI listeners of liked tracks changes.
+ */
 function notifyListeners(detail: { trackId?: number; isLiked?: boolean; likedIds: Set<number> }) {
   if (typeof window !== "undefined") {
     window.dispatchEvent(
@@ -52,35 +64,70 @@ function notifyListeners(detail: { trackId?: number; isLiked?: boolean; likedIds
 }
 
 /**
+ * Attaches multi-tab storage synchronization listener.
+ */
+function attachStorageListener() {
+  if (typeof window === "undefined" || isStorageListenerAttached) return;
+  isStorageListenerAttached = true;
+
+  window.addEventListener("storage", (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY && e.newValue !== null) {
+      try {
+        const parsed = JSON.parse(e.newValue);
+        if (Array.isArray(parsed)) {
+          const newSet = new Set<number>(parsed.map(Number).filter((n) => !isNaN(n) && n > 0));
+          cachedLikedIds = newSet;
+          notifyListeners({ likedIds: newSet });
+        }
+      } catch (_) {}
+    }
+  });
+}
+
+/**
  * Asynchronously syncs with the user's isolated backend likes list.
+ * Merges server likes into local storage without wiping existing local favorites.
  */
 export async function syncUserLikesWithBackend(): Promise<Set<number>> {
   if (typeof window === "undefined") return new Set();
+  attachStorageListener();
+
+  // Always initialize from localStorage first
+  if (cachedLikedIds === null) {
+    cachedLikedIds = loadFromStorage();
+  }
+
   try {
     const response = await fetch("/api/likes");
     if (response.ok) {
       const data = await response.json();
       if (data.success && Array.isArray(data.likedIds)) {
-        const serverLikedIds = new Set<number>(data.likedIds.map(Number).filter((n: number) => !isNaN(n)));
-        
-        // Merge or set server likes
-        if (cachedLikedIds === null) {
-          cachedLikedIds = loadFromStorage();
-        }
+        const serverLikedIds = new Set<number>(
+          data.likedIds.map(Number).filter((n: number) => !isNaN(n) && n > 0)
+        );
 
-        // If local has tracks not yet on server (e.g. first visit), sync them up
-        if (!isInitialSyncDone && cachedLikedIds.size > 0 && serverLikedIds.size === 0) {
-          // Push local likes to server for this user
-          for (const id of Array.from(cachedLikedIds)) {
-            fetch("/api/likes", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ trackId: id, action: "like" }),
-            }).catch(() => {});
+        const currentLocal = loadFromStorage();
+
+        // Merge local and server likes so neither is lost
+        const mergedSet = new Set<number>([
+          ...Array.from(currentLocal),
+          ...Array.from(serverLikedIds),
+        ]);
+
+        cachedLikedIds = mergedSet;
+        saveToStorage(mergedSet);
+
+        // If local had tracks that were not yet on server, push them up
+        if (currentLocal.size > serverLikedIds.size) {
+          for (const id of Array.from(currentLocal)) {
+            if (!serverLikedIds.has(id)) {
+              fetch("/api/likes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ trackId: id, action: "like" }),
+              }).catch(() => {});
+            }
           }
-        } else {
-          cachedLikedIds = serverLikedIds;
-          saveToStorage(cachedLikedIds);
         }
 
         isInitialSyncDone = true;
@@ -89,19 +136,19 @@ export async function syncUserLikesWithBackend(): Promise<Set<number>> {
       }
     }
   } catch (err) {
-    console.warn("Backend likes sync notice:", err);
+    // Network or server offline: preserve local favorites
   }
 
-  if (cachedLikedIds === null) {
-    cachedLikedIds = loadFromStorage();
-  }
+  isInitialSyncDone = true;
   return new Set(cachedLikedIds);
 }
 
 /**
  * Returns a Set of all currently liked track IDs for the active user.
+ * Guaranteed to read directly from persistent storage on first access.
  */
 export function getLikedTrackIds(): Set<number> {
+  attachStorageListener();
   if (cachedLikedIds === null) {
     cachedLikedIds = loadFromStorage();
     if (typeof window !== "undefined" && !isInitialSyncDone) {
@@ -117,16 +164,13 @@ export function getLikedTrackIds(): Set<number> {
 export function isTrackLiked(trackId: number): boolean {
   if (cachedLikedIds === null) {
     cachedLikedIds = loadFromStorage();
-    if (typeof window !== "undefined" && !isInitialSyncDone) {
-      syncUserLikesWithBackend().catch(() => {});
-    }
   }
   return cachedLikedIds.has(trackId);
 }
 
 /**
  * Toggles the like state of a track for the active user.
- * Optimistically updates state locally and sends an isolated request to /api/likes.
+ * Instantly updates localStorage and dispatches changes to all UI components.
  * Returns true if now liked, false if unliked.
  */
 export function toggleLikedTrack(trackId: number): boolean {
@@ -141,10 +185,11 @@ export function toggleLikedTrack(trackId: number): boolean {
     cachedLikedIds.delete(trackId);
   }
 
+  // Synchronously persist to localStorage immediately
   saveToStorage(cachedLikedIds);
   notifyListeners({ trackId, isLiked: isNowLiked, likedIds: cachedLikedIds });
 
-  // Async server sync tied directly to the isolated user session
+  // Async server sync tied directly to user session
   if (typeof window !== "undefined") {
     fetch("/api/likes", {
       method: "POST",
@@ -159,12 +204,36 @@ export function toggleLikedTrack(trackId: number): boolean {
 }
 
 /**
+ * Explicitly unlikes a track and updates persistent storage.
+ */
+export function unlikeTrack(trackId: number): void {
+  if (cachedLikedIds === null) {
+    cachedLikedIds = loadFromStorage();
+  }
+
+  if (cachedLikedIds.has(trackId)) {
+    cachedLikedIds.delete(trackId);
+    saveToStorage(cachedLikedIds);
+    notifyListeners({ trackId, isLiked: false, likedIds: cachedLikedIds });
+
+    if (typeof window !== "undefined") {
+      fetch("/api/likes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackId, action: "unlike" }),
+      }).catch(() => {});
+    }
+  }
+}
+
+/**
  * Subscribes to changes in the active user's liked tracks collection.
  */
 export function subscribeToLikedTracks(
   callback: (likedIds: Set<number>) => void
 ): () => void {
   if (typeof window === "undefined") return () => {};
+  attachStorageListener();
 
   const handler = (event: Event) => {
     const customEvent = event as CustomEvent;
@@ -175,7 +244,7 @@ export function subscribeToLikedTracks(
 
   window.addEventListener(CHANGE_EVENT, handler);
 
-  // Trigger initial fetch/sync if not done yet
+  // Trigger background sync if not done yet
   if (!isInitialSyncDone) {
     syncUserLikesWithBackend().then((set) => callback(set)).catch(() => {});
   }

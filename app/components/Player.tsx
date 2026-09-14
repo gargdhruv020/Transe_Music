@@ -328,6 +328,9 @@ export default function Player() {
     return tracks;
   }, [likedIds]);
   const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
+  const lastLoadedVideoIdRef = useRef<string | null>(null);
+  const trackLoadTimestampRef = useRef<number>(0);
+  const isLoadingTrackRef = useRef<boolean>(false);
   const [isYTApiReady, setIsYTApiReady] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const [crossfadeEnabled, setCrossfadeEnabled] = useState(true);
@@ -514,6 +517,7 @@ export default function Player() {
         onStateChange: (event: any) => {
           if (event.data === 1) {
             // Track is PLAYING
+            isLoadingTrackRef.current = false;
             if (!isPlayingRef.current) {
               setIsPlaying(true);
             }
@@ -573,6 +577,11 @@ export default function Player() {
             }
           } else if (event.data === 0) {
             // Track ENDED: Advance to next song immediately!
+            // Guard: Ignore spurious ENDED events fired right after track load or during rapid transitions!
+            const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
+            if (isLoadingTrackRef.current || timeSinceLoad < 3500) {
+              return;
+            }
             abortCrossfade();
             if (handleNextRef.current) {
               handleNextRef.current();
@@ -583,13 +592,17 @@ export default function Player() {
           isPlayerReadyRef.current = true;
         },
         onError: (event: any) => {
-          console.error("YouTube Player error:", event.data);
+          console.warn("YouTube Player error:", event.data);
+          const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
+          if (timeSinceLoad < 2500) {
+            return;
+          }
           abortCrossfade();
           setTimeout(() => {
             if (handleNextRef.current) {
               handleNextRef.current();
             }
-          }, 300);
+          }, 500);
         },
       },
     });
@@ -679,33 +692,35 @@ export default function Player() {
 
   // 2. Search YouTube when currentIndex changes
   useEffect(() => {
-    const track = tracks[currentIndex];
-    if (!track) return;
+    const currentTrack = tracks[currentIndex];
+    if (!currentTrack) return;
 
     if (searchAbortControllerRef.current) {
       searchAbortControllerRef.current.abort();
+    }
+
+    const resolved = getTrackYoutubeId(currentTrack);
+    if (resolved) {
+      if (currentVideoId !== resolved) {
+        setCurrentVideoId(resolved);
+      }
+      return;
     }
 
     const controller = new AbortController();
     searchAbortControllerRef.current = controller;
 
     async function resolveVideo() {
-      // If the track has a pre-defined youtubeId, use it instantly!
-      if (track.youtubeId) {
-        setCurrentVideoId(track.youtubeId);
-        return;
-      }
-
-      const cacheKey = `${track.title.toLowerCase()} - ${track.artist.toLowerCase()}`;
+      const cacheKey = `${currentTrack.title.toLowerCase()} - ${currentTrack.artist.toLowerCase()}`;
       if (resolvedCacheRef.current[cacheKey]) {
         setCurrentVideoId(resolvedCacheRef.current[cacheKey]);
         return;
       }
 
       try {
-        const query = (track as any).isSpatial
-          ? `${track.title} ${track.artist} 16d audio`
-          : `${track.title} ${track.artist} ${track.film} audio`;
+        const query = (currentTrack as any).isSpatial
+          ? `${currentTrack.title} ${currentTrack.artist} 16d audio`
+          : `${currentTrack.title} ${currentTrack.artist} ${currentTrack.film} audio`;
 
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
           signal: controller.signal,
@@ -715,13 +730,13 @@ export default function Player() {
           resolvedCacheRef.current[cacheKey] = data.videoId;
           setCurrentVideoId(data.videoId);
         } else if (!controller.signal.aborted) {
-          console.error(`Could not resolve videoId for: ${track.title}. Auto-skipping...`);
-          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1000);
+          console.error(`Could not resolve videoId for: ${currentTrack.title}. Auto-skipping...`);
+          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1500);
         }
       } catch (e: any) {
         if (e.name !== "AbortError") {
-          console.error(`Search API resolution error for: ${track.title}`, e);
-          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1000);
+          console.error(`Search API resolution error for: ${currentTrack.title}`, e);
+          if (handleNextRef.current) setTimeout(() => handleNextRef.current(), 1500);
         }
       }
     }
@@ -731,7 +746,7 @@ export default function Player() {
     return () => {
       controller.abort();
     };
-  }, [currentIndex]);
+  }, [currentIndex, getTrackYoutubeId]);
 
   // 3. Pre-fetch next track's YouTube ID in the background for zero-gap loading
   useEffect(() => {
@@ -810,6 +825,18 @@ export default function Player() {
   useEffect(() => {
     if (!isYTApiReady || !currentVideoId) return;
 
+    if (lastLoadedVideoIdRef.current === currentVideoId) {
+      const shouldPlay = isPlaying || autoPlayPendingRef.current || isPlayingRef.current;
+      if (shouldPlay && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+        try { ytPlayerRef.current.playVideo(); } catch (_) {}
+      }
+      return;
+    }
+
+    lastLoadedVideoIdRef.current = currentVideoId;
+    trackLoadTimestampRef.current = Date.now();
+    isLoadingTrackRef.current = true;
+
     const isHustle = (track as any)?.isHustle || queueMode === "hustle";
     let startPos = (track as any)?.startSeconds ?? (isHustle ? 5 : 0);
     if (initialSeekTimeRef.current !== null) {
@@ -854,7 +881,7 @@ export default function Player() {
       }
     };
     tryLoad();
-  }, [currentVideoId, isYTApiReady, ensurePlayerReady]);
+  }, [currentVideoId, isYTApiReady, ensurePlayerReady, track, isPlaying, queueMode]);
 
   // 4a. Service Worker Background Anchor, Anti-Eviction Buffer, & IndexedDB State Persistence
   useEffect(() => {
@@ -1149,28 +1176,34 @@ export default function Player() {
 
           const isHustle = (track as any)?.isHustle || queueMode === "hustle";
           const endCutoff = isHustle ? 5.0 : 0.4;
+          const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
 
-          // A. Smart DJ Crossfade Trigger
-          if (
-            crossfadeEnabledRef.current &&
-            !isCrossfadingRef.current &&
-            dur > (isHustle ? 12 : 8) &&
-            dur - time <= (isHustle ? 7.5 : 2.6) &&
-            dur - time >= (isHustle ? 5.0 : 0.5)
-          ) {
-            if (startCrossfadeRef.current) {
-              startCrossfadeRef.current();
+          // Guard against stale durations & premature transitions
+          if (timeSinceLoad > 3500 && !isLoadingTrackRef.current) {
+            // A. Smart DJ Crossfade Trigger
+            if (
+              crossfadeEnabledRef.current &&
+              !isCrossfadingRef.current &&
+              dur > (isHustle ? 15 : 10) &&
+              time > 4 &&
+              dur - time <= (isHustle ? 7.5 : 2.6) &&
+              dur - time >= (isHustle ? 5.0 : 0.5)
+            ) {
+              if (startCrossfadeRef.current) {
+                startCrossfadeRef.current();
+              }
             }
-          }
 
-          // B. Mobile Auto-Advance Watchdog: Cut last 5 seconds for Hustle tracks and advance automatically!
-          if (
-            !isCrossfadingRef.current &&
-            dur > (isHustle ? 10 : 5) &&
-            time >= dur - endCutoff
-          ) {
-            if (handleNextRef.current) {
-              handleNextRef.current();
+            // B. Mobile Auto-Advance Watchdog:
+            if (
+              !isCrossfadingRef.current &&
+              dur > (isHustle ? 12 : 5) &&
+              time > 3 &&
+              time >= dur - endCutoff
+            ) {
+              if (handleNextRef.current) {
+                handleNextRef.current();
+              }
             }
           }
         }
@@ -1180,7 +1213,7 @@ export default function Player() {
     }, 400);
 
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, currentIndex, queueMode, shuffle, track]);
 
   /* ── Controls ───────────────────────────────────── */
   const handleNext = useCallback(() => {
@@ -1213,10 +1246,14 @@ export default function Player() {
       } catch (_) {}
     }
 
+    const currentTrack = tracks[currentIndex];
     const activeQueue = getActiveQueue(queueMode);
     const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
 
-    let queueIndex = safeQueue.findIndex(t => t.id === track.id);
+    let queueIndex = -1;
+    if (currentTrack) {
+      queueIndex = safeQueue.findIndex(t => t.id === currentTrack.id);
+    }
     if (queueIndex === -1) queueIndex = 0;
 
     // Boundary-safe index resolution (handles final song gracefully with loop-around)
@@ -1224,8 +1261,14 @@ export default function Player() {
     const nextGlobalIndex = tracks.findIndex(t => t.id === nextTrack.id);
     const validGlobalIndex = nextGlobalIndex !== -1 ? nextGlobalIndex : 0;
 
+    setCurrentTime(0);
+    setDuration(0);
     setCurrentIndex(validGlobalIndex);
     setIsPlaying(true);
+    isPlayingRef.current = true;
+    isUserPausedRef.current = false;
+    trackLoadTimestampRef.current = Date.now();
+    isLoadingTrackRef.current = true;
 
     // Synchronously update lock-screen metadata immediately to the new track so the widget stays locked & updated
     if (typeof window !== "undefined" && "mediaSession" in navigator) {
@@ -1245,25 +1288,30 @@ export default function Player() {
 
     const targetVideoId = getTrackYoutubeId(nextTrack);
     if (targetVideoId) {
+      lastLoadedVideoIdRef.current = targetVideoId;
+      autoPlayPendingRef.current = false;
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           const isHustleNext = (nextTrack as any)?.isHustle || queueMode === "hustle";
-            const startPosNext = (nextTrack as any)?.startSeconds ?? (isHustleNext ? 5 : 0);
-            ytPlayerRef.current.loadVideoById(targetVideoId, startPosNext);
+          const startPosNext = (nextTrack as any)?.startSeconds ?? (isHustleNext ? 5 : 0);
+          ytPlayerRef.current.loadVideoById(targetVideoId, startPosNext);
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
         } catch (_) {}
       }
     } else {
+      lastLoadedVideoIdRef.current = null;
+      setCurrentVideoId(null);
+      autoPlayPendingRef.current = true;
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           ytPlayerRef.current.playVideo();
         } catch (_) {}
       }
     }
-  }, [currentIndex, queueMode, shuffle, track, getTrackYoutubeId]);
+  }, [currentIndex, queueMode, shuffle, getTrackYoutubeId, getActiveQueue, abortCrossfade]);
 
   const handlePrev = useCallback(() => {
     abortCrossfade();
@@ -1295,10 +1343,14 @@ export default function Player() {
       } catch (_) {}
     }
 
+    const currentTrack = tracks[currentIndex];
     const activeQueue = getActiveQueue(queueMode);
     const safeQueue = activeQueue.length > 0 ? activeQueue : tracks;
 
-    let queueIndex = safeQueue.findIndex(t => t.id === track.id);
+    let queueIndex = -1;
+    if (currentTrack) {
+      queueIndex = safeQueue.findIndex(t => t.id === currentTrack.id);
+    }
     if (queueIndex === -1) queueIndex = 0;
 
     // Boundary-safe reverse index resolution (handles first song gracefully with reverse loop)
@@ -1306,8 +1358,14 @@ export default function Player() {
     const prevGlobalIndex = tracks.findIndex(t => t.id === prevTrack.id);
     const validGlobalIndex = prevGlobalIndex !== -1 ? prevGlobalIndex : 0;
 
+    setCurrentTime(0);
+    setDuration(0);
     setCurrentIndex(validGlobalIndex);
     setIsPlaying(true);
+    isPlayingRef.current = true;
+    isUserPausedRef.current = false;
+    trackLoadTimestampRef.current = Date.now();
+    isLoadingTrackRef.current = true;
 
     // Synchronously update lock-screen metadata immediately to the previous track
     if (typeof window !== "undefined" && "mediaSession" in navigator) {
@@ -1327,25 +1385,30 @@ export default function Player() {
 
     const targetVideoId = getTrackYoutubeId(prevTrack);
     if (targetVideoId) {
+      lastLoadedVideoIdRef.current = targetVideoId;
+      autoPlayPendingRef.current = false;
       setCurrentVideoId(targetVideoId);
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           const isHustlePrev = (prevTrack as any)?.isHustle || queueMode === "hustle";
-            const startPosPrev = (prevTrack as any)?.startSeconds ?? (isHustlePrev ? 5 : 0);
-            ytPlayerRef.current.loadVideoById(targetVideoId, startPosPrev);
+          const startPosPrev = (prevTrack as any)?.startSeconds ?? (isHustlePrev ? 5 : 0);
+          ytPlayerRef.current.loadVideoById(targetVideoId, startPosPrev);
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
         } catch (_) {}
       }
     } else {
+      lastLoadedVideoIdRef.current = null;
+      setCurrentVideoId(null);
+      autoPlayPendingRef.current = true;
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
         try {
           ytPlayerRef.current.playVideo();
         } catch (_) {}
       }
     }
-  }, [currentIndex, queueMode, shuffle, track, getTrackYoutubeId]);
+  }, [currentIndex, queueMode, shuffle, getTrackYoutubeId, getActiveQueue, abortCrossfade]);
 
   const handleSeek = useCallback((value: number) => {
     abortCrossfade();
@@ -1651,20 +1714,19 @@ export default function Player() {
     isUserPausedRef.current = false;
     wasInterruptedBySystemRef.current = false;
     isPlayingRef.current = true;
-    autoPlayPendingRef.current = true;
     backgroundSyncRef.current?.markTransitioning(5000);
 
     // 2. Guard: if clicking same track that's already loaded
     const activeTrack = tracks[currentIndex];
     if (activeTrack && activeTrack.id === trackId) {
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-        ytPlayerRef.current.playVideo();
+        try { ytPlayerRef.current.playVideo(); } catch (_) {}
         setIsPlaying(true);
       }
       return;
     }
 
-    // 3. Find the selected track
+    // 3. Find the selected track by unique ID
     const index = tracks.findIndex(t => t.id === trackId);
     if (index === -1) return;
     const selectedTrack = tracks[index];
@@ -1675,13 +1737,18 @@ export default function Player() {
     setDuration(0);
     setCurrentIndex(index);
     setIsPlaying(true);
+    trackLoadTimestampRef.current = Date.now();
+    isLoadingTrackRef.current = true;
 
-    // 5. Try to get videoId synchronously (from pre-baked data)
+    // 5. Try to get videoId synchronously (from pre-baked data or cache)
     const targetVideoId = getTrackYoutubeId(selectedTrack);
 
     if (targetVideoId) {
-      // We have the ID — load and play SYNCHRONOUSLY within user gesture
+      // Mark as last loaded so useEffect([currentVideoId]) doesn't redundantly re-load it!
+      lastLoadedVideoIdRef.current = targetVideoId;
+      autoPlayPendingRef.current = false;
       setCurrentVideoId(targetVideoId);
+
       if (isPlayerReadyRef.current && ytPlayerRef.current && typeof ytPlayerRef.current.loadVideoById === "function") {
         try {
           const isHustleSelected = (selectedTrack as any)?.isHustle || mode === "hustle";
@@ -1695,18 +1762,15 @@ export default function Player() {
         }
       }
     } else {
-      // No pre-baked ID — the useEffect[currentIndex] will search and resolve asynchronously.
-      // Mark autoplay pending so the useEffect[currentVideoId] will autoplay when it resolves.
+      // No pre-baked ID — search API will resolve in useEffect[currentIndex]
+      lastLoadedVideoIdRef.current = null;
+      setCurrentVideoId(null);
       autoPlayPendingRef.current = true;
-      // Synchronously ensure playback is active to satisfy iOS user gesture requirements
       if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
-        try {
-          ytPlayerRef.current.playVideo();
-        } catch (_) {}
+        try { ytPlayerRef.current.playVideo(); } catch (_) {}
       }
-      // The video will start playing once the search API resolves in useEffect[currentIndex]
     }
-  }, [currentIndex, isPlaying, initMediaSession, ensurePlayerReady]);
+  }, [currentIndex, getTrackYoutubeId, initMediaSession, ensurePlayerReady, abortCrossfade]);
 
   const togglePlay = useCallback(() => {
     unlockHardwareAudioBus();
