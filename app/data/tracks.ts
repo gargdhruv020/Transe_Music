@@ -16033,25 +16033,20 @@ function normalizeTitleKey(title: string): string {
 }
 
 const uniqueTitleMap = new Map<string, any>();
-const uniqueAudioMap = new Map<string, any>();
 const uniqueTrackList: any[] = [];
 
 for (const t of merged) {
   const item = t as any;
   const tKey = normalizeTitleKey(item.title);
-  const aKey = (item.youtubeId && item.youtubeId.trim()) ? `yt:${item.youtubeId.trim()}` : ((item.audioUrl && item.audioUrl.trim()) ? `url:${item.audioUrl.trim()}` : "");
 
   let existing: any = null;
   if (tKey && uniqueTitleMap.has(tKey)) {
     existing = uniqueTitleMap.get(tKey);
-  } else if (aKey && uniqueAudioMap.has(aKey)) {
-    existing = uniqueAudioMap.get(aKey);
   }
 
   if (!existing) {
     const copy = { ...t };
     if (tKey) uniqueTitleMap.set(tKey, copy);
-    if (aKey) uniqueAudioMap.set(aKey, copy);
     uniqueTrackList.push(copy);
   } else {
     // Retain exactly ONE instance in the database with merged playlist tags and flags
@@ -16072,11 +16067,9 @@ for (const t of merged) {
     if (item.startSeconds !== undefined && existing.startSeconds === undefined) existing.startSeconds = item.startSeconds;
     if (item.youtubeId && !existing.youtubeId) {
       existing.youtubeId = item.youtubeId;
-      uniqueAudioMap.set(`yt:${item.youtubeId.trim()}`, existing);
     }
     if (item.audioUrl && !existing.audioUrl) {
       existing.audioUrl = item.audioUrl;
-      uniqueAudioMap.set(`url:${item.audioUrl.trim()}`, existing);
     }
   }
 }
