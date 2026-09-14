@@ -13611,6 +13611,807 @@ const listHustle = [
     isClub: true,
     youtubeId: "YxW5y24s3oU"
   }
+,
+  {
+    title: "Arjan Vailly x Malhari (Animal x Bajirao Mastani)",
+    artist: "Raw Punjabi battle-cry energy overlaid on rapid dhol rhythms and brass festival stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "s-K7HinTAgA"
+  },
+  {
+    title: "Aayi Nai x Zingaat (Stree 2 x Dhadak)",
+    artist: "Upbeat regional Bhojpuri folk hook overlapping relentless Marathi street percussion.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "What Jhumka? x Show Me The Thumka (Rocky Aur Rani Kii Prem Kahaani x Tu Jhoothi Main Makkaar)",
+    artist: "Fast-paced vocal exchanges driving into an aggressive tech-house bounce drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "xV22cenBGb8"
+  },
+  {
+    title: "Sher Khul Gaye x Ghungroo (Fighter x War)",
+    artist: "Dual Hrithik Roshan dance-groove vocals colliding over a driving four-on-the-floor club bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ChNT2E1jJQI"
+  },
+  {
+    title: "Jamal Kudu x Dum Maaro Dum (Animal x Hare Rama Hare Krishna)",
+    artist: "Chanted Iranian-folk vocal chops colliding with vintage psychedelic synth hooks.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "luO5Fffkcnc"
+  },
+  {
+    title: "Naina x Tareefan (Crew x Veere Di Wedding)",
+    artist: "Diljit Dosanjh verses layered smoothly over Badshah’s urban club cadence.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Not Ramaiya Vastavaiya x Badtameez Dil (Jawan x Yeh Jawaani Hai Deewani)",
+    artist: "Anirudh's high-tempo dance hook interwoven with Ranbir Kapoor’s rapid vocal run.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Ishq Jaisa Kuch x Nashe Si Chadh Gayi (Fighter x Befikre)",
+    artist: "Seductive vocal chops trading bars over a rolling 126 BPM tech-house groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 (Bhool Bhulaiyaa 3 x Shehzada)",
+    artist: "Kartik Aaryan peak-time anthems layered over aggressive electro synths.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Lutt Putt Gaya x Twist (Dunki x Love Aaj Kal)",
+    artist: "Upbeat commercial hooks trading off over an aggressive festival bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Dance Ka Bhoot x Saree Ke Fall Sa (Brahmāstra x R... Rajkumar)",
+    artist: "High-energy festival dhol build colliding directly with massy electro stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Baby Bring It On x Zingaat (Madgaon Express x Dhadak)",
+    artist: "Dual high-BPM party anthems colliding on aggressive Dutch-house synth leads.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Chaleya x Apna Bana Le (Jawan x Bhediya)",
+    artist: "Arijit Singh vocal stems intertwined over a driving festival progressive drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Pyaar Hota Kayi Baar Hai x Subah Hone Na De (Tu Jhoothi Main Makkaar x Desi Boyz)",
+    artist: "High-energy commercial vocals running simultaneously into a peak-time club build.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Kaavaalaa (Hindi) x Muqabla (Jailer x Street Dancer 3D)",
+    artist: "Infectious tribal dance hook layered across Prabhu Deva's electro-funk bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Main Nikla Gaddi Leke x Khadke Glassy (Gadar 2 x Jabariya Jodi)",
+    artist: "High-octane Punjabi-folk shouts riding an aggressive bounce-house kick.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Kusu Kusu x O Saki Saki (Satyameva Jayate 2 x Batla House)",
+    artist: "Nora Fatehi item-track hooks running simultaneously over Middle Eastern synth stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Tip Tip Barsa Paani x Choli Ke Peeche (Sooryavanshi x Crew)",
+    artist: "Classic 90s remake vocal chops layered across a distorted 128 BPM saw-wave drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Chandigarh Mein x Makhna (Good Newwz x Drive)",
+    artist: "Polished urban party vocals traded off over an aggressive slap-house groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Sauda Khara Khara x Proper Patola (Good Newwz x Namaste England)",
+    artist: "Heavy Punjabi club hooks colliding on a driving four-on-the-floor beat.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Coka 2.0 x Illegal Weapon 2.0 (Liger x Street Dancer 3D)",
+    artist: "High-intensity Punjabi bass vocals layered directly over an aggressive club kick.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Ra Ra Rakkamma x Chikni Chameli (Vikrant Rona x Agneepath)",
+    artist: "Fast-paced regional dance verses building into a massive stadium drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Param Sundari x Genda Phool (Mimi x Badshah)",
+    artist: "Folk melodies and rap verses trading bars over a rolling sub-bass drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "BurjKhalifa x Dope Shope (Laxmii x International Villager)",
+    artist: "Commercial urban party flows running side-by-side into an electronic club drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Nadiyon Paar x Chamma Chamma (Roohi x Fraud Saiyaan)",
+    artist: "Hypnotic vocal loops driving into an aggressive Brazilian bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Morani Baga Ma x Morni Banke (Animal x Badhaai Ho)",
+    artist: "Rajasthani folk vocals chopped and overlaid with modern Punjabi dancefloor rhythms.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Lazy Lamhe x Besharam Rang (Thoda Pyaar Thoda Magic x Pathaan)",
+    artist: "Sultry vocal verses laced across a driving minimal-tech groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Touch Me Touch Me x Zara Zara Touch Me (Race)",
+    artist: "Classic thriller dance vocals intertwined over punchy four-on-the-floor house beats.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "High Rated Gabru x Ban Ja Rani (Nawabzaade x Tumhari Sulu)",
+    artist: "Guru Randhawa hooks layered seamlessly over a hard club rhythm.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Coca Cola Tu x She Move It Like (Luka Chuppi x Badshah)",
+    artist: "Bouncy pop hooks matched with high-tempo rap cadences on a festival drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Chhote Chhote Peg x Chaar Botal Vodka (Sonu Ke Titu Ki Sweety x Ragini MMS 2)",
+    artist: "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Buzz x Naah (Aastha Gill x Harrdy Sandhu)",
+    artist: "Modern pop-club vocal duets layered over driving punchy kicks.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Kya Baat Ay 2.0 x Bijlee Bijlee (Govinda Naam Mera x Harrdy Sandhu)",
+    artist: "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Pappi Jhappi x Gandi Baat (Govinda Naam Mera x R... Rajkumar)",
+    artist: "Quirky mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Jeda Nasha x Jehda Nasha (An Action Hero x Amar Jalal)",
+    artist: "Modern dancefloor remake vocals colliding with raw original folk stems over driving club drums.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Alcoholia x Dhan Te Nan (Vikram Vedha x Kaminey)",
+    artist: "Raw, unhinged vocal chants layered over heavy rock-infused electronic basslines.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Besharmi Ki Height x Hookah Bar (Main Tera Hero x Khiladi 786)",
+    artist: "2010s peak-time commercial hooks locked into a massive festival build.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Fevicol Se x Munni Badnaam Hui (Dabangg 2 x Dabangg)",
+    artist: "Classic rustic item-song vocal hooks trading bars over aggressive festival brass.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Sheila Ki Jawani x Chikni Chameli (Tees Maar Khan x Agneepath)",
+    artist: "High-BPM item track battle drop featuring dual female vocal hooks.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Dhoom Machale x Crazy Kiya Re (Dhoom x Dhoom 2)",
+    artist: "Sunidhi Chauhan vocal runs intertwined over driving tech-house percussion.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Paisa Yeh Paisa x Bhaag D.K. Bose (Total Dhamaal x Delhi Belly)",
+    artist: "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Slow Motion x First Class (Bharat x Kalank)",
+    artist: "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Kala Chashma x Dilliwaali Girlfriend (Baar Baar Dekho x Yeh Jawaani Hai Deewani)",
+    artist: "Iconic hooklines colliding directly over a 128 BPM bounce drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Ainvayi Ainvayi x London Thumakda (Band Baaja Baaraat x Queen)",
+    artist: "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Muqabla x Zingaat (Street Dancer 3D x Dhadak)",
+    artist: "Fast rhythmic shouting chops riding alongside Prabhu Deva's synth hooks.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Tauba Tauba x Aankh Marey (Bad Newz x Simmba)",
+    artist: "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Dilbar x Kamli (Satyameva Jayate x Dhoom 3)",
+    artist: "High-energy vocal runs colliding over a driving tech-house bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Tumse Milke Dil Ka Jo Haal x Chammak Challo (Main Hoon Na x Ra.One)",
+    artist: "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Gali Gali x Tip Tip Barsa Paani (KGF x Sooryavanshi)",
+    artist: "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna (Bhool Bhulaiyaa x Commando 3)",
+    artist: "Iconic vocal chants overlaid directly across dark minimal techno synths.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Arjan Vailly x Malhari x Dhan Te Nan (Animal x Bajirao Mastani x Kaminey)",
+    artist: "Raw folk battle shouts and live dhol percussion colliding over an aggressive rock-electro drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Aayi Nai x Zingaat x Baby Bring It On (Stree 2 x Dhadak x Madgaon Express)",
+    artist: "High-BPM Bhojpuri vocal hooks and Marathi street rhythms driving into an intense festival brass drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "What Jhumka? x Show Me The Thumka x Badtameez Dil (RRKPK x TJMM x YJHD)",
+    artist: "Triple Ranbir-Alia era commercial vocal trade-offs layered over a 128 BPM bouncy tech-house drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Sher Khul Gaye x Ghungroo x Jai Jai Shivshankar (Fighter x War)",
+    artist: "Hrithik Roshan dance-groove vocals trading bars across a driving four-on-the-floor electro bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Jamal Kudu x Dum Maaro Dum x Hare Ram Hare Krishna (Animal x Dum Maaro Dum x Bhool Bhulaiyaa)",
+    artist: "Hypnotic Iranian vocal chops and retro hooks layered over a rolling minimal tech kick.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Naina x Tareefan x Proper Patola (Crew x Veere Di Wedding x Namaste England)",
+    artist: "Urban Punjabi flows and female vocal harmonies intertwined across an aggressive slap-house groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Not Ramaiya Vastavaiya x Zinda Banda x Badtameez Dil (Jawan x YJHD)",
+    artist: "Anirudh festival percussion and rapid vocal runs crashing into an electro-house drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Ishq Jaisa Kuch x Nashe Si Chadh Gayi x Besharam Rang (Fighter x Befikre x Pathaan)",
+    artist: "Sultry Vishal-Shekhar verses and high-energy vocal hooks layered over a driving 126 BPM bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Bhool Bhulaiyaa 3 (Title Track) x Character Dheela 2.0 x Dil Chori (BB3 x Shehzada x SKTKS)",
+    artist: "High-energy Kartik Aaryan party anthems riding simultaneously on an aggressive saw-wave synth.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Lutt Putt Gaya x Twist x Chor Bazari (Dunki x Love Aaj Kal)",
+    artist: "Upbeat vocal cadences trading off over an aggressive four-on-the-floor festival drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Dance Ka Bhoot x Saree Ke Fall Sa x Gandi Baat (Brahmāstra x R... Rajkumar)",
+    artist: "Festival dhol build matched with raw massy vocal shouts over heavy electronic stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Kaavaalaa (Hindi) x Muqabla x The Humma Song (Jailer x Street Dancer 3D x OK Jaanu)",
+    artist: "Infectious tribal rhythm layered with iconic dance hooks over an aggressive slap-house kick.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Main Nikla Gaddi Leke x Khadke Glassy x Dil Chori (Gadar 2 x Jabariya Jodi x SKTKS)",
+    artist: "High-octane Punjabi-folk shouts riding continuously on a bouncy bass-house drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Kusu Kusu x O Saki Saki x Dilbar (Satyameva Jayate 2 x Batla House x Satyameva Jayate)",
+    artist: "Triple Nora Fatehi item hooks running simultaneously over dark Middle Eastern synth riffs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Tip Tip Barsa Paani x Choli Ke Peeche x Aaj Ki Raat (Sooryavanshi x Crew x Stree 2)",
+    artist: "90s remake vocal chops running in sync over an aggressive 128 BPM club drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Chandigarh Mein x Makhna x Proper Patola (Good Newwz x Drive x Namaste England)",
+    artist: "Urban party vocals trading off seamlessly over a punchy club groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Sauda Khara Khara x Coka 2.0 x Illegal Weapon 2.0 (Good Newwz x Liger x Street Dancer 3D)",
+    artist: "Heavy Punjabi club hooks and rapid female vocals colliding on a hard four-on-the-floor beat.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Ra Ra Rakkamma x Chikni Chameli x Sheila Ki Jawani (Vikrant Rona x Agneepath x Tees Maar Khan)",
+    artist: "Fast-paced regional dance verses and classic item hooks crashing into a massive stadium drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Param Sundari x Genda Phool x Chittiyaan Kalaiyaan (Mimi x Badshah x Roy)",
+    artist: "Folk melodies and female pop vocal chops riding together on a rolling sub-bass drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "BurjKhalifa x Dope Shope x Angreji Beat (Laxmii x International Villager)",
+    artist: "Commercial urban party flows running side-by-side into a driving electronic drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Nadiyon Paar x Chamma Chamma x Aankh Marey (Roohi x Fraud Saiyaan x Simmba)",
+    artist: "Hypnotic dance loops and party hooks driving an aggressive Brazilian bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Morani Baga Ma x Morni Banke x London Thumakda (Animal x Badhaai Ho x Queen)",
+    artist: "Rajasthani folk vocal chops and Punjabi wedding anthems layered on an aggressive festival beat.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Lazy Lamhe x Besharam Rang x Ghungroo (Thoda Pyaar Thoda Magic x Pathaan x War)",
+    artist: "Sultry vocal verses trading bars across a driving minimal-tech groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Touch Me Touch Me x Zara Zara Touch Me x Race Saanson Ki (Race)",
+    artist: "Iconic thriller dance vocal hooks intertwined over punchy four-on-the-floor house beats.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "High Rated Gabru x Ban Ja Rani x Suit Suit (Nawabzaade x Tumhari Sulu x Hindi Medium)",
+    artist: "Guru Randhawa hooks layered seamlessly over a driving tech rhythm.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Coca Cola Tu x She Move It Like x Buzz (Luka Chuppi x Badshah x Aastha Gill)",
+    artist: "Pop hooks matched with fast-paced rap cadences over a heavy festival drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Chhote Chhote Peg x Chaar Botal Vodka x Blue Eyes (SKTKS x Ragini MMS 2 x Honey Singh)",
+    artist: "Yo Yo Honey Singh party anthems trading verses over driving bass-house stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Kya Baat Ay 2.0 x Bijlee Bijlee x Naah (Govinda Naam Mera x Harrdy Sandhu)",
+    artist: "Upbeat Punjabi-Bollywood vocal overlap backed by an aggressive synth lead.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Pappi Jhappi x Gandi Baat x Saree Ke Fall Sa (Govinda Naam Mera x R... Rajkumar)",
+    artist: "Mass-appeal vocal deliveries riding together on an aggressive electro drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Jeda Nasha x Jehda Nasha x Kusu Kusu (An Action Hero x Amar Jalal x Satyameva Jayate 2)",
+    artist: "Modern dancefloor vocals and hypnotic folk stems running simultaneously over driving club drums.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Alcoholia x Dhan Te Nan x Jee Karda (Vikram Vedha x Kaminey x Badlapur)",
+    artist: "Gritty street vocals and rock shouts colliding over heavy electronic basslines.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Besharmi Ki Height x Hookah Bar x Subah Hone Na De (Main Tera Hero x Khiladi 786 x Desi Boyz)",
+    artist: "Peak-time commercial hooks locked into a massive mainstage festival build.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  },
+  {
+    title: "Fevicol Se x Munni Badnaam Hui x Chikni Chameli (Dabangg 2 x Dabangg x Agneepath)",
+    artist: "Classic rustic item-track hooks trading bars over aggressive festival brass stabs.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "mLbG_sQcsBY"
+  },
+  {
+    title: "Sheila Ki Jawani x Chikni Chameli x O Saki Saki (Tees Maar Khan x Agneepath x Batla House)",
+    artist: "High-BPM item-track battle drop featuring rapid-fire female vocal chops.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "zEsVOsLZo8s"
+  },
+  {
+    title: "Dhoom Machale x Crazy Kiya Re x Kamli (Dhoom x Dhoom 2 x Dhoom 3)",
+    artist: "Iconic Dhoom franchise vocal runs intertwined over driving tech-house percussion.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "eQWK1Iz_qBc"
+  },
+  {
+    title: "Paisa Yeh Paisa x Bhaag D.K. Bose x Dhan Te Nan (Total Dhamaal x Delhi Belly x Kaminey)",
+    artist: "High-energy vocal madness slamming into aggressive rock-techno drops.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "w1p7N0vD5z4"
+  },
+  {
+    title: "Slow Motion x First Class x Gallan Goodiyaan (Bharat x Kalank x Dil Dhadakne Do)",
+    artist: "Fast commercial choruses overlapping seamlessly on an energetic big-room drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "r8P_Gvj7_7E"
+  },
+  {
+    title: "Kala Chashma x Dilliwaali Girlfriend x Kar Gayi Chull (Baar Baar Dekho x YJHD x Kapoor & Sons)",
+    artist: "Iconic party hooks colliding directly over a 128 BPM bounce drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "PvWhAlMGam4"
+  },
+  {
+    title: "Ainvayi Ainvayi x London Thumakda x Sadi Gali (Band Baaja Baaraat x Queen x Tanu Weds Manu)",
+    artist: "High-tempo wedding dance vocals layered into an aggressive club mix.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "BqqeZxesXq8"
+  },
+  {
+    title: "Muqabla x Zingaat x Malhari (Street Dancer 3D x Dhadak x Bajirao Mastani)",
+    artist: "Relentless regional percussion chops and chants riding alongside Prabhu Deva's synth hooks.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNwq-N2Y76w"
+  },
+  {
+    title: "Tauba Tauba x Aankh Marey x Cheez Badi (Bad Newz x Simmba x Machine)",
+    artist: "Karan Aujla's modern cadence trading bars with classic 90s remake vocal chops over heavy bass.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "ahaUNhScopE"
+  },
+  {
+    title: "Dilbar x Kamli x Gali Gali (Satyameva Jayate x Dhoom 3 x KGF)",
+    artist: "High-energy female vocal runs colliding over a driving tech-house bassline.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9gpXOxiNIok"
+  },
+  {
+    title: "Tumse Milke Dil Ka Jo Haal x Chammak Challo x Criminal (Main Hoon Na x Ra.One)",
+    artist: "Qawwali-pop crossover stems layered directly over Akon’s electro-pop vocals.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "DNedQIpgdak"
+  },
+  {
+    title: "Gali Gali x Tip Tip Barsa Paani x Choli Ke Peeche (KGF x Sooryavanshi x Crew)",
+    artist: "Seductive vocal layers alternating on top of an aggressive four-on-the-floor drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "G-YRF-AE6p0"
+  },
+  {
+    title: "Bhool Bhulaiyaa (Title Track) x Hare Ram Hare Krishna x Character Dheela (BB1 x Commando 3 x Ready)",
+    artist: "Iconic vocal chants overlaid directly across dark minimal techno synths.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "kAmcygnlW0w"
+  },
+  {
+    title: "Makhna x Dil Chori x Chhote Chhote Peg (Drive x SKTKS)",
+    artist: "Urban Punjabi-Hindi verses running together across a rolling bounce-house groove.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "qKq4M3K6U-g"
+  },
+  {
+    title: "Chak Lein De x Sadda Haq x Jee Karda (Chandni Chowk to China x Rockstar x Badlapur)",
+    artist: "High-energy motivational rock vocals colliding over distorted electro saws.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "8ZhwlX2EDiA"
+  },
+  {
+    title: "Garmi x Muqabla x Aankh Marey (Street Dancer 3D x Simmba)",
+    artist: "Dance battle vocal chops layered together over an aggressive peak-time festival kick.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "Gv_4t6iF8t0"
+  },
+  {
+    title: "Lat Lag Gayi x Party On My Mind x Besharam Rang (Race 2 x Pathaan)",
+    artist: "Sultry dancefloor vocals running simultaneously over punchy basslines.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "9xGj5g_bZ_g"
+  },
+  {
+    title: "Tauba Tauba x Aaj Ki Raat x Aayi Nai (Bad Newz x Stree 2)",
+    artist: "Modern Punjabi flow, dark Hindi club vocals, and high-energy folk hooks slamming into a peak-time tech drop.",
+    film: "Remix",
+    isRemix: true,
+    isClub: true,
+    youtubeId: "YxW5y24s3oU"
+  }
 ];
 
 const merged = [...(typeof listClub !== "undefined" ? listClub : []), ...list1, ...list2, ...list3, ...list4, ...listGlobal, ...listGoa, ...listRemix, ...listKTrance, ...(typeof listIndoHouse !== "undefined" ? listIndoHouse : []), ...(typeof listSufi !== "undefined" ? listSufi : []), ...(typeof listAfro !== "undefined" ? listAfro : []), ...(typeof listX !== "undefined" ? listX : []), ...(typeof listHustle !== "undefined" ? listHustle : [])];
