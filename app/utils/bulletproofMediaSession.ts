@@ -81,9 +81,24 @@ export class BulletproofMediaSessionGuardian {
       navigator.mediaSession.setActionHandler("pause", () => {
         try {
           navigator.mediaSession.playbackState = "paused";
+          keepAudioBusHot();
           onPause();
         } catch (err) {
           console.warn("MediaSession pause error intercepted:", err);
+          keepAudioBusHot();
+        }
+      });
+    } catch (_) {}
+
+    // 2b. STOP HANDLER (Maps to persistent pause)
+    try {
+      navigator.mediaSession.setActionHandler("stop", () => {
+        try {
+          navigator.mediaSession.playbackState = "paused";
+          keepAudioBusHot();
+          onPause();
+        } catch (err) {
+          console.warn("MediaSession stop error intercepted:", err);
         }
       });
     } catch (_) {}

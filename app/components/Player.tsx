@@ -1682,17 +1682,7 @@ export default function Player() {
 
 
 
-  // Sync the play/pause state of the test-facing audio engine
-  useEffect(() => {
-    if (!audioRef.current) return;
-    try {
-      if (isPlaying) {
-        audioRef.current.play().catch(() => {});
-      } else {
-        audioRef.current.pause();
-      }
-    } catch (_) {}
-  }, [isPlaying]);
+
 
   const handleTrackSelect = useCallback((trackId: number, mode: PlaylistQueueMode) => {
     abortCrossfade();
@@ -1915,11 +1905,21 @@ export default function Player() {
     initMediaSession();
   }, [track, initMediaSession]);
 
-  // Sync media session playback state
+  // Sync media session playback state & scrubber position on play/pause
   useEffect(() => {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
-    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
-  }, [isPlaying]);
+    try {
+      navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+      const dur = durationRef.current || duration;
+      if (dur > 0 && "setPositionState" in navigator.mediaSession) {
+        navigator.mediaSession.setPositionState({
+          duration: dur,
+          playbackRate: isPlaying ? 1 : 0,
+          position: Math.min(currentTime, dur),
+        });
+      }
+    } catch (_) {}
+  }, [isPlaying, currentTime, duration]);
 
   // Update mutable references to latest player states & functions
   useEffect(() => {
