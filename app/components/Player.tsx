@@ -1136,36 +1136,15 @@ export default function Player() {
   }, [isPlaying]);
 
   // 5. Track playing time/duration updates
-  // Crossfade toggle and duration cycler: Off -> 3s -> 5s -> 8s -> 12s -> Off
+  // Crossfade toggle: ON / OFF
   const toggleCrossfade = useCallback(() => {
-    if (!crossfadeEnabledRef.current) {
-      setCrossfadeEnabled(true);
-      setCrossfadeDuration(4);
+    setCrossfadeEnabled(prev => {
+      const next = !prev;
       try {
-        localStorage.setItem("transe_music_crossfade", "true");
-        localStorage.setItem("transe_music_crossfade_duration", "4");
+        localStorage.setItem("transe_music_crossfade", next.toString());
       } catch (_) {}
-    } else {
-      const durations = [3, 5, 8, 12];
-      const curIdx = durations.indexOf(crossfadeDurationRef.current);
-      if (curIdx !== -1 && curIdx < durations.length - 1) {
-        const nextDur = durations[curIdx + 1];
-        setCrossfadeDuration(nextDur);
-        try {
-          localStorage.setItem("transe_music_crossfade_duration", nextDur.toString());
-        } catch (_) {}
-      } else if (curIdx === durations.length - 1) {
-        setCrossfadeEnabled(false);
-        try {
-          localStorage.setItem("transe_music_crossfade", "false");
-        } catch (_) {}
-      } else {
-        setCrossfadeDuration(3);
-        try {
-          localStorage.setItem("transe_music_crossfade_duration", "3");
-        } catch (_) {}
-      }
-    }
+      return next;
+    });
   }, []);
 
   // Seamless DJ Power-Crossfade Engine (Equal-power cosine outro -> load -> equal-power sine intro)
@@ -2175,14 +2154,10 @@ export default function Player() {
         <div className="flex items-center gap-1 pr-1.5 border-r border-white/10">
           <TransportBtn
             onAction={toggleCrossfade}
-            ariaLabel={
-              crossfadeEnabled
-                ? `Smart Crossfade (${crossfadeDuration}s): ON (Click to change duration)`
-                : "Smart Crossfade: OFF (Click to turn ON)"
-            }
+            ariaLabel={crossfadeEnabled ? "Smart Crossfade: ON" : "Smart Crossfade: OFF"}
             size="w-8 h-8"
           >
-            <CrossfadeIcon active={crossfadeEnabled} duration={crossfadeDuration} />
+            <CrossfadeIcon active={crossfadeEnabled} />
           </TransportBtn>
           <TransportBtn
             onAction={() => setShuffle(!shuffle)}
@@ -2323,14 +2298,10 @@ export default function Player() {
         </TransportBtn>
         <TransportBtn
           onAction={toggleCrossfade}
-          ariaLabel={
-            crossfadeEnabled
-              ? `Smart Crossfade (${crossfadeDuration}s): ON (Click to change duration)`
-              : "Smart Crossfade: OFF (Click to turn ON)"
-          }
+          ariaLabel={crossfadeEnabled ? "Smart Crossfade: ON" : "Smart Crossfade: OFF"}
           size="w-9 h-9"
         >
-          <CrossfadeIcon active={crossfadeEnabled} duration={crossfadeDuration} />
+          <CrossfadeIcon active={crossfadeEnabled} />
         </TransportBtn>
       </div>
 
