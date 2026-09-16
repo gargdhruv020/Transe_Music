@@ -21724,6 +21724,502 @@ const listClub: any[] = [
     "isRemix": true,
     "isClub": true,
     "youtubeId": "1y6smkh6c-0"
+  },
+  {
+    "title": "Saajan (Official Music Video / Original Tech Mix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_-Vw0pDrtQQ"
+  },
+  {
+    "title": "Paranda (Official Visualizer / Extended Mix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UnVGau74a-g"
+  },
+  {
+    "title": "Raanjhan Mora",
+    "artist": "AFTERAll, Shreya Jain & Shubham Shirule",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6vg4Cggyqr8"
+  },
+  {
+    "title": "Challa (Punjabi Folk / Indo House Visualizer)",
+    "artist": "AFTERAll & Mitika Kanwar",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-QRUzPUiA8I"
+  },
+  {
+    "title": "Tadke Tadke (Original Club Mix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Wz8Up1kFsAQ"
+  },
+  {
+    "title": "Tadke Tadke (H33t Remix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Wz8Up1kFsAQ"
+  },
+  {
+    "title": "Vatta Vatta (Indian Tech House Original)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PTb83KzAAlY"
+  },
+  {
+    "title": "Johri (Original Club Mix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "WmcSgJ_WRxE"
+  },
+  {
+    "title": "Abhi Abhi",
+    "artist": "AFTERAll, Rapdas & Vibhor",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8Z52_BI_hCE"
+  },
+  {
+    "title": "Na Roko Mujhe",
+    "artist": "AFTERAll, Rashi Kajaria & Vibhor",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "RxMyKqk0ixo"
+  },
+  {
+    "title": "Kho Gaya",
+    "artist": "Queen Madcash, Shray & AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ncNHTJHFKYc"
+  },
+  {
+    "title": "For You",
+    "artist": "AFTERAll & Niyati Handa",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GIRrImFDKdI"
+  },
+  {
+    "title": "Tum Tak x Naina Tarse (Viral Mashup / Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UGsjMwa-ylc"
+  },
+  {
+    "title": "Hungama Tech (AFTRHRS Sessions Studio Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "eenJSVF8T7c"
+  },
+  {
+    "title": "Pal Pal Dil Ke Paas (AFTRHRS Sessions Studio Rework)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZUg3lqh5pl8"
+  },
+  {
+    "title": "Dola Re (AFTRHRS Sessions / BollyTech)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ncNHTJHFKYc"
+  },
+  {
+    "title": "Dil Dooba (Edit - AFTRHRS Sessions 2.0)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "L2q2F39Q2Uc"
+  },
+  {
+    "title": "Taal (Edit - AFTRHRS Sessions 2.0 feat. Chitralekha Sen)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9SuuAmu6crY"
+  },
+  {
+    "title": "Fanaa (Edit - AFTRHRS Sessions 2.0)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HpNeFcqnJN4"
+  },
+  {
+    "title": "Dum Dum (Edit - AFTRHRS Sessions 2.0)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ETsmAnCfY68"
+  },
+  {
+    "title": "Blockbuster (Edit - AFTRHRS Sessions 2.0)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GIRrImFDKdI"
+  },
+  {
+    "title": "Maula Mere (BollyTech Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Q-DlozbrlBA"
+  },
+  {
+    "title": "Tumse Milke (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UGsjMwa-ylc"
+  },
+  {
+    "title": "Choli Ke Peeche / Choli (Tech Rework)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "WUyImOEDra8"
+  },
+  {
+    "title": "Ya Ali (Tech Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5VaqiH1QMTw"
+  },
+  {
+    "title": "Mayya Mayya (Afro-Tech Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9SuuAmu6crY"
+  },
+  {
+    "title": "Kajra Re (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Q-DlozbrlBA"
+  },
+  {
+    "title": "Pehli Baar (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "spD5dAOVOtE"
+  },
+  {
+    "title": "Vaari Jawan (Tech Flip)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UnVGau74a-g"
+  },
+  {
+    "title": "Jhalla x DTMF (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ptz_wkX0oLk"
+  },
+  {
+    "title": "Chokra (Tech House Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "D8xuRSl0Bdg"
+  },
+  {
+    "title": "Ainvayi Ainvayi (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZnRif5sw4jw"
+  },
+  {
+    "title": "Main Nikla (Festival Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "iy8q8jRC2yU"
+  },
+  {
+    "title": "Main Deewana (Tech House Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "534Mu16eUhg"
+  },
+  {
+    "title": "Ankhien Khuli (Club Rework)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "fxh6MWHdoq8"
+  },
+  {
+    "title": "Ole Ole x Edge of Desire (Edit / Cut)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "fxh6MWHdoq8"
+  },
+  {
+    "title": "Jigar Da x Freed From Desire (Bootleg Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ptz_wkX0oLk"
+  },
+  {
+    "title": "Golmaal x Temperature (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "K0TRGmWSqgM"
+  },
+  {
+    "title": "Oo Antava (Club Flip)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "N38rD7d6YyU"
+  },
+  {
+    "title": "Tere Bin (AFTERAll Afro-House Edit)",
+    "artist": "Rabbi Shergill",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5VaqiH1QMTw"
+  },
+  {
+    "title": "Sahiba (AFTERAll Afro Edit)",
+    "artist": "Aditya Rikhari",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xWymCsPJQ7I"
+  },
+  {
+    "title": "Jaan Se Guzarte (AFTERAll Afro / Deep Edit)",
+    "artist": "Nusrat Fateh Ali Khan",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "U2jhF7RI-p4"
+  },
+  {
+    "title": "Naina Tarse (Studio Club Edit)",
+    "artist": "AFTERAll & Chitralekha Sen",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "UGsjMwa-ylc"
+  },
+  {
+    "title": "Mirza (Edit | AFTRHRS Sessions)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "R7ur77iOMWE"
+  },
+  {
+    "title": "Bheer Tech (AFTRHRS Sessions | Punjabi Tech)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ncNHTJHFKYc"
+  },
+  {
+    "title": "Dhol Jageero (BollyTech Remix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zkt7DfOUlyM"
+  },
+  {
+    "title": "Guddi Riddim (Remix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GIRrImFDKdI"
+  },
+  {
+    "title": "Sadi Gali (VIP Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZnRif5sw4jw"
+  },
+  {
+    "title": "Ari Ari (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AcRUS_JUI1M"
+  },
+  {
+    "title": "Udta Punjab (Bassline Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4QVu6Vo6Jhw"
+  },
+  {
+    "title": "Tauba Tauba (AFTERAll Edit | Afro House / Club Flip)",
+    "artist": "Karan Aujla",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oRtOwoQpXhc"
+  },
+  {
+    "title": "Big Dawgs (AFTERAll Club Remix)",
+    "artist": "Hanumankind & Kalmi",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GIRrImFDKdI"
+  },
+  {
+    "title": "Nateka (AFTERAll Hard Mix)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "7bkON9UCIXg"
+  },
+  {
+    "title": "Koi Si (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6zf2dNLS-fs"
+  },
+  {
+    "title": "FE!N x On Top (AFTERAll Edit)",
+    "artist": "Travis Scott",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bwMTnhglpJY"
+  },
+  {
+    "title": "APT. x Oh Ho Ho Ho (AFTERAll Flip)",
+    "artist": "Bruno Mars & ROSE",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0NeKfKBd6S0"
+  },
+  {
+    "title": "Eenie Meenie (AFTERAll Remix)",
+    "artist": "Justin Bieber",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dHsV56I1GwE"
+  },
+  {
+    "title": "I'm Good x Boyfriend (AFTERAll Edit)",
+    "artist": "David Guetta & Bebe Rexha",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KSrt9oMElpQ"
+  },
+  {
+    "title": "Ghafoor x Bam Bam (Club Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "534Mu16eUhg"
+  },
+  {
+    "title": "DDLJ Transition x Mandeya (Festival Transition Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "EnDAATakNck"
+  },
+  {
+    "title": "Say What x Hum Dum (Tech Edit)",
+    "artist": "AFTERAll",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "7bkON9UCIXg"
+  },
+  {
+    "title": "Pappu (Remix)",
+    "artist": "AFTERAll x Rush Mehta",
+    "film": "AFTERAll Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GIRrImFDKdI"
   }
 ];
 
