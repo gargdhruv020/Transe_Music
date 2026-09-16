@@ -539,9 +539,20 @@ export default function Player() {
           if (event.data === 1) {
             // Track is PLAYING
             isLoadingTrackRef.current = false;
+            wasInterruptedBySystemRef.current = false;
+            autoPlayPendingRef.current = false;
+            isPlayingRef.current = true;
             if (!isPlayingRef.current) {
               setIsPlaying(true);
             }
+            if (typeof window !== "undefined" && "mediaSession" in navigator) {
+              try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+            }
+            // Ensure continuous audio anchor node is active so mobile OS never drops Audio Focus
+            if (audioRef.current && audioRef.current.paused) {
+              audioRef.current.play().catch(() => {});
+            }
+
             // If track was loaded via crossfade outro, execute smooth intro fade-in!
             if (fadeInPendingRef.current && ytPlayerRef.current) {
               fadeInPendingRef.current = false;
@@ -593,8 +604,14 @@ export default function Player() {
             }
           } else if (event.data === 2) {
             // Track is PAUSED
-            // 1. If currently transitioning (lock-screen song skip), keep playing through buffering delay!
-            if (backgroundSyncRef.current?.getIsTransitioning()) {
+            const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
+            const isCurrentlyLoading = isLoadingTrackRef.current || timeSinceLoad < 4000 || autoPlayPendingRef.current;
+
+            // 1. If currently loading/buffering a new track (auto-advance or skip), keep playing through buffering delay!
+            if (isCurrentlyLoading || backgroundSyncRef.current?.getIsTransitioning()) {
+              if (audioRef.current && audioRef.current.paused) {
+                audioRef.current.play().catch(() => {});
+              }
               if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
                 try { ytPlayerRef.current.playVideo(); } catch (_) {}
               }
@@ -616,11 +633,16 @@ export default function Player() {
             }
           } else if (event.data === 0) {
             // Track ENDED: Advance to next song immediately!
-            // Guard: Ignore spurious ENDED events fired right after track load or during rapid transitions!
             const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
             if (isLoadingTrackRef.current || timeSinceLoad < 3500) {
               return;
             }
+            isLoadingTrackRef.current = true;
+            trackLoadTimestampRef.current = Date.now();
+            wasInterruptedBySystemRef.current = false;
+            isUserPausedRef.current = false;
+            isPlayingRef.current = true;
+
             abortCrossfade(false);
             if (handleNextRef.current) {
               handleNextRef.current(false);
@@ -1342,6 +1364,7 @@ export default function Player() {
     setIsPlaying(true);
     isPlayingRef.current = true;
     isUserPausedRef.current = false;
+    wasInterruptedBySystemRef.current = false;
     trackLoadTimestampRef.current = Date.now();
     isLoadingTrackRef.current = true;
 
@@ -1459,6 +1482,7 @@ export default function Player() {
     setIsPlaying(true);
     isPlayingRef.current = true;
     isUserPausedRef.current = false;
+    wasInterruptedBySystemRef.current = false;
     trackLoadTimestampRef.current = Date.now();
     isLoadingTrackRef.current = true;
 
@@ -1833,6 +1857,9 @@ export default function Player() {
     setDuration(0);
     setCurrentIndex(index);
     setIsPlaying(true);
+    isPlayingRef.current = true;
+    isUserPausedRef.current = false;
+    wasInterruptedBySystemRef.current = false;
     trackLoadTimestampRef.current = Date.now();
     isLoadingTrackRef.current = true;
 
