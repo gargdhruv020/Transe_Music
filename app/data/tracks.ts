@@ -17888,6 +17888,806 @@ const listClub: any[] = [
     "isRemix": true,
     "isClub": true,
     "youtubeId": "WlLMXGf3p8Y"
+  },
+  {
+    "title": "Don't You Worry Child x With You x Dil Nu (AFTERAll Festival Edit)",
+    "artist": "AFTERAll",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "F5X6qZ_cwMo"
+  },
+  {
+    "title": "Baarishein x Love Story (AFTERAll Prism Live Mashup)",
+    "artist": "AFTERAll",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "edfyQIQBBf4"
+  },
+  {
+    "title": "Koi Si (I'm Good) (AFTERAll x David Guetta Reel Edit)",
+    "artist": "AFTERAll x David Guetta",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "KSrt9oMElpQ"
+  },
+  {
+    "title": "Playboi Carti x Punjabi Hip-Hop (AFTERAll Club Flip)",
+    "artist": "AFTERAll",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "4h9enflIg8c"
+  },
+  {
+    "title": "Jaan Se Guzarte (AFTERAll Sufi-Tech NFAK Bootleg)",
+    "artist": "AFTERAll",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "U2jhF7RI-p4"
+  },
+  {
+    "title": "Tauba Tauba x Losing It (FISHER Style Tech-House Mashup)",
+    "artist": "FISHER",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ahaUNhScopE"
+  },
+  {
+    "title": "Aaj Ki Raat x Tremor (DVLM Mainstage Festival Mashup)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "-nobw5Szkhk"
+  },
+  {
+    "title": "Winning Speech x Laserbeam (Ray Volpe Heavy Bassline Edit)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "EyI2ChkxL0c"
+  },
+  {
+    "title": "Malhari x Laserbeam (Dhol Trap & Festival Dubstep Drop)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oU706jVWVBg"
+  },
+  {
+    "title": "Chaiyya Chaiyya x Kernkraft 400 (Zombie Nation Rave Flip)",
+    "artist": "Zombie Nation",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Q8DyPg2aM_A"
+  },
+  {
+    "title": "Badtameez Dil x Spaceman (Hardwell Big-Room Mashup)",
+    "artist": "Hardwell",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Im9HHMU60Hs"
+  },
+  {
+    "title": "Dhan Te Nan x Mammoth (DVLM Festival Stadium Bootleg)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "3h1EuJkgL_A"
+  },
+  {
+    "title": "Zingaat x Booyah (Showtek Dutch House Screech Mashup)",
+    "artist": "Showtek",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8Cc8hFlHmgw"
+  },
+  {
+    "title": "Besharam Rang x Drugs From Amsterdam (Mau P Tech Edit)",
+    "artist": "Mau P",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "fyuaq0jFfJE"
+  },
+  {
+    "title": "Aankh Marey x Move Your Body (Öwnboss Brazilian Bass Flip)",
+    "artist": "Öwnboss",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8iQU0ubwVdY"
+  },
+  {
+    "title": "Choli Ke Peeche x Satisfaction (Benny Benassi Electro Saw)",
+    "artist": "Benny Benassi",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "JuZpSPmocdU"
+  },
+  {
+    "title": "Ghungroo x Ferrari (James Hype High-BPM House Mashup)",
+    "artist": "James Hype",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XUwCeFgFKQc"
+  },
+  {
+    "title": "Dope Shope x Do It To It (ACRAZE Slap Tech-House Edit)",
+    "artist": "ACRAZE",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dHsV56I1GwE"
+  },
+  {
+    "title": "Dum Maaro Dum x Turn Off The Lights (Fred Again.. UK Bass)",
+    "artist": "Fred Again..",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8BbdTa6_Aak"
+  },
+  {
+    "title": "Sadda Haq x Heads Will Roll (A-Trak Electro House Bootleg)",
+    "artist": "A-Trak",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6xeYav0rbz8"
+  },
+  {
+    "title": "Bhaag D.K. Bose x Bonkers (Dizzee Rascal Rave Bass Edit)",
+    "artist": "Dizzee Rascal",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IQEDu8SPHao"
+  },
+  {
+    "title": "Kala Chashma x Bounce Generation (TJR & VINAI Bounce Flip)",
+    "artist": "TJR & VINAI",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5iW2rlGvtdw"
+  },
+  {
+    "title": "52 Bars x Animals (Martin Garrix Big-Room Crossover)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ggAveCJfdBU"
+  },
+  {
+    "title": "On Top x Tsunami (DVBBS & Borgeous Festival Drop)",
+    "artist": "DVBBS & Borgeous",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "QaRHAvWT6Gg"
+  },
+  {
+    "title": "Softly x Do It To It (ACRAZE Tech-House Vocal Mashup)",
+    "artist": "ACRAZE",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w0AlESQzsKI"
+  },
+  {
+    "title": "White Brown Black x Piece Of Your Heart (Meduza House Mix)",
+    "artist": "Meduza",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "zr_sTaYTCnU"
+  },
+  {
+    "title": "Apna Bana Le x Miracle (Calvin Harris & Ellie Goulding Flip)",
+    "artist": "Calvin Harris",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "u2NAuswnTKs"
+  },
+  {
+    "title": "Kesariya x Don't You Worry Child (SHM Progressive House)",
+    "artist": "Swedish House Mafia",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hKM5JkIDTeE"
+  },
+  {
+    "title": "Tum Hi Ho x Reload (Sebastian Ingrosso Progressive Drop)",
+    "artist": "Sebastian Ingrosso",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dcgk8AUjrX4"
+  },
+  {
+    "title": "Kabira x Clarity (Zedd Melodic Festival Bootleg)",
+    "artist": "Zedd",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V3NHpNmYY8U"
+  },
+  {
+    "title": "Pee Loon x Sunset Lover (Petit Biscuit Chill Deep House)",
+    "artist": "Petit Biscuit",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ew7_HAhF8Rw"
+  },
+  {
+    "title": "Tum Se Hi x Ocean (Martin Garrix Melodic Festival Edit)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "mt9xg0mmt28"
+  },
+  {
+    "title": "Zaalima x Cold Water (Major Lazer Tropical Club Mashup)",
+    "artist": "Major Lazer",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "jK0K-2Gz780"
+  },
+  {
+    "title": "Dil Sambhal Ja Zara x Piece Of Your Heart (Meduza Bassline)",
+    "artist": "Meduza",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "uTQTnig-p2o"
+  },
+  {
+    "title": "Khuda Jaane x Without You (David Guetta Progressive Mix)",
+    "artist": "David Guetta",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nCKRkqyKncw"
+  },
+  {
+    "title": "Subhanallah x Titanium (David Guetta Festival House Flip)",
+    "artist": "David Guetta",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PR2JGFF3IzM"
+  },
+  {
+    "title": "Ishq Sufiyana x Sun & Moon (Above & Beyond Trance Edit)",
+    "artist": "Above & Beyond",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "cvBwKeJRoNc"
+  },
+  {
+    "title": "Hasi Ban Gaye x Heroes (Alesso Progressive House Mashup)",
+    "artist": "Alesso",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5YGc9Y_BRXU"
+  },
+  {
+    "title": "Soch Na Sake x Stay The Night (Zedd High-Energy Bootleg)",
+    "artist": "Zedd",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "oPNv4dxWJHc"
+  },
+  {
+    "title": "Agar Tum Saath Ho x Faded (Alan Walker Melodic House Mix)",
+    "artist": "Alan Walker",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dZse1_yBeKI"
+  },
+  {
+    "title": "Chaleya x Padam Padam (Kylie Minogue Tech-House Rework)",
+    "artist": "Kylie Minogue",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "GJd7wnPhX8o"
+  },
+  {
+    "title": "Mast Magan x In My Mind (Dynoro Slap-House Festival Flip)",
+    "artist": "Dynoro",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gvPjxYkXloU"
+  },
+  {
+    "title": "Sun Saathiya x This Is What You Came For (Calvin Harris)",
+    "artist": "Calvin Harris",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2ZFyi22tGtU"
+  },
+  {
+    "title": "Jeena Jeena x Calling [Lose My Mind] (Ingrosso & Alesso)",
+    "artist": "Ingrosso & Alesso",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "yDAu3r44KJA"
+  },
+  {
+    "title": "Tere Sang Yaara x If I Lose Myself (Alesso Festival Bootleg)",
+    "artist": "Alesso",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TGB9SNGoEKg"
+  },
+  {
+    "title": "Mitwa x Opus (Eric Prydz Progressive Build & Drop)",
+    "artist": "Eric Prydz",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ru_5PA8cwkE"
+  },
+  {
+    "title": "Tera Hone Laga Hoon x Wake Me Up (Avicii Country-House)",
+    "artist": "Avicii",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rTuxUAuJRyY"
+  },
+  {
+    "title": "Kaun Tujhe x Something Just Like This (Chainsmokers Edit)",
+    "artist": "The Chainsmokers",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8YLtmmIq7ZQ"
+  },
+  {
+    "title": "Bakhuda Tumhi Ho x Tremor (Martin Garrix Festival Drop)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ENklhABDmck"
+  },
+  {
+    "title": "Tu Jaane Na x Mammoth (DVLM Mainstage Progressive Mashup)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "estNgy3He1g"
+  },
+  {
+    "title": "Arjan Vailly x Laserbeam (Ray Volpe Dubstep/Trap Drop)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bwMTnhglpJY"
+  },
+  {
+    "title": "Aayi Nai x Bounce Generation (TJR & VINAI Festival Bounce)",
+    "artist": "TJR & VINAI",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0NeKfKBd6S0"
+  },
+  {
+    "title": "What Jhumka? x Do It To It (ACRAZE Tech-House Punch)",
+    "artist": "ACRAZE",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sDSud3GfY0I"
+  },
+  {
+    "title": "Sher Khul Gaye x Ferrari (James Hype High-Energy Tech Edit)",
+    "artist": "James Hype",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "n9dNhtq32wY"
+  },
+  {
+    "title": "Jamal Kudu x Losing It (FISHER Rolling Tech-Bass Bootleg)",
+    "artist": "FISHER",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HlHQbV0JbAE"
+  },
+  {
+    "title": "Naina x Move Your Body (Öwnboss Deep Brazilian Bass)",
+    "artist": "Öwnboss",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V8MbMgCn4tM"
+  },
+  {
+    "title": "Not Ramaiya Vastavaiya x Tremor (DVLM Mainstage Banger)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "Ishq Jaisa Kuch x Piece Of Your Heart (Meduza Tech-House Flip)",
+    "artist": "Meduza",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hE2Ira-Cwxo"
+  },
+  {
+    "title": "Bhool Bhulaiyaa 3 x Satisfaction (Benny Benassi Electro Saw)",
+    "artist": "Benny Benassi",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "aZcSCT34H84"
+  },
+  {
+    "title": "Lutt Putt Gaya x Levels (Avicii Melodic Progressive Drop)",
+    "artist": "Avicii",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_ovdm2yX4MA"
+  },
+  {
+    "title": "Dance Ka Bhoot x Animals (Martin Garrix Big-Room Drop)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gCYcHz2k5x0"
+  },
+  {
+    "title": "Kaavaalaa x Turn Off The Lights (Fred Again.. Bassline Flip)",
+    "artist": "Fred Again..",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xMV6l2y67rk"
+  },
+  {
+    "title": "Main Nikla Gaddi Leke x Booyah (Showtek Dutch House Drop)",
+    "artist": "Showtek",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "W-SFi3UhEOY"
+  },
+  {
+    "title": "Kusu Kusu x Drugs From Amsterdam (Mau P Minimal Tech Edit)",
+    "artist": "Mau P",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "NZd7q60bHck"
+  },
+  {
+    "title": "Tip Tip Barsa Paani x Ferrari (James Hype Tech Rework)",
+    "artist": "James Hype",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "n9dNhtq32wY"
+  },
+  {
+    "title": "Chandigarh Mein x Move Your Body (Öwnboss Bass House Edit)",
+    "artist": "Öwnboss",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V8MbMgCn4tM"
+  },
+  {
+    "title": "Coka 2.0 x Tsunami (DVBBS & Borgeous Hard Festival Drop)",
+    "artist": "DVBBS & Borgeous",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0EWbonj7f18"
+  },
+  {
+    "title": "Ra Ra Rakkamma x Laserbeam (Ray Volpe Heavy Bass Flip)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bwMTnhglpJY"
+  },
+  {
+    "title": "Param Sundari x Do It To It (ACRAZE Punchy Bassline Mix)",
+    "artist": "ACRAZE",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sDSud3GfY0I"
+  },
+  {
+    "title": "BurjKhalifa x Heads Will Roll (A-Trak Electro House Bootleg)",
+    "artist": "A-Trak",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "umAL-6_sddA"
+  },
+  {
+    "title": "Nadiyon Paar x Losing It (FISHER Minimal Tech Drop)",
+    "artist": "FISHER",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HlHQbV0JbAE"
+  },
+  {
+    "title": "Morani Baga Ma x Spaceman (Hardwell Big-Room Festival Edit)",
+    "artist": "Hardwell",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6_i71QOQG5g"
+  },
+  {
+    "title": "High Rated Gabru x Tremor (Martin Garrix Mainstage Rework)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "9vMh9f41pqE"
+  },
+  {
+    "title": "Coca Cola Tu x Bounce Generation (VINAI Festival Bounce)",
+    "artist": "VINAI",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0NeKfKBd6S0"
+  },
+  {
+    "title": "Chhote Chhote Peg x Bonkers (Dizzee Rascal Rave Bassline)",
+    "artist": "Dizzee Rascal",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ISy0Hl0SBfg"
+  },
+  {
+    "title": "Buzz x Animals (Martin Garrix Peak-Time Club Mashup)",
+    "artist": "Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gCYcHz2k5x0"
+  },
+  {
+    "title": "Kya Baat Ay 2.0 x Move Your Body (Öwnboss Brazilian Bass Flip)",
+    "artist": "Öwnboss",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V8MbMgCn4tM"
+  },
+  {
+    "title": "Jeda Nasha x Drugs From Amsterdam (Mau P Tech-House Bootleg)",
+    "artist": "Mau P",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "NZd7q60bHck"
+  },
+  {
+    "title": "Alcoholia x Laserbeam (Ray Volpe Hard Trap/Dubstep Edit)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bwMTnhglpJY"
+  },
+  {
+    "title": "Besharmi Ki Height x Spaceman (Hardwell Peak-Time Club Mix)",
+    "artist": "Hardwell",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6_i71QOQG5g"
+  },
+  {
+    "title": "Fevicol Se x Booyah (Showtek Festival Screech Drop)",
+    "artist": "Showtek",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "W-SFi3UhEOY"
+  },
+  {
+    "title": "Sheila Ki Jawani x Kernkraft 400 (Zombie Nation Rave Synth)",
+    "artist": "Zombie Nation",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "z5LW07FTJbI"
+  },
+  {
+    "title": "Dhoom Machale x Mammoth (DVLM Mainstage Stadium Drop)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_o-XIryB2gg"
+  },
+  {
+    "title": "Paisa Yeh Paisa x Bonkers (Dizzee Rascal Aggressive Bass)",
+    "artist": "Dizzee Rascal",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ISy0Hl0SBfg"
+  },
+  {
+    "title": "Slow Motion x Turn Up The Speakers (Afrojack & Garrix Drop)",
+    "artist": "Afrojack & Martin Garrix",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "SRq7FUGxJew"
+  },
+  {
+    "title": "Ainvayi Ainvayi x Bounce Generation (TJR Bounce House Edit)",
+    "artist": "TJR",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0NeKfKBd6S0"
+  },
+  {
+    "title": "Muqabla x Satisfaction (Benny Benassi Distorted Saw Drop)",
+    "artist": "Benny Benassi",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "aZcSCT34H84"
+  },
+  {
+    "title": "Dilbar x Ferrari (James Hype Tech-House Club Flip)",
+    "artist": "James Hype",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "n9dNhtq32wY"
+  },
+  {
+    "title": "Tumse Milke Dil Ka Jo Haal x Turn Off The Lights (Fred Again..)",
+    "artist": "Fred Again..",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "xMV6l2y67rk"
+  },
+  {
+    "title": "Gali Gali x Losing It (FISHER Tech-House Peak-Time Rework)",
+    "artist": "FISHER",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "HlHQbV0JbAE"
+  },
+  {
+    "title": "295 x Laserbeam (Ray Volpe Heavy Bass Tribute Edit)",
+    "artist": "Ray Volpe",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "bwMTnhglpJY"
+  },
+  {
+    "title": "The Last Ride x Mammoth (DVLM Mainstage Festival Flip)",
+    "artist": "DVLM",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "_o-XIryB2gg"
+  },
+  {
+    "title": "Elevated x Do It To It (ACRAZE Slap Tech-House Mashup)",
+    "artist": "ACRAZE",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "sDSud3GfY0I"
+  },
+  {
+    "title": "Baller x Move Your Body (Öwnboss Brazilian Bass Drop)",
+    "artist": "Öwnboss",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "V8MbMgCn4tM"
+  },
+  {
+    "title": "Insane x Drugs From Amsterdam (Mau P Minimal Tech Edit)",
+    "artist": "Mau P",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "NZd7q60bHck"
+  },
+  {
+    "title": "Summer High x Sunset Lover (Petit Biscuit Chill Deep House)",
+    "artist": "Petit Biscuit",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "wuCK-oiE3rM"
+  },
+  {
+    "title": "Excuses x Piece Of Your Heart (Meduza Melodic Tech Mix)",
+    "artist": "Meduza",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hE2Ira-Cwxo"
+  },
+  {
+    "title": "Lover x Ferrari (James Hype High-BPM Dancefloor Rework)",
+    "artist": "James Hype",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "n9dNhtq32wY"
+  },
+  {
+    "title": "Born To Shine x Spaceman (Hardwell Festival Brass Bootleg)",
+    "artist": "Hardwell",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "6_i71QOQG5g"
+  },
+  {
+    "title": "Hass Hass x Don't You Worry Child (SHM Progressive House Edit)",
+    "artist": "Swedish House Mafia",
+    "film": "Club Mashup",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1y6smkh6c-0"
   }
 ];
 
