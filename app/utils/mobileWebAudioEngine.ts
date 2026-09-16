@@ -131,6 +131,21 @@ export class MobileAudioContextManager {
   }
 
   /**
+   * Resumes the AudioContext if it fell asleep or was suspended by browser autoplay policy.
+   */
+  public static async wakeUp(): Promise<boolean> {
+    if (!this.sharedContext) return false;
+    try {
+      if (this.sharedContext.state === "suspended") {
+        await this.sharedContext.resume();
+      }
+      return this.sharedContext.state === "running";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /**
    * Central user-gesture authorization module.
    * MUST be called synchronously inside a click or touch event (e.g. site Play button).
    * Unlocks iOS Safari's hardware sample-rate clock by playing a 1-sample silent buffer.

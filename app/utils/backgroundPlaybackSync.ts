@@ -93,7 +93,10 @@ export class BackgroundPlaybackSyncEngine {
             .catch(() => {
               // Retry on background constraint
               setTimeout(() => {
-                try { audio.play().catch(() => {}); } catch (_) {}
+                try {
+                  audio.load();
+                  audio.play().catch(() => {});
+                } catch (_) {}
               }, 150);
             });
         }
@@ -102,7 +105,7 @@ export class BackgroundPlaybackSyncEngine {
 
     // 3. Automated retry loop for YouTube player playback
     let attempts = 0;
-    const maxAttempts = 8;
+    const maxAttempts = 10;
 
     const triggerYTPlay = () => {
       attempts++;

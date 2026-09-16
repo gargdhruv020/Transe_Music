@@ -1149,9 +1149,30 @@ export default function Player() {
     } else {
       releaseWakeLock();
     }
-    // Re-acquire when page becomes visible (Chrome auto-releases on hidden)
+    // Re-acquire when page becomes visible and force audio state resumption sync
     const handleVis = () => {
-      if (document.visibilityState === 'visible' && isPlayingRef.current) acquireWakeLock();
+      if (document.visibilityState === 'visible') {
+        if (isPlayingRef.current) {
+          acquireWakeLock();
+          // Resume native audio anchor
+          if (audioRef.current && audioRef.current.paused && !wasInterruptedBySystemRef.current) {
+            audioRef.current.play().catch(() => {});
+          }
+          // Resume YouTube iframe player if suspended in background
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+            try {
+              const state = typeof ytPlayerRef.current.getPlayerState === "function" ? ytPlayerRef.current.getPlayerState() : -1;
+              if (state !== 1) {
+                ytPlayerRef.current.playVideo();
+              }
+            } catch (_) {}
+          }
+          // Sync MediaSession state
+          if (typeof window !== "undefined" && "mediaSession" in navigator) {
+            try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
+          }
+        }
+      }
     };
     document.addEventListener('visibilitychange', handleVis);
     return () => { document.removeEventListener('visibilitychange', handleVis); };
