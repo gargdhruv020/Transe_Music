@@ -449,12 +449,42 @@ export default function Player() {
         return;
       }
 
+      // Web Workers are NOT throttled by browsers — this fires reliably every 1000ms even in background!
       if (isPlayingRef.current && ytPlayerRef.current) {
         try {
           const state = ytPlayerRef.current.getPlayerState();
-          // If we are supposed to be playing but YouTube paused it (e.g. background restriction)
+
+          // A. ENDED DETECTION: If YouTube reports track ended (state 0) while we think we're playing,
+          // the setInterval watchdog (400ms) may have been throttled to 1000ms+ and missed it.
+          // Catch it here in the un-throttled Worker and trigger handleNext.
+          if (state === 0) {
+            const timeSinceLoad = Date.now() - trackLoadTimestampRef.current;
+            if (!isLoadingTrackRef.current && timeSinceLoad > 3500) {
+              isLoadingTrackRef.current = true;
+              trackLoadTimestampRef.current = Date.now();
+              wasInterruptedBySystemRef.current = false;
+              isPlayingRef.current = true;
+              if (handleNextRef.current) {
+                handleNextRef.current(false);
+              }
+            }
+          }
+
+          // B. BACKGROUND playVideo RETRY: If supposed to be playing but YouTube is paused/unstarted
+          // (background autoplay restriction), keep retrying playVideo on every Worker tick
           if (state === 2 || state === -1) {
              ytPlayerRef.current.playVideo();
+          }
+
+          // C. VOLUME RECOVERY: If YouTube is actually playing (state 1) but volume is stuck at 0
+          // (from a crossfade that stalled in background), restore volume to the user's setting
+          if (state === 1 && !isCrossfadingRef.current && !fadeInPendingRef.current) {
+            try {
+              const currentVol = typeof ytPlayerRef.current.getVolume === "function" ? ytPlayerRef.current.getVolume() : -1;
+              if (currentVol === 0 && volumeRef.current > 0) {
+                ytPlayerRef.current.setVolume(volumeRef.current);
+              }
+            } catch (_) {}
           }
         } catch (e) {}
       }
@@ -481,10 +511,10 @@ export default function Player() {
 
   const isPlayerReadyRef = useRef<boolean>(false);
 
-  // Crossfade abort handler: cancels animation and restores full master volume
+  // Crossfade abort handler: cancels timer and restores full master volume
   const abortCrossfade = useCallback((resetVolume = true) => {
     if (crossfadeAnimRef.current) {
-      cancelAnimationFrame(crossfadeAnimRef.current);
+      clearTimeout(crossfadeAnimRef.current);
       crossfadeAnimRef.current = null;
     }
     isCrossfadingRef.current = false;
@@ -559,42 +589,54 @@ export default function Player() {
               isCrossfadingRef.current = true;
 
               if (crossfadeAnimRef.current) {
-                cancelAnimationFrame(crossfadeAnimRef.current);
+                clearTimeout(crossfadeAnimRef.current);
                 crossfadeAnimRef.current = null;
               }
 
-              const durationMs = Math.min(Math.max((crossfadeDurationRef.current || 4) * 1000, 1500), 5000);
-              const startTime = performance.now();
               const baseVolume = volumeRef.current;
 
-              try {
-                ytPlayerRef.current.setVolume(0);
-              } catch (_) {}
-
-              const stepFadeIn = (now: number) => {
-                const elapsed = now - startTime;
-                const progress = Math.min(Math.max(elapsed / durationMs, 0), 1);
-                // Equal-power sine curve for smooth fade-in: 0 -> baseVolume
-                const inVol = Math.round(Math.sin(progress * 0.5 * Math.PI) * baseVolume);
+              // BACKGROUND SHORTCUT: If tab is hidden, skip gradual fade — restore volume instantly
+              // RAF and setTimeout are heavily throttled/frozen in background, so fade would never complete
+              if (typeof document !== "undefined" && document.hidden) {
                 try {
-                  if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-                    ytPlayerRef.current.setVolume(inVol);
-                  }
+                  ytPlayerRef.current.setVolume(baseVolume);
+                } catch (_) {}
+                isCrossfadingRef.current = false;
+              } else {
+                const durationMs = Math.min(Math.max((crossfadeDurationRef.current || 4) * 1000, 1500), 5000);
+                const startTime = Date.now();
+
+                try {
+                  ytPlayerRef.current.setVolume(0);
                 } catch (_) {}
 
-                if (progress < 1) {
-                  crossfadeAnimRef.current = requestAnimationFrame(stepFadeIn);
-                } else {
-                  crossfadeAnimRef.current = null;
-                  isCrossfadingRef.current = false;
+                // Use setTimeout instead of requestAnimationFrame — RAF is FROZEN in background tabs!
+                // setTimeout is throttled to ~1000ms in background but still eventually fires
+                const stepFadeIn = () => {
+                  const elapsed = Date.now() - startTime;
+                  const progress = Math.min(Math.max(elapsed / durationMs, 0), 1);
+                  // Equal-power sine curve for smooth fade-in: 0 -> baseVolume
+                  const inVol = Math.round(Math.sin(progress * 0.5 * Math.PI) * baseVolume);
                   try {
                     if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
-                      ytPlayerRef.current.setVolume(baseVolume);
+                      ytPlayerRef.current.setVolume(inVol);
                     }
                   } catch (_) {}
-                }
-              };
-              crossfadeAnimRef.current = requestAnimationFrame(stepFadeIn);
+
+                  if (progress < 1) {
+                    crossfadeAnimRef.current = setTimeout(stepFadeIn, 50) as unknown as number;
+                  } else {
+                    crossfadeAnimRef.current = null;
+                    isCrossfadingRef.current = false;
+                    try {
+                      if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+                        ytPlayerRef.current.setVolume(baseVolume);
+                      }
+                    } catch (_) {}
+                  }
+                };
+                crossfadeAnimRef.current = setTimeout(stepFadeIn, 50) as unknown as number;
+              }
             } else if (!isCrossfadingRef.current) {
               try {
                 if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
@@ -1154,20 +1196,51 @@ export default function Player() {
       if (document.visibilityState === 'visible') {
         if (isPlayingRef.current) {
           acquireWakeLock();
-          // Resume native audio anchor
+
+          // A. ABORT STALLED CROSSFADES: If crossfade was running when tab went to background,
+          // the setTimeout-based fade may have stalled. Force-abort and restore volume.
+          if (isCrossfadingRef.current || fadeInPendingRef.current) {
+            if (crossfadeAnimRef.current) {
+              clearTimeout(crossfadeAnimRef.current);
+              crossfadeAnimRef.current = null;
+            }
+            isCrossfadingRef.current = false;
+            fadeInPendingRef.current = false;
+          }
+
+          // B. FORCE VOLUME RESTORATION: Unconditionally restore volume to user's setting.
+          // This catches ALL scenarios where volume got stuck at 0 (crossfade stall, background fade, etc.)
+          if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+            try {
+              ytPlayerRef.current.setVolume(volumeRef.current);
+            } catch (_) {}
+          }
+
+          // C. Resume native audio anchor
           if (audioRef.current && audioRef.current.paused && !wasInterruptedBySystemRef.current) {
             audioRef.current.play().catch(() => {});
           }
-          // Resume YouTube iframe player if suspended in background
+
+          // D. Resume YouTube iframe player if suspended in background
           if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
             try {
               const state = typeof ytPlayerRef.current.getPlayerState === "function" ? ytPlayerRef.current.getPlayerState() : -1;
               if (state !== 1) {
                 ytPlayerRef.current.playVideo();
+                // DOUBLE-TAP RETRY: Chrome may need a moment to reconnect the audio pipeline
+                setTimeout(() => {
+                  try {
+                    if (ytPlayerRef.current && isPlayingRef.current) {
+                      const s2 = typeof ytPlayerRef.current.getPlayerState === "function" ? ytPlayerRef.current.getPlayerState() : -1;
+                      if (s2 !== 1) { ytPlayerRef.current.playVideo(); }
+                    }
+                  } catch (_) {}
+                }, 100);
               }
             } catch (_) {}
           }
-          // Sync MediaSession state
+
+          // E. Sync MediaSession state
           if (typeof window !== "undefined" && "mediaSession" in navigator) {
             try { navigator.mediaSession.playbackState = "playing"; } catch (_) {}
           }
@@ -1191,23 +1264,40 @@ export default function Player() {
   }, []);
 
   // Seamless DJ Power-Crossfade Engine (Equal-power cosine outro -> load -> equal-power sine intro)
-  // 100% compatible with mobile devices, iOS background playback, and all playlists!
+  // Background-safe: uses setTimeout instead of RAF (RAF is frozen in background tabs!)
   const startCrossfade = useCallback(() => {
     if (isCrossfadingRef.current || !crossfadeEnabledRef.current || !ytPlayerRef.current || !isPlayingRef.current) return;
     isCrossfadingRef.current = true;
 
     if (crossfadeAnimRef.current) {
-      cancelAnimationFrame(crossfadeAnimRef.current);
+      clearTimeout(crossfadeAnimRef.current);
       crossfadeAnimRef.current = null;
     }
 
+    // BACKGROUND SHORTCUT: If tab is hidden, skip gradual fade-out — jump straight to next track
+    // In background, setTimeout is throttled to ~1000ms and RAF is completely frozen,
+    // so a 4-12s fade-out would take minutes or never complete
+    if (typeof document !== "undefined" && document.hidden) {
+      try {
+        if (ytPlayerRef.current && typeof ytPlayerRef.current.setVolume === "function") {
+          ytPlayerRef.current.setVolume(0);
+        }
+      } catch (_) {}
+      fadeInPendingRef.current = true;
+      if (handleNextRef.current) {
+        handleNextRef.current(true);
+      }
+      return;
+    }
+
     const durationMs = Math.min(Math.max((crossfadeDurationRef.current || 4) * 1000, 1500), 12000);
-    const startTime = performance.now();
+    const startTime = Date.now();
     const baseVolume = volumeRef.current;
 
-    const stepFadeOut = (now: number) => {
+    // Use setTimeout instead of requestAnimationFrame — RAF is FROZEN in background tabs!
+    const stepFadeOut = () => {
       if (!isCrossfadingRef.current) return;
-      const elapsed = now - startTime;
+      const elapsed = Date.now() - startTime;
       const progress = Math.min(Math.max(elapsed / durationMs, 0), 1);
       // Equal-power cosine curve for fade-out: baseVolume -> 0
       const outVol = Math.round(Math.cos(progress * 0.5 * Math.PI) * baseVolume);
@@ -1218,7 +1308,7 @@ export default function Player() {
       } catch (_) {}
 
       if (progress < 1) {
-        crossfadeAnimRef.current = requestAnimationFrame(stepFadeOut);
+        crossfadeAnimRef.current = setTimeout(stepFadeOut, 50) as unknown as number;
       } else {
         crossfadeAnimRef.current = null;
         try {
@@ -1233,7 +1323,7 @@ export default function Player() {
       }
     };
 
-    crossfadeAnimRef.current = requestAnimationFrame(stepFadeOut);
+    crossfadeAnimRef.current = setTimeout(stepFadeOut, 50) as unknown as number;
   }, []);
 
   const startCrossfadeRef = useRef(startCrossfade);
@@ -1324,7 +1414,7 @@ export default function Player() {
     } else if (!isCrossfadeTransition) {
       if (crossfadeEnabledRef.current && isPlayingRef.current && ytPlayerRef.current) {
         if (crossfadeAnimRef.current) {
-          cancelAnimationFrame(crossfadeAnimRef.current);
+          clearTimeout(crossfadeAnimRef.current);
           crossfadeAnimRef.current = null;
         }
         fadeInPendingRef.current = true;
@@ -1418,6 +1508,29 @@ export default function Player() {
           if (typeof ytPlayerRef.current.playVideo === "function") {
             ytPlayerRef.current.playVideo();
           }
+          // BACKGROUND RETRY: In background tabs, the initial playVideo often fails silently
+          // due to Chrome's cross-origin iframe autoplay policy. Schedule backup retries.
+          setTimeout(() => {
+            try {
+              if (ytPlayerRef.current && isPlayingRef.current) {
+                const s = typeof ytPlayerRef.current.getPlayerState === "function" ? ytPlayerRef.current.getPlayerState() : -1;
+                if (s !== 1) { ytPlayerRef.current.playVideo(); }
+              }
+            } catch (_) {}
+          }, 800);
+          setTimeout(() => {
+            try {
+              if (ytPlayerRef.current && isPlayingRef.current) {
+                const s = typeof ytPlayerRef.current.getPlayerState === "function" ? ytPlayerRef.current.getPlayerState() : -1;
+                if (s !== 1) { ytPlayerRef.current.playVideo(); }
+                // Also restore volume if stuck at 0 (background crossfade stall)
+                if (s === 1 && !isCrossfadingRef.current && !fadeInPendingRef.current) {
+                  const v = typeof ytPlayerRef.current.getVolume === "function" ? ytPlayerRef.current.getVolume() : -1;
+                  if (v === 0 && volumeRef.current > 0) { ytPlayerRef.current.setVolume(volumeRef.current); }
+                }
+              }
+            } catch (_) {}
+          }, 2000);
         } catch (_) {}
       }
     } else {
@@ -1442,7 +1555,7 @@ export default function Player() {
     } else if (!isCrossfadeTransition) {
       if (crossfadeEnabledRef.current && isPlayingRef.current && ytPlayerRef.current) {
         if (crossfadeAnimRef.current) {
-          cancelAnimationFrame(crossfadeAnimRef.current);
+          clearTimeout(crossfadeAnimRef.current);
           crossfadeAnimRef.current = null;
         }
         fadeInPendingRef.current = true;
@@ -1827,7 +1940,7 @@ export default function Player() {
   const handleTrackSelect = useCallback((trackId: number, mode: PlaylistQueueMode) => {
     if (crossfadeEnabledRef.current && isPlayingRef.current && ytPlayerRef.current) {
       if (crossfadeAnimRef.current) {
-        cancelAnimationFrame(crossfadeAnimRef.current);
+        clearTimeout(crossfadeAnimRef.current);
         crossfadeAnimRef.current = null;
       }
       fadeInPendingRef.current = true;
