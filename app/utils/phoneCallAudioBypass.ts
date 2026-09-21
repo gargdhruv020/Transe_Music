@@ -78,6 +78,7 @@ export class PhoneCallAudioBypass {
   private silentGain: GainNode | null = null;
   private cleanupFns: Array<() => void> = [];
   private lastVisibleTime = Date.now();
+  private lastUserPlayTimestamp = 0;
 
   constructor(callbacks: PhoneCallBypassCallbacks) {
     this.callbacks = callbacks;
@@ -193,6 +194,15 @@ export class PhoneCallAudioBypass {
     const state = this.audioContext.state;
 
     if (isPlaying && !this.isCallInterrupted) {
+      // GRACE PERIOD: Skip stall detection for 1 second after user clicks Play.
+      // AudioContext needs 50-200ms to resume from suspended state, during which
+      // currentTime doesn't advance. Without this, we falsely detect a phone call.
+      if (Date.now() - this.lastUserPlayTimestamp < 1000) {
+        this.lastWallClock = currentWallClock;
+        this.lastAudioTime = currentAudioTime;
+        this.consecutiveStalls = 0;
+        return;
+      }
       // 1. Check if hardware state was interrupted by phone call
       if (state === "interrupted") {
         console.log("[PhoneCallAudioBypass] Hardware state changed to interrupted (Phone Call)");
@@ -440,6 +450,7 @@ export class PhoneCallAudioBypass {
     this.isCallInterrupted = false;
     this.wasPlayingBeforeCall = false;
     this.consecutiveStalls = 0;
+    this.lastUserPlayTimestamp = Date.now(); // Grace period: skip stall detection during AudioContext resume
     this.lastWallClock = performance.now();
 
     if (this.audioContext) {

@@ -346,6 +346,7 @@ export default function Player() {
   const crossfadeAnimRef = useRef<number | null>(null);
   const wasInterruptedBySystemRef = useRef<boolean>(false);
   const isUserPausedRef = useRef<boolean>(false);
+  const resumeGracePeriodRef = useRef<number>(0);
   const systemInterruptionListenerRef = useRef<SystemInterruptionListener | null>(null);
   const phoneCallAudioBypassRef = useRef<PhoneCallAudioBypass | null>(null);
   const backgroundSyncRef = useRef<BackgroundPlaybackSyncEngine | null>(null);
@@ -418,8 +419,9 @@ export default function Player() {
     
     workerRef.current.onmessage = (e: MessageEvent) => {
       if (e.data === 'pause_tick' || !isPlayingRef.current) {
-        // Continuous hardware anchor while paused: Keep silent audio playing so OS never kills notification
-        if (audioRef.current && !wasInterruptedBySystemRef.current) {
+        // Continuous hardware anchor while paused: Keep silent audio ALWAYS playing so OS never kills notification
+        // This must work even during system interruptions (Bluetooth disconnect, phone call) to preserve lock-screen widget
+        if (audioRef.current) {
           try {
             if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
               audioRef.current.src = AUDIO_STREAM_ANCHOR;
@@ -572,7 +574,7 @@ export default function Player() {
             wasInterruptedBySystemRef.current = false;
             autoPlayPendingRef.current = false;
             isPlayingRef.current = true;
-            if (!isPlayingRef.current) {
+            if (!isPlaying) {
               setIsPlaying(true);
             }
             if (typeof window !== "undefined" && "mediaSession" in navigator) {
@@ -660,7 +662,19 @@ export default function Player() {
               return;
             }
 
-            // 2. If paused while playing and user DID NOT click pause, another app (Instagram/YouTube/Call) requested focus!
+            // 2. RESUME GRACE PERIOD: When user clicks Play, YouTube is still in PAUSED state
+            // and may emit onStateChange(2) before transitioning to PLAYING. Without this guard,
+            // the code falsely interprets this as an external app stealing audio focus.
+            const timeSinceResume = Date.now() - resumeGracePeriodRef.current;
+            if (timeSinceResume < 2000) {
+              // User just clicked Play — YouTube is still transitioning, NOT an external interruption
+              if (ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === "function") {
+                try { ytPlayerRef.current.playVideo(); } catch (_) {}
+              }
+              return;
+            }
+
+            // 3. If paused while playing and user DID NOT click pause, another app (Instagram/YouTube/Call) requested focus!
             // Instantly yield focus cleanly so Instagram plays sound with zero interference!
             if (!isCrossfadingRef.current && isPlayingRef.current && !isUserPausedRef.current) {
               if (systemInterruptionListenerRef.current) {
@@ -1049,8 +1063,11 @@ export default function Player() {
           if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
             ytPlayerRef.current.pauseVideo();
           }
-          if (audioRef.current && !audioRef.current.paused) {
-            audioRef.current.pause();
+          // CRITICAL: NEVER pause audioRef! The silent WAV anchor must stay playing
+          // to keep the OS notification widget on lock screen and notification panel.
+          // Only the YouTube player gets paused.
+          if (audioRef.current && audioRef.current.paused) {
+            audioRef.current.play().catch(() => {});
           }
         } catch (_) {}
         setIsPlaying(false);
@@ -1100,8 +1117,9 @@ export default function Player() {
           if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === "function") {
             ytPlayerRef.current.pauseVideo();
           }
-          if (audioRef.current && !audioRef.current.paused) {
-            audioRef.current.pause();
+          // CRITICAL: Keep audioRef playing to preserve notification widget
+          if (audioRef.current && audioRef.current.paused) {
+            audioRef.current.play().catch(() => {});
           }
         } catch (_) {}
         setIsPlaying(false);
@@ -1741,6 +1759,7 @@ export default function Player() {
           isPlayingRef.current = true;
           isUserPausedRef.current = false;
           wasInterruptedBySystemRef.current = false;
+          resumeGracePeriodRef.current = Date.now(); // Prevent false external app interruption during YT transition
           setIsPlaying(true);
           if (workerRef.current) workerRef.current.postMessage('start');
           if (audioRef.current) {
@@ -2042,6 +2061,7 @@ export default function Player() {
       if (nextVal) {
         isUserPausedRef.current = false;
         wasInterruptedBySystemRef.current = false;
+        resumeGracePeriodRef.current = Date.now(); // Prevent false external app interruption during YT transition
         ServiceWorkerBackgroundAnchor.stopSilentKeepAliveBuffer();
         if (systemInterruptionListenerRef.current) {
           systemInterruptionListenerRef.current.notifyUserPlay();
@@ -2133,18 +2153,16 @@ export default function Player() {
     }
   }, [showList, queueMode]);
 
-  // Continuous hardware audio anchor: Keep silent WAV active even while paused
-  // Crucial: Only pause audioRef during genuine external system interruptions (e.g. phone call / Instagram)
-  // This keeps the OS media notification and lock screen controls pinned until the user manually swipes away the tab!
+  // Continuous hardware audio anchor: Keep silent WAV ALWAYS active (playing AND paused state)
+  // NEVER stop audioRef — it keeps the OS notification widget pinned on lock screen & notification panel
+  // The notification persists until user swipes away the tab from background/recent apps
   useEffect(() => {
     if (!audioRef.current) return;
     if (!audioRef.current.src || !audioRef.current.src.startsWith("data:")) {
       audioRef.current.src = AUDIO_STREAM_ANCHOR;
       audioRef.current.loop = true;
     }
-    if (!wasInterruptedBySystemRef.current) {
-      audioRef.current.play().catch(() => {});
-    }
+    audioRef.current.play().catch(() => {});
   }, [isPlaying]);
 
   // Clean teardown only when user explicitly closes or swipes away the tab from minimized background tabs

@@ -25,6 +25,8 @@ export class SystemInterruptionListener {
   private isInterrupted = false;
   private audioContext: AudioContext | null = null;
   private cleanupFns: Array<() => void> = [];
+  private lastUserPlayTimestamp = 0;
+  private isUserPaused = false;
 
   constructor(callbacks: SystemInterruptionCallbacks) {
     this.callbacks = callbacks;
@@ -60,7 +62,7 @@ export class SystemInterruptionListener {
         const onNativePause = () => {
           try {
             // If the audio was paused by the OS/hardware mixer (not by user click)
-            if (this.callbacks.isCurrentlyPlaying() && !this.isInterrupted) {
+            if (this.callbacks.isCurrentlyPlaying() && !this.isInterrupted && !this.isUserPaused) {
               this.handleInterruptionBegin("external_app");
             }
           } catch (_) {}
@@ -85,7 +87,10 @@ export class SystemInterruptionListener {
             const state = (this.audioContext as any)?.state;
             if (state === "interrupted" || state === "suspended") {
               if (this.callbacks.isCurrentlyPlaying()) {
-                this.handleInterruptionBegin("call");
+                // GRACE PERIOD: Ignore suspended state immediately after a user play
+                if (Date.now() - this.lastUserPlayTimestamp > 2000) {
+                  this.handleInterruptionBegin("call");
+                }
               }
             } else if (state === "running") {
               if (this.isInterrupted && this.wasPlayingBeforeInterruption) {
@@ -207,11 +212,14 @@ export class SystemInterruptionListener {
   public notifyUserPlay(): void {
     this.isInterrupted = false;
     this.wasPlayingBeforeInterruption = false;
+    this.lastUserPlayTimestamp = Date.now();
+    this.isUserPaused = false;
   }
 
   public notifyUserPause(): void {
     this.isInterrupted = false;
     this.wasPlayingBeforeInterruption = false;
+    this.isUserPaused = true;
   }
 
   public getIsInterrupted(): boolean {
