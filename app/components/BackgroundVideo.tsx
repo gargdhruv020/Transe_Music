@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 
 const VIDEOS = [
   "/bg/tunnel-1.webm",
-  "/bg/tunnel-2.webm",
   "/bg/tunnel-3.webm"
 ];
 
