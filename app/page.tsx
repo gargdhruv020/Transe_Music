@@ -4,12 +4,13 @@ import Clock from "@/app/components/Clock";
 import ListenerCount from "@/app/components/ListenerCount";
 import Player from "@/app/components/Player";
 import CaptionRotator from "@/app/components/CaptionRotator";
+import BackgroundVideo from "@/app/components/BackgroundVideo";
 
 export default function Home() {
   return (
     <main className="relative flex min-h-dvh flex-1 flex-col items-center justify-between overflow-hidden">
-      {/* ── 1. Fixed Background ─────────────────────── */}
-      <div className="hero-bg" />
+      {/* ── 1. Dynamic Video Background ─────────────────────── */}
+      <BackgroundVideo />
       {/* Gradient overlay */}
       <div className="fixed inset-0 -z-20 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
 
