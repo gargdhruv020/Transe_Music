@@ -26,11 +26,11 @@ export default function BackgroundVideo() {
     const fadeDuration = 1.5; // 1.5 seconds crossfade
     
     // When there is only `fadeDuration` seconds left, start playing the next one
-    if (video.duration - video.currentTime <= fadeDuration && nextIndex === null) {
+    if (video.duration > 0 && video.duration - video.currentTime <= fadeDuration && nextIndex === null) {
       const nextIdx = (index + 1) % VIDEOS.length;
       setNextIndex(nextIdx);
       if (videoRefs.current[nextIdx]) {
-        videoRefs.current[nextIdx]!.currentTime = 0;
+        // Just play it, do not force seek (currentTime = 0) here as it causes heavy GPU stalling
         videoRefs.current[nextIdx]!.play().catch(() => {});
       }
     }
@@ -46,9 +46,14 @@ export default function BackgroundVideo() {
       const nextIdx = (index + 1) % VIDEOS.length;
       setCurrentIndex(nextIdx);
       if (videoRefs.current[nextIdx]) {
-        videoRefs.current[nextIdx]!.currentTime = 0;
         videoRefs.current[nextIdx]!.play().catch(() => {});
       }
+    }
+    // Reset the finished video back to start quietly in the background
+    const video = videoRefs.current[index];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
     }
   };
 
@@ -78,6 +83,7 @@ export default function BackgroundVideo() {
             src={src}
             muted
             playsInline
+            preload="auto"
             autoPlay={index === 0}
             onTimeUpdate={() => {
                 if (isCurrent) handleTimeUpdate(index);
@@ -88,7 +94,8 @@ export default function BackgroundVideo() {
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
             style={{ 
               opacity, 
-              zIndex 
+              zIndex,
+              willChange: 'opacity'
             }}
           />
         );
