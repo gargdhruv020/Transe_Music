@@ -6093,6 +6093,356 @@ const listRemix: any[] = [
     "film": "Remix",
     "isRemix": true,
     "youtubeId": "FqWQT0eExyE"
+  },
+  {
+    "title": "Ali Ali",
+    "artist": "Diorange, A.R. Rahman, Nooran Sisters",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "LYIhNo2XRDM"
+  },
+  {
+    "title": "Saat Samundar Tech House Mix",
+    "artist": "Arthat, Viju Shah, Sadhana Sargam",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "jAcWZGY6eiQ"
+  },
+  {
+    "title": "Pehle Bhi Main Remix",
+    "artist": "Vishal Mishra, Raj Shekhar, Dj Chetas, DJ Nyk, Designiter",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "o1Ij150VY7k"
+  },
+  {
+    "title": "Aaj Ki Raat - Progressive Techno Mix",
+    "artist": "Debb Official, Divya Kumar, Madhubanti Bagchi, Sachin-Jigar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "-fZn8abwpB4"
+  },
+  {
+    "title": "Jai Jai Shivshankar - Workout Remix",
+    "artist": "Vishal-Shekhar, Vishal Dadlani, Benny Dayal, Kumaar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "oGneAab3e88"
+  },
+  {
+    "title": "Zara Zara - Melodic Techno Remix",
+    "artist": "DJ Reme, Bombay Jayashri",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "qlSOHDCcebA"
+  },
+  {
+    "title": "Maula Mere Maula - Melodic House Mix",
+    "artist": "Dj Turbulence, Roop Kumar Rathod",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "9qxn8KXrjb4"
+  },
+  {
+    "title": "AJA",
+    "artist": "Ammar Baig, Rahat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "K8lgZ5J0Uxw"
+  },
+  {
+    "title": "Aaj Ki Raat X Mujhe Tumse Mohabbat Hai (Mashup)",
+    "artist": "Beatz Boy",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "GaWqsPXu0IA"
+  },
+  {
+    "title": "Jimmy Jimmy (Reprise)",
+    "artist": "Rusha & Blizza, Parvati Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "RNZSqfBf3rM"
+  },
+  {
+    "title": "Raat Baaki",
+    "artist": "Whoja Vu",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "vF4Lh6DHMe8"
+  },
+  {
+    "title": "Kay Sera Sera - House Mix",
+    "artist": "Shankar Mahadevan, Kavita Krishnamurthy, Drub, SAM8",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "6N2JRJYBvFg"
+  },
+  {
+    "title": "Tose Naina Lage - Progressive House Mix",
+    "artist": "DJ Rink, Shilpa Rao, Kshitij Tarey",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "L_RUuzwhdBI"
+  },
+  {
+    "title": "Arjan Vailly Tech House Remix",
+    "artist": "Bhupinder Babbal, Ali Merchant",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "LmopBNZFyz0"
+  },
+  {
+    "title": "Tere Vaaste - Progressive Remix",
+    "artist": "DJ Vaggy, Hermus, Sachin-Jigar, Altamash Faridi, Varun Jain, Shadab Faridi",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Bjtr5psLZHE"
+  },
+  {
+    "title": "Jadu Hai Nasha Hai - Progressive Remix",
+    "artist": "Debb Official, Shreya Ghoshal",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ZuJVCjA6N28"
+  },
+  {
+    "title": "Mujhko Pehchaanlo (Remix By Ricardo Villalobos)",
+    "artist": "KK",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "o84_ivsXku0"
+  },
+  {
+    "title": "Riwaayat",
+    "artist": "Firaaq",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Vd1bawxgukI"
+  },
+  {
+    "title": "Ud-Daa Punjab - DJ Notorious Remix / From \"Udta Punjab\"",
+    "artist": "Amit Trivedi, Vishal Dadlani, DJ Notorious",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ZsgnWQuQaB8"
+  },
+  {
+    "title": "Ghar Aao Na (Techno Mix)",
+    "artist": "Salim–Sulaiman, Sunidhi Chauhan, DJ Nyk",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "77m2qdeMtLs"
+  },
+  {
+    "title": "Vatta Vatta",
+    "artist": "AFTERAll",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "PTb83KzAAlY"
+  },
+  {
+    "title": "Rangi Saari",
+    "artist": "Kavita Seth, Kanishk Seth",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "jY8mAWdQFOA"
+  },
+  {
+    "title": "Mukabala",
+    "artist": "Sodhivine",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "r0hh8gMTNxs"
+  },
+  {
+    "title": "Lakshmi",
+    "artist": "Shanti People, Frank Deka",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "cwlVb5amzYc"
+  },
+  {
+    "title": "Dekhte Dekhte Melodic Progressive House Remix",
+    "artist": "Atif Aslam, Ali Merchant",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "GwtmvGhLzA4"
+  },
+  {
+    "title": "Tumhare Hi Rahenge Hum Melodic Techno Mix",
+    "artist": "Arthat, Sachin-Jigar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "FwwVltnSj9I"
+  },
+  {
+    "title": "Yeh Sama - Minimal Techno Mix",
+    "artist": "Debb Official, Akriti Kakar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "KCEpf9eCGZw"
+  },
+  {
+    "title": "Jiya Jale - Remix",
+    "artist": "Lata Mangeshkar, M. G. Sreekumar, Khanvict, Desi Sub Culture",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "i0kdYFW_oac"
+  },
+  {
+    "title": "D'WANA",
+    "artist": "Mkshft, Ansick",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "HzSqNNafhJs"
+  },
+  {
+    "title": "Bang Bang DJ Aqeel Indo-House Mix",
+    "artist": "Benny Dayal, Neeti Mohan, Vishal-Shekhar, Dj Aqeel",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "jZyAB2KFDls"
+  },
+  {
+    "title": "Tu Tu Hai Wahi DJ Baddiee Mix - Bollywood Techno Mix",
+    "artist": "DJ Baddiee",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "JOYilxB4-yA"
+  },
+  {
+    "title": "Tadke Tadke (Radio Edit)",
+    "artist": "AFTERAll",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ck4ZzQsaYTE"
+  },
+  {
+    "title": "Malhari",
+    "artist": "Memento Mori",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "9bpbAc2U53M"
+  },
+  {
+    "title": "Tum Hi Ho Future Rave Mix",
+    "artist": "Arijit Singh, Mithoon, DJ Yogii",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "R_mkSrAqZcU"
+  },
+  {
+    "title": "Genda Phool",
+    "artist": "Freaky",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "WYFhildhw7s"
+  },
+  {
+    "title": "Tum Hi Aana (Melodic Progressive House)",
+    "artist": "Payal Dev, Jubin Nautiyal, Ali Merchant, Kunaal Vermaa",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "xYd-7Vz2chM"
+  },
+  {
+    "title": "Aaj Ki Raat - Melodic Techno Mix",
+    "artist": "Ri8 Music, Madhubanti Bagchi, Divya Kumar, Sachin-Jigar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Q3v_0c-YpkY"
+  },
+  {
+    "title": "Piya Tu Ab Toh Aaja - Arthat & Amiy Remix",
+    "artist": "Arthat, Amiy",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "7XMWq_JxvEk"
+  },
+  {
+    "title": "Sanson Ki Mala - RxB Edit",
+    "artist": "Nusrat Fateh Ali Khan, Rusha & Blizza",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "VycT0V_Z378"
+  },
+  {
+    "title": "Tumse Milke Dil Ka Hai Jo Haal Remix",
+    "artist": "Sonu Nigam, Aftab Sabri, Hashim Sabri, DJ Dips",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "lq5Wf_kYr7Q"
+  },
+  {
+    "title": "Bure Bure - House Mix",
+    "artist": "Vansh Vijan, Robert Uhlmarash",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "i66YbLrRIGw"
+  },
+  {
+    "title": "Jiya Jale",
+    "artist": "Whoja Vu",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "EBJNoGf-8ZM"
+  },
+  {
+    "title": "Aaja Re O Mere Dilbar Aaja - Techno Remix",
+    "artist": "DJ Vaggy, DJ Hani, Lata Mangeshkar, Nitin Mukesh",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "GFtPagwIhNY"
+  },
+  {
+    "title": "Sawan Barse",
+    "artist": "Piyush Ambhore, DEVM",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "tZbAPNjfFXw"
+  },
+  {
+    "title": "Tose Naina Lage - Melodic Progressive",
+    "artist": "Debb Official, Kshitij Tarey, Shilpa Rao",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "FlAKfXj9jUg"
+  },
+  {
+    "title": "Jhalak Dikhla Ja Remix",
+    "artist": "Himesh Reshammiya, Dj Ganesh Bombay, Sameer Anjaan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "-RtxhwhdxdM"
+  },
+  {
+    "title": "Mora Piya",
+    "artist": "MOKSHER, Umang Darbari",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "X-0CXsGcW8Y"
+  },
+  {
+    "title": "Kesariya - Lost Frequencies Remix",
+    "artist": "Pritam, Arijit Singh, Lost Frequencies",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "t34m3t0768E"
+  },
+  {
+    "title": "Tera Naam Liya - Remix",
+    "artist": "Arthat, Manhar Udhas, Anuradha Paudwal, Laxmikant–Pyarelal",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "GDpwI1nqcRk"
+  },
+  {
+    "title": "Pehla Nasha - Deep House Mix",
+    "artist": "DJ Rink, Udit Narayan, Sadhana Sargam",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Q0asKyaDDH0"
   }
 ];
 
@@ -10557,6 +10907,398 @@ const listAfro: any[] = [
     "isRemix": true,
     "isAfro": true,
     "youtubeId": "nNDbFYfIU1A"
+  },
+  {
+    "title": "Kesariya - Lost Frequencies Remix",
+    "artist": "Pritam, Arijit Singh, Lost Frequencies",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "t34m3t0768E"
+  },
+  {
+    "title": "Bheegi Bheegi",
+    "artist": "KV5 Dubai",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "b3bEiZTAh_0"
+  },
+  {
+    "title": "Dola re Dola",
+    "artist": "MEDUZA, Varun Jain",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "B4HbUt58eFU"
+  },
+  {
+    "title": "Pehle Bhi Main Remix",
+    "artist": "Vishal Mishra, Raj Shekhar, Dj Chetas, DJ Nyk, Designiter",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "o1Ij150VY7k"
+  },
+  {
+    "title": "Guddi Riddim",
+    "artist": "DJ Snake, Wade, Nooran Sisters",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "p0x23GG-FeY"
+  },
+  {
+    "title": "ROYALE",
+    "artist": "BOMBAYS",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "QBJlW1KcR1E"
+  },
+  {
+    "title": "Dilbar Afro Tech House Remix",
+    "artist": "Neha Kakkar, Dhvani Bhanushali, Ikka, Ali Merchant, ILA",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Hl3iXITizyA"
+  },
+  {
+    "title": "Telugu Tech",
+    "artist": "Wax Motif",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "iflk8GHtSY0"
+  },
+  {
+    "title": "Aaj Ki Raat - Progressive Techno Mix",
+    "artist": "Debb Official, Divya Kumar, Madhubanti Bagchi, Sachin-Jigar",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "-fZn8abwpB4"
+  },
+  {
+    "title": "Aao Huzoor",
+    "artist": "Aatma",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Z6b6WZ1eJkg"
+  },
+  {
+    "title": "Dekhte Dekhte Melodic Progressive House Remix",
+    "artist": "Atif Aslam, Ali Merchant",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "GwtmvGhLzA4"
+  },
+  {
+    "title": "Pasoori - SHNKR VIP Remix",
+    "artist": "SHNKR",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "yt4ueH2MVk8"
+  },
+  {
+    "title": "Ghum Shum",
+    "artist": "Sartek",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "GRgruWBEQsc"
+  },
+  {
+    "title": "Pehla Nasha - Deep House Mix",
+    "artist": "DJ Rink, Udit Narayan, Sadhana Sargam",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Q0asKyaDDH0"
+  },
+  {
+    "title": "Jiya Jale",
+    "artist": "Whoja Vu",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "EBJNoGf-8ZM"
+  },
+  {
+    "title": "Kahin Aag Lage",
+    "artist": "Freaky",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "YiPExNgBYNg"
+  },
+  {
+    "title": "nadaaniyan - Sartek & Tangoes Remix",
+    "artist": "Sartek, Tangoes!",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "rDLXP9GaEz4"
+  },
+  {
+    "title": "Jiya Jale (Aatma Remix)",
+    "artist": "Lata Mangeshkar, M. G. Sreekumar, Aatma",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Et50nFECBeY"
+  },
+  {
+    "title": "Genda Phool",
+    "artist": "Freaky",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "WYFhildhw7s"
+  },
+  {
+    "title": "Ghar Aao Na (Techno Mix)",
+    "artist": "Salim–Sulaiman, Sunidhi Chauhan, DJ Nyk",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "77m2qdeMtLs"
+  },
+  {
+    "title": "Hor Disda - Deep House Mix",
+    "artist": "KV5 Dubai, CoverStory",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "HsZYz7x6Wtk"
+  },
+  {
+    "title": "Tere Vaaste - Progressive Remix",
+    "artist": "DJ Vaggy, Hermus, Sachin-Jigar, Altamash Faridi, Varun Jain, Shadab Faridi",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Bjtr5psLZHE"
+  },
+  {
+    "title": "Club Chennai",
+    "artist": "aboywithabag",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ee8OS2H_GrE"
+  },
+  {
+    "title": "Addictive",
+    "artist": "STIKMATIK",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "8w0c5d7LP4o"
+  },
+  {
+    "title": "Si Ta Ram (feat. Drish Vee)",
+    "artist": "Zafrir, Drish Vee",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "BQ9krQRM-r0"
+  },
+  {
+    "title": "Tum Hi Ho Future Rave Mix",
+    "artist": "Arijit Singh, Mithoon, DJ Yogii",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "R_mkSrAqZcU"
+  },
+  {
+    "title": "Nadiyon Paar (Let The Music Play Again) - Tech House Remix",
+    "artist": "Deepanshu Ruhela, Priyank, Sachin-Jigar, Rashmeet Kaur, Shamur, IP Singh",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "eWMBy5Sm318"
+  },
+  {
+    "title": "Softly - Tiësto Remix",
+    "artist": "Karan Aujla, Ikky, Tiësto",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "KX6U8kgyXI0"
+  },
+  {
+    "title": "One Love - Original Mix",
+    "artist": "Liquid Rose",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "Nbav4oWMqEY"
+  },
+  {
+    "title": "Laila Nachle",
+    "artist": "ADXRE",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "QlOX0acfoUg"
+  },
+  {
+    "title": "Haseena",
+    "artist": "Fake Tattoos",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "29a4axIeI80"
+  },
+  {
+    "title": "Just Remember",
+    "artist": "Taner Kaya, Birand Akatak",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ETw5FEwIt08"
+  },
+  {
+    "title": "Turiya Turiya - Sanjoy Remix",
+    "artist": "Asad Khan, Sanjoy",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "xadzBFaDWGI"
+  },
+  {
+    "title": "Radhe Shyam - Yohan & David Remix",
+    "artist": "Sati Ethnica, Ivailo Blagoev, Cafe De Anatolia, Yohan & David",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "R4Noo1YsrgU"
+  },
+  {
+    "title": "Adi Shakti - Extended Mix",
+    "artist": "Zafrir",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "n2BglP5dWeI"
+  },
+  {
+    "title": "Chada De Ve",
+    "artist": "Sartek",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "fGKvwrBntlE"
+  },
+  {
+    "title": "Jhoom",
+    "artist": "Kahani",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "KWqpaPCDp6Q"
+  },
+  {
+    "title": "Chhan Chhan - Kunal Merchant Remix",
+    "artist": "Kunal Merchant, Prateeksha Srivastava, 6091",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ZHG8qHqeh-Q"
+  },
+  {
+    "title": "Zara Zara - Techno Mix",
+    "artist": "DJ SHVM, Bombay Jayashri",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "2RI058AdW0M"
+  },
+  {
+    "title": "Jadu Hai Nasha Hai - Progressive Remix",
+    "artist": "Debb Official, Shreya Ghoshal",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ZuJVCjA6N28"
+  },
+  {
+    "title": "El Toro Y La Rana - Kahani's Dholna Mix",
+    "artist": "Carlos Francisco, Kahani",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ZYvNd0VqMQs"
+  },
+  {
+    "title": "Jugni - Whoja Vu Techno Rework",
+    "artist": "Whoja Vu, Arif Lohar",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "7cNKAJrLFRM"
+  },
+  {
+    "title": "Truth Hurts",
+    "artist": "Liva K",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "ewQOXw-B4r8"
+  },
+  {
+    "title": "BOLLY RAVE",
+    "artist": "Indronix, Shuvonil",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "BF0NrBtWtcU"
+  },
+  {
+    "title": "Rapture - Club Mix",
+    "artist": "Kunal Merchant, Payal Jay, Indo Warehouse",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "dh50T07ZAiI"
+  },
+  {
+    "title": "Raat Baaki",
+    "artist": "Whoja Vu",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "vF4Lh6DHMe8"
+  },
+  {
+    "title": "Tum Hi Aana (Melodic Progressive House)",
+    "artist": "Payal Dev, Jubin Nautiyal, Ali Merchant, Kunaal Vermaa",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "xYd-7Vz2chM"
+  },
+  {
+    "title": "Paranda (Radio Edit)",
+    "artist": "AFTERAll",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "UnVGau74a-g"
+  },
+  {
+    "title": "Addicted (ਆਦੀ)",
+    "artist": "The Chainsmokers, Guru Randhawa, Jonita Gandhi, Zerb, Ink",
+    "film": "Afro",
+    "isRemix": true,
+    "isAfro": true,
+    "youtubeId": "JGR4YD-Iosc"
   }
 ];
 
@@ -11400,6 +12142,318 @@ const listSufi: any[] = [
     "isRemix": true,
     "isSufi": true,
     "youtubeId": "HlHQbV0JbAE"
+  },
+  {
+    "title": "Akhiyaan Udeek Diyaan - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "DoHme8Nc9Dg"
+  },
+  {
+    "title": "Jaan Se Guzarte Hain - Remix / Dil Pe Zakham Khate Hain",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "p3eH_lR0p_w"
+  },
+  {
+    "title": "Dil Pe Zakham Khate Hain",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "NBiuCrpXRXg"
+  },
+  {
+    "title": "Sochta Hoon - Remix",
+    "artist": "Vibrono, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "90WtmAxsi8o"
+  },
+  {
+    "title": "Sanson Ki Mala Pe",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "QqlEFIhekWI"
+  },
+  {
+    "title": "Yadan Vichre Sajan Dian - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "tfzrwYeEjTM"
+  },
+  {
+    "title": "Akhiyan Udeekdiyan - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "TDyjig50rvc"
+  },
+  {
+    "title": "Unke Andaz E Karam - Remix",
+    "artist": "Vibrono, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "l15KMIEt5iE"
+  },
+  {
+    "title": "Piya Ghar Aaya - Remix",
+    "artist": "Asad Khan, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "R4BsqPowUDo"
+  },
+  {
+    "title": "Tumhen Dillagi - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "2q8khiXOH5M"
+  },
+  {
+    "title": "Sanson Ki Mala - RxB Edit",
+    "artist": "Nusrat Fateh Ali Khan, Rusha & Blizza",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "VycT0V_Z378"
+  },
+  {
+    "title": "Tere Bin Nahin Lagda",
+    "artist": "Nusrat Fateh Ali Khan, Partners in Rhyme",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "yH7zEzoJztU"
+  },
+  {
+    "title": "Mast Nazron Se Allah Bachaye",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "ToemWIz2hUo"
+  },
+  {
+    "title": "Tumhen Dillagi",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "S0SORb4W4k4"
+  },
+  {
+    "title": "Hai Kahan Ka Irada",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "cFWVdjid1ss"
+  },
+  {
+    "title": "Yadan Vichre Sajan Dian - Remix / Part 2",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "4i-FJnSTWW4"
+  },
+  {
+    "title": "Tere Bin Nahi Lagda - Remix",
+    "artist": "DJ Nitish Gulyani, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "pGiT3Cvdwuo"
+  },
+  {
+    "title": "Jaan Se Guzarte Hai - Turkish House Mix / Dil Pe Zakham Khate Hain",
+    "artist": "Vaibhav Pani, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "qXGuTHAJcCE"
+  },
+  {
+    "title": "Mann Atkeya - Remix",
+    "artist": "Nusrat Fateh Ali Khan, DJ Nitish Gulyani",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "gExrviYU7jk"
+  },
+  {
+    "title": "Phiroon Dhondhta Maikadah - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "zRZRFsLMp20"
+  },
+  {
+    "title": "Peeni Hai - Dr Zeus Remix",
+    "artist": "Dr Zeus, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "M8_t1Hybwt4"
+  },
+  {
+    "title": "Pyar Manga Tha Gham De Gaye Hain",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "JjJyceVvDVs"
+  },
+  {
+    "title": "Gardeshon Ke Hain Marey",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "JTrbrFitwsQ"
+  },
+  {
+    "title": "Sadgi To Hamari Zara Dekhiye",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "G50mqZyIp44"
+  },
+  {
+    "title": "Un Ke Dar Pe Ponchne To Payen - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "_NCynaLXxJg"
+  },
+  {
+    "title": "Hanju Akhiyan De Vehre - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "pHPSytFveUY"
+  },
+  {
+    "title": "Meri Zindagi Hai Tu - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "Xi1jCUjXwoU"
+  },
+  {
+    "title": "Aisa Bana Sawarna",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "aynl4YJiG6U"
+  },
+  {
+    "title": "Hanju Akhiyan De Vehre - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "4goUx3DUEZg"
+  },
+  {
+    "title": "Fasle Gul Hai - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "bRKx-XoBPg4"
+  },
+  {
+    "title": "Main Rowan Tenu Yaad Karke - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "MTDKmiqDhOQ"
+  },
+  {
+    "title": "Aik Muddat Hui",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "8xTCbvS4lKo"
+  },
+  {
+    "title": "Jaan Se Guzarte Hai - Remix / Dil Pe Zakham Khate Hain",
+    "artist": "Nusrat Fateh Ali Khan, DJ Nitish Gulyani",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "pprzhFPJuFI"
+  },
+  {
+    "title": "Kehna Ghalat Ghalat - Remix",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "Seo-Iy_wKPY"
+  },
+  {
+    "title": "Woh Hata Rahe Hain Parda",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "lrlF83R4iQw"
+  },
+  {
+    "title": "Na Rukte Hain Ansoo",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "z0lyNuPZ8F4"
+  },
+  {
+    "title": "Bina Maahi",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "oVvqyqXTWyk"
+  },
+  {
+    "title": "Halka Halka Saroor",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "Rcga0vsNdms"
+  },
+  {
+    "title": "Haqeeqat Ka Agar Afsana",
+    "artist": "Nusrat Fateh Ali Khan, Afternight Vibes",
+    "film": "Sufi",
+    "isRemix": true,
+    "isSufi": true,
+    "youtubeId": "o1icz_jru_s"
   }
 ];
 
@@ -23036,6 +24090,406 @@ const listClub: any[] = [
     "isRemix": true,
     "isClub": true,
     "youtubeId": "GIRrImFDKdI"
+  },
+  {
+    "title": "You & Me - Rivo Remix",
+    "artist": "Disclosure, Rivo, Eliza Doolittle",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rO5UDrIoTTs"
+  },
+  {
+    "title": "Addicted",
+    "artist": "Zerb, The Chainsmokers, Ink",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ROhlsgTOsgc"
+  },
+  {
+    "title": "Temperature",
+    "artist": "Sean Paul",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "dW2MmuA1nI4"
+  },
+  {
+    "title": "Desire",
+    "artist": "Ian Asher, Olly Alexander (Years & Years)",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ZDw_x_REei0"
+  },
+  {
+    "title": "Friday (feat. Mufasa & Hypeman) - Dopamine Re-Edit",
+    "artist": "Riton, Nightcrawlers, Mufasa & Hypeman, Mufasa, Dopamine",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "U6n2NcJ7rLc"
+  },
+  {
+    "title": "Halo",
+    "artist": "Prezioso, Harris & Ford, Shibui",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "iv9PP1QZAOc"
+  },
+  {
+    "title": "Seven Nation Army",
+    "artist": "DJ Fluke, Jaki Nelson",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Rd276fRSYes"
+  },
+  {
+    "title": "On The Floor",
+    "artist": "Jennifer Lopez, Pitbull",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "t4H_Zoh7G5A"
+  },
+  {
+    "title": "Say My Name - Remix",
+    "artist": "Morgan Seatree, Florence + The Machine",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TUESca2pF3k"
+  },
+  {
+    "title": "Let's Go",
+    "artist": "Jaden Bojsen, David Guetta, Sami Brielle",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "MX8eYdEOU5w"
+  },
+  {
+    "title": "Sahara",
+    "artist": "Whisnu Santika, Volt",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5_ehdwsv5BI"
+  },
+  {
+    "title": "Shots",
+    "artist": "LMFAO, Lil Jon",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XNtTEibFvlQ"
+  },
+  {
+    "title": "Pump It Up",
+    "artist": "Endor",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BfnjX88Va4Y"
+  },
+  {
+    "title": "NO IDEA #jerseyclub - Ziahfyah & Indo2x Remix",
+    "artist": "Don Toliver, Indo2x, Ziahfyah",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "SVulXswdLO8"
+  },
+  {
+    "title": "Turn The Lights Off",
+    "artist": "Justė, Jaxstyle, Jon",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XUv7wLLvO_0"
+  },
+  {
+    "title": "Low (feat. T-Pain)",
+    "artist": "Flo Rida, T-Pain",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "U2waT9TxPU0"
+  },
+  {
+    "title": "Cash Out",
+    "artist": "SIDEPIECE, Bobby Shmurda",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hfgheLBqiD8"
+  },
+  {
+    "title": "The Days - NOTION Remix",
+    "artist": "Chrystal, NOTION",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "t-knFuqQdGc"
+  },
+  {
+    "title": "I Know You Want Me (Calle Ocho)",
+    "artist": "Pitbull",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "hFoxg4IFtqc"
+  },
+  {
+    "title": "Stay Sexy",
+    "artist": "HUGEL, LaBritney, Mili",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "TuA0BzJwth8"
+  },
+  {
+    "title": "Love Tonight - David Guetta Remix Edit",
+    "artist": "Shouse, David Guetta",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "MveDLwDIZiI"
+  },
+  {
+    "title": "Just Dance",
+    "artist": "Lady Gaga, Colby O'Donis",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2Abk1jAONjw"
+  },
+  {
+    "title": "REHAB",
+    "artist": "Blair Muir",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Uhby9lQaZ6g"
+  },
+  {
+    "title": "Addicted (feat. TIMID.)",
+    "artist": "Naarly, Daytona, LEWS, FIRSTCLASS, TIMID.",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ax_fOTzsc1g"
+  },
+  {
+    "title": "La Mamá de la Mamá",
+    "artist": "El Alfa, El Cherry Scom, CJ",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "s5yRZOQ3EWI"
+  },
+  {
+    "title": "B2b",
+    "artist": "Charli xcx",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "If4-ckGcr0c"
+  },
+  {
+    "title": "Do It To It",
+    "artist": "ACRAZE, Cherish",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "cBSYJqv0Fjc"
+  },
+  {
+    "title": "Boyz In Paris (with VINAI)",
+    "artist": "Marnik, Naeleck, VINAI",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Z1Bj-gWAw6Y"
+  },
+  {
+    "title": "Astronomia - Never Go Home",
+    "artist": "Tony Igy",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "XpCurm2Ip5w"
+  },
+  {
+    "title": "Hotel Room Service",
+    "artist": "Pitbull",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "2up_Eq6r6Ko"
+  },
+  {
+    "title": "Better Off Alone",
+    "artist": "Alice Deejay",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "Ck0LO6b6OQc"
+  },
+  {
+    "title": "Shelter",
+    "artist": "Regas Adreo",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "7Y9cfEN-szE"
+  },
+  {
+    "title": "On 2nite",
+    "artist": "Silva Bumpa",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ULPcTknBMqw"
+  },
+  {
+    "title": "Be My Lover (feat. La Bouche) - 2023 Mix",
+    "artist": "Hypaton, David Guetta, La Bouche",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "yCYWWE1ZFzY"
+  },
+  {
+    "title": "DANCE...",
+    "artist": "Slayyyter",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "0W-N1DqpmiM"
+  },
+  {
+    "title": "Desire - Play & Win Radio Edit",
+    "artist": "Morris",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "1kJtn-N_2_Y"
+  },
+  {
+    "title": "Miss You - Bonus Track",
+    "artist": "Oliver Tree, Robin Schulz",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "BX0lKSa_PTk"
+  },
+  {
+    "title": "One More Time",
+    "artist": "Daft Punk",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "FGBhQbmPwH8"
+  },
+  {
+    "title": "Wait So Long (Why Do I Have To)",
+    "artist": "Swedish House Mafia",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "ycO9XkjxPhA"
+  },
+  {
+    "title": "Jenny (I Wanna Ruin Our Friendship)",
+    "artist": "Ian Asher, Studio Killers",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "AXtWV2TWlfw"
+  },
+  {
+    "title": "Get Low",
+    "artist": "Lil Jon & The East Side Boyz, Ying Yang Twins",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IYH7_GzP4Tg"
+  },
+  {
+    "title": "57",
+    "artist": "KAVAK, BAKAN",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "w9uHnR0Iozw"
+  },
+  {
+    "title": "Clarity",
+    "artist": "Zedd, Foxes",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "IxxstCcJlsc"
+  },
+  {
+    "title": "Dance No More (with Kaleena Zanders)",
+    "artist": "Sunday Scaries, Kaleena Zanders",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "rQhFbmBq7z0"
+  },
+  {
+    "title": "Rock That Body",
+    "artist": "Black Eyed Peas",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "nmnjL26OBcY"
+  },
+  {
+    "title": "Yalla Habibi",
+    "artist": "Whisnu Santika",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "8m5br9NdLcA"
+  },
+  {
+    "title": "Ölürüm - Remix",
+    "artist": "Nur Cennet, Muharrem ECE",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "gVkn6R8B110"
+  },
+  {
+    "title": "Danza Kuduro",
+    "artist": "W&W, AXMO, Andre Schnura, Lucenzo, Don Omar",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "PIuxzen7iRA"
+  },
+  {
+    "title": "Where You Are",
+    "artist": "John Summit, HAYLA",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "5BqjhUmldDc"
+  },
+  {
+    "title": "Gasolina",
+    "artist": "Daddy Yankee",
+    "film": "Club",
+    "isRemix": true,
+    "isClub": true,
+    "youtubeId": "CCF1_jI8Prk"
   }
 ];
 
@@ -25037,6 +26491,342 @@ const listHaryanvi: any[] = [
     "youtubeId": "jMjmnSraNe8",
     "videoTitle": "BERETTA (Official Video) Amanraj Gill, Jaya Rohilla ft. Shivani Yadav | New Haryanvi Song 2025",
     "author": "Nav Haryanvi"
+  },
+  {
+    "title": "Aakh Ye Taalibaani",
+    "artist": "Manish Sonipat Aala, Bali Sharma, Vampire",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Y4-Ly0gHGLE"
+  },
+  {
+    "title": "Green Flag",
+    "artist": "Vikram Sarkar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "j3ve-olNH6s"
+  },
+  {
+    "title": "Kharch Karod (Slow)",
+    "artist": "Vikas Kumar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Et46hHWedp8"
+  },
+  {
+    "title": "Angli Ghumai Jaata Ne",
+    "artist": "Biru Kataira, Rahul Puthi, Rinkal Yogi, Sweta Chahuan",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "_ztRITR856Y"
+  },
+  {
+    "title": "Jaat Intro (feat. Pranjal Dahiya)",
+    "artist": "Ajay Bhagta, Manisha Sharma, Kb Dhull, Pranjal Dahiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ApnrYpdBrco"
+  },
+  {
+    "title": "Naam Chale",
+    "artist": "Vikram Sarkar",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "tYKrORILFOg"
+  },
+  {
+    "title": "Naam Tera",
+    "artist": "Ndee Kundu",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "fEaF31ojyjQ"
+  },
+  {
+    "title": "Bandook 2",
+    "artist": "Narender Bhagana, Poonam Gosawmi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "3LO3vsZE3DM"
+  },
+  {
+    "title": "Hero Handa",
+    "artist": "Khushi Baliyan, Ashu Twinkle, Raj Mawar, Punit Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "PRiSzXKA2OY"
+  },
+  {
+    "title": "Brotherhood (Valmiki Chamar)",
+    "artist": "Baidh",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "6DCwvL_uWQE"
+  },
+  {
+    "title": "Kabootar",
+    "artist": "Renuka Panwar, Surender Romio",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "Eb28L8PO-qc"
+  },
+  {
+    "title": "Weapon (Slowed and Reverb)",
+    "artist": "KD DESIROCK, Komal Choudhary, Pranjal Dahiya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "O-cR4FwnMV4"
+  },
+  {
+    "title": "Nature",
+    "artist": "Kabira, NJ Nindaniya",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ZETfvb4hrnw"
+  },
+  {
+    "title": "Kaali Activa - Pind De Gerhe",
+    "artist": "Rupinder Handa, Desi Crew, Narinder Batth",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "DXSDe1HF1VU"
+  },
+  {
+    "title": "Solid Body",
+    "artist": "Raju Punjabi, Sheenam Katholic",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ou-litQ9hWQ"
+  },
+  {
+    "title": "Aankh Ladgi",
+    "artist": "Ruchika Jangid",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "VbSu6_bMD7o"
+  },
+  {
+    "title": "Gaadi Paache Gaadi",
+    "artist": "Amanraj Gill, Bulbul",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ua6GpI8ugxY"
+  },
+  {
+    "title": "Gaadi 150",
+    "artist": "Vikram Sarkar, THOUGHT",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "YSb0Ho5RCQ0"
+  },
+  {
+    "title": "Nazra Ke Teer",
+    "artist": "Vikram Sarkar, Guri Nimana",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "cehyr946p64"
+  },
+  {
+    "title": "Jaguar",
+    "artist": "Sukh-E Muzical Doctorz",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "i2GC06euEDE"
+  },
+  {
+    "title": "Ghana Kasoota (feat. Surbhi Jyoti)",
+    "artist": "Raftaar, Rashmeet Kaur, Avvy Sra, Surbhi Jyoti",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "u0Y3EHuMktE"
+  },
+  {
+    "title": "Haryana Hood",
+    "artist": "Irshad Khan",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "qeVUGnke9ko"
+  },
+  {
+    "title": "Jaat Gelya Yaari",
+    "artist": "Naveen Punia",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2XY29qhcxN8"
+  },
+  {
+    "title": "Sheesha - Aakhya Mai Aakh Ghali Jo Bairan",
+    "artist": "Mitta Ror, Swara Verma",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "i52TYO13Nyg"
+  },
+  {
+    "title": "Naina Te War",
+    "artist": "Bali Sharma, Lakshay Dahiya, Riya Baliyan",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ApDSohpB1Oo"
+  },
+  {
+    "title": "Roots",
+    "artist": "Bintu Pabra",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "e36s_nZCD94"
+  },
+  {
+    "title": "Kitab",
+    "artist": "Mr Dutt, Vipin Foji",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "LYl28zAk8eI"
+  },
+  {
+    "title": "Bairan",
+    "artist": "Banjaare",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "oafxkMv4xnc"
+  },
+  {
+    "title": "My Queen",
+    "artist": "KD DESIROCK, Swara Verma, Ghanu Music",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "GX4UPPxhOgA"
+  },
+  {
+    "title": "Tu Na Samjhe",
+    "artist": "Hellow Raja, MaxxTurnn",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "LmBsyzzX5aA"
+  },
+  {
+    "title": "Tu Chahiye",
+    "artist": "Sahil Dahiya Wrld, Mohit Chahar Ji, Dimple Jaatni",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "2Dbc0IEihbE"
+  },
+  {
+    "title": "Aarzu",
+    "artist": "Noor, Khan, Madhurxo",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "M5OCLifZK1w"
+  },
+  {
+    "title": "Suthri Si Chhori",
+    "artist": "Mukesh Foji, Ajay Hooda, Arzoo Dhillon",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "4NuAujFF_Xc"
+  },
+  {
+    "title": "Baba Ji",
+    "artist": "Vishu Puthi, Sapna Choudhary",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "tnlnqTRV5ZQ"
+  },
+  {
+    "title": "Chambal K Dakku",
+    "artist": "Masoom Sharma, Rahul Muana, Swara Verma, Ruba Khan",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "aOHOAMAYGIU"
+  },
+  {
+    "title": "Bairi",
+    "artist": "Virat, Pradeep Solanki, Heena, Miss Parul",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "yrjDEU9F1bw"
+  },
+  {
+    "title": "Bullet Pe Gediyan",
+    "artist": "Ashu Twinkle, Fiza Choudhary, Thinker, Amar Karnwal",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "CE4ZBuLDvCg"
+  },
+  {
+    "title": "Arbi Ghode",
+    "artist": "Masoom Sharma, Jaivir Rathee",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "eSUPbqtiOrE"
+  },
+  {
+    "title": "Yaari",
+    "artist": "Masoom Sharma, Rohit Lamba",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "pEh_2kDfu2w"
+  },
+  {
+    "title": "Raat Ke Shikari",
+    "artist": "Masoom Sharma, Sweta Chauhan, Yash Thukral",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "SBfjg2VDqXw"
+  },
+  {
+    "title": "Tu Cheez Lajwab",
+    "artist": "Raju Punjabi",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "ldlMb2ZT9mg"
+  },
+  {
+    "title": "Lamba Lamba Ghunghat",
+    "artist": "Ajay Hooda, Harjeet Deewana, Komal Chaudhary, Kavita Joshi)",
+    "film": "Haryanvi",
+    "isRemix": true,
+    "isHaryanvi": true,
+    "youtubeId": "roupEJRZgig"
   }
 ];
 
