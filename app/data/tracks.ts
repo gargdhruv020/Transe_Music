@@ -6443,6 +6443,335 @@ const listRemix: any[] = [
     "film": "Remix",
     "isRemix": true,
     "youtubeId": "Q0asKyaDDH0"
+  },
+  {
+    "title": "Mehbooba Mehbooba - Remix",
+    "artist": "Farooq Got Audio, R. D. Burman",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "e9saX3ajMUU"
+  },
+  {
+    "title": "Akhiyaan Udeek Diyaan - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "DoHme8Nc9Dg"
+  },
+  {
+    "title": "Jaan Se Guzarte Hain - Remix / Dil Pe Zakham Khate Hain",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "p3eH_lR0p_w"
+  },
+  {
+    "title": "Yaad Piya Ki Aane Lagi - Trap Mix",
+    "artist": "Farooq Got Audio, Falguni Pathak",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "o-tmPLeVRBM"
+  },
+  {
+    "title": "Yadan Vichre Sajan Dian - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "tfzrwYeEjTM"
+  },
+  {
+    "title": "Aap Jaisa Koi - Trap Mix",
+    "artist": "Farooq Got Audio, Nazia Hassan, Feroz Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "4hK3LZEtjLk"
+  },
+  {
+    "title": "Yeh Vaada Raha - Trap Mix",
+    "artist": "Farooq Got Audio, Kishore Kumar, Asha Bhosle",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "gDViRtyzlug"
+  },
+  {
+    "title": "Piya Ghar Aaya - Remix",
+    "artist": "Asad Khan, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "R4BsqPowUDo"
+  },
+  {
+    "title": "Tumhen Dillagi - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "2q8khiXOH5M"
+  },
+  {
+    "title": "Silsila Ye Chahat Ka - Drill Mix",
+    "artist": "Farooq Got Audio, Shreya Ghoshal",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Wa7q_x3lZiE"
+  },
+  {
+    "title": "Zeehale Muskin - Drill Mix",
+    "artist": "Farooq Got Audio, Lata Mangeshkar, Shabbir Kumar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "b0ZbVI4rRgM"
+  },
+  {
+    "title": "Main Rowan Tenu Yaad Karke - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "MTDKmiqDhOQ"
+  },
+  {
+    "title": "Bindiya Chamkegi - Trap Mix",
+    "artist": "Farooq Got Audio, Lata Mangeshkar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "aqMeJJlNNQk"
+  },
+  {
+    "title": "Maar Daala - Remix",
+    "artist": "Farooq Got Audio, Kavita Krishnamurthy, KK",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "50IQneqleC8"
+  },
+  {
+    "title": "Chori Chori Chupke Chupke - Trap Mix",
+    "artist": "Farooq Got Audio, Alka Yagnik, Babul Supriyo",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "enjfKZKfWAU"
+  },
+  {
+    "title": "Badi Mushkil - Trap Mix",
+    "artist": "Farooq Got Audio, Alka Yagnik",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "mjLY_HxtfW0"
+  },
+  {
+    "title": "O Meri Mehbooba - Trap Mix",
+    "artist": "Farooq Got Audio, Mohammed Rafi",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "3NZxQnbDSEE"
+  },
+  {
+    "title": "Dola Re Dola - Remix",
+    "artist": "Farooq Got Audio, Kavita Krishnamurthy, Shreya Ghoshal, KK",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "xdfcipXlfdE"
+  },
+  {
+    "title": "Chalak Chalak - Trap Mix",
+    "artist": "Farooq Got Audio, Udit Narayan, Vinod Rathod, Shreya Ghoshal",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "w4ADh0h7a9A"
+  },
+  {
+    "title": "Dekhne Walon Ne - Remix",
+    "artist": "Farooq Got Audio, Udit Narayan, Alka Yagnik",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "Q_ocFe4y4UM"
+  },
+  {
+    "title": "Welcome To The Party (Dola Re)",
+    "artist": "Farooq Got Audio, Sliime, Shreya Ghoshal, Kavita Krishnamurthy",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "0fnyx0UKPeI"
+  },
+  {
+    "title": "You & I",
+    "artist": "DIVINE",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "2Ummj-Do9JI"
+  },
+  {
+    "title": "Aa Hi Jaiye - Remix",
+    "artist": "Farooq Got Audio, Anuradha Sriram",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "f6RGfqc841g"
+  },
+  {
+    "title": "Kabhi Aar Kabhi Paar - Trap Mix",
+    "artist": "Farooq Got Audio, Shamshad Begum",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "h9j4mlH1Dn8"
+  },
+  {
+    "title": "Mere Naseeb Mein - Remix",
+    "artist": "Farooq Got Audio, Shruti Rane",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "bvnIxBCPMQk"
+  },
+  {
+    "title": "Jaane Jaan",
+    "artist": "Kishore Kumar, R. D. Burman, Amit Kumar, Harshdeep Kaur, Shamir Tandon",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "uCYTy7BJMR0"
+  },
+  {
+    "title": "Kehna Hi Kya - Trap Mix",
+    "artist": "Farooq Got Audio, Chitra",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "v_QJ-jUyh4o"
+  },
+  {
+    "title": "Sajna Hai Mujhe - Trap Mix",
+    "artist": "Farooq Got Audio, Asha Bhosle",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "i4gnQRsVsWY"
+  },
+  {
+    "title": "Thoda Resham Lagta Hai - Trap Mix",
+    "artist": "Lata Mangeshkar, Farooq Got Audio",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "zcdlJNRa85I"
+  },
+  {
+    "title": "Honthon Mein Aisi Baat - Trap Mix",
+    "artist": "Lata Mangeshkar, Farooq Got Audio",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "b87g6oo-U8E"
+  },
+  {
+    "title": "Hanju Akhiyan De Vehre - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "4goUx3DUEZg"
+  },
+  {
+    "title": "Ye Jawani Hai Diwani",
+    "artist": "Kishore Kumar, R. D. Burman, Nikhita Gandhi, Shamir Tandon",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "3w1Gg9d6iP4"
+  },
+  {
+    "title": "Dola re Dola",
+    "artist": "MEDUZA, Varun Jain",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "B4HbUt58eFU"
+  },
+  {
+    "title": "Roop Suhana Lagta Hai - Trap Mix",
+    "artist": "Farooq Got Audio, S. P. Balasubrahmanyam, K. S. Chithra",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "bBcmM1zg9PI"
+  },
+  {
+    "title": "Chadti Jawani - Caravan - 71",
+    "artist": "Shreekant Krishnamurthy, Pallavi Kelkar, R. D. Burmanuj Matthews",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "VhHgQlm6yBY"
+  },
+  {
+    "title": "DESI TRILL (feat. Chip & Malkit Singh)",
+    "artist": "DJ LYAN, Chip, Malkit Singh",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "5HMIQfiKjtE"
+  },
+  {
+    "title": "Dola Re",
+    "artist": "Parimal Shais, Naam Sujal, Dhp, Ismail Darbar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "wb82fstyc-o"
+  },
+  {
+    "title": "Tu Tu Hai Wahi - Remix",
+    "artist": "Vaishali Samant, Dj Aqeel",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "yBahBBAHs04"
+  },
+  {
+    "title": "Kajra Mohabbat Wala Trap Mix",
+    "artist": "Asha Bhosle, Shamshad Begum, Raahi",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "MrPMJ9PBj10"
+  },
+  {
+    "title": "Holi Ke Din - Jhankar Beats",
+    "artist": "DJ Harshit Shah, Kishore Kumar, Lata Mangeshkar",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "6KCEcaC9394"
+  },
+  {
+    "title": "Jhumka Gira Re - Trap Mix",
+    "artist": "The Hrishi, Asha Bhosle",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "NmMOZg82mGI"
+  },
+  {
+    "title": "Koi Shahri Babu - Trap Mix",
+    "artist": "Asha Bhosle, Farooq Got Audio",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "7kdZ_RKO0vw"
+  },
+  {
+    "title": "Ram Jaane - Remix",
+    "artist": "Farooq Got Audio, Alka Yagnik, Sonu Nigam",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "ndYxPsqY6Qk"
+  },
+  {
+    "title": "Khalasi - Gotilo Trap Remix",
+    "artist": "Aditya Gadhvi, Achint, Farooq Got Audio",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "D3rmGmAft7o"
+  },
+  {
+    "title": "Dhire Dhire - Remix",
+    "artist": "Farooq Got Audio, Udit Narayan, Alka Yagnik",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "uSLMH2v-twg"
+  },
+  {
+    "title": "Jind Mahi - Remix",
+    "artist": "Farooq Got Audio, Malkit Singh",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "2CMNkoPvVkY"
+  },
+  {
+    "title": "Aap Baithe Hain - Remix",
+    "artist": "Farooq Got Audio, Nusrat Fateh Ali Khan",
+    "film": "Remix",
+    "isRemix": true,
+    "youtubeId": "iHbR6suPEMA"
   }
 ];
 
