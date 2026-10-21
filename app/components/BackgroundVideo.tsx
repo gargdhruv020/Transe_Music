@@ -3,10 +3,13 @@
 import { useEffect, useState, useRef } from "react";
 
 const VIDEOS = [
-  "/bg/tunnel-1.webm",
+  "/bg/107313-676158781_medium.mp4",
+  "/bg/107964-678971212_medium.mp4",
   "/bg/155192-809859962_medium.mp4",
   "/bg/tunnel-3.webm",
+  "/bg/216761_medium.mp4",
   "/bg/227353_medium.mp4",
+  "/bg/26196-357512354_medium.mp4",
   "/bg/57525-484931158_medium.mp4",
   "/bg/65771-515379416_medium.mp4",
   "/bg/65772-515379427_medium.mp4"
