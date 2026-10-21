@@ -4,7 +4,12 @@ import { useEffect, useState, useRef } from "react";
 
 const VIDEOS = [
   "/bg/tunnel-1.webm",
-  "/bg/tunnel-3.webm"
+  "/bg/155192-809859962_medium.mp4",
+  "/bg/tunnel-3.webm",
+  "/bg/227353_medium.mp4",
+  "/bg/57525-484931158_medium.mp4",
+  "/bg/65771-515379416_medium.mp4",
+  "/bg/65772-515379427_medium.mp4"
 ];
 
 export default function BackgroundVideo() {
@@ -56,11 +61,24 @@ export default function BackgroundVideo() {
     }
   };
 
+  const handleError = (index: number) => {
+    console.warn("Background video error at index", index);
+    const nextIdx = (index + 1) % VIDEOS.length;
+    setCurrentIndex(nextIdx);
+    setNextIndex(null);
+    if (videoRefs.current[nextIdx]) {
+      videoRefs.current[nextIdx]!.play().catch(() => {});
+    }
+  };
+
+  const upcomingIndex = (currentIndex + 1) % VIDEOS.length;
+
   return (
     <div className="fixed inset-0 z-[-20] overflow-hidden bg-black">
       {VIDEOS.map((src, index) => {
         const isCurrent = index === currentIndex;
         const isNext = index === nextIndex;
+        const shouldPreload = isCurrent || isNext || index === upcomingIndex;
         
         let opacity = 0;
         let zIndex = 0;
@@ -77,18 +95,21 @@ export default function BackgroundVideo() {
           <video
             key={src}
             ref={(el) => {
-                if (el) videoRefs.current[index] = el;
+              if (el) videoRefs.current[index] = el;
             }}
             src={src}
             muted
             playsInline
-            preload="auto"
+            preload={shouldPreload ? "auto" : "none"}
             autoPlay={index === 0}
             onTimeUpdate={() => {
-                if (isCurrent) handleTimeUpdate(index);
+              if (isCurrent) handleTimeUpdate(index);
             }}
             onEnded={() => {
-                if (isCurrent) handleEnded(index);
+              if (isCurrent) handleEnded(index);
+            }}
+            onError={() => {
+              if (isCurrent) handleError(index);
             }}
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
             style={{ 
